@@ -26,6 +26,11 @@ const IndexPage: React.FC = () => (
           <a>003 - Working with Netlify</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/004">
+          <a>004 - Setting up D3.js</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

@@ -21,6 +21,11 @@ const IndexPage: React.FC = () => (
           <a>002 - Working with API</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/003">
+          <a>003 - Working with Netlify</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

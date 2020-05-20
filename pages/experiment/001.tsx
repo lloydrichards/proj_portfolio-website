@@ -2,17 +2,17 @@ import React, { Component } from "react";
 
 import Layout from "../../components/Layout";
 
-class App extends Component {
+class Experiment001 extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>001 - Setting up Next.js</h2>
-        </div>
-        <div>
-        </div>
-      </div>
+      <Layout title="Experiment | 001">
+        <h2>001 - Setting up Next.js</h2>
+        <h4>Date: May 19th 2020</h4>
+        <p></p>
+
+        <div></div>
+      </Layout>
     );
   }
 }
-export default App;
+export default Experiment001;

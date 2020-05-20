@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { NextPage } from "next";
 import Layout from "../components/Layout";
 
-const IndexPage = () => (
+const IndexPage: NextPage<Props> = (props) => (
   <Layout title="Home | Lloyd's Working Portfolio">
     <h1>Lloyd's Working Portfolio</h1>
     <ul>
@@ -13,6 +14,11 @@ const IndexPage = () => (
       <li>
         <Link href="/experiment/001">
           <a>001 - Setting Up with Next.js</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/experiment/002">
+          <a>002 - Working with API</a>
         </Link>
       </li>
     </ul>

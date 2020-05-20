@@ -1,8 +1,8 @@
+import React from "react";
 import Link from "next/link";
-import { NextPage } from "next";
 import Layout from "../components/Layout";
 
-const IndexPage: NextPage<Props> = (props) => (
+const IndexPage: React.FC = () => (
   <Layout title="Home | Lloyd's Working Portfolio">
     <h1>Lloyd's Working Portfolio</h1>
     <ul>

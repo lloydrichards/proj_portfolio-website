@@ -1,7 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import Fetch from "isomorphic-unfetch";
 import { NextPage } from "next";
 import Layout from "../../components/Layout";
+
+type Props = {
+  current: any;
+  hourly: any;
+};
 
 const Experiment002: NextPage<Props> = (props) => {
   return (

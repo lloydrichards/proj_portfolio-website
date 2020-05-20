@@ -1,5 +1,5 @@
 {
-  "name": "with-typescript",
+  "name": "lloyd-portfolio",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -8,6 +8,9 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@types/d3": "^5.7.2",
+    "d3": "^5.16.0",
+    "d3-scale": "^3.2.1",
     "next": "latest",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"

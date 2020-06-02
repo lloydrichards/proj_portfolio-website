@@ -70,7 +70,7 @@ class Diamond extends React.Component {
   }
 }
 
-class Circle extends React.Component<CircleProps> {
+class Circle extends React.Component<BoxProps> {
   componentDidMount() {
     this.anime();
   }

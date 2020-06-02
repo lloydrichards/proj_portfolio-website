@@ -24,6 +24,7 @@ const Experiment006 = () => {
       translateX: second("x"),
       translateY: second("y"),
       rotate: second("angle"),
+      backgroundColor: "lightblue",
       duration: 8000,
     });
   }, []);
@@ -73,7 +74,7 @@ const Experiment006 = () => {
             style={{ position: "absolute" }}
           >
             <path
-              stroke="red"
+              stroke="blue"
               fill="none"
               d="M 350 450 Q 300 450 300 500 Q 300 550 350 550 L 500 550 Q 600 550 600 450 L 600 350 C 600 250 500 250 500 350 Q 500 400 450 400 L 200 400 Q 100 400 100 300 Q 100 200 200 200 Q 250 200 250 250 Q 250 300 200 300 Q 150 300 150 250 L 150 100 "
             ></path>

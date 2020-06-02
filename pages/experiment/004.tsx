@@ -30,13 +30,9 @@ const Experiment004: React.FC = () => {
   const width = w - margin.right - margin.left,
     height = h - margin.top - margin.bottom;
 
-  const xScale = scaleLinear()
-    .domain(extent(data, (d) => d.x))
-    .range([0, width]);
+  const xScale = scaleLinear().domain([0, 50]).range([0, width]);
 
-  const yScale = scaleLinear()
-    .domain(extent(data, (d) => d.y))
-    .range([height, 0]);
+  const yScale = scaleLinear().domain([0, 50]).range([height, 0]);
 
   const circles = data.map((d, i) => (
     <circle

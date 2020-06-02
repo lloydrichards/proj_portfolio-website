@@ -1,11 +1,10 @@
 import React from "react";
 import { scaleLinear } from "d3-scale";
-import { extent } from "d3-array";
 
 import Layout from "../../components/Layout";
 
 function RandomData() {
-  const data = [...Array(100)].map((e, i) => {
+  const data = [...Array(100)].map(() => {
     return {
       x: Math.random() * 40,
       y: Math.random() * 40,

@@ -109,7 +109,7 @@ class Experiment005 extends React.Component {
     arrayCircles: [],
   };
 
-  addCircle = (x: number, y: number) => {
+  addCircle = () => {
     return {};
   };
 

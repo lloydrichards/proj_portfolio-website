@@ -31,6 +31,11 @@ const IndexPage: React.FC = () => (
           <a>004 - Setting up D3.js</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/005">
+          <a>005 - Setting up Anime.js</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

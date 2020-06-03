@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 class Experiment003 extends Component {
   render() {
     return (
-      <Layout title="Experiment | 001">
+      <Layout title="Experiment | 003">
         <h2>003 - Working with Netlify</h2>
         <h4>Date: May 20th 2020</h4>
         <p>

@@ -116,7 +116,7 @@ class Experiment005 extends React.Component {
   render() {
     const { translateX, translateY } = this.state;
     return (
-      <Layout>
+      <Layout title="Experiment | 005">
         <h2>005 - Setting up Anime.js </h2>
         <h4>Date: June 2nd 2020</h4>
         <p>

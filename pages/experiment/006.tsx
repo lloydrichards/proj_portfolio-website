@@ -82,7 +82,7 @@ const Experiment006 = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout title="Experiment | 006">
       <h2>006 - SVG's & Anime.js </h2>
       <h4>Date: June 3rd 2020</h4>
       <p>

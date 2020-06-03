@@ -41,6 +41,11 @@ const IndexPage: React.FC = () => (
           <a>006 - SVGs & Anime.js</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/007">
+          <a>007 - Little SVG System</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

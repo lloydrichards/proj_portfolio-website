@@ -44,7 +44,7 @@ const Experiment004: React.FC = () => {
   ));
 
   return (
-    <Layout>
+    <Layout title="Experiment | 004">
       <h2>004 - Getting D3.js Running </h2>
       <h4>Date: May 20th 2020</h4>
       <p>Some text that I want to change red...</p>

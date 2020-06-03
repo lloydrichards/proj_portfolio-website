@@ -92,7 +92,7 @@ export const Experiment007 = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Experiment | 007">
       <h2>007 - Little SVG System </h2>
       <h4>Date: June 3rd 2020</h4>
       <p>

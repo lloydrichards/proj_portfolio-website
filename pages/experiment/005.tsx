@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import anime from "animejs";
-import { Box } from "../../components/boxes/shapes";
+import { Box } from "../../components/animejs/shapes";
 
 interface BoxProps {
   translateX: number;

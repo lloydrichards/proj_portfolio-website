@@ -17,6 +17,7 @@ interface AssemblyLine {
 
 interface GarbageType {
   id: string;
+  type: string;
   highlight: boolean;
 }
 interface GrindType {
@@ -35,6 +36,17 @@ interface ProductType {
   highlight: boolean;
 }
 
+const routes = [
+  { parent: "garbage", possibleRoutes: ["grind1", "grind2"] },
+  { parent: "grind1", possibleRoutes: ["pellet2"] },
+  { parent: "grind2", possibleRoutes: ["pellet1"] },
+  { parent: "pellet2", possibleRoutes: ["product2", "product3"] },
+  { parent: "pellet1", possibleRoutes: ["product1"] },
+  { parent: "product1", possibleRoutes: ["garbage"] },
+  { parent: "product2", possibleRoutes: ["garbage"] },
+  { parent: "product3", possibleRoutes: ["garbage"] },
+];
+
 export const Experiment007 = () => {
   const [state, setState] = React.useState<AssemblyLine>({
     garbage: [],
@@ -43,51 +55,65 @@ export const Experiment007 = () => {
     products: [],
   });
 
+  const nextPath = (
+    item: GarbageType | GrindType | PelletType | ProductType
+  ) => {
+    const nextRoute = routes.find((i) => i.parent === item.type);
+    if (nextRoute) {
+      return nextRoute.possibleRoutes[
+        Math.floor(Math.random() * nextRoute.possibleRoutes.length)
+      ];
+    } else return "garbage";
+  };
+
   const addGarbage = () => {
     const newId = nanoid();
     setState((state) => {
-      const garbage = state.garbage.concat({ id: newId, highlight: false });
-      console.log("Garbage Added");
+      const garbage = state.garbage.concat({
+        id: newId,
+        type: "garbage",
+        highlight: false,
+      });
       return { ...state, garbage };
     });
   };
-  const addGrind = () => {
+  const addGrind = (parent: GarbageType) => {
     const newId = nanoid();
-    const newType = Math.ceil(Math.random() * 2);
     setState((state) => {
       const grinds = state.grinds.concat({
         id: newId,
-        type: `grind${newType}`,
-        highlight: false,
+        type: nextPath(parent),
+        highlight: parent.highlight,
       });
-      console.log(`Grind-${newType} Added`);
-      return { ...state, grinds };
+      const garbage = state.garbage.filter((i) => parent.id != i.id);
+      return { ...state, garbage, grinds };
     });
   };
-  const addPellet = () => {
+  const addPellet = (parent: GrindType) => {
     const newId = nanoid();
     const newType = Math.ceil(Math.random() * 2);
     setState((state) => {
       const pellets = state.pellets.concat({
         id: newId,
-        type: `pellet${newType}`,
-        highlight: false,
+        type: nextPath(parent),
+        highlight: parent.highlight,
       });
-      console.log(`Pellets-${newType} Added`);
-      return { ...state, pellets };
+
+      const grinds = state.grinds.filter((i) => parent.id != i.id);
+      return { ...state, grinds, pellets };
     });
   };
-  const addProduct = () => {
+  const addProduct = (parent: PelletType) => {
     const newId = nanoid();
     const newType = Math.ceil(Math.random() * 3);
     setState((state) => {
       const products = state.products.concat({
         id: newId,
-        type: `product${newType}`,
-        highlight: false,
+        type: nextPath(parent),
+        highlight: parent.highlight,
       });
-      console.log(`Products-${newType} Added`);
-      return { ...state, products };
+      const pellets = state.pellets.filter((i) => parent.id != i.id);
+      return { ...state, pellets, products };
     });
   };
 
@@ -129,7 +155,7 @@ export const Experiment007 = () => {
         </button>
         <button
           onClick={() => {
-            console.log("Paused");
+            console.log(state);
           }}
           style={{
             zIndex: 5,
@@ -139,11 +165,16 @@ export const Experiment007 = () => {
             backgroundColor: "blue",
           }}
         >
-          Pause
+          State
         </button>
         <button
           onClick={() => {
-            console.log("Reset");
+            setState({
+              garbage: [],
+              grinds: [],
+              pellets: [],
+              products: [],
+            });
           }}
           style={{
             zIndex: 5,
@@ -163,7 +194,7 @@ export const Experiment007 = () => {
             key={item.id}
             id={item.id}
             pathRef={"#garbage-svg path"}
-            onComplete={addGrind}
+            onComplete={() => addGrind(item)}
           />
         ))}
         {state.grinds.map((item) => (
@@ -171,7 +202,7 @@ export const Experiment007 = () => {
             key={item.id}
             id={item.id}
             pathRef={`#${item.type}-svg path`}
-            onComplete={addPellet}
+            onComplete={() => addPellet(item)}
           />
         ))}
         {state.pellets.map((item) => (
@@ -179,7 +210,7 @@ export const Experiment007 = () => {
             key={item.id}
             id={item.id}
             pathRef={`#${item.type}-svg path`}
-            onComplete={addProduct}
+            onComplete={() => addProduct(item)}
           />
         ))}
         {state.products.map((item) => (
@@ -258,7 +289,7 @@ export const Experiment007 = () => {
             id="grind2-svg"
           >
             <path
-              d="M426 1498.5v55c0 16.57 13.431 30 30 30h54c16.569 0 30 13.43 30 30v222"
+              d="M436 1317h74c16.569 0 30 13.43 30 30v52.5c0 16.57-13.431 30-30 30H384c-16.569 0-30 13.43-30 30v94c0 16.57 13.431 30 30 30h126c16.569 0 30 13.43 30 30V1838"
               fill="none"
               stroke="green"
             />
@@ -318,6 +349,19 @@ Garbage -> Grind 2 -> Pellet 1 -Product 1`}</code>
         speed proportionally. There is a method on the <code>anime.path()</code>{" "}
         that should allow to figure out its length and then use some kind of
         velocity calculated off of distance/time.
+      </p>
+      <hr />
+      <p>
+        Added a filter that removes the object when its converted to the next
+        type. Have also implimented a lookup table for what paths the item can
+        take. Now the state remains the same size throughout, though the ids of
+        each object changes. Would like to next work on a click event to
+        highlight something and then pass this property along to the next
+        conversion. Additionally Id like to try splitting up the conversion so
+        when 'garbage' converts to 'grind' it results in say 5 smaller circles
+        which could go either way. Additionally, some conversions could only
+        take place when a certain amount have accomulated, say when 5 pellets
+        are turned into a product.
       </p>
     </Layout>
   );

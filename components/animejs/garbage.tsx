@@ -70,7 +70,7 @@ export const Grind = ({ pathRef, onComplete }: BoxProps) => {
     ></div>
   );
 };
-export const Pellet = ({ pathRef, onComplete }: BoxProps) => {
+export const Pellet = ({ id, pathRef, onComplete }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const path = anime.path(pathRef);
@@ -85,7 +85,7 @@ export const Pellet = ({ pathRef, onComplete }: BoxProps) => {
     });
 
     return instance.pause;
-  }, []);
+  }, [id]);
 
   return (
     <div

@@ -78,10 +78,9 @@ export const Experiment007 = () => {
     });
   };
   const addGrind = (parent: GarbageType) => {
-    const newId = nanoid();
     setState((state) => {
       const grinds = state.grinds.concat({
-        id: newId,
+        id: parent.id,
         type: nextPath(parent),
         highlight: parent.highlight,
       });
@@ -90,11 +89,9 @@ export const Experiment007 = () => {
     });
   };
   const addPellet = (parent: GrindType) => {
-    const newId = nanoid();
-    const newType = Math.ceil(Math.random() * 2);
     setState((state) => {
       const pellets = state.pellets.concat({
-        id: newId,
+        id: parent.id,
         type: nextPath(parent),
         highlight: parent.highlight,
       });
@@ -104,11 +101,9 @@ export const Experiment007 = () => {
     });
   };
   const addProduct = (parent: PelletType) => {
-    const newId = nanoid();
-    const newType = Math.ceil(Math.random() * 3);
     setState((state) => {
       const products = state.products.concat({
-        id: newId,
+        id: parent.id,
         type: nextPath(parent),
         highlight: parent.highlight,
       });

@@ -7,6 +7,8 @@ interface BoxProps {
   onComplete?: () => void;
 }
 
+const velocity = 0.0005;
+
 export const Garbage = ({ pathRef, onComplete }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
@@ -16,7 +18,7 @@ export const Garbage = ({ pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
-      duration: 5000,
+      duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
     });
@@ -32,7 +34,7 @@ export const Garbage = ({ pathRef, onComplete }: BoxProps) => {
         width: 25,
         backgroundColor: "green",
         position: "absolute",
-        top: "560px",
+        top: "460px",
         left: "-12px",
       }}
     ></div>
@@ -47,7 +49,7 @@ export const Grind = ({ pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
-      duration: 5000,
+      duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
     });
@@ -64,7 +66,7 @@ export const Grind = ({ pathRef, onComplete }: BoxProps) => {
         backgroundColor: "lightgreen",
         position: "absolute",
         borderRadius: "50%",
-        top: "560px",
+        top: "460px",
         left: "-12px",
       }}
     ></div>
@@ -79,7 +81,7 @@ export const Pellet = ({ id, pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
-      duration: Math.ceil(Math.random() * 1000) + 5000,
+      duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
     });
@@ -96,7 +98,7 @@ export const Pellet = ({ id, pathRef, onComplete }: BoxProps) => {
         backgroundColor: "blue",
         position: "absolute",
         borderRadius: "50%",
-        top: "560px",
+        top: "460px",
         left: "-12px",
       }}
     ></div>
@@ -111,7 +113,7 @@ export const Product = ({ pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
-      duration: 5000,
+      duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
     });
@@ -127,8 +129,40 @@ export const Product = ({ pathRef, onComplete }: BoxProps) => {
         width: 50,
         backgroundColor: "tomato",
         position: "absolute",
-        top: "560px",
+        top: "460px",
         left: "-25px",
+      }}
+    ></div>
+  );
+};
+
+export const Waste = ({ pathRef, onComplete }: BoxProps) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const path = anime.path(pathRef);
+    const instance = anime({
+      targets: ref.current,
+      translateX: path("x"),
+      translateY: path("y"),
+      rotate: path("angle"),
+      duration: path.length / velocity,
+      easing: "linear",
+      complete: onComplete,
+    });
+
+    return instance.pause;
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        height: 10,
+        width: 10,
+        backgroundColor: "black",
+        position: "absolute",
+        top: "460px",
+        left: "-5px",
       }}
     ></div>
   );

@@ -313,6 +313,102 @@ export const Experiment007 = () => {
               stroke="lightblue"
             />
           </svg>
+          <svg
+            id="waste8-svg"
+            width="800"
+            height="2000"
+            style={{ position: "absolute" }}
+          >
+            <path
+              fill="none"
+              stroke="lightgrey"
+              d="M411 1843.5H76.5c-16.569 0-30 13.43-30 30v80.5"
+            />
+          </svg>
+          <svg
+            id="waste7-svg"
+            width="800"
+            height="2000"
+            style={{ position: "absolute" }}
+          >
+            <path
+              fill="none"
+              stroke="lightgrey"
+              d="M523 1847h-11.5c-10.77 0-19.5 8.73-19.5 19.5v0c0 10.77-8.73 19.5-19.5 19.5h-396c-16.569 0-30 13.43-30 30v43"
+            />
+          </svg>
+          <svg
+            id="waste6-svg"
+            width="800"
+            height="2000"
+            style={{ position: "absolute" }}
+          >
+            <path
+              fill="none"
+              stroke="lightgrey"
+              d="M407.5 1320h-331c-16.569 0-30 13.43-30 30v610.5"
+            />
+          </svg>
+          <svg
+            id="waste5-svg"
+            width="800"
+            height="2000"
+            style={{ position: "absolute" }}
+          >
+            <path
+              fill="none"
+              stroke="lightgrey"
+              d="M212.5 936H202c-16.569 0-30 13.431-30 30v272c0 16.57-13.431 30-30 30H76.5c-16.569 0-30 13.43-30 30v662.5"
+            />
+          </svg>
+          <svg
+            id="waste4-svg"
+            width="800"
+            height="2000"
+            style={{ position: "absolute" }}
+          >
+            <path
+              fill="none"
+              stroke="lightgrey"
+              d="M320 736h-7.5c-16.569 0-30 13.431-30 30v471.5c0 16.57-13.431 30-30 30h-176c-16.569 0-30 13.43-30 30v660"
+            />
+          </svg>
+          <svg
+            id="waste3-svg"
+            width="800"
+            height="2000"
+            style={{ position: "absolute" }}
+          >
+            <path
+              fill="none"
+              stroke="lightgrey"
+              d="M528 734.5h-9c-16.569 0-30 13.431-30 30V870c0 16.569-13.431 30-30 30H314c-16.569 0-30 13.431-30 30v306c0 16.57-13.431 30-30 30H76.5c-16.569 0-30 13.43-30 30v661.5"
+            />
+          </svg>
+          <svg
+            id="waste2-svg"
+            width="800"
+            height="2000"
+            style={{ position: "absolute" }}
+          >
+            <path
+              fill="none"
+              stroke="lightgrey"
+              d="M193 456h-1c-16.569 0-30 13.431-30 30v5.5c0 16.569-13.431 30-30 30H76.5c-16.569 0-30 13.431-30 30V1954"
+            />
+          </svg>
+          <svg
+            id="waste1-svg"
+            width="800"
+            height="2000"
+            style={{ position: "absolute" }}
+          >
+            <path
+              fill="none"
+              stroke="lightgrey"
+              d="M409.5 472.5h-15.75c-14.774 0-26.75 11.976-26.75 26.75v0c0 14.774-11.976 26.75-26.75 26.75H283c-16.569 0-30 13.431-30 30v241c0 16.569-13.431 30-30 30H76.5c-16.569 0-30 13.431-30 30v1102"
+            />
+          </svg>
         </div>
       </div>
       <p>

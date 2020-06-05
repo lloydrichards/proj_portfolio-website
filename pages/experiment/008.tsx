@@ -225,13 +225,12 @@ export const Experiment007 = () => {
       if (path.wasteRoute.chance > Math.random()) {
         return path.wasteRoute;
       } else {
+        //Pick random path
         const picked = Math.floor(Math.random() * path.possibleRoutes.length);
         return path.possibleRoutes[picked];
       }
+      //else, goes to waste
     } else return path.wasteRoute;
-    //Pick random path
-
-    //else, goes to waste
   };
 
   const nextPath = (item: MaterialType) => {
@@ -619,6 +618,91 @@ export const Experiment007 = () => {
           </svg>
         </div>
       </div>
+      <p>
+        Have had to restructure the state machine several times in order to get
+        this to work but now it seems much more flexible for adding and removing
+        paths while still being able to manipulate how items flow through the
+        system. Currently there are two states, one for the materials and one
+        for the systems. The material state can be updated through{" "}
+        <code>nextMaterial()</code> which removes the material that just arrived
+        and then looks up the next possible path and makes that material to be
+        rendered next. The function to select the next path is particularly
+        interesting:
+      </p>
+      <pre>
+        <code>
+          {` const pickPath = (path: RouteType): PathType | WastePathType => {
+    //Is there the required system?
+    if (systems[path.require]) {
+      //Chance it still goes to waste
+      if (path.wasteRoute.chance > Math.random()) {
+        return path.wasteRoute;
+      } else {
+          //Pick random path
+        const picked = Math.floor(Math.random() * path.possibleRoutes.length);
+        return path.possibleRoutes[picked];
+      }
+      //else, goes to waste
+    } else return path.wasteRoute;
+  };`}
+        </code>
+      </pre>
+      <p>
+        Here I can specify in the routes JSON where each path can lead as well
+        as what the default waste state is incase the system isn't inplace. I
+        can also adjust the change of an item being sent to waste anyway as well
+        as the number of materials created for each route. Additionally I could
+        have multiple routes take the same path but with varying amounts of
+        materials.
+      </p>
+      <p>
+        Figuring out the types for this has been a bit of a challenge as these
+        need to be passed in and returned to makes sure there are no bugs, but
+        Typescript has been a huge help in flagging anything that was wrong or
+        missig something.
+      </p>
+      <pre>
+        <code>
+          {`interface MaterialType {
+  name: string;
+  delay: number;
+  id: string;
+  type: string;
+  path: string;
+  highlight: boolean;
+}
+
+interface RouteType {
+  parent: string;
+  require: string;
+  possibleRoutes: Array<PathType>;
+  wasteRoute: WastePathType;
+}
+
+interface PathType {
+  name: string;
+  type: string;
+  amount: number;
+  chance?: number;
+  path: string;
+}
+
+interface WastePathType {
+  name: string;
+  type: string;
+  amount: number;
+  chance: number;
+  path: string;
+}`}
+        </code>
+      </pre>
+      <p>
+        I'm sure i could still tidy up the WastePathType by extending the
+        PathType, but i'm unsure how to do that just now. For now it covers all
+        the features that I wanted to have so that I can move onto the next step
+        of implimenting more design elements as well as figure out how to
+        narrate the story.
+      </p>
     </Layout>
   );
 };

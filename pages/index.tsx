@@ -46,6 +46,11 @@ const IndexPage: React.FC = () => (
           <a>007 - Little SVG System</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/008">
+          <a>008 - Restructure the Assembly Line</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

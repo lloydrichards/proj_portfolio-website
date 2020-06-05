@@ -4,12 +4,14 @@ import anime from "animejs";
 interface BoxProps {
   id: string;
   pathRef: string;
+  delay?: number;
   onComplete?: () => void;
+  onClick?: () => void;
 }
 
 const velocity = 0.0005;
 
-export const Garbage = ({ pathRef, onComplete }: BoxProps) => {
+export const Garbage = ({ pathRef, onComplete, delay }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const path = anime.path(pathRef);
@@ -18,6 +20,7 @@ export const Garbage = ({ pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
+      delay: delay,
       duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
@@ -34,13 +37,13 @@ export const Garbage = ({ pathRef, onComplete }: BoxProps) => {
         width: 25,
         backgroundColor: "green",
         position: "absolute",
-        top: "460px",
+        top: "415px",
         left: "-12px",
       }}
     ></div>
   );
 };
-export const Grind = ({ pathRef, onComplete }: BoxProps) => {
+export const Grind = ({ pathRef, onComplete, delay }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const path = anime.path(pathRef);
@@ -49,6 +52,7 @@ export const Grind = ({ pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
+      delay: delay,
       duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
@@ -66,13 +70,13 @@ export const Grind = ({ pathRef, onComplete }: BoxProps) => {
         backgroundColor: "lightgreen",
         position: "absolute",
         borderRadius: "50%",
-        top: "460px",
+        top: "415px",
         left: "-12px",
       }}
     ></div>
   );
 };
-export const Pellet = ({ id, pathRef, onComplete }: BoxProps) => {
+export const Pellet = ({ id, pathRef, onComplete, delay }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const path = anime.path(pathRef);
@@ -81,6 +85,7 @@ export const Pellet = ({ id, pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
+      delay: delay,
       duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
@@ -98,13 +103,13 @@ export const Pellet = ({ id, pathRef, onComplete }: BoxProps) => {
         backgroundColor: "blue",
         position: "absolute",
         borderRadius: "50%",
-        top: "460px",
+        top: "415px",
         left: "-12px",
       }}
     ></div>
   );
 };
-export const Product = ({ pathRef, onComplete }: BoxProps) => {
+export const Product = ({ pathRef, onComplete, delay }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const path = anime.path(pathRef);
@@ -113,6 +118,7 @@ export const Product = ({ pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
+      delay: delay,
       duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
@@ -129,14 +135,14 @@ export const Product = ({ pathRef, onComplete }: BoxProps) => {
         width: 50,
         backgroundColor: "tomato",
         position: "absolute",
-        top: "460px",
+        top: "420px",
         left: "-25px",
       }}
     ></div>
   );
 };
 
-export const Waste = ({ pathRef, onComplete }: BoxProps) => {
+export const Waste = ({ pathRef, onComplete, delay }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const path = anime.path(pathRef);
@@ -145,6 +151,7 @@ export const Waste = ({ pathRef, onComplete }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
+      delay: delay,
       duration: path.length / velocity,
       easing: "linear",
       complete: onComplete,
@@ -161,7 +168,7 @@ export const Waste = ({ pathRef, onComplete }: BoxProps) => {
         width: 10,
         backgroundColor: "black",
         position: "absolute",
-        top: "460px",
+        top: "420px",
         left: "-5px",
       }}
     ></div>

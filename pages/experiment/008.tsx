@@ -13,23 +13,46 @@ interface AssemblyLine {
   materials: Array<MaterialType>;
 }
 
+interface SystemList {
+  [index: string]: boolean;
+}
+
 interface MaterialType {
   name: string;
+  delay: number;
   id: string;
   type: string;
   path: string;
   highlight: boolean;
 }
 
+interface RouteType {
+  parent: string;
+  require: string;
+  possibleRoutes: Array<PathType>;
+  wasteRoute: WastePathType;
+}
+
 interface PathType {
   name: string;
   type: string;
   amount: number;
+  chance?: number;
   path: string;
 }
+
+interface WastePathType {
+  name: string;
+  type: string;
+  amount: number;
+  chance: number;
+  path: string;
+}
+
 const routes = [
   {
     parent: "garbage",
+    require: "sort",
     possibleRoutes: [
       {
         name: "grind1",
@@ -43,58 +66,46 @@ const routes = [
         amount: 1,
         path: "#grind2-svg path",
       },
-      {
-        name: "grind1",
-        type: "grind",
-        amount: 1,
-        path: "#grind1-svg path",
-      },
-      {
-        name: "grind2",
-        type: "grind",
-        amount: 1,
-        path: "#grind2-svg path",
-      },
-      {
-        name: "grind1",
-        type: "grind",
-        amount: 1,
-        path: "#grind1-svg path",
-      },
-      {
-        name: "grind2",
-        type: "grind",
-        amount: 1,
-        path: "#grind2-svg path",
-      },
-      {
-        name: "waste6",
-        type: "waste",
-        amount: 1,
-        path: "#waste6-svg path",
-      },
     ],
+    wasteRoute: {
+      name: "waste6",
+      type: "waste",
+      amount: 3,
+      chance: 0.1,
+      path: "#waste6-svg path",
+    },
   },
   {
     parent: "grind1",
+    require: "refineA",
     possibleRoutes: [
       { name: "pellet2", type: "pellet", amount: 1, path: "#pellet2-svg path" },
-      { name: "pellet2", type: "pellet", amount: 1, path: "#pellet2-svg path" },
-      { name: "pellet2", type: "pellet", amount: 1, path: "#pellet2-svg path" },
-      { name: "waste8", type: "waste", amount: 1, path: "#waste8-svg path" },
     ],
+    wasteRoute: {
+      name: "waste8",
+      type: "waste",
+      amount: 3,
+      chance: 0.1,
+      path: "#waste8-svg path",
+    },
   },
   {
     parent: "grind2",
+    require: "refineB",
     possibleRoutes: [
       { name: "pellet1", type: "pellet", amount: 1, path: "#pellet1-svg path" },
-      { name: "pellet1", type: "pellet", amount: 1, path: "#pellet1-svg path" },
-      { name: "pellet1", type: "pellet", amount: 1, path: "#pellet1-svg path" },
-      { name: "waste7", type: "waste", amount: 1, path: "#waste7-svg path" },
     ],
+    wasteRoute: {
+      name: "waste7",
+      type: "waste",
+      amount: 3,
+      chance: 0.1,
+      path: "#waste7-svg path",
+    },
   },
   {
     parent: "pellet1",
+    require: "sort",
     possibleRoutes: [
       {
         name: "product1",
@@ -108,47 +119,18 @@ const routes = [
         amount: 1,
         path: "#product2-svg path",
       },
-      {
-        name: "product1",
-        type: "product",
-        amount: 1,
-        path: "#product1-svg path",
-      },
-      {
-        name: "product2",
-        type: "product",
-        amount: 1,
-        path: "#product2-svg path",
-      },
-      {
-        name: "product1",
-        type: "product",
-        amount: 1,
-        path: "#product1-svg path",
-      },
-      {
-        name: "product2",
-        type: "product",
-        amount: 1,
-        path: "#product2-svg path",
-      },
-      {
-        name: "product1",
-        type: "product",
-        amount: 1,
-        path: "#product1-svg path",
-      },
-      {
-        name: "product2",
-        type: "product",
-        amount: 1,
-        path: "#product2-svg path",
-      },
-      { name: "waste2", type: "waste", amount: 1, path: "#waste2-svg path" },
     ],
+    wasteRoute: {
+      name: "waste2",
+      type: "waste",
+      amount: 3,
+      chance: 0.1,
+      path: "#waste2-svg path",
+    },
   },
   {
     parent: "pellet2",
+    require: "sort",
     possibleRoutes: [
       {
         name: "product3",
@@ -156,23 +138,18 @@ const routes = [
         amount: 1,
         path: "#product3-svg path",
       },
-      {
-        name: "product3",
-        type: "product",
-        amount: 1,
-        path: "#product3-svg path",
-      },
-      {
-        name: "product3",
-        type: "product",
-        amount: 1,
-        path: "#product3-svg path",
-      },
-      { name: "waste1", type: "waste", amount: 1, path: "#waste1-svg path" },
     ],
+    wasteRoute: {
+      name: "waste1",
+      type: "waste",
+      amount: 3,
+      chance: 0.1,
+      path: "#waste1-svg path",
+    },
   },
   {
     parent: "product1",
+    require: "sort",
     possibleRoutes: [
       {
         name: "garbage",
@@ -180,23 +157,18 @@ const routes = [
         amount: 1,
         path: "#garbage-svg path",
       },
-      {
-        name: "garbage",
-        type: "garbage",
-        amount: 1,
-        path: "#garbage-svg path",
-      },
-      {
-        name: "garbage",
-        type: "garbage",
-        amount: 1,
-        path: "#garbage-svg path",
-      },
-      { name: "waste5", type: "waste", amount: 1, path: "#waste5-svg path" },
     ],
+    wasteRoute: {
+      name: "waste5",
+      type: "waste",
+      amount: 3,
+      chance: 0.1,
+      path: "#waste5-svg path",
+    },
   },
   {
     parent: "product2",
+    require: "sort",
     possibleRoutes: [
       {
         name: "garbage",
@@ -204,23 +176,18 @@ const routes = [
         amount: 1,
         path: "#garbage-svg path",
       },
-      {
-        name: "garbage",
-        type: "garbage",
-        amount: 1,
-        path: "#garbage-svg path",
-      },
-      {
-        name: "garbage",
-        type: "garbage",
-        amount: 1,
-        path: "#garbage-svg path",
-      },
-      { name: "waste4", type: "waste", amount: 1, path: "#waste4-svg path" },
     ],
+    wasteRoute: {
+      name: "waste4",
+      type: "waste",
+      amount: 1,
+      chance: 0.1,
+      path: "#waste4-svg path",
+    },
   },
   {
     parent: "product3",
+    require: "sort",
     possibleRoutes: [
       {
         name: "garbage",
@@ -228,61 +195,75 @@ const routes = [
         amount: 1,
         path: "#garbage-svg path",
       },
-      {
-        name: "garbage",
-        type: "garbage",
-        amount: 1,
-        path: "#garbage-svg path",
-      },
-      {
-        name: "garbage",
-        type: "garbage",
-        amount: 1,
-        path: "#garbage-svg path",
-      },
-      { name: "waste3", type: "waste", amount: 1, path: "#waste3-svg path" },
     ],
+    wasteRoute: {
+      name: "waste3",
+      type: "waste",
+      amount: 1,
+      chance: 0.1,
+      path: "#waste3-svg path",
+    },
   },
 ];
 
 export const Experiment007 = () => {
-  const [state, setState] = React.useState<AssemblyLine>({
+  const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
+  const [systems, setSystems] = React.useState<SystemList>({
+    sort: true,
+    refineA: true,
+    refineB: true,
+    manufactureA: true,
+    manufactureB: true,
+  });
+
+  const pickPath = (path: RouteType): PathType | WastePathType => {
+    //Is there the required system?
+    if (systems[path.require]) {
+      //Chance it still goes to waste
+      if (path.wasteRoute.chance > Math.random()) {
+        return path.wasteRoute;
+      } else {
+        const picked = Math.floor(Math.random() * path.possibleRoutes.length);
+        return path.possibleRoutes[picked];
+      }
+    } else return path.wasteRoute;
+    //Pick random path
+
+    //else, goes to waste
+  };
 
   const nextPath = (item: MaterialType) => {
     const currentPath = routes.find((i) => i.parent === item.name);
     if (currentPath) {
-      const picked = Math.floor(
-        Math.random() * currentPath.possibleRoutes.length
-      );
-      const nextPath = currentPath.possibleRoutes[picked];
-      nextMaterial(item, nextPath);
-      console.log(nextPath);
+      const nextPath = pickPath(currentPath);
+      for (var x = 0; x < nextPath.amount; x++) nextMaterial(item, nextPath);
     }
   };
 
   const nextMaterial = (parent: MaterialType, nextPath: PathType) => {
     const newId = nanoid();
-    setState((state) => {
+    setMaterials((state) => {
       const modifiedMaterials = state.materials.concat({
         name: nextPath.name,
+        delay: Math.floor(Math.random() * 10) * 100,
         id: newId,
         type: nextPath.type,
         path: nextPath.path,
         highlight: parent.highlight,
       });
       const materials = modifiedMaterials.filter((i) => parent.id != i.id);
-      console.log(materials);
       return { ...state, materials };
     });
   };
 
   const addGarbage = () => {
     const newId = nanoid();
-    setState((state) => {
+    setMaterials((state) => {
       const materials = state.materials.concat({
         name: "garbage",
+        delay: 0,
         id: newId,
         type: "garbage",
         path: "#garbage-svg path",
@@ -328,7 +309,7 @@ export const Experiment007 = () => {
         </button>
         <button
           onClick={() => {
-            console.log(state);
+            console.log(materials);
           }}
           style={{
             zIndex: 5,
@@ -342,7 +323,7 @@ export const Experiment007 = () => {
         </button>
         <button
           onClick={() => {
-            setState({
+            setMaterials({
               materials: [],
             });
           }}
@@ -356,16 +337,47 @@ export const Experiment007 = () => {
         >
           Reset
         </button>
+        <button
+          onClick={() => {
+            setSystems({ ...systems, ["refineB"]: !systems.refineB });
+            console.log(systems);
+          }}
+          style={{
+            zIndex: 5,
+            position: "absolute",
+            top: 1950,
+            left: 500,
+            backgroundColor: "blue",
+          }}
+        >
+          Toggle RefineB
+        </button>
+        <button
+          onClick={() => {
+            setSystems({ ...systems, ["refineA"]: !systems.refineB });
+            console.log(systems);
+          }}
+          style={{
+            zIndex: 5,
+            position: "absolute",
+            top: 1950,
+            left: 300,
+            backgroundColor: "orange",
+          }}
+        >
+          Toggle RefineA
+        </button>
       </div>
 
       <div style={{ width: 800, height: 2000 }}>
-        {state.materials.map((item) => {
+        {materials.materials.map((item) => {
           switch (item.type) {
             case "garbage":
               return (
                 <Garbage
                   key={item.id}
                   id={item.id}
+                  delay={item.delay}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
@@ -375,6 +387,7 @@ export const Experiment007 = () => {
                 <Grind
                   key={item.id}
                   id={item.id}
+                  delay={item.delay}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
@@ -384,6 +397,7 @@ export const Experiment007 = () => {
                 <Pellet
                   key={item.id}
                   id={item.id}
+                  delay={item.delay}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
@@ -393,6 +407,7 @@ export const Experiment007 = () => {
                 <Product
                   key={item.id}
                   id={item.id}
+                  delay={item.delay}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
@@ -402,6 +417,7 @@ export const Experiment007 = () => {
                 <Waste
                   key={item.id}
                   id={item.id}
+                  delay={item.delay}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />

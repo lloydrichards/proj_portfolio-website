@@ -14,7 +14,11 @@ interface AssemblyLine {
 }
 
 interface SystemList {
-  [index: string]: boolean;
+  sort: boolean;
+  refineA: boolean;
+  refineB: boolean;
+  manufactureA: boolean;
+  manufactureB: boolean;
 }
 
 interface MaterialType {
@@ -28,7 +32,7 @@ interface MaterialType {
 
 interface RouteType {
   parent: string;
-  require: string;
+  require: keyof SystemList;
   possibleRoutes: Array<PathType>;
   wasteRoute: WastePathType;
 }
@@ -37,10 +41,10 @@ interface PathType {
   name: string;
   type: string;
   amount: number;
-  chance?: number;
   path: string;
 }
 
+//type Blah = PathType | WastePathType;
 interface WastePathType {
   name: string;
   type: string;
@@ -49,7 +53,7 @@ interface WastePathType {
   path: string;
 }
 
-const routes = [
+const routes: Array<RouteType> = [
   {
     parent: "garbage",
     require: "sort",
@@ -237,21 +241,26 @@ export const Experiment007 = () => {
     const currentPath = routes.find((i) => i.parent === item.name);
     if (currentPath) {
       const nextPath = pickPath(currentPath);
-      for (var x = 0; x < nextPath.amount; x++) nextMaterial(item, nextPath);
+      for (var x = 0; x < nextPath.amount; x++)
+        nextMaterial(setMaterials)(item, nextPath);
     }
   };
 
-  const nextMaterial = (parent: MaterialType, nextPath: PathType) => {
+  const nextMaterial = (
+    setState: (value: React.SetStateAction<AssemblyLine>) => void
+  ) => (parent: MaterialType, nextPath: PathType) => {
     const newId = nanoid();
-    setMaterials((state) => {
-      const modifiedMaterials = state.materials.concat({
-        name: nextPath.name,
-        delay: Math.floor(Math.random() * 10) * 100,
-        id: newId,
-        type: nextPath.type,
-        path: nextPath.path,
-        highlight: parent.highlight,
-      });
+    setState((state) => {
+      const modifiedMaterials = state.materials.concat([
+        {
+          name: nextPath.name,
+          delay: Math.floor(Math.random() * 10) * 100,
+          id: newId,
+          type: nextPath.type,
+          path: nextPath.path,
+          highlight: parent.highlight,
+        },
+      ]);
       const materials = modifiedMaterials.filter((i) => parent.id != i.id);
       return { ...state, materials };
     });

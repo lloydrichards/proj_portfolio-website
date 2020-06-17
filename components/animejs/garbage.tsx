@@ -37,7 +37,7 @@ export const Garbage = ({ pathRef, onComplete, delay }: BoxProps) => {
         width: 25,
         backgroundColor: "green",
         position: "absolute",
-        top: "415px",
+        top: "350px",
         left: "-12px",
       }}
     ></div>

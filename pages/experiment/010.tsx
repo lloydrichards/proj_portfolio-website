@@ -45,6 +45,7 @@ const Experiment010: React.FC = () => {
     LDPEMachineSort: true,
     OTHERMachineSort: true,
     SeperatedPETGrinder: true,
+    OTHERRefiner: true,
   });
 
   const pickPath = (path: RouteType): PathType => {
@@ -66,6 +67,7 @@ const Experiment010: React.FC = () => {
     const currentPath = RootRoutes.find((i) => i.parent === item.name);
     if (currentPath) {
       const nextPath = pickPath(currentPath);
+      console.log(nextPath);
       for (var x = 0; x < nextPath.amount; x++)
         nextMaterial(setMaterials)(item, nextPath);
     }

@@ -19,6 +19,7 @@ export interface SystemList {
   LDPEMachineSort: boolean;
   OTHERMachineSort: boolean;
   SeperatedPETGrinder: boolean;
+  OTHERRefiner: boolean;
 }
 
 export interface PlasticType {

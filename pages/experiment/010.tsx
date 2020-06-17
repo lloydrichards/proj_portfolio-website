@@ -28,7 +28,7 @@ const Experiment010: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
-  const [systems, setSystems] = React.useState<SystemList>({
+  const [systems] = React.useState<SystemList>({
     MixedBin: true,
     PETBin: true,
     HDPEBin: true,

@@ -51,6 +51,16 @@ const IndexPage: React.FC = () => (
           <a>008 - Restructure the Assembly Line</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/009">
+          <a>009 - Importing the Plastic Illistration</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/experiment/010">
+          <a>010 - Starting with the PET Cycle</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

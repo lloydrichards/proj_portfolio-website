@@ -31,6 +31,7 @@ export interface PlasticType {
   PVC: boolean;
   OTHER: boolean;
   GARBAGE: boolean;
+  undefined: boolean;
 }
 
 export interface FormType {
@@ -45,13 +46,14 @@ export interface FormType {
   Bale: boolean;
   Regrind: boolean;
   Pellet: boolean;
+  undefined: boolean;
 }
 
 export interface MaterialType {
   name: string;
   delay: number;
   id: string;
-  type: string;
+  type: keyof FormType;
   path: string;
   highlight: boolean;
 }

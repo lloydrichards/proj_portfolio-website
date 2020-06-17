@@ -7,6 +7,7 @@ import {
   PathType,
   MaterialType,
   SystemList,
+  FormType,
 } from "../../components/LifePlastic/Interfaces/Interfaces";
 import { RootRoutes } from "../../components/LifePlastic/RootRoutes";
 import { CombinedRoutes } from "../../components/LifePlastic/Routes/CombinedRoutes";
@@ -100,19 +101,19 @@ const Experiment010: React.FC = () => {
     } else {
       return {
         name: "undefined",
-        plastic: "GARBAGE",
-        type: "GARBAGE",
+        plastic: "undefined",
+        type: "undefined",
         amount: 1,
         path: "undefined",
       };
     }
   };
 
-  const addRecyclable = (route: string) => {
+  const addRecyclable = (route: keyof FormType) => {
     const newId = nanoid();
     setMaterials((state) => {
       const materials = state.materials.concat({
-        name: "PET",
+        name: route,
         delay: 0,
         id: newId,
         type: route,
@@ -135,7 +136,6 @@ const Experiment010: React.FC = () => {
       <div>
         <button
           onClick={() => {
-            addRecyclable("Mixed-PETE");
             console.log("Added");
           }}
           style={{
@@ -162,6 +162,21 @@ const Experiment010: React.FC = () => {
           }}
         >
           Add PET
+        </button>
+        <button
+          onClick={() => {
+            addRecyclable("OTHER");
+            console.log("Added");
+          }}
+          style={{
+            zIndex: 5,
+            position: "absolute",
+            top: 2000,
+            left: 600,
+            backgroundColor: "green",
+          }}
+        >
+          Add Other
         </button>
         <button
           onClick={() => {
@@ -256,7 +271,7 @@ const Experiment010: React.FC = () => {
                   id={item.id}
                   delay={item.delay}
                   pathRef={item.path}
-                  onComplete={() => console.log("Garbage")}
+                  onComplete={() => nextPath(item)}
                 />
               );
           }

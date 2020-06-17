@@ -4,6 +4,13 @@ export const RootRoutes: Array<RouteType> = [
   //-----------------GARBAGE Routes
   //-----------------------------------------------------
   {
+    parent: "Garbage",
+    require: "TRASHBin",
+    possible: [],
+    waste: "none",
+    wasteChance: 0,
+  },
+  {
     parent: "Mixed-Garbage",
     require: "TRASHBin",
     possible: [""],
@@ -185,13 +192,7 @@ export const RootRoutes: Array<RouteType> = [
     waste: "none",
     wasteChance: 0,
   },
-  {
-    parent: "Garbage",
-    require: "TRASHBin",
-    possible: [""],
-    waste: "none",
-    wasteChance: 0,
-  },
+
   //-----------------------------------------------------
   //-----------------MIXED Routes
   //-----------------------------------------------------
@@ -670,7 +671,7 @@ export const RootRoutes: Array<RouteType> = [
   {
     parent: "Pellet-Other-Furniture",
     require: "TRASHBin",
-    possible: ["Product-Furniture"],
+    possible: ["Product-GardenFurniture"],
     waste: "none",
     wasteChance: 0,
   },

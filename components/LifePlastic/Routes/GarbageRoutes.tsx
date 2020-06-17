@@ -5,7 +5,7 @@ export const GarbageRoutes: Array<PathType> = [
     type: "GARBAGE",
     plastic: "GARBAGE",
     amount: 1,
-    name: "Garbage_2",
+    name: "Garbage",
     path: "M903.828 1768.04V3765",
   },
   {

@@ -168,7 +168,7 @@ export const Waste = ({ pathRef, onComplete, delay }: BoxProps) => {
         width: 10,
         backgroundColor: "black",
         position: "absolute",
-        top: "420px",
+        top: "360px",
         left: "-5px",
       }}
     ></div>

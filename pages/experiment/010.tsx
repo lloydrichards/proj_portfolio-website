@@ -7,7 +7,6 @@ import {
   PathType,
   MaterialType,
   SystemList,
-  FormType,
 } from "../../components/LifePlastic/Interfaces/Interfaces";
 import { RootRoutes } from "../../components/LifePlastic/RootRoutes";
 import { CombinedRoutes } from "../../components/LifePlastic/Routes/CombinedRoutes";

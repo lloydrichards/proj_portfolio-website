@@ -7,395 +7,395 @@ export const Processes = () => {
       xmlns="http://www.w3.org/2000/svg"
       style={{ position: "absolute" }}
     >
-      <g id="Process">
-        <g id="MixedPET-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+      <g data-name="Process">
+        <g data-name="MixedPET-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 30"
+            data-name="Ellipse 30"
             d="M271.811 2584a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 31"
+            data-name="Ellipse 31"
             d="M271.811 2624a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 32"
+            data-name="Ellipse 32"
             d="M271.811 2664a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="SeperatedPET-Refiner"
+          data-name="SeperatedPET-Refiner"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 76"
+            data-name="Ellipse 76"
             d="M191.811 2744a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 77"
+            data-name="Ellipse 77"
             d="M191.811 2784a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 78"
+            data-name="Ellipse 78"
             d="M191.811 2824a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="SeperateHDPE-Refiner"
+          data-name="SeperateHDPE-Refiner"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 79"
+            data-name="Ellipse 79"
             d="M335.906 2776a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 80"
+            data-name="Ellipse 80"
             d="M335.906 2816a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PP-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="PP-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 86"
+            data-name="Ellipse 86"
             d="M431.906 2936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 87"
+            data-name="Ellipse 87"
             d="M431.906 2976a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="SeperatedHDPE-Grinder"
+          data-name="SeperatedHDPE-Grinder"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 37"
+            data-name="Ellipse 37"
             d="M319.811 2424a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 38"
+            data-name="Ellipse 38"
             d="M319.811 2464a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 39"
+            data-name="Ellipse 39"
             d="M319.811 2504a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PP-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="PP-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 83"
+            data-name="Ellipse 83"
             d="M447.811 2488a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 84"
+            data-name="Ellipse 84"
             d="M447.811 2528a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 85"
+            data-name="Ellipse 85"
             d="M447.811 2568a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="MixedHDPE-Grinder"
+          data-name="MixedHDPE-Grinder"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 40"
+            data-name="Ellipse 40"
             d="M367.906 2224a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 41"
+            data-name="Ellipse 41"
             d="M367.906 2264a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 42"
+            data-name="Ellipse 42"
             d="M367.906 2304a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="MixedPS-Smelter" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="MixedPS-Smelter" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 88"
+            data-name="Ellipse 88"
             d="M559.811 2248a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 89"
+            data-name="Ellipse 89"
             d="M559.811 2288a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 90"
+            data-name="Ellipse 90"
             d="M559.811 2328a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 91"
+            data-name="Ellipse 91"
             d="M559.811 2368a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PS-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="PS-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 92"
+            data-name="Ellipse 92"
             d="M511.906 2680a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 93"
+            data-name="Ellipse 93"
             d="M511.906 2720a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 94"
+            data-name="Ellipse 94"
             d="M511.906 2760a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="LDPE-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="LDPE-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 100"
+            data-name="Ellipse 100"
             d="M639.811 2585a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 101"
+            data-name="Ellipse 101"
             d="M639.811 2625a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 102"
+            data-name="Ellipse 102"
             d="M639.811 2665a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 103"
+            data-name="Ellipse 103"
             d="M639.811 2705a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PVC-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="PVC-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 104"
+            data-name="Ellipse 104"
             d="M703.906 2448a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 105"
+            data-name="Ellipse 105"
             d="M703.906 2488a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 106"
+            data-name="Ellipse 106"
             d="M703.906 2528a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 107"
+            data-name="Ellipse 107"
             d="M703.906 2568a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PVC-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="PVC-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 112"
+            data-name="Ellipse 112"
             d="M719.906 2784a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 113"
+            data-name="Ellipse 113"
             d="M719.906 2824a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="OTHER-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="OTHER-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 108"
+            data-name="Ellipse 108"
             d="M831.906 2216a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 109"
+            data-name="Ellipse 109"
             d="M831.906 2256a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 110"
+            data-name="Ellipse 110"
             d="M831.906 2296a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 111"
+            data-name="Ellipse 111"
             d="M831.906 2336a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PS-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="PS-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 95"
+            data-name="Ellipse 95"
             d="M543.811 2840a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 96"
+            data-name="Ellipse 96"
             d="M543.811 2880a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 97"
+            data-name="Ellipse 97"
             d="M543.811 2920a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 98"
+            data-name="Ellipse 98"
             d="M543.811 2960a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="MixedHDPE-Refiner"
+          data-name="MixedHDPE-Refiner"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 81"
+            data-name="Ellipse 81"
             d="M383.811 2624a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 82"
+            data-name="Ellipse 82"
             d="M383.811 2664a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PET-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="PET-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 22"
+            data-name="Ellipse 22"
             d="M239.906 1936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 23"
+            data-name="Ellipse 23"
             d="M239.906 1896a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 24"
+            data-name="Ellipse 24"
             d="M239.906 1856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PETBin">
+        <g data-name="PETBin">
           <path
-            id="Ellipse 184"
+            data-name="Ellipse 184"
             d="M239.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="HDPEBin">
+        <g data-name="HDPEBin">
           <path
-            id="Ellipse 186"
+            data-name="Ellipse 186"
             d="M335.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="PPBin">
+        <g data-name="PPBin">
           <path
-            id="Ellipse 187"
+            data-name="Ellipse 187"
             d="M431.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="PSBin">
+        <g data-name="PSBin">
           <path
-            id="Ellipse 188"
+            data-name="Ellipse 188"
             d="M527.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="LDPEBin">
+        <g data-name="LDPEBin">
           <path
-            id="Ellipse 189"
+            data-name="Ellipse 189"
             d="M623.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="PVCBin">
+        <g data-name="PVCBin">
           <path
-            id="Ellipse 190"
+            data-name="Ellipse 190"
             d="M719.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="OTHERBin">
+        <g data-name="OTHERBin">
           <path
-            id="Ellipse 191"
+            data-name="Ellipse 191"
             d="M815.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="TRASHBin">
+        <g data-name="TRASHBin">
           <path
-            id="Ellipse 192"
+            data-name="Ellipse 192"
             d="M911.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="MIXEDBin">
+        <g data-name="MIXEDBin">
           <path
-            id="Ellipse 185"
+            data-name="Ellipse 185"
             d="M143.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="HDPE-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="HDPE-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 44"
+            data-name="Ellipse 44"
             d="M335.906 1912a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 45"
+            data-name="Ellipse 45"
             d="M335.906 1872a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 46"
+            data-name="Ellipse 46"
             d="M335.906 1832a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PP-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="PP-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 49"
+            data-name="Ellipse 49"
             d="M431.906 1936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 50"
+            data-name="Ellipse 50"
             d="M431.906 1896a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 51"
+            data-name="Ellipse 51"
             d="M431.906 1856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PS-HandSorting">
+        <g data-name="PS-HandSorting">
           <path
-            id="Ellipse 56"
+            data-name="Ellipse 56"
             d="M527.906 1856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="LDPE-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="LDPE-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 99"
+            data-name="Ellipse 99"
             d="M623.906 1936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 60"
+            data-name="Ellipse 60"
             d="M623.906 1896a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 61"
+            data-name="Ellipse 61"
             d="M623.906 1856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="PVC-HandSorting">
+        <g data-name="PVC-HandSorting">
           <path
-            id="Ellipse 66"
+            data-name="Ellipse 66"
             d="M719.906 1856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
@@ -403,243 +403,243 @@ export const Processes = () => {
           />
         </g>
         <g
-          id="OTHER-HandSorting"
+          data-name="OTHER-HandSorting"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 114"
+            data-name="Ellipse 114"
             d="M815.906 1936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 71"
+            data-name="Ellipse 71"
             d="M815.906 1856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="SeperatedPET-Grinder"
+          data-name="SeperatedPET-Grinder"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 25"
+            data-name="Ellipse 25"
             d="M207.906 2520a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 29"
+            data-name="Ellipse 29"
             d="M207.906 2560a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 26"
+            data-name="Ellipse 26"
             d="M207.906 2480a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 27"
+            data-name="Ellipse 27"
             d="M207.906 2440a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 28"
+            data-name="Ellipse 28"
             d="M223.811 2400a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="PET-MachineSorting"
+          data-name="PET-MachineSorting"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 20"
+            data-name="Ellipse 20"
             d="M239.906 2024a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 21"
+            data-name="Ellipse 21"
             d="M239.906 2064.2a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="HDPE-MachineSorting"
+          data-name="HDPE-MachineSorting"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 43"
+            data-name="Ellipse 43"
             d="M335.906 2024a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 47"
+            data-name="Ellipse 47"
             d="M335.906 2064a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="PP-MachineSorting"
+          data-name="PP-MachineSorting"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 48"
+            data-name="Ellipse 48"
             d="M431.906 2024a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 52"
+            data-name="Ellipse 52"
             d="M431.906 2064a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="PS-MachineSorting"
+          data-name="PS-MachineSorting"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 53"
+            data-name="Ellipse 53"
             d="M511.906 2024a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 74"
+            data-name="Ellipse 74"
             d="M543.906 2024a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 57"
+            data-name="Ellipse 57"
             d="M511.906 2064a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 73"
+            data-name="Ellipse 73"
             d="M511.906 2128a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 75"
+            data-name="Ellipse 75"
             d="M543.906 2128a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="LDPE-MachineSorting"
+          data-name="LDPE-MachineSorting"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 58"
+            data-name="Ellipse 58"
             d="M623.906 2024a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 62"
+            data-name="Ellipse 62"
             d="M623.906 2064a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="OTHER-MachineSorting"
+          data-name="OTHER-MachineSorting"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 68"
+            data-name="Ellipse 68"
             d="M815.906 2024a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 72"
+            data-name="Ellipse 72"
             d="M815.906 2064a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="Product-Toys">
+        <g data-name="Product-Toys">
           <path
-            id="Ellipse 163"
+            data-name="Ellipse 163"
             d="M431.906 377a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
             stroke-width=".5"
           />
         </g>
-        <g id="MixedPET-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="MixedPET-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 33"
+            data-name="Ellipse 33"
             d="M255.906 2337a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 34"
+            data-name="Ellipse 34"
             d="M255.906 2297a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 35"
+            data-name="Ellipse 35"
             d="M255.906 2257a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 36"
+            data-name="Ellipse 36"
             d="M255.906 2216a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-ConstructionInfill"
+          data-name="Product-ConstructionInfill"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 117"
+            data-name="Ellipse 117"
             d="M191.75 1033a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 118"
+            data-name="Ellipse 118"
             d="M191.75 992a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-PictureFrames"
+          data-name="Product-PictureFrames"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 173"
+            data-name="Ellipse 173"
             d="M415.75 896a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 174"
+            data-name="Ellipse 174"
             d="M415.75 856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-PlasticBags"
+          data-name="Product-PlasticBags"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 176"
+            data-name="Ellipse 176"
             d="M559.75 969a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 177"
+            data-name="Ellipse 177"
             d="M559.75 929a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 178"
+            data-name="Ellipse 178"
             d="M559.75 888a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-GardenFurniture"
+          data-name="Product-GardenFurniture"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 181"
+            data-name="Ellipse 181"
             d="M735.75 937a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 182"
+            data-name="Ellipse 182"
             d="M735.75 896a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="Product-Concrete">
+        <g data-name="Product-Concrete">
           <path
-            id="Ellipse 183"
+            data-name="Ellipse 183"
             d="M799.75 1048a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
             fill="#D2E799"
             stroke="#000"
@@ -647,246 +647,246 @@ export const Processes = () => {
           />
         </g>
         <g
-          id="Product-InsulationBoards"
+          data-name="Product-InsulationBoards"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 120"
+            data-name="Ellipse 120"
             d="M255.75 896a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 121"
+            data-name="Ellipse 121"
             d="M255.75 856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 122"
+            data-name="Ellipse 122"
             d="M255.75 816a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-BottleCaps"
+          data-name="Product-BottleCaps"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 123"
+            data-name="Ellipse 123"
             d="M143.906 537a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 124"
+            data-name="Ellipse 124"
             d="M143.906 497a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 125"
+            data-name="Ellipse 125"
             d="M143.906 457a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 126"
+            data-name="Ellipse 126"
             d="M143.906 417a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-PETBottle"
+          data-name="Product-PETBottle"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 131"
+            data-name="Ellipse 131"
             d="M383.906 617a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 132"
+            data-name="Ellipse 132"
             d="M383.906 657a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 133"
+            data-name="Ellipse 133"
             d="M383.906 577a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 134"
+            data-name="Ellipse 134"
             d="M383.906 537a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="Product-PVCPipe" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="Product-PVCPipe" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 137"
+            data-name="Ellipse 137"
             d="M527.906 592a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 138"
+            data-name="Ellipse 138"
             d="M527.906 552a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-LandscapeFabric"
+          data-name="Product-LandscapeFabric"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 140"
+            data-name="Ellipse 140"
             d="M479.906 776a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 141"
+            data-name="Ellipse 141"
             d="M479.906 736a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 142"
+            data-name="Ellipse 142"
             d="M479.906 696a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="Product-Buckets" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="Product-Buckets" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 143"
+            data-name="Ellipse 143"
             d="M607.75 688a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 144"
+            data-name="Ellipse 144"
             d="M607.75 648a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 145"
+            data-name="Ellipse 145"
             d="M607.75 608a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 146"
+            data-name="Ellipse 146"
             d="M607.75 568a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-OfficeSupplies"
+          data-name="Product-OfficeSupplies"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 149"
+            data-name="Ellipse 149"
             d="M703.906 728a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 150"
+            data-name="Ellipse 150"
             d="M703.906 688a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-HDPEPipes"
+          data-name="Product-HDPEPipes"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 151"
+            data-name="Ellipse 151"
             d="M783.906 648a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 152"
+            data-name="Ellipse 152"
             d="M783.906 608a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 153"
+            data-name="Ellipse 153"
             d="M783.906 568a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 154"
+            data-name="Ellipse 154"
             d="M783.906 528a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-rPETFiber"
+          data-name="Product-rPETFiber"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 156"
+            data-name="Ellipse 156"
             d="M591.906 417a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 157"
+            data-name="Ellipse 157"
             d="M591.906 377a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 158"
+            data-name="Ellipse 158"
             d="M591.906 337a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g id="Product-Coths" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g data-name="Product-Coths" fill="#D2E799" stroke="#000" stroke-width=".5">
           <path
-            id="Ellipse 160"
+            data-name="Ellipse 160"
             d="M703.906 305a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 161"
+            data-name="Ellipse 161"
             d="M703.906 265a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 162"
+            data-name="Ellipse 162"
             d="M703.906 225a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-WindowFrames"
+          data-name="Product-WindowFrames"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 165"
+            data-name="Ellipse 165"
             d="M511.906 264a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 166"
+            data-name="Ellipse 166"
             d="M511.906 224a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-PETFurniture"
+          data-name="Product-PETFurniture"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 167"
+            data-name="Ellipse 167"
             d="M351.906 321a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 168"
+            data-name="Ellipse 168"
             d="M351.906 281a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 169"
+            data-name="Ellipse 169"
             d="M351.906 241a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 170"
+            data-name="Ellipse 170"
             d="M351.906 201a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
         <g
-          id="Product-HDPEBottles"
+          data-name="Product-HDPEBottles"
           fill="#D2E799"
           stroke="#000"
           stroke-width=".5"
         >
           <path
-            id="Ellipse 127"
+            data-name="Ellipse 127"
             d="M271.906 593a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 128"
+            data-name="Ellipse 128"
             d="M271.906 553a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 129"
+            data-name="Ellipse 129"
             d="M271.906 513a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
           <path
-            id="Ellipse 130"
+            data-name="Ellipse 130"
             d="M271.906 472a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>

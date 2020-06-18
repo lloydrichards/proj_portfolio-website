@@ -69,8 +69,10 @@ const Experiment010: React.FC = () => {
     if (currentPath) {
       const nextPath = pickPath(currentPath);
       console.log(nextPath);
-      for (var x = 0; x < nextPath.amount; x++)
-        nextMaterial(setMaterials)(item, nextPath);
+      if (nextPath.type != "undefined") {
+        for (var x = 0; x < nextPath.amount; x++)
+          nextMaterial(setMaterials)(item, nextPath);
+      }
     }
   };
 
@@ -78,20 +80,22 @@ const Experiment010: React.FC = () => {
     setState: (value: React.SetStateAction<AssemblyLine>) => void
   ) => (parent: MaterialType, nextPath: PathType) => {
     const newId = nanoid();
-    setState((state) => {
-      const modifiedMaterials = state.materials.concat([
-        {
-          name: nextPath.name,
-          delay: Math.floor(Math.random() * 10) * 100,
-          id: newId,
-          type: nextPath.type,
-          path: `#${nextPath.name}`,
-          highlight: parent.highlight,
-        },
-      ]);
-      const materials = modifiedMaterials.filter((i) => parent.id != i.id);
-      return { ...state, materials };
-    });
+    if (nextPath.type != "undefined") {
+      setState((state) => {
+        const modifiedMaterials = state.materials.concat([
+          {
+            name: nextPath.name,
+            delay: Math.floor(Math.random() * 10) * 100,
+            id: newId,
+            type: nextPath.type,
+            path: `#${nextPath.name}`,
+            highlight: parent.highlight,
+          },
+        ]);
+        const materials = modifiedMaterials.filter((i) => parent.id != i.id);
+        return { ...state, materials };
+      });
+    }
   };
 
   const routeLookUp = (route: string): PathType => {
@@ -109,19 +113,28 @@ const Experiment010: React.FC = () => {
     }
   };
 
-  const addRecyclable = (route: keyof FormType) => {
+  const addRecyclable = (route: string) => {
     const newId = nanoid();
+    const startRoute = routeLookUp(route);
+    console.log(startRoute);
     setMaterials((state) => {
       const materials = state.materials.concat({
-        name: route,
+        name: startRoute.name,
         delay: 0,
         id: newId,
-        type: route,
-        path: `#${route}`,
+        type: startRoute.type,
+        path: `#${startRoute.name}`,
         highlight: false,
       });
       return { ...state, materials };
     });
+  };
+
+  const randomRecycling = (addItem: (pickedItem: string) => void) => (
+    possibleRoutes: Array<string>
+  ) => {
+    const randomNumber = Math.floor(Math.random() * possibleRoutes.length);
+    addItem(possibleRoutes[randomNumber]);
   };
 
   return (
@@ -136,6 +149,15 @@ const Experiment010: React.FC = () => {
       <div>
         <button
           onClick={() => {
+            randomRecycling(addRecyclable)([
+              "Mixed-PS-Machine",
+              "Mixed-PS-Hand",
+              "Mixed-Other",
+              "Mixed-LDPE",
+              "Mixed-PP",
+              "Mixed-HDPE",
+              "Mixed-PETE",
+            ]);
             console.log("Added");
           }}
           style={{
@@ -150,7 +172,7 @@ const Experiment010: React.FC = () => {
         </button>
         <button
           onClick={() => {
-            addRecyclable("PET");
+            addRecyclable("LDPE");
             console.log("Added");
           }}
           style={{
@@ -165,7 +187,7 @@ const Experiment010: React.FC = () => {
         </button>
         <button
           onClick={() => {
-            addRecyclable("OTHER");
+            addRecyclable("Other");
             console.log("Added");
           }}
           style={{
@@ -214,7 +236,47 @@ const Experiment010: React.FC = () => {
                   onComplete={() => nextPath(item)}
                 />
               );
+            case "HDPE":
+              return (
+                <Garbage
+                  key={item.id}
+                  id={item.id}
+                  delay={item.delay}
+                  pathRef={item.path}
+                  onComplete={() => nextPath(item)}
+                />
+              );
             case "PP":
+              return (
+                <Garbage
+                  key={item.id}
+                  id={item.id}
+                  delay={item.delay}
+                  pathRef={item.path}
+                  onComplete={() => nextPath(item)}
+                />
+              );
+            case "PS":
+              return (
+                <Garbage
+                  key={item.id}
+                  id={item.id}
+                  delay={item.delay}
+                  pathRef={item.path}
+                  onComplete={() => nextPath(item)}
+                />
+              );
+            case "LDPE":
+              return (
+                <Garbage
+                  key={item.id}
+                  id={item.id}
+                  delay={item.delay}
+                  pathRef={item.path}
+                  onComplete={() => nextPath(item)}
+                />
+              );
+            case "PVC":
               return (
                 <Garbage
                   key={item.id}

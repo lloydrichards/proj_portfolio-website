@@ -68,7 +68,6 @@ const Experiment010: React.FC = () => {
     const currentPath = RootRoutes.find((i) => i.parent === item.name);
     if (currentPath) {
       const nextPath = pickPath(currentPath);
-      console.log(nextPath);
       if (nextPath.type != "undefined") {
         for (var x = 0; x < nextPath.amount; x++)
           nextMaterial(setMaterials)(item, nextPath);
@@ -116,7 +115,6 @@ const Experiment010: React.FC = () => {
   const addRecyclable = (route: string) => {
     const newId = nanoid();
     const startRoute = routeLookUp(route);
-    console.log(startRoute);
     setMaterials((state) => {
       const materials = state.materials.concat({
         name: startRoute.name,
@@ -158,7 +156,6 @@ const Experiment010: React.FC = () => {
               "Mixed-HDPE",
               "Mixed-PETE",
             ]);
-            console.log("Added");
           }}
           style={{
             zIndex: 5,
@@ -172,8 +169,77 @@ const Experiment010: React.FC = () => {
         </button>
         <button
           onClick={() => {
+            addRecyclable("PET");
+          }}
+          style={{
+            zIndex: 5,
+            position: "absolute",
+            top: 1500,
+            left: 300,
+            backgroundColor: "green",
+          }}
+        >
+          Add PET
+        </button>
+        <button
+          onClick={() => {
+            addRecyclable("HDPE");
+          }}
+          style={{
+            zIndex: 5,
+            position: "absolute",
+            top: 1600,
+            left: 300,
+            backgroundColor: "green",
+          }}
+        >
+          Add HDPE
+        </button>
+        <button
+          onClick={() => {
+            addRecyclable("PP");
+          }}
+          style={{
+            zIndex: 5,
+            position: "absolute",
+            top: 1700,
+            left: 300,
+            backgroundColor: "green",
+          }}
+        >
+          Add PP
+        </button>
+        <button
+          onClick={() => {
+            addRecyclable("PS");
+          }}
+          style={{
+            zIndex: 5,
+            position: "absolute",
+            top: 1800,
+            left: 300,
+            backgroundColor: "green",
+          }}
+        >
+          Add PS
+        </button>
+        <button
+          onClick={() => {
             addRecyclable("LDPE");
-            console.log("Added");
+          }}
+          style={{
+            zIndex: 5,
+            position: "absolute",
+            top: 1900,
+            left: 300,
+            backgroundColor: "green",
+          }}
+        >
+          Add LDPE
+        </button>
+        <button
+          onClick={() => {
+            addRecyclable("PVC");
           }}
           style={{
             zIndex: 5,
@@ -183,12 +249,11 @@ const Experiment010: React.FC = () => {
             backgroundColor: "green",
           }}
         >
-          Add PET
+          Add PVC
         </button>
         <button
           onClick={() => {
             addRecyclable("Other");
-            console.log("Added");
           }}
           style={{
             zIndex: 5,

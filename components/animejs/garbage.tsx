@@ -37,7 +37,7 @@ export const Garbage = ({ pathRef, onComplete, delay }: BoxProps) => {
         width: 25,
         backgroundColor: "green",
         position: "absolute",
-        top: "350px",
+        top: "-12px",
         left: "-12px",
       }}
     ></div>
@@ -168,7 +168,7 @@ export const Waste = ({ pathRef, onComplete, delay }: BoxProps) => {
         width: 10,
         backgroundColor: "black",
         position: "absolute",
-        top: "360px",
+        top: "-5px",
         left: "-5px",
       }}
     ></div>

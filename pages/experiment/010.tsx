@@ -143,7 +143,11 @@ const Experiment010: React.FC = () => {
         of platic through the system. Will first impliment a simple button and
         add one PET bottle at a time and then slowly build up the other systems.
       </p>
-      <div>
+      <div
+        style={{
+          position: "absolute",
+        }}
+      >
         <button
           onClick={() => {
             randomRecycling(addRecyclable)([
@@ -159,7 +163,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 2000,
+            top: 1600,
             left: 150,
             backgroundColor: "green",
           }}
@@ -173,7 +177,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 1500,
+            top: 1100,
             left: 300,
             backgroundColor: "green",
           }}
@@ -187,7 +191,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 1600,
+            top: 1200,
             left: 300,
             backgroundColor: "green",
           }}
@@ -201,7 +205,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 1700,
+            top: 1300,
             left: 300,
             backgroundColor: "green",
           }}
@@ -215,7 +219,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 1800,
+            top: 1400,
             left: 300,
             backgroundColor: "green",
           }}
@@ -229,7 +233,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 1900,
+            top: 1500,
             left: 300,
             backgroundColor: "green",
           }}
@@ -243,7 +247,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 2000,
+            top: 1600,
             left: 300,
             backgroundColor: "green",
           }}
@@ -257,7 +261,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 2000,
+            top: 1600,
             left: 600,
             backgroundColor: "green",
           }}
@@ -271,7 +275,7 @@ const Experiment010: React.FC = () => {
           style={{
             zIndex: 5,
             position: "absolute",
-            top: 2000,
+            top: 1600,
             left: 450,
             backgroundColor: "blue",
           }}
@@ -280,7 +284,11 @@ const Experiment010: React.FC = () => {
         </button>
       </div>
       <div></div>
-      <div>
+      <div
+        style={{
+          position: "absolute",
+        }}
+      >
         <SkyPipesBackground />
         <GroundPipesBackground />
         <GroundFactories />

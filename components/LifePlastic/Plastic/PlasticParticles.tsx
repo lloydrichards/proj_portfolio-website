@@ -8,8 +8,7 @@ export const Plastic = ({
   pathRef,
   onComplete,
   delay,
-  colour,
-  version,
+  colour
 }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {

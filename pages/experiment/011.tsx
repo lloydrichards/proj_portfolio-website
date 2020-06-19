@@ -34,7 +34,6 @@ import { GroundPipesBackground } from "../../components/LifePlastic/GroundPipesB
 import { GroundPipesForeground } from "../../components/LifePlastic/GroundPipesForeground";
 import { SkyPipesBackground } from "../../components/LifePlastic/SkyPipesBackground";
 import { SkyPipesForeground } from "../../components/LifePlastic/SkyPipesForeground";
-import { Processes } from "../../components/LifePlastic/Processes";
 import { nanoid } from "nanoid";
 
 const Experiment011: React.FC = () => {

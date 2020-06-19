@@ -58,7 +58,7 @@ export const MixedRoutes: Array<PathType> = [
       "M135.156 1768v245.98c0 5.53 4.488 10.01 10.018 10l380.637-.67c5.529-.01 10.017 4.47 10.017 10v93.99",
   },
   {
-    type: "PVC",
+    type: "MIXED",
     plastic: "MIXED",
     amount: 1,
     name: "Mixed-PVCRecovery",
@@ -66,7 +66,7 @@ export const MixedRoutes: Array<PathType> = [
       "M695.156 2448v45.97c0 5.53-4.477 10-10 10h-21.48a10.08 10.08 0 01-4.777-1.21l-39.512-21.49a9.966 9.966 0 00-4.778-1.21H97.156c-5.523 0-10-4.48-10-10v-770.77c0-5.53 4.477-10 10-10h27.929a9.996 9.996 0 0110.001 10V1768",
   },
   {
-    type: "PET",
+    type: "MIXED",
     plastic: "MIXED",
     amount: 1,
     name: "Mixed-SeperatePETRecovery",
@@ -74,7 +74,7 @@ export const MixedRoutes: Array<PathType> = [
       "M199.157 2480h-.149a9.951 9.951 0 01-4.993-1.34l-22.947-13.22a9.957 9.957 0 00-4.993-1.34H97.157c-5.523 0-10-4.47-10-10v-754.81c0-5.52 4.476-10 10-10h28c5.523 0 10 4.48 10 10V1768",
   },
   {
-    type: "PET",
+    type: "MIXED",
     plastic: "MIXED",
     amount: 1,
     name: "Mixed-MixedPETRecovery",
@@ -82,7 +82,7 @@ export const MixedRoutes: Array<PathType> = [
       "M247.156 2216v30c0 5.52-4.477 10-10 10h-3.344a9.93 9.93 0 01-4.961-1.32l-51.389-29.36a9.933 9.933 0 00-4.961-1.32H97.156c-5.523 0-10-4.48-10-10v-514.58c0-5.52 4.478-10 10-10h28.001c5.522 0 9.999 4.48 9.999 10V1768",
   },
   {
-    type: "HDPE",
+    type: "MIXED",
     plastic: "MIXED",
     amount: 1,
     name: "Mixed-HDPERecovery",
@@ -90,7 +90,7 @@ export const MixedRoutes: Array<PathType> = [
       "M311.156 2424v30c0 5.52-4.477 10-10 10h-2.972a9.963 9.963 0 01-5.547-1.68l-18.961-12.64a9.963 9.963 0 00-5.547-1.68H96.493a9.999 9.999 0 01-10-10.01l.654-738.58c.004-5.52 4.48-9.99 10-9.99h27.94c5.523 0 10 4.48 10 10V1768",
   },
   {
-    type: "HDPE",
+    type: "MIXED",
     plastic: "MIXED",
     amount: 1,
     name: "Mixed-HDPERecovery_2",

@@ -54,8 +54,8 @@ export const GarbageRoutes: Array<PathType> = [
     amount: 1,
     name: "SeperatePETE-Garbage",
     path:
-    "M199.156 2479.8v0h-.002l-41.827 30a10.015 10.015 0 00-4.171 8.13V3766"
-},
+      "M199.156 2479.8v0h-.002l-41.827 30a10.015 10.015 0 00-4.171 8.13V3766",
+  },
   {
     type: "GARBAGE",
     plastic: "GARBAGE",
@@ -76,7 +76,7 @@ export const GarbageRoutes: Array<PathType> = [
     type: "GARBAGE",
     plastic: "GARBAGE",
     amount: 1,
-    name: "PP -Garbage",
+    name: "PP-Garbage",
     path:
       "M439.156 2488v30c0 5.52 4.477 10 10 10h8.941c1.994 0 3.942.6 5.595 1.71l13.059 8.82a9.991 9.991 0 014.405 8.28V3726",
   },

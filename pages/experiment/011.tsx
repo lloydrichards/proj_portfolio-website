@@ -21,7 +21,6 @@ import { ParticlePS } from "../../components/LifePlastic/Plastic/ParticlePS";
 import { ParticleLDPE } from "../../components/LifePlastic/Plastic/ParticleLDPE";
 import { ParticlePVC } from "../../components/LifePlastic/Plastic/ParticlePVC";
 import { ParticleOTHER } from "../../components/LifePlastic/Plastic/ParticleOTHER";
-import { ParticleMIXED } from "../../components/LifePlastic/Plastic/ParticleMIXED";
 import { ParticleGARBAGE } from "../../components/LifePlastic/Plastic/ParticleGARBAGE";
 import { ParticlePellet } from "../../components/LifePlastic/Plastic/ParticlePellet";
 import { ParticleBale } from "../../components/LifePlastic/Plastic/ParticleBale";
@@ -193,6 +192,12 @@ const Experiment011: React.FC = () => {
         I think now I want to add this is a number which can be incremented up
         when a particle finishes a route and then used to create the next
         particle when a certain amount arrive.
+      </p>
+      <p>
+        First part is done, there are now different colours and forms for each
+        type and plastic as they go through the system. There are still things
+        to do now, but for now it feels quite full. I think I still need to
+        clean up the pipes and change the lines.
       </p>
       <div
         style={{
@@ -471,7 +476,7 @@ const Experiment011: React.FC = () => {
               );
             case "MIXED":
               return (
-                <ParticleMIXED
+                <ParticleGARBAGE
                   key={item.id}
                   id={item.id}
                   colour={plasticColourPicker(item.plastic)}

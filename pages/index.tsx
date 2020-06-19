@@ -61,6 +61,11 @@ const IndexPage: React.FC = () => (
           <a>010 - Starting with the PET Cycle</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/011">
+          <a>011 - Adding and Taking Away Routes</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

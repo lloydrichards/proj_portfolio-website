@@ -43,7 +43,7 @@ export const BaleRoutes: Array<PathType> = [
   },
   {
     type: "Bale",
-    plastic: "PET",
+    plastic: "HDPE",
     amount: 1,
     name: "Bale-SeperatedHDPE-Hand",
     path:

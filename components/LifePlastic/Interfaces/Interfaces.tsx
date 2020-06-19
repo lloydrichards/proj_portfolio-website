@@ -30,6 +30,7 @@ export interface PlasticType {
   LDPE: boolean;
   PVC: boolean;
   OTHER: boolean;
+  MIXED: boolean;
   GARBAGE: boolean;
   undefined: boolean;
 }
@@ -42,6 +43,7 @@ export interface FormType {
   LDPE: boolean;
   PVC: boolean;
   OTHER: boolean;
+  MIXED: boolean;
   GARBAGE: boolean;
   Bale: boolean;
   Regrind: boolean;
@@ -54,6 +56,8 @@ export interface MaterialType {
   delay: number;
   id: string;
   type: keyof FormType;
+  plastic: keyof PlasticType;
+  version: number;
   path: string;
   highlight: boolean;
 }
@@ -72,4 +76,14 @@ export interface PathType {
   type: keyof FormType;
   amount: number;
   path: string;
+}
+
+export interface BoxProps {
+  id: string;
+  colour: string;
+  pathRef: string;
+  delay?: number;
+  version: number;
+  onComplete?: () => void;
+  onClick?: () => void;
 }

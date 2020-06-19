@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layout";
+import * as chroma from "chroma-js";
 
 import {
   AssemblyLine,
@@ -7,11 +8,23 @@ import {
   PathType,
   MaterialType,
   SystemList,
+  FormType,
 } from "../../components/LifePlastic/Interfaces/Interfaces";
 import { RootRoutes } from "../../components/LifePlastic/RootRoutes";
 import { CombinedRoutes } from "../../components/LifePlastic/Routes/CombinedRoutes";
 
-import { Garbage, Waste } from "../../components/animejs/garbage";
+import {
+  Garbage,
+  Plastic,
+} from "../../components/LifePlastic/Plastic/PlasticParticles";
+import { ParticlePET } from "../../components/LifePlastic/Plastic/ParticlePET";
+import { ParticleHDPE } from "../../components/LifePlastic/Plastic/ParticleHDPE";
+import { ParticlePP } from "../../components/LifePlastic/Plastic/ParticlePP";
+import { ParticlePS } from "../../components/LifePlastic/Plastic/ParticlePS";
+import { ParticleLDPE } from "../../components/LifePlastic/Plastic/ParticleLDPE";
+import { ParticlePVC } from "../../components/LifePlastic/Plastic/ParticlePVC";
+import { ParticleOTHER } from "../../components/LifePlastic/Plastic/ParticleOTHER";
+import { ParticleMIXED } from "../../components/LifePlastic/Plastic/ParticleMIXED";
 
 import { GroundFactories } from "../../components/LifePlastic/GroundFactories";
 import { SkyFactories } from "../../components/LifePlastic/SkyFactories";
@@ -24,7 +37,7 @@ import { SkyPipesForeground } from "../../components/LifePlastic/SkyPipesForegro
 import { Processes } from "../../components/LifePlastic/Processes";
 import { nanoid } from "nanoid";
 
-const Experiment010: React.FC = () => {
+const Experiment011: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
@@ -87,7 +100,7 @@ const Experiment010: React.FC = () => {
             id: newId,
             type: nextPath.type,
             plastic: nextPath.plastic,
-            version: Math.floor(Math.random() * 2),
+            version: parent.version,
             path: `#${nextPath.name}`,
             highlight: parent.highlight,
           },
@@ -138,20 +151,49 @@ const Experiment010: React.FC = () => {
     addItem(possibleRoutes[randomNumber]);
   };
 
+  const plasticColourPicker = (type: keyof FormType) => {
+    const cPallet = chroma.scale("Spectral").mode("lch").colors(7);
+    switch (type) {
+      case "PET":
+        return cPallet[0];
+
+      case "HDPE":
+        return cPallet[1];
+
+      case "PP":
+        return cPallet[2];
+
+      case "PS":
+        return cPallet[3];
+
+      case "LDPE":
+        return cPallet[4];
+
+      case "PVC":
+        return cPallet[5];
+
+      case "OTHER":
+        return cPallet[6];
+      case "MIXED":
+        return "grey";
+      case "GARBAGE":
+        return "black";
+      default:
+        return "black";
+    }
+  };
   return (
     <Layout title="Experiment | 009">
-      <h2>010 - Starting with the PET Cycle</h2>
-      <h4>Date: June 16th 2020</h4>
+      <h2>011 - Adding and Taking Away Routes</h2>
+      <h4>Date: June 19th 2020</h4>
       <p>
-        And so starts the process of implimenting all the paths and the movement
-        of platic through the system. Will first impliment a simple button and
-        add one PET bottle at a time and then slowly build up the other systems.
-      </p>
-      <p>
-        After a few days of adding and checking and adding and checking, I
-        beleive all the possible routes are in. I ended up writting some nice
-        little functional comands to start a route anywhere in the diagram by
-        inputting a string and then using a routeLoop() to find the route.{" "}
+        Now that all the routes are in place, the next two challenges are to
+        change the shape and colour of the particle depengin on the properties
+        of the route. The second is being able to conditionally remove or add
+        routes based on the state. Initially this was going to be a boolean, but
+        I think now I want to add this is a number which can be incremented up
+        when a particle finishes a route and then used to create the next
+        particle when a certain amount arrive.
       </p>
       <div
         style={{
@@ -303,117 +345,151 @@ const Experiment010: React.FC = () => {
         <GroundPipesBackground />
         <GroundFactories />
         <SkyFactories />
-        <Bins />
         <GroundPipesForeground />
         <SkyPipesForeground />
+        <Bins />
         {materials.materials.map((item) => {
           switch (item.type) {
             case "PET":
               return (
-                <Garbage
+                <ParticlePET
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "HDPE":
               return (
-                <Garbage
+                <ParticleHDPE
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "PP":
               return (
-                <Garbage
+                <ParticlePP
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "PS":
               return (
-                <Garbage
+                <ParticlePS
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "LDPE":
               return (
-                <Garbage
+                <ParticleLDPE
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "PVC":
               return (
-                <Garbage
+                <ParticlePVC
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "Bale":
               return (
-                <Garbage
+                <Plastic
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "Regrind":
               return (
-                <Garbage
+                <Plastic
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "Pellet":
               return (
-                <Garbage
+                <Plastic
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "OTHER":
               return (
-                <Garbage
+                <ParticleOTHER
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
+                  pathRef={item.path}
+                  onComplete={() => nextPath(item)}
+                />
+              );
+            case "MIXED":
+              return (
+                <ParticleMIXED
+                  key={item.id}
+                  id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
+                  delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
               );
             case "GARBAGE":
               return (
-                <Waste
+                <Garbage
                   key={item.id}
                   id={item.id}
+                  colour={plasticColourPicker(item.plastic)}
                   delay={item.delay}
+                  version={item.version}
                   pathRef={item.path}
                   onComplete={() => nextPath(item)}
                 />
@@ -421,10 +497,9 @@ const Experiment010: React.FC = () => {
           }
         })}
         <Routes />
-        <Processes />
       </div>
     </Layout>
   );
 };
 
-export default Experiment010;
+export default Experiment011;

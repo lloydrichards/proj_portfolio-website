@@ -59,7 +59,7 @@ export const MixedRoutes: Array<PathType> = [
   },
   {
     type: "PVC",
-    plastic: "PVC",
+    plastic: "MIXED",
     amount: 1,
     name: "Mixed-PVCRecovery",
     path:
@@ -67,15 +67,15 @@ export const MixedRoutes: Array<PathType> = [
   },
   {
     type: "PET",
-    plastic: "PET",
+    plastic: "MIXED",
     amount: 1,
     name: "Mixed-SeperatePETRecovery",
     path:
-    "M199.157 2480h-.149a9.951 9.951 0 01-4.993-1.34l-22.947-13.22a9.957 9.957 0 00-4.993-1.34H97.157c-5.523 0-10-4.47-10-10v-754.81c0-5.52 4.476-10 10-10h28c5.523 0 10 4.48 10 10V1768"
-},
+      "M199.157 2480h-.149a9.951 9.951 0 01-4.993-1.34l-22.947-13.22a9.957 9.957 0 00-4.993-1.34H97.157c-5.523 0-10-4.47-10-10v-754.81c0-5.52 4.476-10 10-10h28c5.523 0 10 4.48 10 10V1768",
+  },
   {
     type: "PET",
-    plastic: "PET",
+    plastic: "MIXED",
     amount: 1,
     name: "Mixed-MixedPETRecovery",
     path:
@@ -83,7 +83,7 @@ export const MixedRoutes: Array<PathType> = [
   },
   {
     type: "HDPE",
-    plastic: "HDPE",
+    plastic: "MIXED",
     amount: 1,
     name: "Mixed-HDPERecovery",
     path:
@@ -91,7 +91,7 @@ export const MixedRoutes: Array<PathType> = [
   },
   {
     type: "HDPE",
-    plastic: "HDPE",
+    plastic: "MIXED",
     amount: 1,
     name: "Mixed-HDPERecovery _2",
     path:

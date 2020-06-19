@@ -500,7 +500,17 @@ const Experiment011: React.FC = () => {
               );
           }
         })}
-        <Routes />
+        <Routes
+          routeStyle={{
+            GarbageLines: "none",
+            MixedLines: "none",
+            BaleLines: "none",
+            PelletLines: "none",
+            RegrindLines: "none",
+            HandLines: "none",
+            ProductsLines: "none",
+          }}
+        />
       </div>
     </Layout>
   );

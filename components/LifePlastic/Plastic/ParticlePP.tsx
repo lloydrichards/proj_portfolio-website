@@ -45,7 +45,7 @@ export const ParticlePP = ({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="PP1">
+          <g id="PP1" transform="rotate(-90) translate(-21 0)">
             <path
               d="M5.91 20.348v-1.376L4.625 2.137H3.57V.347h13.61v1.79h-1.054L14.84 18.972v1.376H5.91z"
               fill={colour}
@@ -77,7 +77,7 @@ export const ParticlePP = ({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="PP2">
+          <g id="PP2" transform="rotate(-90) translate(-21 0)">
             <path
               d="M16.56.348c.583 0 1.056.473 1.056 1.056v3.801c0 .564-.44 1.024-.997 1.055v12.527a1.56 1.56 0 01-1.56 1.56H5.832a1.56 1.56 0 01-1.561-1.56V6.262h-.082a1.057 1.057 0 01-1.056-1.056V1.404c0-.583.473-1.056 1.056-1.056h12.37z"
               fill={colour}

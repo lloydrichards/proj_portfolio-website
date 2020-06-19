@@ -3,7 +3,7 @@ import anime from "animejs";
 import { BoxProps } from "../Interfaces/Interfaces";
 import { velocity } from "./PlasticParticles";
 
-export const ParticleGARBAGE = ({
+export const ParticleBale = ({
   pathRef,
   onComplete,
   delay,
@@ -18,7 +18,7 @@ export const ParticleGARBAGE = ({
       translateY: path("y"),
       rotate: path("angle"),
       delay: delay,
-      duration: path.length / velocity + (delay ? delay : 0),
+      duration: path.length / velocity - (delay ? delay : 0),
       easing: "linear",
       complete: onComplete,
     });
@@ -42,13 +42,13 @@ export const ParticleGARBAGE = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="ParticleGarbage" transform="rotate(-90) translate(-21 0)">
+        <g id="Bale" transform="rotate(-90) translate(-21 0)">
           <path
-            d="M2.018 9.162c-1.77 3.165-2.289 6.476.004 9.284 1.596 1.956 3.35 2.761 5.873 2.698l5.096.004c2.677.22 4.633-.616 6.325-2.701 2.284-2.816 1.794-6.134 0-9.285-1.948-3.422-7.591-4.098-7.89-5.504 0-1.272.842-1.772 1.262-2.517H8.375c.42.745 1.26 1.245 1.26 2.517-.297 1.406-6.011 2.634-7.617 5.504z"
+            d="M.672 18.337h1.363L2.03 10.27l-.005-8.076c0-.637.517-1.154 1.154-1.154h14.996c.637 0 1.153.516 1.153 1.153v16.144h1.344v2.706h-1.343v-.64H2.035v.64H.672v-2.706z"
             fill={colour}
           />
           <path
-            d="M7.895 21.144c-2.523.063-4.277-.742-5.873-2.697-2.293-2.81-1.775-6.12-.004-9.285 1.606-2.87 7.32-4.098 7.618-5.504 0-1.272-.841-1.772-1.261-2.517h4.313c-.42.745-1.261 1.245-1.261 2.517.298 1.406 5.941 2.082 7.889 5.504 1.794 3.15 2.284 6.469 0 9.284-1.692 2.086-3.648 2.922-6.325 2.702m-5.096-.004L6.61 16.52m1.286 4.624l5.096.004m0 0c.434-1.265.992-3.219 1.513-4.628M9.99 5.858l-2.094 1.63m3.044-1.63l2.442 2.315m-3.021-1.01L8.718 10.26"
+            d="M10.682 18.346h8.647v-8.077m-8.647 8.077H2.035L2.03 10.27m8.652 8.076L10.677 1.04m0 0H3.179c-.637 0-1.154.517-1.154 1.154l.005 8.076m8.647-9.23h7.498c.637 0 1.153.516 1.153 1.153v8.076m-17.298 0h17.298M.672 18.337h20v2.706h-1.343v-.64H2.035v.64H.672v-2.706z"
             stroke="#000"
             stroke-width=".5"
           />

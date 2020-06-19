@@ -93,7 +93,7 @@ export const MixedRoutes: Array<PathType> = [
     type: "HDPE",
     plastic: "MIXED",
     amount: 1,
-    name: "Mixed-HDPERecovery _2",
+    name: "Mixed-HDPERecovery_2",
     path:
       "M439.156 2488v21.66c0 7.81-8.555 12.61-15.218 8.53l-33.88-20.72a10.008 10.008 0 00-5.218-1.47H97.156c-5.523 0-10-4.48-10-10v-786.58c0-5.52 4.477-10 10-10h27.93c5.523 0 10 4.48 10 10V1768",
   },

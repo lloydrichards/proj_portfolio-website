@@ -45,7 +45,7 @@ export const ParticlePVC = ({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="PVC1">
+          <g id="PVC1" transform="rotate(-90) translate(-21 0)">
             <path
               d="M8.988 4.412V2.9h.785V1.428h-.785V.348H13.7v1.08h-2.69V2.9h.589v1.512h.797c.642 0 1.162.52 1.162 1.162v13.611c0 .642-.52 1.163-1.162 1.163H8.214c-.642 0-1.163-.52-1.163-1.163V5.575c0-.643.52-1.163 1.162-1.163h.775z"
               fill={colour}
@@ -77,7 +77,7 @@ export const ParticlePVC = ({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="PVC2">
+          <g id="PVC2" transform="rotate(-90) translate(-21 0)">
             <path
               d="M7.861.348h5.028v1.59h-.628V9.59h.628v1.59h-.628v7.578h.628v1.59H7.861v-1.59h.629V11.18H7.86V9.59h.629V1.938H7.86V.348z"
               fill={colour}

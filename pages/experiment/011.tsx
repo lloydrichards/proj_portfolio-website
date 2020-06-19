@@ -13,10 +13,7 @@ import {
 import { RootRoutes } from "../../components/LifePlastic/RootRoutes";
 import { CombinedRoutes } from "../../components/LifePlastic/Routes/CombinedRoutes";
 
-import {
-  Garbage,
-  Plastic,
-} from "../../components/LifePlastic/Plastic/PlasticParticles";
+import { Plastic } from "../../components/LifePlastic/Plastic/PlasticParticles";
 import { ParticlePET } from "../../components/LifePlastic/Plastic/ParticlePET";
 import { ParticleHDPE } from "../../components/LifePlastic/Plastic/ParticleHDPE";
 import { ParticlePP } from "../../components/LifePlastic/Plastic/ParticlePP";
@@ -25,6 +22,9 @@ import { ParticleLDPE } from "../../components/LifePlastic/Plastic/ParticleLDPE"
 import { ParticlePVC } from "../../components/LifePlastic/Plastic/ParticlePVC";
 import { ParticleOTHER } from "../../components/LifePlastic/Plastic/ParticleOTHER";
 import { ParticleMIXED } from "../../components/LifePlastic/Plastic/ParticleMIXED";
+import { ParticleGARBAGE } from "../../components/LifePlastic/Plastic/ParticleGARBAGE";
+import { ParticlePellet } from "../../components/LifePlastic/Plastic/ParticlePellet";
+import { ParticleBale } from "../../components/LifePlastic/Plastic/ParticleBale";
 
 import { GroundFactories } from "../../components/LifePlastic/GroundFactories";
 import { SkyFactories } from "../../components/LifePlastic/SkyFactories";
@@ -423,7 +423,7 @@ const Experiment011: React.FC = () => {
               );
             case "Bale":
               return (
-                <Plastic
+                <ParticleBale
                   key={item.id}
                   id={item.id}
                   colour={plasticColourPicker(item.plastic)}
@@ -447,7 +447,7 @@ const Experiment011: React.FC = () => {
               );
             case "Pellet":
               return (
-                <Plastic
+                <ParticlePellet
                   key={item.id}
                   id={item.id}
                   colour={plasticColourPicker(item.plastic)}
@@ -483,7 +483,7 @@ const Experiment011: React.FC = () => {
               );
             case "GARBAGE":
               return (
-                <Garbage
+                <ParticleGARBAGE
                   key={item.id}
                   id={item.id}
                   colour={plasticColourPicker(item.plastic)}

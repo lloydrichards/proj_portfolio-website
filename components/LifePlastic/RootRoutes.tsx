@@ -316,7 +316,7 @@ export const RootRoutes: Array<RouteType> = [
     wasteChance: 0.1,
   },
   {
-    parent: "Mixed-HDPERecovery _2",
+    parent: "Mixed-HDPERecovery_2",
     require: "MixedBin",
     possible: [
       "Mixed-PS-Machine",
@@ -437,14 +437,14 @@ export const RootRoutes: Array<RouteType> = [
   {
     parent: "Bale-PP-Machine",
     require: "PETBin",
-    possible: ["Mixed-HDPERecovery", "Regrind-PP"],
+    possible: ["Mixed-HDPERecovery_2", "Regrind-PP"],
     waste: "PP-Garbage",
     wasteChance: 0.1,
   },
   {
     parent: "Bale-PP-Hand",
     require: "PETBin",
-    possible: ["Mixed-HDPERecovery", "Regrind-PP"],
+    possible: ["Mixed-HDPERecovery_2", "Regrind-PP"],
     waste: "PP-Garbage",
     wasteChance: 0.1,
   },

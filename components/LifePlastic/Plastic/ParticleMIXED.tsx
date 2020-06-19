@@ -45,7 +45,7 @@ export const ParticleMIXED = ({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="HDPE1">
+          <g id="HDPE1" transform="rotate(-90) translate(-21 0)">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -78,7 +78,7 @@ export const ParticleMIXED = ({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="HDPE2">
+          <g id="HDPE2" transform="rotate(-90) translate(-21 0)">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"

@@ -2,14 +2,9 @@ import React from "react";
 import anime from "animejs";
 import { BoxProps } from "../Interfaces/Interfaces";
 
-export const velocity = 0.0002;
+export const velocity = 0.2;
 
-export const Plastic = ({
-  pathRef,
-  onComplete,
-  delay,
-  colour
-}: BoxProps) => {
+export const Plastic = ({ pathRef, onComplete, delay, colour }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const path = anime.path(pathRef);
@@ -19,7 +14,7 @@ export const Plastic = ({
       translateY: path("y"),
       rotate: path("angle"),
       delay: delay,
-      duration: path.length / velocity - (delay ? delay : 0),
+      duration: path("d").totalLength / velocity,
       easing: "linear",
       complete: onComplete,
     });

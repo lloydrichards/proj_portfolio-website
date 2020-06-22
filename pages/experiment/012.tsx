@@ -4,13 +4,13 @@ import * as chroma from "chroma-js";
 
 import {
   AssemblyLine,
-  OldRouteType,
+  RouteType,
   PathType,
   MaterialType,
   SystemList,
   FormType,
 } from "../../components/LifePlastic/Interfaces/Interfaces";
-import { RootRoutes } from "../../components/LifePlastic/data/OldRoutes";
+import { RootRoutes } from "../../components/LifePlastic/data/RootRoutes";
 import { CombinedRoutes } from "../../components/LifePlastic/Routes/CombinedRoutes";
 
 import { Plastic } from "../../components/LifePlastic/Plastic/PlasticParticles";
@@ -35,7 +35,7 @@ import { SkyPipesBackground } from "../../components/LifePlastic/SkyPipesBackgro
 import { SkyPipesForeground } from "../../components/LifePlastic/SkyPipesForeground";
 import { nanoid } from "nanoid";
 
-const Experiment011: React.FC = () => {
+const Experiment012: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
@@ -59,19 +59,32 @@ const Experiment011: React.FC = () => {
     OTHERRefiner: true,
   });
 
-  const pickPath = (path: OldRouteType): PathType => {
+  const pathBuilder = (path: RouteType): Array<string> => {
+    if (path.possible.length === path.probability.length) {
+      let arrayReturn: Array<string> = [];
+      for (let x = 0; x < path.possible.length; x++) {
+        for (let y = 0; y < path.probability[x]; y++) {
+          arrayReturn.push(path.possible[x]);
+        }
+      }
+      return arrayReturn;
+    } else {
+      console.log(
+        `The Routes and Probabilities for ${path.parent} don't match!`
+      );
+      return ["none"];
+    }
+  };
+
+  const pickPath = (path: RouteType): PathType => {
     //Is there the required system?
     if (systems[path.require]) {
-      //Chance it still goes to waste
-      if (path.wasteChance > Math.random()) {
-        return routeLookUp(path.waste);
-      } else {
-        //Pick random path
-        const picked = Math.floor(Math.random() * path.possible.length);
-        return routeLookUp(path.possible[picked]);
-      }
+      //Pick random path
+      const builtPaths = pathBuilder(path);
+      const picked = Math.floor(Math.random() * builtPaths.length);
+      return routeLookUp(builtPaths[picked]);
       //else, goes to waste
-    } else return routeLookUp(path.waste);
+    } else return routeLookUp(path.toWaste);
   };
 
   const nextPath = (item: MaterialType) => {
@@ -154,22 +167,16 @@ const Experiment011: React.FC = () => {
     switch (type) {
       case "PET":
         return cPallet[0];
-
       case "HDPE":
         return cPallet[1];
-
       case "PP":
         return cPallet[2];
-
       case "PS":
         return cPallet[3];
-
       case "LDPE":
         return cPallet[4];
-
       case "PVC":
         return cPallet[5];
-
       case "OTHER":
         return cPallet[6];
       case "MIXED":
@@ -182,22 +189,64 @@ const Experiment011: React.FC = () => {
   };
   return (
     <Layout title="Experiment | 009">
-      <h2>011 - Adding and Taking Away Routes</h2>
-      <h4>Date: June 19th 2020</h4>
+      <h2>011 - Implimenting some Data</h2>
+      <h4>Date: June 21th 2020</h4>
       <p>
-        Now that all the routes are in place, the next two challenges are to
-        change the shape and colour of the particle depengin on the properties
-        of the route. The second is being able to conditionally remove or add
-        routes based on the state. Initially this was going to be a boolean, but
-        I think now I want to add this is a number which can be incremented up
-        when a particle finishes a route and then used to create the next
-        particle when a certain amount arrive.
+        The plan now is to start implimenting some data and figuring out how to
+        remove specific paths. I came up with a functions while on a hike
+        yesterday that should help to control the movement of plastic between
+        the various routes. Currently all the routes are given equal weight so
+        there is no priority for certain routes.
       </p>
+      <pre>
+        <code>
+          {`{
+    parent: "Bale-PP-Hand",
+    require: "PPHandSorting",
+    possible: ["Mixed-HDPERecovery_2", "Regrind-PP"],
+    probability: [1,19],
+    waste: "PPHandSorting-Garbage",
+  },
+          `}
+        </code>
+      </pre>
+      <pre>
+        <code>
+          {`export const func = (arrayRoutes, arrayProb) => {
+  if (arrayRoutes.length === arrayProb.length){
+    let arrayReturn = [];
+    for(const x=0; x < arrayRoutes.length; x++){
+      for (const y=0; y< arrayProb[x]; y++){
+        arrayReturn.concat(arrayRoutes[x]);
+      }
+    }
+    return arrayReturn;
+  } else {console.log("The Routes and Probabilities don't match!")}
+}
+          `}
+        </code>
+      </pre>
       <p>
-        First part is done, there are now different colours and forms for each
-        type and plastic as they go through the system. There are still things
-        to do now, but for now it feels quite full. I think I still need to
-        clean up the pipes and change the lines.
+        What this should do when its given the <code>object.possible</code> and{" "}
+        <code>object.probability</code> is build an array of routes equal to the
+        numbers in the probability. So for the example above it would be a 5%
+        chance of going to Mixed-HDPERecovery-2 and 95% chance to go to
+        Regrind-PP. This will also allow me to remoce the garbage routes and
+        instead impliment something that is more evident of when a system is
+        missing such as the material just dropping out the pipe and keeping its
+        type and plastic.{" "}
+      </p>
+
+      <p>
+        The second problem is that currently everything moves 1:1 across the
+        diagram and this makes everything quite liniar. What i would like to do
+        is impliment something that adds up over time and fires only when a
+        certain amount has been formed. For PET this could be 10 Bottles `{">"}`
+        1 Bale `{">"}` 25 Regrind `{">"}` 1 Pellet `{">"}` 10 Bottles. In this
+        way the material is conserved across the diagram, but because there are
+        waste streams and inefficiencies in the system, it doesnt always mean
+        that putting 10 bottles in will make 10 bottles out, and probablt not
+        when you only put 10 in.
       </p>
       <div
         style={{
@@ -506,7 +555,7 @@ const Experiment011: React.FC = () => {
             MixedLines: "none",
             BaleLines: "none",
             PelletLines: "none",
-            RegrindLines: "none",
+            RegrindLines: "red",
             HandLines: "none",
             ProductsLines: "none",
             MissingLines: "none",
@@ -517,4 +566,4 @@ const Experiment011: React.FC = () => {
   );
 };
 
-export default Experiment011;
+export default Experiment012;

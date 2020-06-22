@@ -18,7 +18,7 @@ export const ParticleBale = ({
       translateY: path("y"),
       rotate: path("angle"),
       delay: delay,
-      duration: path.length / velocity - (delay ? delay : 0),
+      duration: path("d").totalLength / velocity,
       easing: "linear",
       complete: onComplete,
     });

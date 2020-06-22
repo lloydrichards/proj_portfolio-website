@@ -11,9 +11,10 @@ interface StyleType {
   RegrindLines: string;
   HandLines: string;
   ProductsLines: string;
+  MissingLines: string;
 }
 
-export const Routes = ({ routeStyle}: RouteProps) => {
+export const Routes = ({ routeStyle }: RouteProps) => {
   return (
     <svg
       width="1050"
@@ -22,7 +23,10 @@ export const Routes = ({ routeStyle}: RouteProps) => {
       xmlns="http://www.w3.org/2000/svg"
       style={{ position: "absolute" }}
     >
-      <g id="GarbageLines" stroke={routeStyle? routeStyle.GarbageLines : "red"}>
+      <g
+        id="GarbageLines"
+        stroke={routeStyle ? routeStyle.GarbageLines : "red"}
+      >
         <path id="Garbage" d="M903.828 1768.04V3765" />
         <path
           id="Mixed-Garbage"
@@ -129,7 +133,7 @@ export const Routes = ({ routeStyle}: RouteProps) => {
           d="M502.999 224v34.754a9.998 9.998 0 01-4.833 8.561l-16.556 9.992a10.003 10.003 0 00-4.833 8.562v757.201c0 2.66 1.057 5.2 2.936 7.08l421.179 420.36a10.002 10.002 0 012.936 7.08v290.47"
         />
       </g>
-      <g id="MixedLines" stroke={routeStyle? routeStyle.MixedLines : "#000"}>
+      <g id="MixedLines" stroke={routeStyle ? routeStyle.MixedLines : "#000"}>
         <path
           id="Mixed-PETE"
           d="M135.156 1768v245.93c0 5.55 4.522 10.04 10.073 10l75.854-.56c5.551-.04 10.073 4.45 10.073 10V2064"
@@ -179,7 +183,7 @@ export const Routes = ({ routeStyle}: RouteProps) => {
           d="M439.156 2488v21.66c0 7.81-8.555 12.61-15.218 8.53l-33.88-20.72a10.008 10.008 0 00-5.218-1.47H97.156c-5.523 0-10-4.48-10-10v-786.58c0-5.52 4.477-10 10-10h27.93c5.523 0 10 4.48 10 10V1768"
         />
       </g>
-      <g id="BaleLines" stroke={routeStyle? routeStyle.BaleLines : "#FF9D29"}>
+      <g id="BaleLines" stroke={routeStyle ? routeStyle.BaleLines : "#FF9D29"}>
         <path
           id="Bale-SeperatedPETE"
           d="M231.377 2064v53.6c0 3.37-1.697 6.52-4.513 8.36l-22.973 15.08a10 10 0 00-4.514 8.36V2480"
@@ -274,7 +278,10 @@ export const Routes = ({ routeStyle}: RouteProps) => {
           d="M807.154 2064v39.11c0 3.36 1.697 6.51 4.514 8.36l6.973 4.57a10 10 0 014.513 8.36v91.6"
         />
       </g>
-      <g id="PelletLines" stroke={routeStyle? routeStyle.PelletLines : "#E900B5"}>
+      <g
+        id="PelletLines"
+        stroke={routeStyle ? routeStyle.PelletLines : "#E900B5"}
+      >
         <path
           id="Pellet-SeperaterHDPE"
           d="M327.571 2776l.251 29.92c.047 5.55-4.444 10.08-10 10.08h-20.224c-1.974 0-3.904.59-5.547 1.68l-9.647 6.43a9.995 9.995 0 00-4.45 8.1l-.654 29.07c-.126 5.61 4.387 10.22 9.998 10.22h694.945c5.523 0 10-4.48 10-10V498.001c0-5.523-4.477-10-10-10L297.907 488a9.997 9.997 0 00-6.111 2.085l-28.382 21.916"
@@ -297,19 +304,19 @@ export const Routes = ({ routeStyle}: RouteProps) => {
         />
         <path
           id="Pellet-BluerPET"
-          d="M199.57 2479.95v85.01c0 3.97-2.352 7.57-5.991 9.16l-4.017 1.76a9.998 9.998 0 00-5.992 9.16V2819c0 3.15-1.482 6.11-4 8l-24 18a9.999 9.999 0 00-4 8v33c0 5.52 4.477 10 10 10h828.672c5.523 0 9.998-4.48 9.998-10V521.715c0-5.523-4.475-10-9.998-10H399.207a9.997 9.997 0 00-7.89 3.857l-15.903 20.427"
+          d="M183.57 2744v75c0 3.15-1.482 6.11-4 8l-24 18a9.999 9.999 0 00-4 8v33c0 5.52 4.477 10 10 10h828.672c5.523 0 9.998-4.48 9.998-10V521.891c0-5.523-4.475-10-9.998-10H399.347a10.003 10.003 0 00-7.851 3.805l-15.993 20.268"
         />
         <path
           id="Pellet-BrownrPET"
-          d="M199.57 2479.81v85.15c0 3.97-2.352 7.57-5.991 9.16l-4.017 1.76a9.998 9.998 0 00-5.992 9.16V2819c0 3.15-1.482 6.11-4 8l-24 18a9.999 9.999 0 00-4 8v33c0 5.52 4.477 10 10 10h828.672c5.523 0 9.998-4.48 9.998-10V521.629c0-5.523-4.475-10-9.998-10H399.446a10.004 10.004 0 00-7.86 3.816L375.414 536"
+          d="M183.57 2744v75c0 3.15-1.482 6.11-4 8l-24 18a9.999 9.999 0 00-4 8v33c0 5.52 4.477 10 10 10h828.672c5.523 0 9.998-4.48 9.998-10V521.891c0-5.523-4.475-10-9.998-10H399.347a10.003 10.003 0 00-7.851 3.805l-15.993 20.268"
         />
         <path
           id="Pellet-ClearrPET"
-          d="M199.57 2479.81v85.15c0 3.97-2.352 7.57-5.991 9.16l-4.017 1.76a9.998 9.998 0 00-5.992 9.16V2819c0 3.15-1.482 6.11-4 8l-24 18a9.999 9.999 0 00-4 8v33c0 5.52 4.477 10 10 10h828.672c5.523 0 9.998-4.48 9.998-10V521.719c0-5.523-4.475-10-9.998-10H399.511a10 10 0 00-7.834 3.785l-16.263 20.498"
+          d="M183.57 2744v75c0 3.15-1.482 6.11-4 8l-24 18a9.999 9.999 0 00-4 8v33c0 5.52 4.477 10 10 10h828.672c5.523 0 9.998-4.48 9.998-10V521.891c0-5.523-4.475-10-9.998-10H399.347a10.003 10.003 0 00-7.851 3.805l-15.993 20.268"
         />
         <path
           id="Pellet-GreenrPET"
-          d="M199.57 2479.38v85.58c0 3.97-2.352 7.57-5.991 9.16l-4.017 1.76a9.998 9.998 0 00-5.992 9.16V2819c0 3.15-1.482 6.11-4 8l-24 18a9.999 9.999 0 00-4 8v33c0 5.52 4.477 10 10 10h828.672c5.523 0 9.998-4.48 9.998-10V521.891c0-5.523-4.475-10-9.998-10H399.337a9.997 9.997 0 00-7.84 3.793l-16.083 20.317"
+          d="M183.57 2744v75c0 3.15-1.482 6.11-4 8l-24 18a9.999 9.999 0 00-4 8v33c0 5.52 4.477 10 10 10h828.672c5.523 0 9.998-4.48 9.998-10V521.891c0-5.523-4.475-10-9.998-10H399.347a10.003 10.003 0 00-7.851 3.805l-15.993 20.268"
         />
         <path
           id="Pellet-rPP-Buckets"
@@ -360,7 +367,10 @@ export const Routes = ({ routeStyle}: RouteProps) => {
           d="M823.57 2216v127c0 5.52 4.477 10 10 10h109.172c5.523 0 10-4.48 10-10V994.004c0-5.523-4.477-10-10-10H801.414c-5.523 0-10 4.477-10 10V1048"
         />
       </g>
-      <g id="RegrindLines" stroke={routeStyle? routeStyle.RegrindLines : "#1741D5"}>
+      <g
+        id="RegrindLines"
+        stroke={routeStyle ? routeStyle.RegrindLines : "#1741D5"}
+      >
         <path
           id="Regrind-SeperateHDPE"
           d="M311.156 2424v74.31c0 3.53 1.86 6.79 4.895 8.6l6.211 3.68a10.012 10.012 0 014.894 8.6V2776"
@@ -405,8 +415,12 @@ export const Routes = ({ routeStyle}: RouteProps) => {
           id="Regrind-PVC"
           d="M695.156 2448v119.6a10 10 0 004.514 8.36l6.973 4.58a9.987 9.987 0 014.514 8.36V2784"
         />
+        <path
+          id="Regrind-SeperatedPET"
+          d="M199.252 2480.57v85.01c0 3.97-2.352 7.57-5.992 9.16l-4.016 1.76a9.998 9.998 0 00-5.992 9.16v158.96"
+        />
       </g>
-      <g id="HandLines" stroke={routeStyle? routeStyle.HandLines : "#00976A"}>
+      <g id="HandLines" stroke={routeStyle ? routeStyle.HandLines : "#00976A"}>
         <path id="PET" d="M231.895 1767.96V1856" />
         <path id="HDPE" d="M327.771 1767.96V1856" />
         <path id="PP" d="M423.648 1767.84V1856" />
@@ -425,7 +439,10 @@ export const Routes = ({ routeStyle}: RouteProps) => {
           d="M583.287 336.001v69.936c0 5.523 4.477 10 10 10h32.518c2.129 0 4.203-.68 5.92-1.94l8.442-6.202a9.997 9.997 0 004.081-8.059V224.347a10 10 0 013.812-7.855l7.74-6.097a9.994 9.994 0 016.188-2.145h23.156c5.522 0 10 4.477 10 10v5.751"
         />
       </g>
-      <g id="ProductsLines" stroke={routeStyle? routeStyle.ProductsLines : "#2E9100"}>
+      <g
+        id="ProductsLines"
+        stroke={routeStyle ? routeStyle.ProductsLines : "#2E9100"}
+      >
         <path
           id="Product-Concrete"
           d="M791.196 1047.75h-36.4c-5.462 0-9.913 4.38-9.999 9.84l-1.176 74.79a9.987 9.987 0 002.928 7.22L900.3 1293.37a10.01 10.01 0 012.928 7.07v467.66"
@@ -518,6 +535,58 @@ export const Routes = ({ routeStyle}: RouteProps) => {
           id="Product-Thread"
           d="M695.457 223.75v31.193a10 10 0 008.737 9.92l30.474 3.881a10 10 0 018.737 9.92v531.947a10 10 0 002.925 7.067l153.974 154.144a10 10 0 012.925 7.067v789.221"
         />
+      </g>
+      <g
+        id="MissingLines"
+        stroke={routeStyle ? routeStyle.MissingLines : "#9BBD8B"}
+      >
+        <path id="Missing-rPET-SeperateRefiner" d="M183.201 2744.47v1021.41" />
+        <path id="Missing-rHDPE-SeperateRefiner" d="M327.201 2776.21v984" />
+        <path id="Missing-rPP-Refiner" d="M423.494 2936.59v827.43" />
+        <path id="Missing-rPS-Refiner" d="M535.395 2880.23v889.79" />
+        <path id="Missing-rPVC-Refiner" d="M711.699 2784.67v997.3" />
+        <path id="Missing-rLDPE-Refiner" d="M631.156 2585.42v1179.24" />
+        <path id="Missing-PS-Grinder" d="M503.547 2681.16v1085.51" />
+        <path id="Missing-rHDPE-MixedRefiner" d="M375.156 2624v1134.6" />
+        <path id="Missing-PP-Grinder" d="M439.027 2488v1272.62" />
+        <path id="Missing-rPET-Refiner" d="M263.414 2584v1170.57" />
+        <path id="Missing-HDPE-SeperateGrinder" d="M310.832 2424v1338.64" />
+        <path id="Missing-PET-SeperateGrinder" d="M199.693 2479.3v1281.32" />
+        <path id="Missing-PET-MixedGrinder" d="M247.414 2216.83v1545.81" />
+        <path id="Missing-HDPE-MixedGrinder" d="M359.156 2225.35v1529.22" />
+        <path id="Missing-PVC-Grinder" d="M695.156 2448v1322.71" />
+        <path id="Missing-Other-Refiner" d="M823.928 2216v1542.6" />
+        <path id="Missing-Other-MachineSorting" d="M807.828 2062.8v1689.75" />
+        <path id="Missing-LDPE-MachineSorting" d="M615.377 2062.39V3758.6" />
+        <path id="Missing-PS-MachineSorting" d="M535.773 2126.37v1634.25" />
+        <path id="Missing-PS-HandSorting" d="M503.002 2063.46v1699.18" />
+        <path id="Missing-PP-MachineSorting" d="M423.377 2061.73v1684.76" />
+        <path id="Missing-HDPE-MachineSorting" d="M327.156 2062.8v1701.86" />
+        <path id="Missing-PET-MachineSorting" d="M231.121 2065.68v1705.03" />
+        <path id="Missing-PET-HandSorting" d="M231.121 1860.06v1902.47" />
+        <path id="Missing-HDPE-HandSorting" d="M327.229 1860.06v1902.47" />
+        <path id="Missing-PP-HandSorting" d="M423.377 1860.06v1902.47" />
+        <path id="Missing-LDPE-HandSorting" d="M615.229 1898.45v1902.46" />
+        <path id="Missing-Other-HandSorting" d="M807.334 1856v1902.47" />
+        <path id="Missing-WindowFrames" d="M503.414 224v3548.53" />
+        <path id="Missing-rPETCloths" d="M695.145 224v3548.53" />
+        <path id="Missing-rPETFiber" d="M583.01 338.109V3794.3" />
+        <path id="Missing-Toys" d="M425.053 375.75v3404.8" />
+        <path id="Missing-PETFurniture" d="M344.252 239.75v3548.53" />
+        <path id="Missing-HDPEBottles" d="M263.414 511.215V3777.11" />
+        <path id="Missing-BottleCaps" d="M135.502 417.184V3765.08" />
+        <path id="Missing-PETBottles" d="M374.916 538.828V3777.11" />
+        <path id="Missing-PVCPipes" d="M519.156 553.66V3785.7" />
+        <path id="Missing-Buckets" d="M599.082 608v3186.3" />
+        <path id="Missing-OfficeSupplies" d="M695.457 689.82v3085.57" />
+        <path id="Missing-HDPEPipes" d="M775 568.055V3765.08" />
+        <path id="Missing-GardenFurniture" d="M727.414 896.387V3771.95" />
+        <path id="Missing-Concrete" d="M791.352 1047.75v2717.33" />
+        <path id="Missing-PlasticBags" d="M551 889.836V3777.11" />
+        <path id="Missing-LandscapeFabric" d="M471.414 697.684V3780.55" />
+        <path id="Missing-PictureFrames" d="M407.543 855.641V3780.55" />
+        <path id="Missing-Insulation" d="M247.828 856v2910.8" />
+        <path id="Missing-ConcreteInfill" d="M183 993.297V3747.89" />
       </g>
     </svg>
   );

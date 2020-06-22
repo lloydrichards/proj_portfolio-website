@@ -1,5 +1,5 @@
-import { RouteType } from "../LifePlastic/Interfaces/Interfaces";
-export const RootRoutes: Array<RouteType> = [
+import { OldRouteType } from "../../LifePlastic/Interfaces/Interfaces";
+export const RootRoutes: Array<OldRouteType> = [
   //-----------------------------------------------------
   //-----------------GARBAGE Routes
   //-----------------------------------------------------

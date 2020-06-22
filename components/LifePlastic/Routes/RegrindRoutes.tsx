@@ -31,8 +31,8 @@ export const RegrindRoutes: Array<PathType> = [
     amount: 1,
     name: "Regrind-MixedPETE-Recovered",
     path:
-    "M199.156 2479.52v70.41c0 5.52 4.477 10 10 10h5.295a9.9 9.9 0 014.616 1.13l44.089 22.94"
-},
+      "M199.156 2479.52v70.41c0 5.52 4.477 10 10 10h5.295a9.9 9.9 0 014.616 1.13l44.089 22.94",
+  },
   {
     type: "Regrind",
     plastic: "HDPE",
@@ -88,5 +88,13 @@ export const RegrindRoutes: Array<PathType> = [
     name: "Regrind-PVC",
     path:
       "M695.156 2448v119.6a10 10 0 004.514 8.36l6.973 4.58a9.987 9.987 0 014.514 8.36V2784",
+  },
+  {
+    type: "Regrind",
+    plastic: "PET",
+    amount: 1,
+    name: "Regrind-SeperatedPET",
+    path:
+      "M199.252 2480.57v85.01c0 3.97-2.352 7.57-5.992 9.16l-4.016 1.76a9.998 9.998 0 00-5.992 9.16v158.96",
   },
 ];

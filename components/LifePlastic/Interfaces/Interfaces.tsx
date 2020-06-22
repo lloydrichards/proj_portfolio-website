@@ -66,6 +66,13 @@ export interface RouteType {
   parent: string;
   require: keyof SystemList;
   possible: Array<string>;
+  probability: Array<number>;
+  toWaste: string;
+}
+export interface OldRouteType {
+  parent: string;
+  require: keyof SystemList;
+  possible: Array<string>;
   waste: string;
   wasteChance: number;
 }

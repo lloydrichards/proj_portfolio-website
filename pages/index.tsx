@@ -66,6 +66,11 @@ const IndexPage: React.FC = () => (
           <a>011 - Adding and Taking Away Routes</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/012">
+          <a>012 - Implimenting some Data</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

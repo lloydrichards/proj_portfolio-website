@@ -3,12 +3,12 @@ import Layout from "../../components/Layout";
 
 import {
   AssemblyLine,
-  RouteType,
+  OldRouteType,
   PathType,
   MaterialType,
   SystemList,
 } from "../../components/LifePlastic/Interfaces/Interfaces";
-import { RootRoutes } from "../../components/LifePlastic/RootRoutes";
+import { RootRoutes } from "../../components/LifePlastic/data/OldRoutes";
 import { CombinedRoutes } from "../../components/LifePlastic/Routes/CombinedRoutes";
 
 import { Garbage, Waste } from "../../components/animejs/garbage";
@@ -48,7 +48,7 @@ const Experiment010: React.FC = () => {
     OTHERRefiner: true,
   });
 
-  const pickPath = (path: RouteType): PathType => {
+  const pickPath = (path: OldRouteType): PathType => {
     //Is there the required system?
     if (systems[path.require]) {
       //Chance it still goes to waste

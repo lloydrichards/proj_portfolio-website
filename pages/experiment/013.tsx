@@ -195,7 +195,22 @@ const Experiment013: React.FC = () => {
         the various routes. Currently all the routes are given equal weight so
         there is no priority for certain routes.
       </p>
-      <RevealBox />
+      <RevealBox>
+        <h1>Life of Plastic</h1>
+        <h3>...it's fantastic!</h3>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h2>Scroll down to reveal...</h2>
+
+        <p style={{ margin: "0 auto", padding: "800px 400px" }}>
+          Here will be a whole lot of text about stuff, probably about plastic
+          but who knows?
+        </p>
+      </RevealBox>
       <Diagram>
         <GarbageBackground />
         <SkyPipesBackground />

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@types/animejs": "^3.1.1",
     "@types/d3": "^5.7.2",
     "@types/lodash": "^4.14.155",
@@ -21,6 +23,7 @@
     "chroma-js": "^2.1.0",
     "d3": "^5.16.0",
     "d3-scale": "^3.2.1",
+    "framer-motion": "^1.11.1",
     "isomorphic-unfetch": "^3.0.0",
     "lodash": "^4.17.15",
     "nanoid": "^3.1.9",

@@ -37,6 +37,7 @@ export const ParticlePET = ({
           position: "absolute",
           top: "-11px",
           left: "-11px",
+          zIndex:10
         }}
       >
         <svg

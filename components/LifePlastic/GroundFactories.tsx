@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const GroundFactories = () => {
+export const GroundFactories: React.FC = () => {
   return (
     <svg
       width="1050"

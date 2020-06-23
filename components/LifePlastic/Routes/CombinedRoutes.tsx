@@ -5,6 +5,7 @@ import { MixedRoutes } from "./MixedRoutes";
 import { PelletRoutes } from "./PelletRoutes";
 import { ProductRoutes } from "./ProductRoutes";
 import { RegrindRoutes } from "./RegrindRoutes";
+import { MissingRoutes } from "./MissingRoutes";
 
 export const CombinedRoutes = [
   ...BaleRoutes,
@@ -14,4 +15,5 @@ export const CombinedRoutes = [
   ...PelletRoutes,
   ...ProductRoutes,
   ...RegrindRoutes,
+  ...MissingRoutes,
 ];

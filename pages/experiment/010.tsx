@@ -23,30 +23,13 @@ import { SkyPipesBackground } from "../../components/LifePlastic/SkyPipesBackgro
 import { SkyPipesForeground } from "../../components/LifePlastic/SkyPipesForeground";
 import { Processes } from "../../components/LifePlastic/Processes";
 import { nanoid } from "nanoid";
+import { StartingSystems } from "../../components/LifePlastic/data/StartingSystems";
 
 const Experiment010: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
-  const [systems] = React.useState<SystemList>({
-    MixedBin: true,
-    PETBin: true,
-    HDPEBin: true,
-    PPBin: true,
-    PSBin: true,
-    LDPEBin: true,
-    PVCBin: true,
-    OTHERBin: true,
-    TRASHBin: true,
-    PETMachineSort: true,
-    HDPEMachineSort: true,
-    PPMachineSort: true,
-    PSMachineSort: true,
-    LDPEMachineSort: true,
-    OTHERMachineSort: true,
-    SeperatedPETGrinder: true,
-    OTHERRefiner: true,
-  });
+  const [systems] = React.useState<SystemList>(StartingSystems);
 
   const pickPath = (path: OldRouteType): PathType => {
     //Is there the required system?

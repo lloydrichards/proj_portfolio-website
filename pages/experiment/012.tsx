@@ -34,30 +34,15 @@ import { GroundPipesForeground } from "../../components/LifePlastic/GroundPipesF
 import { SkyPipesBackground } from "../../components/LifePlastic/SkyPipesBackground";
 import { SkyPipesForeground } from "../../components/LifePlastic/SkyPipesForeground";
 import { nanoid } from "nanoid";
+import { StartingSystems } from "../../components/LifePlastic/data/StartingSystems";
+import { Processes } from "../../components/LifePlastic/Processes";
+import { FactoryButton } from "../../components/LifePlastic/Buttons";
 
 const Experiment012: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
-  const [systems] = React.useState<SystemList>({
-    MixedBin: true,
-    PETBin: true,
-    HDPEBin: true,
-    PPBin: true,
-    PSBin: true,
-    LDPEBin: true,
-    PVCBin: true,
-    OTHERBin: true,
-    TRASHBin: true,
-    PETMachineSort: true,
-    HDPEMachineSort: true,
-    PPMachineSort: true,
-    PSMachineSort: true,
-    LDPEMachineSort: true,
-    OTHERMachineSort: true,
-    SeperatedPETGrinder: true,
-    OTHERRefiner: true,
-  });
+  const [systems, setSystems] = React.useState<SystemList>(StartingSystems);
 
   const pathBuilder = (path: RouteType): Array<string> => {
     if (path.possible.length === path.probability.length) {
@@ -162,6 +147,22 @@ const Experiment012: React.FC = () => {
     addItem(possibleRoutes[randomNumber]);
   };
 
+  const toggleSystem = (id: any) => {
+    if (Object.keys(systems).find((i) => i == id)) {
+      const verifiedId: keyof SystemList = id;
+      const selectedSystem = systems[verifiedId];
+      if (selectedSystem) {
+        console.log(`${verifiedId} turned OFF`);
+        setSystems({ ...systems, [verifiedId]: false });
+      } else {
+        console.log(`${verifiedId} turned ON`);
+        setSystems({ ...systems, [verifiedId]: true });
+      }
+    } else {
+      console.log(`${id} is not a valid ID`);
+    }
+  };
+
   const plasticColourPicker = (type: keyof FormType) => {
     const cPallet = chroma.scale("Spectral").mode("lch").colors(7);
     switch (type) {
@@ -253,6 +254,15 @@ const Experiment012: React.FC = () => {
           position: "absolute",
         }}
       >
+        <div
+          style={{
+            position: "absolute",
+            top: 2000,
+            height: 2000,
+            width: 2000,
+            backgroundColor: "#666",
+          }}
+        ></div>
         <button
           onClick={() => {
             randomRecycling(addRecyclable)([
@@ -375,7 +385,7 @@ const Experiment012: React.FC = () => {
         </button>
         <button
           onClick={() => {
-            console.log(materials);
+            console.log(systems);
           }}
           style={{
             zIndex: 5,
@@ -385,7 +395,7 @@ const Experiment012: React.FC = () => {
             backgroundColor: "blue",
           }}
         >
-          State
+          Turn Off
         </button>
       </div>
       <div></div>
@@ -560,6 +570,10 @@ const Experiment012: React.FC = () => {
             ProductsLines: "none",
             MissingLines: "none",
           }}
+        />
+        <FactoryButton
+          systems={systems}
+          getSystemId={(id) => toggleSystem(id)}
         />
       </div>
     </Layout>

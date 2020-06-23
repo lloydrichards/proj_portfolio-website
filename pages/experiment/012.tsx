@@ -35,7 +35,6 @@ import { SkyPipesBackground } from "../../components/LifePlastic/SkyPipesBackgro
 import { SkyPipesForeground } from "../../components/LifePlastic/SkyPipesForeground";
 import { nanoid } from "nanoid";
 import { StartingSystems } from "../../components/LifePlastic/data/StartingSystems";
-import { Processes } from "../../components/LifePlastic/Processes";
 import { FactoryButton } from "../../components/LifePlastic/Buttons";
 
 const Experiment012: React.FC = () => {

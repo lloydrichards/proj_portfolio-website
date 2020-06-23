@@ -211,7 +211,7 @@ export const RootRoutes: Array<OldRouteType> = [
   },
   {
     parent: "Mixed-HDPE",
-    require: "HDPEMachineSort",
+    require: "HDPEMachineSorting",
     possible: [
       "Bale-SeperatedHDPE-Hand",
       "Bale-MixedHDPE-Machine",
@@ -222,35 +222,35 @@ export const RootRoutes: Array<OldRouteType> = [
   },
   {
     parent: "Mixed-PP",
-    require: "PPMachineSort",
+    require: "PPMachineSorting",
     possible: ["Bale-PP-Machine", "Bale-PP-Machine-Bucket"],
     waste: "Mixed-Garbage",
     wasteChance: 0.1,
   },
   {
     parent: "Mixed-LDPE",
-    require: "LDPEMachineSort",
+    require: "LDPEMachineSorting",
     possible: ["Bale-LDPE-Machine"],
     waste: "Mixed-Garbage",
     wasteChance: 0.1,
   },
   {
     parent: "Mixed-Other",
-    require: "OTHERMachineSort",
+    require: "OTHERMachineSorting",
     possible: ["Bale-Other-Machine"],
     waste: "Mixed-Garbage",
     wasteChance: 0.1,
   },
   {
     parent: "Mixed-PS-Hand",
-    require: "PSMachineSort",
+    require: "PSMachineSorting",
     possible: ["Brick-ESP", "Brick-ESP-Board", "Brick-ESP-Infill"],
     waste: "none",
     wasteChance: 0,
   },
   {
     parent: "Mixed-PS-Machine",
-    require: "PSMachineSort",
+    require: "PSMachineSorting",
     possible: ["Ingot-MixedPS", "Brick-MixedPS"],
     waste: "MixedPS-Garbage",
     wasteChance: 0.1,
@@ -335,7 +335,7 @@ export const RootRoutes: Array<OldRouteType> = [
   //-----------------------------------------------------
   {
     parent: "Bale-SeperatedPETE",
-    require: "SeperatedPETGrinder",
+    require: "PETSeperateGrinder",
     possible: [
       "Mixed-SeperatePETRecovery",
       "SeperatePETE-Garbage",
@@ -358,7 +358,7 @@ export const RootRoutes: Array<OldRouteType> = [
   },
   {
     parent: "Bale-MixedPETE-Sorted",
-    require: "SeperatedPETGrinder",
+    require: "PETSeperateGrinder",
     possible: [
       "Mixed-SeperatePETRecovery",
       "SeperatePETE-Garbage",
@@ -374,7 +374,7 @@ export const RootRoutes: Array<OldRouteType> = [
   },
   {
     parent: "Bale-PremiumPETE",
-    require: "SeperatedPETGrinder",
+    require: "PETSeperateGrinder",
     possible: [
       "Mixed-SeperatePETRecovery",
       "SeperatePETE-Garbage",
@@ -513,14 +513,14 @@ export const RootRoutes: Array<OldRouteType> = [
   },
   {
     parent: "Bale-Other-Hand",
-    require: "OTHERRefiner",
+    require: "OtherRefiner",
     possible: ["Pellet-Other-Concrete", "Pellet-Other-Furniture"],
     waste: "Other-Garbage",
     wasteChance: 0.1,
   },
   {
     parent: "Bale-Other-Machine",
-    require: "OTHERRefiner",
+    require: "OtherRefiner",
     possible: ["Pellet-Other-Concrete", "Pellet-Other-Furniture"],
     waste: "Other-Garbage",
     wasteChance: 0.1,

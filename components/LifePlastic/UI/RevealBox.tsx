@@ -1,13 +1,19 @@
 import * as React from "react";
 import { motion } from "framer-motion";
+import { SKYBACKGROUND, GROUNDBACKGROUND } from "../styles/PlasticStyles";
 const RevealBox: React.FC = ({ children }) => {
-  const [revealFirst, setRevealFirst] = React.useState(false);
+  const [reveal, setReveal] = React.useState(false);
+
+  const variants = {
+    visible: { opacity: 1 },
+    hidden: { opacity: [1, 0, 0], y: ["0%", "0%", "-500%"] },
+  };
 
   React.useEffect(() => {
     const handleScroll = () => {
       const yPos = window.scrollY;
       if (yPos > 1200) {
-        setRevealFirst(true);
+        setReveal(true);
       }
     };
     window.addEventListener("scroll", handleScroll, false);
@@ -18,17 +24,28 @@ const RevealBox: React.FC = ({ children }) => {
 
   return (
     <motion.div
-      animate={{ display: revealFirst ? "none" : "block" }}
-      transition={{ duration: 2, ease: "easeOut", delayChildren: 10 }}
-      initial={{ display: "block" }}
+      animate={reveal ? "hidden" : "visible"}
+      transition={{ duration: 3, ease: "easeOut", delayChildren: 10 }}
+      initial="visible"
+      variants={variants}
       style={{
         width: "100%",
         height: "4000px",
-        background: "skyblue",
+        background: SKYBACKGROUND,
         position: "absolute",
         zIndex: 10,
       }}
     >
+      <motion.div
+        style={{
+          width: "100%",
+          height: "4000px",
+          top: "1780px",
+          background: GROUNDBACKGROUND,
+          position: "absolute",
+          zIndex: 10,
+        }}
+      />
       {children}
     </motion.div>
   );

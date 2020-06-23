@@ -1,3 +1,5 @@
+import { STROKEWEIGHT, STROKECOLOR, PROCESSFILL } from "./styles/PlasticStyles";
+
 export const Processes = () => {
   return (
     <svg
@@ -8,7 +10,12 @@ export const Processes = () => {
       style={{ position: "absolute" }}
     >
       <g data-name="Process">
-        <g data-name="MixedPET-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="MixedPET-Refiner"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 30"
             d="M271.811 2584a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -24,9 +31,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="SeperatedPET-Refiner"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 76"
@@ -43,9 +50,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="SeperateHDPE-Refiner"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 79"
@@ -56,7 +63,12 @@ export const Processes = () => {
             d="M335.906 2816a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="PP-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="PP-Refiner"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 86"
             d="M431.906 2936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -68,9 +80,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="SeperatedHDPE-Grinder"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 37"
@@ -85,7 +97,12 @@ export const Processes = () => {
             d="M319.811 2504a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="PP-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="PP-Grinder"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 83"
             d="M447.811 2488a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -101,9 +118,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="MixedHDPE-Grinder"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 40"
@@ -118,7 +135,12 @@ export const Processes = () => {
             d="M367.906 2304a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="MixedPS-Smelter" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="MixedPS-Smelter"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 88"
             d="M559.811 2248a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -136,7 +158,12 @@ export const Processes = () => {
             d="M559.811 2368a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="PS-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="PS-Grinder"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 92"
             d="M511.906 2680a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -150,7 +177,12 @@ export const Processes = () => {
             d="M511.906 2760a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="LDPE-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="LDPE-Refiner"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 100"
             d="M639.811 2585a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -168,7 +200,12 @@ export const Processes = () => {
             d="M639.811 2705a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="PVC-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="PVC-Grinder"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 104"
             d="M703.906 2448a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -186,7 +223,12 @@ export const Processes = () => {
             d="M703.906 2568a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="PVC-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="PVC-Refiner"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 112"
             d="M719.906 2784a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -196,7 +238,12 @@ export const Processes = () => {
             d="M719.906 2824a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="OTHER-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="OTHER-Refiner"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 108"
             d="M831.906 2216a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -214,7 +261,12 @@ export const Processes = () => {
             d="M831.906 2336a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="PS-Refiner" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="PS-Refiner"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 95"
             d="M543.811 2840a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -234,9 +286,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="MixedHDPE-Refiner"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 81"
@@ -247,7 +299,12 @@ export const Processes = () => {
             d="M383.811 2664a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="PET-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="PET-HandSorting"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 22"
             d="M239.906 1936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -265,84 +322,89 @@ export const Processes = () => {
           <path
             data-name="Ellipse 184"
             d="M239.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g data-name="HDPEBin">
           <path
             data-name="Ellipse 186"
             d="M335.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g data-name="PPBin">
           <path
             data-name="Ellipse 187"
             d="M431.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g data-name="PSBin">
           <path
             data-name="Ellipse 188"
             d="M527.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g data-name="LDPEBin">
           <path
             data-name="Ellipse 189"
             d="M623.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g data-name="PVCBin">
           <path
             data-name="Ellipse 190"
             d="M719.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g data-name="OTHERBin">
           <path
             data-name="Ellipse 191"
             d="M815.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g data-name="TRASHBin">
           <path
             data-name="Ellipse 192"
             d="M911.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g data-name="MIXEDBin">
           <path
             data-name="Ellipse 185"
             d="M143.75 1768a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="HDPE-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="HDPE-HandSorting"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 44"
             d="M335.906 1912a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -356,7 +418,12 @@ export const Processes = () => {
             d="M335.906 1832a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="PP-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="PP-HandSorting"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 49"
             d="M431.906 1936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -374,12 +441,17 @@ export const Processes = () => {
           <path
             data-name="Ellipse 56"
             d="M527.906 1856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="LDPE-HandSorting" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="LDPE-HandSorting"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 99"
             d="M623.906 1936a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -397,16 +469,16 @@ export const Processes = () => {
           <path
             data-name="Ellipse 66"
             d="M719.906 1856a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g
           data-name="OTHER-HandSorting"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 114"
@@ -419,9 +491,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="SeperatedPET-Grinder"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 25"
@@ -446,9 +518,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="PET-MachineSorting"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 20"
@@ -461,9 +533,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="HDPE-MachineSorting"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 43"
@@ -476,9 +548,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="PP-MachineSorting"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 48"
@@ -491,9 +563,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="PS-MachineSorting"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 53"
@@ -518,9 +590,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="LDPE-MachineSorting"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 58"
@@ -533,9 +605,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="OTHER-MachineSorting"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 68"
@@ -550,12 +622,17 @@ export const Processes = () => {
           <path
             data-name="Ellipse 163"
             d="M431.906 377a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="MixedPET-Grinder" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="MixedPET-Grinder"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 33"
             d="M255.906 2337a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -575,9 +652,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-ConstructionInfill"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 117"
@@ -590,9 +667,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-PictureFrames"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 173"
@@ -605,9 +682,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-PlasticBags"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 176"
@@ -624,9 +701,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-GardenFurniture"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 181"
@@ -641,16 +718,16 @@ export const Processes = () => {
           <path
             data-name="Ellipse 183"
             d="M799.75 1048a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
-            fill="#D2E799"
-            stroke="#000"
-            stroke-width=".5"
+            fill={PROCESSFILL}
+            stroke={STROKECOLOR}
+            stroke-width={STROKEWEIGHT}
           />
         </g>
         <g
           data-name="Product-InsulationBoards"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 120"
@@ -667,9 +744,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-BottleCaps"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 123"
@@ -690,9 +767,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-PETBottle"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 131"
@@ -711,7 +788,12 @@ export const Processes = () => {
             d="M383.906 537a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="Product-PVCPipe" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="Product-PVCPipe"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 137"
             d="M527.906 592a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -723,9 +805,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-LandscapeFabric"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 140"
@@ -740,7 +822,12 @@ export const Processes = () => {
             d="M479.906 696a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="Product-Buckets" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="Product-Buckets"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 143"
             d="M607.75 688a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -760,9 +847,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-OfficeSupplies"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 149"
@@ -775,9 +862,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-HDPEPipes"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 151"
@@ -798,9 +885,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-rPETFiber"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 156"
@@ -815,7 +902,12 @@ export const Processes = () => {
             d="M591.906 337a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
           />
         </g>
-        <g data-name="Product-Coths" fill="#D2E799" stroke="#000" stroke-width=".5">
+        <g
+          data-name="Product-Coths"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
+        >
           <path
             data-name="Ellipse 160"
             d="M703.906 305a7.75 7.75 0 11-15.5 0 7.75 7.75 0 0115.5 0z"
@@ -831,9 +923,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-WindowFrames"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 165"
@@ -846,9 +938,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-PETFurniture"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 167"
@@ -869,9 +961,9 @@ export const Processes = () => {
         </g>
         <g
           data-name="Product-HDPEBottles"
-          fill="#D2E799"
-          stroke="#000"
-          stroke-width=".5"
+          fill={PROCESSFILL}
+          stroke={STROKECOLOR}
+          stroke-width={STROKEWEIGHT}
         >
           <path
             data-name="Ellipse 127"

@@ -2,10 +2,10 @@ import * as React from "react";
 import { ToggleProps } from "./Interfaces/Interfaces";
 
 const FILLCOLOR = "white";
-const STROKECOLOR = "black";
+const STROKECOLOR = "none";
 const STROKEWEIGHT = "2";
 const FILLOPACITY_HIDDEN = "0";
-const FILLOPACITY = "0.9";
+const FILLOPACITY = "0.1";
 
 export const FactoryButton: React.FC<ToggleProps> = ({
   getSystemId,

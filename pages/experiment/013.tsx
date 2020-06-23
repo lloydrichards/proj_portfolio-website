@@ -39,6 +39,7 @@ import { FactoryButton } from "../../components/LifePlastic/Buttons";
 import UIButtons from "../../components/LifePlastic/UI/NavBar";
 import { Diagram } from "../../components/LifePlastic/styles/PlasticStyles";
 import RevealBox from "../../components/LifePlastic/UI/RevealBox";
+import { GarbageBackground } from "../../components/LifePlastic/Garbage";
 
 const Experiment013: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
@@ -196,6 +197,7 @@ const Experiment013: React.FC = () => {
       </p>
       <RevealBox />
       <Diagram>
+        <GarbageBackground />
         <SkyPipesBackground />
         <GroundPipesBackground />
         <GroundFactories />
@@ -357,7 +359,7 @@ const Experiment013: React.FC = () => {
             MixedLines: "none",
             BaleLines: "none",
             PelletLines: "none",
-            RegrindLines: "red",
+            RegrindLines: "none",
             HandLines: "none",
             ProductsLines: "none",
             MissingLines: "none",

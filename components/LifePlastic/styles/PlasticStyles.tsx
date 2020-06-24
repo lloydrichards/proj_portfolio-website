@@ -84,3 +84,49 @@ export const Button = styled.button({
       "inset -4px 4px 8px rgba(20,20,20,0.1), inset 4px -4px 8px rgba(255,255,255,0.8)",
   },
 });
+
+export const TutorialTitleDIV = styled.div({
+  width: "100%",
+  height: "250px",
+  margin: "4px 50px",
+  "&>h1": {
+    fontSize: "64px",
+    lineHeight: "83%",
+    letterSpacing: "3px",
+    fontFamily: "Muli,sans-serif",
+    fontWeight: 200,
+    padding: "50px 0px 0px 0px",
+    margin: "0",
+    width: "400px",
+  },
+  "&>h3": {
+    fontSize: "24px",
+    fontFamily: "Pacifico",
+    color: "#9BBD8B",
+    textShadow:
+      "4px 4px 2px rgba(20,20,20,0.1), -2px -2px 2px rgba(255,255,255,0.8)",
+    padding: "0px 100px",
+    margin: "0",
+  },
+});
+export const TutorialDIV = styled.div({
+  width: "100%",
+  height: "250px",
+  margin: "4px 50px",
+  display: "flex",
+  alignItems: "center",
+  "&>p": {
+    fontSize: "18px",
+    textAlign: "justify",
+    align: "left",
+    lineHeight: "150%",
+    fontFamily: "Josefin Sans,sans-serif",
+    paddingLeft: "250px",
+    width: "400px",
+  },
+  "&>div.example": {
+    position: "absolute",
+    top: "-200px",
+    align: "right",
+  },
+});

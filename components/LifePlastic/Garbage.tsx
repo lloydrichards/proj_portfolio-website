@@ -9,16 +9,27 @@ export const GarbageBackground: React.FC = () => {
         height: "4028px",
         position: "absolute",
         zIndex: -3,
-        background: `${SKYBACKGROUND}`,
       }}
     >
       <div
         style={{
-          width: "100%",
+          width: "200vw",
+          marginLeft: "-50vw",
+          top: "0px",
+          height: "4028px",
+          position: "relative",
+          zIndex: -3,
+          background: `${SKYBACKGROUND}`,
+        }}
+      />
+      <div
+        style={{
+          width: "200vw",
+          marginLeft: "-50vw",
           height: "2248px",
-          top: "1780px",
+          top: "-2248px",
           background: GROUNDBACKGROUND,
-          position: "absolute",
+          position: "relative",
           zIndex: -2,
         }}
       />

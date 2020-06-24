@@ -36,6 +36,7 @@ const RevealBox: React.FC = ({ children }) => {
         zIndex: 4,
       }}
     >
+      {children}
       <motion.div
         style={{
           width: "100%",
@@ -46,7 +47,6 @@ const RevealBox: React.FC = ({ children }) => {
           zIndex: 4,
         }}
       />
-      {children}
     </motion.div>
   );
 };

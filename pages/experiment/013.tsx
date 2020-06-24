@@ -36,11 +36,44 @@ import { nanoid } from "nanoid";
 import { StartingSystems } from "../../components/LifePlastic/data/StartingSystems";
 import { FactoryButton } from "../../components/LifePlastic/Buttons";
 import UIButtons from "../../components/LifePlastic/UI/NavBar";
-import { Diagram } from "../../components/LifePlastic/styles/PlasticStyles";
+import {
+  Diagram,
+  TutorialTitleDIV,
+  TutorialDIV,
+} from "../../components/LifePlastic/styles/PlasticStyles";
 import RevealBox from "../../components/LifePlastic/UI/RevealBox";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
 import { GarbagePile } from "../../components/LifePlastic/Plastic/GarbagePile";
 import { Labels } from "../../components/LifePlastic/Labels";
+import TutorialLines from "../../components/LifePlastic/TutorialLines";
+import Example1 from "../../components/LifePlastic/examples/example1";
+import Example2 from "../../components/LifePlastic/examples/example2";
+import Example3 from "../../components/LifePlastic/examples/example3";
+
+export const plasticColourPicker = (type: keyof FormType) => {
+  switch (type) {
+    case "PET":
+      return "#d50000";
+    case "HDPE":
+      return "#aa00ff";
+    case "PP":
+      return "#304ffe";
+    case "PS":
+      return "#00b8d4";
+    case "LDPE":
+      return "#00c853";
+    case "PVC":
+      return "#ffd600";
+    case "OTHER":
+      return "#ff6d00";
+    case "MIXED":
+      return "#78909c";
+    case "GARBAGE":
+      return "#424242";
+    default:
+      return "#424242";
+  }
+};
 
 const Experiment013: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
@@ -48,6 +81,15 @@ const Experiment013: React.FC = () => {
   });
   const [systems, setSystems] = React.useState<SystemList>(StartingSystems);
   const [garbagePile, setGarbagePile] = React.useState<number>(0);
+  const [tutorial, setTutorial] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    console.log(garbagePile);
+    if (garbagePile >= 2) {
+      console.log("Remove Tutorial");
+      setTutorial(false);
+    }
+  }, [garbagePile]);
 
   const pathBuilder = (path: RouteType): Array<string> => {
     if (path.possible.length === path.probability.length) {
@@ -176,30 +218,7 @@ const Experiment013: React.FC = () => {
     }
   };
 
-  const plasticColourPicker = (type: keyof FormType) => {
-    switch (type) {
-      case "PET":
-        return "#d50000";
-      case "HDPE":
-        return "#aa00ff";
-      case "PP":
-        return "#304ffe";
-      case "PS":
-        return "#00b8d4";
-      case "LDPE":
-        return "#00c853";
-      case "PVC":
-        return "#ffd600";
-      case "OTHER":
-        return "#ff6d00";
-      case "MIXED":
-        return "#78909c";
-      case "GARBAGE":
-        return "#424242";
-      default:
-        return "#424242";
-    }
-  };
+  
   return (
     <Layout title="Experiment | 013">
       <h2>013 - Making the UI</h2>
@@ -211,22 +230,65 @@ const Experiment013: React.FC = () => {
         short intoduction as well as a small tutorial on how to use the diagram,
         the splash screen will fade to reveal the buttons and diagrams
       </p>
-      <RevealBox>
-        <h1>Life of Plastic</h1>
-        <h3>...it's fantastic!</h3>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <h2>Scroll down to reveal...</h2>
+      {tutorial ? (
+        <RevealBox>
+          <TutorialTitleDIV>
+            <h1>Life of Plastic</h1>
+            <h3>...it's fantastic!</h3>
+          </TutorialTitleDIV>
+          <TutorialDIV>
+            <p>
+              Plastic, like most consumable packaging, has for a long time been
+              a through-put design. Resources would be used to make bottles,
+              which would be consumed and eventually thrown away. In this model,
+              resources move in one direction, from production to consumption.
+            </p>
+            <Example1 />
+          </TutorialDIV>
+          <TutorialDIV>
+            <p>
+              Thankfully, in the 21st century, we have recycling which promises
+              to loop the resources back into the production cycle and divert
+              them from becoming waste. In an ideal system, resources would
+              never reach landfills and instead be caught in a regenerative
+              cycle.
+            </p>
+            <Example2 />
+          </TutorialDIV>
+          <TutorialDIV>
+            <p>
+              Unfortunately, our current recycling system is just not that
+              efficent and we are left with some material being recycled back,
+              while some is still diverted to landfills. While every recycling
+              system is different, in general PET plastic bottles could be
+              reused up to 7 times. This is roughly 85% efficent.
+            </p>
+            <Example3 />
+          </TutorialDIV>
+          <TutorialDIV>
+            <p>
+              However, not all plastic is created equal. There are 7 types of
+              plastic that can be recycles, though most places will only deal
+              with PET, HDPE and PP. The technology exists to recycle the other
+              4 types but depending on the supply and demand, they might not be
+              available in your municipality.
+            </p>
+          </TutorialDIV>
+          <TutorialDIV>
+            <p>
+              Try clicking on one off the plastic types and scroll down to see
+              where the product ends up. You can add and remove proccesses to
+              see how it effects how much keeps in the system. Maybe research
+              what your munipality offers and get an idea for where your plastic
+              really ends up.
+            </p>
+          </TutorialDIV>
 
-        <p style={{ margin: "0 auto", padding: "800px 400px" }}>
-          Here will be a whole lot of text about stuff, probably about plastic
-          but who knows?
-        </p>
-      </RevealBox>
+          <TutorialLines />
+        </RevealBox>
+      ) : (
+        <div />
+      )}
       <Diagram>
         <GarbagePile GarbagePile={garbagePile} />
         <Labels systems={systems} />

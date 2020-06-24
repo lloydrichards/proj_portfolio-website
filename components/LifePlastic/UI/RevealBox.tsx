@@ -29,7 +29,7 @@ const RevealBox: React.FC = ({ children }) => {
       initial="visible"
       variants={variants}
       style={{
-        width: "100%",
+        width: "150vw",
         height: "4000px",
         background: SKYBACKGROUND,
         position: "absolute",

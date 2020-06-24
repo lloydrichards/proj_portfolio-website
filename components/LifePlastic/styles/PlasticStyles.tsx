@@ -8,7 +8,7 @@ export const ISLANDOPACITY = "1";
 export const BUILDINGOPACITY = "0.9";
 
 export const PIPEOPACITY = "0.8";
-export const PROCESSFILL = "tomato";
+export const PROCESSFILL = "#dce775";
 
 export const FILLCOLOR = "white";
 export const STROKECOLOR = "black";
@@ -34,11 +34,15 @@ export const Diagram = styled.div({
 export const NavBar = styled.div({
   overflow: "hidden",
   position: "absolute",
-  bottom: -650,
+  top: 1700,
   width: "1050",
   display: "flex",
   justifyContent: "center",
   zIndex: 5,
+
+  "@media only screen and (max-width: 600px)": {
+    bottom: -1020,
+  },
 });
 
 export const Button = styled.button({
@@ -83,6 +87,7 @@ export const Button = styled.button({
     boxShadow:
       "inset -4px 4px 8px rgba(20,20,20,0.1), inset 4px -4px 8px rgba(255,255,255,0.8)",
   },
+  "@media only screen and (max-width: 600px)": {},
 });
 
 export const TutorialTitleDIV = styled.div({
@@ -116,7 +121,7 @@ export const TutorialDIV = styled.div({
   display: "flex",
   alignItems: "center",
   "&>p": {
-    fontSize: "18px",
+    fontSize: "16px",
     textAlign: "justify",
     align: "left",
     lineHeight: "150%",
@@ -128,5 +133,61 @@ export const TutorialDIV = styled.div({
     position: "absolute",
     top: "-200px",
     align: "right",
+  },
+  "@media only screen and (max-width: 600px)": {
+    width: "1080px",
+    display: "flex",
+    alignContent: "center",
+    "&>p": {
+      fontSize: "18px",
+      textAlign: "justify",
+      align: "left",
+      lineHeight: "150%",
+      fontFamily: "Josefin Sans,sans-serif",
+      width: "400px",
+    },
+    "&>div.example": {
+      position: "relative",
+      top: "0",
+      align: "right",
+    },
+  },
+});
+
+export const GroundStyle = styled.div({
+  width: "200vw",
+  marginLeft: "-50vw",
+  height: "2248px",
+  top: "-2248px",
+  background: GROUNDBACKGROUND,
+  position: "relative",
+  zIndex: -2,
+  "@media only screen and (max-width: 600px)": {
+    width: "400vw",
+  },
+});
+
+export const SkyStyle = styled.div({
+  width: "200%",
+  marginLeft: "-50%",
+  top: "0px",
+  height: "4028px",
+  position: "relative",
+  zIndex: -3,
+  background: `${SKYBACKGROUND}`,
+  "@media only screen and (max-width: 600px)": {
+    width: "400vw",
+  },
+});
+export const RevealSkyStyle = styled.div({
+  width: "200vw",
+  marginLeft: "-50vw",
+  top: "-0",
+  height: "4028px",
+  position: "relative",
+  background: `${SKYBACKGROUND}`,
+  zIndex: 4,
+  "@media only screen and (max-width: 600px)": {
+    width: "400vw",
   },
 });

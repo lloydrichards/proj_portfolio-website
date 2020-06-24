@@ -44,11 +44,13 @@ import {
 import RevealBox from "../../components/LifePlastic/UI/RevealBox";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
 import { GarbagePile } from "../../components/LifePlastic/Plastic/GarbagePile";
-import { Labels } from "../../components/LifePlastic/Labels";
 import TutorialLines from "../../components/LifePlastic/TutorialLines";
 import Example1 from "../../components/LifePlastic/examples/example1";
 import Example2 from "../../components/LifePlastic/examples/example2";
 import Example3 from "../../components/LifePlastic/examples/example3";
+import { AddLabels } from "../../components/LifePlastic/AddLabels";
+import RecyclingSymbols from "../../components/LifePlastic/RecyclingSymbols";
+import { Processes } from "../../components/LifePlastic/Processes";
 
 export const plasticColourPicker = (type: keyof FormType) => {
   switch (type) {
@@ -82,6 +84,7 @@ const Experiment013: React.FC = () => {
   const [systems, setSystems] = React.useState<SystemList>(StartingSystems);
   const [garbagePile, setGarbagePile] = React.useState<number>(0);
   const [tutorial, setTutorial] = React.useState<boolean>(true);
+  const [mode, setMode] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     console.log(garbagePile);
@@ -218,7 +221,6 @@ const Experiment013: React.FC = () => {
     }
   };
 
-  
   return (
     <Layout title="Experiment | 013">
       <h2>013 - Making the UI</h2>
@@ -291,7 +293,8 @@ const Experiment013: React.FC = () => {
       )}
       <Diagram>
         <GarbagePile GarbagePile={garbagePile} />
-        <Labels systems={systems} />
+        <RecyclingSymbols />
+        <AddLabels />
         <GarbageBackground />
         <SkyPipesBackground systems={systems} />
         <GroundPipesBackground systems={systems} />
@@ -300,6 +303,39 @@ const Experiment013: React.FC = () => {
         <GroundPipesForeground systems={systems} />
         <SkyPipesForeground systems={systems} />
         <Bins systems={systems} />
+        {mode ? (
+          <div>
+            <Routes
+              routeStyle={{
+                GarbageLines: "none",
+                MixedLines: "none",
+                BaleLines: "none",
+                PelletLines: "none",
+                RegrindLines: "none",
+                HandLines: "none",
+                ProductsLines: "none",
+                MissingLines: "none",
+              }}
+            />
+          </div>
+        ) : (
+          <div style={{ position: "absolute" }}>
+            <Processes />
+            <Routes
+              routeStyle={{
+                GarbageLines: "#none",
+                MixedLines: "#8e8e8e",
+                BaleLines: "#8e8e8e",
+                PelletLines: "#8e8e8e",
+                RegrindLines: "#8e8e8e",
+                HandLines: "#8e8e8e",
+                ProductsLines: "#8e8e8e",
+                MissingLines: "none",
+              }}
+            />
+          </div>
+        )}
+
         {materials.materials.map((item) => {
           switch (item.type) {
             case "PET":
@@ -448,24 +484,22 @@ const Experiment013: React.FC = () => {
               );
           }
         })}
-        <Routes
-          routeStyle={{
-            GarbageLines: "none",
-            MixedLines: "none",
-            BaleLines: "none",
-            PelletLines: "none",
-            RegrindLines: "none",
-            HandLines: "none",
-            ProductsLines: "none",
-            MissingLines: "none",
-          }}
-        />
         <FactoryButton
           systems={systems}
           getSystemId={(id) => toggleSystem(id)}
         />
       </Diagram>
-      <UIButtons systems={systems} addRecyclable={addRecyclable} />
+      <UIButtons
+        systems={systems}
+        addRecyclable={addRecyclable}
+        resetState={() => {
+          setSystems(StartingSystems);
+          setMaterials({
+            materials: [],
+          });
+        }}
+        modeChange={() => setMode(!mode)}
+      />
     </Layout>
   );
 };

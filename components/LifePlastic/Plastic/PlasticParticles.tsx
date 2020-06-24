@@ -13,8 +13,8 @@ export const Plastic = ({ pathRef, onComplete, delay, colour }: BoxProps) => {
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
-      opacity: colour === "black" ? [0.5, 0] : 1,
-      delay: colour === "black" ? 0: delay,
+      opacity: colour === "#424242" ? [0.5, 0] : 1,
+      delay: colour === "#424242" ? 0 : delay,
       duration: path("d").totalLength / velocity,
       easing: "linear",
       complete: onComplete,
@@ -34,6 +34,7 @@ export const Plastic = ({ pathRef, onComplete, delay, colour }: BoxProps) => {
         position: "absolute",
         top: "-5px",
         left: "-5px",
+        zIndex: 6,
       }}
     ></div>
   );
@@ -67,6 +68,7 @@ export const Garbage = ({ pathRef, onComplete, delay, colour }: BoxProps) => {
         position: "absolute",
         top: "-5px",
         left: "-5px",
+        zIndex: 6,
       }}
     ></div>
   );

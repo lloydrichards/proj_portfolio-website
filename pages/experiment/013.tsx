@@ -181,25 +181,25 @@ const Experiment013: React.FC = () => {
     const cPallet = chroma.scale("Spectral").mode("lch").colors(7);
     switch (type) {
       case "PET":
-        return cPallet[0];
+        return "#d50000";
       case "HDPE":
-        return cPallet[1];
+        return "#aa00ff";
       case "PP":
-        return cPallet[2];
+        return "#304ffe";
       case "PS":
-        return cPallet[3];
+        return "#00b8d4";
       case "LDPE":
-        return cPallet[4];
+        return "#00c853";
       case "PVC":
-        return cPallet[5];
+        return "#ffd600";
       case "OTHER":
-        return cPallet[6];
+        return "#ff6d00";
       case "MIXED":
-        return "grey";
+        return "#78909c";
       case "GARBAGE":
-        return "black";
+        return "#424242";
       default:
-        return "black";
+        return "#424242";
     }
   };
   return (

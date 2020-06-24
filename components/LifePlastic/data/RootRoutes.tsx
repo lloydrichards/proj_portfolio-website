@@ -206,7 +206,7 @@ export const RootRoutes: Array<RouteType> = [
       "Bale-MixedPETE-Sorted",
       "Bale-SeperatedPETE",
     ],
-    toWaste: "Missing-PET-HandSorting",
+    toWaste: "Missing-PET-MachineSorting",
     probability: [1, 10, 7, 2],
   },
   {

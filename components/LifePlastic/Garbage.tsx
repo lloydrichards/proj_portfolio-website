@@ -19,6 +19,7 @@ export const GarbageBackground: React.FC = () => {
           top: "1780px",
           background: GROUNDBACKGROUND,
           position: "absolute",
+          zIndex: -2,
         }}
       />
     </div>

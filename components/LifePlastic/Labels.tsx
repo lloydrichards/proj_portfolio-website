@@ -1,14 +1,14 @@
 import { ToggleProps } from "./Interfaces/Interfaces";
 import { TEXTFILL, TEXTOPACITY, TEXTSTROKE } from "./styles/PlasticStyles";
 
-export const Labels: React.FC<Partial<ToggleProps>> = ({  }) => {
+export const Labels: React.FC<Partial<ToggleProps>> = ({}) => {
   return (
     <svg
       width="1050"
       height="4028"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ position: "absolute" }}
+      style={{ position: "absolute", zIndex: -1 }}
     >
       <g data-name="Labels">
         <g data-name="Component 637">

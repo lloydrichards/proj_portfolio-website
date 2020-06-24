@@ -28,6 +28,14 @@ const UIButtons: React.FC<NavProps> = ({ systems, addRecyclable }) => {
             "Mixed-PETE",
           ]);
         }}
+        disabled={
+          !systems.PETMachineSorting &&
+          !systems.HDPEMachineSorting &&
+          !systems.PPMachineSorting &&
+          !systems.PSMachineSorting &&
+          !systems.LDPEMachineSorting &&
+          !systems.OTHERMachineSorting
+        }
       >
         Mixed
       </Button>

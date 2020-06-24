@@ -18,8 +18,8 @@ export const ParticleHDPE = ({
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
-      opacity: colour === "black" ? [0.5, 0] : 1,
-      delay: colour === "black" ? 0: delay,
+      opacity: colour === "#424242" ? [0.5, 0] : 1,
+      delay: colour === "#424242" ? 0: delay,
       duration: path("d").totalLength / velocity,
       easing: "linear",
       complete: onComplete,
@@ -38,6 +38,7 @@ export const ParticleHDPE = ({
           position: "absolute",
           top: "-11px",
           left: "-11px",
+          zIndex: 6
         }}
       >
         <svg
@@ -71,6 +72,7 @@ export const ParticleHDPE = ({
           position: "absolute",
           top: "-11px",
           left: "-11px",
+          zIndex: 6
         }}
       >
         <svg

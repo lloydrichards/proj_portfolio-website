@@ -4,8 +4,8 @@ export const BUILDINGCOLOR = "#cfd8dc";
 export const ISLANDGRASSCOLOR = "#9BBD8B";
 export const ISLANDGROUNDCOLOR = "#666666";
 
-export const ISLANDOPACITY = "0.9";
-export const BUILDINGOPACITY = "0.8";
+export const ISLANDOPACITY = "1";
+export const BUILDINGOPACITY = "0.9";
 
 export const PIPEOPACITY = "0.8";
 export const PROCESSFILL = "tomato";
@@ -20,9 +20,9 @@ export const NAVBARFILL = "#e1f5fe";
 export const GROUNDBACKGROUND = "#616161";
 export const SKYBACKGROUND = "#e1f5fe";
 
-export const TEXTFILL = "#373737";
+export const TEXTFILL = "#8e8e8e";
 export const TEXTSTROKE = "none";
-export const TEXTOPACITY = "0.9";
+export const TEXTOPACITY = "0.8";
 
 export const Diagram = styled.div({
   position: "absolute",
@@ -54,7 +54,7 @@ export const Button = styled.button({
   textAlign: "center",
   transform: "rotate(-90deg)",
   padding: "14px 16px",
-  margin: "32px 4px 32px",
+  margin: "18px 4px",
   textDecoration: "none",
   fontSize: "24px",
   height: "90px",
@@ -75,12 +75,12 @@ export const Button = styled.button({
   "&:active": {
     border: "none",
     outline: "none",
-    textShadow: "0 0 32px #9BBD8B",
+    textShadow: "0 0 32px #616161",
   },
   "&:disabled": {
     color: "#cfd8dc",
     textShadow: "none",
     boxShadow:
-    "inset -4px 4px 8px rgba(20,20,20,0.1), inset 4px -4px 8px rgba(255,255,255,0.8)",
+      "inset -4px 4px 8px rgba(20,20,20,0.1), inset 4px -4px 8px rgba(255,255,255,0.8)",
   },
 });

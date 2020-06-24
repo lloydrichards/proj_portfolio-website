@@ -35,6 +35,7 @@ export const ParticlePellet = ({
         position: "absolute",
         top: "-11px",
         left: "-11px",
+        zIndex: 6
       }}
     >
       <svg

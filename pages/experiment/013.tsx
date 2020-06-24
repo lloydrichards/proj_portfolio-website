@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import * as chroma from "chroma-js";
 
 import {
   AssemblyLine,
@@ -178,7 +177,6 @@ const Experiment013: React.FC = () => {
   };
 
   const plasticColourPicker = (type: keyof FormType) => {
-    const cPallet = chroma.scale("Spectral").mode("lch").colors(7);
     switch (type) {
       case "PET":
         return "#d50000";

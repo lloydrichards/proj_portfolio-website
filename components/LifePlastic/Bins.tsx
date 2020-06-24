@@ -1,7 +1,14 @@
 import * as React from "react";
-import { STROKEWEIGHT, STROKECOLOR, BUILDINGCOLOR, ISLANDGROUNDCOLOR, ISLANDGRASSCOLOR } from "./styles/PlasticStyles";
+import {
+  STROKEWEIGHT,
+  STROKECOLOR,
+  BUILDINGCOLOR,
+  ISLANDGROUNDCOLOR,
+  ISLANDGRASSCOLOR,
+} from "./styles/PlasticStyles";
+import { ToggleProps } from "./Interfaces/Interfaces";
 
-export const Bins = () => {
+export const Bins: React.FC<Partial<ToggleProps>> = ({ systems }) => {
   return (
     <svg
       width="1050"
@@ -11,7 +18,19 @@ export const Bins = () => {
       style={{ position: "absolute" }}
     >
       <g data-name="Bins">
-        <g data-name="MixedBin">
+        <g
+          data-name="MixedBin"
+          display={
+            systems?.PETMachineSorting ||
+            systems?.HDPEMachineSorting ||
+            systems?.PPMachineSorting ||
+            systems?.PSMachineSorting ||
+            systems?.LDPEMachineSorting ||
+            systems?.OTHERMachineSorting
+              ? "block"
+              : "none"
+          }
+        >
           <g data-name="BelowPipe">
             <path
               data-name="Ellipse 404"
@@ -102,7 +121,10 @@ export const Bins = () => {
             </g>
           </g>
         </g>
-        <g data-name="PETBin">
+        <g
+          data-name="PETBin"
+          display={systems?.PETHandSorting ? "block" : "none"}
+        >
           <g data-name="BelowPipe_2">
             <path
               data-name="Ellipse 404_4"
@@ -193,7 +215,10 @@ export const Bins = () => {
             </g>
           </g>
         </g>
-        <g data-name="HDPEBin">
+        <g
+          data-name="HDPEBin"
+          display={systems?.HDPEHandSorting ? "block" : "none"}
+        >
           <g data-name="BelowPipe_3">
             <path
               data-name="Ellipse 404_7"
@@ -284,7 +309,10 @@ export const Bins = () => {
             </g>
           </g>
         </g>
-        <g data-name="PPBin">
+        <g
+          data-name="PPBin"
+          display={systems?.PPHandSorting ? "block" : "none"}
+        >
           <g data-name="BelowPipe_4">
             <path
               data-name="Ellipse 404_10"
@@ -375,7 +403,10 @@ export const Bins = () => {
             </g>
           </g>
         </g>
-        <g data-name="PSBin">
+        <g
+          data-name="PSBin"
+          display={systems?.PSHandSorting ? "block" : "none"}
+        >
           <g data-name="BelowPipe_5">
             <path
               data-name="Ellipse 404_13"
@@ -466,7 +497,10 @@ export const Bins = () => {
             </g>
           </g>
         </g>
-        <g data-name="LDPEBin">
+        <g
+          data-name="LDPEBin"
+          display={systems?.LDPEHandSorting ? "block" : "none"}
+        >
           <g data-name="BelowPipe_6">
             <path
               data-name="Ellipse 404_16"
@@ -555,7 +589,10 @@ export const Bins = () => {
             </g>
           </g>
         </g>
-        <g data-name="OTHERBin">
+        <g
+          data-name="OTHERBin"
+          display={systems?.OTHERHandSorting ? "block" : "none"}
+        >
           <g data-name="BelowPipe_7">
             <path
               data-name="Ellipse 404_19"
@@ -642,7 +679,10 @@ export const Bins = () => {
             </g>
           </g>
         </g>
-        <g data-name="PVCBin">
+        <g
+          data-name="PVCBin"
+          display={systems?.PVCHandSorting ? "block" : "none"}
+        >
           <g data-name="BelowPipe_8">
             <path
               data-name="Ellipse 404_22"

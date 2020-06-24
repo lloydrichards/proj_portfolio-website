@@ -5,8 +5,11 @@ import {
   ISLANDGROUNDCOLOR,
   PIPEOPACITY,
 } from "./styles/PlasticStyles";
+import { ToggleProps } from "./Interfaces/Interfaces";
 
-export const SkyPipesBackground = () => {
+export const SkyPipesBackground: React.FC<Partial<ToggleProps>> = ({
+  systems,
+}) => {
   return (
     <svg
       width="1050"
@@ -16,7 +19,10 @@ export const SkyPipesBackground = () => {
       style={{ position: "absolute" }}
     >
       <g data-name="Above Pipes">
-        <g data-name="Product-PETFurniture">
+        <g
+          data-name="Product-PETFurniture"
+          display={systems?.ProductPETFurniture ? "block" : "none"}
+        >
           <path
             data-name="Ellipse 408"
             d="M990.541 288.791c0 3.064 4.274 5.549 9.549 5.549 5.27 0 9.55-2.485 9.55-5.549m-18.849 0c0 1.406.982 2.725 2.672 3.707 1.683.979 4.025 1.592 6.627 1.592 2.6 0 4.94-.613 6.62-1.592 1.69-.982 2.68-2.301 2.68-3.707 0-1.406-.99-2.726-2.68-3.707-1.68-.979-4.02-1.592-6.62-1.592-2.602 0-4.944.613-6.627 1.592-1.69.981-2.672 2.301-2.672 3.707zm18.599 1.844c-.5.89-1.35 1.672-2.42 2.296-1.78 1.03-4.21 1.659-6.88 1.659-2.674 0-5.106-.629-6.879-1.659-1.073-.624-1.921-1.406-2.42-2.296v1.557c0 1.406.982 2.726 2.672 3.708 1.683.978 4.025 1.591 6.627 1.591 2.6 0 4.94-.613 6.62-1.591 1.69-.982 2.68-2.302 2.68-3.708v-1.557z"
@@ -76,7 +82,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-rPETFiber">
+        <g
+          data-name="Product-rPETFiber"
+          display={systems?.ProductrPETFiber ? "block" : "none"}
+        >
           <path
             data-name="Vector 687 (Stroke)_2"
             d="M991.733 271.744l-378.998-.002c-2.458 0-4.716-3.741-4.716-7.97 0-4.229 2.258-8.03 4.716-8.03l378.998.002c2.458 0 4.716 3.741 4.716 7.97 0 4.229-2.258 8.03-4.716 8.03z"
@@ -129,7 +138,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-PlasticBags">
+        <g
+          data-name="Product-PlasticBags"
+          display={systems?.ProductPlasticBags ? "block" : "none"}
+        >
           <g data-name="Group 746_3">
             <path
               data-name="Ellipse 408_3"
@@ -172,7 +184,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-Concrete">
+        <g
+          data-name="Product-Concrete"
+          display={systems?.ProductConcrete ? "block" : "none"}
+        >
           <g data-name="Group 746_4">
             <path
               data-name="Ellipse 408_4"
@@ -215,7 +230,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-InsulationBoard">
+        <g
+          data-name="Product-InsulationBoard"
+          display={systems?.ProductInsulation ? "block" : "none"}
+        >
           <g data-name="Group 746_5">
             <path
               data-name="Ellipse 408_5"
@@ -278,7 +296,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-PictureFrames">
+        <g
+          data-name="Product-PictureFrames"
+          display={systems?.ProductPictureFrames ? "block" : "none"}
+        >
           <path
             data-name="Vector 687 (Stroke)_12"
             d="M967.866 824.673l-530.537-.001c-2.458 0-4.716-3.742-4.716-7.971s2.258-8.029 4.716-8.029l530.537.001c2.458 0 4.716 3.742 4.716 7.971s-2.258 8.029-4.716 8.029z"
@@ -288,7 +309,10 @@ export const SkyPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="Product-PETFurnitureGrind">
+        <g
+          data-name="Product-PETFurnitureGrind"
+          display={systems?.ProductPETFurniture ? "block" : "none"}
+        >
           <g data-name="Group 741_2">
             <path
               data-name="Ellipse 404_5"
@@ -342,6 +366,7 @@ export const SkyPipesBackground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductWindowFrames ? "block" : "none"}
         >
           <path
             data-name="Ellipse 408_6"
@@ -352,7 +377,10 @@ export const SkyPipesBackground = () => {
             d="M534.367 153.614c-3.065 0-5.549-4.275-5.549-9.548s2.484-9.548 5.549-9.548m.878 17.445c-2.458 0-4.449-3.64-4.449-7.869 0-4.229 1.992-8.131 4.45-8.131m-21.408 31.759c0 3.064-4.274 5.549-9.548 5.549-5.273 0-9.548-2.485-9.548-5.549m17.562-1.345c0 2.458-3.757 4.916-7.986 4.916-4.229 0-8.014-2.458-8.014-4.916m17.534 23.786c0 3.065-4.274 5.549-9.548 5.549-5.273 0-9.548-2.484-9.548-5.549m17.562-.878c0 2.457-3.757 4.449-7.986 4.449-4.229 0-8.014-1.992-8.014-4.45m439.995-54.917c-3.064 0-5.549 4.275-5.549 9.548 0 5.274 2.485 9.548 5.549 9.548m.879-17.5c-2.457 0-4.45 3.696-4.45 7.925 0 4.229 1.993 8.075 4.45 8.075m-411.762-7.897c0-3.255.947-6.13 2.392-7.853m6.559 17.151c-1.406 0-2.726-.982-3.708-2.672-.978-1.683-1.591-4.025-1.591-6.626 0-2.6.613-4.942 1.591-6.626.982-1.689 2.302-2.672 3.708-2.672 1.025 0 1.947.194 2.731.945h-1.852c-1.37 0-2.548 1.08-3.367 2.611-.828 1.545-1.333 3.619-1.333 5.77 0 2.15.505 4.161 1.335 5.642.823 1.472 2.002 2.477 3.364 2.477h1.863c-.8.815-1.736 1.151-2.741 1.151zm-1.844-18.596c-.89.5-1.672 1.348-2.296 2.421-1.03 1.772-1.659 4.204-1.659 6.877s.629 5.105 1.659 6.877c.624 1.074 1.406 1.922 2.296 2.421h-1.558c-1.062 0-2.073-.558-2.93-1.563-1.417-1.661-2.369-4.493-2.369-7.735 0-3.376 1.033-6.306 2.546-7.933 0 0 0 0 0 0 .818-.88 1.763-1.365 2.753-1.365h1.558zm5.015 1.445h391.764c-1.351 1.801-2.203 4.592-2.203 7.702 0 3.165.882 6 2.276 7.798h-394.13c-1.096 0-2.142-.816-2.928-2.221-.781-1.396-1.271-3.32-1.271-5.398 0-2.079.49-4.07 1.273-5.534.791-1.477 1.838-2.347 2.927-2.347h2.292zm395.36-1.596h1.557c-.89.5-1.672 1.348-2.296 2.421-1.03 1.773-1.659 4.205-1.659 6.877 0 2.673.629 5.105 1.659 6.877.624 1.074 1.406 1.922 2.296 2.421h-1.557c-1.011 0-1.973-.505-2.803-1.418l-.002-.003c-1.485-1.638-2.494-4.539-2.494-7.877 0-3.277.973-6.135 2.415-7.788.847-.971 1.84-1.51 2.884-1.51zm6.135 17.596c-.788.768-1.715 1-2.734 1-1.406 0-2.725-.982-3.707-2.672-.979-1.683-1.592-4.025-1.592-6.626 0-2.6.613-4.942 1.592-6.626.982-1.689 2.301-2.672 3.707-2.672 1.01 0 1.944.298 2.74 1.096h-1.861c-1.363 0-2.542 1.021-3.365 2.505-.829 1.495-1.335 3.519-1.335 5.67 0 2.15.506 4.211 1.334 5.742.82 1.519 1.998 2.583 3.366 2.583h1.855zm.559-.5h-2.414c-1.09 0-2.137-.859-2.927-2.321-.782-1.448-1.273-3.425-1.273-5.504 0-2.079.49-4.017 1.272-5.427.788-1.421 1.834-2.248 2.928-2.248h3.777c15.325 0 27.75 12.424 27.75 27.75v25.408c0 1.096-.856 2.209-2.306 3.064-1.438.847-3.401 1.401-5.474 1.401-2.073 0-4.021-.554-5.443-1.401-1.434-.854-2.277-1.966-2.277-3.064v-25.408c0-6.766-5.485-12.25-12.25-12.25h-1.363zM512.054 186.87v2.415c0 1.092-.84 2.138-2.278 2.927-1.426.782-3.38 1.272-5.458 1.272-2.079 0-4.04-.49-5.473-1.273-1.445-.789-2.291-1.835-2.291-2.927v-14.591c1.8 1.366 4.607 2.229 7.736 2.229 3.145 0 5.964-.871 7.764-2.249v12.197zm-16 .556v1.858c0 1.366 1.046 2.545 2.551 3.366 1.517.828 3.562 1.334 5.713 1.334 2.15 0 4.189-.506 5.699-1.334 1.498-.822 2.537-2 2.537-3.365v-1.858c.779.791 1.034 1.72 1.034 2.736 0 1.406-.982 2.726-2.672 3.708-1.683.978-4.025 1.591-6.626 1.591-2.6 0-4.942-.613-6.626-1.591-1.689-.982-2.672-2.302-2.672-3.708 0-1.013.274-1.944 1.062-2.737zm-1.062 6.139v-1.558c.5.89 1.348 1.672 2.421 2.296 1.773 1.03 4.205 1.659 6.877 1.659 2.673 0 5.105-.629 6.877-1.659 1.074-.624 1.922-1.406 2.421-2.296v1.558c0 1.406-.982 2.725-2.672 3.707-1.683.978-4.025 1.591-6.626 1.591-2.6 0-4.942-.613-6.626-1.591-1.689-.982-2.672-2.301-2.672-3.707zm0-22.442v-1.558c.5.891 1.348 1.673 2.421 2.297 1.773 1.03 4.205 1.659 6.877 1.659 2.673 0 5.105-.629 6.877-1.659 1.074-.624 1.922-1.406 2.421-2.297v1.558c0 1.023-.517 1.996-1.451 2.832 0 0 0 0 0 0-1.643 1.471-4.53 2.467-7.847 2.467-3.299 0-6.173-.986-7.821-2.444 0 0 0 0 0 0-.95-.841-1.477-1.823-1.477-2.855zm30.174-27.057c0 3.078.835 5.844 2.162 7.647h-3.024c-6.766 0-12.25 5.484-12.25 12.25v2.414c0 1.102-.851 2.265-2.29 3.168-1.427.896-3.377 1.498-5.446 1.498s-4.027-.602-5.461-1.499c-1.446-.904-2.303-2.067-2.303-3.167v-2.414c0-15.326 12.424-27.75 27.75-27.75h3.182c-1.419 1.794-2.32 4.656-2.32 7.853zm-12.612 22.311v-1.834c.768.875 1.034 2.141 1.034 3.179 0 1.406-.982 2.725-2.672 3.707-1.683.979-4.025 1.592-6.626 1.592-2.6 0-4.942-.613-6.626-1.592-1.689-.982-2.672-2.301-2.672-3.707 0-1.035.285-2.304 1.062-3.18v1.835c0 1.357 1.035 2.652 2.538 3.591 1.516.948 3.566 1.575 5.726 1.575s4.203-.627 5.711-1.575c1.497-.939 2.525-2.234 2.525-3.591z"
           />
         </g>
-        <g data-name="Product-HDPEBottles">
+        <g
+          data-name="Product-HDPEBottles"
+          display={systems?.ProductHDPEBottles ? "block" : "none"}
+        >
           <path
             data-name="Ellipse 408_7"
             d="M982.935 592.889c0 3.064 4.275 5.548 9.548 5.548s9.547-2.484 9.547-5.548m-18.845 0c0 1.406.983 2.725 2.672 3.707 1.684.978 4.026 1.591 6.626 1.591 2.601 0 4.943-.613 6.626-1.591 1.691-.982 2.671-2.301 2.671-3.707 0-1.406-.98-2.726-2.671-3.708-1.683-.978-4.025-1.591-6.626-1.591-2.6 0-4.942.613-6.626 1.591-1.689.982-2.672 2.302-2.672 3.708zm18.595 1.843c-.5.89-1.35 1.672-2.42 2.296-1.772 1.03-4.204 1.659-6.877 1.659s-5.105-.629-6.877-1.659c-1.074-.624-1.921-1.406-2.421-2.296v1.558c0 1.406.983 2.726 2.672 3.707 1.684.979 4.026 1.592 6.626 1.592 2.601 0 4.943-.613 6.626-1.592 1.691-.981 2.671-2.301 2.671-3.707v-1.558z"
@@ -426,7 +454,10 @@ export const SkyPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="Product-HDPEPipes">
+        <g
+          data-name="Product-HDPEPipes"
+          display={systems?.ProductHDPEPipes ? "block" : "none"}
+        >
           <path
             data-name="Vector 687 (Stroke)_15"
             d="M984.858 576.002L784.842 576c-2.458 0-4.716-3.742-4.716-7.971s2.258-8.029 4.716-8.029l200.016.002c2.458 0 4.716 3.741 4.716 7.97 0 4.229-2.258 8.03-4.716 8.03z"
@@ -442,6 +473,7 @@ export const SkyPipesBackground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductLandscapeFabric ? "block" : "none"}
         >
           <g data-name="Group 741_4">
             <path
@@ -476,7 +508,10 @@ export const SkyPipesBackground = () => {
             d="M957.859 695.673c0 3.064 4.275 5.548 9.548 5.548s9.548-2.484 9.548-5.548m-18.846 0c0 1.405.982 2.725 2.672 3.707 1.683.978 4.025 1.591 6.626 1.591 2.6 0 4.943-.613 6.626-1.591 1.69-.982 2.672-2.302 2.672-3.707 0-.99-.485-1.934-1.362-2.751v1.871c0 1.357-.96 2.537-2.396 3.364-1.444.83-3.417 1.336-5.568 1.336-2.15 0-4.109-.506-5.54-1.337-1.424-.827-2.367-2.007-2.367-3.363v-1.872c-.878.817-1.363 1.762-1.363 2.752zm18.596 1.843c-.5.89-1.347 1.672-2.421 2.296-1.772 1.03-4.204 1.659-6.877 1.659s-5.105-.629-6.877-1.659c-1.074-.624-1.921-1.406-2.421-2.296v1.558c0 1.406.982 2.725 2.672 3.707 1.683.979 4.025 1.592 6.626 1.592 2.6 0 4.943-.613 6.626-1.592 1.69-.982 2.672-2.301 2.672-3.707v-1.558z"
           />
         </g>
-        <g data-name="Product-OfficeSupplies">
+        <g
+          data-name="Product-OfficeSupplies"
+          display={systems?.ProductOfficeSupplies ? "block" : "none"}
+        >
           <g
             data-name="Group 741_5"
             fill={BUILDINGCOLOR}
@@ -538,7 +573,10 @@ export const SkyPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="Product-BottleCaps">
+        <g
+          data-name="Product-BottleCaps"
+          display={systems?.ProductBottleCaps ? "block" : "none"}
+        >
           <g data-name="Group 741_7">
             <path
               data-name="Ellipse 408_10"
@@ -584,6 +622,7 @@ export const SkyPipesBackground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductGardenFurniture ? "block" : "none"}
         >
           <path
             data-name="Ellipse 408_11"
@@ -618,7 +657,10 @@ export const SkyPipesBackground = () => {
             d="M943.47 895.712c0 3.064 4.275 5.548 9.548 5.548 5.274 0 9.548-2.484 9.548-5.548m-18.846 0c0 1.406.983 2.725 2.672 3.707 1.684.978 4.026 1.591 6.626 1.591 2.601 0 4.943-.613 6.626-1.591 1.69-.982 2.672-2.301 2.672-3.707 0-.99-.484-1.934-1.362-2.751v1.872c0 1.356-.96 2.536-2.396 3.363-1.444.83-3.417 1.336-5.567 1.336-2.151 0-4.11-.506-5.54-1.337-1.424-.827-2.368-2.007-2.368-3.362v-1.873c-.878.817-1.363 1.762-1.363 2.752zm18.596 1.843c-.499.89-1.347 1.672-2.421 2.296-1.772 1.03-4.204 1.659-6.877 1.659-2.672 0-5.104-.629-6.877-1.659-1.073-.624-1.921-1.406-2.421-2.296v1.558c0 1.406.983 2.726 2.672 3.707 1.684.979 4.026 1.592 6.626 1.592 2.601 0 4.943-.613 6.626-1.592 1.69-.981 2.672-2.301 2.672-3.707v-1.558z"
           />
         </g>
-        <g data-name="Product-PETBottles">
+        <g
+          data-name="Product-PETBottles"
+          display={systems?.ProductPETBottles ? "block" : "none"}
+        >
           <g data-name="Group 746_6">
             <path
               data-name="Ellipse 408_12"
@@ -681,7 +723,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-PVCPipes">
+        <g
+          data-name="Product-PVCPipes"
+          display={systems?.ProductPVCPipes ? "block" : "none"}
+        >
           <g data-name="Group 933">
             <g data-name="Group 931">
               <g data-name="Group 746_7">
@@ -748,7 +793,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-Buckets">
+        <g
+          data-name="Product-Buckets"
+          display={systems?.ProductBuckets ? "block" : "none"}
+        >
           <g data-name="Group 746_8">
             <path
               data-name="Ellipse 408_14"
@@ -791,7 +839,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-InsulationBoard_2">
+        <g
+          data-name="Product-InsulationBoard_2"
+          display={systems?.ProductInsulation ? "block" : "none"}
+        >
           <g data-name="Group 899">
             <g data-name="Group 844">
               <path
@@ -856,7 +907,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-ConstructionInfill">
+        <g
+          data-name="Product-ConstructionInfill"
+          display={systems?.ProductConstructionInfill ? "block" : "none"}
+        >
           <g data-name="Group 901">
             <g data-name="Group 844_2">
               <path
@@ -921,7 +975,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-BucketsGrind">
+        <g
+          data-name="Product-BucketsGrind"
+          display={systems?.ProductBuckets ? "block" : "none"}
+        >
           <g data-name="Group 899_4">
             <g data-name="Group 844_3">
               <path
@@ -959,7 +1016,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-HDPEPipeGrind">
+        <g
+          data-name="Product-HDPEPipeGrind"
+          display={systems?.ProductHDPEPipes ? "block" : "none"}
+        >
           <g data-name="Group 844_4">
             <path
               data-name="Vector 687 (Stroke)_32"
@@ -1003,7 +1063,10 @@ export const SkyPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-BucketOrPipe">
+        <g
+          data-name="Product-BucketOrPipe"
+          display={systems?.ProductBuckets ? "block" : "none"}
+        >
           <g data-name="Group 741_12">
             <g data-name="Vector 739 (Stroke)_12">
               <path
@@ -1080,6 +1143,7 @@ export const SkyPipesBackground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductrPETFiber ? "block" : "none"}
         >
           <path
             data-name="Vector 687 (Stroke)_35"

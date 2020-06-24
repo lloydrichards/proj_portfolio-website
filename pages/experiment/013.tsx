@@ -40,12 +40,15 @@ import UIButtons from "../../components/LifePlastic/UI/NavBar";
 import { Diagram } from "../../components/LifePlastic/styles/PlasticStyles";
 import RevealBox from "../../components/LifePlastic/UI/RevealBox";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
+import { GarbagePile } from "../../components/LifePlastic/Plastic/GarbagePile";
+import { Labels } from "../../components/LifePlastic/Labels";
 
 const Experiment013: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
   const [systems, setSystems] = React.useState<SystemList>(StartingSystems);
+  const [garbagePile, setGarbagePile] = React.useState<number>(0);
 
   const pathBuilder = (path: RouteType): Array<string> => {
     if (path.possible.length === path.probability.length) {
@@ -82,7 +85,11 @@ const Experiment013: React.FC = () => {
       if (nextPath.type != "undefined") {
         for (var x = 0; x < nextPath.amount; x++)
           nextMaterial(setMaterials)(item, nextPath);
+      } else {
+        addGarbage(setMaterials)(item);
       }
+    } else {
+      addGarbage(setMaterials)(item);
     }
   };
 
@@ -108,6 +115,17 @@ const Experiment013: React.FC = () => {
         return { ...state, materials };
       });
     }
+  };
+
+  const addGarbage = (
+    setState: (value: React.SetStateAction<AssemblyLine>) => void
+  ) => (parent: MaterialType) => {
+    setGarbagePile(garbagePile + 1);
+    setState((state) => {
+      console.log("removed");
+      const materials = state.materials.filter((i) => parent.id != i.id);
+      return { materials };
+    });
   };
 
   const routeLookUp = (route: string): PathType => {
@@ -189,21 +207,21 @@ const Experiment013: React.FC = () => {
       <h2>013 - Making the UI</h2>
       <h4>Date: June 23rd 2020</h4>
       <p>
-        The plan now is to start implimenting some data and figuring out how to
-        remove specific paths. I came up with a functions while on a hike
-        yesterday that should help to control the movement of plastic between
-        the various routes. Currently all the routes are given equal weight so
-        there is no priority for certain routes.
+        With the majority of the system elements in place its start to impliment
+        the the code. My idea is the move the buttons to the bottom and then
+        have a splash screen that hides the diagram at first. After reading a
+        short intoduction as well as a small tutorial on how to use the diagram,
+        the splash screen will fade to reveal the buttons and diagrams
       </p>
       <RevealBox>
         <h1>Life of Plastic</h1>
         <h3>...it's fantastic!</h3>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <h2>Scroll down to reveal...</h2>
 
         <p style={{ margin: "0 auto", padding: "800px 400px" }}>
@@ -212,14 +230,16 @@ const Experiment013: React.FC = () => {
         </p>
       </RevealBox>
       <Diagram>
+        <GarbagePile GarbagePile={garbagePile} />
+        <Labels systems={systems} />
         <GarbageBackground />
-        <SkyPipesBackground />
-        <GroundPipesBackground />
-        <GroundFactories />
-        <SkyFactories />
-        <GroundPipesForeground />
-        <SkyPipesForeground />
-        <Bins />
+        <SkyPipesBackground systems={systems} />
+        <GroundPipesBackground systems={systems} />
+        <GroundFactories systems={systems} />
+        <SkyFactories systems={systems} />
+        <GroundPipesForeground systems={systems} />
+        <SkyPipesForeground systems={systems} />
+        <Bins systems={systems} />
         {materials.materials.map((item) => {
           switch (item.type) {
             case "PET":
@@ -385,7 +405,7 @@ const Experiment013: React.FC = () => {
           getSystemId={(id) => toggleSystem(id)}
         />
       </Diagram>
-      <UIButtons addRecyclable={addRecyclable} />
+      <UIButtons systems={systems} addRecyclable={addRecyclable} />
     </Layout>
   );
 };

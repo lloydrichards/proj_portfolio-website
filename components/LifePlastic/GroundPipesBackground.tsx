@@ -6,8 +6,11 @@ import {
   ISLANDGROUNDCOLOR,
   PIPEOPACITY,
 } from "./styles/PlasticStyles";
+import { ToggleProps } from "./Interfaces/Interfaces";
 
-export const GroundPipesBackground = () => {
+export const GroundPipesBackground: React.FC<Partial<ToggleProps>> = ({
+  systems,
+}) => {
   return (
     <svg
       width="1050"
@@ -17,7 +20,10 @@ export const GroundPipesBackground = () => {
       style={{ position: "absolute" }}
     >
       <g data-name="Bellow Pipes">
-        <g data-name="HDPE-HandSorting">
+        <g
+          data-name="HDPE-HandSorting"
+          display={systems?.HDPEHandSorting ? "block" : "none"}
+        >
           <g data-name="Group 844">
             <path
               data-name="Vector 687 (Stroke)"
@@ -29,7 +35,10 @@ export const GroundPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="PP-HandSorting">
+        <g
+          data-name="PP-HandSorting"
+          display={systems?.PPHandSorting ? "block" : "none"}
+        >
           <g data-name="Group 844_2">
             <path
               data-name="Vector 687 (Stroke)_2"
@@ -41,7 +50,10 @@ export const GroundPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="PP-Grinder">
+        <g
+          data-name="PP-Grinder"
+          display={systems?.PPGrinder ? "block" : "none"}
+        >
           <path
             data-name="Vector 687 (Stroke)_3"
             d="M378.373 2500.43H101.358c-1.229 0-2.358-1.87-2.358-3.98 0-2.12 1.129-4.02 2.358-4.02h277.015v8z"
@@ -71,7 +83,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="SeperatedHDPE-Grinder">
+        <g
+          data-name="SeperatedHDPE-Grinder"
+          display={systems?.PETSeperateGrinder ? "block" : "none"}
+        >
           <path
             data-name="Vector 687 (Stroke)_4"
             d="M170.898 2467.5h-69.751c-1.23 0-2.358-1.87-2.358-3.99 0-2.11 1.129-4.01 2.358-4.01h69.751v8z"
@@ -93,7 +108,10 @@ export const GroundPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="SeperatedHDPE-Grinder_2">
+        <g
+          data-name="SeperatedHDPE-Grinder_2"
+          display={systems?.HDPESeperateGrinder ? "block" : "none"}
+        >
           <path
             data-name="Vector 687 (Stroke)_5"
             d="M259.094 2452.34H101.276c-1.228 0-2.358-1.87-2.358-3.99 0-2.11 1.13-4.01 2.358-4.01h157.818v8z"
@@ -123,7 +141,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="PET-MachineSorting">
+        <g
+          data-name="PET-MachineSorting"
+          display={systems?.PETMachineSorting ? "block" : "none"}
+        >
           <g data-name="Group 844_3">
             <path
               data-name="Vector 687 (Stroke)_6"
@@ -135,7 +156,10 @@ export const GroundPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="HDPE-MachineSorting">
+        <g
+          data-name="HDPE-MachineSorting"
+          display={systems?.HDPEMachineSorting ? "block" : "none"}
+        >
           <g data-name="Group 844_4">
             <path
               data-name="Vector 687 (Stroke)_7"
@@ -147,7 +171,10 @@ export const GroundPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="MixedPET-Refiner">
+        <g
+          data-name="MixedPET-Refiner"
+          display={systems?.rPETMixedRefiner ? "block" : "none"}
+        >
           <g data-name="Group 841">
             <g data-name="Group 748">
               <path
@@ -206,7 +233,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="PVC-Grinder">
+        <g
+          data-name="PVC-Grinder"
+          display={systems?.PVCGrinder ? "block" : "none"}
+        >
           <path
             data-name="Vector 687 (Stroke)_11"
             d="M609.32 2483.7H101.925c-1.228 0-2.358-1.87-2.358-3.98 0-2.12 1.13-4.02 2.358-4.02H609.32v8z"
@@ -236,7 +266,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="PP-MachineSorting">
+        <g
+          data-name="PP-MachineSorting"
+          display={systems?.PPMachineSorting ? "block" : "none"}
+        >
           <g data-name="Group 844_5">
             <path
               data-name="Vector 687 (Stroke)_12"
@@ -248,7 +281,10 @@ export const GroundPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="PS-MachineSorting">
+        <g
+          data-name="PS-MachineSorting"
+          display={systems?.PSMachineSorting ? "block" : "none"}
+        >
           <g data-name="Group 844_6">
             <path
               data-name="Vector 687 (Stroke)_13"
@@ -260,7 +296,10 @@ export const GroundPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="SeperatedHDPE-Refiner">
+        <g
+          data-name="SeperatedHDPE-Refiner"
+          display={systems?.rHDPESeperateRefiner ? "block" : "none"}
+        >
           <g data-name="Group 855">
             <g data-name="Group 741">
               <path
@@ -313,7 +352,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="MixedHDPE-Refiner">
+        <g
+          data-name="MixedHDPE-Refiner"
+          display={systems?.rHDPEMixedRefiner ? "block" : "none"}
+        >
           <g data-name="Group 748_2">
             <path
               data-name="Ellipse 408_2"
@@ -383,7 +425,10 @@ export const GroundPipesBackground = () => {
             fill={ISLANDGROUNDCOLOR}
           />
         </g>
-        <g data-name="SeperatedPET-Refiner">
+        <g
+          data-name="SeperatedPET-Refiner"
+          display={systems?.rPETSeperateRefiner ? "block" : "none"}
+        >
           <g data-name="Group 855_2">
             <g data-name="Group 741_2">
               <path
@@ -436,7 +481,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="TRASHfromMIXED">
+        <g
+          data-name="TRASHfromMIXED"
+          display={systems?.MixedBin ? "block" : "none"}
+        >
           <path
             data-name="Ellipse 408_3"
             d="M913.45 2058.51c0 3.07-4.275 5.55-9.548 5.55-5.274 0-9.548-2.48-9.548-5.55m18.846 0c0 1.41-.983 2.73-2.672 3.71-1.684.98-4.026 1.59-6.626 1.59-2.601 0-4.943-.61-6.626-1.59-1.69-.98-2.672-2.3-2.672-3.71 0-1.4.982-2.72 2.672-3.7 1.683-.98 4.025-1.6 6.626-1.6 2.6 0 4.942.62 6.626 1.6 1.689.98 2.672 2.3 2.672 3.7zm-18.596 1.85c.499.89 1.347 1.67 2.42 2.29 1.773 1.03 4.205 1.66 6.878 1.66 2.672 0 5.104-.63 6.877-1.66 1.073-.62 1.921-1.4 2.421-2.29v1.56c0 1.4-.983 2.72-2.672 3.7-1.684.98-4.026 1.59-6.626 1.59-2.601 0-4.943-.61-6.626-1.59-1.69-.98-2.672-2.3-2.672-3.7v-1.56z"
@@ -506,7 +554,10 @@ export const GroundPipesBackground = () => {
             />
           </g>
         </g>
-        <g data-name="MixedPET-Grinder">
+        <g
+          data-name="MixedPET-Grinder"
+          display={systems?.PETMixedGrinder ? "block" : "none"}
+        >
           <path
             data-name="Vector 687 (Stroke)_20"
             d="M169.373 2228.76h-68.337c-1.229 0-2.358-1.87-2.358-3.98 0-2.12 1.13-4.02 2.358-4.02h68.337v8z"
@@ -536,7 +587,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="MixedReturnMixedPET">
+        <g
+          data-name="MixedReturnMixedPET"
+          display={systems?.PETMixedGrinder ? "block" : "none"}
+        >
           <g data-name="Group 748_3">
             <path
               data-name="Ellipse 408_4"
@@ -589,7 +643,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="PS-Refiner">
+        <g
+          data-name="PS-Refiner"
+          display={systems?.rPSRefiner ? "block" : "none"}
+        >
           <g data-name="Group 855_3">
             <g data-name="Group 741_3">
               <path
@@ -642,7 +699,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="PVC-Refiner">
+        <g
+          data-name="PVC-Refiner"
+          display={systems?.rPVCRefiner ? "block" : "none"}
+        >
           <g data-name="Group 855_4">
             <g data-name="Group 741_4">
               <path
@@ -703,7 +763,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="LDPE-Refiner">
+        <g
+          data-name="LDPE-Refiner"
+          display={systems?.rLDPERefiner ? "block" : "none"}
+        >
           <g data-name="Group 855_5">
             <g data-name="Group 741_5">
               <path
@@ -756,7 +819,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="PP-Refiner">
+        <g
+          data-name="PP-Refiner"
+          display={systems?.rPPRefiner ? "block" : "none"}
+        >
           <g data-name="Group 855_6">
             <g data-name="Group 741_6">
               <path
@@ -809,7 +875,10 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="PP-Recovered">
+        <g
+          data-name="PP-Recovered"
+          display={systems?.rPPRefiner ? "block" : "none"}
+        >
           <g data-name="Group 741_7">
             <g data-name="Vector 739 (Stroke)_7">
               <path
@@ -920,7 +989,17 @@ export const GroundPipesBackground = () => {
             fill={ISLANDGROUNDCOLOR}
           />
         </g>
-        <g data-name="MixedReturn">
+        <g
+          data-name="MixedReturn"
+          display={
+            systems?.PETSeperateGrinder ||
+            systems?.HDPESeperateGrinder ||
+            systems?.PPGrinder ||
+            systems?.PVCGrinder
+              ? "block"
+              : "none"
+          }
+        >
           <g data-name="Group 741_8">
             <g data-name="Vector 739 (Stroke)_8">
               <path
@@ -1012,7 +1091,17 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="MachineBales">
+        <g
+          data-name="MachineBales"
+          display={
+            systems?.PETMachineSorting ||
+            systems?.HDPEMachineSorting ||
+            systems?.PPMachineSorting ||
+            systems?.PSMachineSorting
+              ? "block"
+              : "none"
+          }
+        >
           <g data-name="Group 741_9">
             <path
               data-name="Vector 739 (Stroke)_9"
@@ -1115,7 +1204,14 @@ export const GroundPipesBackground = () => {
             stroke-width={STROKEWEIGHT}
           />
         </g>
-        <g data-name="HandBales">
+        <g
+          data-name="HandBales"
+          display={
+            systems?.HDPEHandSorting || systems?.PPHandSorting
+              ? "block"
+              : "none"
+          }
+        >
           <g data-name="Group 741_10">
             <g data-name="Vector 739 (Stroke)_10">
               <path

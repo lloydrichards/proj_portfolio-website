@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, NavBar } from "../styles/PlasticStyles";
+import { SystemList } from "../Interfaces/Interfaces";
 
 interface NavProps {
+  systems: SystemList;
   addRecyclable: (route: string) => void;
 }
 const randomRecycling = (addItem: (pickedItem: string) => void) => (
@@ -11,7 +13,7 @@ const randomRecycling = (addItem: (pickedItem: string) => void) => (
   addItem(possibleRoutes[randomNumber]);
 };
 
-const UIButtons: React.FC<NavProps> = ({ addRecyclable }) => {
+const UIButtons: React.FC<NavProps> = ({ systems, addRecyclable }) => {
   return (
     <NavBar>
       <Button
@@ -33,6 +35,7 @@ const UIButtons: React.FC<NavProps> = ({ addRecyclable }) => {
         onClick={() => {
           addRecyclable("PET");
         }}
+        disabled={!systems.PETHandSorting}
       >
         PET
       </Button>
@@ -40,6 +43,7 @@ const UIButtons: React.FC<NavProps> = ({ addRecyclable }) => {
         onClick={() => {
           addRecyclable("HDPE");
         }}
+        disabled={!systems.HDPEHandSorting}
       >
         HDPE
       </Button>
@@ -47,6 +51,7 @@ const UIButtons: React.FC<NavProps> = ({ addRecyclable }) => {
         onClick={() => {
           addRecyclable("PP");
         }}
+        disabled={!systems.PPHandSorting}
       >
         PP
       </Button>
@@ -54,6 +59,7 @@ const UIButtons: React.FC<NavProps> = ({ addRecyclable }) => {
         onClick={() => {
           addRecyclable("PS");
         }}
+        disabled={!systems.PSHandSorting}
       >
         PS
       </Button>
@@ -61,6 +67,7 @@ const UIButtons: React.FC<NavProps> = ({ addRecyclable }) => {
         onClick={() => {
           addRecyclable("LDPE");
         }}
+        disabled={!systems.LDPEHandSorting}
       >
         LDPE
       </Button>
@@ -68,6 +75,7 @@ const UIButtons: React.FC<NavProps> = ({ addRecyclable }) => {
         onClick={() => {
           addRecyclable("PVC");
         }}
+        disabled={!systems.PVCHandSorting}
       >
         PVC
       </Button>
@@ -75,6 +83,7 @@ const UIButtons: React.FC<NavProps> = ({ addRecyclable }) => {
         onClick={() => {
           addRecyclable("Other");
         }}
+        disabled={!systems.OTHERHandSorting}
       >
         OTHER
       </Button>

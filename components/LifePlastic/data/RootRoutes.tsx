@@ -6,7 +6,7 @@ export const RootRoutes: Array<RouteType> = [
   {
     parent: "Garbage",
     require: "TRASHBin",
-    possible: [],
+    possible: [""],
     toWaste: "none",
     probability: [1],
   },

@@ -4,8 +4,11 @@ import {
   STROKECOLOR,
   PIPEOPACITY,
 } from "./styles/PlasticStyles";
+import { ToggleProps } from "./Interfaces/Interfaces";
 
-export const SkyPipesForeground = () => {
+export const SkyPipesForeground: React.FC<Partial<ToggleProps>> = ({
+  systems,
+}) => {
   return (
     <svg
       width="1050"
@@ -21,6 +24,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductWindowFrames ? "block" : "none"}
         >
           <path
             data-name="Ellipse 406"
@@ -41,6 +45,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductrPETCloths ? "block" : "none"}
         >
           <g data-name="Group 795">
             <path
@@ -109,6 +114,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductPETBottles ? "block" : "none"}
         >
           <path
             data-name="Ellipse 406_6"
@@ -129,6 +135,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductPVCPipes ? "block" : "none"}
         >
           <path
             data-name="Ellipse 406_7"
@@ -149,6 +156,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductGardenFurniture ? "block" : "none"}
         >
           <g data-name="Group 803">
             <path
@@ -185,6 +193,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductLandscapeFabric ? "block" : "none"}
         >
           <path
             data-name="Ellipse 406_10"
@@ -205,6 +214,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductBuckets ? "block" : "none"}
         >
           <path
             data-name="Ellipse 406_11"
@@ -225,6 +235,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductOfficeSupplies ? "block" : "none"}
         >
           <path
             data-name="Ellipse 406_12"
@@ -245,6 +256,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductHDPEPipes ? "block" : "none"}
         >
           <path
             data-name="Ellipse 406_13"
@@ -259,7 +271,10 @@ export const SkyPipesForeground = () => {
             d="M781.908 662.016c-2.654-1.532-2.668-6.476-.031-11.043 2.636-4.567 6.925-7.027 9.579-5.495m-9.423 16.321c-1.217-.702-1.869-2.213-1.874-4.167-.006-1.947.634-4.282 1.934-6.534 1.301-2.252 3.003-3.974 4.691-4.943 1.696-.972 3.33-1.163 4.547-.46.857.494 1.433 1.386 1.701 2.555l-1.621-.936c-1.175-.678-2.676-.437-4.11.394-1.442.834-2.866 2.29-3.942 4.152-1.075 1.863-1.616 3.813-1.612 5.467.005 1.647.555 3.054 1.729 3.731l1.622.937c-1.147.352-2.208.299-3.065-.196zm7.702-17.026c-1.021-.012-2.122.331-3.199.948-1.779 1.02-3.539 2.812-4.876 5.127-1.336 2.314-2.007 4.735-2.001 6.785.003 1.242.257 2.367.777 3.245l-1.349-.779c-1.217-.703-1.869-2.214-1.874-4.168-.006-1.947.634-4.282 1.935-6.534 1.3-2.252 3.002-3.974 4.691-4.943 1.695-.972 3.329-1.163 4.546-.46l1.35.779z"
           />
         </g>
-        <g data-name="Product-InsulationBoards">
+        <g
+          data-name="Product-InsulationBoards"
+          display={systems?.ProductInsulation ? "block" : "none"}
+        >
           <g data-name="Group 854">
             <g data-name="Group 741">
               <g data-name="Vector 739 (Stroke)">
@@ -313,7 +328,10 @@ export const SkyPipesForeground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-PictureFrames">
+        <g
+          data-name="Product-PictureFrames"
+          display={systems?.ProductPictureFrames ? "block" : "none"}
+        >
           <g
             data-name="Group 807"
             fill={BUILDINGCOLOR}
@@ -363,7 +381,10 @@ export const SkyPipesForeground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-PlasticBags">
+        <g
+          data-name="Product-PlasticBags"
+          display={systems?.ProductPlasticBags ? "block" : "none"}
+        >
           <g
             data-name="Group 806"
             fill={BUILDINGCOLOR}
@@ -413,7 +434,10 @@ export const SkyPipesForeground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-Concrete">
+        <g
+          data-name="Product-Concrete"
+          display={systems?.ProductConcrete ? "block" : "none"}
+        >
           <g
             data-name="Group 805"
             fill={BUILDINGCOLOR}
@@ -469,6 +493,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductHDPEBottles ? "block" : "none"}
         >
           <g data-name="Group 792">
             <path
@@ -523,6 +548,7 @@ export const SkyPipesForeground = () => {
           stroke={STROKECOLOR}
           opacity={PIPEOPACITY}
           stroke-width={STROKEWEIGHT}
+          display={systems?.ProductBottleCaps ? "block" : "none"}
         >
           <g data-name="Group 791">
             <path
@@ -564,6 +590,7 @@ export const SkyPipesForeground = () => {
             stroke={STROKECOLOR}
             opacity={PIPEOPACITY}
             stroke-width={STROKEWEIGHT}
+            display={systems?.ProductToys ? "block" : "none"}
           >
             <path
               data-name="Ellipse 406_25"
@@ -611,7 +638,10 @@ export const SkyPipesForeground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-rPETFiber">
+        <g
+          data-name="Product-rPETFiber"
+          display={systems?.ProductrPETFiber ? "block" : "none"}
+        >
           <g
             data-name="Group 770"
             fill={BUILDINGCOLOR}
@@ -673,7 +703,10 @@ export const SkyPipesForeground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-PETFurniture">
+        <g
+          data-name="Product-PETFurniture"
+          display={systems?.ProductPETFurniture ? "block" : "none"}
+        >
           <g
             data-name="Group 796"
             fill={BUILDINGCOLOR}
@@ -727,7 +760,10 @@ export const SkyPipesForeground = () => {
             />
           </g>
         </g>
-        <g data-name="Product-ConstructionInfill">
+        <g
+          data-name="Product-ConstructionInfill"
+          display={systems?.ProductConstructionInfill ? "block" : "none"}
+        >
           <g
             data-name="Group 800"
             fill={BUILDINGCOLOR}

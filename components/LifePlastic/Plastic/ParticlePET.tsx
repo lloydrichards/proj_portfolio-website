@@ -18,7 +18,8 @@ export const ParticlePET = ({
       translateX: path("x"),
       translateY: path("y"),
       rotate: path("angle"),
-      delay: delay,
+      opacity: colour === "black" ? [0.5, 0] : 1,
+      delay: colour === "black" ? 0: delay,
       duration: path("d").totalLength / velocity,
       easing: "linear",
       complete: onComplete,
@@ -37,7 +38,7 @@ export const ParticlePET = ({
           position: "absolute",
           top: "-11px",
           left: "-11px",
-          zIndex:10
+          zIndex: 10,
         }}
       >
         <svg

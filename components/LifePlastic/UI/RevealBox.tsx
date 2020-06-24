@@ -33,7 +33,7 @@ const RevealBox: React.FC = ({ children }) => {
         height: "4000px",
         background: SKYBACKGROUND,
         position: "absolute",
-        zIndex: 10,
+        zIndex: 4,
       }}
     >
       <motion.div
@@ -43,7 +43,7 @@ const RevealBox: React.FC = ({ children }) => {
           top: "1780px",
           background: GROUNDBACKGROUND,
           position: "absolute",
-          zIndex: 10,
+          zIndex: 4,
         }}
       />
       {children}

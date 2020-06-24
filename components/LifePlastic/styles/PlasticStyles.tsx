@@ -16,7 +16,7 @@ export const STROKEWEIGHT = "0.4";
 export const FILLOPACITY_HIDDEN = "0";
 export const FILLOPACITY = "0.9";
 
-export const NAVBARFILL = "#373737";
+export const NAVBARFILL = "#e1f5fe";
 export const GROUNDBACKGROUND = "#616161";
 export const SKYBACKGROUND = "#e1f5fe";
 
@@ -32,40 +32,40 @@ export const Diagram = styled.div({
 });
 
 export const NavBar = styled.div({
-  backgroundColor: `${NAVBARFILL}`,
-  boxShadow: "0px -2px 4px #1c313a",
   overflow: "hidden",
-  position: "fixed",
-  bottom: 0,
-  width: "100%",
+  position: "absolute",
+  bottom: -650,
+  width: "1050",
   display: "flex",
   justifyContent: "center",
-  zIndex: 10,
+  zIndex: 5,
 });
 
 export const Button = styled.button({
   background: `${NAVBARFILL}`,
   display: "block",
-  color: "#FFFFFF",
+  color: "#616161",
   border: "none",
+  outline: "none",
   borderRadius: "30%",
   boxShadow:
-    "2px 2px 6px rgba(20,20,20,0.6), -2px -2px 6px rgba(255,225,225,0.4)",
-  textShadow: "0 0 16px #9effff",
+    "-4px 4px 12px rgba(20,20,20,0.08), 4px -4px 12px rgba(255,255,255,0.8)",
+  textShadow: "0 0 16px #cfd8dc",
   textAlign: "center",
+  transform: "rotate(-90deg)",
   padding: "14px 16px",
-  margin: "32px 8px 32px 8px",
+  margin: "32px 4px 32px",
   textDecoration: "none",
   fontSize: "24px",
-  height: "80px",
+  height: "90px",
   width: "120px",
 
   "&:hover": {
     background: `${NAVBARFILL}`,
-    color: `${NAVBARFILL}`,
-    textShadow: "0 0 8px #9effff",
+    color: `#cfd8dc`,
+    textShadow: "0 0 8px #cfd8dc",
     boxShadow:
-      "inset 2px 2px 4px rgba(20,20,20,0.6), inset -2px -2px 4px rgba(255,225,225,0.4)",
+      "inset -4px 4px 8px rgba(20,20,20,0.1), inset 4px -4px 8px rgba(255,255,255,0.8)",
   },
 
   "&:focus": {
@@ -75,12 +75,12 @@ export const Button = styled.button({
   "&:active": {
     border: "none",
     outline: "none",
-    textShadow: "0 0 32px #9effff",
+    textShadow: "0 0 32px #9BBD8B",
   },
   "&:disabled": {
-    color: "#424242",
+    color: "#cfd8dc",
     textShadow: "none",
     boxShadow:
-      "1px 1px 6px rgba(20,20,20,0.3), -1px -1px 6px rgba(255,225,225,0.2)",
+    "inset -4px 4px 8px rgba(20,20,20,0.1), inset 4px -4px 8px rgba(255,255,255,0.8)",
   },
 });

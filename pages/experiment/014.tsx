@@ -5,7 +5,7 @@ import Example3 from "../../components/LifePlastic/examples/example3";
 
 const Experiment014 = () => {
   return (
-    <Layout>
+    <Layout title="Experiment | 014">
       <Example1 />
       <Example2 />
       <Example3 />

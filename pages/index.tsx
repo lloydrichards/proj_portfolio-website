@@ -71,6 +71,24 @@ const IndexPage: React.FC = () => (
           <a>012 - Implimenting some Data</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/013">
+          <a>013 - Implimenting some Data</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/experiment/014">
+          <a>014 - Implimenting some Data</a>
+        </Link>
+      </li>
+    </ul>
+    <hr />
+    <ul>
+      <li>
+        <Link href="/lifeofplastic">
+          <a>Life of Plastic | Data Visualization</a>
+        </Link>
+      </li>
     </ul>
   </Layout>
 );

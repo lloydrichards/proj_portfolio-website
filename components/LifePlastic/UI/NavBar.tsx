@@ -22,7 +22,7 @@ const UIButtons: React.FC<NavProps> = ({
   modeChange,
 }) => {
   return (
-    <div>
+    <div style={{position:"absolute", top:-190}}>
       <Button
         style={{
           top: "1350px",

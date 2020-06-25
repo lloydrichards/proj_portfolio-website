@@ -125,7 +125,7 @@ export const TutorialDIV = styled.div({
     textAlign: "justify",
     align: "left",
     lineHeight: "150%",
-    fontFamily: "Josefin Sans,sans-serif",
+    fontFamily: "Josefin Slab,sans-serif",
     paddingLeft: "250px",
     width: "400px",
   },

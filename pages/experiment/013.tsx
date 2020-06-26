@@ -90,16 +90,16 @@ const Experiment013: React.FC = () => {
 
   //['petBin', 'PETGrinder']
 
-  const buildInitialSystems = (
-    sysytemObject: SystemList,
-    queryCode: Array<string>
-  ): SystemList => {
-    // Array is only Systems
+  // const buildInitialSystems = (
+  //   sysytemObject: SystemList,
+  //   queryCode: Array<string>
+  // ): SystemList => {
+  // Array is only Systems
 
-    //Turn array
-    const overwrites = {};
-    return { ...sysytemObject, ...overwrites };
-  };
+  //Turn array
+  //   const overwrites = {};
+  //   return { ...sysytemObject, ...overwrites };
+  // };
 
   React.useEffect(() => {
     console.log(garbagePile);

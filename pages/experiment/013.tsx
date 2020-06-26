@@ -86,6 +86,21 @@ const Experiment013: React.FC = () => {
   const [tutorial, setTutorial] = React.useState<boolean>(true);
   const [mode, setMode] = React.useState<boolean>(true);
 
+  //lifeofplastic/code?='PETBin','PETGrinder'
+
+  //['petBin', 'PETGrinder']
+
+  const buildInitialSystems = (
+    sysytemObject: SystemList,
+    queryCode: Array<string>
+  ): SystemList => {
+    // Array is only Systems
+
+    //Turn array
+    const overwrites = {};
+    return { ...sysytemObject, ...overwrites };
+  };
+
   React.useEffect(() => {
     console.log(garbagePile);
     if (garbagePile >= 2) {

@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import { withRouter, SingletonRouter } from "next/router";
 
 import {
   AssemblyLine,
@@ -51,6 +51,7 @@ import Example3 from "../../components/LifePlastic/examples/example3";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
 import RecyclingSymbols from "../../components/LifePlastic/RecyclingSymbols";
 import { Processes } from "../../components/LifePlastic/Processes";
+import { InitializeSystems } from "../../components/LifePlastic/data/InitializeSystems";
 
 export const plasticColourPicker = (type: keyof FormType) => {
   switch (type) {
@@ -77,17 +78,69 @@ export const plasticColourPicker = (type: keyof FormType) => {
   }
 };
 
-const Experiment013: React.FC = () => {
+const buildInitialSystems = (
+  initialSystem: SystemList,
+  param: string | Array<string>
+): SystemList => {
+  const overwrites: Partial<SystemList> = {};
+  if (param) {
+    if (Array.isArray(param)) {
+      param.forEach((system) => {
+        if (isKeyOfState(initialSystem, system)) {
+          overwrites[system] = true;
+        }
+      });
+    } else if (isKeyOfState(initialSystem, param)) {
+      overwrites[param] = true;
+    }
+  }
+  console.log("Built from Query");
+  return { ...initialSystem, ...overwrites };
+};
+
+const isKeyOfState = (
+  system: SystemList,
+  key: string
+): key is keyof SystemList => {
+  return system.hasOwnProperty(key);
+};
+
+const saveSystemState = (systemState: SystemList): string => {
+  var urlString: string = "/lifeofplastic";
+  for (const [key, value] of Object.entries(systemState)) {
+    if (value === true) {
+      urlString += `/${key}`;
+    }
+    console.log(`${key}: ${value}`);
+  }
+  return urlString;
+};
+
+interface Props {
+  router: SingletonRouter;
+}
+
+const Experiment013: React.FC<Props> = ({ router }) => {
+  console.log("1.", router.query.param);
+  const builtFromQuery = buildInitialSystems(
+    InitializeSystems,
+    router.query.param
+  );
+
   const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
-  const [systems, setSystems] = React.useState<SystemList>(StartingSystems);
+  const [systems, setSystems] = React.useState<SystemList>(builtFromQuery);
   const [garbagePile, setGarbagePile] = React.useState<number>(0);
   const [tutorial, setTutorial] = React.useState<boolean>(true);
   const [mode, setMode] = React.useState<boolean>(true);
 
+  console.log("2. Function:", builtFromQuery);
+  console.log("3. State:", systems);
+  console.log(router.query);
+  console.log(InitializeSystems);
+
   React.useEffect(() => {
-    console.log(garbagePile);
     if (garbagePile >= 2) {
       console.log("Remove Tutorial");
       setTutorial(false);
@@ -222,16 +275,7 @@ const Experiment013: React.FC = () => {
   };
 
   return (
-    <Layout title="Experiment | 013">
-      <h2>013 - Making the UI</h2>
-      <h4>Date: June 23rd 2020</h4>
-      <p>
-        With the majority of the system elements in place its start to impliment
-        the the code. My idea is the move the buttons to the bottom and then
-        have a splash screen that hides the diagram at first. After reading a
-        short intoduction as well as a small tutorial on how to use the diagram,
-        the splash screen will fade to reveal the buttons and diagrams
-      </p>
+    <div style={{ margin: "auto", width: "1080px" }} title="Life of Plastic">
       {tutorial ? (
         <RevealBox>
           <TutorialTitleDIV>
@@ -499,10 +543,10 @@ const Experiment013: React.FC = () => {
           });
         }}
         modeChange={() => setMode(!mode)}
-        saveSystem={() => console.log("saved")}
+        saveSystem={() => router.push(saveSystemState(systems))}
       />
-    </Layout>
+    </div>
   );
 };
 
-export default Experiment013;
+export default withRouter(Experiment013);

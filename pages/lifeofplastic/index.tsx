@@ -489,6 +489,7 @@ const Experiment013: React.FC = () => {
           });
         }}
         modeChange={() => setMode(!mode)}
+        saveSystem={() => console.log("saved!")}
       />
     </div>
   );

@@ -73,12 +73,22 @@ const IndexPage: React.FC = () => (
       </li>
       <li>
         <Link href="/experiment/013">
-          <a>013 - Implimenting some Data</a>
+          <a>013 - Add Tutorial</a>
         </Link>
       </li>
       <li>
         <Link href="/experiment/014">
-          <a>014 - Implimenting some Data</a>
+          <a>014 - Create Example Components</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/experiment/015">
+          <a>015 - Animated Notifications</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/experiment/016">
+          <a>016 - Autocomplete Species w/ Algolia</a>
         </Link>
       </li>
     </ul>

@@ -7,6 +7,7 @@ interface NavProps {
   addRecyclable: (route: string) => void;
   resetState: () => void;
   modeChange: () => void;
+  saveSystem: () => void;
 }
 const randomRecycling = (addItem: (pickedItem: string) => void) => (
   possibleRoutes: Array<string>
@@ -20,9 +21,21 @@ const UIButtons: React.FC<NavProps> = ({
   addRecyclable,
   resetState,
   modeChange,
+  saveSystem,
 }) => {
   return (
-    <div style={{position:"absolute", top:-190}}>
+    <div style={{ position: "absolute", top: -190 }}>
+      <Button
+        style={{
+          top: "1350px",
+          left: "685px",
+          position: "absolute",
+          transform: "rotate(0deg)",
+        }}
+        onClick={() => saveSystem()}
+      >
+        SAVE
+      </Button>
       <Button
         style={{
           top: "1350px",

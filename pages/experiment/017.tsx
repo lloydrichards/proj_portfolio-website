@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { useRouter } from "next/router";
+import React from "react";
+import Layout from "../../components/Layout";
 
 import {
   AssemblyLine,
@@ -36,22 +36,12 @@ import { nanoid } from "nanoid";
 import { StartingSystems } from "../../components/LifePlastic/data/StartingSystems";
 import { FactoryButton } from "../../components/LifePlastic/Buttons";
 import UIButtons from "../../components/LifePlastic/UI/NavBar";
-import {
-  Diagram,
-  TutorialTitleDIV,
-  TutorialDIV,
-} from "../../components/LifePlastic/styles/PlasticStyles";
-import RevealBox from "../../components/LifePlastic/UI/RevealBox";
+import { Diagram } from "../../components/LifePlastic/styles/PlasticStyles";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
 import { GarbagePile } from "../../components/LifePlastic/Plastic/GarbagePile";
-import TutorialLines from "../../components/LifePlastic/TutorialLines";
-import Example1 from "../../components/LifePlastic/examples/example1";
-import Example2 from "../../components/LifePlastic/examples/example2";
-import Example3 from "../../components/LifePlastic/examples/example3";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
 import RecyclingSymbols from "../../components/LifePlastic/RecyclingSymbols";
 import { Processes } from "../../components/LifePlastic/Processes";
-import { InitializeSystems } from "../../components/LifePlastic/data/InitializeSystems";
 
 export const plasticColourPicker = (type: keyof FormType) => {
   switch (type) {
@@ -78,71 +68,13 @@ export const plasticColourPicker = (type: keyof FormType) => {
   }
 };
 
-const buildInitialSystems = (
-  initialSystem: SystemList,
-  param: string | Array<string>
-): SystemList => {
-  const overwrites: Partial<SystemList> = {};
-  if (param) {
-    if (Array.isArray(param)) {
-      param.forEach((system) => {
-        if (isKeyOfState(initialSystem, system)) {
-          overwrites[system] = true;
-        }
-      });
-    } else if (isKeyOfState(initialSystem, param)) {
-      overwrites[param] = true;
-    }
-  }
-  return { ...initialSystem, ...overwrites };
-};
-
-const isKeyOfState = (
-  system: SystemList,
-  key: string
-): key is keyof SystemList => {
-  return system.hasOwnProperty(key);
-};
-
-const saveSystemState = (systemState: SystemList): string => {
-  var urlString: string = "/lifeofplastic";
-  for (const [key, value] of Object.entries(systemState)) {
-    if (value === true) {
-      urlString += `/${key}`;
-    }
-  }
-  return urlString;
-};
-
-const useInitalizeSystem = () => {
-  const router = useRouter();
-  return useMemo(() => {
-    return buildInitialSystems(InitializeSystems, router.query.param);
-  }, [router.query.param]);
-};
-
-const Experiment013: React.FC = () => {
-  const router = useRouter();
-  const builtFromQuery = useInitalizeSystem();
-
+const Experiment017: React.FC = () => {
   const [materials, setMaterials] = React.useState<AssemblyLine>({
     materials: [],
   });
-  const [systems, setSystems] = React.useState<SystemList>(builtFromQuery);
+  const [systems, setSystems] = React.useState<SystemList>(StartingSystems);
   const [garbagePile, setGarbagePile] = React.useState<number>(0);
-  const [tutorial, setTutorial] = React.useState<boolean>(true);
   const [mode, setMode] = React.useState<boolean>(true);
-
-  React.useEffect(() => {
-    setSystems(builtFromQuery);
-  }, [builtFromQuery]);
-
-  React.useEffect(() => {
-    if (garbagePile >= 2) {
-      console.log("Remove Tutorial");
-      setTutorial(false);
-    }
-  }, [garbagePile]);
 
   const pathBuilder = (path: RouteType): Array<string> => {
     if (path.possible.length === path.probability.length) {
@@ -272,66 +204,23 @@ const Experiment013: React.FC = () => {
   };
 
   return (
-    <div style={{ margin: "auto", width: "1080px" }} title="Life of Plastic">
-      {tutorial ? (
-        <RevealBox>
-          <TutorialTitleDIV>
-            <h1>Life of Plastic</h1>
-            <h3>...it's fantastic!</h3>
-          </TutorialTitleDIV>
-          <TutorialDIV>
-            <p>
-              Plastic, like most consumable packaging, has for a long time been
-              a through-put design. Resources would be used to make bottles,
-              which would be consumed and eventually thrown away. In this model,
-              resources move in one direction, from production to consumption.
-            </p>
-            <Example1 />
-          </TutorialDIV>
-          <TutorialDIV>
-            <p>
-              Thankfully, in the 21st century, we have recycling which promises
-              to loop the resources back into the production cycle and divert
-              them from becoming waste. In an ideal system, resources would
-              never reach landfills and instead be caught in a regenerative
-              cycle.
-            </p>
-            <Example2 />
-          </TutorialDIV>
-          <TutorialDIV>
-            <p>
-              Unfortunately, our current recycling system is just not that
-              efficent and we are left with some material being recycled back,
-              while some is still diverted to landfills. While every recycling
-              system is different, in general PET plastic bottles could be
-              reused up to 7 times. This is roughly 85% efficent.
-            </p>
-            <Example3 />
-          </TutorialDIV>
-          <TutorialDIV>
-            <p>
-              However, not all plastic is created equal. There are 7 types of
-              plastic that can be recycles, though most places will only deal
-              with PET, HDPE and PP. The technology exists to recycle the other
-              4 types but depending on the supply and demand, they might not be
-              available in your municipality.
-            </p>
-          </TutorialDIV>
-          <TutorialDIV>
-            <p>
-              Try clicking on one off the plastic types and scroll down to see
-              where the product ends up. You can add and remove proccesses to
-              see how it effects how much keeps in the system. Maybe research
-              what your munipality offers and get an idea for where your plastic
-              really ends up.
-            </p>
-          </TutorialDIV>
-
-          <TutorialLines />
-        </RevealBox>
-      ) : (
-        <div />
-      )}
+    <Layout title="Experiment | 017">
+      <h2>017 - Onboarding Tutorial</h2>
+      <h4>Date: June 30th 2020</h4>
+      <p>
+        As part of the usability redesign for the Life of Plastic, one of the
+        key areas to tackle was the Onboarding where users were introduced to
+        the diagram and how to explore it. This should be a click based
+        adventure where the user clicks a 'next' button and watches a few
+        bottles flow through to the next stage. Here there should be some text
+        and explination on what is happening and what to expect, along with
+        another 'next' button.
+      </p>
+      <p>
+        Some things I will need to experiment and design will be a splash screen
+        and a way to focus the users attention onto the process at hand and give
+        a little bit of information on what is happening.
+      </p>
       <Diagram>
         <GarbagePile GarbagePile={garbagePile} />
         <RecyclingSymbols />
@@ -540,10 +429,10 @@ const Experiment013: React.FC = () => {
           });
         }}
         modeChange={() => setMode(!mode)}
-        saveSystem={() => router.push(saveSystemState(systems))}
+        saveSystem={() => console.log("saved")}
       />
-    </div>
+    </Layout>
   );
 };
 
-export default Experiment013;
+export default Experiment017;

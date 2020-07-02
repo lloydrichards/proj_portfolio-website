@@ -21,21 +21,9 @@ const UIButtons: React.FC<NavProps> = ({
   addRecyclable,
   resetState,
   modeChange,
-  saveSystem,
 }) => {
   return (
     <div style={{ position: "absolute", top: -190 }}>
-      <Button
-        style={{
-          top: "1350px",
-          left: "685px",
-          position: "absolute",
-          transform: "rotate(0deg)",
-        }}
-        onClick={() => saveSystem()}
-      >
-        SAVE
-      </Button>
       <Button
         style={{
           top: "1350px",

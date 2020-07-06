@@ -29,7 +29,7 @@ const UIButtons: React.FC<NavProps> = ({
   modeChange,
 }) => {
   return (
-    <div style={{ position: "absolute", top: 1750 }}>
+    <div style={{ position: "relative", top: 1500 }}>
       <TopNavBar>
         <ShareIcon onClick={() => console.log("Share Clicked!")} />
         <InfoIcon onClick={modeChange} />

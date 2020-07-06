@@ -63,28 +63,52 @@ export const TopNavBar = styled.div({
   },
 });
 
-export const Modal = styled.div({
-  minHeight: "190px",
-  width: "475px",
-  margin: "0 auto",
-  zIndex: 9,
-  borderRadius: "12px",
-  boxShadow: "4px 4px 8px rgba(20,20,20,0.12)",
-  background: `${SKYBACKGROUND}`,
-  "&>p": {
-    fontSize: "16px",
-    textAlign: "justify",
-    align: "left",
-    lineHeight: "150%",
-    fontFamily: "Josefin Slab,sans-serif",
-    margin: "0px auto",
-    padding: "60px 0px 0px",
-    width: "400px",
-  },
+export const TutorialSplash = styled.div({
+  
 });
+
+export const Modal = styled.div(
+  {
+    position: "relative",
+    minHeight: "190px",
+    width: "475px",
+    margin: "0 auto",
+    zIndex: 9,
+    borderRadius: "12px",
+    boxShadow: "4px 4px 8px rgba(20,20,20,0.12)",
+    background: `${SKYBACKGROUND}`,
+    "&>p": {
+      fontSize: "16px",
+      textAlign: "justify",
+      align: "left",
+      lineHeight: "150%",
+      fontFamily: "Josefin Slab,sans-serif",
+      margin: "0px auto",
+      padding: "60px 0px 0px",
+      width: "400px",
+    },
+    "&>button": {
+      background: `${SKYBACKGROUND}`,
+      cursor: "pointer",
+      float: "right",
+      margin: "10px 30px",
+      overflow: "visible",
+      display: "block",
+      border: "none",
+      outline: "none",
+      fontSize: "18px",
+      lineHeight: "83%",
+      letterSpacing: "3px",
+      fontFamily: "Muli,sans-serif",
+      fontWeight: 200,
+    },
+  },
+  (props: any) => ({ top: props.top })
+);
 
 export const Toggle = styled.button({
   background: `${NAVBARFILL}`,
+  cursor: "pointer",
   overflow: "visible",
   display: "block",
   color: "#cfd8dc",
@@ -123,6 +147,7 @@ export const Toggle = styled.button({
       "inset -2px 2px 4px rgba(20,20,20,0.1), inset 2px -2px 4px rgba(255,255,255,0.8)",
   },
   "&:disabled": {
+    cursor: "default",
     color: "#cfd8dc",
     textShadow: "none",
     boxShadow:
@@ -133,6 +158,7 @@ export const Toggle = styled.button({
 
 export const AddButton = styled.button({
   background: `${NAVBARFILL}`,
+  cursor: "pointer",
   display: "block",
   color: "#616161",
   border: "none",
@@ -169,6 +195,7 @@ export const AddButton = styled.button({
       "inset 4px 4px 8px rgba(20,20,20,0.1), inset -4px -4px 8px rgba(255,255,255,0.8)",
   },
   "&:disabled": {
+    cursor: "default",
     color: "#cfd8dc",
     textShadow: "none",
     boxShadow:

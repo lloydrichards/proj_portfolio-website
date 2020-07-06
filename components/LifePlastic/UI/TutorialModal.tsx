@@ -3,16 +3,24 @@ import TutorialIcon from "./icons/tutorial";
 import CloseIcon from "./icons/close";
 import { Modal } from "../styles/PlasticStyles";
 
-const TutorialModal: React.FC = ({ children }) => {
+interface Props {
+  offset: number;
+  onClose: () => void;
+  onContinue: () => void;
+}
+
+const TutorialModal: React.FC<Props> = ({offset, onClose, onContinue, children }) => {
   return (
-    <Modal>
-      <div style={{ width: "100%"}}>
+    <Modal top={offset} >
+      <div style={{ width: "100%" }}>
         <TutorialIcon />
-        <CloseIcon onClick={() => console.log("Close!")} />
+        <CloseIcon onClick={onClose} />
       </div>
 
       {children}
-      <button>`{`>`}` Continue</button>
+      <button onClick={onContinue}>
+        <i>continue</i>
+      </button>
     </Modal>
   );
 };

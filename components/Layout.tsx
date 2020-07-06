@@ -10,7 +10,7 @@ const Layout: React.FunctionComponent<Props> = ({
   children,
   title = "This is the default title",
 }) => (
-  <div style={{ margin: "auto", width: "1080px" }}>
+  <div style={{ margin: "auto", width: "1080px"}}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />

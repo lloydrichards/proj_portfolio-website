@@ -27,7 +27,6 @@ import { ParticleBale } from "../../components/LifePlastic/Plastic/ParticleBale"
 import { GroundFactories } from "../../components/LifePlastic/GroundFactories";
 import { SkyFactories } from "../../components/LifePlastic/SkyFactories";
 import { Bins } from "../../components/LifePlastic/Bins";
-import { Routes } from "../../components/LifePlastic/Routes";
 import { GroundPipesBackground } from "../../components/LifePlastic/GroundPipesBackground";
 import { GroundPipesForeground } from "../../components/LifePlastic/GroundPipesForeground";
 import { SkyPipesBackground } from "../../components/LifePlastic/SkyPipesBackground";
@@ -40,8 +39,8 @@ import { Diagram } from "../../components/LifePlastic/styles/PlasticStyles";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
 import { GarbagePile } from "../../components/LifePlastic/Plastic/GarbagePile";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
-import { Processes } from "../../components/LifePlastic/Processes";
-import TutorialModal from "../../components/LifePlastic/UI/TutorialModal";
+import TutorialOverlay from "../../components/LifePlastic/UI/TutorialOverlay";
+import { Routes } from "../../components/LifePlastic/Routes";
 
 export const plasticColourPicker = (type: keyof FormType) => {
   switch (type) {
@@ -221,13 +220,6 @@ const Experiment017: React.FC = () => {
         and a way to focus the users attention onto the process at hand and give
         a little bit of information on what is happening.
       </p>
-      <TutorialModal>
-        <p>
-          Sometimes a municipality won’t have a certain system or they might be
-          temporarily unavilable. Click on the factory to see what happens to
-          the plastic in the system.
-        </p>
-      </TutorialModal>
       <Diagram>
         <GarbagePile GarbagePile={garbagePile} />
         <AddLabels />
@@ -239,38 +231,19 @@ const Experiment017: React.FC = () => {
         <GroundPipesForeground systems={systems} />
         <SkyPipesForeground systems={systems} />
         <Bins systems={systems} />
-        {mode ? (
-          <div>
-            <Routes
-              routeStyle={{
-                GarbageLines: "none",
-                MixedLines: "none",
-                BaleLines: "none",
-                PelletLines: "none",
-                RegrindLines: "none",
-                HandLines: "none",
-                ProductsLines: "none",
-                MissingLines: "none",
-              }}
-            />
-          </div>
-        ) : (
-          <div style={{ position: "absolute" }}>
-            <Processes />
-            <Routes
-              routeStyle={{
-                GarbageLines: "#none",
-                MixedLines: "#8e8e8e",
-                BaleLines: "#8e8e8e",
-                PelletLines: "#8e8e8e",
-                RegrindLines: "#8e8e8e",
-                HandLines: "#8e8e8e",
-                ProductsLines: "#8e8e8e",
-                MissingLines: "none",
-              }}
-            />
-          </div>
-        )}
+        <Routes
+          routeStyle={{
+            GarbageLines: "none",
+            MixedLines: "none",
+            BaleLines: "none",
+            PelletLines: "none",
+            RegrindLines: "none",
+            HandLines: "none",
+            ProductsLines: "none",
+            MissingLines: "none",
+          }}
+        />
+        {mode ? <div></div> : <TutorialOverlay />}
 
         {materials.materials.map((item) => {
           switch (item.type) {

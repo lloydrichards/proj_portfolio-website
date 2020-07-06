@@ -34,11 +34,12 @@ import { SkyPipesForeground } from "../../components/LifePlastic/SkyPipesForegro
 import { nanoid } from "nanoid";
 import { StartingSystems } from "../../components/LifePlastic/data/StartingSystems";
 import { FactoryButton } from "../../components/LifePlastic/Buttons";
-import UIButtons from "../../components/LifePlastic/UI/NavBar";
+import UIButtons from "../../components/LifePlastic/UI/NavBarRedesign";
 import {
   Diagram,
   TutorialTitleDIV,
   TutorialDIV,
+  SKYBACKGROUND,
 } from "../../components/LifePlastic/styles/PlasticStyles";
 import RevealBox from "../../components/LifePlastic/UI/RevealBox";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
@@ -50,6 +51,7 @@ import Example3 from "../../components/LifePlastic/examples/example3";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
 import RecyclingSymbols from "../../components/LifePlastic/RecyclingSymbols";
 import { Processes } from "../../components/LifePlastic/Processes";
+import TutorialOverlay from "../../components/LifePlastic/UI/TutorialOverlay";
 
 export const plasticColourPicker = (type: keyof FormType) => {
   switch (type) {
@@ -279,11 +281,38 @@ const Experiment013: React.FC = () => {
           <TutorialLines />
         </RevealBox>
       ) : (
-        <div />
+        <div style={{ position: "absolute", zIndex: 9 }}>
+          <TutorialTitleDIV>
+            <h1>Life of Plastic</h1>
+            <h3>...it's fantastic!</h3>
+          </TutorialTitleDIV>
+          <button
+            style={{
+              background: `${SKYBACKGROUND}`,
+              cursor: "pointer",
+              float: "right",
+              margin: "10px 30px",
+              overflow: "visible",
+              display: "block",
+              border: "none",
+              outline: "none",
+              fontSize: "18px",
+              lineHeight: "83%",
+              letterSpacing: "3px",
+              fontFamily: "Muli,sans-serif",
+              fontWeight: 200,
+              position: "relative",
+              top: -150,
+              left: 100,
+            }}
+            onClick={() => setMode(true)}
+          >
+            Back to Intro
+          </button>
+        </div>
       )}
       <Diagram>
         <GarbagePile GarbagePile={garbagePile} />
-        <RecyclingSymbols />
         <AddLabels />
         <GarbageBackground />
         <SkyPipesBackground systems={systems} />
@@ -293,38 +322,19 @@ const Experiment013: React.FC = () => {
         <GroundPipesForeground systems={systems} />
         <SkyPipesForeground systems={systems} />
         <Bins systems={systems} />
-        {mode ? (
-          <div>
-            <Routes
-              routeStyle={{
-                GarbageLines: "none",
-                MixedLines: "none",
-                BaleLines: "none",
-                PelletLines: "none",
-                RegrindLines: "none",
-                HandLines: "none",
-                ProductsLines: "none",
-                MissingLines: "none",
-              }}
-            />
-          </div>
-        ) : (
-          <div style={{ position: "absolute" }}>
-            <Processes />
-            <Routes
-              routeStyle={{
-                GarbageLines: "#none",
-                MixedLines: "#8e8e8e",
-                BaleLines: "#8e8e8e",
-                PelletLines: "#8e8e8e",
-                RegrindLines: "#8e8e8e",
-                HandLines: "#8e8e8e",
-                ProductsLines: "#8e8e8e",
-                MissingLines: "none",
-              }}
-            />
-          </div>
-        )}
+        <Routes
+          routeStyle={{
+            GarbageLines: "none",
+            MixedLines: "none",
+            BaleLines: "none",
+            PelletLines: "none",
+            RegrindLines: "none",
+            HandLines: "none",
+            ProductsLines: "none",
+            MissingLines: "none",
+          }}
+        />
+        {mode ? <div></div> : <TutorialOverlay />}
 
         {materials.materials.map((item) => {
           switch (item.type) {
@@ -488,8 +498,9 @@ const Experiment013: React.FC = () => {
             materials: [],
           });
         }}
+        setSystem={(systems) => setSystems(systems)}
         modeChange={() => setMode(!mode)}
-        saveSystem={() => console.log("saved!")}
+        saveSystem={() => console.log("saved")}
       />
     </div>
   );

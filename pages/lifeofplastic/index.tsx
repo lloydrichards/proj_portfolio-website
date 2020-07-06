@@ -49,8 +49,6 @@ import Example1 from "../../components/LifePlastic/examples/example1";
 import Example2 from "../../components/LifePlastic/examples/example2";
 import Example3 from "../../components/LifePlastic/examples/example3";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
-import RecyclingSymbols from "../../components/LifePlastic/RecyclingSymbols";
-import { Processes } from "../../components/LifePlastic/Processes";
 import TutorialOverlay from "../../components/LifePlastic/UI/TutorialOverlay";
 
 export const plasticColourPicker = (type: keyof FormType) => {

@@ -35,12 +35,11 @@ import { SkyPipesForeground } from "../../components/LifePlastic/SkyPipesForegro
 import { nanoid } from "nanoid";
 import { StartingSystems } from "../../components/LifePlastic/data/StartingSystems";
 import { FactoryButton } from "../../components/LifePlastic/Buttons";
-import UIButtons from "../../components/LifePlastic/UI/NavBar";
+import UIButtons from "../../components/LifePlastic/UI/NavBarRedesign";
 import { Diagram } from "../../components/LifePlastic/styles/PlasticStyles";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
 import { GarbagePile } from "../../components/LifePlastic/Plastic/GarbagePile";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
-import RecyclingSymbols from "../../components/LifePlastic/RecyclingSymbols";
 import { Processes } from "../../components/LifePlastic/Processes";
 
 export const plasticColourPicker = (type: keyof FormType) => {
@@ -223,7 +222,6 @@ const Experiment017: React.FC = () => {
       </p>
       <Diagram>
         <GarbagePile GarbagePile={garbagePile} />
-        <RecyclingSymbols />
         <AddLabels />
         <GarbageBackground />
         <SkyPipesBackground systems={systems} />
@@ -428,6 +426,7 @@ const Experiment017: React.FC = () => {
             materials: [],
           });
         }}
+        setSystem={(systems) => setSystems(systems)}
         modeChange={() => setMode(!mode)}
         saveSystem={() => console.log("saved")}
       />

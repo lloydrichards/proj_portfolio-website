@@ -34,11 +34,10 @@ const RecycleSymbol: React.FC<SymbolProps> = ({ number, colour }) => {
       </svg>
       <p
         style={{
-          fontSize: 18,
+          fontSize: 14,
           position: "relative",
-          left: -35,
-          top: 5,
-          transform: "rotate(0deg)",
+          margin: "auto -33px",
+          color: `${colour}`,
         }}
       >
         {number}

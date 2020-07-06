@@ -45,7 +45,7 @@ export const NavBar = styled.div({
     letterSpacing: "3px",
     fontFamily: "Muli,sans-serif",
     fontWeight: 200,
-    fontSize: "20px"
+    fontSize: "20px",
   },
 });
 export const TopNavBar = styled.div({
@@ -60,6 +60,26 @@ export const TopNavBar = styled.div({
     display: "flex",
     float: "right",
     padding: "10px 10px",
+  },
+});
+
+export const Modal = styled.div({
+  minHeight: "190px",
+  width: "475px",
+  margin: "0 auto",
+  zIndex: 9,
+  borderRadius: "12px",
+  boxShadow: "4px 4px 8px rgba(20,20,20,0.12)",
+  background: `${SKYBACKGROUND}`,
+  "&>p": {
+    fontSize: "16px",
+    textAlign: "justify",
+    align: "left",
+    lineHeight: "150%",
+    fontFamily: "Josefin Slab,sans-serif",
+    margin: "0px auto",
+    padding: "60px 0px 0px",
+    width: "400px",
   },
 });
 

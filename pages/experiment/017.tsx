@@ -41,6 +41,7 @@ import { GarbageBackground } from "../../components/LifePlastic/Garbage";
 import { GarbagePile } from "../../components/LifePlastic/Plastic/GarbagePile";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
 import { Processes } from "../../components/LifePlastic/Processes";
+import TutorialModal from "../../components/LifePlastic/UI/TutorialModal";
 
 export const plasticColourPicker = (type: keyof FormType) => {
   switch (type) {
@@ -220,6 +221,13 @@ const Experiment017: React.FC = () => {
         and a way to focus the users attention onto the process at hand and give
         a little bit of information on what is happening.
       </p>
+      <TutorialModal>
+        <p>
+          Sometimes a municipality won’t have a certain system or they might be
+          temporarily unavilable. Click on the factory to see what happens to
+          the plastic in the system.
+        </p>
+      </TutorialModal>
       <Diagram>
         <GarbagePile GarbagePile={garbagePile} />
         <AddLabels />

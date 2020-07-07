@@ -1,11 +1,16 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { SKYBACKGROUND, GROUNDBACKGROUND } from "../styles/PlasticStyles";
-const RevealBox: React.FC = ({ children }) => {
+
+interface RevealProps {
+  show?: boolean;
+  onRemove?: () => void;
+}
+const RevealBox: React.FC<RevealProps> = ({ onRemove, show, children }) => {
   const [reveal, setReveal] = React.useState(false);
 
   const variants = {
-    visible: { opacity: 1 },
+    visible: { opacity: 1, y: "0%" },
     hidden: { opacity: [1, 0, 0], y: ["0%", "0%", "-500%"] },
   };
 
@@ -14,6 +19,7 @@ const RevealBox: React.FC = ({ children }) => {
       const yPos = window.scrollY;
       if (yPos > 1200) {
         setReveal(true);
+        if (onRemove) setTimeout(() => onRemove(), 3000);
       }
     };
     window.addEventListener("scroll", handleScroll, false);
@@ -22,10 +28,15 @@ const RevealBox: React.FC = ({ children }) => {
     };
   }, []);
 
+  React.useEffect(() => {
+    console.log("back to into");
+    if (show) setReveal(false);
+  }, [show]);
+
   return (
     <motion.div
       animate={reveal ? "hidden" : "visible"}
-      transition={{ duration: 3, ease: "easeOut", delayChildren: 10 }}
+      transition={{ duration: 3, ease: "easeOut" }}
       initial="visible"
       variants={variants}
       style={{

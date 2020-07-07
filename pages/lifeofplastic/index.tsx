@@ -223,7 +223,7 @@ const Experiment013: React.FC = () => {
   return (
     <div style={{ margin: "auto", width: "1080px" }} title="Life of Plastic">
       {tutorial ? (
-        <RevealBox>
+        <RevealBox show={tutorial} onRemove={() => setTutorial(false)}>
           <TutorialTitleDIV>
             <h1>Life of Plastic</h1>
             <h3>...it's fantastic!</h3>
@@ -279,37 +279,43 @@ const Experiment013: React.FC = () => {
           <TutorialLines />
         </RevealBox>
       ) : (
+        <div />
+      )}
+      <Diagram>
         <div style={{ position: "absolute", zIndex: 9 }}>
           <TutorialTitleDIV>
             <h1>Life of Plastic</h1>
             <h3>...it's fantastic!</h3>
           </TutorialTitleDIV>
-          <button
-            style={{
-              background: `${SKYBACKGROUND}`,
-              cursor: "pointer",
-              float: "right",
-              margin: "10px 30px",
-              overflow: "visible",
-              display: "block",
-              border: "none",
-              outline: "none",
-              fontSize: "18px",
-              lineHeight: "83%",
-              letterSpacing: "3px",
-              fontFamily: "Muli,sans-serif",
-              fontWeight: 200,
-              position: "relative",
-              top: -150,
-              left: 100,
-            }}
-            onClick={() => setMode(true)}
-          >
-            Back to Intro
-          </button>
+          {tutorial ? (
+            <div />
+          ) : (
+            <button
+              style={{
+                background: `${SKYBACKGROUND}`,
+                zIndex: 3,
+                cursor: "pointer",
+                float: "right",
+                margin: "10px 30px",
+                overflow: "visible",
+                display: "block",
+                border: "none",
+                outline: "none",
+                fontSize: "18px",
+                lineHeight: "83%",
+                letterSpacing: "3px",
+                fontFamily: "Muli,sans-serif",
+                fontWeight: 200,
+                position: "relative",
+                top: -150,
+                left: 100,
+              }}
+              onClick={() => setTutorial(true)}
+            >
+              Back to Intro
+            </button>
+          )}
         </div>
-      )}
-      <Diagram>
         <GarbagePile GarbagePile={garbagePile} />
         <AddLabels />
         <GarbageBackground />

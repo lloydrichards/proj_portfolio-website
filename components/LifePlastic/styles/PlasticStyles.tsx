@@ -63,11 +63,6 @@ export const TopNavBar = styled.div({
   },
 });
 
-export const TutorialSplash = styled.div({});
-type ModalProps = {
-  top: number;
-};
-
 export const Toggle = styled.button({
   background: `${NAVBARFILL}`,
   cursor: "pointer",

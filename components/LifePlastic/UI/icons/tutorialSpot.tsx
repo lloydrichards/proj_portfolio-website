@@ -1,11 +1,30 @@
+/** @jsx jsx */
 import React from "react";
 import { GROUNDBACKGROUND } from "../../styles/PlasticStyles";
+import { jsx, css, keyframes } from "@emotion/core";
 
 interface SymbolProps {
   number: number;
   offset: number;
   onClick: () => void;
 }
+
+const pulse = keyframes`
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 #FCE35F;
+    }
+
+    70% {
+      transform: scale(1.8);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+`;
 
 const TutorialSpotIcon: React.FC<SymbolProps> = ({
   number,
@@ -25,6 +44,22 @@ const TutorialSpotIcon: React.FC<SymbolProps> = ({
       }}
       onClick={onClick}
     >
+      <div
+        css={css`
+          position: absolute;
+          top: 14px;
+          left: 14px;
+          background: #fce35f;
+          border-radius: 50%;
+          margin: 10px;
+          height: 20px;
+          width: 20px;
+
+          box-shadow: 0 0 0 0 #fce35f;
+          transform: scale(1);
+          animation: ${pulse} 3s infinite;
+        `}
+      />
       <svg
         width="41"
         height="41"

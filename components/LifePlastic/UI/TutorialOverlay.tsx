@@ -24,8 +24,8 @@ const TutorialOverlay = () => {
           >
             <p>
               When you want to add or remove an entire recycling system, you can
-              click these buttons to toggle everything at once. Try click on the
-              button to see which factories appear and disapear.
+              click these buttons to toggle everything at once. Try clicking on
+              the button to see which factories appear and disapear.
             </p>
           </TutorialModal>
         );
@@ -40,7 +40,7 @@ const TutorialOverlay = () => {
             }}
           >
             <p>
-              Want to add some plastic to the system? Click the recycle symbol
+              Want to add some plastic to the system? Click the recycling symbol
               and watch the plastic object start its journey through the system.
               You can add multiple items at once.
             </p>
@@ -134,7 +134,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
-      number={2}
+        number={2}
         offset={1600}
         onClick={() => {
           Scroll.animateScroll.scrollTo(1200);
@@ -142,7 +142,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
-      number={3}
+        number={3}
         offset={1900}
         onClick={() => {
           Scroll.animateScroll.scrollTo(1500);
@@ -150,7 +150,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
-      number={4}
+        number={4}
         offset={2500}
         onClick={() => {
           Scroll.animateScroll.scrollTo(2200);
@@ -158,7 +158,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
-      number={5}
+        number={5}
         offset={2800}
         onClick={() => {
           Scroll.animateScroll.scrollTo(2400);
@@ -166,7 +166,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
-      number={6}
+        number={6}
         offset={500}
         onClick={() => {
           Scroll.animateScroll.scrollTo(0);

@@ -53,6 +53,7 @@ import Example3 from "../../components/LifePlastic/examples/example3";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
 import TutorialOverlay from "../../components/LifePlastic/UI/TutorialOverlay";
 import SymbolAnatomy from "../../components/LifePlastic/examples/SymbolAnatomy";
+import FactorySigns from "../../components/LifePlastic/FactorySigns";
 
 export const plasticColourPicker = (type: keyof FormType) => {
   switch (type) {
@@ -87,7 +88,7 @@ const Experiment013: React.FC = () => {
   const [garbagePile, setGarbagePile] = React.useState<number>(0);
   const [tutorial, setTutorial] = React.useState<boolean>(true);
   const [triggerTutorial, setTriggerTutorial] = React.useState<boolean>(false);
-  const [mode, setMode] = React.useState<boolean>(true);
+  const [mode, setMode] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     console.log(garbagePile);
@@ -225,7 +226,7 @@ const Experiment013: React.FC = () => {
   };
 
   return (
-    <div style={{ margin: "auto", width: "1080px" }} title="Life of Plastic">
+    <div style={{ margin: "auto", width: "1080px" }}>
       {tutorial ? (
         <RevealBox show={triggerTutorial} onRemove={() => setTutorial(false)}>
           <TutorialTitleDIV>
@@ -264,7 +265,7 @@ const Experiment013: React.FC = () => {
           <TutorialDIV>
             <p>
               However, not all plastic is created equal. There are 7 types of
-              plastic that can be recycles, though most places will only deal
+              plastic that can be recycled, though most places will only deal
               with PET, HDPE and PP. The technology exists to recycle the other
               4 types but depending on the supply and demand, they might not be
               available in your municipality.
@@ -273,10 +274,10 @@ const Experiment013: React.FC = () => {
           </TutorialDIV>
           <TutorialDIV>
             <p>
-              To start exploring what these relationships looks like, you can
-              click the PET button below and then click the recycle symbol to
-              add plastic. If you're unsure what to do, there is a tutorial in
-              the top right. Have fun exploring!
+              To start exploring, what these relationships look like, click the
+              PET button below and then add plastic with the recycle symbol. If
+              you're unsure what to do, there is a tutorial in the top right.
+              Have fun exploring!
             </p>
           </TutorialDIV>
           <TutorialLines />
@@ -305,36 +306,39 @@ const Experiment013: React.FC = () => {
           {tutorial ? (
             <div />
           ) : (
-            <button
-              style={{
-                background: `${SKYBACKGROUND}`,
-                zIndex: 3,
-                cursor: "pointer",
-                float: "right",
-                margin: "10px 30px",
-                overflow: "visible",
-                display: "block",
-                border: "none",
-                outline: "none",
-                fontSize: "18px",
-                lineHeight: "83%",
-                letterSpacing: "3px",
-                fontFamily: "Muli,sans-serif",
-                fontWeight: 200,
-                position: "relative",
-                top: -150,
-                left: 100,
-              }}
-              onClick={() => {
-                setMaterials({
-                  materials: [],
-                });
-                setTutorial(true);
-                setTriggerTutorial(false);
-              }}
-            >
-              Back to Intro
-            </button>
+            <div>
+              <button
+                style={{
+                  background: `${SKYBACKGROUND}`,
+                  zIndex: 3,
+                  cursor: "pointer",
+                  float: "right",
+                  margin: "10px 30px",
+                  overflow: "visible",
+                  display: "block",
+                  border: "none",
+                  outline: "none",
+                  fontSize: "18px",
+                  lineHeight: "83%",
+                  letterSpacing: "3px",
+                  fontFamily: "Muli,sans-serif",
+                  fontWeight: 200,
+                  position: "relative",
+                  top: -150,
+                  left: 100,
+                }}
+                onClick={() => {
+                  setMaterials({
+                    materials: [],
+                  });
+                  setTutorial(true);
+                  setTriggerTutorial(false);
+                }}
+              >
+                Back to Intro
+              </button>
+              {mode ? <div></div> : <TutorialOverlay />}
+            </div>
           )}
         </div>
         <GarbagePile GarbagePile={garbagePile} />
@@ -347,6 +351,7 @@ const Experiment013: React.FC = () => {
         <GroundPipesForeground systems={systems} />
         <SkyPipesForeground systems={systems} />
         <Bins systems={systems} />
+        <FactorySigns systems={systems} />
         <Routes
           routeStyle={{
             GarbageLines: "none",
@@ -359,7 +364,6 @@ const Experiment013: React.FC = () => {
             MissingLines: "none",
           }}
         />
-        {mode ? <div></div> : <TutorialOverlay />}
 
         {materials.materials.map((item) => {
           switch (item.type) {

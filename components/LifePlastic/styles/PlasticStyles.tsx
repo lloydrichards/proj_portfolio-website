@@ -30,6 +30,11 @@ export const Diagram = styled.div({
   height: "4028px",
   margin: "0px auto",
 });
+export const ToolTipContainer = styled.span({
+  position: "relative",
+  display: "inline-block",
+  
+})
 
 export const NavBar = styled.div({
   overflow: "hidden",

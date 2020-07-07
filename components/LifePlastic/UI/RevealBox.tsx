@@ -17,7 +17,7 @@ const RevealBox: React.FC<RevealProps> = ({ onRemove, show, children }) => {
   React.useEffect(() => {
     const handleScroll = () => {
       const yPos = window.scrollY;
-      if (yPos > 1200) {
+      if (yPos > 1500) {
         setReveal(true);
         if (onRemove) setTimeout(() => onRemove(), 3000);
       }

@@ -67,44 +67,6 @@ export const TutorialSplash = styled.div({});
 type ModalProps = {
   top: number;
 };
-export const Modal = styled("div")(
-  {
-    position: "relative",
-    minHeight: "190px",
-    width: "475px",
-    margin: "0 auto",
-    zIndex: 9,
-    borderRadius: "12px",
-    boxShadow: "4px 4px 8px rgba(20,20,20,0.12)",
-    background: `${SKYBACKGROUND}`,
-    "&>p": {
-      fontSize: "16px",
-      textAlign: "justify",
-      align: "left",
-      lineHeight: "150%",
-      fontFamily: "Josefin Slab,sans-serif",
-      margin: "0px auto",
-      padding: "60px 0px 0px",
-      width: "400px",
-    },
-    "&>button": {
-      background: `${SKYBACKGROUND}`,
-      cursor: "pointer",
-      float: "right",
-      margin: "10px 30px",
-      overflow: "visible",
-      display: "block",
-      border: "none",
-      outline: "none",
-      fontSize: "18px",
-      lineHeight: "83%",
-      letterSpacing: "3px",
-      fontFamily: "Muli,sans-serif",
-      fontWeight: 200,
-    },
-  },
-  (props: ModalProps) => ({ top: props.top })
-);
 
 export const Toggle = styled.button({
   background: `${NAVBARFILL}`,

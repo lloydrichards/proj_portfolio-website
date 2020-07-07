@@ -63,10 +63,10 @@ export const TopNavBar = styled.div({
   },
 });
 
-export const TutorialSplash = styled.div({
-  
-});
-
+export const TutorialSplash = styled.div({});
+type ModalProps = {
+  top: number;
+};
 export const Modal = styled.div(
   {
     position: "relative",
@@ -103,7 +103,7 @@ export const Modal = styled.div(
       fontWeight: 200,
     },
   },
-  (props: any) => ({ top: props.top })
+  (props: ModalProps) => ({ top: props.top })
 );
 
 export const Toggle = styled.button({

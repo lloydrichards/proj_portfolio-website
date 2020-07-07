@@ -341,6 +341,7 @@ const Experiment013: React.FC = () => {
             </div>
           )}
         </div>
+
         <GarbagePile GarbagePile={garbagePile} />
         <AddLabels />
         <GarbageBackground />

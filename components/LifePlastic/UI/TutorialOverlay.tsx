@@ -123,6 +123,7 @@ const TutorialOverlay = () => {
       style={{
         position: "absolute",
         width: "1050px",
+        top: "0px",
       }}
     >
       <TutorialSpotIcon

@@ -67,7 +67,7 @@ export const TutorialSplash = styled.div({});
 type ModalProps = {
   top: number;
 };
-export const Modal = styled.div(
+export const Modal = styled("div")(
   {
     position: "relative",
     minHeight: "190px",

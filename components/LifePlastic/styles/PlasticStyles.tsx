@@ -45,7 +45,7 @@ export const NavBar = styled.div({
     letterSpacing: "3px",
     fontFamily: "Muli,sans-serif",
     fontWeight: 200,
-    fontSize: "20px",
+    fontSize: "16px",
   },
 });
 export const TopNavBar = styled.div({

@@ -126,6 +126,7 @@ const TutorialOverlay = () => {
       }}
     >
       <TutorialSpotIcon
+        number={1}
         offset={1515}
         onClick={() => {
           Scroll.animateScroll.scrollTo(1000);
@@ -133,6 +134,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
+      number={2}
         offset={1600}
         onClick={() => {
           Scroll.animateScroll.scrollTo(1200);
@@ -140,6 +142,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
+      number={3}
         offset={1900}
         onClick={() => {
           Scroll.animateScroll.scrollTo(1500);
@@ -147,6 +150,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
+      number={4}
         offset={2500}
         onClick={() => {
           Scroll.animateScroll.scrollTo(2200);
@@ -154,6 +158,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
+      number={5}
         offset={2800}
         onClick={() => {
           Scroll.animateScroll.scrollTo(2400);
@@ -161,6 +166,7 @@ const TutorialOverlay = () => {
         }}
       />
       <TutorialSpotIcon
+      number={6}
         offset={500}
         onClick={() => {
           Scroll.animateScroll.scrollTo(0);

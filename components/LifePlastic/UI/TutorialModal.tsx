@@ -3,7 +3,6 @@ import * as React from "react";
 import TutorialIcon from "./icons/tutorial";
 import CloseIcon from "./icons/close";
 import { jsx, css } from "@emotion/core";
-import { SKYBACKGROUND } from "../styles/PlasticStyles";
 
 interface Props {
   offset: number;
@@ -26,7 +25,8 @@ const TutorialModal: React.FC<Props> = ({
     z-index: 9;
     border-radius: 12px;
     box-shadow: 4px 4px 8px rgba(20, 20, 20, 0.12);
-    background: ${SKYBACKGROUND};
+    background: white;
+    opacity: 0.9;
     p {
       font-size: 16px;
       text-align: justify;
@@ -38,7 +38,8 @@ const TutorialModal: React.FC<Props> = ({
       width: 400px;
     }
     button {
-      background: ${SKYBACKGROUND};
+      background: white;
+      opacity: 0.9;
       cursor: pointer;
       float: right;
       margin: 10px 30px 30px;

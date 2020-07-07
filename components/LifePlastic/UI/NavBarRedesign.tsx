@@ -238,7 +238,7 @@ const UIButtons: React.FC<NavProps> = ({
         >
           Other
         </Toggle>
-        <h2>Toggle</h2>
+        <h2>Add/ Remove System</h2>
       </NavBar>
       <NavBar>
         <AddButton
@@ -354,7 +354,7 @@ const UIButtons: React.FC<NavProps> = ({
           />
         </AddButton>
 
-        <h2>Add</h2>
+        <h2>Add Plastic</h2>
       </NavBar>
     </div>
   );

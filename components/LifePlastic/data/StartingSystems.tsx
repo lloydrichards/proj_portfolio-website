@@ -1,14 +1,14 @@
 import { SystemList } from "../Interfaces/Interfaces";
 
 export const StartingSystems: SystemList = {
-  MixedBin: true,
+  MixedBin: false,
   PETBin: true,
   HDPEBin: true,
   PPBin: true,
-  PSBin: true,
-  LDPEBin: true,
-  PVCBin: true,
-  OTHERBin: true,
+  PSBin: false,
+  LDPEBin: false,
+  PVCBin: false,
+  OTHERBin: false,
   TRASHBin: true,
 
   PETHandSorting: true,
@@ -19,9 +19,9 @@ export const StartingSystems: SystemList = {
   PVCHandSorting: false,
   OTHERHandSorting: false,
 
-  PETMachineSorting: true,
-  HDPEMachineSorting: true,
-  PPMachineSorting: true,
+  PETMachineSorting: false,
+  HDPEMachineSorting: false,
+  PPMachineSorting: false,
   PSMachineSorting: false,
   LDPEMachineSorting: false,
   OTHERMachineSorting: false,

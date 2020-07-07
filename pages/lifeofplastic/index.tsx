@@ -40,6 +40,8 @@ import {
   TutorialTitleDIV,
   TutorialDIV,
   SKYBACKGROUND,
+  NavBar,
+  Toggle,
 } from "../../components/LifePlastic/styles/PlasticStyles";
 import RevealBox from "../../components/LifePlastic/UI/RevealBox";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
@@ -50,6 +52,7 @@ import Example2 from "../../components/LifePlastic/examples/example2";
 import Example3 from "../../components/LifePlastic/examples/example3";
 import { AddLabels } from "../../components/LifePlastic/AddLabels";
 import TutorialOverlay from "../../components/LifePlastic/UI/TutorialOverlay";
+import SymbolAnatomy from "../../components/LifePlastic/examples/SymbolAnatomy";
 
 export const plasticColourPicker = (type: keyof FormType) => {
   switch (type) {
@@ -83,6 +86,7 @@ const Experiment013: React.FC = () => {
   const [systems, setSystems] = React.useState<SystemList>(StartingSystems);
   const [garbagePile, setGarbagePile] = React.useState<number>(0);
   const [tutorial, setTutorial] = React.useState<boolean>(true);
+  const [triggerTutorial, setTriggerTutorial] = React.useState<boolean>(false);
   const [mode, setMode] = React.useState<boolean>(true);
 
   React.useEffect(() => {
@@ -223,7 +227,7 @@ const Experiment013: React.FC = () => {
   return (
     <div style={{ margin: "auto", width: "1080px" }} title="Life of Plastic">
       {tutorial ? (
-        <RevealBox show={tutorial} onRemove={() => setTutorial(false)}>
+        <RevealBox show={triggerTutorial} onRemove={() => setTutorial(false)}>
           <TutorialTitleDIV>
             <h1>Life of Plastic</h1>
             <h3>...it's fantastic!</h3>
@@ -265,18 +269,29 @@ const Experiment013: React.FC = () => {
               4 types but depending on the supply and demand, they might not be
               available in your municipality.
             </p>
+            <SymbolAnatomy />
           </TutorialDIV>
           <TutorialDIV>
             <p>
-              Try clicking on one off the plastic types and scroll down to see
-              where the product ends up. You can add and remove proccesses to
-              see how it effects how much keeps in the system. Maybe research
-              what your munipality offers and get an idea for where your plastic
-              really ends up.
+              To start exploring what these relationships looks like, you can
+              click the PET button below and then click the recycle symbol to
+              add plastic. If you're unsure what to do, there is a tutorial in
+              the top right. Have fun exploring!
             </p>
           </TutorialDIV>
-
           <TutorialLines />
+          <div style={{ position: "relative", zIndex: 10, top: -30 }}>
+            <NavBar>
+              <div style={{ height: "60px", width: "100px" }} />
+              <Toggle
+                onClick={() => {
+                  setTriggerTutorial(true);
+                }}
+              >
+                PET
+              </Toggle>
+            </NavBar>
+          </div>
         </RevealBox>
       ) : (
         <div />
@@ -310,7 +325,13 @@ const Experiment013: React.FC = () => {
                 top: -150,
                 left: 100,
               }}
-              onClick={() => setTutorial(true)}
+              onClick={() => {
+                setMaterials({
+                  materials: [],
+                });
+                setTutorial(true);
+                setTriggerTutorial(false);
+              }}
             >
               Back to Intro
             </button>

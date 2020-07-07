@@ -483,7 +483,16 @@ export const GroundPipesBackground: React.FC<Partial<ToggleProps>> = ({
         </g>
         <g
           data-name="TRASHfromMIXED"
-          display={systems?.MixedBin ? "block" : "none"}
+          display={
+            systems?.PETMachineSorting ||
+            systems?.HDPEMachineSorting ||
+            systems?.PPMachineSorting ||
+            systems?.PSMachineSorting ||
+            systems?.LDPEMachineSorting ||
+            systems?.OTHERMachineSorting
+              ? "block"
+              : "none"
+          }
         >
           <path
             data-name="Ellipse 408_3"

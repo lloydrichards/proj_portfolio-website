@@ -33,9 +33,61 @@ export const Diagram = styled.div({
 export const ToolTipContainer = styled.span({
   position: "relative",
   display: "inline-block",
-  
-})
+});
 
+export const FooterBackground = styled.div({
+  position: "absolute",
+  height: "1800px",
+  left: "-50%",
+  width: "200%",
+  top: "4028px",
+  background: "#424242",
+});
+export const Footer = styled.div({
+  position: "absolute",
+  minHeight: 200,
+  width: "1050px",
+  top: "4028px",
+  background: "#424242",
+  padding: "25px",
+  "&>h2": {
+    padding: "10px 0px",
+    letterSpacing: "3px",
+    fontFamily: "Muli,sans-serif",
+    fontWeight: 200,
+    fontSize: "24px",
+    paddingLeft: "200px",
+    color: "#fff",
+  },
+  "&>ul": {
+    listStyle: "square",
+    fontSize: "18px",
+    textAlign: "justify",
+    align: "left",
+    lineHeight: "200%",
+    fontFamily: "Josefin Slab,sans-serif",
+    margin: "24px auto",
+    width: "500px",
+    color: "#fff",
+    "&>li>a": {
+      color: "#fff",
+      textUnderlineOffset: 5,
+    },
+  },
+  "&>p": {
+    fontSize: "18px",
+    textAlign: "justify",
+    align: "left",
+    lineHeight: "150%",
+    fontFamily: "Josefin Slab,sans-serif",
+    margin: "24px auto",
+    width: "500px",
+    color: "#fff",
+    "&>a": {
+      color: "#fff",
+    },
+  },
+});
 export const NavBar = styled.div({
   overflow: "hidden",
   width: "950px",
@@ -232,8 +284,8 @@ export const TutorialTitleDIV = styled.div({
     fontFamily: "Pacifico",
     color: "#9BBD8B",
     textShadow:
-      "4px 4px 2px rgba(20,20,20,0.1), -2px -2px 2px rgba(255,255,255,0.8)",
-    padding: "0px 100px",
+      "2px 2px 2px rgba(20,20,20,0.05), -2px -2px 2px rgba(255,255,255,0.8)",
+    padding: "10px 100px",
     margin: "0",
   },
 });

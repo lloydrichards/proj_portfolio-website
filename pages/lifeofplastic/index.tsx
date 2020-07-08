@@ -7,6 +7,7 @@ import {
   MaterialType,
   SystemList,
   FormType,
+  Logs,
 } from "../../components/LifePlastic/Interfaces/Interfaces";
 import { RootRoutes } from "../../components/LifePlastic/data/RootRoutes";
 import { CombinedRoutes } from "../../components/LifePlastic/Routes/CombinedRoutes";
@@ -42,6 +43,9 @@ import {
   SKYBACKGROUND,
   NavBar,
   Toggle,
+  TEXTFILL,
+  Footer,
+  FooterBackground,
 } from "../../components/LifePlastic/styles/PlasticStyles";
 import RevealBox from "../../components/LifePlastic/UI/RevealBox";
 import { GarbageBackground } from "../../components/LifePlastic/Garbage";
@@ -89,6 +93,7 @@ const Experiment013: React.FC = () => {
   const [tutorial, setTutorial] = React.useState<boolean>(true);
   const [triggerTutorial, setTriggerTutorial] = React.useState<boolean>(false);
   const [mode, setMode] = React.useState<boolean>(false);
+  const [logs, setLogs] = React.useState<Array<Logs>>([]);
 
   React.useEffect(() => {
     console.log(garbagePile);
@@ -97,6 +102,25 @@ const Experiment013: React.FC = () => {
       setTutorial(false);
     }
   }, [garbagePile]);
+
+  React.useEffect(() => {
+    if (logs.length > 10) {
+      console.log("OVER");
+      setLogs([...logs.slice(1)]);
+    }
+  }, [logs]);
+
+  const addLog = (parent: MaterialType, nextPath: PathType) => {
+    const newLog: Logs = {
+      id: nanoid(),
+      enterPlastic: parent.plastic,
+      enterAmount: 1,
+      facility: nextPath.name,
+      exitPlastic: nextPath.plastic,
+      exitAmount: 1,
+    };
+    setLogs([...logs, newLog]);
+  };
 
   const pathBuilder = (path: RouteType): Array<string> => {
     if (path.possible.length === path.probability.length) {
@@ -160,6 +184,7 @@ const Experiment013: React.FC = () => {
           },
         ]);
         const materials = modifiedMaterials.filter((i) => parent.id != i.id);
+        addLog(parent, nextPath);
         return { ...state, materials };
       });
     }
@@ -226,12 +251,12 @@ const Experiment013: React.FC = () => {
   };
 
   return (
-    <div style={{ margin: "auto", width: "1080px" }}>
+    <div style={{ margin: "auto", width: "1080px", height: "4428px" }}>
       {tutorial ? (
         <RevealBox show={triggerTutorial} onRemove={() => setTutorial(false)}>
           <TutorialTitleDIV>
             <h1>Life of Plastic</h1>
-            <h3>...it's fantastic!</h3>
+            <h3>... it's fantastic!</h3>
           </TutorialTitleDIV>
           <TutorialDIV>
             <p>
@@ -301,7 +326,7 @@ const Experiment013: React.FC = () => {
         <div style={{ position: "absolute", zIndex: 9 }}>
           <TutorialTitleDIV>
             <h1>Life of Plastic</h1>
-            <h3>...it's fantastic!</h3>
+            <h3>... it's fantastic!</h3>
           </TutorialTitleDIV>
           {tutorial ? (
             <div />
@@ -520,6 +545,7 @@ const Experiment013: React.FC = () => {
         />
       </Diagram>
       <UIButtons
+        logs={logs}
         systems={systems}
         addRecyclable={addRecyclable}
         resetState={() => {
@@ -532,6 +558,118 @@ const Experiment013: React.FC = () => {
         modeChange={() => setMode(!mode)}
         saveSystem={() => console.log("saved")}
       />
+      <FooterBackground />
+      <Footer>
+        <hr />
+        <h2>Life of Plastic</h2>
+        <p>
+          A data visualization to explore the complex relationship of plastic
+          and its recycling system.
+        </p>
+        <h2>About the Project</h2>
+        <p>
+          The project was created by{" "}
+          <a target="_blank" href="https://www.lloydrichardsdesign.com">
+            Lloyd Richards
+          </a>{" "}
+          as part of his internship at{" "}
+          <a target="_blank" href="https://www.interactivethings.com/">
+            Interactive Things
+          </a>
+          . Over the course six week, Lloyd explored, designed and developed a
+          visualization based on a topic of his choosiing. Hvaving a strong
+          passion for sustainability and systems, he chose to explore the
+          complexities of the plastic recycling system.
+        </p>
+        <p>
+          With so many visualization showing the simplicity of the system, Lloyd
+          chose to apporach it from the otherside and show how complex the
+          system is in reality. First outlining all the technological processes
+          for recycling the major types of plastic and then researching how each
+          is interconnected. The flowdiagram was implimented into an interactive
+          webexperiance that allowed users to add plastic to the system and see
+          what routes it would take, like a giant pinball machine.
+        </p>
+        <p>
+          The data visualization was created in TypeScript using React, Next.js,
+          anime.js, Framer-Motion, and Emotion.{" "}
+          <a target="_blank" href="http://www.swissrecycling.ch/">
+            GitHub Repo
+          </a>
+        </p>
+        <h2>Source</h2>
+        <ul>
+          <li>
+            Swiss Recycling -{" "}
+            <a target="_blank" href="http://www.swissrecycling.ch/">
+              website
+            </a>
+          </li>
+          <li>
+            Recycling PET -{" "}
+            <a target="_blank" href="https://www.petrecycling.ch/de/home">
+              website
+            </a>
+          </li>
+          <li>
+            Design For Recycled Content Guide -{" "}
+            <a target="_blank" href="https://recycledcontent.org/">
+              website
+            </a>
+          </li>
+          <li>
+            GreenBlue: Closing the Loop -{" "}
+            <a
+              target="_blank"
+              href="http://www.truthstudio.com/content/Closing_The_Loop_Guide_final.pdf"
+            >
+              .pdf
+            </a>
+          </li>
+          <li>
+            Paper: Efficiency of ecycling post-consumer plastic packages -{" "}
+            <a
+              target="_blank"
+              href="https://aip.scitation.org/doi/pdf/10.1063/1.5016785"
+            >
+              .pdf
+            </a>
+          </li>
+          <li>
+            Plasticker: Material Cost -{" "}
+            <a
+              target="_blank"
+              href="https://plasticker.de/preise/pms_en.php?show=ok&make=ok&aog=A&kat=Mahlgut"
+            >
+              website
+            </a>
+          </li>
+        </ul>
+        <h2>Credit</h2>
+        <p>Designed and Developed by Lloyd Richards</p>
+        <p>
+          HUGE thanks to Peter Gassner for his patience and guidance throughout
+          the project. And to everyone at Interactive Things for their input
+          throughout the design and development process.
+        </p>
+        <h2>Contact</h2>
+        <p>
+          <a target="_blank" href="https://www.lloydrichardsdesign.com">
+            www.lloydrichardsdesign.com
+          </a>
+        </p>
+        <p>
+          <a
+            target="_blank"
+            href="https://www.instagram.com/lloydrichardsdesign/"
+          >
+            @lloydrichardsdesign
+          </a>
+        </p>
+      </Footer>
+      <div>
+        <h2>hello world</h2>
+      </div>
     </div>
   );
 };

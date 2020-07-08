@@ -399,6 +399,7 @@ const Experiment017: React.FC = () => {
         />
       </Diagram>
       <UIButtons
+      logs={[]}
         systems={systems}
         addRecyclable={addRecyclable}
         resetState={() => {

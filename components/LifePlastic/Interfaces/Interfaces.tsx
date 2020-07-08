@@ -66,6 +66,14 @@ export interface MissingLines {
   none: boolean;
 }
 
+export interface Logs {
+  id: string;
+  enterPlastic: string;
+  enterAmount?: number;
+  facility: string;
+  exitPlastic: string;
+  exitAmount?: number;
+}
 export interface SystemList {
   MixedBin: boolean;
   PETBin: boolean;

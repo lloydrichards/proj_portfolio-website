@@ -1,13 +1,15 @@
 import React from "react";
 import { NavBar, AddButton, Toggle, TopNavBar } from "../styles/PlasticStyles";
-import { SystemList } from "../Interfaces/Interfaces";
+import { SystemList, Logs } from "../Interfaces/Interfaces";
 import RecycleSymbol from "./RecycleSymbol";
 import InfoIcon from "./icons/info";
 import RefreshIcon from "./icons/refresh";
 import ShareIcon from "./icons/share";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface NavProps {
   systems: SystemList;
+  logs: Array<Logs>;
   addRecyclable: (route: string) => void;
   resetState: () => void;
   modeChange: () => void;
@@ -23,6 +25,7 @@ const randomRecycling = (addItem: (pickedItem: string) => void) => (
 
 const UIButtons: React.FC<NavProps> = ({
   systems,
+  logs,
   addRecyclable,
   setSystem,
   resetState,
@@ -35,6 +38,35 @@ const UIButtons: React.FC<NavProps> = ({
         <InfoIcon onClick={modeChange} />
         <RefreshIcon onClick={resetState} />
       </TopNavBar>
+      {/* <div style={{ position: "absolute", top: "-300px", right: 100 }}>
+        <ul>
+          <AnimatePresence initial={false}>
+            {logs?.map((log) => (
+              <motion.li
+                style={{
+                  width: "300px",
+                  height: "20px",
+                  background: "tomato",
+                  margin: "10px",
+                  flex: "0 0 100px",
+                  position: "relative",
+                  borderRadius: "10px",
+                }}
+                key={log.id}
+                positionTransition
+                initial={{ opacity: 0, y: 10, scale: 0.3 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.1 } }}
+              >
+                <p>
+                  {log.enterPlastic} enters {log.facility}; turned into{" "}
+                  {log.exitPlastic}
+                </p>
+              </motion.li>
+            ))}
+          </AnimatePresence>
+        </ul>
+      </div> */}
       <NavBar>
         <Toggle
           className={systems.MixedBin ? "selected" : ""}

@@ -666,9 +666,6 @@ const Experiment013: React.FC = () => {
           </a>
         </p>
       </Footer>
-      <div>
-        <h2>hello world</h2>
-      </div>
     </div>
   );
 };

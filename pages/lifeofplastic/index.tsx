@@ -43,7 +43,6 @@ import {
   SKYBACKGROUND,
   NavBar,
   Toggle,
-  TEXTFILL,
   Footer,
   FooterBackground,
 } from "../../components/LifePlastic/styles/PlasticStyles";

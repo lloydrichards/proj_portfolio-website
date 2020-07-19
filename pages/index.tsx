@@ -91,6 +91,16 @@ const IndexPage: React.FC = () => (
           <a>016 - Autocomplete Species w/ Algolia</a>
         </Link>
       </li>
+      <li>
+        <Link href="/experiment/017">
+          <a>017 - Life of Platic Tutorial</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/experiment/018">
+          <a>018 - Intergrating P5.js</a>
+        </Link>
+      </li>
     </ul>
     <hr />
     <ul>

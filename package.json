@@ -32,6 +32,7 @@
     "lodash": "^4.17.15",
     "nanoid": "^3.1.9",
     "next": "latest",
+    "p5": "^1.0.0",
     "query-string": "^6.13.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@types/chroma-js": "^2.0.0",
     "@types/node": "^12.12.21",
+    "@types/p5": "^0.9.1",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
     "@types/react-scroll": "^1.5.5",

@@ -6,7 +6,7 @@ import {
   CardActions,
   Button,
 } from '@material-ui/core';
-import { H3, Content, CardTitle } from './layout/StyledLayoutComponents';
+import { Content, CardTitle } from './layout/StyledLayoutComponents';
 
 interface Blog {
   id: number;

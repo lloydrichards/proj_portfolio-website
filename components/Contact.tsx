@@ -1,4 +1,5 @@
 import React from 'react';
+import * as yup from 'yup';
 import {
   Grid,
   Card,
@@ -12,12 +13,24 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import SendIcon from '@material-ui/icons/Send';
+import { Formik, Form } from 'formik';
+import { MyTextField } from './formik/TextField';
+import { MyTextArea } from './formik/TextArea';
+
+const validationSchema = yup.object({
+  name: yup.string().required(),
+  email: yup.string().required().email(),
+  message: yup.string().required(),
+});
 
 const Contact = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
-        <Card elevation={0} style={{ background: '#F6F3F0' }}>
+        <Card
+          elevation={0}
+          style={{ background: '#F6F3F0', maxWidth: '480px', margin: '0 auto' }}
+        >
           <CardContent>
             <Intro>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet
@@ -46,14 +59,59 @@ const Contact = () => {
         </Card>
       </Grid>
       <Grid item xs={12} md={6}>
-        <Card elevation={0} style={{ background: '#F6F3F0' }}>
-          <CardContent></CardContent>
-          <CardActions style={{ justifyContent: 'center' }}>
-            <Button variant='outlined' startIcon={<SendIcon />}>
-              Submit
-            </Button>
-          </CardActions>
-        </Card>
+        <Formik
+          onSubmit={async (data, { setErrors, setSubmitting, resetForm }) => {
+            setSubmitting(true);
+            try {
+              console.log(data);
+            } catch (error) {
+              setErrors(error);
+            }
+            setSubmitting(false);
+            resetForm();
+          }}
+          validationSchema={validationSchema}
+          initialValues={{
+            name: '',
+            email: '',
+            message: '',
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Card
+              elevation={0}
+              style={{
+                background: '#F6F3F0',
+                maxWidth: '480px',
+                margin: '0 auto',
+              }}
+            >
+              <Form>
+                <CardContent>
+                  <div style={{ padding: '1em' }}>
+                    <MyTextField label='Name' name='name' />
+                  </div>
+                  <div style={{ padding: '1em' }}>
+                    <MyTextField label='Email' name='email' />
+                  </div>
+                  <div style={{ padding: '1em' }}>
+                    <MyTextArea rowsMax={4} label='Message' name='message' />
+                  </div>
+                </CardContent>
+                <CardActions style={{ justifyContent: 'center' }}>
+                  <Button
+                    disabled={isSubmitting}
+                    type='submit'
+                    variant='outlined'
+                    startIcon={<SendIcon />}
+                  >
+                    Submit
+                  </Button>
+                </CardActions>
+              </Form>
+            </Card>
+          )}
+        </Formik>
       </Grid>
     </Grid>
   );

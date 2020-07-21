@@ -42,7 +42,8 @@
     "react-instantsearch": "^6.6.0",
     "react-instantsearch-dom": "^6.6.0",
     "react-scroll": "^1.7.16",
-    "react-select": "^3.1.0"
+    "react-select": "^3.1.0",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "@types/chroma-js": "^2.0.0",
@@ -52,6 +53,7 @@
     "@types/react-dom": "^16.9.4",
     "@types/react-scroll": "^1.5.5",
     "@types/react-select": "^3.0.13",
+    "@types/yup": "^0.29.3",
     "typescript": "3.7.3"
   },
   "license": "ISC"

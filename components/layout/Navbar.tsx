@@ -6,6 +6,8 @@ const Navbar = () => {
   return (
     <div
       css={css`
+        background-color: rgba(246,243,240, 0.7);
+        backdrop-filter: blur(3px);
         z-index: 9;
         overflow: hidden;
         position: fixed;
@@ -26,10 +28,10 @@ const Navbar = () => {
         css={css`
           float: left;
           a {
-            padding-left: 2em;
+            padding: 0.35em 2em;
             color: black;
             font-family: 'Raleway', sans-serif;
-            font-size: 36px;
+            font-size: 1.5em;
           }
         `}
       >

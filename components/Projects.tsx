@@ -7,9 +7,12 @@ import {
   Button,
   ButtonGroup,
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { H3, Description } from './layout/StyledLayoutComponents';
+import { ProjectData } from './ProjectData';
 
-interface Project {
+export interface Project {
   id: string;
   date: Date;
   title: string;
@@ -29,7 +32,7 @@ interface Category {
 
 const Projects = () => {
   const [currentProjects, setCurrentProjects] = useState<Array<Project>>(
-    ProjectData
+    ProjectData.sort((a, b) => +b.date - +a.date)
   );
   const [categories, setCategories] = useState<Category>({
     Design: true,
@@ -37,7 +40,7 @@ const Projects = () => {
     Code: true,
     Other: true,
   });
-
+  const [expanded, setExpanded] = useState<boolean>(false);
   useEffect(() => {
     setCurrentProjects(
       ProjectData.filter((i) => i.category.some((r) => categories[r] === true))
@@ -137,39 +140,16 @@ const Projects = () => {
           </Grid>
         ))}
       </Grid>
+      <Button
+        startIcon={expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        onClick={() => setExpanded(!expanded)}
+        size='small'
+        style={{ marginLeft: 'auto' }}
+      >
+        {expanded ? 'Less' : 'More'}
+      </Button>
     </div>
   );
 };
 
 export default Projects;
-
-const ProjectData: Array<Project> = [
-  {
-    id: '2000',
-    date: new Date('2020-06-10'),
-    title: 'Life of Plastic',
-    description: 'Data Visualization looking at plastic recycling',
-    href: '/lifeofplastic',
-    category: ['Code', 'Design'],
-    github: 'https://github.com/interactivethings/LifeofPlastic',
-    link: 'https://life-of-plastic.interactivethings.io/',
-  },
-  {
-    id: '2001',
-    date: new Date('2020-02-10'),
-    title: 'Coming Soon',
-    description: 'Data Visualization looking at Vietnamese Cuisine',
-    href: '/lifeofplastic',
-    category: ['Design'],
-    link: 'https://life-of-plastic.interactivethings.io/',
-  },
-  {
-    id: '2002',
-    date: new Date('2020-01-20'),
-    title: 'Visualized',
-    description: 'Cateloging the presentations from the Visualized Conference',
-    href: '/lifeofplastic',
-    category: ['Design', 'Code'],
-    link: 'https://life-of-plastic.interactivethings.io/',
-  },
-];

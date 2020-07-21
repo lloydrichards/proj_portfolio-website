@@ -1,18 +1,10 @@
 import p5 from 'p5';
 
 const sketch_particleExample = (p: p5) => {
-  let x = 0;
-  let y = 0;
-
-  const setupPosition = () => {
-    x = p.windowWidth / 2;
-    y = p.windowHeight / 4;
-  };
 
   p.windowResized = () => {
     p.resizeCanvas(p.windowWidth, p.windowHeight / 2);
     drawBackground();
-    setupPosition();
   };
 
   const drawBackground = () => {
@@ -70,7 +62,6 @@ const sketch_particleExample = (p: p5) => {
   p.setup = () => {
     p.resizeCanvas(p.windowWidth, p.windowHeight / 2);
     drawBackground();
-    setupPosition();
     for (let i = 0; i < 100; i++) {
       particles.push(new Particle());
     }

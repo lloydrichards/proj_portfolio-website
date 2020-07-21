@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 import Example1 from "../../components/LifePlastic/examples/example1";
 import Example2 from "../../components/LifePlastic/examples/example2";
 import Example3 from "../../components/LifePlastic/examples/example3";

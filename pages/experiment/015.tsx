@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { nanoid } from "nanoid";

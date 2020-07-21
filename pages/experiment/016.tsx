@@ -8,7 +8,7 @@ import {
 } from "react-instantsearch-dom";
 import { components, OptionProps } from "react-select";
 import AsyncSelect from "react-select/async";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 
 const searchClient = algoliasearch(
   "7IQ427UHJY",

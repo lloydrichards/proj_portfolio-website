@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 import anime from "animejs";
 import { nanoid } from "nanoid";
 import { BoxOnPath } from "../../components/animejs/boxOnPath";

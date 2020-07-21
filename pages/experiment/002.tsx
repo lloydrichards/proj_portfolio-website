@@ -1,6 +1,6 @@
 import React from 'react';
 import Fetch from 'isomorphic-unfetch';
-import Layout from '../../components/Layout';
+import Layout from '../../components/layout/Layout';
 import { NextPage } from 'next';
 
 type Props = {

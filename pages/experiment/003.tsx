@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 
 class Experiment003 extends Component {
   render() {

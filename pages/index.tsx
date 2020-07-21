@@ -1,115 +1,92 @@
-import React from "react";
-import Link from "next/link";
-import Layout from "../components/Layout";
+import React from 'react';
+import Layout from '../components/layout/Layout';
+import Button from '@material-ui/core/Button';
+import {
+  FullWidthBackground,
+  H2,
+  H1,
+  Intro,
+  Content,
+  ContentList,
+} from '../components/layout/StyledLayoutComponents';
+import Projects from '../components/Projects';
+import Blog from '../components/Blog';
 
 const IndexPage: React.FC = () => (
   <Layout title="Home | Lloyd's Working Portfolio">
-    <h1>Lloyd's Working Portfolio</h1>
-    <ul>
-      <li>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/001">
-          <a>001 - Setting Up with Next.js</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/002">
-          <a>002 - Working with API</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/003">
-          <a>003 - Working with Netlify</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/004">
-          <a>004 - Setting up D3.js</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/005">
-          <a>005 - Setting up Anime.js</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/006">
-          <a>006 - SVGs & Anime.js</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/007">
-          <a>007 - Little SVG System</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/008">
-          <a>008 - Restructure the Assembly Line</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/009">
-          <a>009 - Importing the Plastic Illistration</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/010">
-          <a>010 - Starting with the PET Cycle</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/011">
-          <a>011 - Adding and Taking Away Routes</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/012">
-          <a>012 - Implimenting some Data</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/013">
-          <a>013 - Add Tutorial</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/014">
-          <a>014 - Create Example Components</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/015">
-          <a>015 - Animated Notifications</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/016">
-          <a>016 - Autocomplete Species w/ Algolia</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/017">
-          <a>017 - Life of Platic Tutorial</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/experiment/018">
-          <a>018 - Intergrating P5.js</a>
-        </Link>
-      </li>
-    </ul>
-    <hr />
-    <ul>
-      <li>
-        <Link href="/lifeofplastic">
-          <a>Life of Plastic | Data Visualization</a>
-        </Link>
-      </li>
-    </ul>
+    <div
+      className='Intro'
+      style={{
+        width: '100%',
+        height: '95vh',
+        background: '#F6F3F0',
+      }}
+    >
+      <FullWidthBackground />
+      <div style={{ position: 'absolute', top: 0, margin: '240px 120px' }}>
+        <H1>Hi, I'm Lloyd</H1>
+        <Intro>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet
+          laoreet egestas hac ac lectus ultricies in risus non. Tellus augue
+          morbi quis egestas tellus lectus et. Habitant ut porta commodo est nec
+          bibendum et quisque.
+        </Intro>
+        <Button
+          style={{
+            margin: '0 1em',
+            textTransform: 'none',
+            color: 'black',
+            fontFamily: "'Josefin Slab', serif",
+            fontSize: '1.5em',
+          }}
+        >
+          Contact Me
+        </Button>
+      </div>
+    </div>
+    <div className='About' style={{ width: '100%', minHeight: '320px' }}>
+      <H2>About</H2>
+      <Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet
+        laoreet egestas hac ac lectus ultricies in risus non. Tellus augue morbi
+        quis egestas tellus lectus et. Habitant ut porta commodo est nec
+        bibendum et quisque. Pretium amet, aenean faucibus gravida sapien
+        sollicitudin. Arcu arcu, pharetra, amet sed commodo eu leo tellus. Nulla
+        amet pharetra ultrices tortor mattis urna mauris massa. Egestas aliquet
+        neque lectus massa bibendum velit. Accumsan at diam, lorem ultrices
+        vitae sit. Viverra semper vestibulum phasellus non.
+      </Content>
+      <ContentList>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+      </ContentList>
+      <Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet
+        laoreet egestas hac ac lectus ultricies in risus non.
+      </Content>
+    </div>
+    <div className='Recent' style={{ width: '100%', minHeight: '640px' }}>
+      <H2>Recent</H2>
+      <Projects />
+    </div>
+    <div
+      className='Blog'
+      style={{
+        width: '100%',
+        position: 'relative',
+        top: 0,
+        minHeight: '320px',
+        background: '#F6F3F0',
+      }}
+    >
+      <FullWidthBackground />
+      <H2>Blog</H2>
+      <Blog />
+    </div>
+    <div className='CV' style={{ width: '100%', minHeight: '320px' }}>
+      <H2>CV</H2>
+    </div>
   </Layout>
 );
 

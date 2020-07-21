@@ -1,6 +1,7 @@
 import React from 'react';
 import p5 from 'p5';
-import Layout from '../../components/Layout';
+import Layout from '../../components/layout/Layout';
+import sketch_particleExample from '../../components/processing/sketch_particleExample';
 
 const sketch = (p: p5) => {
   let x = 0;
@@ -37,10 +38,13 @@ const sketch = (p: p5) => {
 
 class Experiment018 extends React.Component {
   myRef: React.RefObject<HTMLDivElement>;
+  myRef2: React.RefObject<HTMLDivElement>;
   myP5?: p5;
+  myP52?: p5;
   constructor(props: any) {
     super(props);
     this.myRef = React.createRef();
+    this.myRef2 = React.createRef();
   }
 
   Sketch = (p: p5) => {
@@ -61,6 +65,7 @@ class Experiment018 extends React.Component {
   componentDidMount() {
     const p5 = require('p5');
     this.myP5 = new p5(sketch, this.myRef.current);
+    this.myP52 = new p5(sketch_particleExample, this.myRef2.current);
   }
   render() {
     return (
@@ -87,8 +92,15 @@ class Experiment018 extends React.Component {
           turned out I had to require the p5 library inside the
           componentDiDMount which kind of screwed up the type for it and set it
           to any, but did let it render. Not sure if this is a good solution,
-          but at least I can now make things.{' '}
+          but at least I can now make things.
         </p>
+        <p>
+          Something I quite like about this thought is that I can now break up
+          the sketches into seperate files and import them as needed. This I
+          think will be super useful for experimenting and forking different
+          sketches and seeing how they might work in varous areas of a site.
+        </p>
+        <div ref={this.myRef2}></div>
       </Layout>
     );
   }

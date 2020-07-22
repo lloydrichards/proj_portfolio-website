@@ -11,6 +11,7 @@ import {
 } from '../components/layout/StyledLayoutComponents';
 import Projects from '../components/Projects';
 import Blog from '../components/Blog';
+import { Grid } from '@material-ui/core';
 
 const IndexPage: React.FC = () => (
   <Layout title="Home | Lloyd's Working Portfolio">
@@ -23,48 +24,65 @@ const IndexPage: React.FC = () => (
       }}
     >
       <FullWidthBackground />
-      <div style={{ position: 'absolute', top: 0, margin: '240px 120px' }}>
-        <H1>Hi, I'm Lloyd</H1>
-        <Intro>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet
-          laoreet egestas hac ac lectus ultricies in risus non. Tellus augue
-          morbi quis egestas tellus lectus et. Habitant ut porta commodo est nec
-          bibendum et quisque.
-        </Intro>
-        <Button
-          style={{
-            margin: '0 1em',
-            textTransform: 'none',
-            color: 'black',
-            fontFamily: "'Josefin Slab', serif",
-            fontSize: '1.5em',
-          }}
-        >
-          Contact Me
-        </Button>
+      <div style={{ position: 'absolute', top: 0, margin: '30% 0' }}>
+        <Grid container>
+          <Grid item xs={12} sm={6}></Grid>
+          <Grid item xs={12} sm={6} style={{ padding: '1em' }}>
+            <H1>Hello, I'm Lloyd</H1>
+            <Intro>
+              I'm a Zurich based <b>Data Visualization</b> and{' '}
+              <b>Garden Designer</b>. Pretty weird combinations, right? Let me
+              tell you how I got here.
+            </Intro>
+            <Button
+              style={{
+                margin: '0em',
+                textTransform: 'none',
+                color: 'black',
+                fontFamily: "'Josefin Slab', serif",
+                fontSize: '1.5em',
+              }}
+            >
+              Contact Me
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     </div>
     <div className='About' style={{ width: '100%', minHeight: '320px' }}>
       <H2>About</H2>
-      <Content>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet
-        laoreet egestas hac ac lectus ultricies in risus non. Tellus augue morbi
-        quis egestas tellus lectus et. Habitant ut porta commodo est nec
-        bibendum et quisque. Pretium amet, aenean faucibus gravida sapien
-        sollicitudin. Arcu arcu, pharetra, amet sed commodo eu leo tellus. Nulla
-        amet pharetra ultrices tortor mattis urna mauris massa. Egestas aliquet
-        neque lectus massa bibendum velit. Accumsan at diam, lorem ultrices
-        vitae sit. Viverra semper vestibulum phasellus non.
-      </Content>
-      <ContentList>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-      </ContentList>
-      <Content>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet
-        laoreet egestas hac ac lectus ultricies in risus non.
-      </Content>
+      <Grid container>
+        <Grid item xs={12} sm={6} md={8}>
+          <Content>
+            In my life, I've traveled to a lot of places, met a lot of people
+            and been many things. From a Baker in Canada; to a Bamboo Builder in
+            Costa Rica; to a Landscaper in England; to a Web Designer in
+            Switzerland. My passion for life and experiancing new things has
+            always overpowered any fears I might have about trying new things.
+            At the core of most of my decisions are three main principles:
+          </Content>
+          <ContentList>
+            <li>
+              Passionate for <b>Sustainability</b> and having a positive impact
+              on the planet
+            </li>
+            <li>
+              Obsessed about <b>System Thinking</b> and understanding the
+              interconnection of disiplines
+            </li>
+            <li>
+              Constantly <b>Learning</b> new skills, and applying to real world
+              projects.
+            </li>
+          </ContentList>
+          <Content>
+            I bring a unique perspective to the projects I work on, being able
+            to empathize with different users, seeing the problem from different
+            angles, and come up with solutions from different understandings.
+          </Content>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}></Grid>
+      </Grid>
     </div>
     <div className='Recent' style={{ width: '100%', minHeight: '640px' }}>
       <H2>Recent</H2>

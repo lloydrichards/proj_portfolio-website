@@ -18,13 +18,16 @@ const Layout: React.FunctionComponent<Props> = ({
       <meta charSet='utf-8' />
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
     </Head>
-    <Navbar />
+    <div style={{ position: 'relative', height: 50, zIndex: 9, width: '100%',  }}>
+      <FullWidthBackground />
+      <Navbar />
+    </div>
     {children}
-      <div className='Contact' style={{ width: '100%', height:"100%" }}>
-        <FullWidthBackground />
-        <H2>Contact</H2>
-        <Contact />
-      </div>
+    <div className='Contact' style={{ width: '100%', height: '100%' }}>
+      <FullWidthBackground />
+      <H2>Contact</H2>
+      <Contact />
+    </div>
   </div>
 );
 

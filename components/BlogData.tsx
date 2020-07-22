@@ -3,7 +3,7 @@ import { Blog } from './Blog';
 export const BlogData: Array<Blog> = [
   {
     id: 1,
-    date: new Date('2020-01-01'),
+    date: new Date('2020-05-19'),
     title: '001 - Setting Up with Next.js',
     description: '',
     href: '/experiment/001',
@@ -11,7 +11,7 @@ export const BlogData: Array<Blog> = [
   },
   {
     id: 2,
-    date: new Date('2020-01-02'),
+    date: new Date('2020-05-20'),
     title: '002 - Working with API',
     description: '',
     href: '/experiment/002',
@@ -19,7 +19,7 @@ export const BlogData: Array<Blog> = [
   },
   {
     id: 3,
-    date: new Date('2020-01-4'),
+    date: new Date('2020-05-20'),
     title: '003 - Working with Netlify',
     description: '',
     href: '/experiment/003',
@@ -27,7 +27,7 @@ export const BlogData: Array<Blog> = [
   },
   {
     id: 4,
-    date: new Date('2020-01-07'),
+    date: new Date('2020-05-20'),
     title: '004 - Setting up D3.js',
     description: '',
     href: '/experiment/004',
@@ -35,76 +35,114 @@ export const BlogData: Array<Blog> = [
   },
   {
     id: 5,
-    date: new Date('2020-01-08'),
+    date: new Date('2020-06-02'),
     title: '005 - Setting up Anime.js',
     description: '',
     href: '/experiment/005',
     tag: ['Code'],
   },
+  {
+    id: 6,
+    date: new Date('2020-06-03'),
+    title: '006 - SVGs & Anime.js',
+    description: '',
+    href: '/experiment/006',
+    tag: ['Code'],
+  },
+  {
+    id: 7,
+    date: new Date('2020-06-03'),
+    title: '007 - Little SVG System',
+    description: '',
+    href: '/experiment/007',
+    tag: ['Code'],
+  },
+  {
+    id: 8,
+    date: new Date('2020-06-04'),
+    title: '008 - Restructure the Assembly Line',
+    description: '',
+    href: '/experiment/008',
+    tag: ['Code'],
+  },
+  {
+    id: 9,
+    date: new Date('2020-06-16'),
+    title: '009 - Importing the Plastic Illistration',
+    description: '',
+    href: '/experiment/009',
+    tag: ['Code'],
+  },
+  {
+    id: 10,
+    date: new Date('2020-06-16'),
+    title: '010 - Starting with the PET Cycle',
+    description: '',
+    href: '/experiment/010',
+    tag: ['Code'],
+  },
+  {
+    id: 11,
+    date: new Date('2020-06-19'),
+    title: '011 - Adding and Taking Away Routes',
+    description: '',
+    href: '/experiment/011',
+    tag: ['Code'],
+  },
+  {
+    id: 12,
+    date: new Date('2020-06-21'),
+    title: '012 - Implimenting some Data',
+    description: '',
+    href: '/experiment/012',
+    tag: ['Code'],
+  },
+  {
+    id: 13,
+    date: new Date('2020-06-23'),
+    title: '013 - Add Tutorial',
+    description: 'Buttons that ',
+    href: '/experiment/013',
+    tag: ['Code'],
+  },
+  {
+    id: 14,
+    date: new Date('2020-06-24'),
+    title: '014 - Create Example Components',
+    description: 'Small, simple diagrams that demonstrate the system of recycling.',
+    href: '/experiment/014',
+    tag: ['Code'],
+  },
+  {
+    id: 15,
+    date: new Date('2020-06-26'),
+    title: '015 - Animated Notifications',
+    description: 'Simple test using Framer-Motion to add animated notification system.',
+    href: '/experiment/015',
+    tag: ['Code'],
+  },
+  {
+    id: 16,
+    date: new Date('2020-06-29'),
+    title: '016 - Autocomplete Species w/ Algolia',
+    description: 'How to build an autocomplete search form using Formik and Algolia',
+    href: '/experiment/016',
+    tag: ['Code'],
+  },
+  {
+    id: 17,
+    date: new Date('2020-06-30'),
+    title: '017 - Life of Platic Tutorial',
+    description: 'Building a tutorial layer around the diagram to aid in usability.',
+    href: '/experiment/017',
+    tag: ['Code'],
+  },
+  {
+    id: 18,
+    date: new Date('2020-7-20'),
+    title: '018 - Intergrating P5.js',
+    description: 'Figuring out how to impliment P5.js into Next.js and React.',
+    href: '/experiment/018',
+    tag: ['Code'],
+  },
 ];
-
-//     <Link href='/experiment/006'>
-//       <a>006 - SVGs & Anime.js</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/007'>
-//       <a>007 - Little SVG System</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/008'>
-//       <a>008 - Restructure the Assembly Line</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/009'>
-//       <a>009 - Importing the Plastic Illistration</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/010'>
-//       <a>010 - Starting with the PET Cycle</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/011'>
-//       <a>011 - Adding and Taking Away Routes</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/012'>
-//       <a>012 - Implimenting some Data</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/013'>
-//       <a>013 - Add Tutorial</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/014'>
-//       <a>014 - Create Example Components</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/015'>
-//       <a>015 - Animated Notifications</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/016'>
-//       <a>016 - Autocomplete Species w/ Algolia</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/017'>
-//       <a>017 - Life of Platic Tutorial</a>
-//     </Link>
-//   </li>
-//   <li>
-//     <Link href='/experiment/018'>
-//       <a>018 - Intergrating P5.js</a>
-//     </Link>
-//   </li>
-// </ul>

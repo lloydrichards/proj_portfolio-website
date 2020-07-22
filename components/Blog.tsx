@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardActions,
+  CardHeader,
   Button,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -38,21 +39,23 @@ function Blog() {
       {posts.slice(0, numberOfItems).map((i) => (
         <Grid key={i.id} item xs={12}>
           <Card elevation={0} style={{ background: '#f6f3f0' }}>
+            <CardHeader
+            style={{padding:"0 1em"}}
+              action={
+                <Button
+                  onClick={() => router.push(i.href)}
+                  size='small'
+                  style={{ marginLeft: 'auto' }}
+                >
+                  Read More
+                </Button>
+              }
+              title={i.title}
+              subheader={i.date.toDateString()}
+            />
             <CardContent style={{ padding: '0 1em' }}>
-              <CardTitle>
-                {i.title} |<i>{i.date.toDateString()}</i>
-              </CardTitle>
               <Content>{i.description}</Content>
             </CardContent>
-            <CardActions style={{ padding: '0 1em' }}>
-              <Button
-                onClick={() => router.push(i.href)}
-                size='small'
-                style={{ marginLeft: 'auto' }}
-              >
-                Read More
-              </Button>
-            </CardActions>
           </Card>
         </Grid>
       ))}

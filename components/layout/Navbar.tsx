@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import Link from 'next/link';
 import { css, jsx } from '@emotion/core';
-import { FullWidthBackground } from './StyledLayoutComponents';
 
 const Navbar = () => {
   return (

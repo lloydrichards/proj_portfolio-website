@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Card, Button, CardHeader, IconButton } from '@material-ui/core';
+import { Grid, Card, Button, CardHeader } from '@material-ui/core';
 import {} from '../../components/layout/StyledLayoutComponents';
 import { useRouter } from 'next/router';
 import { BlogData } from '../../components/BlogData';
@@ -23,11 +23,10 @@ function Blog() {
   const [posts] = useState<Array<Blog>>(
     BlogData.sort((a, b) => +b.date - +a.date)
   );
-  const [expanded, setExpanded] = useState<boolean>(false);
 
   return (
     <Layout>
-      <Grid container spacing={1} style={{position:"relative", top:50}}>
+      <Grid container spacing={1} style={{ position: 'relative', top: 50 }}>
         {posts.map((i) => (
           <Grid key={i.id} item xs={12}>
             <Card elevation={0} style={{ background: '#f6f3f0' }}>

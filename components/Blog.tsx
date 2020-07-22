@@ -3,13 +3,12 @@ import {
   Grid,
   Card,
   CardContent,
-  CardActions,
   CardHeader,
   Button,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { Content, CardTitle } from './layout/StyledLayoutComponents';
+import { Content } from './layout/StyledLayoutComponents';
 import { useRouter } from 'next/router';
 import { BlogData } from './BlogData';
 

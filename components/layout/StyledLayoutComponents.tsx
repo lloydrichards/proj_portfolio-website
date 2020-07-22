@@ -13,7 +13,7 @@ export const FullWidthBackground = styled.div`
 export const H1 = styled.h1`
   position: relative;
   color: black;
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Josefin Sans', serif;
   font-size: 3em;
 `;
 
@@ -22,7 +22,7 @@ export const H2 = styled.h2`
   position: relative;
   padding: 1em 0.5em 0.5em;
   color: black;
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Josefin Sans', serif;
   font-size: 2em;
 `;
 
@@ -31,14 +31,14 @@ export const H3 = styled.h2`
   position: relative;
   text-align: center;
   color: black;
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Josefin Sans', serif;
   font-size: 1.5em;
 `;
 
 export const CardTitle = styled.h2`
   margin: 0;
   color: black;
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Josefin Sans', serif;
   font-size: 1.5em;
   i {
     font-size: 0.7em;

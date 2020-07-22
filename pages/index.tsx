@@ -39,7 +39,7 @@ const IndexPage: React.FC = () => (
                 margin: '0em',
                 textTransform: 'none',
                 color: 'black',
-                fontFamily: "'Josefin Slab', serif",
+                fontFamily: "'Josefin Sans', serif",
                 fontSize: '1.5em',
               }}
             >

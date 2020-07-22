@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Grid,
-  Card,
-  CardContent,
-  CardHeader,
-  Button,
-} from '@material-ui/core';
+import { Grid, Card, CardContent, CardHeader, Button } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { Content } from './layout/StyledLayoutComponents';
@@ -37,9 +31,12 @@ function Blog() {
     <Grid container spacing={1}>
       {posts.slice(0, numberOfItems).map((i) => (
         <Grid key={i.id} item xs={12}>
-          <Card elevation={0} style={{ background: '#f6f3f0' }}>
+          <Card
+            elevation={0}
+            style={{ background: '#f6f3f0', maxWidth: '720px', margin: '0 auto' }}
+          >
             <CardHeader
-            style={{padding:"0 1em"}}
+              style={{ padding: '0 1em' }}
               action={
                 <Button
                   onClick={() => router.push(i.href)}

@@ -29,7 +29,14 @@ function Blog() {
       <Grid container spacing={1} style={{ position: 'relative', top: 50 }}>
         {posts.map((i) => (
           <Grid key={i.id} item xs={12}>
-            <Card elevation={0} style={{ background: '#f6f3f0' }}>
+            <Card
+              elevation={0}
+              style={{
+                background: '#f6f3f0',
+                maxWidth: '720px',
+                margin: '0 auto',
+              }}
+            >
               <CardHeader
                 action={
                   <Button

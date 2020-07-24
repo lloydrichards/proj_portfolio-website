@@ -12,6 +12,7 @@ import {
 import Projects from '../components/Projects';
 import Blog from '../components/Blog';
 import { Grid } from '@material-ui/core';
+import CV from '../components/CV';
 
 const IndexPage: React.FC = () => (
   <Layout title="Home | Lloyd's Working Portfolio">
@@ -108,6 +109,7 @@ const IndexPage: React.FC = () => (
     </div>
     <div id='CV' style={{ width: '100%', minHeight: '320px' }}>
       <H2>CV</H2>
+      <CV />
     </div>
   </Layout>
 );

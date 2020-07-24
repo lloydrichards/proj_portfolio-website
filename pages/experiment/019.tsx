@@ -1,13 +1,20 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import * as d3 from 'd3';
-import TimeLine, { Occupation, LifeEvent } from '../../components/d3/TimeLine';
+import TimeLine, {
+  Occupation,
+  LifeEvent,
+  Category,
+} from '../../components/d3/TimeLine';
 import { LinenPaper } from '../../components/layout/StyledLayoutComponents';
 import { Grid } from '@material-ui/core';
+import { Formik, Form } from 'formik';
+import { nanoid } from 'nanoid';
 
 const Experiment019 = () => {
   const svgRef = useRef(null);
   const [data, setData] = useState([10, 12, 24, 31, 2, 37]);
+  const [occupations, setOccupations] = useState(occupationSampleData);
   useEffect(() => {
     if (svgRef.current) {
       const svg = d3.select(svgRef.current);
@@ -77,7 +84,7 @@ const Experiment019 = () => {
           <TimeLine
             width={400}
             height={800}
-            occupations={occupationSampleData}
+            occupations={occupations}
             events={eventSampleData}
             background={LinenPaper}
           />
@@ -90,6 +97,84 @@ const Experiment019 = () => {
             graph scales to the size of the data and even orders the boxes and
             colours them accoring to their overlap and props. So cool to see
             this come together so nicely!
+          </p>
+          <p>
+            The timeline here is build with some dummy data which is being
+            managed in the parent component which should allow me to edit and
+            tweak the data on the go as well as filter it. Lets have a go
+          </p>
+          <Formik
+            onSubmit={(data, { resetForm }) => {
+              try {
+                setOccupations([
+                  ...occupations,
+                  {
+                    id: nanoid(),
+                    selected: true,
+                    title: data.title,
+                    category: data.category as keyof Category,
+                    tag: ['coder'],
+                    start: new Date(data.startDate),
+                    end: new Date(data.endDate),
+                  },
+                ]);
+              } catch (error) {
+                console.log(error);
+              }
+              resetForm();
+            }}
+            initialValues={{
+              title: '',
+              startDate: '',
+              endDate: '',
+              category: '',
+              tag: [''],
+            }}
+          >
+            {({ values, handleChange }) => (
+              <Form>
+                <input
+                  name='title'
+                  value={values.title}
+                  onChange={handleChange}
+                  placeholder='title'
+                />
+                <input
+                  name='startDate'
+                  value={values.startDate}
+                  onChange={handleChange}
+                  placeholder='startDate'
+                />
+                <input
+                  name='endDate'
+                  value={values.endDate}
+                  onChange={handleChange}
+                  placeholder='endDate'
+                />
+                <select
+                  name='category'
+                  value={values.category}
+                  onChange={handleChange}
+                >
+                  <option value='' label='Select a Category' />
+                  <option value='Work' label='Work' />
+                  <option value='Education' label='Education' />
+                  <option value='Volunteer' label='Volunteer' />
+                </select>
+                <button type='submit'>Add</button>
+              </Form>
+            )}
+          </Formik>
+          <p>
+            That kind of works. There seems to be an issue with the different
+            layers of boxes not being removed when changing layers, but i'm not
+            really sure what to do about this.
+          </p>
+          <p>
+            The question now is: Do I render the whole chart in one go,
+            including the text on the side? Or should this be a seperate
+            component that lists the items and then I can figure out how to draw
+            a line between them?
           </p>
         </Grid>
       </Grid>

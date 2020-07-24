@@ -19,7 +19,7 @@ const dimensions = {
 
 const Experiment020 = () => {
   const svgRef = useRef(null);
-  const [data, setData] = useState<Array<number>>([25, 36, 29, 60, 48, 22, 39]);
+  const [data] = useState<Array<number>>([25, 36, 29, 60, 48, 22, 39]);
 
   useEffect(() => {
     const svg = select(svgRef.current);
@@ -32,28 +32,28 @@ const Experiment020 = () => {
       .range([dimensions.chartHeight, 0]);
 
     const myLine = line<any>()
-      .x((value, index) => xScale(index))
+      .x((_, index) => xScale(index))
       .y(yScale)
       .curve(curveCardinal);
 
     const xAxis = axisBottom(xScale);
     const yAxis = axisLeft(yScale);
 
-    const xAxisGroup = svg
-      .append('g')
+    const xAxisGroup = svg.append('g');
+    xAxisGroup
       .style(
         'transform',
         `translate(${dimensions.marginLeft}px,${dimensions.chartHeight}px)`
       )
       .call(xAxis);
 
-    const yAxisGroup = svg
-      .append('g')
+    const yAxisGroup = svg.append('g');
+    yAxisGroup
       .style('transform', `translateX(${dimensions.marginLeft}px)`)
       .call(yAxis);
 
-    const lines = svg
-      .append('g')
+    const lines = svg.append('g');
+    lines
       .style('transform', `translateX(${dimensions.marginLeft}px)`)
       .selectAll('path')
       .data([data])

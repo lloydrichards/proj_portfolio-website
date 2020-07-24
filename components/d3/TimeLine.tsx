@@ -9,7 +9,7 @@ const dim = {
 
 const TimeLine = () => {
   const svgRef = useRef(null);
-  const [data, setData] = useState(timelineData);
+  const [data] = useState(timelineData);
 
   useEffect(() => {
     const svg = select(svgRef.current);
@@ -18,9 +18,21 @@ const TimeLine = () => {
       .domain([new Date('2018-01-01'), new Date('2020-07-22')])
       .range([dim.height, 0]);
 
-      const yAxis = axisLeft(yScale)
+    const yAxis = axisLeft<any>(yScale);
 
-      const Axis = svg.append('g').style('transform', `translateX(${dim.marginLeft}px)`).call(yAxis)
+    const Axis = svg.append('g');
+    Axis.style('transform', `translateX(${dim.marginLeft}px)`).call(yAxis);
+
+    const Boxes = svg.append('g');
+    Boxes.selectAll('rect')
+      .data(data)
+      .join('rect')
+      .attr('x', 100)
+      .attr('y', (value) => yScale(+value.end))
+      .attr('width', (_, i) => i * 10 + 25)
+      .attr('height', (value) => yScale(+value.start) - yScale(+value.end))
+      .attr('fill', 'teal')
+      .attr('stroke', 'lightgrey');
   }, [data]);
 
   return (
@@ -43,7 +55,7 @@ const timelineData = [
     title: 'number 1',
     category: 'Code',
     start: new Date('2020-01-01'),
-    end: new Date('2020-02-23'),
+    end: new Date('2020-03-23'),
   },
   {
     id: '002',
@@ -58,5 +70,12 @@ const timelineData = [
     category: 'Other',
     start: new Date('2019-04-29'),
     end: new Date('2019-12-31'),
+  },
+  {
+    id: '004',
+    title: 'number 4',
+    category: 'Other',
+    start: new Date('2019-02-29'),
+    end: new Date('2019-5-31'),
   },
 ];

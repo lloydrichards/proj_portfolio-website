@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+export const LinenPaper = '#f6f3f0';
+export const DarkLinenPaper = '#8B7A70';
+export const Unselected = "#E7DFD8"
+
 export const FullWidthBackground = styled.div`
   width: 100vw;
   background: #f6f3f0;
@@ -24,6 +28,14 @@ export const H2 = styled.h2`
   color: black;
   font-family: 'Josefin Sans', serif;
   font-size: 2em;
+  a {
+    text-decoration: none;
+    color: ${Unselected};
+    :hover {
+      text-decoration: underline;
+      color: ${DarkLinenPaper};
+    }
+  }
 `;
 
 export const H3 = styled.h2`

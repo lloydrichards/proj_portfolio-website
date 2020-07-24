@@ -49,7 +49,7 @@ const IndexPage: React.FC = () => (
         </Grid>
       </div>
     </div>
-    <div className='About' style={{ width: '100%', minHeight: '320px' }}>
+    <div id='About' style={{ width: '100%', minHeight: '320px' }}>
       <H2>About</H2>
       <Grid container>
         <Grid item xs={12} sm={6} md={8}>
@@ -84,12 +84,14 @@ const IndexPage: React.FC = () => (
         <Grid item xs={12} sm={6} md={4}></Grid>
       </Grid>
     </div>
-    <div className='Recent' style={{ width: '100%', minHeight: '640px' }}>
-      <H2>Recent</H2>
+    <div id='Portfolio' style={{ width: '100%', minHeight: '640px' }}>
+      <H2>
+        Recent <a href='/portfolio'>/ Portfolio</a>
+      </H2>
       <Projects />
     </div>
     <div
-      className='Blog'
+      id='Blog'
       style={{
         width: '100%',
         position: 'relative',
@@ -99,10 +101,12 @@ const IndexPage: React.FC = () => (
       }}
     >
       <FullWidthBackground />
-      <H2>Blog</H2>
+      <H2>
+        Recent <a href='/blog'>/ Blog</a>
+      </H2>
       <Blog />
     </div>
-    <div className='CV' style={{ width: '100%', minHeight: '320px' }}>
+    <div id='CV' style={{ width: '100%', minHeight: '320px' }}>
       <H2>CV</H2>
     </div>
   </Layout>

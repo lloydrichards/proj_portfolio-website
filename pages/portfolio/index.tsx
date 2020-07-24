@@ -9,8 +9,13 @@ import {
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { H3, Description } from './layout/StyledLayoutComponents';
-import { ProjectData } from './ProjectData';
+import {
+  H3,
+  Description,
+  H2,
+} from '../../components/layout/StyledLayoutComponents';
+import { ProjectData } from '../../components/ProjectData';
+import Layout from '../../components/layout/Layout';
 
 export interface Project {
   id: string;
@@ -19,7 +24,6 @@ export interface Project {
   description: string;
   href: string;
   category: Array<keyof Category>;
-  image: string;
   github?: string;
   link?: string;
 }
@@ -48,7 +52,8 @@ const Projects = () => {
     );
   }, [categories]);
   return (
-    <div>
+    <Layout>
+      <H2>Portfolio</H2>
       <ButtonGroup
         variant='text'
         size='large'
@@ -141,15 +146,7 @@ const Projects = () => {
           </Grid>
         ))}
       </Grid>
-      <Button
-        startIcon={expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        onClick={() => setExpanded(!expanded)}
-        size='small'
-        style={{ marginLeft: 'auto' }}
-      >
-        {expanded ? 'Less' : 'More'}
-      </Button>
-    </div>
+    </Layout>
   );
 };
 

@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import * as d3 from 'd3';
-import TimeLine from '../../components/d3/TimeLine';
+import TimeLine, { Occupation, LifeEvent } from '../../components/d3/TimeLine';
+import { LinenPaper } from '../../components/layout/StyledLayoutComponents';
+import { Grid } from '@material-ui/core';
 
 const Experiment019 = () => {
   const svgRef = useRef(null);
@@ -70,9 +72,72 @@ const Experiment019 = () => {
         as a list beside the timeline and then using D3, build the timeline and
         draw lines that connect to the appropriate list item.
       </p>
-      <TimeLine />
+      <Grid container>
+        <Grid item xs={12} sm={6}>
+          <TimeLine
+            width={400}
+            height={800}
+            occupations={occupationSampleData}
+            events={eventSampleData}
+            background={LinenPaper}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <p>
+            This feels really good. I've built a <code>TimeLine.tsx</code>{' '}
+            component that can take in props for the data, including occupations
+            and events which it then renders into this horizontal timeline. The
+            graph scales to the size of the data and even orders the boxes and
+            colours them accoring to their overlap and props. So cool to see
+            this come together so nicely!
+          </p>
+        </Grid>
+      </Grid>
     </Layout>
   );
 };
 
 export default Experiment019;
+
+const eventSampleData: Array<LifeEvent> = [
+  { id: '001', title: 'Moved to Switzerland', date: new Date('2020-01-03') },
+];
+
+const occupationSampleData: Array<Occupation> = [
+  {
+    id: '001',
+    selected: true,
+    title: 'number 1',
+    category: 'Work',
+    tag: ['coder'],
+    start: new Date('2019-12-01'),
+    end: new Date('2020-03-23'),
+  },
+  {
+    id: '002',
+    selected: false,
+    title: 'number 2',
+    category: 'Education',
+    tag: ['coder'],
+    start: new Date('2018-06-02'),
+    end: new Date('2019-01-01'),
+  },
+  {
+    id: '003',
+    selected: true,
+    title: 'number 3',
+    category: 'Work',
+    tag: ['coder'],
+    start: new Date('2019-04-29'),
+    end: new Date('2019-12-31'),
+  },
+  {
+    id: '004',
+    selected: true,
+    title: 'number 4',
+    category: 'Volunteer',
+    tag: ['coder'],
+    start: new Date('2019-02-29'),
+    end: new Date('2019-06-31'),
+  },
+];

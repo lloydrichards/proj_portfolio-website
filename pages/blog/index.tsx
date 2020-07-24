@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Card, Button, CardHeader } from '@material-ui/core';
-import {} from '../../components/layout/StyledLayoutComponents';
+import { H2 } from '../../components/layout/StyledLayoutComponents';
 import { useRouter } from 'next/router';
 import { BlogData } from '../../components/BlogData';
 import Layout from '../../components/layout/Layout';
@@ -26,6 +26,7 @@ function Blog() {
 
   return (
     <Layout>
+      <H2>Blog</H2>
       <Grid container spacing={1} style={{ position: 'relative', top: 50 }}>
         {posts.map((i) => (
           <Grid key={i.id} item xs={12}>

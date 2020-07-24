@@ -8,6 +8,7 @@ export const ProjectData: Array<Project> = [
     description: 'Data Visualization looking at plastic recycling',
     href: '/lifeofplastic',
     category: ['Code', 'Design'],
+    image: '/public/images/thumb_lifeofplastic.png',
     github: 'https://github.com/interactivethings/LifeofPlastic',
     link: 'https://life-of-plastic.interactivethings.io/',
   },
@@ -18,6 +19,7 @@ export const ProjectData: Array<Project> = [
     description: 'Data Visualization looking at Vietnamese Cuisine',
     href: '/lifeofplastic',
     category: ['Design'],
+    image: '/public/images/thumb_lifeofplastic.png',
     link: 'https://life-of-plastic.interactivethings.io/',
   },
   {
@@ -27,6 +29,7 @@ export const ProjectData: Array<Project> = [
     description: 'Cateloging the presentations from the Visualized Conference',
     href: '/lifeofplastic',
     category: ['Design', 'Code'],
+    image: '/public/images/thumb_lifeofplastic.png',
     link: 'https://life-of-plastic.interactivethings.io/',
   },
   {
@@ -36,6 +39,7 @@ export const ProjectData: Array<Project> = [
     description: 'Cateloging the presentations from the Visualized Conference',
     href: '/lifeofplastic',
     category: ['Design', 'Code'],
+    image: '/public/images/thumb_lifeofplastic.png',
     link: 'https://life-of-plastic.interactivethings.io/',
   },
 ];

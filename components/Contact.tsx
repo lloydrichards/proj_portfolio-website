@@ -12,6 +12,7 @@ import { Intro } from './layout/StyledLayoutComponents';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
 import SendIcon from '@material-ui/icons/Send';
 import { Formik, Form } from 'formik';
 import { MyTextField } from './formik/TextField';
@@ -25,7 +26,7 @@ const validationSchema = yup.object({
 
 const Contact = () => {
   return (
-    <Grid container spacing={2}>
+    <Grid id='Contact' container spacing={2}>
       <Grid item xs={12} md={6}>
         <Card
           elevation={0}
@@ -46,13 +47,32 @@ const Contact = () => {
             </Intro>
           </CardContent>
           <CardActions style={{ justifyContent: 'center' }}>
-            <IconButton aria-label='linkedIn'>
+            <IconButton
+              target='_blank'
+              href='https://www.linkedin.com/in/lloyddrichards/'
+              aria-label='linkedIn'
+            >
               <LinkedInIcon />
             </IconButton>
-            <IconButton aria-label='Instagram'>
+            <IconButton
+              target='_blank'
+              href='https://www.instagram.com/lloydrichardsdesign/'
+              aria-label='Instagram'
+            >
               <InstagramIcon />
             </IconButton>
-            <IconButton aria-label='Github'>
+            <IconButton
+              target='_blank'
+              href='https://twitter.com/LRichardsDesign'
+              aria-label='Twitter'
+            >
+              <TwitterIcon />
+            </IconButton>
+            <IconButton
+              target='_blank'
+              href='https://github.com/lloydrichards'
+              aria-label='Github'
+            >
               <GitHubIcon />
             </IconButton>
           </CardActions>

@@ -7,8 +7,6 @@ import {
   Button,
   ButtonGroup,
 } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import {
   H3,
   Description,
@@ -45,7 +43,6 @@ const Projects = () => {
     Code: true,
     Other: true,
   });
-  const [expanded, setExpanded] = useState<boolean>(false);
   useEffect(() => {
     setCurrentProjects(
       ProjectData.filter((i) => i.category.some((r) => categories[r] === true))

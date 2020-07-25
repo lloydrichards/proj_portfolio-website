@@ -64,8 +64,8 @@ export const occupationData: Array<Occupation> = [
     character: [''],
     category: 'Volunteer',
     tag: ['coder'],
-    start: new Date('2016-10-01'),
-    end: new Date('2018-01-03'),
+    start: new Date('2016-11-01'),
+    end: new Date('2018-12-21'),
   },
   {
     id: '005',

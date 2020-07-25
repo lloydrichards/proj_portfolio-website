@@ -224,7 +224,7 @@ const TimeLine: React.FC<Props> = ({
       (exit) => exit.transition().style('opacity', 0).remove()
     )
       .attr('x1', 25)
-      .attr('x2', width - 25)
+      .attr('x2', 200)
       .attr('y1', (value) => yScale(value.date))
       .attr('y2', (value) => yScale(value.date))
       .attr('stroke', DarkLinenPaper)

@@ -101,6 +101,9 @@ const TimeLine: React.FC<Props> = ({
   };
 
   useEffect(() => {
+    const clean = select(svgRef.current);
+    clean.selectAll('g').remove();
+    
     const svg = select(svgRef.current);
 
     const yScale = scaleTime()

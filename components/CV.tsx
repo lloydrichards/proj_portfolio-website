@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import TimeLine, { Category } from './d3/TimeLine';
 import { ButtonGroup, Button } from '@material-ui/core';
-import { occupationData } from './CVData';
+import { occupationData, lifeEventData } from './CVData';
 
 function CV() {
-  const [events] = useState([]);
+  const [events] = useState(lifeEventData);
   const [occupations, setOccupations] = useState(occupationData);
   const [categories, setCategories] = useState<Category>({
     Education: true,

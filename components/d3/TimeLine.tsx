@@ -227,8 +227,8 @@ const TimeLine: React.FC<Props> = ({
       .attr('x2', width - 25)
       .attr('y1', (value) => yScale(value.date))
       .attr('y2', (value) => yScale(value.date))
-      .attr('stroke', 'black')
-      .attr('stroke-dasharray', '5,10,5');
+      .attr('stroke', DarkLinenPaper)
+      .attr('stroke-dasharray', '8');
 
     LifeEvents.join(
       (enter) => enter.append('text'),

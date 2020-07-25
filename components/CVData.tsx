@@ -1,4 +1,4 @@
-import { Occupation } from './d3/TimeLine';
+import { Occupation, LifeEvent } from './d3/TimeLine';
 
 export const occupationData: Array<Occupation> = [
   {
@@ -204,11 +204,25 @@ export const occupationData: Array<Occupation> = [
     character: [''],
     category: 'Work',
     tag: ['coder'],
-    start: new Date('2011-10-01'),
-    end: new Date('2012-04-21'),
+    start: new Date('2012-01-01'),
+    end: new Date('2012-06-21'),
   },
   {
     id: '017',
+    selected: true,
+    title: 'Baker',
+    company: '',
+    location: '',
+    description: '',
+    skills: [''],
+    character: [''],
+    category: 'Work',
+    tag: ['coder'],
+    start: new Date('2011-06-01'),
+    end: new Date('2011-12-21'),
+  },
+  {
+    id: '018',
     selected: true,
     title: 'Bachelor of Arts',
     company: '',
@@ -219,6 +233,23 @@ export const occupationData: Array<Occupation> = [
     category: 'Education',
     tag: ['coder'],
     start: new Date('2006-09-01'),
-    end: new Date('2010-04-21'),
+    end: new Date('2011-04-21'),
+  },
+];
+
+export const lifeEventData: Array<LifeEvent> = [
+  { id: '001', date: new Date('2020-01-03'), title: 'Moved to Switzerland' },
+  { id: '002', date: new Date('2019-01-03'), title: 'Moved to Germany' },
+  { id: '003', date: new Date('2015-08-03'), title: 'Moved to UK' },
+  { id: '004', date: new Date('2014-08-01'), title: 'Moved to Spain' },
+  {
+    id: '005',
+    date: new Date('2014-01-01'),
+    title: 'Traveled Central America',
+  },
+  {
+    id: '005',
+    date: new Date('2012-08-01'),
+    title: 'Started MArch',
   },
 ];

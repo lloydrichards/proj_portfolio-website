@@ -6,6 +6,11 @@ export interface Occupation {
   id: string;
   selected: boolean;
   title: string;
+  company: string;
+  location: string;
+  description: string;
+  skills: Array<string>;
+  character: Array<string>;
   category: keyof Category;
   tag: Array<keyof Tag>;
   start: Date;
@@ -103,7 +108,7 @@ const TimeLine: React.FC<Props> = ({
   useEffect(() => {
     const clean = select(svgRef.current);
     clean.selectAll('g').remove();
-    
+
     const svg = select(svgRef.current);
 
     const yScale = scaleTime()

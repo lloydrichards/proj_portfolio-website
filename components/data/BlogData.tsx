@@ -1,4 +1,4 @@
-import { Blog } from './Blog';
+import { Blog } from '../Blog';
 
 export const BlogData: Array<Blog> = [
   {
@@ -109,7 +109,8 @@ export const BlogData: Array<Blog> = [
     id: 14,
     date: new Date('2020-06-24'),
     title: '014 - Create Example Components',
-    description: 'Small, simple diagrams that demonstrate the system of recycling.',
+    description:
+      'Small, simple diagrams that demonstrate the system of recycling.',
     href: '/experiment/014',
     tag: ['Code'],
   },
@@ -117,7 +118,8 @@ export const BlogData: Array<Blog> = [
     id: 15,
     date: new Date('2020-06-26'),
     title: '015 - Animated Notifications',
-    description: 'Simple test using Framer-Motion to add animated notification system.',
+    description:
+      'Simple test using Framer-Motion to add animated notification system.',
     href: '/experiment/015',
     tag: ['Code'],
   },
@@ -125,7 +127,8 @@ export const BlogData: Array<Blog> = [
     id: 16,
     date: new Date('2020-06-29'),
     title: '016 - Autocomplete Species w/ Algolia',
-    description: 'How to build an autocomplete search form using Formik and Algolia',
+    description:
+      'How to build an autocomplete search form using Formik and Algolia',
     href: '/experiment/016',
     tag: ['Code'],
   },
@@ -133,7 +136,8 @@ export const BlogData: Array<Blog> = [
     id: 17,
     date: new Date('2020-06-30'),
     title: '017 - Life of Platic Tutorial',
-    description: 'Building a tutorial layer around the diagram to aid in usability.',
+    description:
+      'Building a tutorial layer around the diagram to aid in usability.',
     href: '/experiment/017',
     tag: ['Code'],
   },
@@ -143,6 +147,24 @@ export const BlogData: Array<Blog> = [
     title: '018 - Intergrating P5.js',
     description: 'Figuring out how to impliment P5.js into Next.js and React.',
     href: '/experiment/018',
+    tag: ['Code'],
+  },
+  {
+    id: 19,
+    date: new Date('2020-7-22'),
+    title: '019 - D3.js and CV Timeline',
+    description:
+      'Building D3.js into a React component using React Hooks and Typescript',
+    href: '/experiment/019',
+    tag: ['Code'],
+  },
+  {
+    id: 20,
+    date: new Date('2020-7-23'),
+    title: '020 - D3.js and Line Chart',
+    description:
+      'Following several tutorials to build basic shapes and grpahs using D3 and React.',
+    href: '/experiment/020',
     tag: ['Code'],
   },
 ];

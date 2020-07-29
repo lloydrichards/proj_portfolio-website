@@ -10,7 +10,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { H3, Description } from './layout/StyledLayoutComponents';
-import { ProjectData } from './ProjectData';
+import { ProjectData } from './data/ProjectData';
 
 export interface Project {
   id: string;
@@ -121,6 +121,7 @@ const Projects = () => {
                 background: '#F6F3F0',
               }}
             >
+              <img style={{position:"absolute", width:"100%", opacity: "50%"}} src={i.image} alt={i.title}/>
               <CardContent>
                 <H3>{i.title}</H3>
                 <Description>{i.description}</Description>

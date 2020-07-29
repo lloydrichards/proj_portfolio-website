@@ -1,5 +1,14 @@
 import React, { useRef, useEffect } from 'react';
-import { select, scaleTime, axisLeft, timeYear, timeFormat, min } from 'd3';
+import {
+  Selection,
+  select,
+  scaleTime,
+  axisLeft,
+  timeYear,
+  timeFormat,
+  min,
+  EnterElement,
+} from 'd3';
 import { DarkLinenPaper } from '../layout/StyledLayoutComponents';
 
 export interface Occupation {
@@ -105,6 +114,44 @@ const TimeLine: React.FC<Props> = ({
     }
   };
 
+  const wrap = (
+    text: Selection<
+      Element | EnterElement | Document | Window | SVGTextElement | null,
+      Occupation,
+      SVGGElement,
+      unknown
+    >,
+    width: number
+  ) => {
+    text.each(function () {
+      var text = select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line: string[] = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr('y'),
+        dy = parseFloat(text.attr('dy')),
+        tspan = text.text(null).append('tspan').attr('x', 215).attr('y', y);
+
+      while ((word = words.pop())) {
+        line.push(word);
+        tspan.text(line.join(' '));
+        if (tspan.node()!.getComputedTextLength() > width) {
+          line.pop();
+          tspan.text(line.join(' '));
+          line = [word];
+          tspan = text
+            .append('tspan')
+            .attr('x', 215)
+            .attr('y', y)
+            .attr('dy', `${++lineNumber * lineHeight + dy}em`)
+            .text(word);
+        }
+      }
+    });
+  };
+
   useEffect(() => {
     const clean = select(svgRef.current);
     clean.selectAll('g').remove();
@@ -182,17 +229,13 @@ const TimeLine: React.FC<Props> = ({
       .data(occupations.filter((d) => d.selected));
 
     OccupationLabels.join('rect')
-      .attr('width', (d) => d.title.length * 9)
+      .attr('width', (d) => d.title.length * 11)
       .attr('height', 20)
       .attr('x', 200)
       .attr('y', (_, i) => i * dim.textPadding)
       .attr('fill', (d) => categoryColor(d.category));
 
-    OccupationLabels.join(
-      (enter) => enter.append('path'),
-      (update) => update.attr('className', 'updated'),
-      (exit) => exit.transition().style('opacity', 0).remove()
-    )
+    OccupationLabels.join('path')
       .attr('d', (d, i) => {
         //const randomOffset = Math.floor(Math.random() * 8) + 155;
         return `M120 ${
@@ -205,17 +248,32 @@ const TimeLine: React.FC<Props> = ({
       .attr('stroke', (d) => categoryColor(d.category))
       .attr('stroke-width', '2px');
 
-    OccupationLabels.join(
-      (enter) => enter.append('text'),
-      (update) => update.attr('className', 'updated'),
-      (exit) => exit.transition().style('opacity', 0).remove()
-    )
+    OccupationLabels.join('text')
       .attr('x', 208)
-      .attr('y', (_, i) => i * dim.textPadding + 15)
+      .attr('y', (_, i) => i * dim.textPadding + 17)
       .text((value) => value.title)
       .attr('font-family', 'Josefin Sans, serif')
-      .attr('font-size', '1em')
+      .attr('font-size', '1.4em')
       .attr('fill', DarkLinenPaper);
+
+    OccupationLabels.join('text')
+      .attr('x', 208)
+      .attr('y', (_, i) => i * dim.textPadding + 35)
+      .text((value) => `${value.company}, ${value.location}`)
+      .attr('font-family', 'Maven Pro, sans-serif')
+      .attr('font-size', '1em')
+      .attr('fill', DarkLinenPaper)
+      .style('font-style', 'italic');
+
+    OccupationLabels.join('text')
+      .attr('x', 224)
+      .attr('y', (_, i) => i * dim.textPadding + 55)
+      .attr('dy', 0)
+      .text((value) => value.description)
+      .attr('font-family', 'Maven Pro, sans-serif')
+      .attr('font-size', '1em')
+      .attr('fill', DarkLinenPaper)
+      .call(wrap, 550);
 
     const LifeEvents = svg.append('g').selectAll('line').data(events);
     LifeEvents.join(
@@ -237,6 +295,8 @@ const TimeLine: React.FC<Props> = ({
     )
       .attr('x', 5)
       .attr('y', (value) => yScale(value.date) - 5)
+      .attr('dy', 0)
+      .attr('text-anchor', 'start')
       .text((value) => value.title)
       .attr('font-family', 'Josefin Sans, serif')
       .attr('font-size', '0.6em')

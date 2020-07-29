@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Card, Button, CardHeader } from '@material-ui/core';
 import { H2 } from '../../components/layout/StyledLayoutComponents';
 import { useRouter } from 'next/router';
-import { BlogData } from '../../components/BlogData';
+import { BlogData } from '../../components/data/BlogData';
 import Layout from '../../components/layout/Layout';
 
 export interface Blog {

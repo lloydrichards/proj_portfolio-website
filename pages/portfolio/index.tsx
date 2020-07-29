@@ -12,7 +12,7 @@ import {
   Description,
   H2,
 } from '../../components/layout/StyledLayoutComponents';
-import { ProjectData } from '../../components/ProjectData';
+import { ProjectData } from '../../components/data/ProjectData';
 import Layout from '../../components/layout/Layout';
 
 export interface Project {

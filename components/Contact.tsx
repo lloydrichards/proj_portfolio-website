@@ -34,16 +34,17 @@ const Contact = () => {
         >
           <CardContent>
             <Intro>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Imperdiet
-              laoreet egestas hac ac lectus ultricies in risus non. Tellus augue
-              morbi quis egestas tellus lectus et. Habitant ut porta commodo est
-              nec bibendum et quisque. Pretium amet, aenean faucibus gravida
-              sapien sollicitudin. Arcu arcu, pharet
+              Thank you for visiting my page, I hope you found something of
+              interest here. As this site is primariliy for my own
+              experimentations and documentation, I'm always thrilled to hear
+              how people experiances it. If you have any questions or comments,
+              feel free to fill out the contact. I m looking forward to hearing
+              from you!
             </Intro>
             <Intro>
-              Lorem ipsu gestas tellus lectus et. Habitant ut porta commodo est
-              nec bibendum et quisque. Pretium amet, aenean faucibus gravida
-              sapien sollicitudin. Arcu arcu, pharet
+              Alternatively, if you would like to follow along with me on some
+              of my other social media platforms, you can find them in the links
+              below.
             </Intro>
           </CardContent>
           <CardActions style={{ justifyContent: 'center' }}>

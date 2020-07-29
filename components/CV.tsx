@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TimeLine, { Category } from './d3/TimeLine';
 import { ButtonGroup, Button } from '@material-ui/core';
-import { occupationData, lifeEventData } from './CVData';
+import { occupationData, lifeEventData } from './data/CVData';
 
 function CV() {
   const [events] = useState(lifeEventData);
@@ -24,7 +24,7 @@ function CV() {
       <ButtonGroup
         variant='text'
         size='large'
-        style={{ width: '100%', justifyContent: 'center' }}
+        style={{ width: '100%', justifyContent: 'center', padding: "2em" }}
       >
         <Button
           onClick={() =>

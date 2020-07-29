@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { Content } from './layout/StyledLayoutComponents';
 import { useRouter } from 'next/router';
-import { BlogData } from './BlogData';
+import { BlogData } from './data/BlogData';
 
 export interface Blog {
   id: number;

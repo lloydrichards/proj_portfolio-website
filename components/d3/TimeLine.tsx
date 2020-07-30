@@ -64,7 +64,6 @@ interface Props {
 
 const TimeLine: React.FC<Props> = ({
   width,
-  height,
   occupations,
   events,
   background,
@@ -163,7 +162,7 @@ const TimeLine: React.FC<Props> = ({
         min(occupations, (d) => d.start) || new Date('1988-04-18'),
         new Date(),
       ])
-      .range([height, 0]);
+      .range([dim.textPadding * occupations.length, 0]);
 
     const yAxis = axisLeft<any>(yScale)
       .ticks(timeYear, 1)
@@ -238,10 +237,10 @@ const TimeLine: React.FC<Props> = ({
     OccupationLabels.join('path')
       .attr('d', (d, i) => {
         //const randomOffset = Math.floor(Math.random() * 8) + 155;
-        return `M120 ${
-          (yScale(d.start) - yScale(d.end)) / 2 + yScale(d.end)
+        return `M130 ${
+          yScale(d.start) -16
         } L${160} ${
-          (yScale(d.start) - yScale(d.end)) / 2 + yScale(d.end)
+          yScale(d.start) -16
         } L${170} ${i * dim.textPadding + 10} L200 ${i * dim.textPadding + 10}`;
       })
       .attr('fill', 'none')
@@ -266,7 +265,7 @@ const TimeLine: React.FC<Props> = ({
       .style('font-style', 'italic');
 
     OccupationLabels.join('text')
-      .attr('x', 224)
+      .attr('x', 232)
       .attr('y', (_, i) => i * dim.textPadding + 55)
       .attr('dy', 0)
       .text((value) => value.description)
@@ -308,7 +307,7 @@ const TimeLine: React.FC<Props> = ({
       <svg
         style={{ background, overflow: 'visible' }}
         width={width}
-        height={height}
+        height={dim.textPadding * occupations.length}
         ref={svgRef}
       />
     </div>

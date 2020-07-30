@@ -24,7 +24,7 @@ function CV() {
       <ButtonGroup
         variant='text'
         size='large'
-        style={{ width: '100%', justifyContent: 'center', padding: "2em" }}
+        style={{ width: '100%', justifyContent: 'center', padding: '2em' }}
       >
         <Button
           onClick={() =>
@@ -45,30 +45,30 @@ function CV() {
         </Button>
         <Button
           onClick={() =>
-            setCategories({ ...categories, Work: !categories.Work })
+            setCategories({ Education: false, Work: true, Volunteer: false })
           }
           style={{
-            color: categories.Work ? '#8B7A70' : '#F0ECE8',
+            color: categories.Work ? '#CBE0F2' : '#F0ECE8',
           }}
         >
           Work
         </Button>
         <Button
           onClick={() =>
-            setCategories({ ...categories, Education: !categories.Education })
+            setCategories({ Education: true, Work: false, Volunteer: false })
           }
           style={{
-            color: categories.Education ? '#8B7A70' : '#F0ECE8',
+            color: categories.Education ? '#EECEC9' : '#F0ECE8',
           }}
         >
           Education
         </Button>
         <Button
           onClick={() =>
-            setCategories({ ...categories, Volunteer: !categories.Volunteer })
+            setCategories({ Education: false, Work: false, Volunteer: true })
           }
           style={{
-            color: categories.Volunteer ? '#8B7A70' : '#F0ECE8',
+            color: categories.Volunteer ? '#F0E2CE' : '#F0ECE8',
           }}
         >
           Volunteer

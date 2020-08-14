@@ -30,7 +30,7 @@ export const ProjectData: Array<Project> = [
     description: 'Open Hardware Project based on the mimirHome sensor',
     href: '/',
     category: ['Design', 'Code', 'Garden'],
-    image: '/images/thumb_missing.png',
+    image: '/images/thumb_mimiropen.png',
     link: '/',
   },
   {
@@ -41,7 +41,7 @@ export const ProjectData: Array<Project> = [
       'Taking envir. data and ML to create house plant recommentations',
     href: '/',
     category: ['Design', 'Code', 'Garden'],
-    image: '/images/thumb_missing.png',
+    image: '/images/thumb_mimirHome.png',
     link: '/',
   },
   {
@@ -61,7 +61,7 @@ export const ProjectData: Array<Project> = [
     description: 'Data Visualization comparing New York City and Zurich',
     href: '/',
     category: ['Design'],
-    image: '/images/thumb_missing.png',
+    image: '/images/thumb_interactivethings_nyc.png',
     link: '/',
   },
   {
@@ -71,7 +71,7 @@ export const ProjectData: Array<Project> = [
     description: 'Composit deck around the pool, overlooking the olives',
     href: '/',
     category: ['Garden'],
-    image: '/images/thumb_missing.png',
+    image: '/images/thumb_spanishdeck.png',
     link: '/',
   },
   {
@@ -82,7 +82,7 @@ export const ProjectData: Array<Project> = [
       'First attempt at visualizing the environmental data from mimir',
     href: '/',
     category: ['Design'],
-    image: '/images/thumb_missing.png',
+    image: '/images/thumb_mimirhome_visualization.png',
     link: '/',
   },
   {

@@ -27,35 +27,49 @@ const IndexPage: React.FC = () => {
         className='Intro'
         style={{
           width: '100%',
-          height: '95vh',
+          minHeight: '80vh',
           background: '#F6F3F0',
         }}
       >
         <FullWidthBackground />
-        <div style={{ position: 'absolute', top: 0, margin: '30% 0' }}>
-          <Grid container>
-            <Grid item xs={12} sm={6}></Grid>
-            <Grid item xs={12} sm={6} style={{ padding: '1em' }}>
-              <H1>Hello, I'm Lloyd</H1>
-              <Intro>
-                I'm a Zurich based <b>Data Visualization</b> and{' '}
-                <b>Garden Designer</b>. Pretty weird combinations, right? Let me
-                tell you how I got here.
-              </Intro>
-              <Button
-                style={{
-                  margin: '0em',
-                  textTransform: 'none',
-                  color: 'black',
-                  fontFamily: "'Josefin Sans', serif",
-                  fontSize: '1.5em',
-                }}
-              >
-                Contact Me
-              </Button>
-            </Grid>
+
+        <Grid container direction='row-reverse' alignItems='stretch' style={{height:"95vh"}}>
+          <Grid
+            item
+            sm={12}
+            md={6}
+            style={{ padding: '2em', marginTop: '30vh' }}
+          >
+            <H1>Hello, I'm Lloyd</H1>
+            <Intro>
+              I'm a Zurich based <b>Data Visualization</b> and{' '}
+              <b>Garden Designer</b>. Pretty weird combinations, right? Let me
+              tell you how I got here.
+            </Intro>
+            <Button
+              style={{
+                margin: '0em',
+                textTransform: 'none',
+                color: 'black',
+                fontFamily: "'Josefin Sans', serif",
+                fontSize: '1.5em',
+              }}
+            >
+              Contact Me
+            </Button>
           </Grid>
-        </div>
+          <Grid item sm={12} md={6}>
+            <img
+              src='/images/LloydRichards_Cover_small.png'
+              alt='Lloyd Richards Portrait'
+              style={{
+                position: 'relative',
+                bottom: 0,
+                right: 0,
+              }}
+            />
+          </Grid>
+        </Grid>
       </div>
       <div id='About' style={{ width: '100%', minHeight: '320px' }}>
         <H2>About</H2>

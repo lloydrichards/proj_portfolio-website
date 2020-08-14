@@ -17,6 +17,7 @@ import SendIcon from '@material-ui/icons/Send';
 import { Formik, Form } from 'formik';
 import { MyTextField } from './formik/TextField';
 import { MyTextArea } from './formik/TextArea';
+import emailjs from 'emailjs-com';
 
 const validationSchema = yup.object({
   name: yup.string().required(),
@@ -84,7 +85,11 @@ const Contact = () => {
           onSubmit={async (data, { setErrors, setSubmitting, resetForm }) => {
             setSubmitting(true);
             try {
-              console.log(data);
+              emailjs
+                .send('default_service', 'lloyd_portfolio', data,"user_8qN3GsDHSfKctOiEQBVGm")
+                .then((response) => {
+                  console.log('SUCCESS!', response.status, response.text);
+                });
             } catch (error) {
               setErrors(error);
             }

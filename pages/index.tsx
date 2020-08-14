@@ -27,13 +27,18 @@ const IndexPage: React.FC = () => {
         className='Intro'
         style={{
           width: '100%',
-          minHeight: '80vh',
+          height: '100%',
           background: '#F6F3F0',
         }}
       >
         <FullWidthBackground />
 
-        <Grid container direction='row-reverse' alignItems='stretch' style={{height:"95vh"}}>
+        <Grid
+          container
+          direction='row-reverse'
+          alignItems='stretch'
+          style={{ height: '95vh' }}
+        >
           <Grid
             item
             sm={12}
@@ -54,6 +59,7 @@ const IndexPage: React.FC = () => {
                 fontFamily: "'Josefin Sans', serif",
                 fontSize: '1.5em',
               }}
+              onClick={() => router.push('/#Contact')}
             >
               Contact Me
             </Button>

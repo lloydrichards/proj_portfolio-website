@@ -93,7 +93,7 @@ export const ProjectData: Array<Project> = [
       'Garden designed to be a self sufficent and abundant ecosystem in Spain',
     href: '/',
     category: ['Design', 'Garden'],
-    image: '/images/thumb_missing.png',
+    image: '/images/thumb_spanishfoodforest.png',
     link: '/',
   },
 ];

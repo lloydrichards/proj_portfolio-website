@@ -19,7 +19,7 @@ const Layout: React.FunctionComponent<Props> = ({
   title = 'Lloyd Richards Design',
   description = 'Welcome to the digital portfolio of Lloyd Richards.  Find projects, blogs and experiments in data visualization and garden design.',
   previewImage = '',
-  currentURL = 'https://www.lloydrichardsdesing.com',
+  currentURL = '',
 }) => (
   <div style={{ margin: 'auto', maxWidth: '1080px' }}>
     <Head>
@@ -33,8 +33,16 @@ const Layout: React.FunctionComponent<Props> = ({
       <meta name='twitter:creator' content={twitterHandle} key='twhandle' />
 
       {/* Open Graph */}
-      <meta property='og:url' content={currentURL} key='ogurl' />
-      <meta property='og:image' content={previewImage} key='ogimage' />
+      <meta
+        property='og:url'
+        content={'https://www.lloydrichardsdesign.com' + currentURL}
+        key='ogurl'
+      />
+      <meta
+        property='og:image'
+        content={'https://www.lloydrichardsdesign.com' + previewImage}
+        key='ogimage'
+      />
       <meta property='og:site_name' content={siteName} key='ogsitename' />
       <meta property='og:title' content={title} key='ogtitle' />
       <meta property='og:description' content={description} key='ogdesc' />

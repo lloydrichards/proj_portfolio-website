@@ -18,7 +18,7 @@ const Layout: React.FunctionComponent<Props> = ({
   children,
   title = 'Lloyd Richards Design',
   description = 'Welcome to the digital portfolio of Lloyd Richards.  Find projects, blogs and experiments in data visualization and garden design.',
-  previewImage = '',
+  previewImage = '/images/home/preview_home.png',
   currentURL = '',
 }) => (
   <div style={{ margin: 'auto', maxWidth: '1080px' }}>

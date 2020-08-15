@@ -21,7 +21,7 @@ const IndexPage: React.FC = () => {
     <Layout
       title='Home | Lloyd Richards Design'
       currentURL={router.pathname}
-      previewImage={'/images/preview/preview_home_square.png'}
+      previewImage={'/images/home/preview_home.png'}
     >
       <div
         className='Intro'

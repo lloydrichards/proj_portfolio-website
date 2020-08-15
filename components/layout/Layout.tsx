@@ -29,6 +29,7 @@ const Layout: React.FunctionComponent<Props> = ({
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
 
       {/* Twitter */}
+      <meta name='twitter:card' content='summary_large_image' key='twcard' />
       <meta name='twitter:creator' content={twitterHandle} key='twhandle' />
       <meta name='twitter:description ' content={description} key='twdesc' />
       <meta

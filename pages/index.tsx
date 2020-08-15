@@ -19,7 +19,7 @@ const IndexPage: React.FC = () => {
   const router = useRouter();
   return (
     <Layout
-      title='Home | Lloyd Richards Design'
+      title='Homepage'
       currentURL={router.pathname}
       previewImage={'/images/home/preview_home.png'}
     >

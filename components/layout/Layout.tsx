@@ -29,10 +29,16 @@ const Layout: React.FunctionComponent<Props> = ({
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
 
       {/* Twitter */}
-      <meta name='twitter:card' content='summary' key='twcard' />
       <meta name='twitter:creator' content={twitterHandle} key='twhandle' />
+      <meta name='twitter:description ' content={description} key='twdesc' />
+      <meta
+        name='twitter:image'
+        content={'https://www.lloydrichardsdesign.com' + previewImage}
+        key='twimage'
+      />
 
       {/* Open Graph */}
+      <meta property='og:type' content='website' key='ogtype' />
       <meta
         property='og:url'
         content={'https://www.lloydrichardsdesign.com' + currentURL}
@@ -44,7 +50,11 @@ const Layout: React.FunctionComponent<Props> = ({
         key='ogimage'
       />
       <meta property='og:site_name' content={siteName} key='ogsitename' />
-      <meta property='og:title' content={title} key='ogtitle' />
+      <meta
+        property='og:title'
+        content={title + ' | Lloyd Richards Design'}
+        key='ogtitle'
+      />
       <meta property='og:description' content={description} key='ogdesc' />
     </Head>
     <div style={{ position: 'relative', height: 50, zIndex: 9, width: '100%' }}>

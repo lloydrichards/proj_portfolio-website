@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Grid,
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  ButtonGroup,
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { H3, Description } from './layout/StyledLayoutComponents';
+import { Grid, Button, ButtonGroup } from '@material-ui/core';
 import { ProjectData } from './data/ProjectData';
+import ProjectCard from './ProjectCard';
 
 export interface Project {
   id: string;
@@ -41,7 +32,6 @@ const Projects = () => {
     Code: true,
     Other: true,
   });
-  const [expanded, setExpanded] = useState<boolean>(false);
   useEffect(() => {
     setCurrentProjects(
       ProjectData.filter((i) => i.category.some((r) => categories[r] === true))
@@ -104,52 +94,10 @@ const Projects = () => {
         </Button>
       </ButtonGroup>
       <Grid container spacing={2} style={{ width: '100%', margin: '0 auto' }}>
-        {currentProjects.map((i) => (
-          <Grid
-            item
-            key={i.id}
-            xs={12}
-            sm={6}
-            md={4}
-            style={{ width: '340px', height: '340px' }}
-          >
-            <Card
-              elevation={0}
-              style={{
-                position: 'relative',
-                height: '100%',
-                background: '#F6F3F0',
-              }}
-            >
-              <img style={{position:"absolute", width:"100%", opacity: "50%"}} src={i.image} alt={i.title}/>
-              <CardContent>
-                <H3>{i.title}</H3>
-                <Description>{i.description}</Description>
-              </CardContent>
-              <CardActions
-                style={{ position: 'absolute', width: '95%', bottom: 8 }}
-              >
-                {i.github ? (
-                  <Button size='small' style={{ float: 'left' }}>
-                    GitHub
-                  </Button>
-                ) : null}
-                <Button size='small' style={{ marginLeft: 'auto' }}>
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
+        {currentProjects.slice(0, 6).map((i) => (
+          <ProjectCard project={i} key={i.id} />
         ))}
       </Grid>
-      <Button
-        startIcon={expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        onClick={() => setExpanded(!expanded)}
-        size='small'
-        style={{ marginLeft: 'auto' }}
-      >
-        {expanded ? 'Less' : 'More'}
-      </Button>
     </div>
   );
 };

@@ -2,6 +2,16 @@ import { Project } from '../Projects';
 
 export const ProjectData: Array<Project> = [
   {
+    id: '2006',
+    date: new Date('2020-05-01'),
+    title: '2020 Portfolio',
+    description: 'Print/digital Data Visualization portfolio for 2020',
+    href: '/',
+    category: ['Code', 'Design'],
+    image: '/images/thumb_2020portfolio.png',
+    link: '/download/2020Portfolio.pdf',
+  },
+  {
     id: '2000',
     date: new Date('2020-06-10'),
     title: 'Life of Plastic',
@@ -31,7 +41,8 @@ export const ProjectData: Array<Project> = [
     href: '/',
     category: ['Design', 'Code', 'Garden'],
     image: '/images/thumb_mimiropen.png',
-    link: '/',
+    link: '/portfolio/mimiropen',
+    github: 'https://github.com/lloydrichards/mimirOpen',
   },
   {
     id: '2003',
@@ -42,7 +53,7 @@ export const ProjectData: Array<Project> = [
     href: '/',
     category: ['Design', 'Code', 'Garden'],
     image: '/images/thumb_mimirHome.png',
-    link: '/',
+    link: '/portfolio/mimirhome',
   },
   {
     id: '2004',
@@ -53,6 +64,7 @@ export const ProjectData: Array<Project> = [
     category: ['Design', 'Code'],
     image: '/images/thumb_natako.png',
     link: 'http://nata-ko.com/',
+    github: 'https://github.com/lloydrichards/nata-ko',
   },
   {
     id: '2005',
@@ -62,7 +74,17 @@ export const ProjectData: Array<Project> = [
     href: '/',
     category: ['Design'],
     image: '/images/thumb_interactivethings_nyc.png',
-    link: '/',
+    link: '/portfolio/interactivethings_nyc',
+  },
+  {
+    id: '1903',
+    date: new Date('2019-08-01'),
+    title: '2019 Portfolio',
+    description: 'Print/digital Data Visualization portfolio for 2019',
+    href: '/',
+    category: ['Code', 'Design'],
+    image: '/images/thumb_2019portfolio.png',
+    link: '/download/2019Portfolio.pdf',
   },
   {
     id: '1900',
@@ -72,7 +94,7 @@ export const ProjectData: Array<Project> = [
     href: '/',
     category: ['Garden'],
     image: '/images/thumb_spanishdeck.png',
-    link: '/',
+    link: '/portfolio/spanishpooldeck',
   },
   {
     id: '1901',
@@ -83,7 +105,7 @@ export const ProjectData: Array<Project> = [
     href: '/',
     category: ['Design'],
     image: '/images/thumb_mimirhome_visualization.png',
-    link: '/',
+    link: '/portfolio/mimirhome_visualizations1',
   },
   {
     id: '1500',
@@ -94,6 +116,6 @@ export const ProjectData: Array<Project> = [
     href: '/',
     category: ['Design', 'Garden'],
     image: '/images/thumb_spanishfoodforest.png',
-    link: '/',
+    link: '/portfolio/spanishfoodforest',
   },
 ];

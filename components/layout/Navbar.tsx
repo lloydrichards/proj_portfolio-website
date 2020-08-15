@@ -81,8 +81,8 @@ const Navbar = () => {
       <Link href='/'>
         <a className='title'>Lloyd Richards</a>
       </Link>
-      <a href='#Contact'>Contact</a>
-      <a href='#CV'>CV</a>
+      <a href='/#Contact'>Contact</a>
+      <a href='/#CV'>CV</a>
       <div className='dropdown'>
         <button className='dropbtn'>Blog</button>
         <div className='dropdown-content'>
@@ -97,7 +97,7 @@ const Navbar = () => {
           <a href='/portfolio'>Portfolio</a>
         </div>
       </div>
-      <a href='#About'>About</a>
+      <a href='/#About'>About</a>
     </div>
   );
 };

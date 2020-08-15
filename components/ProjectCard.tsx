@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Project } from './Projects';
 import {
   Grid,
@@ -9,11 +9,18 @@ import {
 } from '@material-ui/core';
 import { H3, Description } from './layout/StyledLayoutComponents';
 
-
 interface ProjCard {
   project: Project;
 }
 const ProjectCard: React.FC<ProjCard> = ({ project }) => {
+  const [hovered, setHovered] = useState<boolean>(false);
+
+  const handleMouseOver = () => {
+    setHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
   return (
     <Grid
       item
@@ -25,6 +32,8 @@ const ProjectCard: React.FC<ProjCard> = ({ project }) => {
     >
       <Card
         elevation={0}
+        onMouseOver={handleMouseOver}
+        onMouseLeave={handleMouseLeave}
         style={{
           position: 'relative',
           height: '100%',
@@ -32,7 +41,7 @@ const ProjectCard: React.FC<ProjCard> = ({ project }) => {
         }}
       >
         <img
-          style={{ position: 'absolute', width: '100%', opacity: '50%' }}
+          style={{ position: 'absolute', width: '100%', opacity: hovered ? '50%': "10%" }}
           src={project.image}
           alt={project.title}
         />
@@ -40,24 +49,28 @@ const ProjectCard: React.FC<ProjCard> = ({ project }) => {
           <H3>{project.title}</H3>
           <Description>{project.description}</Description>
         </CardContent>
-        <CardActions style={{ position: 'absolute', width: '95%', bottom: 8 }}>
-          {project.github ? (
+        {hovered ? (
+          <CardActions
+            style={{ position: 'absolute', width: '95%', bottom: 8 }}
+          >
+            {project.github ? (
+              <Button
+                size='small'
+                style={{ float: 'left' }}
+                href={project.github}
+              >
+                GitHub
+              </Button>
+            ) : null}
             <Button
               size='small'
-              style={{ float: 'left' }}
-              href={project.github}
+              style={{ marginLeft: 'auto' }}
+              href={project.link}
             >
-              GitHub
+              Learn More
             </Button>
-          ) : null}
-          <Button
-            size='small'
-            style={{ marginLeft: 'auto' }}
-            href={project.link}
-          >
-            Learn More
-          </Button>
-        </CardActions>
+          </CardActions>
+        ) : null}
       </Card>
     </Grid>
   );

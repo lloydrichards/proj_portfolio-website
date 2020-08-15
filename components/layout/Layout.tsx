@@ -59,7 +59,7 @@ const Layout: React.FunctionComponent<Props> = ({
       <meta property='og:description' content={description} key='ogdesc' />
     </Head>
     <div style={{ position: 'relative', height: 50, zIndex: 9, width: '100%' }}>
-      <FullWidthBackground />
+      <FullWidthBackground style={{ position: 'fixed', top: 0, height:"50px"}} />
       <Navbar />
     </div>
     {children}

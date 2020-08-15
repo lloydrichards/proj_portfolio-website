@@ -9,7 +9,7 @@ export const ProjectData: Array<Project> = [
     href: '/',
     category: ['Code', 'Design'],
     image: '/images/thumb_2020portfolio.png',
-    link: '/download/2020Portfolio.pdf',
+    link: '/downloads/2020Portfolio.pdf',
   },
   {
     id: '2000',
@@ -84,7 +84,7 @@ export const ProjectData: Array<Project> = [
     href: '/',
     category: ['Code', 'Design'],
     image: '/images/thumb_2019portfolio.png',
-    link: '/download/2019Portfolio.pdf',
+    link: '/downloads/2019Portfolio.pdf',
   },
   {
     id: '1900',

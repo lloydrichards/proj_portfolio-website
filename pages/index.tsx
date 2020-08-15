@@ -27,7 +27,7 @@ const IndexPage: React.FC = () => {
         className='Intro'
         style={{
           width: '100%',
-          height: '100%',
+          minHeight: '98vh',
           background: '#F6F3F0',
         }}
       >
@@ -36,14 +36,14 @@ const IndexPage: React.FC = () => {
         <Grid
           container
           direction='row-reverse'
-          alignItems='stretch'
-          style={{ height: '95vh' }}
+          alignItems='flex-end'
+          style={{ minHeight: '98vh' }}
         >
           <Grid
             item
             sm={12}
             md={6}
-            style={{ padding: '2em', marginTop: '30vh' }}
+            style={{ padding: '2em', marginBottom: '30vh' }}
           >
             <H1>Hello, I'm Lloyd</H1>
             <Intro>
@@ -70,7 +70,7 @@ const IndexPage: React.FC = () => {
               alt='Lloyd Richards Portrait'
               style={{
                 position: 'relative',
-                bottom: 0,
+                top: 'auto',
                 right: 0,
               }}
             />
@@ -104,10 +104,9 @@ const IndexPage: React.FC = () => {
               </li>
             </ContentList>
             <Content>
-              I bring a unique perspective to the projects I work on, being able
-              to empathize with different users, seeing the problem from
-              different angles, and come up with solutions from different
-              understandings.
+              Feel free to have browse through my recent projects, read some
+              experiments or blog posts and if you have any questions you can
+              contact me directly via the form below or via social media.
             </Content>
           </Grid>
           <Grid item xs={12} sm={6} md={4}></Grid>
@@ -136,7 +135,8 @@ const IndexPage: React.FC = () => {
         <Blog />
       </div>
       <div id='CV' style={{ width: '100%', minHeight: '320px' }}>
-        <H2>CV</H2>
+        <H2>Curriculum Vitae</H2>
+        <Content></Content>
         <CV />
       </div>
     </Layout>

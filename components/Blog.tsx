@@ -17,6 +17,7 @@ export interface Blog {
 
 interface Tag {
   Code: boolean;
+  Design: boolean;
 }
 
 function Blog() {

@@ -167,4 +167,13 @@ export const BlogData: Array<Blog> = [
     href: '/experiment/020',
     tag: ['Code'],
   },
+  {
+    id: 21,
+    date: new Date('2020-8-16'),
+    title: 'Blog 001 - Starting Feeld Redesign',
+    description:
+      'Starting to redesign the dating app, Feeld.  Will start with user research and examining feedback on the existing app.',
+    href: '/blog/001',
+    tag: ['Design'],
+  },
 ];

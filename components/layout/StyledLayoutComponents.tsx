@@ -46,6 +46,14 @@ export const H3 = styled.h2`
   font-family: 'Josefin Sans', serif;
   font-size: 1.5em;
 `;
+export const H4 = styled.h2`
+  margin-top: 1em;
+  position: relative;
+  text-align: left;
+  color: black;
+  font-family: 'Josefin Sans', serif;
+  font-size: 1em;
+`;
 
 export const CardTitle = styled.h2`
   margin: 0;

@@ -15,7 +15,7 @@ export interface Blog {
   tag: Array<keyof Tag>;
 }
 
-interface Tag {
+export interface Tag {
   Code: boolean;
   Design: boolean;
 }

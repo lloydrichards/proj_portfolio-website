@@ -4,6 +4,7 @@ import { H2 } from '../../components/layout/StyledLayoutComponents';
 import { useRouter } from 'next/router';
 import { BlogData } from '../../components/data/BlogData';
 import Layout from '../../components/layout/Layout';
+import { Tag } from '../../components/Blog';
 
 export interface Blog {
   id: number;
@@ -14,9 +15,6 @@ export interface Blog {
   tag: Array<keyof Tag>;
 }
 
-interface Tag {
-  Code: boolean;
-}
 
 function Blog() {
   const router = useRouter();

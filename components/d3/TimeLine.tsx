@@ -129,7 +129,7 @@ const TimeLine: React.FC<Props> = ({
         tspan = text
           .text(null)
           .append('tspan')
-          .attr('x', textMargin+16)
+          .attr('x', textMargin + 16)
           .attr('y', y);
 
       while ((word = words.pop())) {
@@ -141,7 +141,7 @@ const TimeLine: React.FC<Props> = ({
           line = [word];
           tspan = text
             .append('tspan')
-            .attr('x', textMargin+16)
+            .attr('x', textMargin + 16)
             .attr('y', y)
             .attr('dy', `${++lineNumber * lineHeight + dy}em`)
             .text(word);
@@ -155,7 +155,7 @@ const TimeLine: React.FC<Props> = ({
   var textWidth = 500;
   var textSpacing = 150;
 
-  const diagramHeight =
+  var diagramHeight =
     textSpacing * occupations.filter((i) => i.selected == true).length;
 
   useEffect(() => {
@@ -163,8 +163,8 @@ const TimeLine: React.FC<Props> = ({
       if (windowRef.current.offsetWidth < 600) {
         lineMargin = 0;
         textMargin = 50;
-        textWidth = windowRef.current.offsetWidth - 50;
-        textSpacing = 140;
+        textWidth = windowRef.current.offsetWidth - 75;
+        textSpacing = 190;
       } else if (windowRef.current.offsetWidth < 960) {
         lineMargin = 25;
         textMargin = 150;
@@ -176,6 +176,8 @@ const TimeLine: React.FC<Props> = ({
         textWidth = windowRef.current.offsetWidth - 300;
         textSpacing = 110;
       }
+      diagramHeight =
+        textSpacing * occupations.filter((i) => i.selected == true).length;
     }
 
     const clean = select(svgRef.current);

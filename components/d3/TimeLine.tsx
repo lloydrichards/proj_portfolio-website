@@ -8,6 +8,7 @@ import {
   timeFormat,
   min,
   EnterElement,
+  timeMonth,
 } from 'd3';
 import { DarkLinenPaper } from '../layout/StyledLayoutComponents';
 
@@ -151,6 +152,7 @@ const TimeLine: React.FC<Props> = ({
   };
 
   var lineMargin = 50;
+  var axisLabelMargin = 0;
   var textMargin = 200;
   var textWidth = 500;
   var textSpacing = 150;
@@ -164,10 +166,12 @@ const TimeLine: React.FC<Props> = ({
         lineMargin = 0;
         textMargin = 50;
         textWidth = windowRef.current.offsetWidth - 75;
+        axisLabelMargin = 50;
         textSpacing = 190;
       } else if (windowRef.current.offsetWidth < 960) {
         lineMargin = 25;
         textMargin = 150;
+        axisLabelMargin = 50;
         textWidth = windowRef.current.offsetWidth - 200;
         textSpacing = 135;
       } else {
@@ -196,6 +200,8 @@ const TimeLine: React.FC<Props> = ({
       .ticks(timeYear, 1)
       .tickSize(5)
       .tickFormat(timeFormat('%Y'));
+
+    const yAxisMonth = axisLeft<any>(yScale).ticks(timeMonth, 1).tickSize(3);
 
     const BackBoxes = svg
       .append('g')
@@ -254,9 +260,15 @@ const TimeLine: React.FC<Props> = ({
       .call(yAxis)
       .selectAll('text')
       .attr('font-family', 'Josefin Sans, serif')
-      .attr('font-size', '1.4em')
+      .attr('font-size', '1.6em')
       .attr('fill', DarkLinenPaper)
-      .style('transform', `translateX(${-lineMargin + 40}px)`);
+      .style('transform', `translateX(${axisLabelMargin}px)`);
+
+    Axis.append('g')
+      .attr('stroke-width', 1)
+      .call(yAxisMonth)
+      .selectAll('text')
+      .attr('fill', "none")
 
     const OccupationLabels = svg
       .append('g')
@@ -310,32 +322,32 @@ const TimeLine: React.FC<Props> = ({
       .attr('fill', DarkLinenPaper)
       .call(wrap, textWidth, textMargin);
 
-    const LifeEvents = svg.append('g').selectAll('line').data(events);
-    LifeEvents.join(
-      (enter) => enter.append('line'),
-      (update) => update.attr('className', 'updated'),
-      (exit) => exit.transition().style('opacity', 0).remove()
-    )
-      .attr('x1', 25)
-      .attr('x2', textMargin)
-      .attr('y1', (value) => yScale(value.date))
-      .attr('y2', (value) => yScale(value.date))
-      .attr('stroke', DarkLinenPaper)
-      .attr('stroke-dasharray', '8');
+    // const LifeEvents = svg.append('g').selectAll('line').data(events);
+    // LifeEvents.join(
+    //   (enter) => enter.append('line'),
+    //   (update) => update.attr('className', 'updated'),
+    //   (exit) => exit.transition().style('opacity', 0).remove()
+    // )
+    //   .attr('x1', 25)
+    //   .attr('x2', textMargin)
+    //   .attr('y1', (value) => yScale(value.date))
+    //   .attr('y2', (value) => yScale(value.date))
+    //   .attr('stroke', DarkLinenPaper)
+    //   .attr('stroke-dasharray', '8');
 
-    LifeEvents.join(
-      (enter) => enter.append('text'),
-      (update) => update.attr('className', 'updated'),
-      (exit) => exit.remove()
-    )
-      .attr('x', 5)
-      .attr('y', (value) => yScale(value.date) - 5)
-      .attr('dy', 0)
-      .attr('text-anchor', 'start')
-      .text((value) => value.title)
-      .attr('font-family', 'Josefin Sans, serif')
-      .attr('font-size', '0.6em')
-      .attr('fill', DarkLinenPaper);
+    // LifeEvents.join(
+    //   (enter) => enter.append('text'),
+    //   (update) => update.attr('className', 'updated'),
+    //   (exit) => exit.remove()
+    // )
+    //   .attr('x', 5)
+    //   .attr('y', (value) => yScale(value.date) - 5)
+    //   .attr('dy', 0)
+    //   .attr('text-anchor', 'start')
+    //   .text((value) => value.title)
+    //   .attr('font-family', 'Josefin Sans, serif')
+    //   .attr('font-size', '0.6em')
+    //   .attr('fill', DarkLinenPaper);
   }, [occupations]);
 
   return (

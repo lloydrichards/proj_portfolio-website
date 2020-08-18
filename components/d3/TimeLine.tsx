@@ -46,13 +46,6 @@ interface Tag {
   farmer: boolean;
   manager: boolean;
 }
-const dim = {
-  width: 400,
-  height: 800,
-  marginLeft: 100,
-  textPadding: 120,
-  background: '#f6f3f0',
-};
 
 interface Props {
   width: number;
@@ -69,6 +62,7 @@ const TimeLine: React.FC<Props> = ({
   background,
 }) => {
   const svgRef = useRef(null);
+  const windowRef = useRef<HTMLDivElement>(null);
 
   const lookupInRange = (
     corner: Date,
@@ -120,7 +114,8 @@ const TimeLine: React.FC<Props> = ({
       SVGGElement,
       unknown
     >,
-    width: number
+    width: number,
+    textMargin: number
   ) => {
     text.each(function () {
       var text = select(this),
@@ -131,7 +126,11 @@ const TimeLine: React.FC<Props> = ({
         lineHeight = 1.1, // ems
         y = text.attr('y'),
         dy = parseFloat(text.attr('dy')),
-        tspan = text.text(null).append('tspan').attr('x', 215).attr('y', y);
+        tspan = text
+          .text(null)
+          .append('tspan')
+          .attr('x', textMargin+16)
+          .attr('y', y);
 
       while ((word = words.pop())) {
         line.push(word);
@@ -142,7 +141,7 @@ const TimeLine: React.FC<Props> = ({
           line = [word];
           tspan = text
             .append('tspan')
-            .attr('x', 215)
+            .attr('x', textMargin+16)
             .attr('y', y)
             .attr('dy', `${++lineNumber * lineHeight + dy}em`)
             .text(word);
@@ -151,7 +150,34 @@ const TimeLine: React.FC<Props> = ({
     });
   };
 
+  var lineMargin = 50;
+  var textMargin = 200;
+  var textWidth = 500;
+  var textSpacing = 150;
+
+  const diagramHeight =
+    textSpacing * occupations.filter((i) => i.selected == true).length;
+
   useEffect(() => {
+    if (windowRef.current) {
+      if (windowRef.current.offsetWidth < 600) {
+        lineMargin = 0;
+        textMargin = 50;
+        textWidth = windowRef.current.offsetWidth - 50;
+        textSpacing = 140;
+      } else if (windowRef.current.offsetWidth < 960) {
+        lineMargin = 25;
+        textMargin = 150;
+        textWidth = windowRef.current.offsetWidth - 200;
+        textSpacing = 135;
+      } else {
+        lineMargin = 100;
+        textMargin = 300;
+        textWidth = windowRef.current.offsetWidth - 300;
+        textSpacing = 110;
+      }
+    }
+
     const clean = select(svgRef.current);
     clean.selectAll('g').remove();
 
@@ -162,21 +188,19 @@ const TimeLine: React.FC<Props> = ({
         min(occupations, (d) => d.start) || new Date('1988-04-18'),
         new Date(),
       ])
-      .range([dim.textPadding * occupations.length, 0]);
+      .range([diagramHeight, 0]);
 
     const yAxis = axisLeft<any>(yScale)
       .ticks(timeYear, 1)
+      .tickSize(5)
       .tickFormat(timeFormat('%Y'));
-
-    const Axis = svg.append('g');
-    Axis.style('transform', `translateX(${dim.marginLeft}px)`).call(yAxis);
 
     const BackBoxes = svg
       .append('g')
       .selectAll('rect')
       .data(occupations.filter((d) => orderInRange(d, true, false, false)));
     BackBoxes.join('rect')
-      .attr('x', 115)
+      .attr('x', lineMargin + 10)
       .attr('y', (value) => yScale(+value.end))
       .attr('width', 35)
       .attr('height', (value) => yScale(+value.start) - yScale(+value.end))
@@ -193,7 +217,7 @@ const TimeLine: React.FC<Props> = ({
       .selectAll('rect')
       .data(occupations.filter((d) => orderInRange(d, false, true, false)));
     MidBoxes.join('rect')
-      .attr('x', 110)
+      .attr('x', lineMargin + 5)
       .attr('y', (value) => yScale(+value.end))
       .attr('width', 30)
       .attr('height', (value) => yScale(+value.start) - yScale(+value.end))
@@ -210,7 +234,7 @@ const TimeLine: React.FC<Props> = ({
       .selectAll('rect')
       .data(occupations.filter((d) => orderInRange(d, false, false, true)));
     FrontBoxes.join('rect')
-      .attr('x', 105)
+      .attr('x', lineMargin)
       .attr('y', (value) => yScale(+value.end))
       .attr('width', 25)
       .attr('height', (value) => yScale(+value.start) - yScale(+value.end))
@@ -222,6 +246,16 @@ const TimeLine: React.FC<Props> = ({
       )
       .attr('stroke-width', '2px');
 
+    const Axis = svg.append('g');
+    Axis.style('transform', `translateX(${lineMargin}px)`)
+      .attr('stroke-width', 2)
+      .call(yAxis)
+      .selectAll('text')
+      .attr('font-family', 'Josefin Sans, serif')
+      .attr('font-size', '1.4em')
+      .attr('fill', DarkLinenPaper)
+      .style('transform', `translateX(${-lineMargin + 40}px)`);
+
     const OccupationLabels = svg
       .append('g')
       .selectAll('rect')
@@ -230,34 +264,34 @@ const TimeLine: React.FC<Props> = ({
     OccupationLabels.join('rect')
       .attr('width', (d) => d.title.length * 11)
       .attr('height', 20)
-      .attr('x', 200)
-      .attr('y', (_, i) => i * dim.textPadding)
+      .attr('x', textMargin)
+      .attr('y', (_, i) => i * textSpacing)
       .attr('fill', (d) => categoryColor(d.category));
 
     OccupationLabels.join('path')
       .attr('d', (d, i) => {
         //const randomOffset = Math.floor(Math.random() * 8) + 155;
-        return `M130 ${
-          yScale(d.start) -16
-        } L${160} ${
-          yScale(d.start) -16
-        } L${170} ${i * dim.textPadding + 10} L200 ${i * dim.textPadding + 10}`;
+        return `M${lineMargin + 25} ${yScale(d.start) - 16} L${
+          textMargin - lineMargin - 5
+        } ${yScale(d.start) - 16} L${textMargin - lineMargin + 5} ${
+          i * textSpacing + 10
+        } L${textMargin} ${i * textSpacing + 10}`;
       })
       .attr('fill', 'none')
       .attr('stroke', (d) => categoryColor(d.category))
       .attr('stroke-width', '2px');
 
     OccupationLabels.join('text')
-      .attr('x', 208)
-      .attr('y', (_, i) => i * dim.textPadding + 17)
+      .attr('x', textMargin + 8)
+      .attr('y', (_, i) => i * textSpacing + 17)
       .text((value) => value.title)
       .attr('font-family', 'Josefin Sans, serif')
       .attr('font-size', '1.4em')
       .attr('fill', DarkLinenPaper);
 
     OccupationLabels.join('text')
-      .attr('x', 208)
-      .attr('y', (_, i) => i * dim.textPadding + 35)
+      .attr('x', textMargin + 8)
+      .attr('y', (_, i) => i * textSpacing + 35)
       .text((value) => `${value.company}, ${value.location}`)
       .attr('font-family', 'Maven Pro, sans-serif')
       .attr('font-size', '1em')
@@ -265,14 +299,14 @@ const TimeLine: React.FC<Props> = ({
       .style('font-style', 'italic');
 
     OccupationLabels.join('text')
-      .attr('x', 232)
-      .attr('y', (_, i) => i * dim.textPadding + 55)
+      .attr('x', textMargin)
+      .attr('y', (_, i) => i * textSpacing + 55)
       .attr('dy', 0)
       .text((value) => value.description)
       .attr('font-family', 'Maven Pro, sans-serif')
       .attr('font-size', '1em')
       .attr('fill', DarkLinenPaper)
-      .call(wrap, 550);
+      .call(wrap, textWidth, textMargin);
 
     const LifeEvents = svg.append('g').selectAll('line').data(events);
     LifeEvents.join(
@@ -281,7 +315,7 @@ const TimeLine: React.FC<Props> = ({
       (exit) => exit.transition().style('opacity', 0).remove()
     )
       .attr('x1', 25)
-      .attr('x2', 200)
+      .attr('x2', textMargin)
       .attr('y1', (value) => yScale(value.date))
       .attr('y2', (value) => yScale(value.date))
       .attr('stroke', DarkLinenPaper)
@@ -303,11 +337,11 @@ const TimeLine: React.FC<Props> = ({
   }, [occupations]);
 
   return (
-    <div>
+    <div ref={windowRef}>
       <svg
         style={{ background, overflow: 'visible' }}
-        width={width}
-        height={dim.textPadding * occupations.length}
+        width={windowRef.current ? windowRef.current.offsetWidth : width}
+        height={diagramHeight}
         ref={svgRef}
       />
     </div>

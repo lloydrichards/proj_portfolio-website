@@ -29,7 +29,7 @@ const ReviewCard: React.FC<Review> = ({
   };
 
   return (
-    <Card>
+    <Card style={{height:"100%"}}>
       <CardHeader></CardHeader>
       <CardContent>
         {starRating(stars).map((i) =>
@@ -39,9 +39,8 @@ const ReviewCard: React.FC<Review> = ({
             <StarBorderRoundedIcon style={{ color: color }} />
           )
         )}
-        <H4>{date}</H4>
-        <Content>{review}</Content>
-        <H4>~{reviewer}</H4>
+        <H4 style={{color:"lightgrey"}}>{reviewer}, {date}</H4>
+        <Content style={{padding:"0.5em"}}>{review}</Content>
       </CardContent>
     </Card>
   );

@@ -9,6 +9,8 @@ import {
   H2,
 } from '../../components/layout/StyledLayoutComponents';
 import ReviewCard from '../../components/blog/ReviewCard';
+import SeriesNavigation from '../../components/blog/SeriesNavigation';
+import { BlogData } from '../../components/data/BlogData';
 
 const Blog001 = () => {
   return (
@@ -298,17 +300,96 @@ const Blog001 = () => {
         </ContentList>
       </Content>
       <H3 style={{ textAlign: 'left' }}>Customer Feedback</H3>
-      <Grid container>
-        <Grid item xs={12} sm={6} md={4}>
+      <Content>
+        Looking at the{' '}
+        <a href='https://play.google.com/store/apps/details?id=co.feeld&hl=en&showAllReviews=true'>
+          Google Play
+        </a>{' '}
+        and{' '}
+        <a href='https://apps.apple.com/us/app/feeld-for-couples-singles/id887914690#see-all/reviews'>
+          App Store
+        </a>{' '}
+        there are some real gems of user feedback. On average the Google Play
+        has 2.4/5 stars (7,548 reviews) and the App Store has 4.3/5 stars (12k
+        reviews).
+      </Content>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={4} md={3}>
           <ReviewCard
             color='#fc4600'
-            reviewer=''
+            reviewer='Two times noforn'
             date='28/4/2019'
+            stars={1}
+            review='Sounds awesome. Sadly, it is the opposite. Ugh. Really bad.'
+          />
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <ReviewCard
+            color='#fc4600'
+            reviewer='3 for 3nder'
+            date='1/9/2019'
             stars={3}
-            review=''
+            review='Great but not Great.  The idea of this app is great, which is exactly what brought me here in the first place but I have to admit from a technical point of view it’s not very good.'
+          />
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <ReviewCard
+            color='#fc4600'
+            reviewer='Bernadette Pierce'
+            date='1/6/2019'
+            stars={1}
+            review='So Glitchy... The concept of this app is by far the best of its kind. But I simply cant get over how many bugs there are, or things that dont work correctly.'
+          />
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <ReviewCard
+            color='#fc4600'
+            reviewer='888Noeljp'
+            date='11/1/2020'
+            stars={2}
+            review='Want to like it, but ... in practice not working for me.'
+          />
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <ReviewCard
+            color='#fc4600'
+            reviewer='Emil Ferent'
+            date='10/8/2020'
+            stars={2}
+            review='I like the content, but the latest update, where they rushed to implement pay for likes just like in Tinder demonstrates how poor the app is built'
+          />
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <ReviewCard
+            color='#fc4600'
+            reviewer='The dude'
+            date='13/9/2019'
+            stars={1}
+            review='Concept is great, execution of the app is not.  The app idea is great and the user base is also a good size. But the people who own the app are most likely not the developers and have probably outsourced the work elsewhere.'
           />
         </Grid>
       </Grid>
+      <Content>
+        What is of particular notice when reading through the reviews is that
+        several themes come up. Leaving out those who were just frustrated they
+        didn't get more matches, there seems to three main greavances:
+      </Content>
+      <ContentList>
+        <li>The app is too glitchy and has too many technical issues.</li>
+        <li>
+          The concept is great, but the execution doesn't live up to the idea.
+        </li>
+        <li>The paid features do not add value to the experiance.</li>
+      </ContentList>
+      <Content>
+        I'm also quite interested in the massive difference in rating between
+        the android and apple version. Whether this means that there are two
+        versions or if android users are just more honest? Certainly there seems
+        to be more feedback from the developers on the App Store, but at the
+        same time most of the reviewers do not give their name and give star
+        rating quite different from the text review.
+      </Content>
+      <SeriesNavigation forwardNav={BlogData.find((i) => i.id == 22)} />
     </Layout>
   );
 };

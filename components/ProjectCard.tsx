@@ -41,7 +41,11 @@ const ProjectCard: React.FC<ProjCard> = ({ project }) => {
         }}
       >
         <img
-          style={{ position: 'absolute', width: '100%', opacity: hovered ? '50%': "10%" }}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            opacity: hovered ? '50%' : '10%',
+          }}
           src={project.image}
           alt={project.title}
         />

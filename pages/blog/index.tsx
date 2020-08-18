@@ -43,7 +43,7 @@ function Blog() {
                     size='small'
                     style={{ marginLeft: 'auto' }}
                   >
-                    Read More
+                    Read Article
                   </Button>
                 }
                 title={i.title}

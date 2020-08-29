@@ -73,7 +73,7 @@ export const ProjectData: Array<Project> = [
     description: 'Data Visualization comparing New York City and Zurich',
     href: '/',
     category: ['Design'],
-    image: '/images/thumb_interactivethings_nyc.png',
+    image: '/images/projects/interactivethings_nyc/thumb_interactivethings_nyc.png',
     link: '/portfolio/interactivethings_nyc',
   },
   {

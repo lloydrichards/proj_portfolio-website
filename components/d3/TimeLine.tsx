@@ -1,16 +1,17 @@
 import React, { useRef, useEffect } from 'react';
 import {
   Selection,
-  select,
   scaleTime,
   axisLeft,
   timeYear,
   timeFormat,
   min,
-  EnterElement,
   timeMonth,
 } from 'd3';
+import { select } from 'd3-selection';
+import 'd3-transition';
 import { DarkLinenPaper } from '../layout/StyledLayoutComponents';
+import useResizeObserver from '../helpers/useResizeObserver';
 
 export interface Occupation {
   id: string;
@@ -56,14 +57,10 @@ interface Props {
   background: string;
 }
 
-const TimeLine: React.FC<Props> = ({
-  width,
-  occupations,
-  events,
-  background,
-}) => {
+const TimeLine: React.FC<Props> = ({ occupations, background }) => {
   const svgRef = useRef(null);
-  const windowRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef(null);
+  const dimensions = useResizeObserver(wrapperRef);
 
   const lookupInRange = (
     corner: Date,
@@ -109,12 +106,7 @@ const TimeLine: React.FC<Props> = ({
   };
 
   const wrap = (
-    text: Selection<
-      Element | EnterElement | Document | Window | SVGTextElement | null,
-      Occupation,
-      SVGGElement,
-      unknown
-    >,
+    text: Selection<SVGTextElement, Occupation, null, unknown>,
     width: number,
     textMargin: number
   ) => {
@@ -161,33 +153,29 @@ const TimeLine: React.FC<Props> = ({
     textSpacing * occupations.filter((i) => i.selected == true).length;
 
   useEffect(() => {
-    if (windowRef.current) {
-      if (windowRef.current.offsetWidth < 600) {
-        lineMargin = 0;
-        textMargin = 50;
-        textWidth = windowRef.current.offsetWidth - 75;
-        axisLabelMargin = 50;
-        textSpacing = 190;
-      } else if (windowRef.current.offsetWidth < 960) {
-        lineMargin = 25;
-        textMargin = 150;
-        axisLabelMargin = 50;
-        textWidth = windowRef.current.offsetWidth - 200;
-        textSpacing = 135;
-      } else {
-        lineMargin = 100;
-        textMargin = 300;
-        textWidth = windowRef.current.offsetWidth - 300;
-        textSpacing = 110;
-      }
-      diagramHeight =
-        textSpacing * occupations.filter((i) => i.selected == true).length;
-    }
-
-    const clean = select(svgRef.current);
-    clean.selectAll('g').remove();
-
     const svg = select(svgRef.current);
+    if (!dimensions) return;
+
+    if (dimensions.width < 600) {
+      lineMargin = 0;
+      textMargin = 50;
+      textWidth = dimensions.width - 75;
+      axisLabelMargin = 50;
+      textSpacing = 190;
+    } else if (dimensions.width < 960) {
+      lineMargin = 25;
+      textMargin = 150;
+      axisLabelMargin = 50;
+      textWidth = dimensions.width - 200;
+      textSpacing = 135;
+    } else {
+      lineMargin = 100;
+      textMargin = 300;
+      textWidth = dimensions.width - 300;
+      textSpacing = 110;
+    }
+    diagramHeight =
+      textSpacing * occupations.filter((i) => i.selected == true).length;
 
     const yScale = scaleTime()
       .domain([
@@ -203,11 +191,36 @@ const TimeLine: React.FC<Props> = ({
 
     const yAxisMonth = axisLeft<any>(yScale).ticks(timeMonth, 1).tickSize(3);
 
-    const BackBoxes = svg
-      .append('g')
-      .selectAll('rect')
-      .data(occupations.filter((d) => orderInRange(d, true, false, false)));
-    BackBoxes.join('rect')
+    svg
+      .select<SVGGElement>('.y-axis')
+      .style('transform', `translateX(${lineMargin}px)`)
+      .transition()
+      .duration(1000)
+      .attr('stroke-width', 2)
+      .call(yAxis)
+      .selectAll('text')
+      .attr('font-family', 'Josefin Sans, serif')
+      .attr('font-size', '1.6em')
+      .attr('fill', DarkLinenPaper)
+      .style('transform', `translateX(${axisLabelMargin}px)`);
+
+    svg
+      .select<SVGGElement>('.x-axis')
+      .style('transform', `translateX(${lineMargin}px)`)
+      .attr('stroke-width', 1)
+      .transition()
+      .duration(1000)
+      .call(yAxisMonth)
+      .selectAll('text')
+      .attr('fill', 'none');
+
+    svg
+      .selectAll('.data-back')
+      .data(occupations.filter((d) => orderInRange(d, true, false, false)))
+      .join('rect')
+      .attr('class', 'data-back')
+      .transition()
+      .duration(1000)
       .attr('x', lineMargin + 10)
       .attr('y', (value) => yScale(+value.end))
       .attr('width', 35)
@@ -220,11 +233,13 @@ const TimeLine: React.FC<Props> = ({
       )
       .attr('stroke-width', '2px');
 
-    const MidBoxes = svg
-      .append('g')
-      .selectAll('rect')
-      .data(occupations.filter((d) => orderInRange(d, false, true, false)));
-    MidBoxes.join('rect')
+    svg
+      .selectAll('.data-mid')
+      .data(occupations.filter((d) => orderInRange(d, false, true, false)))
+      .join('rect')
+      .attr('class', 'data-mid')
+      .transition()
+      .duration(1000)
       .attr('x', lineMargin + 5)
       .attr('y', (value) => yScale(+value.end))
       .attr('width', 30)
@@ -237,11 +252,13 @@ const TimeLine: React.FC<Props> = ({
       )
       .attr('stroke-width', '2px');
 
-    const FrontBoxes = svg
-      .append('g')
-      .selectAll('rect')
-      .data(occupations.filter((d) => orderInRange(d, false, false, true)));
-    FrontBoxes.join('rect')
+    svg
+      .selectAll('.data-front')
+      .data(occupations.filter((d) => orderInRange(d, false, false, true)))
+      .join('rect')
+      .attr('class', 'data-front')
+      .transition()
+      .duration(1000)
       .attr('x', lineMargin)
       .attr('y', (value) => yScale(+value.end))
       .attr('width', 25)
@@ -254,35 +271,26 @@ const TimeLine: React.FC<Props> = ({
       )
       .attr('stroke-width', '2px');
 
-    const Axis = svg.append('g');
-    Axis.style('transform', `translateX(${lineMargin}px)`)
-      .attr('stroke-width', 2)
-      .call(yAxis)
-      .selectAll('text')
-      .attr('font-family', 'Josefin Sans, serif')
-      .attr('font-size', '1.6em')
-      .attr('fill', DarkLinenPaper)
-      .style('transform', `translateX(${axisLabelMargin}px)`);
-
-    Axis.append('g')
-      .attr('stroke-width', 1)
-      .call(yAxisMonth)
-      .selectAll('text')
-      .attr('fill', "none")
-
-    const OccupationLabels = svg
-      .append('g')
-      .selectAll('rect')
-      .data(occupations.filter((d) => d.selected));
-
-    OccupationLabels.join('rect')
+    svg
+      .selectAll('.label-occupation')
+      .data(occupations.filter((d) => d.selected))
+      .join('rect')
+      .attr('class', 'label-occupation')
+      .transition()
+      .duration(1000)
       .attr('width', (d) => d.title.length * 11)
       .attr('height', 20)
       .attr('x', textMargin)
       .attr('y', (_, i) => i * textSpacing)
       .attr('fill', (d) => categoryColor(d.category));
 
-    OccupationLabels.join('path')
+    svg
+      .selectAll('.path-occupation')
+      .data(occupations.filter((d) => d.selected))
+      .join('path')
+      .attr('class', 'path-occupation')
+      .transition()
+      .duration(1000)
       .attr('d', (d, i) => {
         //const randomOffset = Math.floor(Math.random() * 8) + 155;
         return `M${lineMargin + 25} ${yScale(d.start) - 16} L${
@@ -295,7 +303,13 @@ const TimeLine: React.FC<Props> = ({
       .attr('stroke', (d) => categoryColor(d.category))
       .attr('stroke-width', '2px');
 
-    OccupationLabels.join('text')
+    svg
+      .selectAll<SVGTextElement, any>('.text-title-occupation')
+      .data(occupations.filter((d) => d.selected))
+      .join('text')
+      .attr('class', 'text-title-occupation')
+      .transition()
+      .duration(1000)
       .attr('x', textMargin + 8)
       .attr('y', (_, i) => i * textSpacing + 17)
       .text((value) => value.title)
@@ -303,7 +317,13 @@ const TimeLine: React.FC<Props> = ({
       .attr('font-size', '1.4em')
       .attr('fill', DarkLinenPaper);
 
-    OccupationLabels.join('text')
+    svg
+      .selectAll<SVGTextElement, any>('.text-subtitle-occupation')
+      .data(occupations.filter((d) => d.selected))
+      .join('text')
+      .attr('class', 'text-subtitle-occupation')
+      .transition()
+      .duration(1000)
       .attr('x', textMargin + 8)
       .attr('y', (_, i) => i * textSpacing + 35)
       .text((value) => `${value.company}, ${value.location}`)
@@ -312,7 +332,11 @@ const TimeLine: React.FC<Props> = ({
       .attr('fill', DarkLinenPaper)
       .style('font-style', 'italic');
 
-    OccupationLabels.join('text')
+    svg
+      .selectAll<SVGTextElement, any>('.text-desc-occupation')
+      .data(occupations.filter((d) => d.selected))
+      .join('text')
+      .attr('class', 'text-desc-occupation')
       .attr('x', textMargin)
       .attr('y', (_, i) => i * textSpacing + 55)
       .attr('dy', 0)
@@ -348,16 +372,19 @@ const TimeLine: React.FC<Props> = ({
     //   .attr('font-family', 'Josefin Sans, serif')
     //   .attr('font-size', '0.6em')
     //   .attr('fill', DarkLinenPaper);
-  }, [occupations]);
+  }, [occupations, dimensions]);
 
   return (
-    <div ref={windowRef}>
+    <div style={{ height: '100%' }} ref={wrapperRef}>
       <svg
         style={{ background, overflow: 'visible' }}
-        width={windowRef.current ? windowRef.current.offsetWidth : width}
+        width='100%'
         height={diagramHeight}
         ref={svgRef}
-      />
+      >
+        <g className='x-axis' />
+        <g className='y-axis' />
+      </svg>
     </div>
   );
 };

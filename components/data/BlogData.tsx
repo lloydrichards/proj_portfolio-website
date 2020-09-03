@@ -185,4 +185,13 @@ export const BlogData: Array<Blog> = [
     href: '/blog/002',
     tag: ['Design'],
   },
+  {
+    id: 23,
+    date: new Date('2020-9-3'),
+    title: 'Blog 003 - Interview Coding Task',
+    description:
+      'Coding task for a Frontend Dev Position.  Creating an App in 90min based on task contraints.',
+    href: '/blog/003',
+    tag: ['Design'],
+  },
 ];

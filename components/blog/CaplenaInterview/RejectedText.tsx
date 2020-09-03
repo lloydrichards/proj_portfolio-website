@@ -4,12 +4,11 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-  Typography,
 } from '@material-ui/core';
 import SentimentSatisfiedOutlinedIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import SentimentDissatisfiedOutlinedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
-import { Quote } from '../App';
+import { Quote } from './InterviewApp';
 
 interface Props {
   quote: Quote;

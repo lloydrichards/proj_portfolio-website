@@ -1,5 +1,5 @@
 import React from 'react';
-import { Quote } from '../App';
+import { Quote } from './InterviewApp';
 import {
   Card,
   Typography,

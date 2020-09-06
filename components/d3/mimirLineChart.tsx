@@ -85,7 +85,6 @@ const LineChartMimir: React.FC<Props> = ({ data }) => {
       .on('start brush end', (e: any) => {
         if (e.selection) {
           const timeSelection = e.selection.map(xScale.invert);
-          console.log(timeSelection);
           setSelection(timeSelection);
         }
       });
@@ -106,16 +105,23 @@ const LineChartMimir: React.FC<Props> = ({ data }) => {
     svg
       .selectAll('.data-point')
       .data(data)
-      .join('circle')
+      .join((enter) =>
+        enter
+          .append('circle')
+          .attr('cx', (d) => xScale(+d.timestamp))
+          .attr('cy', (d) => yScale(d.iaq))
+      )
       .attr('class', 'data-point')
+      .transition()
+      .duration(1000)
+      .attr('cx', (d) => xScale(+d.timestamp))
+      .attr('cy', (d) => yScale(d.iaq))
       .attr('r', (d) =>
         new Date(+d.timestamp) >= selection[0] &&
         new Date(+d.timestamp) <= selection[1]
           ? 4
           : 2
       )
-      .attr('cx', (d) => xScale(+d.timestamp))
-      .attr('cy', (d) => yScale(d.iaq))
       .attr('fill', (d) =>
         new Date(+d.timestamp) >= selection[0] &&
         new Date(+d.timestamp) <= selection[1]
@@ -124,10 +130,31 @@ const LineChartMimir: React.FC<Props> = ({ data }) => {
       );
 
     svg
+      .selectAll('.tooltip')
+      .data(data)
+      .join('text')
+      .attr('class', 'tooltip')
+      .transition()
+      .duration(2000)
+      .attr('opacity', (d) =>
+        new Date(+d.timestamp) >= selection[0] &&
+        new Date(+d.timestamp) <= selection[1]
+          ? 1
+          : 0
+      )
+      .attr('x', (d) => xScale(+d.timestamp))
+      .attr('y', (d) => yScale(d.iaq) - 8)
+      .attr('font-size', '10px')
+      .attr('text-anchor', 'middle')
+      .text((d) => `${d.iaq.toFixed(0)}`);
+
+    svg
       .selectAll('.data-line')
       .data([data])
       .join('path')
       .attr('class', 'data-line')
+      .transition()
+      .duration(1000)
       .attr('opacity', 1)
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')

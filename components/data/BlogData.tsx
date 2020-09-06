@@ -194,4 +194,13 @@ export const BlogData: Array<Blog> = [
     href: '/blog/003',
     tag: ['Design'],
   },
+  {
+    id: 24,
+    date: new Date('2020-9-6'),
+    title: '021 - RxJS, Firestore and D3',
+    description:
+      'In this little experiment, I want to create a D3 chart using data from a Firebase project Im working on, but do it using RxJS so that the data is updated in realtime, but without calling all the values at ones.',
+    href: '/experiment/021',
+    tag: ['Code'],
+  },
 ];

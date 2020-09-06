@@ -65,7 +65,7 @@ const Experiment020 = () => {
 
   return (
     <Layout title='Experiment | 020'>
-      <h2>019 - D3.js and Line Chart</h2>
+      <h2>020 - D3.js and Line Chart</h2>
       <h4>Date: July 22nd 2020</h4>
       <p></p>
       <svg

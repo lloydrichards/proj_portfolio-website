@@ -6,6 +6,7 @@ import {
   debounceTime,
   mergeMap,
 } from 'rxjs/operators';
+import { collectionData } from 'rxfire/firestore';
 import Layout from '../../components/layout/Layout';
 import {
   H2,
@@ -15,6 +16,18 @@ import {
   LinenPaper,
 } from '../../components/layout/StyledLayoutComponents';
 import useObservable from '../../components/helpers/useObservable';
+import firebase from '../../libs/firebase';
+import LineChartMimir from '../../components/d3/mimirLineChart';
+
+const db = firebase.firestore();
+
+const dataObservable = collectionData(
+  db
+    .collection('mimirReading')
+    .where('deviceId', '==', 'fFrU8brLxN5Wea7PQwJg')
+    .orderBy('timestamp', 'desc')
+    .limit(48)
+);
 
 const getPokemonByName = async (name: string) => {
   const { results: allPokemon } = await fetch(
@@ -34,8 +47,10 @@ let searchResultObservable = searchSubject.pipe(
 const Experiment021 = () => {
   const [search, setSearch] = useState<string>();
   const [results, setResults] = useState<Array<any>>([]);
+  const [readings, setReadings] = useState<Array<any>>([]);
 
   useObservable(searchResultObservable, setResults);
+  useObservable(dataObservable, setReadings);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -82,13 +97,30 @@ const Experiment021 = () => {
           onChange={handleSearchChange}
         />
         <H4>Matching Pokemon:</H4>
-        <pre>{JSON.stringify(results, null, 2)}</pre>
+        <pre>{JSON.stringify(results, null, 3)}</pre>
       </Content>
       <Content>
         With that done, its now time to look at how to get infomation from
         Firestore. What I want to have is a list off all the readings for a
         certain device which will update when a new reading comes in.
       </Content>
+
+      <p>
+        <H4>Last Five Readings:</H4>
+        <ul>
+          {readings.slice(0, 5).map((v) => (
+            <li key={v.timestamp}>
+              {new Date(+v.timestamp).toTimeString()} : {v.iaq}
+            </li>
+          ))}
+        </ul>
+      </p>
+      <H4>Charts:</H4>
+      <div style={{ height: '300px', width: '100%', margin: '3rem' }}>
+        <LineChartMimir data={readings} />
+      </div>
+      <H4>Raw Results:</H4>
+      <pre>{JSON.stringify(readings, null, 3)}</pre>
     </Layout>
   );
 };

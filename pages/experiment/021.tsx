@@ -32,7 +32,7 @@ const dataObservable = collectionData(
 
 const getPokemonByName = async (name: string) => {
   const { results: allPokemon } = await fetch(
-    'https://pokeapi.co/api/v2/pokemon/?limit=10000'
+    'https://pokeapi.co/api/v2/pokemon/?limit=1000'
   ).then((res) => res.json());
   return allPokemon.filter((i: any) => i.name.includes(name));
 };
@@ -110,10 +110,10 @@ const Experiment021 = () => {
       <pre
         style={{
           backgroundColor: DarkLinenPaper,
-          color:"snow",
+          color: 'snow',
           overflow: 'auto',
           fontFamily: 'Monaco, monospace',
-          margin:"1rem",
+          margin: '1rem',
           padding: '0 1em',
         }}
       >

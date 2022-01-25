@@ -17,8 +17,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "allowSyntheticDefaultImports": true,
-    "types": ["resize-observer-browser"]
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]

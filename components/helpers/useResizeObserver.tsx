@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import ResizeObserver from 'resize-observer-polyfill';
 
 const useResizeObserver = (
-  ref: React.MutableRefObject<HTMLObjectElement | null>,
+  ref: React.MutableRefObject<HTMLObjectElement | null>
 ) => {
   const [dimensions, setDimentions] = useState<DOMRectReadOnly>();
   useEffect(() => {

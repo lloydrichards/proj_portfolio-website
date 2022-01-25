@@ -8,11 +8,11 @@ type Props = {
   hourly: any;
 };
 
-const Experiment002: NextPage<Props> = () => {
+const Experiment002: NextPage<Props> = (props) => {
   return (
     <Layout title="Experiment | 002">
       <h2>001 - Working with API's</h2>
-      <p>The current temperature is </p>
+      <p>The current temperature is {props?.current?.temp}</p>
       <div></div>
     </Layout>
   );

@@ -2,6 +2,77 @@ import { Occupation, LifeEvent } from '../d3/TimeLine';
 
 export const occupationData: Array<Occupation> = [
   {
+    id: '101',
+    selected: true,
+    title: 'Events Committee Member',
+    company: 'Outlier Conference',
+    location: 'Online',
+    description:
+      'Volunteer on the Events Committee to help bring together the online Outlier Conference, a 2 day online event for Data Visualization.  My current focus in the committee is keeping the website uptodate and developing an app for the conference schedule.',
+    skills: [
+      'Web Design(Figma)',
+      'App Development (Flutter)',
+      'Frontend(Typescript, React)',
+    ],
+    character: [
+      'Multidisciplinary Teamplayer',
+      'Self Motivated',
+      'Leadership',
+    ],
+    category: 'Volunteer',
+    tag: ['coder'],
+    start: new Date('2020-06-01'),
+    end: new Date(),
+  },
+  {
+    id: '100',
+    selected: true,
+    title: 'Data Visualization Specialist',
+    company: 'Vatorex AG.',
+    location: 'Switzerland',
+    description:
+      'Took charge of the development of new digital products and updating existing ones.  Working through UX to design to code and on to production.  Work closely with the CEO on bringing ideas to the development team and organizing work loads and schedules.',
+    skills: [
+      'Web Design(Figma)',
+      'App Development (Flutter)',
+      'Backend Development (GCP)',
+      'Data Visualization (D3.js)',
+    ],
+    character: [
+      'Multidisciplinary Teamplayer',
+      'Self Motivated',
+      'Leadership',
+    ],
+    category: 'Work',
+    tag: ['coder'],
+    start: new Date('2021-04-01'),
+    end: new Date(),
+  },
+  {
+    id: '099',
+    selected: true,
+    title: 'Data Visualization Intern',
+    company: 'Vatorex AG.',
+    location: 'Switzerland',
+    description:
+      'Building digital products and design data structures for improving exisiting databases.  Build the companies first design system to create cohersion across platforms.  Worked with a web and app developer to bring design into production.',
+    skills: [
+      'Web Design(Figma)',
+      'Frontend(Typescript, React)',
+      'Data Architecture (GCP)',
+      'Data Visualization (D3.js)',
+    ],
+    character: [
+      'Multidisciplinary Teamplayer',
+      'Self Motivated',
+      'Problem Solver',
+    ],
+    category: 'Work',
+    tag: ['coder'],
+    start: new Date('2020-10-01'),
+    end: new Date('2021-03-31'),
+  },
+  {
     id: '001',
     selected: true,
     title: 'Data Visualization Intern',
@@ -134,7 +205,7 @@ export const occupationData: Array<Occupation> = [
   {
     id: '008',
     selected: true,
-    title: 'Farm Manager',
+    title: 'Volunteer',
     company: 'La Loma Vida',
     location: 'Spain',
     description:

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 import {
   Selection,
   scaleTime,
@@ -7,11 +7,11 @@ import {
   timeFormat,
   min,
   timeMonth,
-} from 'd3';
-import { select } from 'd3-selection';
-import 'd3-transition';
-import { DarkLinenPaper } from '../layout/StyledLayoutComponents';
-import useResizeObserver from '../helpers/useResizeObserver';
+} from "d3";
+import { select } from "d3-selection";
+import "d3-transition";
+import { DarkLinenPaper } from "../layout/StyledLayoutComponents";
+import useResizeObserver from "../helpers/useResizeObserver";
 
 export interface Occupation {
   id: string;
@@ -64,7 +64,7 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
 
   const lookupInRange = (
     corner: Date,
-    allValues: Array<Occupation>
+    allValues: Array<Occupation>,
   ): boolean => {
     let result: boolean = false;
     allValues.forEach((i) => {
@@ -78,12 +78,12 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
 
   const categoryColor = (category: keyof Category) => {
     switch (category) {
-      case 'Work':
-        return '#CBE0F2';
-      case 'Education':
-        return '#EECEC9';
-      case 'Volunteer':
-        return '#F0E2CE';
+      case "Work":
+        return "#CBE0F2";
+      case "Education":
+        return "#EECEC9";
+      case "Volunteer":
+        return "#F0E2CE";
     }
   };
 
@@ -91,7 +91,7 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
     value: Occupation,
     backArg: any,
     midArg: any,
-    frontArg: any
+    frontArg: any,
   ): boolean | number | string => {
     if (
       lookupInRange(value.end, occupations) &&
@@ -108,7 +108,7 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
   const wrap = (
     text: Selection<SVGTextElement, Occupation, null, unknown>,
     width: number,
-    textMargin: number
+    textMargin: number,
   ) => {
     text.each(function () {
       var text = select(this),
@@ -117,26 +117,26 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
         line: string[] = [],
         lineNumber = 0,
         lineHeight = 1.1, // ems
-        y = text.attr('y'),
-        dy = parseFloat(text.attr('dy')),
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
         tspan = text
           .text(null)
-          .append('tspan')
-          .attr('x', textMargin + 16)
-          .attr('y', y);
+          .append("tspan")
+          .attr("x", textMargin + 16)
+          .attr("y", y);
 
       while ((word = words.pop())) {
         line.push(word);
-        tspan.text(line.join(' '));
+        tspan.text(line.join(" "));
         if (tspan.node()!.getComputedTextLength() > width) {
           line.pop();
-          tspan.text(line.join(' '));
+          tspan.text(line.join(" "));
           line = [word];
           tspan = text
-            .append('tspan')
-            .attr('x', textMargin + 16)
-            .attr('y', y)
-            .attr('dy', `${++lineNumber * lineHeight + dy}em`)
+            .append("tspan")
+            .attr("x", textMargin + 16)
+            .attr("y", y)
+            .attr("dy", `${++lineNumber * lineHeight + dy}em`)
             .text(word);
         }
       }
@@ -179,7 +179,7 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
 
     const yScale = scaleTime()
       .domain([
-        min(occupations, (d) => d.start) || new Date('1988-04-18'),
+        min(occupations, (d) => d.start) || new Date("1988-04-18"),
         new Date(),
       ])
       .range([diagramHeight, 0]);
@@ -187,111 +187,111 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
     const yAxis = axisLeft<any>(yScale)
       .ticks(timeYear, 1)
       .tickSize(5)
-      .tickFormat(timeFormat('%Y'));
+      .tickFormat(timeFormat("%Y"));
 
     const yAxisMonth = axisLeft<any>(yScale).ticks(timeMonth, 1).tickSize(3);
 
     svg
-      .select<SVGGElement>('.y-axis')
-      .style('transform', `translateX(${lineMargin}px)`)
+      .select<SVGGElement>(".y-axis")
+      .style("transform", `translateX(${lineMargin}px)`)
       .transition()
       .duration(1000)
-      .attr('stroke-width', 2)
+      .attr("stroke-width", 2)
       .call(yAxis)
-      .selectAll('text')
-      .attr('font-family', 'Josefin Sans, serif')
-      .attr('font-size', '1.6em')
-      .attr('fill', DarkLinenPaper)
-      .style('transform', `translateX(${axisLabelMargin}px)`);
+      .selectAll("text")
+      .attr("font-family", "Josefin Sans, serif")
+      .attr("font-size", "1.6em")
+      .attr("fill", DarkLinenPaper)
+      .style("transform", `translateX(${axisLabelMargin}px)`);
 
     svg
-      .select<SVGGElement>('.x-axis')
-      .style('transform', `translateX(${lineMargin}px)`)
-      .attr('stroke-width', 1)
+      .select<SVGGElement>(".x-axis")
+      .style("transform", `translateX(${lineMargin}px)`)
+      .attr("stroke-width", 1)
       .transition()
       .duration(1000)
       .call(yAxisMonth)
-      .selectAll('text')
-      .attr('fill', 'none');
+      .selectAll("text")
+      .attr("fill", "none");
 
     svg
-      .selectAll('.data-back')
+      .selectAll(".data-back")
       .data(occupations.filter((d) => orderInRange(d, true, false, false)))
-      .join('rect')
-      .attr('class', 'data-back')
+      .join("rect")
+      .attr("class", "data-back")
       .transition()
       .duration(1000)
-      .attr('x', lineMargin + 10)
-      .attr('y', (value) => yScale(+value.end))
-      .attr('width', 35)
-      .attr('height', (value) => yScale(+value.start) - yScale(+value.end))
-      .attr('fill', (value) =>
-        value.selected ? categoryColor(value.category) : background
+      .attr("x", lineMargin + 10)
+      .attr("y", (value) => yScale(+value.end))
+      .attr("width", 35)
+      .attr("height", (value) => yScale(+value.start) - yScale(+value.end))
+      .attr("fill", (value) =>
+        value.selected ? categoryColor(value.category) : background,
       )
-      .attr('stroke', (value) =>
-        value.selected ? background : categoryColor(value.category)
+      .attr("stroke", (value) =>
+        value.selected ? background : categoryColor(value.category),
       )
-      .attr('stroke-width', '2px');
+      .attr("stroke-width", "2px");
 
     svg
-      .selectAll('.data-mid')
+      .selectAll(".data-mid")
       .data(occupations.filter((d) => orderInRange(d, false, true, false)))
-      .join('rect')
-      .attr('class', 'data-mid')
+      .join("rect")
+      .attr("class", "data-mid")
       .transition()
       .duration(1000)
-      .attr('x', lineMargin + 5)
-      .attr('y', (value) => yScale(+value.end))
-      .attr('width', 30)
-      .attr('height', (value) => yScale(+value.start) - yScale(+value.end))
-      .attr('fill', (value) =>
-        value.selected ? categoryColor(value.category) : background
+      .attr("x", lineMargin + 5)
+      .attr("y", (value) => yScale(+value.end))
+      .attr("width", 30)
+      .attr("height", (value) => yScale(+value.start) - yScale(+value.end))
+      .attr("fill", (value) =>
+        value.selected ? categoryColor(value.category) : background,
       )
-      .attr('stroke', (value) =>
-        value.selected ? background : categoryColor(value.category)
+      .attr("stroke", (value) =>
+        value.selected ? background : categoryColor(value.category),
       )
-      .attr('stroke-width', '2px');
+      .attr("stroke-width", "2px");
 
     svg
-      .selectAll('.data-front')
+      .selectAll(".data-front")
       .data(occupations.filter((d) => orderInRange(d, false, false, true)))
-      .join('rect')
-      .attr('class', 'data-front')
+      .join("rect")
+      .attr("class", "data-front")
       .transition()
       .duration(1000)
-      .attr('x', lineMargin)
-      .attr('y', (value) => yScale(+value.end))
-      .attr('width', 25)
-      .attr('height', (value) => yScale(+value.start) - yScale(+value.end))
-      .attr('fill', (value) =>
-        value.selected ? categoryColor(value.category) : background
+      .attr("x", lineMargin)
+      .attr("y", (value) => yScale(+value.end))
+      .attr("width", 25)
+      .attr("height", (value) => yScale(+value.start) - yScale(+value.end))
+      .attr("fill", (value) =>
+        value.selected ? categoryColor(value.category) : background,
       )
-      .attr('stroke', (value) =>
-        value.selected ? background : categoryColor(value.category)
+      .attr("stroke", (value) =>
+        value.selected ? background : categoryColor(value.category),
       )
-      .attr('stroke-width', '2px');
+      .attr("stroke-width", "2px");
 
     svg
-      .selectAll('.label-occupation')
+      .selectAll(".label-occupation")
       .data(occupations.filter((d) => d.selected))
-      .join('rect')
-      .attr('class', 'label-occupation')
+      .join("rect")
+      .attr("class", "label-occupation")
       .transition()
       .duration(1000)
-      .attr('width', (d) => d.title.length * 11)
-      .attr('height', 20)
-      .attr('x', textMargin)
-      .attr('y', (_, i) => i * textSpacing)
-      .attr('fill', (d) => categoryColor(d.category));
+      .attr("width", (d) => d.title.length * 11)
+      .attr("height", 20)
+      .attr("x", textMargin)
+      .attr("y", (_, i) => i * textSpacing)
+      .attr("fill", (d) => categoryColor(d.category));
 
     svg
-      .selectAll('.path-occupation')
+      .selectAll(".path-occupation")
       .data(occupations.filter((d) => d.selected))
-      .join('path')
-      .attr('class', 'path-occupation')
+      .join("path")
+      .attr("class", "path-occupation")
       .transition()
       .duration(1000)
-      .attr('d', (d, i) => {
+      .attr("d", (d, i) => {
         //const randomOffset = Math.floor(Math.random() * 8) + 155;
         return `M${lineMargin + 25} ${yScale(d.start) - 16} L${
           textMargin - lineMargin - 5
@@ -299,51 +299,55 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
           i * textSpacing + 10
         } L${textMargin} ${i * textSpacing + 10}`;
       })
-      .attr('fill', 'none')
-      .attr('stroke', (d) => categoryColor(d.category))
-      .attr('stroke-width', '2px');
+      .attr("fill", "none")
+      .attr("stroke", (d) => categoryColor(d.category))
+      .attr("stroke-width", "2px");
 
     svg
-      .selectAll<SVGTextElement, any>('.text-title-occupation')
+      .selectAll<SVGTextElement, any>(".text-title-occupation")
       .data(occupations.filter((d) => d.selected))
-      .join('text')
-      .attr('class', 'text-title-occupation')
+      .join("text")
+      .attr("class", "text-title-occupation")
+      .attr("opacity", 0)
       .transition()
       .duration(1000)
-      .attr('x', textMargin + 8)
-      .attr('y', (_, i) => i * textSpacing + 17)
+      .attr("opacity", 1)
+      .attr("x", textMargin + 8)
+      .attr("y", (_, i) => i * textSpacing + 17)
       .text((value) => value.title)
-      .attr('font-family', 'Josefin Sans, serif')
-      .attr('font-size', '1.4em')
-      .attr('fill', DarkLinenPaper);
+      .attr("font-family", "Josefin Sans, serif")
+      .attr("font-size", "1.4em")
+      .attr("fill", DarkLinenPaper);
 
     svg
-      .selectAll<SVGTextElement, any>('.text-subtitle-occupation')
+      .selectAll<SVGTextElement, any>(".text-subtitle-occupation")
       .data(occupations.filter((d) => d.selected))
-      .join('text')
-      .attr('class', 'text-subtitle-occupation')
+      .join("text")
+      .attr("class", "text-subtitle-occupation")
+      .attr("opacity", 0)
+      .attr("x", textMargin + 8)
+      .attr("y", (_, i) => i * textSpacing + 35)
       .transition()
       .duration(1000)
-      .attr('x', textMargin + 8)
-      .attr('y', (_, i) => i * textSpacing + 35)
+      .attr("opacity", 0)
       .text((value) => `${value.company}, ${value.location}`)
-      .attr('font-family', 'Maven Pro, sans-serif')
-      .attr('font-size', '1em')
-      .attr('fill', DarkLinenPaper)
-      .style('font-style', 'italic');
+      .attr("font-family", "Maven Pro, sans-serif")
+      .attr("font-size", "1em")
+      .attr("fill", DarkLinenPaper)
+      .style("font-style", "italic");
 
     svg
-      .selectAll<SVGTextElement, any>('.text-desc-occupation')
+      .selectAll<SVGTextElement, any>(".text-desc-occupation")
       .data(occupations.filter((d) => d.selected))
-      .join('text')
-      .attr('class', 'text-desc-occupation')
-      .attr('x', textMargin)
-      .attr('y', (_, i) => i * textSpacing + 55)
-      .attr('dy', 0)
+      .join("text")
+      .attr("class", "text-desc-occupation")
+      .attr("x", textMargin)
+      .attr("y", (_, i) => i * textSpacing + 55)
+      .attr("dy", 0)
       .text((value) => value.description)
-      .attr('font-family', 'Maven Pro, sans-serif')
-      .attr('font-size', '1em')
-      .attr('fill', DarkLinenPaper)
+      .attr("font-family", "Maven Pro, sans-serif")
+      .attr("font-size", "1em")
+      .attr("fill", DarkLinenPaper)
       .call(wrap, textWidth, textMargin);
 
     // const LifeEvents = svg.append('g').selectAll('line').data(events);
@@ -375,15 +379,15 @@ const TimeLine: React.FC<Props> = ({ occupations, background }) => {
   }, [occupations, dimensions]);
 
   return (
-    <div style={{ height: '100%' }} ref={wrapperRef}>
+    <div style={{ height: "100%" }} ref={wrapperRef}>
       <svg
-        style={{ background, overflow: 'visible' }}
-        width='100%'
+        style={{ background, overflow: "visible" }}
+        width="100%"
         height={diagramHeight}
         ref={svgRef}
       >
-        <g className='x-axis' />
-        <g className='y-axis' />
+        <g className="x-axis" />
+        <g className="y-axis" />
       </svg>
     </div>
   );

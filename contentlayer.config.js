@@ -1,8 +1,4 @@
-import {
-  defineDocumentType,
-  defineNestedType,
-  makeSource,
-} from "contentlayer/source-files";
+import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
@@ -41,10 +37,9 @@ export const Post = defineDocumentType(() => ({
       type: "boolean",
       default: true,
     },
-    // image: {
-    //   type: "string",
-    //   required: true,
-    // },
+    image: {
+      type: "string",
+    },
   },
   computedFields,
 }));
@@ -54,6 +49,10 @@ export const Experiment = defineDocumentType(() => ({
   filePathPattern: `experiments/**/*.mdx`,
   contentType: "mdx",
   fields: {
+    id: {
+      type: "number",
+      required: true,
+    },
     title: {
       type: "string",
       required: true,
@@ -65,19 +64,16 @@ export const Experiment = defineDocumentType(() => ({
       type: "date",
       required: true,
     },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+    },
     published: {
       type: "boolean",
       default: true,
     },
   },
   computedFields,
-}));
-
-const Category = defineNestedType(() => ({
-  name: "Category",
-  fields: {
-    title: { type: "enum", options: CATEGORIES, required: true },
-  },
 }));
 
 export const Portfolio = defineDocumentType(() => ({

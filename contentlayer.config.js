@@ -1,8 +1,13 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import {
+  defineDocumentType,
+  defineNestedType,
+  makeSource,
+} from "contentlayer/source-files";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import { CATEGORIES } from "./src/lib/const";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -68,9 +73,58 @@ export const Experiment = defineDocumentType(() => ({
   computedFields,
 }));
 
+const Category = defineNestedType(() => ({
+  name: "Category",
+  fields: {
+    title: { type: "enum", options: CATEGORIES, required: true },
+  },
+}));
+
+export const Portfolio = defineDocumentType(() => ({
+  name: "Portfolio",
+  filePathPattern: `portfolio/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    id: {
+      type: "number",
+      required: true,
+    },
+    title: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+    },
+    date: {
+      type: "date",
+      required: true,
+    },
+    published: {
+      type: "boolean",
+      default: true,
+    },
+    category: {
+      type: "list",
+      of: { type: "enum", options: CATEGORIES, required: true },
+    },
+    image: {
+      type: "string",
+      required: true,
+    },
+    repo: {
+      type: "string",
+    },
+    href: {
+      type: "string",
+    },
+  },
+  computedFields,
+}));
+
 export default makeSource({
   contentDirPath: "./src/content",
-  documentTypes: [Post, Experiment],
+  documentTypes: [Post, Experiment, Portfolio],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

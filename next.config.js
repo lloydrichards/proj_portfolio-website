@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const { withContentlayer } = require("next-contentlayer");
+
+module.exports = withContentlayer({
   trailingSlash: true,
   async rewrites() {
     return [
@@ -9,6 +10,4 @@ const nextConfig = {
       },
     ];
   },
-};
-
-module.exports = nextConfig;
+});

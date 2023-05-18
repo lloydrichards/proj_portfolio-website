@@ -17,6 +17,7 @@
     "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",
     "contentlayer": "^0.3.2",
+    "daisyui": "^2.51.6",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "next": "13.4.2",
@@ -24,6 +25,7 @@
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-pretty-code": "^0.9.5",
     "rehype-slug": "^5.1.0",
@@ -41,6 +43,7 @@
     "@storybook/nextjs": "^7.0.12",
     "@storybook/react": "^7.0.12",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@tailwindcss/typography": "^0.5.9",
     "eslint-plugin-storybook": "^0.6.12",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "storybook": "^7.0.12"

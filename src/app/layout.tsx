@@ -1,7 +1,25 @@
+import { Navbar } from "@/components/layout/navbar/Navbar";
+import { Footer } from "@/components/layout/footer/Footer";
 import "../styles/globals.css";
-import { Josefin_Sans } from "next/font/google";
+import { Inter, Roboto_Mono, Josefin_Sans } from "next/font/google";
 
-const josefin = Josefin_Sans({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const josefin_sans = Josefin_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-josefin-sans",
+});
+
+const roboto_mono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -14,8 +32,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={josefin.className}>{children}</body>
+    <html
+      lang="en"
+      data-theme="cupcake"
+      className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
+    >
+      <body>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

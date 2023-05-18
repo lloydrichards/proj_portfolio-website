@@ -1,8 +1,7 @@
-import * as React from "react";
-import Image from "next/image";
-import { useMDXComponent } from "next-contentlayer/hooks";
-
 import { cn } from "@/lib/utils";
+import "@/styles/mdx.css";
+import { useMDXComponent } from "next-contentlayer/hooks";
+import Image from "next/image";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -86,7 +85,7 @@ const components = {
   }: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
       className={cn(
-        "mt-6 border-l-2 pl-6 italic [&>*]:text-muted-foreground",
+        "[&>*]:text-muted-foreground mt-6 border-l-2 pl-6 italic",
         className
       )}
       {...props}
@@ -110,7 +109,7 @@ const components = {
   ),
   tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
     <tr
-      className={cn("m-0 border-t p-0 even:bg-muted", className)}
+      className={cn("even:bg-muted m-0 border-t p-0", className)}
       {...props}
     />
   ),

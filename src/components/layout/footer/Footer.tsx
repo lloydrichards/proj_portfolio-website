@@ -1,10 +1,5 @@
 import Link from "next/link";
-import {
-  FiChevronDown,
-  FiInstagram,
-  FiLinkedin,
-  FiGithub,
-} from "react-icons/fi";
+import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
 export const Footer: React.FC = () => {
   return (
     <footer className="footer bg-base-300 p-10 text-base-content">

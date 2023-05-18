@@ -14,6 +14,9 @@ module.exports = {
       },
     },
   },
+  daisyui: {
+    themes: ["light", "dark", "garden", "forest"],
+  },
   plugins: [
     require("prettier-plugin-tailwindcss"),
     require("@tailwindcss/typography"),

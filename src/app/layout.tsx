@@ -1,7 +1,7 @@
-import { Navbar } from "@/components/layout/navbar/Navbar";
 import { Footer } from "@/components/layout/footer/Footer";
+import { Navbar } from "@/components/layout/navbar/Navbar";
+import { Inter, Josefin_Sans, Roboto_Mono } from "next/font/google";
 import "../styles/globals.css";
-import { Inter, Roboto_Mono, Josefin_Sans } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="cupcake"
+      data-theme="garden"
       className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
     >
       <body>

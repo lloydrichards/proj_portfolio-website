@@ -5,6 +5,7 @@ import { Mdx } from "@/components/Mdx";
 
 import "@/styles/mdx.css";
 import { Metadata } from "next";
+import { FC } from "react";
 
 interface PostPageProps {
   params: {
@@ -44,15 +45,17 @@ export async function generateStaticParams(): Promise<
   }));
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+const PostPage = async ({ params }: PostPageProps) => {
   const post = await getPostFromParams(params.slug);
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center w-full max-w-2xl mx-auto">
+      <div className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
         <h1 className="text-4xl font-bold">{post.title}</h1>
         <Mdx code={post.body.code} />
       </div>
     </div>
   );
-}
+};
+
+export default PostPage;

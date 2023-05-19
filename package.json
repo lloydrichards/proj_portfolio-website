@@ -11,17 +11,24 @@
     "storybook:build": "storybook build -o public/storybook"
   },
   "dependencies": {
+    "@react-three/drei": "^9.68.3",
+    "@react-three/fiber": "^8.13.0",
     "@types/node": "20.1.7",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "@types/three": "^0.152.0",
+    "animejs": "^3.2.1",
     "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",
     "contentlayer": "^0.3.2",
+    "d3": "^7.8.4",
     "daisyui": "^2.51.6",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
+    "framer-motion": "^10.12.12",
     "next": "13.4.2",
     "next-contentlayer": "^0.3.2",
+    "p5": "^1.6.0",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -33,7 +40,9 @@
     "shiki": "^0.14.2",
     "tailwind-merge": "^1.12.0",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "three": "^0.152.2",
+    "typescript": "5.0.4",
+    "usehooks-ts": "^2.9.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.12",
@@ -44,6 +53,9 @@
     "@storybook/react": "^7.0.12",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@tailwindcss/typography": "^0.5.9",
+    "@types/animejs": "^3.1.7",
+    "@types/d3": "^7.4.0",
+    "@types/p5": "^1.6.2",
     "eslint-plugin-storybook": "^0.6.12",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "storybook": "^7.0.12"

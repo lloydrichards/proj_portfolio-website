@@ -3,7 +3,9 @@ import { allBlogs, allExperiments } from "contentlayer/generated";
 import Link from "next/link";
 
 const PostsPage = () => {
-  const allPosts = [...allBlogs, ...allExperiments];
+  const allPosts = [...allBlogs, ...allExperiments].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
   const recentPosts = allPosts.filter((d) => d.published).slice(0, 6);
   return (
     <main className="prose flex min-h-screen flex-col items-center p-16">
@@ -14,13 +16,12 @@ const PostsPage = () => {
             <Link
               key={post.slugAsParams}
               href={post.slug}
-              className="card-compact image-full rounded-lg bg-base-100 no-underline shadow-md hover:bg-base-200"
+              className="image-full card-compact rounded-lg bg-base-100 no-underline shadow-md hover:bg-base-200"
             >
               <div className="card-body h-full">
-                <div className="card-actions justify-end">
-                  <div className="badge-outline badge">
-                    {formatDate(new Date(post.date))}
-                  </div>
+                <div className="card-actions justify-between">
+                  <div className="badge-outline badge">{post.type}</div>
+                  <div className="">{formatDate(new Date(post.date))}</div>
                 </div>
                 <h2 className="card-title">{post.title}</h2>
                 <p className="h-full overflow-clip">{post.description}</p>

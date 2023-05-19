@@ -1,0 +1,57 @@
+---
+id: 019
+title: CV Timeline
+date: 2020-07-22
+description: Create a timeline visualization of my CV
+tags:
+  - D3.js
+  - Data Visualization
+---
+
+import { BasicTimeline, CVTimeline } from "../../experiments/019";
+
+The plan here is to build a system in which a timeline of past education
+and experiance. There are several pieces here that I'd like to include
+in this diagram including linking blurbs and their place on the
+timeline, as well as tooltips for included skills.
+
+First step is to setup D3.js with a timeline and a simple input for data
+and squares. Lets have a go at the new(er) `.join()` pattern
+in React.
+
+## Adding Elements
+
+<BasicTimeline />
+
+Okay, so thats a working D3 example. With this, the data is being
+managed by React and `useStae()` and then using`useEffect()`  
+D3 can take over the manipulation of the svgs inside its box. While I'm sure D3 could build the whole timeline I'm
+thinking off, what I think is better is if the text blurbs are generated
+as a list beside the timeline and then using D3, build the timeline and
+draw lines that connect to the appropriate list item.
+
+## Timeline Components
+
+<CVTimeline />
+
+This feels really good. I've built a `TimeLine.tsx`
+component that can take in props for the data, including occupations
+and events which it then renders into this horizontal timeline. The
+graph scales to the size of the data and even orders the boxes and
+colours them accoring to their overlap and props. So cool to see
+this come together so nicely!
+
+The timeline here is build with some dummy data which is being
+managed in the parent component which should allow me to edit and
+tweak the data on the go as well as filter it. Lets have a go
+
+## Add Elements with Form
+
+That kind of works. There seems to be an issue with the different
+layers of boxes not being removed when changing layers, but i'm not
+really sure what to do about this.
+
+The question now is: Do I render the whole chart in one go,
+including the text on the side? Or should this be a seperate
+component that lists the items and then I can figure out how to draw
+a line between them?

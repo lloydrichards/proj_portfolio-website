@@ -46,8 +46,8 @@ const BlogPage = async ({ params }: BlogPageProps) => {
   const blog = await getBlogFromParams(params.slug);
 
   return (
-    <main className="prose flex min-h-screen flex-col items-center p-16">
-      <div className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center p-16">
+      <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
         <h1 className="text-4xl font-bold">{blog.title}</h1>
         <Mdx code={blog.body.code} />
       </div>

@@ -8,8 +8,8 @@ const PostsPage = () => {
   );
   const recentPosts = allPosts.filter((d) => d.published).slice(0, 6);
   return (
-    <main className="prose flex min-h-screen flex-col items-center p-16">
-      <section>
+    <main className="flex min-h-screen flex-col items-center p-16">
+      <section className="prose">
         <h1 className="text-lg">Recent Posts</h1>
         <div className="grid grid-cols-2 gap-2">
           {recentPosts.map((post) => (
@@ -30,7 +30,7 @@ const PostsPage = () => {
           ))}
         </div>
       </section>
-      <section className="mt-8 w-full">
+      <section className="prose mt-8 w-full">
         <h1 className="text-lg">All Posts</h1>
         <ul>
           {allPosts

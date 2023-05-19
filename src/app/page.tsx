@@ -1,6 +1,11 @@
+import { ProjectCard } from "@/components/projects/project_card/ProjectCard";
+import { allProjects } from "contentlayer/generated";
 import Image from "next/image";
 
 export default function Home() {
+  const sortedProjects = allProjects
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .filter((d) => d.published);
   return (
     <main className="flex min-h-screen flex-col items-center p-16">
       <section className="prose">
@@ -61,8 +66,15 @@ export default function Home() {
           directly via the form below or through social media.
         </p>
       </section>
-      <section className="card card-body mt-8 h-96 w-full bg-secondary text-secondary-content">
+      <section className="card card-body mt-8 min-h-96 w-full bg-secondary text-secondary-content">
         <h2 className="card-title font-serif">Portfolio</h2>
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          {sortedProjects
+            .filter((d) => d.spotlight)
+            .map((project) => (
+              <ProjectCard key={project.slugAsParams} project={project} />
+            ))}
+        </div>
       </section>
       <section className="card card-body mt-8 h-96 w-full bg-secondary text-secondary-content">
         <h2 className="card-title font-serif">Posts</h2>

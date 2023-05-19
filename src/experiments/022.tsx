@@ -1,7 +1,6 @@
-import React from 'react';
-import p5 from 'p5';
-import Matter from 'matter-js';
-import Layout from '../../components/layout/Layout';
+import React from "react";
+import p5 from "p5";
+import Matter from "matter-js";
 
 const sketch = (p: p5) => {
   var Engine = Matter.Engine,
@@ -27,7 +26,7 @@ const sketch = (p: p5) => {
       p.translate(pos.x, pos.y);
       p.rotate(angle);
       p.rect(0, 0, this.w, this.h);
-      p.rectMode('center');
+      p.rectMode("center");
       p.pop();
     }
   }
@@ -61,12 +60,12 @@ const sketch = (p: p5) => {
     boxes.forEach((box) => {
       box.show();
     });
-    p.rectMode('center');
+    p.rectMode("center");
     p.rect(ground.position.x, ground.position.y, 200, 25);
   };
 };
 
-class Experiment018 extends React.Component {
+export class BasicPhysicsSketch extends React.Component {
   myRef: React.RefObject<HTMLDivElement>;
   myP5?: p5;
   constructor(props: any) {
@@ -75,18 +74,10 @@ class Experiment018 extends React.Component {
   }
 
   componentDidMount() {
-    const p5 = require('p5');
+    const p5 = require("p5");
     this.myP5 = new p5(sketch, this.myRef.current);
   }
   render() {
-    return (
-      <Layout title='Experiment | 022'>
-        <h2>022 - Intergrating P5.js and Matter.js</h2>
-        <p></p>
-        <div ref={this.myRef}></div>
-      </Layout>
-    );
+    return <div ref={this.myRef}></div>;
   }
 }
-
-export default Experiment018;

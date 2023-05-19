@@ -17,26 +17,38 @@ const computedFields = {
   },
 };
 
+const postFields = {
+  id: {
+    type: "number",
+    required: true,
+  },
+  title: {
+    type: "string",
+    required: true,
+  },
+  description: {
+    type: "string",
+  },
+  date: {
+    type: "date",
+    required: true,
+  },
+  tags: {
+    type: "list",
+    of: { type: "string" },
+  },
+  published: {
+    type: "boolean",
+    default: true,
+  },
+};
+
 export const Blog = defineDocumentType(() => ({
   name: "Blog",
   filePathPattern: `blogs/**/*.mdx`,
   contentType: "mdx",
   fields: {
-    title: {
-      type: "string",
-      required: true,
-    },
-    description: {
-      type: "string",
-    },
-    date: {
-      type: "date",
-      required: true,
-    },
-    published: {
-      type: "boolean",
-      default: true,
-    },
+    ...postFields,
     image: {
       type: "string",
     },
@@ -49,25 +61,7 @@ export const Experiment = defineDocumentType(() => ({
   filePathPattern: `experiments/**/*.mdx`,
   contentType: "mdx",
   fields: {
-    id: {
-      type: "number",
-      required: true,
-    },
-    title: {
-      type: "string",
-      required: true,
-    },
-    description: {
-      type: "string",
-    },
-    date: {
-      type: "date",
-      required: true,
-    },
-    tags: {
-      type: "list",
-      of: { type: "string" },
-    },
+    ...postFields,
     published: {
       type: "boolean",
       default: true,
@@ -96,13 +90,18 @@ export const Project = defineDocumentType(() => ({
       type: "date",
       required: true,
     },
+    spotlight: {
+      type: "boolean",
+      default: false,
+    },
     published: {
       type: "boolean",
       default: true,
     },
     category: {
       type: "list",
-      of: { type: "enum", options: CATEGORIES, required: true },
+      of: { type: "enum", options: CATEGORIES },
+      required: true,
     },
     image: {
       type: "string",

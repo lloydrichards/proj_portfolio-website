@@ -47,8 +47,8 @@ const ExperimentPage = async ({ params }: ExperimentPageProps) => {
   const experiment = await getExperimentFromParams(params.slug);
 
   return (
-    <main className="prose flex min-h-screen flex-col items-center p-16">
-      <div className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center p-16">
+      <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
         <h1 className="text-4xl font-bold">{experiment.title}</h1>
         <Mdx code={experiment.body.code} />
       </div>

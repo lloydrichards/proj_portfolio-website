@@ -24,9 +24,10 @@ export default function Home() {
         <p>
           I&apos;m a Zurich-based <strong>Interaction Engineer</strong>. Data
           visualisation is a potent tool for understanding and communicating
-          complex information. As a garden designer, I aim to create beautiful,
-          sustainable spaces that enhance the well-being of people and the
-          planet.
+          complex information. As a garden designer, I aimed to create
+          beautiful, sustainable spaces that enhance the well-being of people
+          and the planet. Now as a web developer, I want to empower people to
+          understand the earth better.
         </p>
         <p>
           In my life, I&apos;ve travelled to many places, met many people, and

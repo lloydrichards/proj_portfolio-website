@@ -1,0 +1,110 @@
+---
+id: 005
+title: Setting up Anime.js
+date: 2020-06-2
+description: Experimenting with SVG manipulation and animation in order to prepare for making the Life of Plastic project.
+tags:
+  - frontend
+  - animiation
+---
+
+import { Diamond, Box } from "../../experiments/005";
+
+Experimenting with SVG manipulation and animation in order to prepare for making my final project. My goals and tasks include:
+
+- Setup Anime.JS
+- Make Simple animation on click event
+- Get SVG object to follow a non-linear path
+- Get several SVGs to follow the same path after each click
+
+### anime.js
+
+Installed anime.js into my package.json through npm
+
+```shell
+npm install animejs --save
+```
+
+followed by importing it into this functional components
+
+```typescript
+import anime from "animejs";
+```
+
+Lets try move some squares around the place
+
+<Diamond />
+
+For this, i had to create a class based component for the box that toook in the props for the translateX. This was then rendered during componentDidMount and componentDidUpdate through a this.anime function. The click action was then taken care of by a button on the page (also a class based component) that updated its state which was passed to the Box component.
+
+Added another class and then used the same button to effect its movement but in a different way. When updating the props I ran into an issue with typescript that it didn't recognize the this.box reference. I'm not sure how to fix this but will ask Peter. This will also be a key issue when wanting to make new objects on click and each one having a seperate ref
+
+The problem I see with this current version is that the state is currently being help on the page component, and I need each object to have its own stored state and then for the top level to controll how many of these there are.
+
+After Chatting with Peter
+After a long chat with Peter about using Typescript with anime.js I've made some big changes to how to write the components for this. The main difference is to use pure Functional Components for the objects and then dealing with the anime() in the useEffect.
+
+```typescript
+const Box2 = ({ translateX, translateY, initX, initY }: BoxProps) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const instance = anime({
+      targets: ref.current,
+      translateX: { value: translateX + initX },
+      translateY: { value: translateY + initY },
+      duration: 20000,
+    });
+    return instance.pause;
+  }, [translateX, translateY, initX, initY]);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        height: 50,
+        width: 50,
+        backgroundColor: "tomato",
+        transform: "translateX(500px)",
+      }}
+    ></div>
+  );
+};
+```
+
+Here is a box made from a 'pure' functional component
+
+<Box translateX={350} translateY={0} initX={0} initY={0} />
+
+Peter also suggested ways to clean up the state managment system. Suggesting that there should be a BoxManagement component that uses hooks to manage an array of boxes that holds the id's and internal states of each box. Then each box can be be rendered using map.
+
+```typescript
+interface BoxManagerState {
+  boxes: Array<{ id: string; state: "default" | "fadeOut" }>;
+}
+
+const BoxManager = () => {
+  const [state, setState] = React.useState<BoxManagerState>({
+    boxes: [],
+  });
+  const actions = React.useMemo(
+    () => ({
+      removeBox: (id: string) =>
+        setState({
+          ...state,
+          boxes: state.boxes.filter((x) => x.id === id),
+        }),
+    }),
+    []
+  );
+
+  return state.boxes.map((x) => (
+    <Box2
+      key={x.id}
+      id={x.id}
+      actions={actions}
+      onComplete={() => actions.removeBox(x.id)}
+      style={x.state}
+    />
+  ));
+};
+```

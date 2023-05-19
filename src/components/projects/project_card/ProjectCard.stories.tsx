@@ -4,7 +4,7 @@ import { mockProjectCardProps } from "./ProjectCard.mocks";
 
 export default {
   // Update the title to match the component type
-  title: "templates/ProjectCard",
+  title: "project/ProjectCard",
   component: ProjectCard,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},

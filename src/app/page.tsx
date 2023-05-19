@@ -1,63 +1,40 @@
+import { PostCard } from "@/components/posts/post_card/PostCard";
 import { ProjectCard } from "@/components/projects/project_card/ProjectCard";
-import { allProjects } from "contentlayer/generated";
+import { allBlogs, allExperiments, allProjects } from "contentlayer/generated";
 import Image from "next/image";
+import { TbBarrierBlock } from "react-icons/tb";
 
 export default function Home() {
   const sortedProjects = allProjects
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .filter((d) => d.published);
+  const allPosts = [...allBlogs, ...allExperiments].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+  const recentPosts = allPosts.filter((d) => d.published).slice(0, 6);
+
   return (
-    <main className="flex min-h-screen flex-col items-center p-16">
+    <main className="mb-8 flex min-h-screen flex-col items-center gap-8">
+      <section className="hero min-h-[95vh] bg-base-200 ">
+        <div className="hero-content h-full flex-col p-0 md:flex-row">
+          <Image
+            className="self-end"
+            src="/images/lloyd_richards_portrait.png"
+            alt="Lloyd Richards Portrait"
+            width={400}
+            height={600}
+          />
+          <div className="prose md:w-[30vw]">
+            <h1 className="font-serif">Hello, I&apos;m Lloyd</h1>
+            <blockquote>
+              Exploring innovative ways of visualizing a sustainable future
+              through data
+            </blockquote>
+          </div>
+        </div>
+      </section>
       <section className="prose">
-        <h1 className="font-serif">Hello, I&apos;m Lloyd</h1>
-        <Image
-          src="/images/lloyd_richards_portrait.png"
-          alt="Lloyd Richards Portrait"
-          style={{
-            position: "relative",
-            top: "auto",
-            right: 0,
-          }}
-          width={300}
-          height={300}
-        />
-        <blockquote>
-          Exploring innovative ways of visualizing a sustainable future through
-          data
-        </blockquote>
-        <h2 className="font-serif">About</h2>
-        <p>
-          I&apos;m a Zurich-based <strong>Interaction Engineer</strong>. Data
-          visualisation is a potent tool for understanding and communicating
-          complex information. As a garden designer, I aimed to create
-          beautiful, sustainable spaces that enhance the well-being of people
-          and the planet. Now as a web developer, I want to empower people to
-          understand the earth better.
-        </p>
-        <p>
-          In my life, I&apos;ve travelled to many places, met many people, and
-          pursued varied careers. From a baker in Canada to a bamboo builder in
-          Costa Rica and from a landscaper in England to a web designer in
-          Switzerland, I&apos;ve always been passionate about learning new
-          skills and applying them to real-world projects.
-        </p>
-        <p>
-          My approach to problem-solving is rooted in three core principles:
-        </p>
-        <ul role="list">
-          <li>
-            Passionate about <strong>sustainability</strong> and having a
-            positive impact on the planet
-          </li>
-          <li>
-            Obsessed with <strong>systems thinking</strong> and understanding
-            the interconnectedness of different disciplines
-          </li>
-          <li>
-            Constantly <strong>learning</strong> new skills and applying them to
-            real-world projects
-          </li>
-        </ul>
+        <h2 className="font-serif">How to Use</h2>
         <p>
           This website is a personal portfolio and experimental space where I
           can showcase my projects, experiment with new ideas, and share my
@@ -66,8 +43,8 @@ export default function Home() {
           directly via the form below or through social media.
         </p>
       </section>
-      <section className="card card-body mt-8 min-h-96 w-full bg-secondary text-secondary-content">
-        <h2 className="card-title font-serif">Portfolio</h2>
+      <section className="min-h-96 prose mt-8 w-full">
+        <h2 className=" font-serif">Spotlight Projects</h2>
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
           {sortedProjects
             .filter((d) => d.spotlight)
@@ -76,11 +53,24 @@ export default function Home() {
             ))}
         </div>
       </section>
-      <section className="card card-body mt-8 h-96 w-full bg-secondary text-secondary-content">
-        <h2 className="card-title font-serif">Posts</h2>
+      <section className="flex w-full flex-col items-center bg-base-200 p-8">
+        <div className="prose">
+          <h2 className="font-serif">Recent Posts</h2>
+          <div className="grid grid-cols-2 gap-2">
+            {recentPosts.map((post) => (
+              <PostCard key={post.slugAsParams} post={post} />
+            ))}
+          </div>
+        </div>
       </section>
-      <section className="h-200 card card-body mt-8 h-screen w-full bg-secondary text-secondary-content">
-        <h2 className="card-title font-serif">Timeline</h2>
+      <section className="min-h-96 prose mt-8 w-full">
+        <h2 className="font-serif">Timeline</h2>
+        <div className="min-h-96 not-prose card rounded bg-base-300">
+          <div className="card-body flex-row items-center justify-center text-error-content">
+            <TbBarrierBlock size={34} />
+            <h3 className="text-xl font-bold">Currently Under Construction</h3>
+          </div>
+        </div>
       </section>
     </main>
   );

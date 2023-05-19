@@ -10,10 +10,10 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
   return (
     <Link
       href={project.slug}
-      className="not-prose card image-full no-underline shadow-md hover:shadow-lg"
+      className="not-prose card image-full bg-secondary-focus no-underline shadow-md hover:bg-secondary hover:shadow-lg"
     >
       {!!project.image && (
-        <figure>
+        <figure className=" opacity-50">
           <img src={project.image} alt={project.title} />
         </figure>
       )}

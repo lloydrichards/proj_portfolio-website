@@ -26,7 +26,7 @@ export const Example1 = () => {
       >
         <path id="Example1Path" d="M165.848 43.105v162.731" stroke="#000" />
         <g
-          clip-path="url(#clip0)"
+          clipPath="url(#clip0)"
           stroke="#434040"
           strokeWidth="2"
           strokeLinecap="round"

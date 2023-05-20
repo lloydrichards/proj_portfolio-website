@@ -417,7 +417,7 @@ export const Garbage = ({ pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
-  }, []);
+  }, [pathRef]);
 
   return (
     <div
@@ -449,7 +449,7 @@ export const Grind = ({ pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
-  }, []);
+  }, [pathRef]);
 
   return (
     <div
@@ -482,7 +482,7 @@ export const Pellet = ({ id, pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
-  }, [id]);
+  }, [id,pathRef]);
 
   return (
     <div
@@ -515,7 +515,7 @@ export const Product = ({ pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
-  }, []);
+  }, [pathRef]);
 
   return (
     <div
@@ -548,7 +548,7 @@ export const Waste = ({ pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
-  }, []);
+  }, [pathRef]);
 
   return (
     <div

@@ -39,3 +39,6 @@ next-env.d.ts
 
 # contentlayer
 .contentlayer
+
+# storybook
+public/storybook

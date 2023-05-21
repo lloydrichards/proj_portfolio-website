@@ -33,14 +33,17 @@ export default function Home() {
       <section className="prose">
         <h2 className="font-serif">How to Use</h2>
         <p>
-          This website is a personal portfolio and lab space where I
-          can showcase my projects, experiment with new ideas, and share my
-          thoughts and experiences through blogging. Please feel free to explore
-          my recent projects, read my lab and blog posts, or connect with me through social media.
+          This website is a personal portfolio and lab space where I can
+          showcase my projects, experiment with new ideas, and share my thoughts
+          and experiences through blogging. Please feel free to explore my
+          recent projects, read my lab and blog posts, or connect with me
+          through social media.
         </p>
       </section>
       <SpotlightProjects />
-      <RecentPosts className="w-full bg-base-200 py-8" />
+      <div className="w-full bg-base-200 py-8">
+        <RecentPosts posts={[...allLabs, ...allBlogs]} />
+      </div>
       <section className="min-h-96 prose mt-8 w-full">
         <h2 className="font-serif">Timeline</h2>
         <div className="min-h-96 not-prose card rounded bg-base-300">

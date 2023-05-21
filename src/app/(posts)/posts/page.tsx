@@ -8,7 +8,7 @@ const PostsPage = () => {
   );
   return (
     <main className="flex min-h-screen flex-col items-center p-16">
-      <RecentPosts />
+      <RecentPosts posts={allPosts} />
       <section className="prose mt-8 w-full">
         <h1 className="text-lg">All Posts</h1>
         <ul>

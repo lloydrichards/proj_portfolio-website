@@ -1,21 +1,24 @@
 "use client";
-import { allBlogs, allLabs } from "contentlayer/generated";
-import { PostCard } from "../post_card/PostCard";
-import { useMemo, useState } from "react";
+
+import { Blog, Lab } from "contentlayer/generated";
 import { AnimatePresence, motion } from "framer-motion";
+import { useMemo, useState } from "react";
+import { PostCard } from "../post_card/PostCard";
 
-type Props = React.ComponentProps<"section">;
+interface RecentPostsProps {
+  posts: (Blog | Lab)[];
+}
 
-export const RecentPosts: React.FC<Props> = (props) => {
+export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
   const [filter, setFilter] = useState<"Lab" | "Blog" | null>(null);
   const allPosts = useMemo(
     () =>
-      [...allBlogs, ...allLabs]
+      posts
         .filter((d) => !filter || d.type === filter)
         .sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         ),
-    [filter]
+    [filter, posts]
   );
   const recentPosts = useMemo(
     () => allPosts.filter((d) => d.published).slice(0, 6),
@@ -23,10 +26,7 @@ export const RecentPosts: React.FC<Props> = (props) => {
   );
 
   return (
-    <section
-      {...props}
-      className={`${props.className} flex flex-col items-center`}
-    >
+    <section className={` flex flex-col items-center`}>
       <div className="prose flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <h1 className="mb-0 text-lg">Recent</h1>

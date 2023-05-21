@@ -14,7 +14,6 @@ export const PostCard: React.FC<IPostCard> = ({ post }) => {
       key={post.slugAsParams}
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
-      exit={{ opacity: 0, x: -2000 }}
       className="image-full card-compact aspect-square rounded-lg bg-base-100 shadow-md hover:bg-base-200"
     >
       <Link href={post.slug} className="no-underline">

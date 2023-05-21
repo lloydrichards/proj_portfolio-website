@@ -11,7 +11,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
   return (
     <Link
       href={project.slug}
-      className="not-prose overflow-clip card image-full bg-secondary-focus no-underline shadow-md hover:bg-secondary hover:shadow-lg"
+      className="not-prose overflow-clip card aspect-square image-full bg-secondary-focus no-underline shadow-md hover:bg-secondary hover:shadow-lg"
     >
       {!!project.image && (
         <Image

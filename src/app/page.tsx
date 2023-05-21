@@ -1,5 +1,7 @@
 import { PostCard } from "@/components/posts/post_card/PostCard";
+import { RecentPosts } from "@/components/posts/recent_posts/RecentPosts";
 import { ProjectCard } from "@/components/projects/project_card/ProjectCard";
+import { SpotlightProjects } from "@/components/projects/spotlight_projects/SpotlightProjects";
 import { allBlogs, allLabs, allProjects } from "contentlayer/generated";
 import Image from "next/image";
 import { TbBarrierBlock } from "react-icons/tb";
@@ -8,11 +10,6 @@ export default function Home() {
   const sortedProjects = allProjects
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .filter((d) => d.published);
-  const allPosts = [...allBlogs, ...allLabs].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-  const recentPosts = allPosts.filter((d) => d.published).slice(0, 6);
-
   return (
     <main className="mb-8 flex min-h-screen flex-col items-center gap-8">
       <section className="hero min-h-[95vh] bg-base-200 ">
@@ -36,33 +33,14 @@ export default function Home() {
       <section className="prose">
         <h2 className="font-serif">How to Use</h2>
         <p>
-          This website is a personal portfolio and experimental space where I
+          This website is a personal portfolio and lab space where I
           can showcase my projects, experiment with new ideas, and share my
           thoughts and experiences through blogging. Please feel free to explore
-          my recent projects, read my experiments and blog posts, and contact me
-          directly via the form below or through social media.
+          my recent projects, read my lab and blog posts, or connect with me through social media.
         </p>
       </section>
-      <section className="min-h-96 prose mt-8 w-full">
-        <h2 className=" font-serif">Spotlight Projects</h2>
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-          {sortedProjects
-            .filter((d) => d.spotlight)
-            .map((project) => (
-              <ProjectCard key={project.slugAsParams} project={project} />
-            ))}
-        </div>
-      </section>
-      <section className="flex w-full flex-col items-center bg-base-200 p-8">
-        <div className="prose">
-          <h2 className="font-serif">Recent Posts</h2>
-          <div className="grid grid-cols-2 gap-2">
-            {recentPosts.map((post) => (
-              <PostCard key={post.slugAsParams} post={post} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <SpotlightProjects />
+      <RecentPosts className="w-full bg-base-200 py-8" />
       <section className="min-h-96 prose mt-8 w-full">
         <h2 className="font-serif">Timeline</h2>
         <div className="min-h-96 not-prose card rounded bg-base-300">

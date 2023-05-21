@@ -1,9 +1,9 @@
 import { formatDate } from "@/lib/format";
-import { Blog, Experiment } from "contentlayer/generated";
+import { Blog, Lab } from "contentlayer/generated";
 import Link from "next/link";
 
 export interface IPostCard {
-  post: Blog | Experiment;
+  post: Blog | Lab;
 }
 
 export const PostCard: React.FC<IPostCard> = ({ post }) => {

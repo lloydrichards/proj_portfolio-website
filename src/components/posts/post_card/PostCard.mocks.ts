@@ -1,8 +1,8 @@
-import { allExperiments } from 'contentlayer/generated';
+import { allLabs } from 'contentlayer/generated';
 import { IPostCard } from './PostCard';
 
 const base: IPostCard = {
-  post: allExperiments[0],
+  post: allLabs[0],
 };
 
 export const mockPostCardProps = {

@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
           Lloyd Richards
         </Link>
       </div>
-      <div className="flex-none pr-10">
+      <div className="flex-none pr-10  z-10">
         <ul className="menu menu-horizontal px-1">
           <li>
             <Link href="/about">About</Link>

@@ -1,9 +1,9 @@
 import { PostCard } from "@/components/posts/post_card/PostCard";
-import { allBlogs, allExperiments } from "contentlayer/generated";
+import { allBlogs, allLabs } from "contentlayer/generated";
 import Link from "next/link";
 
 const PostsPage = () => {
-  const allPosts = [...allBlogs, ...allExperiments].sort(
+  const allPosts = [...allBlogs, ...allLabs].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const recentPosts = allPosts.filter((d) => d.published).slice(0, 6);

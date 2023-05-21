@@ -1,5 +1,6 @@
 import { formatDate } from "@/lib/format";
 import { Project } from "contentlayer/generated";
+import Image from "next/image";
 import Link from "next/link";
 
 export interface IProjectCard {
@@ -10,12 +11,15 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
   return (
     <Link
       href={project.slug}
-      className="not-prose card image-full bg-secondary-focus no-underline shadow-md hover:bg-secondary hover:shadow-lg"
+      className="not-prose overflow-clip card image-full bg-secondary-focus no-underline shadow-md hover:bg-secondary hover:shadow-lg"
     >
       {!!project.image && (
-        <figure className=" opacity-50">
-          <img src={project.image} alt={project.title} />
-        </figure>
+        <Image
+          className=" object-cover opacity-50"
+          src={project.image}
+          alt={project.title}
+          fill
+        />
       )}
       <div className="card-body">
         <div className="card-actions">

@@ -417,6 +417,7 @@ export const Garbage = ({ pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathRef]);
 
   return (
@@ -449,6 +450,7 @@ export const Grind = ({ pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathRef]);
 
   return (
@@ -482,7 +484,8 @@ export const Pellet = ({ id, pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
-  }, [id,pathRef]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, pathRef]);
 
   return (
     <div
@@ -515,6 +518,7 @@ export const Product = ({ pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathRef]);
 
   return (
@@ -548,6 +552,7 @@ export const Waste = ({ pathRef, onComplete, delay }: BoxProps) => {
     });
 
     return instance.pause;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathRef]);
 
   return (

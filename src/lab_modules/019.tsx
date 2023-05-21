@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import * as d3 from "d3";
 import { nanoid } from "nanoid";
 
@@ -238,23 +238,26 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
     }
   };
 
-  const orderInRange = (
-    value: Occupation,
-    backArg: any,
-    midArg: any,
-    frontArg: any
-  ): boolean | number | string => {
-    if (
-      lookupInRange(value.end, occupations) &&
-      lookupInRange(value.start, occupations)
-    ) {
-      return backArg;
-    } else if (lookupInRange(value.start, occupations)) {
-      return midArg;
-    } else {
-      return frontArg;
-    }
-  };
+  const orderInRange = useCallback(
+    (
+      value: Occupation,
+      backArg: any,
+      midArg: any,
+      frontArg: any
+    ): boolean | number | string => {
+      if (
+        lookupInRange(value.end, occupations) &&
+        lookupInRange(value.start, occupations)
+      ) {
+        return backArg;
+      } else if (lookupInRange(value.start, occupations)) {
+        return midArg;
+      } else {
+        return frontArg;
+      }
+    },
+    [occupations]
+  );
 
   const wrap = (
     text: d3.Selection<SVGTextElement, Occupation, null, unknown>,
@@ -294,20 +297,17 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
     });
   };
 
-  var lineMargin = 50;
-  var axisLabelMargin = 0;
-  var textMargin = 200;
-  var textWidth = 500;
-  var textSpacing = 150;
-
-  var diagramHeight =
-    textSpacing * occupations.filter((i) => i.selected == true).length;
-
   useEffect(() => {
     const svg = d3.select(svgRef.current);
     console.log(svg);
+    var lineMargin = 50;
+    var axisLabelMargin = 0;
+    var textMargin = 200;
+    var textWidth = 500;
+    var textSpacing = 150;
+    var diagramHeight =
+      textSpacing * occupations.filter((i) => i.selected == true).length;
     if (!dimensions) return;
-
     if (dimensions.width < 600) {
       lineMargin = 0;
       textMargin = 50;
@@ -326,6 +326,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       textWidth = dimensions.width - 300;
       textSpacing = 110;
     }
+
     diagramHeight =
       textSpacing * occupations.filter((i) => i.selected == true).length;
 
@@ -506,7 +507,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .attr("font-size", "1em")
       .attr("fill", "#000000")
       .call(wrap, textWidth, textMargin);
-  }, [occupations, dimensions]);
+  }, [occupations, dimensions, orderInRange]);
 
   return (
     <div

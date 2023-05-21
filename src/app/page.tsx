@@ -1,6 +1,6 @@
 import { PostCard } from "@/components/posts/post_card/PostCard";
 import { ProjectCard } from "@/components/projects/project_card/ProjectCard";
-import { allBlogs, allExperiments, allProjects } from "contentlayer/generated";
+import { allBlogs, allLabs, allProjects } from "contentlayer/generated";
 import Image from "next/image";
 import { TbBarrierBlock } from "react-icons/tb";
 
@@ -8,7 +8,7 @@ export default function Home() {
   const sortedProjects = allProjects
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .filter((d) => d.published);
-  const allPosts = [...allBlogs, ...allExperiments].sort(
+  const allPosts = [...allBlogs, ...allLabs].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const recentPosts = allPosts.filter((d) => d.published).slice(0, 6);

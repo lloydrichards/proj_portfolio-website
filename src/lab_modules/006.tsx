@@ -32,6 +32,7 @@ const BoxOnPath = ({ pathRef, onComplete }: BoxProps) => {
     });
 
     return instance.pause;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -62,6 +63,7 @@ const CircleOnPath = ({ pathRef }: BoxProps) => {
       easing: "linear",
     });
     return instance.pause;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

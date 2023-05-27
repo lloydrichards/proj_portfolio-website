@@ -51,8 +51,8 @@ const topicColor = (topic: Topic) => {
 
 export const NestedBubblePacking: FC<Props> = ({
   data,
-  width = 800,
-  height = 800,
+  width = 680,
+  height = 600,
 }) => {
   const [layout, setLayout] = useState<
     Array<SimulationNodeDatum & Partial<Node>>
@@ -154,7 +154,7 @@ export const NestedBubblePacking: FC<Props> = ({
   }, [data, layout]);
 
   return (
-    <div>
+    <div className="w-full overflow-scroll">
       <svg width={width} height={height} className="bg-base-200">
         {layout.map((d, i) => (
           <circle

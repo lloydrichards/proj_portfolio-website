@@ -52,7 +52,7 @@ const randomColor = () => {
 
 export const BubblePacking: FC<Props> = ({
   data,
-  width = 500,
+  width = 680,
   height = 500,
 }) => {
   const [renderCounter, setRenderCounter] = useState(0);
@@ -89,7 +89,7 @@ export const BubblePacking: FC<Props> = ({
   }, [data]);
 
   return (
-    <div>
+    <div className="w-full overflow-scroll">
       <svg width={width} height={height} className="bg-base-200">
         {items.map((d, i) => (
           <circle
@@ -109,7 +109,7 @@ export const BubblePacking: FC<Props> = ({
 
 export const BubblePacking2: FC<Props> = ({
   data,
-  width = 500,
+  width = 680,
   height = 500,
 }) => {
   const [layout, setLayout] = useState<
@@ -143,7 +143,7 @@ export const BubblePacking2: FC<Props> = ({
   }, [data]);
 
   return (
-    <div>
+    <div className="w-full overflow-scroll">
       <svg width={width} height={height} className="bg-base-200">
         {layout.map((d, i) => (
           <circle

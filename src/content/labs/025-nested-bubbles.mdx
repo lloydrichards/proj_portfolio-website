@@ -18,54 +18,53 @@ their topic type.
 
 <NestedBubblePacking data={MockBubbles} />
 
-With the nesting bubbles i'm basically running two simulations at once.  The first
+With the nesting bubbles i'm basically running two simulations at once. The first
 calcualtes the center of the topic area and updates the `layout` property with the
-x and y coord.  Using the sum of all the elements by type its possible to effect 
+x and y coord. Using the sum of all the elements by type its possible to effect
 the radius of the area within the `collide` force.
 
 ```typescript
-  // Node Simulator
-  useEffect(() => {
-    const nodeSim = forceSimulation()
-      .alphaMin(0.1)
-      .force(
-        "forceX",
-        forceX<SimulationNodeDatum & Partial<Node>>(
-          (d) => layout.find((e) => e.type == d.type)?.x || width / 2
-        )
+// Node Simulator
+useEffect(() => {
+  const nodeSim = forceSimulation()
+    .alphaMin(0.1)
+    .force(
+      "forceX",
+      forceX<SimulationNodeDatum & Partial<Node>>(
+        (d) => layout.find((e) => e.type == d.type)?.x || width / 2
       )
-      .force(
-        "forceY",
-        forceY<SimulationNodeDatum & Partial<Node>>(
-          (d) => layout.find((e) => e.type == d.type)?.y || width / 2
-        )
+    )
+    .force(
+      "forceY",
+      forceY<SimulationNodeDatum & Partial<Node>>(
+        (d) => layout.find((e) => e.type == d.type)?.y || width / 2
       )
-      .force("charge", forceManyBody())
-      .force(
-        "collide",
-        forceCollide<Node>()
-          .strength(0.5)
-          .radius((d) => d.count + 10)
-      );
+    )
+    .force("charge", forceManyBody())
+    .force(
+      "collide",
+      forceCollide<Node>()
+        .strength(0.5)
+        .radius((d) => d.count + 10)
+    );
 
-    nodeSim.on("tick", () => {
-      nodeSim.tick(1);
-      setNodes([...nodeSim.nodes()]);
-    });
-    nodeSim.nodes([
-      ...data.map((d) => ({ ...d, color: topicColor(d.type || "SPORT") })),
-    ]);
+  nodeSim.on("tick", () => {
+    nodeSim.tick(1);
+    setNodes([...nodeSim.nodes()]);
+  });
+  nodeSim.nodes([
+    ...data.map((d) => ({ ...d, color: topicColor(d.type || "SPORT") })),
+  ]);
 
-    nodeSim.alpha(0.8).restart();
+  nodeSim.alpha(0.8).restart();
 
-    return () => {
-      nodeSim.stop();
-    };
-  }, [data, layout]);
+  return () => {
+    nodeSim.stop();
+  };
+}, [data, layout]);
 ```
 
-Then for the nested items, another simulation runs to and applies the `xForce` and 
-`yForce` based on the location of the `layout`.  The result currently is a bit of 
-delayed calculation where the layout needs to settle first before the nested ones 
+Then for the nested items, another simulation runs to and applies the `xForce` and
+`yForce` based on the location of the `layout`. The result currently is a bit of
+delayed calculation where the layout needs to settle first before the nested ones
 can more, but I think this can be fixed by moving the `nodeSim` into its own state.
-

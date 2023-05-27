@@ -161,7 +161,7 @@ export function Mdx({ code }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return (
-    <div className="mdx">
+    <div className="w-full overflow-scroll ">
       <Component components={components} />
     </div>
   );

@@ -39,7 +39,7 @@ jobs:
           cmd: install
 
       - name: Install Semantic Release
-        run: npm install @semantic-release/gitlab @semantic-release/changelog @semantic-release/git
+        run: npm install @semantic-release/github @semantic-release/changelog @semantic-release/git
 
       - name: Tag Version
         run: npx semantic-release

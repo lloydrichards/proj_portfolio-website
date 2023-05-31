@@ -38,7 +38,10 @@ jobs:
         with:
           cmd: install
 
+      - name: Install Semantic Release
+        run: npm install @semantic-release/gitlab @semantic-release/changelog
+
       - name: Tag Version
-        run: ./node_modules/semantic-release/bin/semantic-release.js --no-ci
+        run: npx semantic-release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

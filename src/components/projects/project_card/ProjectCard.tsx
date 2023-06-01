@@ -1,3 +1,12 @@
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { formatDate } from "@/lib/format";
 import { Project } from "contentlayer/generated";
 import Image from "next/image";
@@ -11,31 +20,34 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
   return (
     <Link
       href={project.slug}
-      className="not-prose overflow-clip card aspect-square image-full bg-secondary-focus no-underline shadow-md hover:bg-secondary hover:shadow-lg"
+      className="not-prose no-underline rounded hover:shadow"
     >
-      {!!project.image && (
-        <Image
-          className=" object-cover opacity-50"
-          src={project.image}
-          alt={project.title}
-          fill
-        />
-      )}
-      <div className="card-body">
-        <div className="card-actions">
+      <Card className="flex h-full flex-col">
+        {/* {!!project.image && (
+              <div className="h-full w-full opacity-50">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                />
+              </div>
+            )} */}
+        <CardHeader className="flex-1">
+          <CardTitle className="line-clamp-2">{project.title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CardDescription className="line-clamp-3">
+            {project.description}
+          </CardDescription>
+        </CardContent>
+        <CardFooter className="justify-end gap-1">
           {project.category.map((category) => (
-            <div
-              key={`${project.slug}-${category}`}
-              className="badge-outline badge"
-            >
+            <Badge variant="outline" key={`${project.slug}-${category}`}>
               {category}
-            </div>
+            </Badge>
           ))}
-        </div>
-        <h2 className="card-title">{project.title}</h2>
-        <p>{project.description}</p>
-        <div className="text-right">{formatDate(new Date(project.date))}</div>
-      </div>
+        </CardFooter>
+      </Card>
     </Link>
   );
 };

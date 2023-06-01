@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/lloydrichards/portfolio-website/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2023-06-01)
+
+
+### Features
+
+* **analytics:** :chart_with_upwards_trend: added vercel analytics ([e0a4305](https://github.com/lloydrichards/portfolio-website/commit/e0a4305600b1b16ad54cacb3ec02fcf55954b83e))
+
 # 1.0.0-beta.1 (2023-05-31)
 
 

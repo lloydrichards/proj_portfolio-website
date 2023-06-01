@@ -2,6 +2,10 @@ name: Tag Version
 
 on:
   push:
+    paths-ignore:
+      - "src/content/**"
+      - "src/lab-modules/**"
+      - "public/**"
     branches:
       - main
       - develop
@@ -11,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     name: Tag New Version
-    if: "!contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, '[release]')"
+    if: "!contains(github.event.head_commit.message, 'skip ci') &&
+      !contains(github.event.head_commit.message, '[release]')"
 
     steps:
       - name: Checkout code

@@ -18,29 +18,27 @@ export interface IProjectCard {
 
 export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
   return (
-    <Link
-      href={project.slug}
-      className="not-prose no-underline rounded hover:shadow"
-    >
-      <Card className="flex h-full flex-col">
-        {/* {!!project.image && (
-              <div className="h-full w-full opacity-50">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                />
-              </div>
-            )} */}
-        <CardHeader className="flex-1">
+    <Link href={project.slug} className="not-prose rounded no-underline ">
+      <Card className="relative flex h-full flex-col  overflow-clip hover:shadow">
+        {!!project.image && (
+          <div className="z-0 h-full w-full opacity-20 ">
+            <Image
+              className="object-cover blur-sm grayscale hover:blur-0 hover:grayscale-0"
+              src={project.image}
+              alt={project.title}
+              fill
+            />
+          </div>
+        )}
+        <CardHeader className="pointer-events-none z-10 flex-1">
           <CardTitle className="line-clamp-2">{project.title}</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pointer-events-none z-10">
           <CardDescription className="line-clamp-3">
             {project.description}
           </CardDescription>
         </CardContent>
-        <CardFooter className="justify-end gap-1">
+        <CardFooter className="x-10 pointer-events-none justify-end gap-1">
           {project.category.map((category) => (
             <Badge variant="outline" key={`${project.slug}-${category}`}>
               {category}

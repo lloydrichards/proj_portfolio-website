@@ -1,6 +1,7 @@
 import { Footer } from "@/components/layout/footer/Footer";
 import { Navbar } from "@/components/layout/navbar/Navbar";
 import { Inter, Josefin_Sans, Roboto_Mono } from "next/font/google";
+import { Analytics } from '@vercel/analytics/react';
 import "../styles/globals.css";
 
 const inter = Inter({
@@ -43,6 +44,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <Analytics />
         <Footer />
       </body>
     </html>

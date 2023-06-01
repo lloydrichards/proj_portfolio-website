@@ -1,8 +1,5 @@
 {
-  "branches": [
-    { "name": "main" },
-    { "name": "develop", "channel": "develop", "prerelease": "beta" }
-  ],
+  "branches": [{ "name": "main" }],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -30,14 +27,10 @@
     [
       "@semantic-release/git",
       {
-          "assets": [
-              "CHANGELOG.md",
-              "package.json",
-              "yarn.lock"
-          ],
-          "message": "chore(release): v${nextRelease.version} [release]"
+        "assets": ["CHANGELOG.md", "package.json", "yarn.lock"],
+        "message": "chore(release): v${nextRelease.version} [release]"
       }
-  ],
+    ],
     "@semantic-release/github"
   ]
 }

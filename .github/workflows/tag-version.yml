@@ -8,7 +8,6 @@ on:
       - "public/**"
     branches:
       - main
-      - develop
 
 jobs:
   create-release:

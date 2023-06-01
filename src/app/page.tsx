@@ -7,9 +7,6 @@ import Image from "next/image";
 import { TbBarrierBlock } from "react-icons/tb";
 
 export default function Home() {
-  const sortedProjects = allProjects
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .filter((d) => d.published);
   return (
     <main className="mb-8 flex min-h-screen flex-col items-center gap-8">
       <section className="flex min-h-[98vh] w-full justify-center bg-accent ">

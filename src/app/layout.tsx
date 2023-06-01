@@ -38,7 +38,6 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="garden"
       className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
     >
       <body>

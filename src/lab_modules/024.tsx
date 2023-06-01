@@ -86,11 +86,11 @@ export const BubblePacking: FC<Props> = ({
       .nodes(nodes)
       .alpha(0.5)
       .restart();
-  }, [data]);
+  }, [data, width, height]);
 
   return (
     <div className="w-full overflow-scroll">
-      <svg width={width} height={height} className="bg-base-200">
+      <svg width={width} height={height} className="bg-accent">
         {items.map((d, i) => (
           <circle
             key={i}
@@ -140,11 +140,11 @@ export const BubblePacking2: FC<Props> = ({
     return () => {
       simulation.stop();
     };
-  }, [data]);
+  }, [data, width, height]);
 
   return (
     <div className="w-full overflow-scroll">
-      <svg width={width} height={height} className="bg-base-200">
+      <svg width={width} height={height} className="bg-accent">
         {layout.map((d, i) => (
           <circle
             key={i}

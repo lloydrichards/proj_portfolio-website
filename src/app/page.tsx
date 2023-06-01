@@ -12,16 +12,16 @@ export default function Home() {
     .filter((d) => d.published);
   return (
     <main className="mb-8 flex min-h-screen flex-col items-center gap-8">
-      <section className="hero min-h-[95vh] bg-base-200 ">
-        <div className="hero-content h-full flex-col p-0 md:flex-row">
+      <section className="flex min-h-[98vh] w-full justify-center bg-accent ">
+        <div className="prose grid grid-cols-5 gap-8 p-0">
           <Image
-            className="self-end"
+            className="col-span-5 mb-0 self-end md:col-span-3"
             src="/images/lloyd_richards_portrait.png"
             alt="Lloyd Richards Portrait"
             width={400}
             height={600}
           />
-          <div className="prose md:w-[30vw]">
+          <div className="col-span-5 self-center px-4 md:col-span-2">
             <h1 className="font-serif">Hello, I&apos;m Lloyd</h1>
             <blockquote>
               Exploring innovative ways of visualizing a sustainable future
@@ -30,7 +30,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="prose">
+      <section className="prose px-2">
         <h2 className="font-serif">How to Use</h2>
         <p>
           This website is a personal portfolio and lab space where I can
@@ -41,13 +41,13 @@ export default function Home() {
         </p>
       </section>
       <SpotlightProjects />
-      <div className="w-full bg-base-200 py-8">
+      <div className="w-full bg-accent py-8 px-8">
         <RecentPosts posts={[...allLabs, ...allBlogs]} />
       </div>
-      <section className="min-h-96 prose mt-8 w-full">
+      <section className="min-h-96 prose mt-8 w-full px-2">
         <h2 className="font-serif">Timeline</h2>
-        <div className="min-h-96 not-prose card rounded bg-base-300">
-          <div className="card-body flex-row items-center justify-center text-error-content">
+        <div className="min-h-96 not-prose rounded bg-secondary px-4 py-6">
+          <div className="card-body text-error-content flex-row items-center justify-center">
             <TbBarrierBlock size={34} />
             <h3 className="text-xl font-bold">Currently Under Construction</h3>
           </div>

@@ -4,6 +4,7 @@ import { Blog, Lab } from "contentlayer/generated";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { PostCard } from "../post_card/PostCard";
+import { Button } from "@/components/ui/button";
 
 interface RecentPostsProps {
   posts: (Blog | Lab)[];
@@ -30,30 +31,24 @@ export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
       <div className="prose flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <h1 className="mb-0 text-lg">Recent</h1>
-          <button
-            className={`btn-sm btn ${
-              filter == null ? "btn-outline" : "btn-ghost"
-            }`}
+          <Button
+            variant={filter == null ? "default" : "ghost"}
             onClick={() => setFilter(null)}
           >
             Posts
-          </button>
-          <button
-            className={`btn-sm btn ${
-              filter == "Blog" ? "btn-outline" : "btn-ghost"
-            }`}
+          </Button>
+          <Button
+            variant={filter == "Blog" ? "default" : "ghost"}
             onClick={() => setFilter("Blog")}
           >
             Blogs
-          </button>
-          <button
-            className={`btn-sm btn ${
-              filter == "Lab" ? "btn-outline" : "btn-ghost"
-            }`}
+          </Button>
+          <Button
+            variant={filter == "Lab" ? "default" : "ghost"}
             onClick={() => setFilter("Lab")}
           >
             Labs
-          </button>
+          </Button>
         </div>
         <motion.div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence>

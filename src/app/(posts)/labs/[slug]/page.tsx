@@ -1,4 +1,14 @@
 import { Mdx } from "@/components/Mdx";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { formatDate } from "@/lib/format";
 import { Lab, allLabs } from "contentlayer/generated";
 import { Metadata } from "next";
@@ -50,37 +60,36 @@ interface LabInfoCardProps {
 
 const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
   return (
-    <div className="not-prose card card-compact w-full border-2 border-base-200">
-      <div className="card-body">
-        <div className="card-actions justify-between">
-          <div className="flex items-center gap-2 opacity-60">
-            {lab.tags?.map((t) => (
-              <div
-                key={t}
-                className="badge-outline badge border-neutral text-neutral"
-              >
-                {t.toUpperCase()}
-              </div>
-            ))}
-          </div>
-          <div className="">{formatDate(new Date(lab.date))}</div>
+    <Card className="w-full not-prose">
+      <CardHeader className="flex-row justify-between pb-1">
+        <div className="flex items-center gap-2 opacity-60">
+          {lab.tags?.map((t) => (
+            <Badge key={t} variant="outline">
+              {t.toUpperCase()}
+            </Badge>
+          ))}
         </div>
-        <h2 className="card-title mt-2">
+        <CardDescription>{formatDate(new Date(lab.date))}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <CardTitle className="flex gap-2">
           <ImLab className="fill-neutral" />
           {lab.title}
-        </h2>
-        <p>{lab.description}</p>
-        <div className="card-actions justify-end">
+        </CardTitle>
+        <CardDescription>{lab.description}</CardDescription>
+      </CardContent>
+      <CardFooter className="justify-end">
+        <Button variant="outline" asChild>
           <a
             target="_blank"
             href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/content/${lab._raw.sourceFilePath}`}
-            className="btn-ghost btn-sm btn gap-2"
+            className="flex gap-2 no-underline"
           >
-            <FiGithub /> Repo
+            <FiGithub /> Source
           </a>
-        </div>
-      </div>
-    </div>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

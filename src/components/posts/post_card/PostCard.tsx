@@ -2,6 +2,14 @@ import { formatDate } from "@/lib/format";
 import { Blog, Lab } from "contentlayer/generated";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export interface IPostCard {
   post: Blog | Lab;
@@ -14,17 +22,25 @@ export const PostCard: React.FC<IPostCard> = ({ post }) => {
       key={post.slugAsParams}
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
-      className="image-full card-compact aspect-square rounded-lg bg-base-100 shadow-md hover:bg-base-200"
+      className="not-prose rounded-lg shadow-md"
     >
       <Link href={post.slug} className="no-underline">
-        <div className="card-body h-full">
-          <div className="card-actions justify-between">
-            <div className="badge-outline badge">{post.type}</div>
-            <div className="">{formatDate(new Date(post.date))}</div>
-          </div>
-          <h2 className="card-title mt-2">{post.title}</h2>
-          <p className="mb-0 overflow-clip">{post.description}</p>
-        </div>
+        <Card className="flex h-full flex-col">
+          <CardHeader className="flex-1 gap-2">
+            <div className="flex justify-between">
+              <Badge variant="outline">{post.type}</Badge>
+              <p className="text-sm text-muted-foreground">
+                {formatDate(new Date(post.date))}
+              </p>
+            </div>
+            <CardTitle className="line-clamp-2">{post.title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription className="line-clamp-3">
+              {post.description}
+            </CardDescription>
+          </CardContent>
+        </Card>
       </Link>
     </motion.div>
   );

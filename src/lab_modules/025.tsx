@@ -112,7 +112,7 @@ export const NestedBubblePacking: FC<Props> = ({
     return () => {
       layoutSim.stop();
     };
-  }, [data]);
+  }, [data, width, height]);
 
   // Node Simulator
   useEffect(() => {
@@ -151,11 +151,11 @@ export const NestedBubblePacking: FC<Props> = ({
     return () => {
       nodeSim.stop();
     };
-  }, [data, layout]);
+  }, [data, layout, width, height]);
 
   return (
     <div className="w-full overflow-scroll">
-      <svg width={width} height={height} className="bg-base-200">
+      <svg width={width} height={height} className="bg-accent">
         {layout.map((d, i) => (
           <circle
             key={i}

@@ -29,6 +29,14 @@ export async function generateMetadata({
       title: project.title,
       description: project.description,
       type: "article",
+      images: [
+        {
+          url: project.image,
+          width: 800,
+          height: 600,
+          alt: project.title,
+        },
+      ],
     },
   };
 }

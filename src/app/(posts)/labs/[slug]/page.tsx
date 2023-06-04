@@ -17,13 +17,13 @@ import { FC } from "react";
 import { FiGithub } from "react-icons/fi";
 import { ImLab } from "react-icons/im";
 
-interface LabPageProps {
+export interface LabPageProps {
   params: {
     slug: string;
   };
 }
 
-async function getLabFromParams(slug: string) {
+export async function getLabFromParams(slug: string) {
   const lab = allLabs.find((lab) => lab.slugAsParams === slug);
 
   if (!lab) notFound();
@@ -60,7 +60,7 @@ interface LabInfoCardProps {
 
 const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
   return (
-    <Card className="w-full not-prose">
+    <Card className="not-prose w-full">
       <CardHeader className="flex-row justify-between pb-1">
         <div className="flex items-center gap-2 opacity-60">
           {lab.tags?.map((t) => (

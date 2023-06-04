@@ -4,13 +4,13 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/mdx.css";
 
-interface BlogPageProps {
+export interface BlogPageProps {
   params: {
     slug: string;
   };
 }
 
-async function getBlogFromParams(slug: string) {
+export async function getBlogFromParams(slug: string) {
   const blog = allBlogs.find((blog) => blog.slugAsParams === slug);
 
   if (!blog) notFound();

@@ -3,13 +3,13 @@ import { allProjects } from "contentlayer/generated";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-interface ProjectPageProps {
+export interface ProjectPageProps {
   params: {
     slug: string;
   };
 }
 
-async function getProjectFromParams(slug: string) {
+export async function getProjectFromParams(slug: string) {
   const project = allProjects.find((project) => project.slugAsParams === slug);
 
   if (!project) notFound();

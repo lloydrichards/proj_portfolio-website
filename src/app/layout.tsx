@@ -30,7 +30,6 @@ export const metadata = {
     icon: "/favicon.svg",
   },
   openGraph: {
-    type: "website",
     locale: "en_US",
     url: "https://lloydrichardsdesign.com",
     title: "Lloyd Richards Design",
@@ -44,14 +43,16 @@ export const metadata = {
         alt: "Lloyd Richards Portrait",
       },
     ],
-    site_name: "Lloyd Richards Design",
+    siteName: "Lloyd Richards Design",
   },
 };
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html
@@ -61,6 +62,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        {modal}
         <Analytics />
         <Footer />
       </body>

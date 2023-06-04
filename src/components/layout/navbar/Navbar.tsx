@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -98,10 +98,10 @@ export const Navbar: React.FC = () => {
   return (
     <div className="flex px-4 py-2">
       <Sheet>
-        <SheetTrigger>
-          <Button variant="ghost" className="md:hidden">
+        <SheetTrigger className="md:hidden">
+          <div className={buttonVariants({ variant: "ghost", size: "sm" })}>
             <FiMenu size={32} />
-          </Button>
+          </div>
         </SheetTrigger>
         <SheetContent position="left" className="w-[80vw] py-24">
           <NavigationMenu orientation="vertical">

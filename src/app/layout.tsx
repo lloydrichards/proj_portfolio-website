@@ -59,7 +59,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
     >
-      <body>
+      <body suppressHydrationWarning={true}>
         <Navbar />
         {children}
         {modal}

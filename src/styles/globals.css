@@ -79,3 +79,12 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+@layer components {
+  .component-server {
+    @apply border-2 border-red-600;
+  }
+  .component-client {
+    @apply border-2 border-green-600;
+  }
+}

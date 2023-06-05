@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/lloydrichards/portfolio-website/compare/v1.1.0...v1.1.1) (2023-06-05)
+
+
+### Bug Fixes
+
+* :green_heart: fix tag version conditions ([d7419a2](https://github.com/lloydrichards/portfolio-website/commit/d7419a2c245ea58ba546947cd5b8721198bb3774))
+
 # [1.1.0](https://github.com/lloydrichards/portfolio-website/compare/v1.0.0...v1.1.0) (2023-06-05)
 
 

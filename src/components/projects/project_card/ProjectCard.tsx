@@ -21,12 +21,13 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
     <Link href={project.slug} className="not-prose rounded no-underline ">
       <Card className="relative flex h-full flex-col  overflow-clip hover:shadow">
         {!!project.image && (
-          <div className="z-0 h-full w-full opacity-20 ">
+          <div className="absolute z-0 h-full w-full opacity-20 ">
             <Image
               className="object-cover blur-sm grayscale hover:blur-0 hover:grayscale-0"
               src={project.image}
               alt={project.title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         )}

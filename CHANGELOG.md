@@ -1,3 +1,21 @@
+# [1.1.0](https://github.com/lloydrichards/portfolio-website/compare/v1.0.0...v1.1.0) (2023-06-05)
+
+
+### Bug Fixes
+
+* **layout:** :bug: fix exported functions from pages ([14a8566](https://github.com/lloydrichards/portfolio-website/commit/14a856611d40a5c8ff58484a85566dde02efada8))
+* **layout:** :bug: fixed button in button error ([7f67e45](https://github.com/lloydrichards/portfolio-website/commit/7f67e459160a6d4546f95c0a42c1cc728363ca03))
+
+
+### Features
+
+* **layout:** :sparkles: sidebar navigation for posts ([e73e410](https://github.com/lloydrichards/portfolio-website/commit/e73e4105427e5a55187dda94182aaf406ce95b48))
+
+
+### Performance Improvements
+
+* **layout:** :zap: optimize image loading and sizing ([d0c2321](https://github.com/lloydrichards/portfolio-website/commit/d0c2321daaa1340cee2014769b60224f7fafb35c))
+
 # 1.0.0 (2023-06-01)
 
 

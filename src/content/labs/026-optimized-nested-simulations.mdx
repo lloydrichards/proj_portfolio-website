@@ -1,0 +1,33 @@
+---
+id: 026
+title: Optimized Nested Bubble Packing
+date: 2023-06-05
+description: This is a continuation of the previous post on bubble packing.
+tags:
+  - d3
+  - physics
+---
+
+import {
+  OptimizedNestedBubblePacking,
+  MockBubbles,
+  BubbleMachine,
+} from "../../lab_modules/026";
+
+This is a continuation of the previous post on bubble packing. In this post, we will optimize the bubble packing
+algorithm to reduce the number of iterations required to find a stable layout.
+
+<OptimizedNestedBubblePacking data={MockBubbles} />
+
+Above is a more optimized example where the layoutSimulation is first created and stored in useState. Next, the
+nodeSimulator is creates and stored in another useState and the nodeSimulator is updated each time the layoutSimulation
+is updated. This reduces the number of iterations required to find a stable layout. It also creates a smooth animation
+as the bubbles are settling at the same time.
+
+## Bubble Machine
+
+<BubbleMachine />
+
+To further experiment with the `OptimizedNestedBubblePacking` component, I created a bubble machine that stores the
+state of the MockBubbles and allows me to add and remove bubbles from the machine. By clicking on the `Add Bubble` button
+a new bubble will be created from the right and when clicking `Remove Bubble` the last bubble is removed

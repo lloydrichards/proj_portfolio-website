@@ -17,6 +17,7 @@ export default function Home() {
             alt="Lloyd Richards Portrait"
             width={400}
             height={600}
+            priority
           />
           <div className="col-span-5 self-center px-4 md:col-span-2">
             <h1 className="font-serif">Hello, I&apos;m Lloyd</h1>
@@ -38,7 +39,7 @@ export default function Home() {
         </p>
       </section>
       <SpotlightProjects />
-      <div className="w-full bg-accent py-8 px-8">
+      <div className="w-full bg-accent px-8 py-8">
         <RecentPosts posts={[...allLabs, ...allBlogs]} />
       </div>
       <section className="min-h-96 prose mt-8 w-full px-2">

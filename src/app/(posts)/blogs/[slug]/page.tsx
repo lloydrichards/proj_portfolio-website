@@ -10,13 +10,11 @@ export interface BlogPageProps {
   };
 }
 
-export async function getBlogFromParams(slug: string) {
+const getBlogFromParams = async (slug: string) => {
   const blog = allBlogs.find((blog) => blog.slugAsParams === slug);
-
   if (!blog) notFound();
-
   return blog;
-}
+};
 
 export async function generateMetadata({
   params,

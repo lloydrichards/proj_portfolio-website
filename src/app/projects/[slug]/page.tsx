@@ -9,13 +9,11 @@ export interface ProjectPageProps {
   };
 }
 
-export async function getProjectFromParams(slug: string) {
+const getProjectFromParams = async (slug: string) => {
   const project = allProjects.find((project) => project.slugAsParams === slug);
-
   if (!project) notFound();
-
   return project;
-}
+};
 
 export async function generateMetadata({
   params,

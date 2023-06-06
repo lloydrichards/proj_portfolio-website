@@ -31,6 +31,7 @@
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "framer-motion": "^10.12.12",
+    "leva": "^0.9.34",
     "matter-js": "^0.19.0",
     "next": "^13.4.4",
     "next-contentlayer": "^0.3.2",

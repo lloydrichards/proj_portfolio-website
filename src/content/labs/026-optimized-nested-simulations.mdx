@@ -24,10 +24,48 @@ nodeSimulator is creates and stored in another useState and the nodeSimulator is
 is updated. This reduces the number of iterations required to find a stable layout. It also creates a smooth animation
 as the bubbles are settling at the same time.
 
-## Bubble Machine
+### How it Works
 
-<BubbleMachine />
+The `OptimizedNestedBubblePacking` component is similar to the `NestedBubblePacking` component from the previous post. The
+only difference is that the `OptimizedNestedBubblePacking` component uses `useState` to store the layoutSimulation and
+nodeSimulation. The `useState` hook is used to store the layoutSimulation and nodeSimulation because we want to
+re-render the component each time the layoutSimulation is updated. This will allow us to animate the bubbles as they
+settle into their final positions.
+
+```jsx
+const [layout, setLayout] = useState([]);
+const [layoutSimulation, setLayoutSimulation] = useState();
+const [nodeSimulation, setNodeSimulation] = useState();
+
+// Create the layoutSimulation
+useEffect(() => {
+  const simulation = forceSimulation();
+  setLayoutSimulation(simulation);
+}, []);
+
+// Update the layoutSimulation
+useEffect(() => {
+  if (!layoutSimulation) return;
+  layoutSimulator.nodes(topics);
+  layoutSimulator.on("tick", () => {
+    layoutSimulator.tick(1);
+    setLayout([...layoutSimulator.nodes()]);
+  });
+}, [layoutSimulation, topics]);
+```
+
+## Bubble Machine
 
 To further experiment with the `OptimizedNestedBubblePacking` component, I created a bubble machine that stores the
 state of the MockBubbles and allows me to add and remove bubbles from the machine. By clicking on the `Add Bubble` button
-a new bubble will be created from the right and when clicking `Remove Bubble` the last bubble is removed
+a new bubble will be created from the right and when clicking `Remove Bubble` the last bubble is removed.
+
+<BubbleMachine />
+
+The result is a smooth animation of the bubbles as they settle into their final positions. As the data changes, the
+bubbles will animate to their new positions. As the simulation winds down, the bubbles will slow down and eventually
+stop moving.
+
+What is left now if figuring out how to animate out the bubbles as they are removed. I've
+tried using [Framer Motion](https://www.framer.com/motion/) to animate the exit of the bubbles but I haven't been able
+to get it to work. I'll continue to experiment with it and hopefully I'll have an update in the next post or two.

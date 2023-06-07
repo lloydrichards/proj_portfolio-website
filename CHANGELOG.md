@@ -30,6 +30,26 @@
 
 * :bug: move posts to prop of client component ([267bcc6](https://github.com/lloydrichards/portfolio-website/commit/267bcc6f72848e97afb8fa906e2ec4c7a8b726a3))
 * :wheelchair: added page metadata ([80d26ab](https://github.com/lloydrichards/portfolio-website/commit/80d26abf04783e9d1b22cfb841373fee6017498e))
+* **layout:** :bug: fix padding for projects page ([3ddaca7](https://github.com/lloydrichards/portfolio-website/commit/3ddaca7dff1b86afabf0737042b58a851757b455))
+* **layout:** :iphone: make lab pages responsive ([4ed2160](https://github.com/lloydrichards/portfolio-website/commit/4ed2160205476cbc52df26351f07c245482fd92c))
+
+
+### Features
+
+* :memo: add experiments and posts ([c8b0aa9](https://github.com/lloydrichards/portfolio-website/commit/c8b0aa980d22ca0dad688193b3eb5b9abd0bf1bc))
+* :memo: added home page with style ([496bea5](https://github.com/lloydrichards/portfolio-website/commit/496bea509e642ecf9ce7b801da0bd606a0670751))
+* :sparkles: added contentlayer and mdx component ([71c9d6e](https://github.com/lloydrichards/portfolio-website/commit/71c9d6ee606d53b8548951fc1a2d1b4e4b30ca11))
+* **analytics:** :chart_with_upwards_trend: added vercel analytics ([3450125](https://github.com/lloydrichards/portfolio-website/commit/3450125ae585dc5e07f0fc828eee21d550e84599))
+* **layout:** :iphone: add responsive Navbar ([0be7fbd](https://github.com/lloydrichards/portfolio-website/commit/0be7fbd02e4cfb099963e081584b0f30c3000cf7))
+* **portfolio:** :sparkles: add filters to recent posts ([5cca673](https://github.com/lloydrichards/portfolio-website/commit/5cca6737ed9bd647fd1606ae170a309f96d805b5))
+* **portfolio:** :sparkles: added ProjectCard and ProjectPage ([96c8c8e](https://github.com/lloydrichards/portfolio-website/commit/96c8c8e899ae96a38c477c1b4036ff509f9521ce))
+
+
+# 0.0.0 (2022-09-01)
+
+
+### Bug Fixes
+
 * added Comments ([b63d9dd](https://github.com/lloydrichards/portfolio-website/commit/b63d9ddb0169b90c2df89a644ef015a35d1c1096))
 * Aligned Garbage ([5a557c1](https://github.com/lloydrichards/portfolio-website/commit/5a557c19d39e1bb4477f4c88446c8d302be081da))
 * Broken Routes ([dff4f6e](https://github.com/lloydrichards/portfolio-website/commit/dff4f6e28d93e0e6bb8b80884fb45c0049f52775))
@@ -43,8 +63,6 @@
 * Emotion Typescript ([a2d8ce8](https://github.com/lloydrichards/portfolio-website/commit/a2d8ce8b173658a08d46b4c4e83627e07e3e4131))
 * Google Tracking ([dc3b948](https://github.com/lloydrichards/portfolio-website/commit/dc3b948c1401ee089a9eef20bd53a20ece2df86f))
 * Layout and Portrait bugs ([3ce2974](https://github.com/lloydrichards/portfolio-website/commit/3ce29740d351671ab0d6c8f5671763e2d9dd8ac8))
-* **layout:** :bug: fix padding for projects page ([3ddaca7](https://github.com/lloydrichards/portfolio-website/commit/3ddaca7dff1b86afabf0737042b58a851757b455))
-* **layout:** :iphone: make lab pages responsive ([4ed2160](https://github.com/lloydrichards/portfolio-website/commit/4ed2160205476cbc52df26351f07c245482fd92c))
 * Missed OldRouter ([7a61add](https://github.com/lloydrichards/portfolio-website/commit/7a61addd6115fcfb78983355f8d6ff39b42ad2c4))
 * Missing Imports ([8c20902](https://github.com/lloydrichards/portfolio-website/commit/8c2090232436c359a72e22e0f1870350d7772c31))
 * Missing OldRouteType ([1026ba8](https://github.com/lloydrichards/portfolio-website/commit/1026ba8bc34a3c1bef28aba0434e9e73302b32bf))
@@ -78,9 +96,6 @@
 
 ### Features
 
-* :memo: add experiments and posts ([c8b0aa9](https://github.com/lloydrichards/portfolio-website/commit/c8b0aa980d22ca0dad688193b3eb5b9abd0bf1bc))
-* :memo: added home page with style ([496bea5](https://github.com/lloydrichards/portfolio-website/commit/496bea509e642ecf9ce7b801da0bd606a0670751))
-* :sparkles: added contentlayer and mdx component ([71c9d6e](https://github.com/lloydrichards/portfolio-website/commit/71c9d6ee606d53b8548951fc1a2d1b4e4b30ca11))
 * Add Notification Animation ([3365d3b](https://github.com/lloydrichards/portfolio-website/commit/3365d3b38b2afc11fd5344e85dfa4baaaa5d9ad7))
 * Added Apollo Client ([0e971fc](https://github.com/lloydrichards/portfolio-website/commit/0e971fc1901bbd0a2a0759ebf76d3d79a265c185))
 * Added Buttons ([42bbecd](https://github.com/lloydrichards/portfolio-website/commit/42bbecd06af7db3b471e41fcc697436cc3cc10cc))
@@ -95,7 +110,6 @@
 * Added Tutorial ([d741ee6](https://github.com/lloydrichards/portfolio-website/commit/d741ee6d8b9d3ab9b9b4647cccb5c70694e780ae))
 * Added Varying Types ([16f6274](https://github.com/lloydrichards/portfolio-website/commit/16f6274a3404a94ae779ff79755056eefd67b2ff))
 * Adding Netflify CI/CO ([b4f458c](https://github.com/lloydrichards/portfolio-website/commit/b4f458c51c65f9b9278c8e209e9c763932c0e9d1))
-* **analytics:** :chart_with_upwards_trend: added vercel analytics ([3450125](https://github.com/lloydrichards/portfolio-website/commit/3450125ae585dc5e07f0fc828eee21d550e84599))
 * Back to Intro ([b25bbb0](https://github.com/lloydrichards/portfolio-website/commit/b25bbb02d54f41924d4239d95e7f069475edd11d))
 * Blog Navigation ([e4d3ca6](https://github.com/lloydrichards/portfolio-website/commit/e4d3ca65d1354eb23a332be9056ece6f083b5969))
 * Blog Post ([34183b5](https://github.com/lloydrichards/portfolio-website/commit/34183b5ef2cc158b644df30c0fd4c6024179d69e))
@@ -110,11 +124,8 @@
 * Front Page ([65b3336](https://github.com/lloydrichards/portfolio-website/commit/65b33361ab3688d94fe791e24dc3335584e881c3))
 * Init RxJS ([84742cd](https://github.com/lloydrichards/portfolio-website/commit/84742cdd65c083851e2b302043c04e1b2cf72ded))
 * IxT NYC Project Page ([530e8aa](https://github.com/lloydrichards/portfolio-website/commit/530e8aaedbea6f1f317b5c16fa0df7255b7a4ee4))
-* **layout:** :iphone: add responsive Navbar ([0be7fbd](https://github.com/lloydrichards/portfolio-website/commit/0be7fbd02e4cfb099963e081584b0f30c3000cf7))
 * Legent Icons ([f1e7f6b](https://github.com/lloydrichards/portfolio-website/commit/f1e7f6bae7dc3eacef39b5ae0197c851d2848c86))
 * Modes and Reset ([726e30b](https://github.com/lloydrichards/portfolio-website/commit/726e30bbb6a1018eccc364c9895768440edea644))
-* **portfolio:** :sparkles: add filters to recent posts ([5cca673](https://github.com/lloydrichards/portfolio-website/commit/5cca6737ed9bd647fd1606ae170a309f96d805b5))
-* **portfolio:** :sparkles: added ProjectCard and ProjectPage ([96c8c8e](https://github.com/lloydrichards/portfolio-website/commit/96c8c8e899ae96a38c477c1b4036ff509f9521ce))
 * Possible Routes ([549e764](https://github.com/lloydrichards/portfolio-website/commit/549e764aa884a5f6a300743eff0dc94607e561da))
 * Preview Image for Home ([093facf](https://github.com/lloydrichards/portfolio-website/commit/093facf8a96d883d7c0ed894b367ac3a82adfa3a))
 * React-Select ([8de34ea](https://github.com/lloydrichards/portfolio-website/commit/8de34eaa3464d2852cdf1f9a6fd6649290728e27))
@@ -140,29 +151,3 @@
 
 * Revert "updated temp" ([08b3f49](https://github.com/lloydrichards/portfolio-website/commit/08b3f4932b6dcaba71da9812ef7ed5426b82608a))
 * Revert "fix" ([4e9f98d](https://github.com/lloydrichards/portfolio-website/commit/4e9f98dfecf5684c5695824ee9c3f7761081d2c2))
-
-# [1.0.0-beta.2](https://github.com/lloydrichards/portfolio-website/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2023-06-01)
-
-
-### Features
-
-* **analytics:** :chart_with_upwards_trend: added vercel analytics ([e0a4305](https://github.com/lloydrichards/portfolio-website/commit/e0a4305600b1b16ad54cacb3ec02fcf55954b83e))
-
-# 1.0.0-beta.1 (2023-05-31)
-
-
-### Bug Fixes
-
-* :bug: move posts to prop of client component ([267bcc6](https://github.com/lloydrichards/lloyd-portfolio/commit/267bcc6f72848e97afb8fa906e2ec4c7a8b726a3))
-* :wheelchair: added page metadata ([80d26ab](https://github.com/lloydrichards/lloyd-portfolio/commit/80d26abf04783e9d1b22cfb841373fee6017498e))
-* **layout:** :bug: fix padding for projects page ([3ddaca7](https://github.com/lloydrichards/lloyd-portfolio/commit/3ddaca7dff1b86afabf0737042b58a851757b455))
-* **layout:** :iphone: make lab pages responsive ([4ed2160](https://github.com/lloydrichards/lloyd-portfolio/commit/4ed2160205476cbc52df26351f07c245482fd92c))
-
-### Features
-
-* :memo: add experiments and posts ([c8b0aa9](https://github.com/lloydrichards/lloyd-portfolio/commit/c8b0aa980d22ca0dad688193b3eb5b9abd0bf1bc))
-* :memo: added home page with style ([496bea5](https://github.com/lloydrichards/lloyd-portfolio/commit/496bea509e642ecf9ce7b801da0bd606a0670751))
-* :sparkles: added contentlayer and mdx component ([71c9d6e](https://github.com/lloydrichards/lloyd-portfolio/commit/71c9d6ee606d53b8548951fc1a2d1b4e4b30ca11))
-* **layout:** :iphone: add responsive Navbar ([0be7fbd](https://github.com/lloydrichards/lloyd-portfolio/commit/0be7fbd02e4cfb099963e081584b0f30c3000cf7))
-* **portfolio:** :sparkles: add filters to recent posts ([5cca673](https://github.com/lloydrichards/lloyd-portfolio/commit/5cca6737ed9bd647fd1606ae170a309f96d805b5))
-* **portfolio:** :sparkles: added ProjectCard and ProjectPage ([96c8c8e](https://github.com/lloydrichards/lloyd-portfolio/commit/96c8c8e899ae96a38c477c1b4036ff509f9521ce))

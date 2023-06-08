@@ -1,17 +1,21 @@
+import { cn } from "@/lib/utils";
 import React, { FC } from "react";
 import { useElementSize } from "usehooks-ts";
 
 type ResponsiveChartProps = {
-  children: (props: { height: number; width: number }) => React.ReactNode;
+  render: (props: { height: number; width: number }) => React.ReactNode;
+  className?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 export const ResponsiveChart: FC<ResponsiveChartProps> = ({
-  children,
+  render,
+  className,
   ...props
 }) => {
   const [ref, { width, height }] = useElementSize<HTMLDivElement>();
   return (
     <div
       {...props}
+      className={cn(className)}
       style={{
         width: "100%",
         overflowX: "auto",
@@ -20,7 +24,7 @@ export const ResponsiveChart: FC<ResponsiveChartProps> = ({
       }}
       ref={ref}
     >
-      {children({ width, height })}
+      {render({ width, height })}
     </div>
   );
 };

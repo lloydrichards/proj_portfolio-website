@@ -8,7 +8,7 @@ tags:
   - d3
 ---
 
-import { Chart } from "../../lab_modules/028";
+import { Timeline } from "../../lab_modules/028";
 import { ResponsiveChart } from "../../components/charts/utils/ResponsiveChart.tsx";
 
 There are some things that are more tedious to do with D3 than others. Brushable
@@ -21,7 +21,7 @@ and Brushes more flexible.
 <ResponsiveChart
   className="h-96 rounded bg-muted p-4"
   render={({ width, height }) => (
-    <Chart width={width - 32} height={height - 32} />
+    <Timeline width={width - 32} height={height - 32} />
   )}
 />
 
@@ -62,7 +62,7 @@ of the boxes that intersected the brush.
 const intersect = (a: [Date, Date], b: [Date, Date]) =>
   a[0] <= b[1] && b[0] <= a[1];
 
-export const Chart = () => {
+export const Timeline = () => {
   // ...
   return (
     <svg>

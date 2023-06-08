@@ -1,10 +1,11 @@
-import { scaleTime, scaleBand, max } from "d3";
-import { eachMonthOfInterval, format } from "date-fns";
-import { FC, useRef, useState } from "react";
 import { Brush } from "@visx/brush";
+import BaseBrush, { BaseBrushState } from "@visx/brush/lib/BaseBrush";
 import { Bounds } from "@visx/brush/lib/types";
-import BaseBrush from "@visx/brush/lib/BaseBrush";
-
+import { max, scaleBand, scaleTime } from "d3";
+import { addDays, eachMonthOfInterval, format } from "date-fns";
+import { FC, useMemo, useRef, useState } from "react";
+import { FiFastForward, FiPause, FiPlay, FiRewind } from "react-icons/fi";
+import { useInterval } from "usehooks-ts";
 const channels = [
   {
     channel: "CH 1",
@@ -37,7 +38,7 @@ interface ChartProps {
 }
 
 export const Timeline: FC<ChartProps> = ({ height, width }) => {
-  const [selected, setSelected] = useState<[Date, Date] | undefined>();
+  const brushRef = useRef<BaseBrush | null>(null);
   // Dimensions
   const margin = {
     top: 24,
@@ -59,11 +60,80 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
     .range([0, innerHeight])
     .paddingInner(0.1);
 
+  // Brush
+  const initialBrushPosition = useMemo(
+    () => ({
+      start: { x: xScale(intervals[0]) },
+      end: { x: xScale(intervals[1]) },
+    }),
+    [xScale]
+  );
+
   // Handlers
+  const [selected, setSelected] = useState<[Date, Date]>([
+    intervals[0],
+    intervals[1],
+  ]);
+  const [window, setWindow] = useState<[Date, Date]>([
+    intervals[0],
+    intervals[1],
+  ]);
+  const [count, setCount] = useState<number>(0);
+  const [speed, setSpeed] = useState<number>(0);
+
   const onBrushChange = (domain: Bounds | null) => {
     if (!domain) return;
     setSelected([new Date(domain.x0), new Date(domain.x1)]);
   };
+
+  const ontTick = () => {
+    if (!brushRef.current) return;
+    brushRef.current.updateBrush((prevBrush) => {
+      const newStart = addDays(window[0], speed);
+      const newEnd = addDays(window[1], speed);
+      const newExtent = brushRef.current!.getExtent(
+        { x: xScale(newStart) },
+        { x: xScale(newEnd) }
+      );
+      setWindow([newStart, newEnd]);
+      const newState: BaseBrushState = {
+        ...prevBrush,
+        start: { y: newExtent.y0, x: newExtent.x0 },
+        end: { y: newExtent.y1, x: newExtent.x1 },
+        extent: newExtent,
+      };
+      return newState;
+    });
+  };
+
+  const onReset = () => {
+    setSpeed(0);
+    setWindow([intervals[0], intervals[1]]);
+    setSelected([intervals[0], intervals[1]]);
+    setCount(0);
+    if (!brushRef.current) return;
+    brushRef.current.updateBrush((prevBrush) => {
+      const newExtent = brushRef.current!.getExtent(
+        { x: xScale(intervals[0]) },
+        { x: xScale(intervals[1]) }
+      );
+      const newState: BaseBrushState = {
+        ...prevBrush,
+        start: { y: newExtent.y0, x: newExtent.x0 },
+        end: { y: newExtent.y1, x: newExtent.x1 },
+        extent: newExtent,
+      };
+      return newState;
+    });
+  };
+
+  useInterval(
+    () => {
+      setCount(count + 1);
+      ontTick();
+    },
+    speed != 0 ? 200 : null
+  );
 
   return (
     <div
@@ -114,11 +184,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
               width={clampZero(xScale(c.end) - xScale(c.start))}
               height={yScale.bandwidth()}
               fill={
-                selected != undefined
-                  ? intersect(selected, [c.start, c.end])
-                    ? "tomato"
-                    : "SteelBlue"
-                  : "SeaGreen"
+                intersect(selected, [c.start, c.end]) ? "tomato" : "SteelBlue"
               }
             />
           ))}
@@ -130,16 +196,35 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
             height={innerHeight}
             width={innerWidth}
             margin={margin}
-            //   innerRef={brushRef}
-            //   useWindowMoveEvents
-            //   resizeTriggerAreas={["left", "right"]}
-            //   brushDirection="horizontal"
+            innerRef={brushRef}
+            initialBrushPosition={initialBrushPosition}
+            resizeTriggerAreas={[]}
             onChange={onBrushChange}
-            onClick={() => setSelected(undefined)}
+            onClick={onReset}
           />
         </g>
       </svg>
-      <div className="not-prose grid h-8 grid-flow-col grid-cols-2 gap-2">
+      <div className="not-prose grid h-8 grid-flow-col grid-cols-3 items-center gap-2">
+        <div className="flex gap-2">
+          <button
+            onClick={() => setSpeed(speed - 1)}
+            className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          >
+            <FiRewind />
+          </button>
+          <button
+            onClick={() => setSpeed(speed == 0 ? 1 : 0)}
+            className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          >
+            {speed != 0 ? <FiPause /> : <FiPlay />}
+          </button>
+          <button
+            onClick={() => setSpeed(speed + 1)}
+            className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          >
+            <FiFastForward />
+          </button>
+        </div>
         <p>
           Brush Start:{" "}
           {selected != undefined ? format(selected[0], "LLL d, yyy") : null}

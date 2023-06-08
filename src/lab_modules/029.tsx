@@ -1,4 +1,5 @@
 import { Brush } from "@visx/brush";
+import { AxisTop } from "@visx/axis";
 import BaseBrush, { BaseBrushState } from "@visx/brush/lib/BaseBrush";
 import { Bounds } from "@visx/brush/lib/types";
 import { max, scaleBand, scaleTime } from "d3";
@@ -147,21 +148,21 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
       <svg width={width} height={margin.top + innerHeight}>
         <g transform={`translate(${margin.left} ${margin.top})`}>
           {/* Axis */}
-          {intervals.map((i, idx) => {
-            const barWidth = clampZero(xScale(intervals[idx + 1]) - xScale(i));
-            const label = format(i, "LLL");
-            return (
-              <g
-                key={`g-${idx}`}
-                transform={`translate(${xScale(i)} ${-margin.top / 2})`}
-              >
-                <text x={barWidth / 2} textAnchor="middle">
-                  {label}
-                </text>
-                <line x1={0} x2={0} y1={0} y2={height} stroke="grey" />
-              </g>
-            );
-          })}
+          <AxisTop
+            scale={xScale}
+            tickFormat={(d) => format(d as Date, "LLL")}
+          />
+          {intervals.map((i, idx) => (
+            <line
+              key={`grid-${idx}`}
+              x1={xScale(i)}
+              x2={xScale(i)}
+              y1={0}
+              y2={height}
+              stroke="grey"
+              strokeOpacity={0.5}
+            />
+          ))}
           {/* Labels */}
           {channels.map((c, i) => (
             <text
@@ -204,7 +205,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
           />
         </g>
       </svg>
-      <div className="not-prose grid h-8 grid-flow-col grid-cols-3 items-center gap-2">
+      <div className="not-prose grid h-8 grid-flow-col grid-cols-3 items-center gap-1">
         <div className="flex gap-2">
           <button
             onClick={() => setSpeed(speed - 1)}
@@ -225,13 +226,10 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
             <FiFastForward />
           </button>
         </div>
-        <p>
-          Brush Start:{" "}
-          {selected != undefined ? format(selected[0], "LLL d, yyy") : null}
-        </p>
-        <p>
-          Brush End:{" "}
-          {selected != undefined ? format(selected[1], "LLL d, yyy") : null}
+        <p className="line-clamp-1">
+          | {selected != undefined ? format(selected[0], "LLL d, yyy") : null} -
+          - - {selected != undefined ? format(selected[1], "LLL d, yyy") : null}{" "}
+          |
         </p>
       </div>
     </div>

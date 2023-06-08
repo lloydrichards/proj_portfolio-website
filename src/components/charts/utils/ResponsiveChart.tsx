@@ -1,5 +1,5 @@
-import { useSize } from "@/hooks/use-size";
 import React, { FC } from "react";
+import { useElementSize } from "usehooks-ts";
 
 type ResponsiveChartProps = {
   children: (props: { height: number; width: number }) => React.ReactNode;
@@ -8,7 +8,7 @@ export const ResponsiveChart: FC<ResponsiveChartProps> = ({
   children,
   ...props
 }) => {
-  const [ref, { width, height }] = useSize<HTMLDivElement>();
+  const [ref, { width, height }] = useElementSize<HTMLDivElement>();
   return (
     <div
       {...props}

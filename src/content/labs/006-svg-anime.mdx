@@ -15,41 +15,37 @@ import {
   AddSVGExample3,
 } from "../../lab_modules/006";
 
-Goign to playing around with SVGs and anime.js. Using this nifty SVG
-line creater [SVG Path Builder](https://codepen.io/anthonydugois/pen/mewdyZ)
-I made a path and drew it below
+Goign to playing around with SVGs and anime.js. Using this nifty SVG line
+creater [SVG Path Builder](https://codepen.io/anthonydugois/pen/mewdyZ) I made a
+path and drew it below
 
 <SVGExample />
 
-Now I've added a second blue svg path and using the timeline function to
-link the two paths together. These animations can be chained together
-using the `.add({})` There is still a bit of a problem
-with the animation instantly jumping to the next start, which could
-either be ignored and the paths lined up, or another animations added
-between them.
+Now I've added a second blue svg path and using the timeline function to link
+the two paths together. These animations can be chained together using the
+`.add({})` There is still a bit of a problem with the animation instantly
+jumping to the next start, which could either be ignored and the paths lined up,
+or another animations added between them.
 
-Now lets see if we can add a button and add a new svg each time I press
-it.
+Now lets see if we can add a button and add a new svg each time I press it.
 
 <AddSVGExample />
 
-This doesn't work because the `useEffect()` rerenders each
-time a new id is created. Instead I think I need to break this up into
-seperate components that each deal with their own rendering and have the
-path and id passed into them.
+This doesn't work because the `useEffect()` rerenders each time a new id is
+created. Instead I think I need to break this up into seperate components that
+each deal with their own rendering and have the path and id passed into them.
 
 <AddSVGExample2 />
 
-Ta Da! That wasn't too hard. For this, I made a new component that took
-in the id and a string reference to the path. Inside the component I was
-able to then animate each piece individually without reloading the
-others. In this way each component deals with its own animation and
-complete state and can then pass wheather its finished or not onto the
-next part of the state. There are two ways this could be implimented
-now:
+Ta Da! That wasn't too hard. For this, I made a new component that took in the
+id and a string reference to the path. Inside the component I was able to then
+animate each piece individually without reloading the others. In this way each
+component deals with its own animation and complete state and can then pass
+wheather its finished or not onto the next part of the state. There are two ways
+this could be implimented now:
 
-- Either by having several arrays of objects for each part of the
-  assembly line. For example
+- Either by having several arrays of objects for each part of the assembly line.
+  For example
 
   ```typescript
   instance BottleManager = {
@@ -61,18 +57,17 @@ now:
   }
   ```
 
-  And in this way each time something finishes its line then it is
-  removed and a new object is added to the next process. When these
-  callback functions are invoked then there can also be the added chance
-  of of it going down one of several paths. This would mean though that
-  the state would get very large and complicated with each type having
-  an array of itself.
+  And in this way each time something finishes its line then it is removed and a
+  new object is added to the next process. When these callback functions are
+  invoked then there can also be the added chance of of it going down one of
+  several paths. This would mean though that the state would get very large and
+  complicated with each type having an array of itself.
 
-- The second option could be that each bottle is a single object that
-  travels the whole length of the assembly line and at various places
-  the object is updated with new paths, new svg forms. This might help
-  in being able to track something through the whole process as you
-  could use the same ref to highlight or scroll lock to that object.
+- The second option could be that each bottle is a single object that travels
+  the whole length of the assembly line and at various places the object is
+  updated with new paths, new svg forms. This might help in being able to track
+  something through the whole process as you could use the same ref to highlight
+  or scroll lock to that object.
 
   ```typescript
   instance BottleManager = {
@@ -87,21 +82,20 @@ now:
   }
   ```
 
-  This could mean though that the random nature of the bottle is
-  calculated when its created and fed into the array of path strings. In
-  this way, each bottle knows where its doing from the start which might
-  reduce performance issues. However this could also lead to problems
-  incase parts of the assembly are removed mid process.
+  This could mean though that the random nature of the bottle is calculated when
+  its created and fed into the array of path strings. In this way, each bottle
+  knows where its doing from the start which might reduce performance issues.
+  However this could also lead to problems incase parts of the assembly are
+  removed mid process.
 
-For now, lets try use the callback function to trigger a second
-animation
+For now, lets try use the callback function to trigger a second animation
 
 <AddSVGExample3 />
 
-Using the `complet: () =>{}` properties I could pass in a
-callback function that could be used to add the circle once the square
-was completed. At this time I could also remove the square or call on a
-different animation like fading it out. I'd also like to experiment with
-adding several circles when a single square arrives and then staggering
-their deployment. this could be interesting for creating almost a
-particle effect with several bits breaking down from the single path.
+Using the `complet: () =>{}` properties I could pass in a callback function that
+could be used to add the circle once the square was completed. At this time I
+could also remove the square or call on a different animation like fading it
+out. I'd also like to experiment with adding several circles when a single
+square arrives and then staggering their deployment. this could be interesting
+for creating almost a particle effect with several bits breaking down from the
+single path.

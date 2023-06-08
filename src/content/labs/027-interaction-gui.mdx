@@ -14,23 +14,24 @@ import {
   MockBubbles,
 } from "../../lab_modules/027";
 
-Part of the frustration when building out an interactive or reactive chart is having to
-tweak parameters and re-run the code to see the results. This is especially true when
-working with physics simulations, where the results are often unpredictable and
-non-deterministic. I've been experimenting with using [Leva](https://github.com/pmndrs/leva)
-as a GUI for tweaking parameters and seeing the results in real-time. This is a
-proof-of-concept for using Leva to tweak the parameters of a physics simulation.
+Part of the frustration when building out an interactive or reactive chart is
+having to tweak parameters and re-run the code to see the results. This is
+especially true when working with physics simulations, where the results are
+often unpredictable and non-deterministic. I've been experimenting with using
+[Leva](https://github.com/pmndrs/leva) as a GUI for tweaking parameters and
+seeing the results in real-time. This is a proof-of-concept for using Leva to
+tweak the parameters of a physics simulation.
 
 <OptimizedNestedBubblePacking data={MockBubbles} />
 
 ## How it works
 
-In the `OptimizedNestedBubblePacking` component, I'm using the `useControls` hook from
-Leva to create a GUI for tweaking the parameters of the physics simulation. The
-`useControls` hook returns an object with the values of the controls, which I'm passing
-into the `useEffect` hook as dependencies. This means that whenever the values of the
-controls change, the `useEffect` hook will run again, and the physics simulation will
-re-run with the new parameters.
+In the `OptimizedNestedBubblePacking` component, I'm using the `useControls`
+hook from Leva to create a GUI for tweaking the parameters of the physics
+simulation. The `useControls` hook returns an object with the values of the
+controls, which I'm passing into the `useEffect` hook as dependencies. This
+means that whenever the values of the controls change, the `useEffect` hook will
+run again, and the physics simulation will re-run with the new parameters.
 
 ```jsx
 const { alpha } = useControls({
@@ -42,19 +43,20 @@ const { alpha } = useControls({
 });
 ```
 
-I can then play around with the parameters and see the results in real-time. This is
-especially useful when working with simulation parameters such as alpha, which controls
-the strength of the force that pulls the bubbles towards the center of the chart. I can
-also tweak the parameters of the physics simulation while the simulation is running, and
-see the results in real-time.
+I can then play around with the parameters and see the results in real-time.
+This is especially useful when working with simulation parameters such as alpha,
+which controls the strength of the force that pulls the bubbles towards the
+center of the chart. I can also tweak the parameters of the physics simulation
+while the simulation is running, and see the results in real-time.
 
 ## Collaborating with Designers
 
-I think this approach could be useful for collaborating with designers. Designers can
-play around with the parameters of the physics simulation and see the results in
-real-time. They can then tweak the parameters until they get the desired result, and
-share the parameters with the me. This is already something that I do with [Storybook](https://storybook.js.org/),
-where I create a Storybook for each component, and designers can play around with the
-props of the component and see the results in real-time. But _Leva_ is more suited for
+I think this approach could be useful for collaborating with designers.
+Designers can play around with the parameters of the physics simulation and see
+the results in real-time. They can then tweak the parameters until they get the
+desired result, and share the parameters with the me. This is already something
+that I do with [Storybook](https://storybook.js.org/), where I create a
+Storybook for each component, and designers can play around with the props of
+the component and see the results in real-time. But _Leva_ is more suited for
 tweaking the parameters of a physics simulation, and it's easier to set up than
 Storybook.

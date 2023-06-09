@@ -1,3 +1,15 @@
+## [1.1.2](https://github.com/lloydrichards/portfolio-website/compare/v1.1.1...v1.1.2) (2023-06-09)
+
+
+### Bug Fixes
+
+* **lab:** :bug: make lab 028 and 029 mobile frendly [content] ([d95cd55](https://github.com/lloydrichards/portfolio-website/commit/d95cd55070f0a9e551a0425f26abcb1552ea48a6))
+
+
+### Performance Improvements
+
+* **analytics:** :zap: optimize headshot image ([0971996](https://github.com/lloydrichards/portfolio-website/commit/0971996aa1ac1a3c355666eb972d678ad4ce4e80))
+
 ## [1.1.1](https://github.com/lloydrichards/portfolio-website/compare/v1.1.0...v1.1.1) (2023-06-05)
 
 

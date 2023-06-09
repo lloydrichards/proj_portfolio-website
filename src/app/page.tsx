@@ -14,7 +14,7 @@ export default function Home() {
           <Image
             className="col-span-5 mb-0 self-end md:col-span-3"
             src="/images/lloyd_richards_portrait.png"
-            alt="Lloyd Richards Portrait"
+            alt="Half body head shot of Lloyd Richards"
             width={400}
             height={600}
             priority

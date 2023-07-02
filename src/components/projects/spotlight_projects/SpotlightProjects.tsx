@@ -1,4 +1,4 @@
-import { allProjects } from "contentlayer/generated";
+import { allProjects } from "../../../../.contentlayer/generated";
 import { ProjectCard } from "../project_card/ProjectCard";
 
 export const SpotlightProjects: React.FC = () => {

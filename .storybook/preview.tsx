@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import React from "react";
+import "../src/styles/globals.css";
 
 // This is where you can wrap the story in any ContextProviders
 export const decorators = [
@@ -14,7 +15,7 @@ const preview: Preview = {
   parameters: {
     backgrounds: {
       default: "light",
-			// <- can add more themes here
+      // <- can add more themes here
     },
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {

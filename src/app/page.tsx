@@ -5,6 +5,7 @@ import { SpotlightProjects } from "@/components/projects/spotlight_projects/Spot
 import { allBlogs, allLabs, allProjects } from "contentlayer/generated";
 import Image from "next/image";
 import { TbBarrierBlock } from "react-icons/tb";
+import { TimelineSection } from "./TimelineSection";
 
 export default function Home() {
   return (
@@ -42,15 +43,7 @@ export default function Home() {
       <div className="w-full bg-accent px-8 py-8">
         <RecentPosts posts={[...allLabs, ...allBlogs]} />
       </div>
-      <section className="min-h-96 prose mt-8 w-full px-2">
-        <h2 className="font-serif">Timeline</h2>
-        <div className="min-h-96 not-prose rounded bg-secondary px-4 py-6">
-          <div className="card-body text-error-content flex-row items-center justify-center">
-            <TbBarrierBlock size={34} />
-            <h3 className="text-xl font-bold">Currently Under Construction</h3>
-          </div>
-        </div>
-      </section>
+      <TimelineSection />
     </main>
   );
 }

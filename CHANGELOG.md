@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/lloydrichards/portfolio-website/compare/v1.1.2...v1.2.0) (2023-07-02)
+
+
+### Features
+
+* **portfolio:** :sparkles: added Timeline ([ddd7238](https://github.com/lloydrichards/portfolio-website/commit/ddd72388f05a4b2e78fc6ee3ef4858365d174d04))
+
 ## [1.1.2](https://github.com/lloydrichards/portfolio-website/compare/v1.1.1...v1.1.2) (2023-06-09)
 
 

@@ -1,4 +1,4 @@
-import { allLabs } from 'contentlayer/generated';
+import { allLabs } from '../../../../.contentlayer/generated';
 import { IPostCard } from './PostCard';
 
 const base: IPostCard = {

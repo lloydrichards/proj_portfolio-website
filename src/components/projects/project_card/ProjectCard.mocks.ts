@@ -1,4 +1,4 @@
-import { allProjects } from 'contentlayer/generated';
+import { allProjects } from '../../../../.contentlayer/generated';
 import { IProjectCard } from './ProjectCard';
 
 const base: IProjectCard = {

@@ -179,18 +179,7 @@ export default makeSource({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      [
-        rehypePrettyCode,
-        {
-          theme: "github-dark",
-          onVisitHighlightedLine(node) {
-            node.properties.className.push("line--highlighted");
-          },
-          onVisitHighlightedChar(node) {
-            node.properties.className = ["word--highlighted"];
-          },
-        },
-      ],
+      rehypePrettyCode,
       [
         rehypeAutolinkHeadings,
         {

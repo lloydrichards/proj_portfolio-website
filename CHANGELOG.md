@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/lloydrichards/portfolio-website/compare/v1.2.0...v1.2.1) (2023-07-02)
+
+
+### Bug Fixes
+
+* **portfolio:** :bug: dynamicly loading the TimelineSection ([8a2d9de](https://github.com/lloydrichards/portfolio-website/commit/8a2d9dec2c5d9b6ccab8c91c1e306f74526f06a5))
+
 # [1.2.0](https://github.com/lloydrichards/portfolio-website/compare/v1.1.2...v1.2.0) (2023-07-02)
 
 

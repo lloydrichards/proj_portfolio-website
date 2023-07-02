@@ -28,6 +28,7 @@ export const OccupationItem: FC<OccupationItemProps> = ({
   textMargin,
   path,
 }) => {
+  if (width <= 0) return;
   return (
     <g>
       <motion.rect

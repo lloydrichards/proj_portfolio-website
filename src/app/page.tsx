@@ -2,10 +2,18 @@ import { PostCard } from "@/components/posts/post_card/PostCard";
 import { RecentPosts } from "@/components/posts/recent_posts/RecentPosts";
 import { ProjectCard } from "@/components/projects/project_card/ProjectCard";
 import { SpotlightProjects } from "@/components/projects/spotlight_projects/SpotlightProjects";
-import { allBlogs, allLabs, allProjects } from "contentlayer/generated";
+import {
+  allBlogs,
+  allLabs,
+  allOccupations,
+  allProjects,
+} from "contentlayer/generated";
 import Image from "next/image";
 import { TbBarrierBlock } from "react-icons/tb";
-import { TimelineSection } from "./TimelineSection";
+import dynamic from "next/dynamic";
+const TimelineSection = dynamic(() => import("./TimelineSection"), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -43,7 +51,7 @@ export default function Home() {
       <div className="w-full bg-accent px-8 py-8">
         <RecentPosts posts={[...allLabs, ...allBlogs]} />
       </div>
-      <TimelineSection />
+      <TimelineSection occupations={allOccupations} />
     </main>
   );
 }

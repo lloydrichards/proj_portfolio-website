@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/lloydrichards/portfolio-website/compare/v1.2.1...v1.2.2) (2023-07-03)
+
+
+### Bug Fixes
+
+* **occupation:** :bug: moved Timeline to TimelineDashboard ([de6a972](https://github.com/lloydrichards/portfolio-website/commit/de6a972e4b55f15def719cbe1094f99211ea7671))
+
 ## [1.2.1](https://github.com/lloydrichards/portfolio-website/compare/v1.2.0...v1.2.1) (2023-07-02)
 
 

@@ -11,7 +11,9 @@ import {
 import Image from "next/image";
 import { TbBarrierBlock } from "react-icons/tb";
 import dynamic from "next/dynamic";
-const TimelineSection = dynamic(() => import("./TimelineSection"), {
+import { isAfter, subYears } from "date-fns";
+
+const TimelineDashboard = dynamic(() => import("@/components/timeline/timeline_dashboard/TimelineDashboard"), {
   ssr: false,
 });
 
@@ -51,7 +53,11 @@ export default function Home() {
       <div className="w-full bg-accent px-8 py-8">
         <RecentPosts posts={[...allLabs, ...allBlogs]} />
       </div>
-      <TimelineSection occupations={allOccupations} />
+      <TimelineDashboard
+        occupations={allOccupations.filter((d) =>
+          isAfter(new Date(d.start_date), subYears(new Date(), 5))
+        )}
+      />
     </main>
   );
 }

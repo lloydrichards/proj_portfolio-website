@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { FC } from "react";
-import { FiInstagram, FiLinkedin, FiGithub, FiMenu } from "react-icons/fi";
+import { Instagram, Linkedin, Github, Menu } from "lucide-react";
 
 interface NavRouteProps {
   vertical?: boolean;
@@ -68,7 +68,7 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
               target="_blank"
               href="https://www.instagram.com/lloyd_bydesign/"
             >
-              <FiInstagram />
+              <Instagram />
               Instagram
             </NavigationMenuLink>
             <NavigationMenuLink
@@ -76,7 +76,7 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
               target="_blank"
               href="https://www.linkedin.com/in/lloyddrichards/"
             >
-              <FiLinkedin />
+              <Linkedin />
               LinkedIn
             </NavigationMenuLink>
             <NavigationMenuLink
@@ -84,7 +84,7 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
               target="_blank"
               href="https://github.com/lloydrichards"
             >
-              <FiGithub />
+              <Github />
               Github
             </NavigationMenuLink>
           </div>
@@ -100,7 +100,7 @@ export const Navbar: React.FC = () => {
       <Sheet>
         <SheetTrigger className="md:hidden">
           <div className={buttonVariants({ variant: "ghost", size: "sm" })}>
-            <FiMenu size={32} />
+            <Menu size={32} />
           </div>
         </SheetTrigger>
         <SheetContent position="left" className="w-[80vw] py-24">

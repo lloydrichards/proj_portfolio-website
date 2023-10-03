@@ -11,11 +11,10 @@ import {
 } from "@/components/ui/card";
 import { formatDate } from "@/lib/format";
 import { Lab, allLabs } from "contentlayer/generated";
+import { FlaskConical, Github } from "lucide-react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FC } from "react";
-import { FiGithub } from "react-icons/fi";
-import { ImLab } from "react-icons/im";
 
 export interface LabPageProps {
   params: {
@@ -71,7 +70,7 @@ const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
       </CardHeader>
       <CardContent>
         <CardTitle className="flex gap-2">
-          <ImLab className="fill-neutral" />
+          <FlaskConical className="fill-neutral" />
           {lab.title}
         </CardTitle>
         <CardDescription>{lab.description}</CardDescription>
@@ -83,7 +82,7 @@ const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
             href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/content/${lab._raw.sourceFilePath}`}
             className="flex gap-2 no-underline"
           >
-            <FiGithub /> Source
+            <Github /> Source
           </a>
         </Button>
       </CardFooter>

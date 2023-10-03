@@ -5,7 +5,7 @@ import { Bounds } from "@visx/brush/lib/types";
 import { max, scaleBand, scaleTime } from "d3";
 import { addDays, eachMonthOfInterval, format } from "date-fns";
 import { FC, useMemo, useRef, useState } from "react";
-import { FiFastForward, FiPause, FiPlay, FiRewind } from "react-icons/fi";
+import { FastForward, Pause, Play, Rewind } from "lucide-react";
 import { useInterval } from "usehooks-ts";
 const channels = [
   {
@@ -211,19 +211,19 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
             onClick={() => setSpeed(speed - 1)}
             className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
-            <FiRewind />
+            <Rewind />
           </button>
           <button
             onClick={() => setSpeed(speed == 0 ? 1 : 0)}
             className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
-            {speed != 0 ? <FiPause /> : <FiPlay />}
+            {speed != 0 ? <Pause /> : <Play />}
           </button>
           <button
             onClick={() => setSpeed(speed + 1)}
             className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
-            <FiFastForward />
+            <FastForward />
           </button>
         </div>
         <p className="line-clamp-1">

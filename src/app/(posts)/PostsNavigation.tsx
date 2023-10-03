@@ -10,9 +10,8 @@ import { cn } from "@/lib/utils";
 import { Blog, Lab } from "contentlayer/generated";
 import Link from "next/link";
 import { FC } from "react";
-import { ImLab } from "react-icons/im";
-import { FiMic } from "react-icons/fi";
 import { formatDate } from "@/lib/format";
+import {FlaskConical, Mic} from "lucide-react"
 
 interface PostsListItemProps {
   post: Lab | Blog;
@@ -41,9 +40,9 @@ interface PostIconProps {
 const PostIcon: FC<PostIconProps> = ({ type, className }) => {
   switch (type) {
     case "Lab":
-      return <ImLab size={24} />;
+      return <FlaskConical size={24} />;
     case "Blog":
-      return <FiMic size={24} />;
+      return <Mic size={24} />;
   }
 };
 

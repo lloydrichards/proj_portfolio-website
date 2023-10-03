@@ -9,7 +9,6 @@ import {
   allProjects,
 } from "contentlayer/generated";
 import Image from "next/image";
-import { TbBarrierBlock } from "react-icons/tb";
 import dynamic from "next/dynamic";
 import { isAfter, subYears } from "date-fns";
 

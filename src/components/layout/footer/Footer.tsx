@@ -1,5 +1,5 @@
+import { Github, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
-import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
 export const Footer: React.FC = () => {
   return (
     <footer className=" bg-accent text-accent-foreground">
@@ -31,16 +31,16 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 href="https://www.instagram.com/lloyd_bydesign/"
               >
-                <FiInstagram />
+                <Instagram />
               </a>
               <a
                 target="_blank"
                 href="https://www.linkedin.com/in/lloyddrichards/"
               >
-                <FiLinkedin />
+                <Linkedin />
               </a>
               <a target="_blank" href="https://github.com/lloydrichards">
-                <FiGithub />
+                <Github />
               </a>
             </div>
           </div>

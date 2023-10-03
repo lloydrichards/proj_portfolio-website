@@ -29,6 +29,7 @@
     "date-fns": "^2.30.0",
     "fp-ts": "^2.16.1",
     "framer-motion": "^10.16.4",
+    "io-ts": "^2.2.20",
     "leva": "^0.9.34",
     "lucide-react": "^0.284.0",
     "matter-js": "^0.19.0",

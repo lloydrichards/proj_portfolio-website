@@ -1,0 +1,149 @@
+---
+id: 033
+title: "fp-ts: The Practical (Part 2)"
+date: 2023-10-03
+description: Exploring fp-ts, looking at some of the more practical examples.
+tags:
+  - fp-ts
+  - io-ts
+---
+
+import "../../lab_modules/033";
+
+## The Practical
+
+I find many of the tutorials on fp-ts to be a bit too low level. They are great
+for learning the fundamentals, but I wanted to see some more practical examples.
+I've been using fp-ts in production for a while now, and I wanted to explore
+some commone use cases that I've encountered.
+
+Before jumping into the examples, I want to mention another library that I found
+to be very useful. [io-ts](https://github.com/gcanti/io-ts) is a library for
+runtime type checking. It is a great companion to fp-ts, and I will be using it
+in some of the examples below.
+
+### DeepEqual of Nested Objects
+
+Sometimes you need to compare two objects to see if they are equal. This is
+pretty easy to do with primitive values, but it gets a bit more complicated when
+you have nested objects. You can use `JSON.stringify` to compare the objects,
+but this is not very efficient. It is also not very flexible, since it will
+compare all of the properties on the object. What if you only want to compare
+some of the properties?
+
+```ts
+import * as t from "io-ts";
+import * as EQ from "io-ts/Eq";
+
+const Filter = t.type({
+  types: t.array(t.string),
+  range: t.tuple([t.number, t.number]),
+  boolean: t.boolean,
+  user: t.type({
+    name: t.string,
+    id: t.number,
+  }),
+});
+type Filter = t.TypeOf<typeof Filter>;
+
+const FilterEq = EQ.struct<Filter>({
+  types: EQ.array(EQ.string),
+  range: EQ.tuple(EQ.number, EQ.number),
+  boolean: EQ.boolean,
+  user: EQ.struct({
+    name: EQ.string,
+    id: EQ.number,
+  }),
+});
+
+const isEqual = (a: Filter, b: Filter) => FilterEq.equals(a, b);
+
+const settings: Filter = {
+  types: ["a", "b"],
+  range: [1, 2],
+  boolean: true,
+  user: {
+    name: "John",
+    id: 1,
+  },
+};
+
+console.log(isEqual(settings, settings)); // Output: true
+console.log(isEqual(settings, { ...settings, user: { name: "Fred", id: 2 } })); // Output: false
+```
+
+### Elegant IO Layer (Error Handling)
+
+This is borrowed heavily from
+[fp-ts and Even More Beautiful API Calls (w/ sum types!)](https://dev.to/anthonyjoeseph/fp-ts-and-even-more-beautiful-api-calls-w-sum-types-53j0)
+but also expands on it a bit. This pattern is great for handeling APIs that are
+less trustworthy. It allows you to handle errors in a very elegant way, without
+having to crash the application.
+
+```ts
+import * as A from "fp-ts/lib/Array";
+import * as O from "fp-ts/lib/Option";
+import * as T from "fp-ts/Task";
+import * as TE from "fp-ts/TaskEither";
+import * as t from "io-ts";
+import { pipe } from "fp-ts/lib/function";
+import { failure } from "io-ts/PathReporter";
+
+const ApiData = t.type({
+  status: t.string,
+  value: t.type({
+    id: t.number,
+    name: t.string,
+  }),
+});
+type ApiData = t.TypeOf<typeof ApiData>;
+
+interface NetworkError {
+  type: "NetworkError";
+  message: string;
+}
+interface ParseError {
+  type: "ParseError";
+  errors: t.Errors;
+}
+type AppError = NetworkError | ParseError;
+
+const handleErrors = (appError: AppError): T.Task<string> => {
+  switch (appError.type) {
+    case "NetworkError":
+      return T.of(`Network error: ${appError.message}`);
+    case "ParseError":
+      return pipe(
+        appError.errors,
+        failure,
+        A.head,
+        O.getOrElse(() => "Unknown error"),
+        T.of,
+      );
+  }
+};
+
+const getFromUrl = (url: string) =>
+  pipe(
+    TE.tryCatch(
+      () => fetch(url),
+      (e) => ({ type: "NetworkError", message: String(e) }),
+    ),
+    TE.chain((x) => TE.of(x.json())),
+    TE.mapLeft(({ message }): AppError => ({ type: "NetworkError", message })),
+    TE.chain((json) =>
+      pipe(
+        ApiData.decode(json),
+        E.mapLeft((errors): AppError => ({ type: "ParseError", errors })),
+        TE.fromEither,
+      ),
+    ),
+    TE.fold(handleErrors, (data) => T.of(data.value.name)),
+  );
+
+getFromUrl("https://api.chucknorris.io/jokes/random")().then(console.log); // Output: "Invalid value undefined supplied to : { status: string, value: { id: number, name: string } }/status: string"
+```
+
+### Branching Render Logic
+
+### Responsive Values

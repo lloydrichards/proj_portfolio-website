@@ -1,11 +1,15 @@
 ---
-id: 006
+id: 032
 title: "fp-ts: The Basics (Part 1)"
 date: 2023-10-03
 description:
   Exploring fp-ts, and some of the less documented features or practical
   examples.
+tags:
+  - fp-ts
 ---
+
+import "../../lab_modules/032";
 
 ## The Basics
 
@@ -20,6 +24,14 @@ While the majority of what I do with `fp-ts` is pretty standard, there are a few
 things that I would like to improve upon. This series of posts will be a
 collection of things that I've learned about `fp-ts` that I think are worth
 sharing or exploring further.
+
+Some important resources to check out:
+
+- [fp-ts](https://gcanti.github.io/fp-ts/)
+  ([GitHub](https://github.com/gcanti/fp-ts))
+- [fp-ts recipes](https://grossbart.github.io/fp-ts-recipes/#/)
+- [Practical Guide to Fp-ts](https://rlee.dev/practical-guide-to-fp-ts-part-1)
+- [fp-ts and Beautiful API Calls](https://dev.to/gnomff_65/fp-ts-and-beautiful-api-calls-1f55)
 
 ## Primatives
 
@@ -44,7 +56,7 @@ const doubleSquareAndInc = pipe(
   A.map(square), // apply the square function
 );
 
-console.log(doubleSquareAndInc); // Output: [ 4, 9, 16, 25, 36 ]
+console.log(doubleSquareAndInc); // Output: [ 9, 25, 49, 81, 121 ]
 ```
 
 ### `Option`
@@ -86,7 +98,7 @@ const divide = (x: number, y: number): E.Either<string, number> =>
   pipe(
     y,
     E.fromPredicate(
-      (y) => y == 0,
+      (y) => y != 0,
       () => "Division by zero",
     ),
     E.map((y) => x / y),
@@ -102,12 +114,12 @@ const squareRoot = (x: number): E.Either<string, number> =>
     E.map((x) => Math.sqrt(x)),
   );
 
-const result = pipe(
-  divide(10, 2), // Start with an Either<string, number>
+const calculate = flow(
+  divide, // Start with an Either<string, number>
   E.chain((value) => squareRoot(value)), // Apply squareRoot function
 );
 
-console.log(result); // Output: Right(2.5)
+console.log(calculate(10, 2)); // Output: Right(2.5)
 ```
 
 ### `Task`
@@ -164,4 +176,113 @@ const getJson = pipe(
 );
 
 console.log(getJson().then((e) => e)); // Output: Right("{\"foo\":\"bar\"}")
+```
+
+## Composition
+
+### `pipe` vs `flow`
+
+The `pipe` and `flow` functions are used to compose functions together. They are
+very similar, but have a few key differences. The `pipe` function starts with a
+value and then applies a series of functions to it. The `flow` function composes
+a series of functions together and then returns a new function that can be
+applied to a value.
+
+```ts
+import { pipe, flow } from "fp-ts/lib/function";
+
+const double = (x: number): number => x * 2;
+const square = (x: number): number => x ** 2;
+
+const doubleSquarePipe = (input: number) =>
+  pipe(
+    input,
+    double, // apply double function
+    square, // apply square function
+  );
+
+const doubleSquareFlow = flow(
+  double, // apply double function
+  square, // apply square function
+);
+```
+
+### `chain`
+
+The `chain` function is used to flatten nested primatives. When you need to
+flatten left or right values, you can use the `chain` function. It is very
+similar to the `flatMap` function in other languages.
+
+```ts
+import { pipe } from "fp-ts/lib/function";
+import * as TE from "fp-ts/lib/TaskEither";
+
+const maybeUserId: TE.TaskEither<string, number> = TE.right(3);
+
+const parseUser = pipe(
+  maybeUserId, // start with a TaskEither<string, number>
+  TE.chain((id) =>
+    pipe(
+      id,
+      double, // apply double function
+      TE.fromPredicate(
+        (n) => n > 0, // check if the value is positive
+        () => "ID is not positive",
+      ),
+      TE.map((id) => ({
+        id,
+        name: "John Doe",
+      })),
+    ),
+  ),
+);
+
+console.log(parseUser()); // Output: Right({ id: 6, name: 'John Doe' })
+```
+
+### `match` or `fold`
+
+The `match` function is used to extract values from primatives. When you need to
+extract a value to be used in the application, `match` forces you to think about
+both the left and right values.
+
+```ts
+import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+
+const maybeNumber: O.Option<number> = O.some(3);
+
+const result = pipe(
+  maybeNumber, // start with an Option<number>
+  O.map(double), // apply double function
+  O.map(square), // apply square function
+  O.match(
+    () => "No number found",
+    (n) => "The result is " + n,
+  ),
+);
+
+console.log(result); // Output: "The result is 36"
+```
+
+sometimes its needed to return multiple types from a match. In this case, you
+can use the `foldW` function.
+
+```ts
+import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+
+const maybeNumber: O.Option<number> = O.some(3);
+
+const result = pipe(
+  maybeNumber, // start with an Option<number>
+  O.map(double), // apply double function
+  O.map(square), // apply square function
+  O.matchW(
+    () => ({ status: "error", error: "No number" }), // return an error object
+    (n) => ({ status: "ok", data: n }), // return a data object
+  ),
+);
+
+console.log(result); // Output: { status: 'ok', data: 36 }
 ```

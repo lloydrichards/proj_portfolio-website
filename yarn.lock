@@ -1461,7 +1461,7 @@
 
 "@contentlayer/cli@0.3.4":
   version "0.3.4"
-  resolved "https://registry.npmjs.org/@contentlayer/cli/-/cli-0.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/@contentlayer/cli/-/cli-0.3.4.tgz#a3b322aa30cd2c5db09c69b530928e80aebddae4"
   integrity sha512-vNDwgLuhYNu+m70NZ3XK9kexKNguuxPXg7Yvzj3B34cEilQjjzSrcTY/i+AIQm9V7uT5GGshx9ukzPf+SmoszQ==
   dependencies:
     "@contentlayer/core" "0.3.4"
@@ -1471,7 +1471,7 @@
 
 "@contentlayer/client@0.3.4":
   version "0.3.4"
-  resolved "https://registry.npmjs.org/@contentlayer/client/-/client-0.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/@contentlayer/client/-/client-0.3.4.tgz#2adf835502bfda58994211ab94f3e6555000d3a7"
   integrity sha512-QSlLyc3y4PtdC5lFw0L4wTZUH8BQnv2nk37hNCsPAqGf+dRO7TLAzdc+2/mVIRgK+vSH+pSOzjLsQpFxxXRTZA==
   dependencies:
     "@contentlayer/core" "0.3.4"
@@ -1497,7 +1497,7 @@
 
 "@contentlayer/source-files@0.3.4":
   version "0.3.4"
-  resolved "https://registry.npmjs.org/@contentlayer/source-files/-/source-files-0.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/@contentlayer/source-files/-/source-files-0.3.4.tgz#5e4c16e1c97436649a2c2953bd74dad6b93645de"
   integrity sha512-4njyn0OFPu7WY4tAjMxiJgWOKeiHuBOGdQ36EYE03iij/pPPRbiWbL+cmLccYXUFEW58mDwpqROZZm6pnxjRDQ==
   dependencies:
     "@contentlayer/core" "0.3.4"
@@ -1514,7 +1514,7 @@
 
 "@contentlayer/source-remote-files@0.3.4":
   version "0.3.4"
-  resolved "https://registry.npmjs.org/@contentlayer/source-remote-files/-/source-remote-files-0.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/@contentlayer/source-remote-files/-/source-remote-files-0.3.4.tgz#9b528144b44ba35e9200ae438cd92350d29ffb6f"
   integrity sha512-cyiv4sNUySZvR0uAKlM+kSAELzNd2h2QT1R2e41dRKbwOUVxeLfmGiLugr0aVac6Q3xYcD99dbHyR1xWPV+w9w==
   dependencies:
     "@contentlayer/core" "0.3.4"
@@ -6731,7 +6731,7 @@ client-only@0.0.1:
 
 clipanion@^3.2.1:
   version "3.2.1"
-  resolved "https://registry.npmjs.org/clipanion/-/clipanion-3.2.1.tgz"
+  resolved "https://registry.yarnpkg.com/clipanion/-/clipanion-3.2.1.tgz#2887db4cb232e80ba57cf19347a4e3a1c4a74133"
   integrity sha512-dYFdjLb7y1ajfxQopN05mylEpK9ZX0sO1/RfMXdfmwjlIsPkbh4p7A682x++zFPLDCo1x3p82dtljHf5cW2LKA==
   dependencies:
     typanion "^3.8.0"
@@ -6932,9 +6932,9 @@ content-type@~1.0.4:
   resolved "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz"
   integrity sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==
 
-contentlayer@^0.3.2:
+contentlayer@^0.3.4:
   version "0.3.4"
-  resolved "https://registry.npmjs.org/contentlayer/-/contentlayer-0.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/contentlayer/-/contentlayer-0.3.4.tgz#519ad446e38d533a2166a7bd3bd5188c5be019ab"
   integrity sha512-FYDdTUFaN4yqep0waswrhcXjmMJnPD5iXDTtxcUCGdklfuIrXM2xLx51xl748cHmGA6IsC+27YZFxU6Ym13QIA==
   dependencies:
     "@contentlayer/cli" "0.3.4"
@@ -9542,7 +9542,7 @@ image-size@^1.0.0:
 
 imagescript@^1.2.16:
   version "1.2.16"
-  resolved "https://registry.npmjs.org/imagescript/-/imagescript-1.2.16.tgz"
+  resolved "https://registry.yarnpkg.com/imagescript/-/imagescript-1.2.16.tgz#2272f535816bdcbaec9da4448de5c89a488756bd"
   integrity sha512-hhy8OVNymU+cYYj8IwCbdNlXJRoMr4HRd7+efkH32eBVfybVU/5SbzDYf3ZSiiF9ye/ghfBrI/ujec/nwl+fOQ==
 
 import-fresh@^3.0.0, import-fresh@^3.2.1:
@@ -11419,9 +11419,9 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1, neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-contentlayer@^0.3.2:
+next-contentlayer@^0.3.4:
   version "0.3.4"
-  resolved "https://registry.npmjs.org/next-contentlayer/-/next-contentlayer-0.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/next-contentlayer/-/next-contentlayer-0.3.4.tgz#dd88ff27bca94ec8c619d77d225a0b15f2e6ccb2"
   integrity sha512-UtUCwgAl159KwfhNaOwyiI7Lg6sdioyKMeh+E7jxx0CJ29JuXGxBEYmCI6+72NxFGIFZKx8lvttbbQhbnYWYSw==
   dependencies:
     "@contentlayer/core" "0.3.4"
@@ -13999,9 +13999,9 @@ tty-browserify@^0.0.1:
   integrity sha512-C3TaO7K81YvjCgQH9Q1S3R3P3BtN3RIM8n+OvX4il1K1zgE8ZhI0op7kClgkxtutIE8hQrcrHBXvIheqKUUCxw==
 
 typanion@^3.12.1, typanion@^3.8.0:
-  version "3.13.0"
-  resolved "https://registry.npmjs.org/typanion/-/typanion-3.13.0.tgz"
-  integrity sha512-AkZMjMIW8MGeQwBxu1bixzu/2Zk7rH6ILrI/9zBoW0sAiVaWwHjXSnmPBomfY2t7tSG6m5bIE+OYYyyuGnFVHA==
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/typanion/-/typanion-3.14.0.tgz#a766a91810ce8258033975733e836c43a2929b94"
+  integrity sha512-ZW/lVMRabETuYCd9O9ZvMhAh8GslSqaUjxmK/JLPCh6l73CvLBiuXswj/+7LdnWOgYsQ130FqLzFz5aGT4I3Ug==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
@@ -14675,10 +14675,15 @@ yaml@^1.10.0:
   resolved "https://registry.npmjs.org/yaml/-/yaml-1.10.2.tgz"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-yaml@^2.1.1, yaml@^2.3.1:
+yaml@^2.1.1:
   version "2.3.1"
   resolved "https://registry.npmjs.org/yaml/-/yaml-2.3.1.tgz"
   integrity sha512-2eHWfjaoXgTBC2jNM1LRef62VQa0umtvRiDSk6HSzW7RvS5YtkabJrwYLLEKWBc8a5U2PTSCs+dJjUTJdlHsWQ==
+
+yaml@^2.3.1:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.3.2.tgz#f522db4313c671a0ca963a75670f1c12ea909144"
+  integrity sha512-N/lyzTPaJasoDmfV7YTrYCI0G/3ivm/9wdG0aHuheKowWQwGTsK0Eoiw6utmzAnI6pkJa0DUVygvp3spqqEKXg==
 
 yargs-parser@^20.2.2, yargs-parser@^20.2.9:
   version "20.2.9"
@@ -14729,10 +14734,15 @@ yocto-queue@^0.1.0:
   resolved "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zod@3.21.4, zod@^3.21.4:
+zod@3.21.4:
   version "3.21.4"
   resolved "https://registry.npmjs.org/zod/-/zod-3.21.4.tgz"
   integrity sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==
+
+zod@^3.21.4:
+  version "3.22.2"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.2.tgz#3add8c682b7077c05ac6f979fea6998b573e157b"
+  integrity sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==
 
 zstddec@^0.0.2:
   version "0.0.2"

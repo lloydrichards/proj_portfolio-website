@@ -67,7 +67,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
       start: { x: xScale(intervals[0]) },
       end: { x: xScale(intervals[1]) },
     }),
-    [xScale]
+    [xScale] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   // Handlers

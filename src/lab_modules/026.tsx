@@ -117,7 +117,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
     return () => {
       layoutSim.stop();
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update Layout Simulator
   useEffect(() => {
@@ -149,7 +149,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
     return () => {
       nodeSim.stop();
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update Node Simulator
   useEffect(() => {
@@ -174,7 +174,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
       });
       nodeSimulator.alpha(0.8).restart();
     }
-  }, [nodeSimulator, layout, dataNodes]);
+  }, [nodeSimulator, layout, dataNodes]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Data Update
   useEffect(() => {
@@ -192,7 +192,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
         count: sum(updatedNodes, (d) => (d.type == t.type ? d.count : 0)),
       }))
     );
-  }, [data]);
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="w-full overflow-scroll">

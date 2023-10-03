@@ -142,7 +142,7 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
     return () => {
       forceSim.stop();
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update Layout Simulator
   useEffect(() => {
@@ -177,6 +177,7 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
       });
       simulator.alpha(alpha).restart();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     simulator,
     alpha,
@@ -202,7 +203,7 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
       return d;
     });
     setNodes(updatedNodes);
-  }, [data]);
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="w-full overflow-scroll">

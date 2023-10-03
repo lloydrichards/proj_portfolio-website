@@ -6,7 +6,7 @@ const TimelineDashboard = dynamic(
   () => import("@/components/timeline/timeline_dashboard/TimelineDashboard"),
   {
     ssr: false,
-  }
+  },
 );
 
 const TimelinePage = () => {

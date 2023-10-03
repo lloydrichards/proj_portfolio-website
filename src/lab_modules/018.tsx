@@ -146,6 +146,6 @@ export class ParticleP5Sketch extends React.Component {
     this.myP5 = new p5(particleSketch, this.myRef.current);
   }
   render() {
-    return <div  ref={this.myRef}></div>;
+    return <div ref={this.myRef}></div>;
   }
 }

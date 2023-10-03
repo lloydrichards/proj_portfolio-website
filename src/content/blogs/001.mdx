@@ -2,35 +2,36 @@
 id: 001
 title: Starting Feeld Redesign
 date: 2020-08-16
-description: Join me on my journey to rebuild my portfolio using Next.js, TypeScript, Storybook, Contentlayer, and Tailwind CSS.
+description:
+  Join me on my journey to rebuild my portfolio using Next.js, TypeScript,
+  Storybook, Contentlayer, and Tailwind CSS.
 ---
 
-This will be the start of a fairly odd project, but one that I've been
-wanting to do for a long time. So why not document the process 😄. The
-problem starts with a dating app called [Feeld](https://feeld.co/).
-The basic premise is that this is
-a dating app for couples or those interested more in polyamorour or
-alternative relationships. This is a super interesting concept,
-especially from a UX perspective, but unfortunately the app comes no
-where near its own potential.
+This will be the start of a fairly odd project, but one that I've been wanting
+to do for a long time. So why not document the process 😄. The problem starts
+with a dating app called [Feeld](https://feeld.co/). The basic premise is that
+this is a dating app for couples or those interested more in polyamorour or
+alternative relationships. This is a super interesting concept, especially from
+a UX perspective, but unfortunately the app comes no where near its own
+potential.
 
-What I'm hoping to acheive in this series is to first go in an examine
-whats wrong with the app currently and then re-envision it as something
-more true to the core user. This will be partly design and partly code
-as I'd like to make a basic MVP of my concept that could be used to test
-the user experiance. Lets jump right in!
+What I'm hoping to acheive in this series is to first go in an examine whats
+wrong with the app currently and then re-envision it as something more true to
+the core user. This will be partly design and partly code as I'd like to make a
+basic MVP of my concept that could be used to test the user experiance. Lets
+jump right in!
 
 ## Users
 
-From my experiance using the app I've noticed four distinct groups of
-users based on their intent with the app. From these four there are
-multiple combinations of gender, orientation and sexual preference. But
-lets start with breaking down these user stories.
+From my experiance using the app I've noticed four distinct groups of users
+based on their intent with the app. From these four there are multiple
+combinations of gender, orientation and sexual preference. But lets start with
+breaking down these user stories.
 
 ### Baby Poly's 👶
 
-New to the polyamory scene, have little experiance but are
-curious about the possibilies.
+New to the polyamory scene, have little experiance but are curious about the
+possibilies.
 
 #### Facts
 
@@ -39,14 +40,12 @@ curious about the possibilies.
 
 #### Problems
 
-Looking for others seeking alternative relationships. Not sure
-what they want.
+Looking for others seeking alternative relationships. Not sure what they want.
 
 #### Behaviours
 
-Might use the app for intense periods at the start but overtime
-will loose interest or if they mind a monogamous relationship
-will abandon the app.
+Might use the app for intense periods at the start but overtime will loose
+interest or if they mind a monogamous relationship will abandon the app.
 
 #### Needs & Goals
 
@@ -56,8 +55,7 @@ will abandon the app.
 
 ### Unicorns 🦄
 
-Single people looking for sexual experiances with couples or
-groups.
+Single people looking for sexual experiances with couples or groups.
 
 #### Facts
 
@@ -67,16 +65,14 @@ groups.
 
 #### Problems
 
-Looking for couples open to a third person in relationship/bed.
-Able to see everyone involved and be part of a group
-conversation.
+Looking for couples open to a third person in relationship/bed. Able to see
+everyone involved and be part of a group conversation.
 
 #### Behaviours
 
-Use app from time to time when in the mood. Aren't seeking
-relationships so will usualy not continue chatting with couples
-after. Will want to 'cast a large net' and see what interests
-them.
+Use app from time to time when in the mood. Aren't seeking relationships so will
+usualy not continue chatting with couples after. Will want to 'cast a large net'
+and see what interests them.
 
 #### Needs & Goals
 
@@ -86,8 +82,8 @@ them.
 
 ### Unicorn Hunters 🏹
 
-Couples looking to spice up their sex life by bringing in a
-single person to play with.
+Couples looking to spice up their sex life by bringing in a single person to
+play with.
 
 #### Facts
 
@@ -97,16 +93,14 @@ single person to play with.
 
 #### Problems
 
-Are in relationship but want to have a sexual experiance
-together with another person. Private and don't want this to be
-known by their closer friends/family.
+Are in relationship but want to have a sexual experiance together with another
+person. Private and don't want this to be known by their closer friends/family.
 
 #### Behaviours
 
-Use the app togehter, searching profiles and dicussing together
-outside the app their interests. Might have different
-preferences or desires. Will use the app periodically but more
-consistantly over time as long as they enjoy it.
+Use the app togehter, searching profiles and dicussing together outside the app
+their interests. Might have different preferences or desires. Will use the app
+periodically but more consistantly over time as long as they enjoy it.
 
 #### Needs & Goals
 
@@ -116,8 +110,7 @@ consistantly over time as long as they enjoy it.
 
 ### Poly Couples 💑
 
-Couples looking for relationships with other experianced poly
-couples.
+Couples looking for relationships with other experianced poly couples.
 
 #### Facts
 
@@ -127,15 +120,14 @@ couples.
 
 #### Problems
 
-Have a hard time finding others with similar ideas about
-relationships. Feel marginalized or objectified in other dating
-apps. Feel misunderstood.
+Have a hard time finding others with similar ideas about relationships. Feel
+marginalized or objectified in other dating apps. Feel misunderstood.
 
 #### Behaviours
 
-Use the app regularly to interact with other poly couples. Will
-typically find another relationship, meet, and then move to
-another app like WhatsApp for futher communication.
+Use the app regularly to interact with other poly couples. Will typically find
+another relationship, meet, and then move to another app like WhatsApp for
+futher communication.
 
 #### Needs & Goals
 

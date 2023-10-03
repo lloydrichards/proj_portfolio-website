@@ -11,7 +11,7 @@ import { Blog, Lab } from "contentlayer/generated";
 import Link from "next/link";
 import { FC } from "react";
 import { formatDate } from "@/lib/format";
-import {FlaskConical, Mic} from "lucide-react"
+import { FlaskConical, Mic } from "lucide-react";
 
 interface PostsListItemProps {
   post: Lab | Blog;
@@ -57,10 +57,7 @@ export const PostsNavigation: FC<PostsNavigationProps> = ({
   return (
     <NavigationMenu
       orientation="vertical"
-      className={cn(
-        "flex-col items-start justify-start gap-4",
-        className
-      )}
+      className={cn("flex-col items-start justify-start gap-4", className)}
     >
       <Link href={"/posts"}>
         <h1 className="text-lg">All Posts</h1>

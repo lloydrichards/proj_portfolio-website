@@ -249,4 +249,3 @@ export const Example3 = () => {
     </div>
   );
 };
-

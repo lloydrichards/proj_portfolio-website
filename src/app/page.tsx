@@ -12,9 +12,12 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { isAfter, subYears } from "date-fns";
 
-const TimelineDashboard = dynamic(() => import("@/components/timeline/timeline_dashboard/TimelineDashboard"), {
-  ssr: false,
-});
+const TimelineDashboard = dynamic(
+  () => import("@/components/timeline/timeline_dashboard/TimelineDashboard"),
+  {
+    ssr: false,
+  },
+);
 
 export default function Home() {
   return (
@@ -54,7 +57,7 @@ export default function Home() {
       </div>
       <TimelineDashboard
         occupations={allOccupations.filter((d) =>
-          isAfter(new Date(d.start_date), subYears(new Date(), 5))
+          isAfter(new Date(d.start_date), subYears(new Date(), 5)),
         )}
       />
     </main>

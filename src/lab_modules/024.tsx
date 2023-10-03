@@ -79,7 +79,7 @@ export const BubblePacking: FC<Props> = ({
         "collide",
         forceCollide<Node>()
           .strength(0.1)
-          .radius((d) => d.count + 10)
+          .radius((d) => d.count + 10),
       )
       .on("tick", updateSimulation)
       .on("end", endSimulation)
@@ -126,7 +126,7 @@ export const BubblePacking2: FC<Props> = ({
         "collide",
         forceCollide<Node>()
           .strength(0.5)
-          .radius((d) => d.count + 10)
+          .radius((d) => d.count + 10),
       );
 
     simulation.on("tick", () => {

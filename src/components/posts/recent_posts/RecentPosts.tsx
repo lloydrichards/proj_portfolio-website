@@ -17,13 +17,13 @@ export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
       posts
         .filter((d) => !filter || d.type === filter)
         .sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
         ),
-    [filter, posts]
+    [filter, posts],
   );
   const recentPosts = useMemo(
     () => allPosts.filter((d) => d.published).slice(0, 6),
-    [allPosts]
+    [allPosts],
   );
 
   return (

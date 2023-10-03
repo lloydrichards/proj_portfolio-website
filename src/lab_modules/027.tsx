@@ -95,7 +95,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({ data }) => {
         min: 0,
         max: 1,
       },
-    }
+    },
   );
   const [topics, setTopics] = useState([
     {
@@ -124,7 +124,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({ data }) => {
     },
   ]);
   const [dataNodes, setDataNodes] = useState<Node[]>(
-    data.map((d) => ({ ...d, color: topicColor(d.type || "SPORT") }))
+    data.map((d) => ({ ...d, color: topicColor(d.type || "SPORT") })),
   );
   const [layout, setLayout] = useState<
     Array<SimulationNodeDatum & Partial<Node>>
@@ -159,8 +159,8 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({ data }) => {
           forceCollide<Node>()
             .strength(collisionStr)
             .radius(
-              (d) => (d.count || 0) / Math.PI + nodeRad * Math.PI * 2 + padding
-            )
+              (d) => (d.count || 0) / Math.PI + nodeRad * Math.PI * 2 + padding,
+            ),
         );
 
       layoutSimulator.nodes(topics);
@@ -198,20 +198,20 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({ data }) => {
         .force(
           "forceX",
           forceX<SimulationNodeDatum & Partial<Node>>(
-            (d) => layout.find((e) => e.type == d.type)?.x || width / 2
-          )
+            (d) => layout.find((e) => e.type == d.type)?.x || width / 2,
+          ),
         )
         .force(
           "forceY",
           forceY<SimulationNodeDatum & Partial<Node>>(
-            (d) => layout.find((e) => e.type == d.type)?.y || width / 2
-          )
+            (d) => layout.find((e) => e.type == d.type)?.y || width / 2,
+          ),
         )
         .force(
           "collide",
           forceCollide<Node>()
             .strength(nodeStr)
-            .radius((d) => d.count + nodeRad)
+            .radius((d) => d.count + nodeRad),
         );
       nodeSimulator.nodes(dataNodes);
       nodeSimulator.on("tick", () => {
@@ -236,7 +236,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({ data }) => {
       topics.map((t) => ({
         ...t,
         count: sum(updatedNodes, (d) => (d.type == t.type ? d.count : 0)),
-      }))
+      })),
     );
   }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 

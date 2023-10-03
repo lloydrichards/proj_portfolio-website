@@ -21,7 +21,7 @@ export const BasicTimeline = () => {
               .attr("cy", 50)
               .attr("stroke", "tomato"),
           (update) => update.attr("class", "updated"),
-          (exit) => exit.transition().duration(1000).attr("r", 0).remove()
+          (exit) => exit.transition().duration(1000).attr("r", 0).remove(),
         )
         .transition()
         .duration(1000)
@@ -215,7 +215,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
 
   const lookupInRange = (
     corner: Date,
-    allValues: Array<Occupation>
+    allValues: Array<Occupation>,
   ): boolean => {
     let result: boolean = false;
     allValues.forEach((i) => {
@@ -243,7 +243,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       value: Occupation,
       backArg: any,
       midArg: any,
-      frontArg: any
+      frontArg: any,
     ): boolean | number | string => {
       if (
         lookupInRange(value.end, occupations) &&
@@ -256,13 +256,13 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
         return frontArg;
       }
     },
-    [occupations]
+    [occupations],
   );
 
   const wrap = (
     text: d3.Selection<SVGTextElement, Occupation, null, unknown>,
     width: number,
-    textMargin: number
+    textMargin: number,
   ) => {
     text.each(function () {
       var text = d3.select(this),
@@ -384,10 +384,10 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .attr("width", 35)
       .attr("height", (value) => yScale(+value.start) - yScale(+value.end))
       .attr("fill", (value) =>
-        value.selected ? categoryColor(value.category) : "#f6f3f0"
+        value.selected ? categoryColor(value.category) : "#f6f3f0",
       )
       .attr("stroke", (value) =>
-        value.selected ? "#f6f3f0" : categoryColor(value.category)
+        value.selected ? "#f6f3f0" : categoryColor(value.category),
       )
       .attr("stroke-width", "2px");
 
@@ -403,10 +403,10 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .attr("width", 30)
       .attr("height", (value) => yScale(+value.start) - yScale(+value.end))
       .attr("fill", (value) =>
-        value.selected ? categoryColor(value.category) : "#f6f3f0"
+        value.selected ? categoryColor(value.category) : "#f6f3f0",
       )
       .attr("stroke", (value) =>
-        value.selected ? "#f6f3f0" : categoryColor(value.category)
+        value.selected ? "#f6f3f0" : categoryColor(value.category),
       )
       .attr("stroke-width", "2px");
 
@@ -422,10 +422,10 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .attr("width", 25)
       .attr("height", (value) => yScale(+value.start) - yScale(+value.end))
       .attr("fill", (value) =>
-        value.selected ? categoryColor(value.category) : "#f6f3f0"
+        value.selected ? categoryColor(value.category) : "#f6f3f0",
       )
       .attr("stroke", (value) =>
-        value.selected ? "#f6f3f0" : categoryColor(value.category)
+        value.selected ? "#f6f3f0" : categoryColor(value.category),
       )
       .attr("stroke-width", "2px");
 

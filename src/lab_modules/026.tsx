@@ -83,7 +83,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
     },
   ]);
   const [dataNodes, setDataNodes] = useState<Node[]>(
-    data.map((d) => ({ ...d, color: topicColor(d.type || "SPORT") }))
+    data.map((d) => ({ ...d, color: topicColor(d.type || "SPORT") })),
   );
   const [layout, setLayout] = useState<
     Array<SimulationNodeDatum & Partial<Node>>
@@ -102,7 +102,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
       "collide",
       forceCollide<Node>()
         .strength(1)
-        .radius((d) => (d.count || 0) / Math.PI + 56)
+        .radius((d) => (d.count || 0) / Math.PI + 56),
     );
 
     layoutSim.on("tick", () => {
@@ -141,7 +141,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
       "collide",
       forceCollide<Node>()
         .strength(1)
-        .radius((d) => d.count + 10)
+        .radius((d) => d.count + 10),
     );
     nodeSim.nodes(dataNodes);
     setNodeSimulator(nodeSim);
@@ -158,14 +158,14 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
         .force(
           "forceX",
           forceX<SimulationNodeDatum & Partial<Node>>(
-            (d) => layout.find((e) => e.type == d.type)?.x || width / 2
-          )
+            (d) => layout.find((e) => e.type == d.type)?.x || width / 2,
+          ),
         )
         .force(
           "forceY",
           forceY<SimulationNodeDatum & Partial<Node>>(
-            (d) => layout.find((e) => e.type == d.type)?.y || width / 2
-          )
+            (d) => layout.find((e) => e.type == d.type)?.y || width / 2,
+          ),
         );
       nodeSimulator.nodes(dataNodes);
       nodeSimulator.on("tick", () => {
@@ -190,7 +190,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
       topics.map((t) => ({
         ...t,
         count: sum(updatedNodes, (d) => (d.type == t.type ? d.count : 0)),
-      }))
+      })),
     );
   }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 

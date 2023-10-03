@@ -22,11 +22,11 @@ export interface LabPageProps {
   };
 }
 
-const getLabFromParams = async (slug: string)=> {
+const getLabFromParams = async (slug: string) => {
   const lab = allLabs.find((lab) => lab.slugAsParams === slug);
   if (!lab) notFound();
   return lab;
-}
+};
 
 export async function generateMetadata({
   params,

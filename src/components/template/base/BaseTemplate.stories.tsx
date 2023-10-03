@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { BaseTemplate } from './BaseTemplate';
-import { mockBaseTemplateProps } from './BaseTemplate.mocks';
+import { Meta, StoryObj } from "@storybook/react";
+import { BaseTemplate } from "./BaseTemplate";
+import { mockBaseTemplateProps } from "./BaseTemplate.mocks";
 
 export default {
   // Update the title to match the component type
-  title: 'templates/BaseTemplate',
+  title: "templates/BaseTemplate",
   component: BaseTemplate,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},

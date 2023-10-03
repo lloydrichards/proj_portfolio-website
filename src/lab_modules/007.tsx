@@ -49,7 +49,7 @@ export const SVGSystem = () => {
   });
 
   const nextPath = (
-    item: GarbageType | GrindType | PelletType | ProductType
+    item: GarbageType | GrindType | PelletType | ProductType,
   ) => {
     const nextRoute = routes.find((i) => i.parent === item.type);
     if (nextRoute) {

@@ -2,8 +2,8 @@ const AboutPage = () => {
   return (
     <main className=" flex min-h-screen flex-col items-center p-16">
       <div className="prose">
-      <h1>About Page</h1>
-      <p>
+        <h1>About Page</h1>
+        <p>
           I&apos;m a Zurich-based <strong>Interaction Engineer</strong>. Data
           visualisation is a potent tool for understanding and communicating
           complex information. As a garden designer, I aimed to create

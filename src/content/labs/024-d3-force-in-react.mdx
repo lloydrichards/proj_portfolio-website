@@ -45,7 +45,7 @@ useEffect(() => {
       "collide",
       forceCollide<Node>()
         .strength(0.1)
-        .radius((d) => d.count + 10)
+        .radius((d) => d.count + 10),
     )
     .on("tick", updateSimulation)
     .on("end", endSimulation)
@@ -88,7 +88,7 @@ useEffect(() => {
       "collide",
       forceCollide<Node>()
         .strength(0.5)
-        .radius((d) => d.count + 10)
+        .radius((d) => d.count + 10),
     );
 
   simulation.on("tick", () => {

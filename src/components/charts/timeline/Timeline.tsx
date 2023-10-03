@@ -51,7 +51,7 @@ export const Timeline: FC<TimelineProps> = ({
   // Helpers
   const lookupInRange = (
     corner: Date,
-    allValues: Array<Occupation>
+    allValues: Array<Occupation>,
   ): boolean => {
     let result: boolean = false;
     allValues.forEach((i) => {
@@ -68,7 +68,7 @@ export const Timeline: FC<TimelineProps> = ({
 
   const dataWithChannels = data
     .sort((a, b) =>
-      isBefore(new Date(a.start_date), new Date(b.start_date)) ? 1 : -1
+      isBefore(new Date(a.start_date), new Date(b.start_date)) ? 1 : -1,
     )
     .map((d) => {
       if (

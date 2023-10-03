@@ -11,6 +11,5 @@ export default {
 export const Base: StoryObj<typeof PostCard> = {
   args: mockPostCardProps.base,
   parameters: {},
-  play: () => {
-  },
+  play: () => {},
 };

@@ -1,5 +1,5 @@
-import { allLabs } from '../../../../.contentlayer/generated';
-import { IPostCard } from './PostCard';
+import { allLabs } from "../../../../.contentlayer/generated";
+import { IPostCard } from "./PostCard";
 
 const base: IPostCard = {
   post: allLabs[0],

@@ -98,7 +98,7 @@ export const NestedBubblePacking: FC<Props> = ({
         "collide",
         forceCollide<Node>()
           .strength(0.5)
-          .radius((d) => ((d.count || 0) / Math.PI) * 2.2 + 24)
+          .radius((d) => ((d.count || 0) / Math.PI) * 2.2 + 24),
       );
 
     layoutSim.on("tick", () => {
@@ -121,21 +121,21 @@ export const NestedBubblePacking: FC<Props> = ({
       .force(
         "forceX",
         forceX<SimulationNodeDatum & Partial<Node>>(
-          (d) => layout.find((e) => e.type == d.type)?.x || width / 2
-        )
+          (d) => layout.find((e) => e.type == d.type)?.x || width / 2,
+        ),
       )
       .force(
         "forceY",
         forceY<SimulationNodeDatum & Partial<Node>>(
-          (d) => layout.find((e) => e.type == d.type)?.y || width / 2
-        )
+          (d) => layout.find((e) => e.type == d.type)?.y || width / 2,
+        ),
       )
       .force("charge", forceManyBody())
       .force(
         "collide",
         forceCollide<Node>()
           .strength(0.5)
-          .radius((d) => d.count + 10)
+          .radius((d) => d.count + 10),
       );
 
     nodeSim.on("tick", () => {

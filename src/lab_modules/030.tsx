@@ -150,13 +150,13 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
       simulator
         .force(
           "forceX",
-          forceX<Node>((d) => xScale(d.timestamp)).strength(xStr)
+          forceX<Node>((d) => xScale(d.timestamp)).strength(xStr),
         )
         .force(
           "forceY",
           forceY<Node>(height / 2).strength(
-            (d) => yStr + (d.type == selected ? selectStr : 0)
-          )
+            (d) => yStr + (d.type == selected ? selectStr : 0),
+          ),
         )
         .force(
           "collide",
@@ -166,8 +166,8 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
               (d) =>
                 ((d.count || 0) / Math.PI) * 2 +
                 padding -
-                (d.type == selected ? selectRad : 0)
-            )
+                (d.type == selected ? selectRad : 0),
+            ),
         );
 
       simulator.nodes(nodes);

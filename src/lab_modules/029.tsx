@@ -67,7 +67,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
       start: { x: xScale(intervals[0]) },
       end: { x: xScale(intervals[1]) },
     }),
-    [xScale] // eslint-disable-line react-hooks/exhaustive-deps
+    [xScale], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   // Handlers
@@ -94,7 +94,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
       const newEnd = addDays(window[1], speed);
       const newExtent = brushRef.current!.getExtent(
         { x: xScale(newStart) },
-        { x: xScale(newEnd) }
+        { x: xScale(newEnd) },
       );
       setWindow([newStart, newEnd]);
       const newState: BaseBrushState = {
@@ -116,7 +116,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
     brushRef.current.updateBrush((prevBrush) => {
       const newExtent = brushRef.current!.getExtent(
         { x: xScale(intervals[0]) },
-        { x: xScale(intervals[1]) }
+        { x: xScale(intervals[1]) },
       );
       const newState: BaseBrushState = {
         ...prevBrush,
@@ -133,7 +133,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
       setCount(count + 1);
       ontTick();
     },
-    speed != 0 ? 200 : null
+    speed != 0 ? 200 : null,
   );
 
   return (

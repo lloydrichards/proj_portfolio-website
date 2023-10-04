@@ -1,7 +1,7 @@
 ---
 id: 033
 title: "fp-ts: The Practical (Part 2)"
-date: 2023-10-03
+date: 2023-10-04
 description: Exploring fp-ts, looking at some of the more practical examples.
 tags:
   - fp-ts
@@ -146,4 +146,91 @@ getFromUrl("https://api.chucknorris.io/jokes/random")().then(console.log); // Ou
 
 ### Branching Render Logic
 
+This pattern is very useful in React applications. It allows you to branch your
+render logic based on the type of data that you have. This is very useful when
+you have a loading or error state that you want to handle differently.
+
+```ts
+import * as E from "fp-ts/lib/Either";
+import * as IO from "fp-ts/lib/IO";
+import * as O from "fp-ts/lib/Option";
+import { pipe } from "fp-ts/lib/function";
+
+export const ConditionalRender: FC<{ value?: number }> = ({ value }) => {
+  useEffect(() => {
+    return pipe(
+      value,
+      O.fromPredicate((value) => value == 10),
+      O.fold(
+        () => IO.of(undefined), // no side effect
+        () => IO.of(console.log("The value is very important!")), // conditional side effect
+      ),
+    );
+  }, [value]);
+
+  return pipe(
+    value,
+    O.fromNullable,
+    O.fold(
+      () => <LoadingCard />, // Output: Loading UI Card
+      (value) =>
+        pipe(
+          value,
+          E.fromPredicate(
+            (value) => value !== 0, // Addition validation
+            () => "Error: Value is not 0",
+          ),
+          E.map((value) =>
+            value > 0 ? `Positive (${value})` : `Negative (${value})`, // Transform value
+          ),
+          E.fold(
+            (error) => <ErrorCard error={error} />, // Output: Error UI Card
+            (success) => <SuccessCard data={success} />, // Success UI Card
+          ),
+        ),
+    ),
+  );
+};
+```
+
 ### Responsive Values
+
+When working with repsonsiveness it can sometimes be nessisary to conditionally
+return values based on the screen size. This pattern allows you to do that in a
+very elegant way. While its not nessisary to use fp-ts for this, it does make it
+use of functional programming concepts such as currying and composition.
+
+```ts
+export const foldScreenWidth =
+  <T>(
+    xs: (width: number) => T,
+    sm?: (width: number) => T,
+    md?: (width: number) => T,
+    lg?: (width: number) => T,
+  ) =>
+  (width: number) => {
+    switch (true) {
+      case width > 1200 && lg !== undefined:
+        return lg!(width);
+      case width > 992 && md !== undefined:
+        return md!(width);
+      case width > 768 && sm !== undefined:
+        return sm!(width);
+      default:
+        return xs(width);
+    }
+  };
+
+const responsiveFontSize = foldScreenWidth(
+  () => `1rem`, // default for xs screen
+  () => `1.25rem`, // sm screen
+  undefined, // md screen
+  () => `2rem`, // lg screen
+);
+console.log(responsiveFontSize(1000)); // Output: "1.25rem"
+```
+
+This can also be done using ADTs which is a bit more elegant, but also a bit
+more complicated. I've only used an ADT abstraction from
+[morphic-ts](https://github.com/sledorze/morphic-ts) but dont want to add that
+dependency to this project (right now).

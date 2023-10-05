@@ -1,17 +1,14 @@
-import * as A from "fp-ts/lib/Array";
-import * as O from "fp-ts/lib/Option";
-import * as E from "fp-ts/lib/Either";
-import * as T from "fp-ts/Task";
-import * as TE from "fp-ts/TaskEither";
-import * as IO from "fp-ts/IO";
-import * as t from "io-ts";
-import * as EQ from "io-ts/Eq";
-import { pipe, flow } from "fp-ts/lib/function";
-import { failure } from "io-ts/PathReporter";
-import { FC, useEffect, useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import { Toaster } from "@/components/ui/toaster";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/components/ui/use-toast";
+import * as IO from "fp-ts/IO";
+import * as TE from "fp-ts/TaskEither";
+import * as A from "fp-ts/lib/Array";
+import * as E from "fp-ts/lib/Either";
+import * as O from "fp-ts/lib/Option";
+import { pipe } from "fp-ts/lib/function";
+import * as t from "io-ts";
+import { failure } from "io-ts/PathReporter";
 import {
   Book,
   Gift,
@@ -22,7 +19,7 @@ import {
   Sofa,
   Trash,
 } from "lucide-react";
-import { set } from "date-fns";
+import { FC, useEffect, useState } from "react";
 
 /*
  * Infrastructure Layer
@@ -42,6 +39,7 @@ const fetchProducts = (): TE.TaskEither<AppError, Product[]> =>
     ),
     TE.map((response) => JSON.parse(response)),
     TE.chainEitherK((json) =>
+      // check that the data returned from the server is valid
       pipe(
         Products.decode(json),
         E.mapLeft(
@@ -117,13 +115,13 @@ const addProductToCart =
             cart.items,
             A.findFirst((item) => item.product.id === product.id),
             O.fold(
-              () => true,
+              () => amount >= 0,
               (item) => item.quantity + amount >= 0,
             ),
           ),
         (): AppError => ({
           type: "ValidationError",
-          message: "Can't remove more items than are in the cart",
+          message: "Can't remove that many items from the cart",
         }),
       ),
       E.map((cart) => ({
@@ -154,8 +152,8 @@ const addProductToCart =
     );
 
 const updateCart =
-  (cart: Cart) =>
-  (product: Product, amount: number): E.Either<AppError, Cart> =>
+  (product: Product, amount: number) =>
+  (cart: Cart): E.Either<AppError, Cart> =>
     pipe(
       cart,
       E.fromPredicate(
@@ -170,9 +168,8 @@ const updateCart =
     );
 
 const useShoppingCart = () => {
-  const { toast } = useToast();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState<AppError | undefined>(undefined);
+  const [products, setProducts] = useState<O.Option<Product[]>>(O.none);
+  const [error, setError] = useState<O.Option<AppError>>(O.none);
   const [cart, setCart] = useState<Cart>({ items: [] });
 
   useEffect(() => {
@@ -180,47 +177,30 @@ const useShoppingCart = () => {
       pipe(
         s,
         E.fold(
-          (error) => IO.of(setError(error)),
-          (products) => IO.of(setProducts(products)),
+          (error) => setError(O.some(error)),
+          (products) => setProducts(O.some(products)),
         ),
       ),
     );
   }, []);
 
-  useEffect(() => {
-    pipe(
-      error,
-      O.fromNullable,
-      O.filter((error) => ["NetworkError", "ParseError"].includes(error.type)),
-      O.foldW(
-        () => IO.of(undefined),
-        (error) =>
-          IO.of(
-            toast({
-              variant: "destructive",
-              title: error.type,
-              description: error.message,
-            }),
-          ),
-      ),
-    )();
-  }, [error, toast]);
-
   const addItem = (product: Product, amount: number | undefined = 1) =>
     pipe(
-      updateCart(cart)(product, amount),
-      E.fold(
-        (error) => IO.of(setError(error)),
-        (cart) => IO.of(setCart(cart)),
+      cart,
+      updateCart(product, amount),
+      E.foldW(
+        (error) => setError(O.some(error)),
+        (cart) => setCart(cart),
       ),
     );
 
   const removeItem = (product: Product, amount: number | undefined = 1) =>
     pipe(
-      updateCart(cart)(product, -amount),
+      cart,
+      updateCart(product, -amount),
       E.fold(
-        (error) => IO.of(setError(error)),
-        (cart) => IO.of(setCart(cart)),
+        (error) => setError(O.some(error)),
+        (cart) => setCart(cart),
       ),
     );
 
@@ -230,68 +210,104 @@ const useShoppingCart = () => {
  * Presentation Layer
  */
 
-export const ShoppingApp: FC = () => {
-  const { products, cart, addItem, removeItem, error } = useShoppingCart();
+const ErrorCard: FC<{ type: string }> = ({ type }) => {
+  return (
+    <div className="grid items-center justify-center rounded border-2 border-destructive p-4 shadow-md">
+      <p>Oh no! Something went wrong 😭 ({type})</p>
+    </div>
+  );
+};
 
-  return pipe(
-    products,
-    O.fromPredicate((products) => products.length > 0),
-    O.fold(
-      () =>
-        pipe(
-          error,
-          O.fromNullable,
-          O.fold(
-            () => (
-              <div className="grid grid-cols-5 rounded border bg-background p-4 shadow-md">
-                <p>Loading...</p>
-              </div>
+const LoadingCard: FC = () => {
+  return (
+    <div className="grid items-center justify-center rounded border bg-background p-4 shadow-md">
+      <p>Loading...</p>
+    </div>
+  );
+};
+
+const ShopCard: FC<{
+  products: Product[];
+  cart: Cart;
+  addItem: (product: Product) => void;
+  removeItem: (product: Product) => void;
+}> = ({ products, addItem, cart, removeItem }) => {
+  return (
+    <div className="not-prose grid grid-cols-5 rounded border bg-background p-4 shadow-md">
+      <section className="col-span-3 w-full border-r">
+        <h1 className="flex gap-2">
+          <Gift />
+          Products
+        </h1>
+        <div className="flex w-full flex-wrap gap-2">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAdd={addItem}
+              onRemove={removeItem}
+            />
+          ))}
+        </div>
+      </section>
+      <aside className=" col-span-2 w-full flex-col border p-2">
+        <h2 className="flex gap-2">
+          <ShoppingBasket />
+          Cart
+        </h2>
+        <ul>
+          {cart.items.map((item) => (
+            <CartItem key={item.product.id} item={item} onDelete={removeItem} />
+          ))}
+        </ul>
+      </aside>
+    </div>
+  );
+};
+
+export const ShoppingApp: FC = () => {
+  const { toast } = useToast();
+  const { products, error, addItem, cart, removeItem } = useShoppingCart();
+  useEffect(() => {
+    pipe(
+      error,
+      O.foldW(
+        () => {},
+        (error) =>
+          toast({
+            variant: "destructive",
+            title: error.type,
+            description: error.message,
+          }),
+      ),
+    );
+  }, [error, toast]);
+
+  return (
+    <main>
+      {pipe(
+        products,
+        O.fold(
+          () =>
+            pipe(
+              error,
+              O.fold(
+                () => <LoadingCard />,
+                (error) => <ErrorCard type={error.type} />,
+              ),
             ),
-            (error) => (
-              <div className="grid grid-cols-5 rounded border bg-destructive p-4 text-destructive-foreground shadow-md">
-                <p>{error.type}</p>
-                <p className="col-span-4">{error.message}</p>
-              </div>
-            ),
+          (data) => (
+            <ShopCard
+              products={data}
+              cart={cart}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
           ),
         ),
-      () => (
-        <div className="not-prose grid grid-cols-5 rounded border bg-background p-4 shadow-md">
-          <section className="col-span-3 w-full border-r">
-            <h1 className="flex gap-2">
-              <Gift />
-              Products
-            </h1>
-            <div className="flex w-full flex-wrap gap-2">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAdd={addItem}
-                  onRemove={removeItem}
-                />
-              ))}
-            </div>
-          </section>
-          <aside className=" col-span-2 w-full flex-col border p-2">
-            <h2 className="flex gap-2">
-              <ShoppingBasket />
-              Cart
-            </h2>
-            <ul>
-              {cart.items.map((item) => (
-                <CartItem
-                  key={item.product.id}
-                  item={item}
-                  onDelete={removeItem}
-                />
-              ))}
-            </ul>
-          </aside>
-          <Toaster />
-        </div>
-      ),
-    ),
+      )}
+      <Toaster />
+    </main>
   );
 };
 const ProductCard: FC<{

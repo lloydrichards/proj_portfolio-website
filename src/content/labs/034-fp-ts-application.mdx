@@ -175,23 +175,21 @@ const addProductToCart =
     pipe(
       cart,
       E.fromPredicate(
-        // check that there is enough items in the cart to remove
         (cart) =>
           pipe(
             cart.items,
             A.findFirst((item) => item.product.id === product.id),
             O.fold(
-              () => true,
+              () => amount >= 0,
               (item) => item.quantity + amount >= 0,
             ),
           ),
         (): AppError => ({
           type: "ValidationError",
-          message: "Can't remove more items than are in the cart",
+          message: "Can't remove that many items from the cart",
         }),
       ),
       E.map((cart) => ({
-        // add the product to the cart
         ...cart,
         items: pipe(
           cart.items,
@@ -210,7 +208,6 @@ const addProductToCart =
         ),
       })),
       E.map((cart) => ({
-        // remove any items that have a quantity of 0
         ...cart,
         items: pipe(
           cart.items,
@@ -220,10 +217,9 @@ const addProductToCart =
     );
 
 const updateCart =
-  (cart: Cart) =>
-  (product: Product, amount: number): E.Either<AppError, Cart> =>
+  (product: Product, amount: number) =>
+  (cart: Cart): E.Either<AppError, Cart> =>
     pipe(
-      // check that the cart is not full
       cart,
       E.fromPredicate(
         (cart) =>
@@ -248,9 +244,8 @@ used `useState` here to keep the example simple.
 
 ```ts
 const useShoppingCart = () => {
-  const { toast } = useToast();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState<AppError | undefined>(undefined);
+  const [products, setProducts] = useState<O.Option<Product[]>>(O.none);
+  const [error, setError] = useState<O.Option<AppError>>(O.none);
   const [cart, setCart] = useState<Cart>({ items: [] });
 
   useEffect(() => {
@@ -258,47 +253,30 @@ const useShoppingCart = () => {
       pipe(
         s,
         E.fold(
-          (error) => IO.of(setError(error)),
-          (products) => IO.of(setProducts(products)),
+          (error) => setError(O.some(error)),
+          (products) => setProducts(O.some(products)),
         ),
       ),
     );
   }, []);
 
-  useEffect(() => {
-    pipe(
-      error,
-      O.fromNullable,
-      O.filter((error) => ["NetworkError", "ParseError"].includes(error.type)),
-      O.foldW(
-        () => IO.of(undefined),
-        (error) =>
-          IO.of(
-            toast({
-              variant: "destructive",
-              title: error.type,
-              description: error.message,
-            }),
-          ),
-      ),
-    )();
-  }, [error, toast]);
-
   const addItem = (product: Product, amount: number | undefined = 1) =>
     pipe(
-      updateCart(cart)(product, amount),
-      E.fold(
-        (error) => IO.of(setError(error)),
-        (cart) => IO.of(setCart(cart)),
+      cart,
+      updateCart(product, amount),
+      E.foldW(
+        (error) => setError(O.some(error)),
+        (cart) => setCart(cart),
       ),
     );
 
   const removeItem = (product: Product, amount: number | undefined = 1) =>
     pipe(
-      updateCart(cart)(product, -amount),
+      cart,
+      updateCart(product, -amount),
       E.fold(
-        (error) => IO.of(setError(error)),
-        (cart) => IO.of(setCart(cart)),
+        (error) => setError(O.some(error)),
+        (cart) => setCart(cart),
       ),
     );
 
@@ -317,67 +295,109 @@ may occur.
 
 ```tsx
 export const ShoppingApp: FC = () => {
-  const { products, cart, addItem, removeItem, error } = useShoppingCart();
+  const { toast } = useToast();
+  const { products, error, addItem, cart, removeItem } = useShoppingCart();
+  useEffect(() => {
+    pipe(
+      error,
+      O.foldW(
+        () => {},
+        (error) =>
+          toast({
+            variant: "destructive",
+            title: error.type,
+            description: error.message,
+          }),
+      ),
+    );
+  }, [error, toast]);
 
-  return pipe(
-    products,
-    O.fromPredicate((products) => products.length > 0),
-    O.fold(
-      () =>
-        pipe(
-          error,
-          O.fromNullable,
-          O.fold(
-            () => (
-              <div className="bg-background grid grid-cols-5 rounded border p-4 shadow-md">
-                <p>Loading...</p>
-              </div>
+  return (
+    <main>
+      {pipe(
+        products,
+        O.fold(
+          () =>
+            pipe(
+              error,
+              O.fold(
+                () => <LoadingCard />,
+                (error) => <ErrorCard type={error.type} />,
+              ),
             ),
-            (error) => (
-              <div className="bg-destructive text-destructive-foreground grid grid-cols-5 rounded border p-4 shadow-md">
-                <p>{error.type}</p>
-                <p className="col-span-4">{error.message}</p>
-              </div>
-            ),
+          (data) => (
+            <ShopCard
+              products={data}
+              cart={cart}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
           ),
         ),
-      () => (
-        <div className="not-prose bg-background grid grid-cols-5 rounded border p-4 shadow-md">
-          <section className="col-span-3 w-full border-r">
-            <h1 className="flex gap-2">
-              <Gift />
-              Products
-            </h1>
-            <div className="flex w-full flex-wrap gap-2">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAdd={addItem}
-                  onRemove={removeItem}
-                />
-              ))}
-            </div>
-          </section>
-          <aside className=" col-span-2 w-full flex-col border p-2">
-            <h2 className="flex gap-2">
-              <ShoppingBasket />
-              Cart
-            </h2>
-            <ul>
-              {cart.items.map((item) => (
-                <CartItem
-                  key={item.product.id}
-                  item={item}
-                  onDelete={removeItem}
-                />
-              ))}
-            </ul>
-          </aside>
-          <Toaster />
+      )}
+      <Toaster />
+    </main>
+  );
+};
+```
+
+Since the `ShoppingApp` component is responsible for seperating the states of
+the application, I don't need to worry about errors or loading in the `ShopCard`
+component. I can just focus on displaying the data to the user in each state.
+
+```tsx
+const ErrorCard: FC<{ type: string }> = ({ type }) => {
+  return (
+    <div className="border-destructive grid items-center justify-center rounded border-2 p-4 shadow-md">
+      <p>Oh no! Something went wrong 😭 ({type})</p>
+    </div>
+  );
+};
+
+const LoadingCard: FC = () => {
+  return (
+    <div className="bg-background grid items-center justify-center rounded border p-4 shadow-md">
+      <p>Loading...</p>
+    </div>
+  );
+};
+
+const ShopCard: FC<{
+  products: Product[];
+  cart: Cart;
+  addItem: (product: Product) => void;
+  removeItem: (product: Product) => void;
+}> = ({ products, addItem, cart, removeItem }) => {
+  return (
+    <div className="not-prose bg-background grid grid-cols-5 rounded border p-4 shadow-md">
+      <section className="col-span-3 w-full border-r">
+        <h1 className="flex gap-2">
+          <Gift />
+          Products
+        </h1>
+        <div className="flex w-full flex-wrap gap-2">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAdd={addItem}
+              onRemove={removeItem}
+            />
+          ))}
         </div>
-      ),
-    ),
+      </section>
+      <aside className=" col-span-2 w-full flex-col border p-2">
+        <h2 className="flex gap-2">
+          <ShoppingBasket />
+          Cart
+        </h2>
+        <ul>
+          {cart.items.map((item) => (
+            <CartItem key={item.product.id} item={item} onDelete={removeItem} />
+          ))}
+        </ul>
+      </aside>
+    </div>
   );
 };
 ```

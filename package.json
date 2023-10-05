@@ -17,6 +17,7 @@
     "@radix-ui/react-menubar": "^1.0.4",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@react-three/drei": "^9.86.3",
     "@react-three/fiber": "^8.14.4",
     "@vercel/analytics": "^1.0.2",

@@ -1,0 +1,446 @@
+---
+id: 033
+title: "fp-ts: The Application (Part 3)"
+date: 2023-10-05
+description: Exploring fp-ts, building a practical example.
+tags:
+  - fp-ts
+  - io-ts
+---
+
+import "../../lab_modules/034";
+import { ShoppingApp } from "../../lab_modules/034";
+
+## The Application
+
+In the previous two articles we have explored the basics of `fp-ts` and `io-ts`.
+In this article we will build a practical example of an application using these
+libraries. We will build a simple application for updating product:
+
+<ShoppingApp />
+
+The application is very simple. It fetches a list of products from a external
+source and displays them to the user. The user can then add or remove products
+from the cart. The cart is limited to 10 items. The user can also remove items
+from the cart.
+
+### Infrastructure Layer
+
+The infrastructure layer is responsible for fetching data from external sources
+or services. Normally this would be a database or a web service. In this example
+i'm just returning a stringified JSON object, saves me having to mock a http
+request.
+
+```ts
+const fetchProducts = (): TE.TaskEither<AppError, Product[]> =>
+  pipe(
+    TE.right(
+      JSON.stringify([
+        { id: 1, name: "Art of War", type: "BOOK" },
+        { id: 2, name: "Sofa", type: "FURNITURE" },
+        { id: 3, name: "Big Shirt", type: "CLOTH" },
+        { id: 4, name: "Lost Japan", type: "BOOK" },
+        { id: 5, name: "Underwear", type: "CLOTH" },
+        { id: 6, name: "Table", type: "FURNITURE" },
+      ]),
+    ),
+    TE.map((response) => JSON.parse(response)),
+    TE.chainEitherK((json) =>
+      // check that the data returned from the server is valid
+      pipe(
+        Products.decode(json),
+        E.mapLeft(
+          (errors): AppError => ({
+            type: "ParseError",
+            message: failure(errors).join("\n"),
+          }),
+        ),
+      ),
+    ),
+  );
+```
+
+One of the really nice things about `fp-ts` is that it allows you to compose the
+fetching of data and address any errors that may occur. In this example Im using
+`TaskEither` to represent the asynchronous nature of the request and the
+possibility of an error. We are using `chainEitherK` to convert the `Either`
+returned by `decode` into a `TaskEither`. This allows us to compose the
+`TaskEither` with other `TaskEither`'s using `chain` and `map`.
+
+The pipe makes it very easy for me to add additional validation or checks to the
+data. For example, if I wanted to check that the data returned from the server
+was not empty I could do something like this:
+
+```ts
+const fetchProducts = (): TE.TaskEither<AppError, Product[]> =>
+  pipe(
+    ...// <- same as above
+    TE.chainEitherK((data) =>
+      pipe(
+        E.fromPredicate(
+          // return ValidationError if data is empty
+          (data) => data.length > 0,
+          (): AppError => ({
+            type: "ValidationError",
+            message: "No products returned",
+          }),
+        ),
+      ),
+    ),
+  );
+```
+
+### Domain Layer
+
+The domain layer is responsible for defining the types that are used in the
+application. In this example we are using `io-ts` to define the types. This
+allows us to define the types and also validate the data at runtime. This is
+very useful when working with data from external sources.
+
+My goal with a domain layer is always to define exactly what is needed in the
+application and nothing more. This means that I can be very specific about the
+data that is required and also the data that is returned. This makes it very
+easy to reason about the application and also makes it very easy to test.
+
+```ts
+const Product = t.type({
+  id: t.number,
+  name: t.string,
+  type: t.union([
+    t.literal("BOOK"),
+    t.literal("FURNITURE"),
+    t.literal("CLOTH"),
+  ]),
+});
+type Product = t.TypeOf<typeof Product>;
+
+const Products = t.array(Product);
+type Products = t.TypeOf<typeof Products>;
+
+const Cart = t.type({
+  items: t.array(
+    t.type({
+      product: Product,
+      quantity: t.number,
+    }),
+  ),
+});
+type Cart = t.TypeOf<typeof Cart>;
+```
+
+For errors, I've kept it simple and just defined a few different types of errors
+that can occur. This is not a complete list of errors that can occur but it
+should be enough to demonstrate the concept.
+
+I want to catch and handle any exceptions that occur in the application. I don't
+want to have to worry about exceptions being thrown in the application. I want
+to be able to handle them in a consistent way. This is why I have defined a
+`NetworkError` and a `ParseError`. These errors are thrown by the
+`fetchProducts` function and are handled in the application layer.
+
+```ts
+type NetworkError = {
+  type: "NetworkError";
+  message: string;
+};
+
+type ParseError = {
+  type: "ParseError";
+  message: string;
+};
+
+type ValidationError = {
+  type: "ValidationError";
+  message: string;
+};
+
+type AppError = NetworkError | ParseError | ValidationError;
+```
+
+### Application Layer
+
+The application layer is responsible for defining the business logic of the
+application. This is where we define the functions that are used to update the
+state of the application. In this example we are using `fp-ts` to define the
+functions. This allows us to compose the functions and handle any errors that
+may occur.
+
+```ts
+const getProductList = (): TE.TaskEither<AppError, Product[]> =>
+  pipe(fetchProducts());
+
+const addProductToCart =
+  (product: Product, amount: number) =>
+  (cart: Cart): E.Either<AppError, Cart> =>
+    pipe(
+      cart,
+      E.fromPredicate(
+        // check that there is enough items in the cart to remove
+        (cart) =>
+          pipe(
+            cart.items,
+            A.findFirst((item) => item.product.id === product.id),
+            O.fold(
+              () => true,
+              (item) => item.quantity + amount >= 0,
+            ),
+          ),
+        (): AppError => ({
+          type: "ValidationError",
+          message: "Can't remove more items than are in the cart",
+        }),
+      ),
+      E.map((cart) => ({
+        // add the product to the cart
+        ...cart,
+        items: pipe(
+          cart.items,
+          A.filter((item) => item.product.id !== product.id),
+          A.append({
+            product,
+            quantity: pipe(
+              cart.items,
+              A.findFirst((item) => item.product.id === product.id),
+              O.fold(
+                () => amount,
+                (item) => item.quantity + amount,
+              ),
+            ),
+          }),
+        ),
+      })),
+      E.map((cart) => ({
+        // remove any items that have a quantity of 0
+        ...cart,
+        items: pipe(
+          cart.items,
+          A.filter((item) => item.quantity > 0),
+        ),
+      })),
+    );
+
+const updateCart =
+  (cart: Cart) =>
+  (product: Product, amount: number): E.Either<AppError, Cart> =>
+    pipe(
+      // check that the cart is not full
+      cart,
+      E.fromPredicate(
+        (cart) =>
+          cart.items.reduce((acc, cur) => acc + cur.quantity, amount) <= 10,
+        (): AppError => ({
+          type: "ValidationError",
+          message: "Cart is full",
+        }),
+      ),
+      E.chain((cart) => pipe(cart, addProductToCart(product, amount))),
+    );
+```
+
+The `useShoppingCart` hook is responsible for fetching the data and updating the
+state of the application. It is also responsible for displaying any errors that
+occur. This is where we use the `pipe` function to compose the functions and
+handle any errors that may occur.
+
+Storing the state of the application in a `useState` hook is not ideal. It would
+be better to use a state management library like `redux` or `zustand`. I have
+used `useState` here to keep the example simple.
+
+```ts
+const useShoppingCart = () => {
+  const { toast } = useToast();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState<AppError | undefined>(undefined);
+  const [cart, setCart] = useState<Cart>({ items: [] });
+
+  useEffect(() => {
+    pipe(getProductList())().then((s) =>
+      pipe(
+        s,
+        E.fold(
+          (error) => IO.of(setError(error)),
+          (products) => IO.of(setProducts(products)),
+        ),
+      ),
+    );
+  }, []);
+
+  useEffect(() => {
+    pipe(
+      error,
+      O.fromNullable,
+      O.filter((error) => ["NetworkError", "ParseError"].includes(error.type)),
+      O.foldW(
+        () => IO.of(undefined),
+        (error) =>
+          IO.of(
+            toast({
+              variant: "destructive",
+              title: error.type,
+              description: error.message,
+            }),
+          ),
+      ),
+    )();
+  }, [error, toast]);
+
+  const addItem = (product: Product, amount: number | undefined = 1) =>
+    pipe(
+      updateCart(cart)(product, amount),
+      E.fold(
+        (error) => IO.of(setError(error)),
+        (cart) => IO.of(setCart(cart)),
+      ),
+    );
+
+  const removeItem = (product: Product, amount: number | undefined = 1) =>
+    pipe(
+      updateCart(cart)(product, -amount),
+      E.fold(
+        (error) => IO.of(setError(error)),
+        (cart) => IO.of(setCart(cart)),
+      ),
+    );
+
+  return { products, cart, addItem, removeItem, error };
+};
+```
+
+### Presentation Layer
+
+The presentation layer is responsible for displaying the data to the user. In
+this example we are using `react` to display the data. The `ShoppingApp`
+component is responsible for displaying the data to the user. It is also
+responsible for handeling the state of the application. This is where we use the
+`pipe` function to compose the functions and handle any errors, or loading that
+may occur.
+
+```tsx
+export const ShoppingApp: FC = () => {
+  const { products, cart, addItem, removeItem, error } = useShoppingCart();
+
+  return pipe(
+    products,
+    O.fromPredicate((products) => products.length > 0),
+    O.fold(
+      () =>
+        pipe(
+          error,
+          O.fromNullable,
+          O.fold(
+            () => (
+              <div className="bg-background grid grid-cols-5 rounded border p-4 shadow-md">
+                <p>Loading...</p>
+              </div>
+            ),
+            (error) => (
+              <div className="bg-destructive text-destructive-foreground grid grid-cols-5 rounded border p-4 shadow-md">
+                <p>{error.type}</p>
+                <p className="col-span-4">{error.message}</p>
+              </div>
+            ),
+          ),
+        ),
+      () => (
+        <div className="not-prose bg-background grid grid-cols-5 rounded border p-4 shadow-md">
+          <section className="col-span-3 w-full border-r">
+            <h1 className="flex gap-2">
+              <Gift />
+              Products
+            </h1>
+            <div className="flex w-full flex-wrap gap-2">
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAdd={addItem}
+                  onRemove={removeItem}
+                />
+              ))}
+            </div>
+          </section>
+          <aside className=" col-span-2 w-full flex-col border p-2">
+            <h2 className="flex gap-2">
+              <ShoppingBasket />
+              Cart
+            </h2>
+            <ul>
+              {cart.items.map((item) => (
+                <CartItem
+                  key={item.product.id}
+                  item={item}
+                  onDelete={removeItem}
+                />
+              ))}
+            </ul>
+          </aside>
+          <Toaster />
+        </div>
+      ),
+    ),
+  );
+};
+```
+
+The `ProductCard` and `CartItem` components are responsible for displaying the
+data to the user. Since I've already delt with errors and loading in the
+`ShoppingApp` component I don't need to worry about them here. I can just focus
+on displaying the data to the user.
+
+```tsx
+const ProductCard: FC<{
+  product: Product;
+  onAdd: (product: Product) => void;
+  onRemove: (product: Product) => void;
+}> = ({ product, onAdd, onRemove }) => {
+  const Icon = () => {
+    switch (product.type) {
+      case "BOOK":
+        return <Book size={40} className="text-foreground/80" />;
+      case "FURNITURE":
+        return <Sofa size={40} className="text-foreground/80" />;
+      case "CLOTH":
+        return <Shirt size={40} className="text-foreground/80" />;
+    }
+  };
+
+  return (
+    <div className="flex h-32 w-40 gap-2 rounded-md border px-2 py-4 shadow-md">
+      <div className="flex w-full flex-col justify-center">
+        <p className="w-full text-ellipsis">{product.name}</p>
+        <Icon />
+      </div>
+      <div className="flex flex-col justify-between">
+        <Button variant="ghost" size="sm" onClick={() => onAdd(product)}>
+          <Plus />
+        </Button>
+        <Button variant="ghost" size="sm" onClick={() => onRemove(product)}>
+          <Minus />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+const CartItem: FC<{
+  item: Cart["items"][0];
+  onDelete: (product: Product, amount: number) => void;
+}> = ({ item, onDelete }) => {
+  return (
+    <li
+      key={item.product.id}
+      className=" bg-background flex items-center gap-1"
+    >
+      <p className="w-full">
+        {item.product.name} x {item.quantity}
+      </p>
+      <Button
+        variant="ghost"
+        onClick={() => onDelete(item.product, item.quantity)}
+      >
+        <Trash />
+      </Button>
+    </li>
+  );
+};
+```

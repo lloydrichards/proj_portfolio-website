@@ -45,8 +45,8 @@ const filter1: Filter = {
     id: 1,
   },
 };
-// console.log(isEqual(filter1, filter1)); // Output: true
-// console.log(isEqual(filter1, { ...filter1, user: { name: "Fred", id: 2 } })); // Output: false
+console.log(isEqual(filter1, filter1)); // Output: true
+console.log(isEqual(filter1, { ...filter1, user: { name: "Fred", id: 2 } })); // Output: false
 
 /*
  * Elegant IO Layer (Error Handling)
@@ -104,7 +104,7 @@ const getFromUrl = (url: string) =>
     TE.fold(handleErrors, (data) => T.of(data.value.name)),
   );
 
-// getFromUrl("https://api.chucknorris.io/jokes/random")().then(console.log); // Output: "Invalid value undefined supplied to : { status: string, value: { id: number, name: string } }/status: string"
+getFromUrl("https://api.chucknorris.io/jokes/random")().then(console.log); // Output: "Invalid value undefined supplied to : { status: string, value: { id: number, name: string } }/status: string"
 
 /*
  * Branching Render Logic
@@ -177,4 +177,4 @@ const responsiveFontSize = foldScreenWidth(
   undefined, // md screen
   () => `2rem`, // lg screen
 );
-// console.log(responsiveFontSize(1000)); // Output: "2rem"
+console.log(responsiveFontSize(1000)); // Output: "2rem"

@@ -2,13 +2,11 @@ import {
   Simulation,
   SimulationNodeDatum,
   forceCollide,
-  forceManyBody,
   forceSimulation,
   forceX,
   forceY,
   sum,
 } from "d3";
-import { AnimatePresence } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 
 type Topic = "SPORT" | "NEWS" | "MEDIA";

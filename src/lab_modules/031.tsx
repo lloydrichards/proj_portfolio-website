@@ -1,15 +1,7 @@
-import {
-  curveBasis,
-  curveStep,
-  line,
-  min,
-  scaleOrdinal,
-  scaleTime,
-  text,
-} from "d3";
-import { FC } from "react";
 import { AxisLeft } from "@visx/axis";
+import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
 import { isBefore } from "date-fns";
+import { FC } from "react";
 
 interface Occupation {
   start_date: string;

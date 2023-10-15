@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { formatDate } from "@/lib/format";
 import { Project } from "contentlayer/generated";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +18,7 @@ export interface IProjectCard {
 export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
   return (
     <Link href={project.slug} className="not-prose rounded no-underline ">
-      <Card className="relative flex h-full flex-col  overflow-clip hover:shadow">
+      <Card className="relative flex h-full flex-col text-clip hover:shadow">
         {!!project.image && (
           <div className="absolute z-0 h-full w-full opacity-20 ">
             <Image

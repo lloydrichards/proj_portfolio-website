@@ -1,12 +1,12 @@
-import * as A from "fp-ts/lib/Array";
-import * as O from "fp-ts/lib/Option";
-import * as E from "fp-ts/lib/Either";
+import * as IO from "fp-ts/IO";
 import * as T from "fp-ts/Task";
 import * as TE from "fp-ts/TaskEither";
-import * as IO from "fp-ts/IO";
+import * as A from "fp-ts/lib/Array";
+import * as E from "fp-ts/lib/Either";
+import * as O from "fp-ts/lib/Option";
+import { pipe } from "fp-ts/lib/function";
 import * as t from "io-ts";
 import * as EQ from "io-ts/Eq";
-import { pipe, flow } from "fp-ts/lib/function";
 import { failure } from "io-ts/PathReporter";
 import { FC, useEffect } from "react";
 /*

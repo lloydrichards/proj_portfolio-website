@@ -126,7 +126,6 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
   // Dimensions
   const margin = { top: 0, right: 16, bottom: 0, left: 16 };
   const innerWidth = width - margin.left - margin.right;
-  const innerHeight = height - margin.top - margin.bottom;
 
   // Scales
   const xScale = scaleTime()

@@ -17,10 +17,10 @@ const config = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "prefer-const": "warn",
     "@next/next/no-img-element": "off",
-    "no-var": "warn",
+    "no-var": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn", // or "error"
       {

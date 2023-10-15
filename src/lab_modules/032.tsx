@@ -21,7 +21,7 @@ const doubleSquareAndInc = pipe(
   A.map(square), // apply the square function
 );
 
-// console.log(doubleSquareAndInc); // Output: [ 4, 9, 16, 25, 36 ]
+console.log(doubleSquareAndInc); // Output: [ 4, 9, 16, 25, 36 ]
 
 /**
  * Option
@@ -36,7 +36,7 @@ const resultO = pipe(
   O.map(square), // apply square function
 );
 
-// console.log(resultO); // Output: Some(36)
+console.log(resultO); // Output: Some(36)
 
 /**
  * Either
@@ -67,7 +67,7 @@ const calculate = flow(
   E.chain((value) => squareRoot(value)), // Apply squareRoot function
 );
 
-// console.log(calculate(10, 2)); // Output: Right(2.5)
+console.log(calculate(10, 2)); // Output: Right(2.5)
 
 /**
  * Task
@@ -80,7 +80,7 @@ const response = pipe(
   T.map((n) => "The answer is " + n),
 );
 
-// console.log(response().then((d) => d)); // Output: "The answer is 42"
+console.log(response().then((d) => d)); // Output: "The answer is 42"
 
 /**
  * TaskEither
@@ -108,7 +108,7 @@ const getJson = pipe(
   TE.chain(stringify), // if successful, stringify the data or return error message
 );
 
-// console.log(getJson().then((e) => e)); // Output: Right("{\"foo\":\"bar\"}")
+console.log(getJson().then((e) => e)); // Output: Right("{\"foo\":\"bar\"}")
 
 /**
  * pipe and flow
@@ -125,6 +125,9 @@ const doubleSquareFlow = flow(
   double, // apply double function
   square, // apply square function
 );
+
+console.log(doubleSquarePipe(3)); // Output: 36
+console.log(doubleSquareFlow(3)); // Output: 36
 
 /**
  * chain
@@ -150,7 +153,7 @@ const parseUser = pipe(
   ),
 ); // apply the getUser function
 
-// console.log(parseUser()); // Output: Right({ id: 6, name: 'John Doe' })
+console.log(parseUser()); // Output: Right({ id: 6, name: 'John Doe' })
 
 /**
  * match
@@ -176,3 +179,6 @@ const resultO3 = pipe(
     (n) => ({ status: "ok", data: n }),
   ),
 );
+
+console.log(resultO2); // Output: "The result is 36"
+console.log(resultO3); // Output: { status: 'ok', data: 36 }

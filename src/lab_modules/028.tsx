@@ -1,9 +1,8 @@
-import { scaleTime, scaleBand, max } from "d3";
-import { eachMonthOfInterval, format } from "date-fns";
-import { FC, useRef, useState } from "react";
 import { Brush } from "@visx/brush";
 import { Bounds } from "@visx/brush/lib/types";
-import BaseBrush from "@visx/brush/lib/BaseBrush";
+import { max, scaleBand, scaleTime } from "d3";
+import { eachMonthOfInterval, format } from "date-fns";
+import { FC, useState } from "react";
 
 const channels = [
   {

@@ -246,6 +246,13 @@ const byOrdinal = pipe(
   Ord.contramap((obj: SomeObj) => obj.group),
 );
 
+const sortByOrdinal = pipe(
+  someObj,
+  A.sort(byOrdinal),
+  A.map((obj) => obj.id),
+);
+
+console.log(sortByOrdinal); // Output: [ 1, 2, 3, 4 ]
 /**
  * ReadonlyArray
  */

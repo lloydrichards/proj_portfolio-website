@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useState, useCallback } from "react";
 import * as d3 from "d3";
-import { nanoid } from "nanoid";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 export const BasicTimeline = () => {
   const svgRef = useRef(null);
@@ -52,7 +51,7 @@ export const BasicTimeline = () => {
 };
 
 export const CVTimeline = () => {
-  const [occupations, setOccupations] = useState(occupationSampleData);
+  const [occupations] = useState(occupationSampleData);
 
   return (
     <TimeLine
@@ -63,7 +62,7 @@ export const CVTimeline = () => {
 };
 
 export const CVTimelineWithForm = () => {
-  const [occupations, setOccupations] = useState(occupationSampleData);
+  const [occupations] = useState(occupationSampleData);
 
   return (
     <div>
@@ -137,10 +136,6 @@ export interface Category {
   Work: boolean;
   Volunteer: boolean;
 }
-
-const eventSampleData: Array<LifeEvent> = [
-  { id: "001", title: "Moved to Switzerland", date: new Date("2020-01-03") },
-];
 
 const occupationSampleData: Array<Occupation> = [
   {

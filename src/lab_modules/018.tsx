@@ -100,7 +100,7 @@ const particleSketch = (p: p5) => {
     // between particles which are less than a certain distance apart
     joinParticles(particles: Array<Particle>) {
       particles.forEach((element) => {
-        let dis = p.dist(this.x, this.y, element.x, element.y);
+        const dis = p.dist(this.x, this.y, element.x, element.y);
         if (dis < 85) {
           p.stroke("rgba(255,255,255,0.25)");
           p.line(this.x, this.y, element.x, element.y);
@@ -110,7 +110,7 @@ const particleSketch = (p: p5) => {
   }
 
   // an array to add multiple particles
-  let particles: Array<Particle> = [];
+  const particles: Array<Particle> = [];
 
   p.setup = () => {
     p.resizeCanvas(p.windowWidth, p.windowHeight / 2);

@@ -1,5 +1,4 @@
 import {
-  Simulation,
   SimulationNodeDatum,
   forceCollide,
   forceManyBody,
@@ -55,7 +54,7 @@ export const BubblePacking: FC<Props> = ({
   width = 680,
   height = 500,
 }) => {
-  const [renderCounter, setRenderCounter] = useState(0);
+  const [_renderCounter, setRenderCounter] = useState(0);
   const [items, setItems] = useState<Array<Node>>([]);
 
   function endSimulation() {

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
-import * as IO from "fp-ts/IO";
 import * as TE from "fp-ts/TaskEither";
 import * as A from "fp-ts/lib/Array";
 import * as E from "fp-ts/lib/Either";

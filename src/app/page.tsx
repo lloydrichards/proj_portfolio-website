@@ -1,16 +1,9 @@
-import { PostCard } from "@/components/posts/post_card/PostCard";
 import { RecentPosts } from "@/components/posts/recent_posts/RecentPosts";
-import { ProjectCard } from "@/components/projects/project_card/ProjectCard";
 import { SpotlightProjects } from "@/components/projects/spotlight_projects/SpotlightProjects";
-import {
-  allBlogs,
-  allLabs,
-  allOccupations,
-  allProjects,
-} from "contentlayer/generated";
-import Image from "next/image";
-import dynamic from "next/dynamic";
+import { allBlogs, allLabs, allOccupations } from "contentlayer/generated";
 import { isAfter, subYears } from "date-fns";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const TimelineDashboard = dynamic(
   () => import("@/components/timeline/timeline_dashboard/TimelineDashboard"),
@@ -52,7 +45,7 @@ export default function Home() {
         </p>
       </section>
       <SpotlightProjects />
-      <div className="w-full bg-accent px-8 py-8">
+      <div className="w-full bg-accent p-8">
         <RecentPosts posts={[...allLabs, ...allBlogs]} />
       </div>
       <TimelineDashboard

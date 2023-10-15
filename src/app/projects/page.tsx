@@ -1,4 +1,3 @@
-import { ProjectCard } from "@/components/projects/project_card/ProjectCard";
 import { SpotlightProjects } from "@/components/projects/spotlight_projects/SpotlightProjects";
 import { formatDate } from "@/lib/format";
 import { allProjects } from "contentlayer/generated";

@@ -17,7 +17,7 @@ interface PostsListItemProps {
   post: Lab | Blog;
   className?: string;
 }
-const PostListItem: FC<PostsListItemProps> = ({ post, className }) => {
+const PostListItem: FC<PostsListItemProps> = ({ post }) => {
   return (
     <NavigationMenuItem>
       <Link href={post.slug} legacyBehavior passHref>
@@ -25,7 +25,7 @@ const PostListItem: FC<PostsListItemProps> = ({ post, className }) => {
           className={cn(navigationMenuTriggerStyle(), "w-full gap-2")}
         >
           <PostIcon type={post.type} />
-          <h4 className="line-clamp-1 flex-1 overflow-clip">{post.title}</h4>
+          <h4 className="line-clamp-1 flex-1 text-clip">{post.title}</h4>
           <p className="text-sm">{formatDate(new Date(post.date))}</p>
         </NavigationMenuLink>
       </Link>
@@ -37,7 +37,7 @@ interface PostIconProps {
   type: "Lab" | "Blog";
   className?: string;
 }
-const PostIcon: FC<PostIconProps> = ({ type, className }) => {
+const PostIcon: FC<PostIconProps> = ({ type }) => {
   switch (type) {
     case "Lab":
       return <FlaskConical size={24} />;

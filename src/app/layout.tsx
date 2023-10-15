@@ -49,10 +49,8 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }) {
   return (
     <html
@@ -62,7 +60,6 @@ export default function RootLayout({
       <body suppressHydrationWarning={true}>
         <Navbar />
         {children}
-        {modal}
         <Analytics />
         <Footer />
       </body>

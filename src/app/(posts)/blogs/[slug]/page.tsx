@@ -11,7 +11,7 @@ export interface BlogPageProps {
 }
 
 const getBlogFromParams = async (slug: string) => {
-  const blog = allBlogs.find((blog) => blog.slugAsParams === slug);
+  const blog = allBlogs.find((blog) => blog._raw.sourceFileName === slug);
   if (!blog) notFound();
   return blog;
 };

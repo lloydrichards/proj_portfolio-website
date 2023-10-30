@@ -23,7 +23,7 @@ export interface LabPageProps {
 }
 
 const getLabFromParams = async (slug: string) => {
-  const lab = allLabs.find((lab) => lab.slugAsParams === slug);
+  const lab = allLabs.find((lab) => lab._raw.sourceFileName === slug);
   if (!lab) notFound();
   return lab;
 };

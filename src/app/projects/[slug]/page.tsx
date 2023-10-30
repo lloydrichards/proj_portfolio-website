@@ -10,7 +10,7 @@ export interface ProjectPageProps {
 }
 
 const getProjectFromParams = async (slug: string) => {
-  const project = allProjects.find((project) => project.slugAsParams === slug);
+  const project = allProjects.find((project) => project._raw.sourceFileName === slug);
   if (!project) notFound();
   return project;
 };

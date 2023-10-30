@@ -42,3 +42,6 @@ next-env.d.ts
 
 # storybook
 public/storybook
+
+# yarn
+.yarn

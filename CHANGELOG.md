@@ -1,3 +1,15 @@
+## [1.2.3](https://github.com/lloydrichards/portfolio-website/compare/v1.2.2...v1.2.3) (2023-10-31)
+
+
+### Bug Fixes
+
+* **lab:** :bug: removed p5.js sketches ([efb5b23](https://github.com/lloydrichards/portfolio-website/commit/efb5b2327e77b2e9b728f8d4134f0340c12915b4))
+
+
+### Reverts
+
+* **routing:** :fire: remove intercepted routes ([7c5abf9](https://github.com/lloydrichards/portfolio-website/commit/7c5abf9f5bc6d4a3e6f07fb93d4dbbd920e403df))
+
 ## [1.2.2](https://github.com/lloydrichards/portfolio-website/compare/v1.2.1...v1.2.2) (2023-07-03)
 
 ### Bug Fixes

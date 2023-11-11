@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm build:storybook && pnpm build:content && next build",
+    "build": "pnpm build:content && pnpm build:storybook && next build",
     "build:content": "contentlayer build",
     "build:storybook": "storybook build -o public/storybook",
     "start": "next start",
@@ -23,6 +23,8 @@
     "@react-three/drei": "^9.88.13",
     "@react-three/fiber": "^8.15.10",
     "@vercel/analytics": "^1.1.1",
+    "@visx/axis": "^3.4.1",
+    "@visx/brush": "^3.3.0",
     "@visx/visx": "^3.4.1",
     "animejs": "^3.2.1",
     "class-variance-authority": "^0.7.0",

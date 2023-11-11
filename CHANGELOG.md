@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/lloydrichards/portfolio-website/compare/v1.2.3...v1.2.4) (2023-11-11)
+
+
+### Bug Fixes
+
+* **occupation:** :bug: correct years of Outlier ([eb7f784](https://github.com/lloydrichards/portfolio-website/commit/eb7f784732f7857fd2072a73aef4bdf4f169c783))
+
 ## [1.2.3](https://github.com/lloydrichards/portfolio-website/compare/v1.2.2...v1.2.3) (2023-10-31)
 
 

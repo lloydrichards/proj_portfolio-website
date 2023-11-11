@@ -4606,7 +4606,7 @@
     prop-types "^15.5.10"
     react-use-measure "^2.0.4"
 
-"@visx/axis@3.4.1":
+"@visx/axis@3.4.1", "@visx/axis@^3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@visx/axis/-/axis-3.4.1.tgz#185c8d7790b47b9e8840e2ab73e47372d9a6ad59"
   integrity sha512-EnYMnPftKzGIVw8pbCJqSqfO1nYLqxjVYtwJYazIq6yIwbLdLjgyRBmkijhFYmTO3/TsN9bLFRuBqJOCTA9npA==
@@ -4629,7 +4629,7 @@
     "@types/react-dom" "*"
     prop-types "^15.5.10"
 
-"@visx/brush@3.3.0":
+"@visx/brush@3.3.0", "@visx/brush@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@visx/brush/-/brush-3.3.0.tgz#df540b825b7877ffa2c721d0d3ca538e0badd5c6"
   integrity sha512-JGuU4pEeKDNhx+o1amXxAYqd7rzKsGvL1RF7YJljjDNazzkHp3HAD0w5CwdBAgiXNouCZgewI+Rbo75vV6PGDQ==

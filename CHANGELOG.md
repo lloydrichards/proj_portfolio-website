@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/lloydrichards/portfolio-website/compare/v1.2.4...v1.2.5) (2023-11-11)
+
+
+### Bug Fixes
+
+* **dependencies:** :bug: fix visx imports ([670ed24](https://github.com/lloydrichards/portfolio-website/commit/670ed2477a5e5d2d6aa56a4cc1bb87999a2bf394))
+
 ## [1.2.4](https://github.com/lloydrichards/portfolio-website/compare/v1.2.3...v1.2.4) (2023-11-11)
 
 

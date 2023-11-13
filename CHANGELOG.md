@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/lloydrichards/portfolio-website/compare/v1.2.5...v1.2.6) (2023-11-13)
+
+
+### Bug Fixes
+
+* **lab:** :bug: using slugAsParams ([858f4a2](https://github.com/lloydrichards/portfolio-website/commit/858f4a26692aca1dfc9b5144d40dce331d8dc74c))
+
 ## [1.2.5](https://github.com/lloydrichards/portfolio-website/compare/v1.2.4...v1.2.5) (2023-11-11)
 
 

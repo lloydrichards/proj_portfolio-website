@@ -205,7 +205,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
           />
         </g>
       </svg>
-      <div className="not-prose grid h-8 grid-flow-col grid-cols-3 items-center gap-1">
+      <div className="not-prose grid h-8 grid-flow-col grid-cols-3 items-center gap-1 dark:prose-invert">
         <div className="flex gap-2">
           <button
             onClick={() => setSpeed(speed - 1)}

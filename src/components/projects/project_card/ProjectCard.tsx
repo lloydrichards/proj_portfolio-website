@@ -17,7 +17,10 @@ export interface IProjectCard {
 
 export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
   return (
-    <Link href={project.slug} className="not-prose rounded no-underline ">
+    <Link
+      href={project.slug}
+      className="not-prose rounded no-underline dark:prose-invert "
+    >
       <Card className="relative flex h-full flex-col text-clip hover:shadow">
         {!!project.image && (
           <div className="absolute z-0 h-full w-full opacity-20 ">

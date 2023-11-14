@@ -6,7 +6,7 @@ export const SpotlightProjects: React.FC = () => {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .filter((d) => d.published);
   return (
-    <section className="prose">
+    <section className="prose dark:prose-invert">
       <h1 className="text-lg">Spotlight Project</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {sortedProjects

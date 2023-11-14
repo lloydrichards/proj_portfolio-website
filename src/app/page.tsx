@@ -14,9 +14,9 @@ const TimelineDashboard = dynamic(
 
 export default function Home() {
   return (
-    <main className="mb-8 flex min-h-screen flex-col items-center gap-8">
+    <main className="mb-8 flex min-h-screen flex-col items-center gap-8 text-foreground">
       <section className="flex min-h-[98vh] w-full justify-center bg-accent ">
-        <div className="prose grid grid-cols-5 gap-8 p-0">
+        <div className="prose grid grid-cols-5 gap-8 p-0 dark:prose-invert">
           <Image
             className="col-span-5 mb-0 self-end md:col-span-3"
             src="/images/lloyd_richards_portrait.png"
@@ -34,7 +34,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="prose px-2">
+      <section className="prose px-2 dark:prose-invert">
         <h2 className="font-serif">How to Use</h2>
         <p>
           This website is a personal portfolio and lab space where I can

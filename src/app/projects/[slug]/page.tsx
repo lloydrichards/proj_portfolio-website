@@ -52,7 +52,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
 
   return (
     <main className="flex min-h-screen flex-col items-center py-16">
-      <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
+      <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center dark:prose-invert">
         <h1 className="text-4xl font-bold">{project.title}</h1>
         <Mdx code={project.body.code} />
       </div>

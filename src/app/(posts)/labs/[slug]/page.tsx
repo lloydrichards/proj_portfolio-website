@@ -57,7 +57,7 @@ interface LabInfoCardProps {
 
 const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
   return (
-    <Card className="not-prose w-full">
+    <Card className="not-prose w-full dark:prose-invert">
       <CardHeader className="flex-row justify-between pb-1">
         <div className="flex items-center gap-2 opacity-60">
           {lab.tags?.map((t) => (
@@ -94,7 +94,7 @@ const LabPage = async ({ params }: LabPageProps) => {
   const lab = await getLabFromParams(params.slug);
   return (
     <main className="flex min-h-screen flex-col items-center py-4">
-      <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center p-2">
+      <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center p-2 dark:prose-invert">
         <LabInfoCard lab={lab} />
         <Mdx code={lab.body.code} />
       </div>

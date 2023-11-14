@@ -294,7 +294,6 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
-    console.log(svg);
     var lineMargin = 50;
     var axisLabelMargin = 0;
     var textMargin = 200;

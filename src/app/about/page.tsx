@@ -1,7 +1,7 @@
 const AboutPage = () => {
   return (
     <main className=" flex min-h-screen flex-col items-center p-16">
-      <div className="prose">
+      <div className="prose dark:prose-invert">
         <h1>About Page</h1>
         <p>
           I&apos;m a Zurich-based <strong>Interaction Engineer</strong>. Data

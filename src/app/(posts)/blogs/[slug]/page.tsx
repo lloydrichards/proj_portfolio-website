@@ -45,7 +45,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
 
   return (
     <main className="flex min-h-screen flex-col items-center py-16">
-      <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
+      <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center dark:prose-invert">
         <h1 className="text-4xl font-bold">{blog.title}</h1>
         <Mdx code={blog.body.code} />
       </div>

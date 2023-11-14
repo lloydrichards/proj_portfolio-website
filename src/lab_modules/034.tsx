@@ -232,7 +232,7 @@ const ShopCard: FC<{
   removeItem: (product: Product) => void;
 }> = ({ products, addItem, cart, removeItem }) => {
   return (
-    <div className="not-prose grid grid-cols-5 rounded border bg-background p-4 shadow-md">
+    <div className="not-prose grid grid-cols-5 rounded border bg-background p-4 shadow-md dark:prose-invert">
       <section className="col-span-3 w-full border-r">
         <h1 className="flex gap-2">
           <Gift />

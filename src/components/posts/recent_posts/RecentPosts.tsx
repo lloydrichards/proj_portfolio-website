@@ -28,7 +28,7 @@ export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
 
   return (
     <section className={`flex w-full flex-col items-center`}>
-      <div className="prose flex flex-col gap-4">
+      <div className="prose flex flex-col gap-4 dark:prose-invert">
         <div className="flex items-center gap-2">
           <h1 className="mb-0 text-lg">Recent</h1>
           <Button

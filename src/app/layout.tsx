@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/navbar/Navbar";
 import { inter, josefin_sans, roboto_mono } from "@/styles/font";
 import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
+import { ThemeProvider } from "./theme-provider";
 
 export const metadata = {
   title: "Lloyd Richards Design",
@@ -40,10 +41,17 @@ export default function RootLayout({
       className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
     >
       <body suppressHydrationWarning={true}>
-        <Navbar />
-        {children}
-        <Analytics />
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+          <Analytics />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

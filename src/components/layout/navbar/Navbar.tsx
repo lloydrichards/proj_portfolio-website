@@ -1,6 +1,7 @@
 "use client";
 
 import { buttonVariants } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -83,6 +84,7 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
+      <ModeToggle />
     </NavigationMenuList>
   );
 };

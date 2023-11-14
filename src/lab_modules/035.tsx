@@ -322,7 +322,7 @@ const ShopCard: FC<{
 
   return (
     <div
-      className={`not-prose grid grid-cols-5 rounded border bg-background p-4 shadow-md ${
+      className={`not-prose grid grid-cols-5 rounded border bg-background p-4 shadow-md dark:prose-invert ${
         isLoading ? "opacity-50" : "opacity-100"
       } `}
     >

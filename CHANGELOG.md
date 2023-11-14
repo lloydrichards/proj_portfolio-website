@@ -1,35 +1,35 @@
 ## [1.2.6](https://github.com/lloydrichards/portfolio-website/compare/v1.2.5...v1.2.6) (2023-11-13)
 
-
 ### Bug Fixes
 
-* **lab:** :bug: using slugAsParams ([858f4a2](https://github.com/lloydrichards/portfolio-website/commit/858f4a26692aca1dfc9b5144d40dce331d8dc74c))
+- **lab:** :bug: using slugAsParams
+  ([858f4a2](https://github.com/lloydrichards/portfolio-website/commit/858f4a26692aca1dfc9b5144d40dce331d8dc74c))
 
 ## [1.2.5](https://github.com/lloydrichards/portfolio-website/compare/v1.2.4...v1.2.5) (2023-11-11)
 
-
 ### Bug Fixes
 
-* **dependencies:** :bug: fix visx imports ([670ed24](https://github.com/lloydrichards/portfolio-website/commit/670ed2477a5e5d2d6aa56a4cc1bb87999a2bf394))
+- **dependencies:** :bug: fix visx imports
+  ([670ed24](https://github.com/lloydrichards/portfolio-website/commit/670ed2477a5e5d2d6aa56a4cc1bb87999a2bf394))
 
 ## [1.2.4](https://github.com/lloydrichards/portfolio-website/compare/v1.2.3...v1.2.4) (2023-11-11)
 
-
 ### Bug Fixes
 
-* **occupation:** :bug: correct years of Outlier ([eb7f784](https://github.com/lloydrichards/portfolio-website/commit/eb7f784732f7857fd2072a73aef4bdf4f169c783))
+- **occupation:** :bug: correct years of Outlier
+  ([eb7f784](https://github.com/lloydrichards/portfolio-website/commit/eb7f784732f7857fd2072a73aef4bdf4f169c783))
 
 ## [1.2.3](https://github.com/lloydrichards/portfolio-website/compare/v1.2.2...v1.2.3) (2023-10-31)
 
-
 ### Bug Fixes
 
-* **lab:** :bug: removed p5.js sketches ([efb5b23](https://github.com/lloydrichards/portfolio-website/commit/efb5b2327e77b2e9b728f8d4134f0340c12915b4))
-
+- **lab:** :bug: removed p5.js sketches
+  ([efb5b23](https://github.com/lloydrichards/portfolio-website/commit/efb5b2327e77b2e9b728f8d4134f0340c12915b4))
 
 ### Reverts
 
-* **routing:** :fire: remove intercepted routes ([7c5abf9](https://github.com/lloydrichards/portfolio-website/commit/7c5abf9f5bc6d4a3e6f07fb93d4dbbd920e403df))
+- **routing:** :fire: remove intercepted routes
+  ([7c5abf9](https://github.com/lloydrichards/portfolio-website/commit/7c5abf9f5bc6d4a3e6f07fb93d4dbbd920e403df))
 
 ## [1.2.2](https://github.com/lloydrichards/portfolio-website/compare/v1.2.1...v1.2.2) (2023-07-03)
 

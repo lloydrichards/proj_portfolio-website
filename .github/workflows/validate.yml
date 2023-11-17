@@ -2,9 +2,6 @@ name: Validate
 
 on: push
 
-env:
-  NODE_OPTIONS: "--max_old_space_size=8192 --openssl-legacy-provider"
-
 jobs:
   lint:
     name: "Lint"
@@ -15,8 +12,11 @@ jobs:
         with:
           node-version: 18
 
-      - run: pnpm install --frozen-lockfile
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
+      - run: pnpm install --frozen-lockfile
       - run: pnpm lint
 
   verify-types:
@@ -28,8 +28,12 @@ jobs:
         with:
           node-version: 18
 
-      - run: pnpm install --frozen-lockfile
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:content
       - run: pnpm type-check
 
   build:
@@ -41,6 +45,9 @@ jobs:
         with:
           node-version: 18
 
-      - run: pnpm install --frozen-lockfile
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build

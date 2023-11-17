@@ -39,10 +39,12 @@ jobs:
           restore-keys: |
             node
 
-      - name: Install JS deps
-        uses: borales/actions-yarn@v4
+      - uses: pnpm/action-setup@v2
         with:
-          cmd: install
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Tag Version
         run: npx semantic-release

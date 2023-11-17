@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/lloydrichards/portfolio-website/compare/v1.3.2...v1.3.3) (2023-11-17)
+
+
+### Bug Fixes
+
+* **deps:** update visx monorepo to v3.5.0 ([#38](https://github.com/lloydrichards/portfolio-website/issues/38)) ([ac2b394](https://github.com/lloydrichards/portfolio-website/commit/ac2b3944cc90ef65c20576422c98577e1a4464b3))
+
 ## [1.3.2](https://github.com/lloydrichards/portfolio-website/compare/v1.3.1...v1.3.2) (2023-11-17)
 
 

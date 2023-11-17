@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/lloydrichards/portfolio-website/compare/v1.3.1...v1.3.2) (2023-11-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v10.16.5 ([#34](https://github.com/lloydrichards/portfolio-website/issues/34)) ([bd500f8](https://github.com/lloydrichards/portfolio-website/commit/bd500f80fb9f02ad3fb8ee448071def55b340187))
+
 ## [1.3.1](https://github.com/lloydrichards/portfolio-website/compare/v1.3.0...v1.3.1) (2023-11-17)
 
 

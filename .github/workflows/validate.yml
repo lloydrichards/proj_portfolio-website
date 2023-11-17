@@ -15,9 +15,9 @@ jobs:
         with:
           node-version: 18
 
-      - run: yarn install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
 
-      - run: yarn lint
+      - run: pnpm lint
 
   verify-types:
     name: "Verify Types"
@@ -28,9 +28,9 @@ jobs:
         with:
           node-version: 18
 
-      - run: yarn install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
 
-      - run: yarn type-check
+      - run: pnpm type-check
 
   build:
     name: "Build"
@@ -41,6 +41,6 @@ jobs:
         with:
           node-version: 18
 
-      - run: yarn install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
 
-      - run: yarn build
+      - run: pnpm build

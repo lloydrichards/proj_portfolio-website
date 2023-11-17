@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/lloydrichards/portfolio-website/compare/v1.2.6...v1.3.0) (2023-11-17)
+
+
+### Features
+
+* **theme:** :sparkles: add theming and ModeToggle ([6bd94ae](https://github.com/lloydrichards/portfolio-website/commit/6bd94ae1de5df6a47f19d320c35629130e5937f2))
+
 ## [1.2.6](https://github.com/lloydrichards/portfolio-website/compare/v1.2.5...v1.2.6) (2023-11-13)
 
 ### Bug Fixes

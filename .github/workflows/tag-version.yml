@@ -26,7 +26,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Set Node.js 20.x
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 20.x
 
@@ -39,14 +39,12 @@ jobs:
           restore-keys: |
             node
 
-      - uses: pnpm/action-setup@v2
+      - name: Install JS deps
+        uses: borales/actions-yarn@v4
         with:
-          version: 8
-
-      - name: Install dependencies
-        run: pnpm install
+          cmd: install
 
       - name: Tag Version
-        run: pnpm exec semantic-release
+        run: npx semantic-release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -20,7 +20,7 @@ jobs:
       - run: pnpm lint
 
   verify-types:
-    name: "Verify Types"
+    name: "Types"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

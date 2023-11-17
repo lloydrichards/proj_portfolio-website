@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "type-check": "tsc --build"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",

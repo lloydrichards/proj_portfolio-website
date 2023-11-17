@@ -1,3 +1,11 @@
+## [1.3.4](https://github.com/lloydrichards/portfolio-website/compare/v1.3.3...v1.3.4) (2023-11-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @react-three/drei to v9.88.16 ([#32](https://github.com/lloydrichards/portfolio-website/issues/32)) ([b8890e2](https://github.com/lloydrichards/portfolio-website/commit/b8890e2d3caecaea53a3ebbf2df4541dd68dc70f))
+* **deps:** update dependency @react-three/fiber to v8.15.11 ([#33](https://github.com/lloydrichards/portfolio-website/issues/33)) ([ba6a551](https://github.com/lloydrichards/portfolio-website/commit/ba6a55141194f61199852eadc636beafcbd7f830))
+
 ## [1.3.3](https://github.com/lloydrichards/portfolio-website/compare/v1.3.2...v1.3.3) (2023-11-17)
 
 

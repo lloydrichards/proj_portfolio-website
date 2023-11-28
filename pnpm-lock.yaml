@@ -78,8 +78,8 @@ dependencies:
     specifier: ^0.9.35
     version: 0.9.35(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
   lucide-react:
-    specifier: ^0.293.0
-    version: 0.293.0(react@18.2.0)
+    specifier: ^0.294.0
+    version: 0.294.0(react@18.2.0)
   matter-js:
     specifier: ^0.19.0
     version: 0.19.0
@@ -12057,8 +12057,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-react@0.293.0(react@18.2.0):
-    resolution: {integrity: sha512-g3AN0EYITCpAjNgLHrKrFWvIJzZy0Y9OPBaonyKw1cM+nZE6piOM+TiuQdYfha7oa76TMiDaWXQHE44CEqsrzw==}
+  /lucide-react@0.294.0(react@18.2.0):
+    resolution: {integrity: sha512-V7o0/VECSGbLHn3/1O67FUgBwWB+hmzshrgDVRJQhMh8uj5D3HBuIvhuAmQTtlupILSplwIZg5FTc4tTKMA2SA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:

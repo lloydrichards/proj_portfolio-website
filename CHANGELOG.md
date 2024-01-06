@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/lloydrichards/portfolio-website/compare/v1.3.5...v1.3.6) (2024-01-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency lucide-react to ^0.306.0 ([#57](https://github.com/lloydrichards/portfolio-website/issues/57)) ([0e3a139](https://github.com/lloydrichards/portfolio-website/commit/0e3a139c9e7333ef036048663f47a94ff6d02c21))
+
 ## [1.3.5](https://github.com/lloydrichards/portfolio-website/compare/v1.3.4...v1.3.5) (2023-11-25)
 
 

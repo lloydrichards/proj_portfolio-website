@@ -50,7 +50,7 @@
     "rehype-pretty-code": "^0.13.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "3.0.1",
-    "shiki": "^0.14.5",
+    "shiki": "^1.0.0",
     "three": "^0.161.0",
     "usehooks-ts": "^2.9.1"
   },

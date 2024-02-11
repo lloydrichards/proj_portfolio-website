@@ -8,8 +8,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/atom/card/card";
+import { Badge } from "@/components/atom/badge/badge";
 
 export interface IPostCard {
   post: Blog | Lab;

@@ -1,7 +1,7 @@
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
-import { ModeToggle } from "@/components/ui/mode-toggle";
+import { buttonVariants } from "@/components/atom/button/button";
+import { ModeToggle } from "@/components/atom/mode-toggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,8 +10,12 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+} from "@/components/atom/navigation-menu/navigation-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/atom/sheet/sheet";
 import { Github, Instagram, Linkedin, Menu } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";

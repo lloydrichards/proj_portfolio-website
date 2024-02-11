@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/toaster";
-import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/atom/button/button";
+import { Toaster } from "@/components/atom/toast/toaster";
+import { useToast } from "@/hooks/use-toast";
 import * as T from "fp-ts/Task";
 import * as TE from "fp-ts/TaskEither";
 import * as A from "fp-ts/lib/Array";

@@ -1,6 +1,6 @@
 import { Mdx } from "@/components/Mdx";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/atom/badge/badge";
+import { Button } from "@/components/atom/button/button";
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/atom/card/card";
 import { formatDate } from "@/lib/format";
 import { Lab, allLabs } from "contentlayer/generated";
 import { FlaskConical, Github } from "lucide-react";

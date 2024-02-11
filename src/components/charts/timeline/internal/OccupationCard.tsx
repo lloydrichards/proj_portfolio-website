@@ -4,7 +4,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/atom/card/card";
 import { Occupation } from "../../../../../.contentlayer/generated";
 import { FC } from "react";
 import { cn } from "@/lib/utils";

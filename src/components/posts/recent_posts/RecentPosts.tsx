@@ -4,7 +4,7 @@ import { Blog, Lab } from "contentlayer/generated";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { PostCard } from "../post_card/PostCard";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atom/button/button";
 
 interface RecentPostsProps {
   posts: (Blog | Lab)[];

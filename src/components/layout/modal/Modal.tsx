@@ -1,5 +1,5 @@
 "use client";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/atom/dialog/dialog";
 import { useRouter } from "next/navigation";
 
 export interface IModal {

@@ -45,6 +45,7 @@
     --color-ui-success: 160.1, 84.1%, 39.4%; /* #10b981 */
     --color-ui-info: 215.4, 16.3%, 46.9%; /* #64748b */
 
+    /* Functional Colors */
     --background: var(--color-white);
     --foreground: var(--color-mono-900);
 
@@ -92,19 +93,19 @@
     --card: var(--color-mono-800);
     --card-foreground: var(--color-mono-050);
 
-    --popover: var(--color-mono-700);
+    --popover: var(--color-mono-900);
     --popover-foreground: var(--color-mono-050);
 
     --primary: var(--color-mono-050);
     --primary-foreground: var(--color-mono-900);
 
-    --secondary: var(--color-mono-300);
+    --secondary: var(--color-mono-800);
     --secondary-foreground: var(--color-mono-050);
 
-    --muted: var(--color-mono-300);
+    --muted: var(--color-mono-800);
     --muted-foreground: var(--color-mono-050);
 
-    --accent: var(--color-mono-300);
+    --accent: var(--color-mono-800);
     --accent-foreground: var(--color-mono-050);
 
     --destructive: var(--color-ui-error);
@@ -119,8 +120,8 @@
     --info: var(--color-ui-info);
     --info-foreground: var(--color-mono-900);
 
-    --border: var(--color-mono-600);
-    --input: var(--color-mono-700);
+    --border: var(--color-mono-800);
+    --input: var(--color-mono-900);
     --ring: var(--color-primary-600);
 
     --radius: 0.5rem;

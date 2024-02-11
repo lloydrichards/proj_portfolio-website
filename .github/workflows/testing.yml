@@ -25,6 +25,9 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
 
+      - name: Generate content
+        run: bun build:content
+
       - name: Build Storybook
         run: bun build:storybook --quiet
 

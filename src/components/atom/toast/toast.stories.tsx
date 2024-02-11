@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Toast, ToastAction, ToastActionElement, ToastProps } from "./toast";
 import { Toaster } from "./toaster";
 import { useToast } from "../../../hooks/use-toast";
+import { Button } from "../button/button";
 
 /**
  * A succinct message that is displayed temporarily.
@@ -13,9 +14,17 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {},
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
   },
   render: (args) => <ToastExample {...args} />,
+  decorators: [
+    (Story) => (
+      <div className="grid h-44 items-center justify-center">
+        <Story />
+        <Toaster />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof Toast>;
 
 export default meta;
@@ -34,16 +43,14 @@ type ToasterToast = ToastProps & {
 const ToastExample = (args: Story["args"]) => {
   const { toast } = useToast();
   return (
-    <div>
-      <button
-        onClick={() => {
-          toast(args);
-        }}
-      >
-        Show Toast
-      </button>
-      <Toaster />
-    </div>
+    <Button
+      variant="outline"
+      onClick={() => {
+        toast(args);
+      }}
+    >
+      Show Toast
+    </Button>
   );
 };
 
@@ -86,5 +93,27 @@ export const Destructive: Story = {
     title: "Uh oh! Something went wrong.",
     description: "There was a problem with your request.",
     action: <ToastAction altText="Try again">Try again</ToastAction>,
+  },
+};
+
+/**
+ * Use the `warning` variant to indicate a warning.
+ */
+export const Warning: Story = {
+  args: {
+    variant: "warning",
+    title: "Looks like you missed something!",
+    description: "Please fill out all required fields.",
+  },
+};
+
+/**
+ * Use the `success` variant to indicate a successful action.
+ */
+export const Success: Story = {
+  args: {
+    variant: "success",
+    title: "Success!",
+    description: "Your message has been sent.",
   },
 };

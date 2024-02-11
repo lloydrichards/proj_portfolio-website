@@ -1,18 +1,18 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { BaseTemplate } from "./BaseTemplate";
-import { mockBaseTemplateProps } from "./BaseTemplate.mocks";
+import { ProjectCard } from "./ProjectCard";
+import { mockProjectCardProps } from "./ProjectCard.mocks";
 
 export default {
   // Update the title to match the component type
-  title: "templates/BaseTemplate",
-  component: BaseTemplate,
+  title: "molecule/ProjectCard",
+  component: ProjectCard,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as Meta<typeof BaseTemplate>;
+} as Meta<typeof ProjectCard>;
 
-export const Base: StoryObj<typeof BaseTemplate> = {
+export const Base: StoryObj<typeof ProjectCard> = {
   // More on args: https://storybook.js.org/docs/react/writing-stories/args
-  args: mockBaseTemplateProps.base,
+  args: mockProjectCardProps.base,
   // More on parameters: https://storybook.js.org/docs/react/writing-stories/parameters
   parameters: {},
   // More on interactions: https://storybook.js.org/docs/react/essentials/interactions

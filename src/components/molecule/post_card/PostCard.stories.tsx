@@ -3,7 +3,7 @@ import { PostCard } from "./PostCard";
 import { mockPostCardProps } from "./PostCard.mocks";
 
 export default {
-  title: "posts/PostCard",
+  title: "molecule/PostCard",
   component: PostCard,
   argTypes: {},
 } as Meta<typeof PostCard>;

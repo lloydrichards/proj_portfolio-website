@@ -4,7 +4,7 @@ import { allOccupations } from "../../../../.contentlayer/generated";
 import { ResponsiveChart } from "../utils/ResponsiveChart";
 
 export default {
-  title: "charts/Timeline",
+  title: "chart/Timeline",
   component: Timeline,
   argTypes: {},
   parameters: {

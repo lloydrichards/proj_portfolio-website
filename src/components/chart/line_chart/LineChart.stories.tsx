@@ -3,7 +3,7 @@ import { LineChart } from "./LineChart";
 import { mockLineChartProps } from "./LineChart.mocks";
 
 export default {
-  title: "charts/LineChart",
+  title: "chart/LineChart",
   component: LineChart,
   argTypes: {},
 } as Meta<typeof LineChart>;

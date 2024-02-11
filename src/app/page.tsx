@@ -1,12 +1,12 @@
-import { RecentPosts } from "@/components/posts/recent_posts/RecentPosts";
-import { SpotlightProjects } from "@/components/projects/spotlight_projects/SpotlightProjects";
+import { RecentPosts } from "@/components/organism/recent_posts/RecentPosts";
+import { SpotlightProjects } from "@/components/organism/spotlight_projects/SpotlightProjects";
 import { allBlogs, allLabs, allOccupations } from "contentlayer/generated";
 import { isAfter, subYears } from "date-fns";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 
 const TimelineDashboard = dynamic(
-  () => import("@/components/timeline/timeline_dashboard/TimelineDashboard"),
+  () => import("@/components/organism/timeline_dashboard/timeline_dashboard"),
   {
     ssr: false,
   },

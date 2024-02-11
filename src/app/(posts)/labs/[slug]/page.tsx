@@ -1,4 +1,4 @@
-import { Mdx } from "@/components/Mdx";
+import { Mdx } from "@/components/atom/mdx";
 import { Badge } from "@/components/atom/badge/badge";
 import { Button } from "@/components/atom/button/button";
 import {

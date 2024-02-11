@@ -1,6 +1,6 @@
 "use client";
-import { Timeline } from "@/components/charts/timeline/Timeline";
-import { ResponsiveChart } from "@/components/charts/utils/ResponsiveChart";
+import { Timeline } from "@/components/chart/timeline/Timeline";
+import { ResponsiveChart } from "@/components/chart/utils/ResponsiveChart";
 import { Occupation } from "contentlayer/generated";
 import { FC } from "react";
 

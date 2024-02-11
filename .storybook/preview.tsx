@@ -2,12 +2,18 @@ import type { Preview } from "@storybook/react";
 import React from "react";
 import "../src/styles/globals.css";
 import { inter, josefin_sans, roboto_mono } from "../src/styles/font";
+import { cn } from "../src/lib/utils";
 
 // This is where you can wrap the story in any ContextProviders
 export const decorators = [
   (Story) => (
     <div
-      className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
+      className={cn(
+        "font-sans",
+        inter.variable,
+        roboto_mono.variable,
+        josefin_sans.variable,
+      )}
     >
       <Story />
     </div>

@@ -3,7 +3,7 @@ import { allOccupations } from "contentlayer/generated";
 import dynamic from "next/dynamic";
 
 const TimelineDashboard = dynamic(
-  () => import("@/components/timeline/timeline_dashboard/TimelineDashboard"),
+  () => import("@/components/organism/timeline_dashboard/timeline_dashboard"),
   {
     ssr: false,
   },

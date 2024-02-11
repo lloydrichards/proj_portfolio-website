@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { SpotlightProjects } from "./SpotlightProjects";
 
 export default {
-  title: "projects/SpotlightProjects",
+  title: "organism/SpotlightProjects",
   component: SpotlightProjects,
   argTypes: {},
 } as Meta<typeof SpotlightProjects>;

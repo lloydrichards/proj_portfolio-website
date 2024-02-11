@@ -1,7 +1,7 @@
 "use client";
 
 import { buttonVariants } from "@/components/atom/button/button";
-import { ModeToggle } from "@/components/atom/mode-toggle";
+import { ModeToggle } from "@/components/molecule/mode-toggle";
 import {
   NavigationMenu,
   NavigationMenuContent,

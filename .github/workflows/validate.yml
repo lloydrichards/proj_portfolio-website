@@ -1,6 +1,14 @@
 name: Validate
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   lint:
@@ -8,46 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - uses: oven-sh/setup-bun@v1
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
+      - run: bun install --frozen-lockfile
+      - run: bun lint
 
   verify-types:
     name: "Types"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - uses: oven-sh/setup-bun@v1
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build:content
-      - run: pnpm type-check
-
-  build:
-    name: "Build"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+      - run: bun install --frozen-lockfile
+      - run: bun type-check

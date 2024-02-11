@@ -1,6 +1,7 @@
 {
   "name": "lloyd_richards_portfolio",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,6 +12,7 @@
     "lint": "next lint",
     "prettier": "prettier --write .",
     "storybook": "storybook dev -p 6006",
+    "storybook:test": "test-storybook",
     "type-check": "tsc --build"
   },
   "dependencies": {
@@ -65,6 +67,7 @@
     "@storybook/blocks": "^7.5.3",
     "@storybook/nextjs": "^7.5.3",
     "@storybook/react": "^7.5.3",
+    "@storybook/test-runner": "^0.16.0",
     "@storybook/testing-library": "^0.2.2",
     "@tailwindcss/typography": "^0.5.10",
     "@types/animejs": "^3.1.11",
@@ -77,6 +80,7 @@
     "@types/three": "^0.161.0",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "autoprefixer": "10.4.17",
+    "bun-types": "latest",
     "eslint": "^8.53.0",
     "eslint-config-next": "^14.0.2",
     "eslint-plugin-storybook": "^0.6.15",

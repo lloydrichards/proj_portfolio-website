@@ -1,8 +1,8 @@
-const { withContentlayer } = require("next-contentlayer");
+import { withContentlayer } from 'next-contentlayer'
 
 // @type {import('next').NextConfig}
 
-module.exports = withContentlayer({
+const config = withContentlayer({
   trailingSlash: true,
   async rewrites() {
     return [
@@ -13,3 +13,5 @@ module.exports = withContentlayer({
     ];
   },
 });
+
+export default config;

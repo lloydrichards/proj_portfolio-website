@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm build:content && pnpm build:storybook && next build",
+    "build": "bun build:content && bun build:storybook && next build",
     "build:content": "contentlayer build",
     "build:storybook": "storybook build -o public/storybook",
     "start": "next start",

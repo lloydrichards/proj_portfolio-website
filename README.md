@@ -25,6 +25,10 @@ with:
 - [three.js](https://threejs.org/) - 3D library
 - [p5](https://p5js.org/) - Creative coding library
 - [visx](https://airbnb.io/visx/) - Data visualization library
+- [leva](https://github.com/pmndrs/leva) - GUI for debugging
+- [fp-ts](https://gcanti.github.io/fp-ts/) - Functional programming library
+- [anime.js](https://animejs.com/) - Animation library
+- [matter.js](https://brm.io/matter-js/) - Physics engine
 
 ## Getting Started
 

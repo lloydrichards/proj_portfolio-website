@@ -23,7 +23,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
     >
       <Card className="relative flex h-full flex-col text-clip hover:shadow">
         {!!project.image && (
-          <div className="absolute z-0 h-full w-full opacity-20 ">
+          <div className="absolute z-0 size-full opacity-20 ">
             <Image
               className="object-cover blur-sm grayscale hover:blur-0 hover:grayscale-0"
               src={project.image}

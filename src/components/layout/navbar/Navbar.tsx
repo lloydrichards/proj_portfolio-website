@@ -102,7 +102,7 @@ export const Navbar: React.FC = () => {
             <Menu size={32} />
           </div>
         </SheetTrigger>
-        <SheetContent position="left" className="w-[80vw] py-24">
+        <SheetContent side="left" className="w-[80vw] py-24">
           <NavigationMenu orientation="vertical">
             <NavRoutes vertical />
           </NavigationMenu>

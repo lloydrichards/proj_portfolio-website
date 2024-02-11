@@ -12,7 +12,7 @@ const TimelineDashboard: FC<Props> = ({ occupations }) => {
     <section className="prose mt-8 min-h-96 w-full px-2 dark:prose-invert">
       <h2 className="font-serif">CV Timeline</h2>
       <ResponsiveChart
-        className="prose h-full w-full dark:prose-invert"
+        className="prose size-full dark:prose-invert"
         render={({ width, height }) => (
           <Timeline data={occupations} width={width} maxHeight={height} />
         )}

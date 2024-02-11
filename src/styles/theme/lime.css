@@ -1,0 +1,62 @@
+html[data-theme="lime"] {
+  --color-lime-050: 78.3 92% 95.1%; /* #f7fee7 */
+  --color-lime-100: 79.6 89.1% 89.2%; /* #ecfccb */
+  --color-lime-200: 80.9 88.5% 79.6%; /* #d9f99d */
+  --color-lime-300: 82 84.5% 67.1%; /* #bef264 */
+  --color-lime-400: 82.7 78% 55.5%; /* #a3e635 */
+  --color-lime-500: 83.7 80.5% 44.3%; /* #84cc16 */
+  --color-lime-600: 84.8 85.2% 34.5%; /* #65a30d */
+  --color-lime-700: 85.9 78.4% 27.3%; /* #4d7c0f */
+  --color-lime-800: 86.3 69% 22.7%; /* #3f6212 */
+  --color-lime-900: 87.6 61.2% 20.2%; /* #365314 */
+
+  --background: var(--color-lime-050);
+  --foreground: var(--color-lime-900);
+
+  --primary: var(--color-lime-700);
+  --primary-foreground: var(--color-lime-050);
+
+  --secondary: var(--color-lime-100);
+  --secondary-foreground: var(--color-lime-900);
+
+  --card: var(--background);
+  --card-foreground: var(--color-lime-900);
+
+  --popover: var(--color-lime-050);
+  --popover-foreground: var(--color-lime-900);
+
+  --muted: var(--color-lime-100);
+  --muted-foreground: var(--color-lime-900);
+
+  --accent: var(--color-lime-100);
+  --accent-foreground: var(--color-lime-900);
+
+  --border: var(--color-lime-200);
+  --input: var(--color-lime-200);
+}
+
+html[data-theme="lime"].dark {
+  --background: var(--color-lime-900);
+  --foreground: var(--color-lime-050);
+
+  --card: var(--color-lime-800);
+  --card-foreground: var(--color-lime-050);
+
+  --popover: var(--color-lime-900);
+  --popover-foreground: var(--color-lime-050);
+
+  --primary: var(--color-lime-050);
+  --primary-foreground: var(--color-lime-900);
+
+  --secondary: var(--color-lime-900);
+  --secondary-foreground: var(--color-lime-050);
+
+  --muted: var(--color-lime-900);
+  --muted-foreground: var(--color-lime-050);
+
+  --accent: var(--color-lime-900);
+  --accent-foreground: var(--color-lime-050);
+
+  --border: var(--color-lime-100);
+  --input: var(--color-lime-100);
+}

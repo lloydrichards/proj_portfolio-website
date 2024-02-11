@@ -126,6 +126,10 @@
 
     --radius: 0.5rem;
   }
+
+  @import "theme/lime.css";
+  @import "theme/sky.css";
+  @import "theme/rose.css";
 }
 
 @layer base {
@@ -133,6 +137,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition;
   }
 }

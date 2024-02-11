@@ -19,6 +19,7 @@ import {
 import { Github, Instagram, Linkedin, Menu } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";
+import { ThemeToggle } from "@/components/molecule/theme-toggle";
 
 interface NavRouteProps {
   vertical?: boolean;
@@ -95,6 +96,7 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
+      <ThemeToggle />
       <ModeToggle />
     </NavigationMenuList>
   );

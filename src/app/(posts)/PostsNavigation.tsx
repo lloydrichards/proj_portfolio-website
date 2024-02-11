@@ -5,7 +5,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu";
+} from "@/components/atom/navigation-menu/navigation-menu";
 import { cn } from "@/lib/utils";
 import { Blog, Lab } from "contentlayer/generated";
 import Link from "next/link";

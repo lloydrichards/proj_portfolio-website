@@ -25,13 +25,16 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
 
+      - name: Generate content
+        run: bun build:content
+
       - name: Build Storybook
-        run: bun storybook:build --quiet
+        run: bun build:storybook --quiet
 
       - name: Serve Storybook and run tests
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --silent" \
+            "npx http-server public/storybook --port 6006 --silent" \
             "npx wait-on tcp:127.0.0.1:6006 && bun storybook:test"
 
   unit-testing:

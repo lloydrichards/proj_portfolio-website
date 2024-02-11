@@ -39,10 +39,6 @@ jobs:
           restore-keys: |
             node
 
-      - name: Install deps
-        uses: oven-sh/setup-bun@v1
-      - run: bun install --frozen-lockfile
-
       - name: Tag Version
         run: npx semantic-release
         env:

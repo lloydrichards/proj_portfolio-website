@@ -9,7 +9,7 @@ type Props = {
 };
 const TimelineDashboard: FC<Props> = ({ occupations }) => {
   return (
-    <section className="min-h-96 prose mt-8 w-full px-2 dark:prose-invert">
+    <section className="prose mt-8 min-h-96 w-full px-2 dark:prose-invert">
       <h2 className="font-serif">CV Timeline</h2>
       <ResponsiveChart
         className="prose h-full w-full dark:prose-invert"

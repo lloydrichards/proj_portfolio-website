@@ -1,52 +1,60 @@
 ## [1.3.6](https://github.com/lloydrichards/portfolio-website/compare/v1.3.5...v1.3.6) (2024-01-06)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency lucide-react to ^0.306.0 ([#57](https://github.com/lloydrichards/portfolio-website/issues/57)) ([0e3a139](https://github.com/lloydrichards/portfolio-website/commit/0e3a139c9e7333ef036048663f47a94ff6d02c21))
+- **deps:** update dependency lucide-react to ^0.306.0
+  ([#57](https://github.com/lloydrichards/portfolio-website/issues/57))
+  ([0e3a139](https://github.com/lloydrichards/portfolio-website/commit/0e3a139c9e7333ef036048663f47a94ff6d02c21))
 
 ## [1.3.5](https://github.com/lloydrichards/portfolio-website/compare/v1.3.4...v1.3.5) (2023-11-25)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency lucide-react to ^0.293.0 ([#43](https://github.com/lloydrichards/portfolio-website/issues/43)) ([a95c6af](https://github.com/lloydrichards/portfolio-website/commit/a95c6afff4686b1d3848ddeb1806f0164bbe43a8))
+- **deps:** update dependency lucide-react to ^0.293.0
+  ([#43](https://github.com/lloydrichards/portfolio-website/issues/43))
+  ([a95c6af](https://github.com/lloydrichards/portfolio-website/commit/a95c6afff4686b1d3848ddeb1806f0164bbe43a8))
 
 ## [1.3.4](https://github.com/lloydrichards/portfolio-website/compare/v1.3.3...v1.3.4) (2023-11-17)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @react-three/drei to v9.88.16 ([#32](https://github.com/lloydrichards/portfolio-website/issues/32)) ([b8890e2](https://github.com/lloydrichards/portfolio-website/commit/b8890e2d3caecaea53a3ebbf2df4541dd68dc70f))
-* **deps:** update dependency @react-three/fiber to v8.15.11 ([#33](https://github.com/lloydrichards/portfolio-website/issues/33)) ([ba6a551](https://github.com/lloydrichards/portfolio-website/commit/ba6a55141194f61199852eadc636beafcbd7f830))
+- **deps:** update dependency @react-three/drei to v9.88.16
+  ([#32](https://github.com/lloydrichards/portfolio-website/issues/32))
+  ([b8890e2](https://github.com/lloydrichards/portfolio-website/commit/b8890e2d3caecaea53a3ebbf2df4541dd68dc70f))
+- **deps:** update dependency @react-three/fiber to v8.15.11
+  ([#33](https://github.com/lloydrichards/portfolio-website/issues/33))
+  ([ba6a551](https://github.com/lloydrichards/portfolio-website/commit/ba6a55141194f61199852eadc636beafcbd7f830))
 
 ## [1.3.3](https://github.com/lloydrichards/portfolio-website/compare/v1.3.2...v1.3.3) (2023-11-17)
 
-
 ### Bug Fixes
 
-* **deps:** update visx monorepo to v3.5.0 ([#38](https://github.com/lloydrichards/portfolio-website/issues/38)) ([ac2b394](https://github.com/lloydrichards/portfolio-website/commit/ac2b3944cc90ef65c20576422c98577e1a4464b3))
+- **deps:** update visx monorepo to v3.5.0
+  ([#38](https://github.com/lloydrichards/portfolio-website/issues/38))
+  ([ac2b394](https://github.com/lloydrichards/portfolio-website/commit/ac2b3944cc90ef65c20576422c98577e1a4464b3))
 
 ## [1.3.2](https://github.com/lloydrichards/portfolio-website/compare/v1.3.1...v1.3.2) (2023-11-17)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency framer-motion to v10.16.5 ([#34](https://github.com/lloydrichards/portfolio-website/issues/34)) ([bd500f8](https://github.com/lloydrichards/portfolio-website/commit/bd500f80fb9f02ad3fb8ee448071def55b340187))
+- **deps:** update dependency framer-motion to v10.16.5
+  ([#34](https://github.com/lloydrichards/portfolio-website/issues/34))
+  ([bd500f8](https://github.com/lloydrichards/portfolio-website/commit/bd500f80fb9f02ad3fb8ee448071def55b340187))
 
 ## [1.3.1](https://github.com/lloydrichards/portfolio-website/compare/v1.3.0...v1.3.1) (2023-11-17)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency lucide-react to ^0.292.0 ([#37](https://github.com/lloydrichards/portfolio-website/issues/37)) ([7843ee5](https://github.com/lloydrichards/portfolio-website/commit/7843ee5f79519325a48ce588013837ad1f690df7))
+- **deps:** update dependency lucide-react to ^0.292.0
+  ([#37](https://github.com/lloydrichards/portfolio-website/issues/37))
+  ([7843ee5](https://github.com/lloydrichards/portfolio-website/commit/7843ee5f79519325a48ce588013837ad1f690df7))
 
 # [1.3.0](https://github.com/lloydrichards/portfolio-website/compare/v1.2.6...v1.3.0) (2023-11-17)
 
-
 ### Features
 
-* **theme:** :sparkles: add theming and ModeToggle ([6bd94ae](https://github.com/lloydrichards/portfolio-website/commit/6bd94ae1de5df6a47f19d320c35629130e5937f2))
+- **theme:** :sparkles: add theming and ModeToggle
+  ([6bd94ae](https://github.com/lloydrichards/portfolio-website/commit/6bd94ae1de5df6a47f19d320c35629130e5937f2))
 
 ## [1.2.6](https://github.com/lloydrichards/portfolio-website/compare/v1.2.5...v1.2.6) (2023-11-13)
 

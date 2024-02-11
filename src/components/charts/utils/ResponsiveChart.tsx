@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import React, { FC } from "react";
-import { useElementSize } from "usehooks-ts";
+import React, { FC, useRef } from "react";
+import { useResizeObserver } from "usehooks-ts";
 
 type ResponsiveChartProps = {
   render: (props: { height: number; width: number }) => React.ReactNode;
@@ -11,7 +11,8 @@ export const ResponsiveChart: FC<ResponsiveChartProps> = ({
   className,
   ...props
 }) => {
-  const [ref, { width, height }] = useElementSize<HTMLDivElement>();
+  const ref = useRef<HTMLDivElement>(null);
+  const { width = 0, height = 0 } = useResizeObserver({ ref });
   return (
     <div
       {...props}

@@ -1,46 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with
-[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Welcome to the Portfolio website for myself, Lloyd Richards. This website is a
+personal project to showcase my work and experiments. It is built with Next.js
+and TypeScript, and uses Tailwind CSS for styling. As a digital curriculum
+vitae, it include what works, education, and volunteer projects I have been
+involved in.
+
+The website is also a place for me to experiment with new technologies and
+concepts. This includes data visualization, 3D graphics, and creative coding.
+
+## Tech Stack
+
+This project uses the following technologies:
+
+- [Next.js](https://nextjs.org/) - React Framework
+- [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [shadcn/ui](https://ui.shadcn.com/) - UI components
+- [contentlayer](https://contentlayer.dev/) - Content management
+- [D3.js](https://d3js.org/) - Data visualization library
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
+
+In addition, for the lab modules, the following technologies are experimented
+with:
+
+- [three.js](https://threejs.org/) - 3D library
+- [p5](https://p5js.org/) - Creative coding library
+- [visx](https://airbnb.io/visx/) - Data visualization library
+- [leva](https://github.com/pmndrs/leva) - GUI for debugging
+- [fp-ts](https://gcanti.github.io/fp-ts/) - Functional programming library
+- [anime.js](https://animejs.com/) - Animation library
+- [matter.js](https://brm.io/matter-js/) - Physics engine
 
 ## Getting Started
 
-First, run the development server:
+For the JS runtime, this project uses [Bun](https://bun.sh/), make sure to have
+it installed. Then make sure to install the dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+bun install
+```
+
+To run the development server:
+
+```bash
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 result.
 
-You can start editing the page by modifying `app/page.tsx`. The page
-auto-updates as you edit the file.
+### Storybook
 
-This project uses
-[`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to
-automatically optimize and load Inter, a custom Google Font.
+This project uses [Storybook](https://storybook.js.org/) for component
+development. To run it:
 
-## Learn More
+```bash
+bun storybook
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out
-[the Next.js GitHub repository](https://github.com/vercel/next.js/) - your
-feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
-
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/deployment) for more
-details.
+Open [http://localhost:6006](http://localhost:6006) with your browser to see the
+result.

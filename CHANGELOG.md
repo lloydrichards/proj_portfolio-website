@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/lloydrichards/portfolio-website/compare/v1.3.6...v1.4.0) (2024-02-12)
+
+
+### Features
+
+* ✨ multi-theme and design tokens ([#73](https://github.com/lloydrichards/portfolio-website/issues/73)) ([f3b11ee](https://github.com/lloydrichards/portfolio-website/commit/f3b11eebe89de537cabfde0d1c773ca77b9f3999))
+
+
+### Reverts
+
+* :rewind: change tag-version back ([78932f4](https://github.com/lloydrichards/portfolio-website/commit/78932f4596988175fba9e97b38fad1d6ac20845e))
+
 ## [1.3.6](https://github.com/lloydrichards/portfolio-website/compare/v1.3.5...v1.3.6) (2024-01-06)
 
 ### Bug Fixes

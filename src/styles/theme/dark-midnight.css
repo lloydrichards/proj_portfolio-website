@@ -14,7 +14,7 @@ html[data-theme="dark-midnight"] {
   --background: var(--color-indigo-900);
   --foreground: var(--color-indigo-050);
 
-  --card: var(--color-indigo-800);
+  --card: var(--color-indigo-900);
   --card-foreground: var(--color-indigo-050);
 
   --popover: var(--color-indigo-900);
@@ -44,9 +44,11 @@ html[data-theme="dark-midnight"] {
   --info: var(--color-ui-info);
   --info-foreground: var(--color-indigo-900);
 
-  --border: var(--color-indigo-050);
+  --border: var(--color-indigo-600);
   --input: var(--color-indigo-050);
   --ring: var(--color-primary-600);
 
   --radius: 0.5rem;
+
+  --border-base: 4px;
 }

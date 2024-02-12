@@ -44,9 +44,11 @@ html[data-theme="dark-professional"] {
   --info: var(--color-ui-info);
   --info-foreground: var(--color-stone-900);
 
-  --border: var(--color-stone-050);
-  --input: var(--color-stone-050);
+  --border: var(--color-stone-400);
+  --input: var(--color-stone-300);
   --ring: var(--color-primary-600);
 
   --radius: 0rem;
+
+  --border-base: 2px;
 }

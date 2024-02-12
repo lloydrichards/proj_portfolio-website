@@ -31,8 +31,10 @@ html[data-theme="light-professional"] {
   --accent: var(--color-stone-100);
   --accent-foreground: var(--color-stone-900);
 
-  --border: var(--color-stone-200);
-  --input: var(--color-stone-200);
+  --border: var(--color-stone-400);
+  --input: var(--color-stone-300);
 
   --radius: 0rem;
+
+  --border-base: 2px;
 }

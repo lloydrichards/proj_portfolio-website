@@ -85,6 +85,8 @@
 
     --radius: 0.5rem;
 
+    --border-base: 1px;
+
     --shadow-sm: 0 1px 2px 0 hsl(var(--border));
     --shadow: 0 1px 3px 0 hsl(var(--border)), 0 1px 2px -1px hsl(var(--border));
     --shadow-md: 0 4px 6px -1px hsl(var(--border)),

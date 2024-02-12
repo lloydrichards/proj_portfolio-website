@@ -28,6 +28,13 @@ const config = {
       inner: "var(--shadow-inner)",
       none: "none",
     },
+    borderWidth: {
+      DEFAULT: "var(--border-base)",
+      "0": "0",
+      "2": "calc(var(--border-base) * 2)",
+      "4": "calc(var(--border-base) * 4)",
+      "8": "calc(var(--border-base) * 8)",
+    },
     extend: {
       fontFamily: {
         serif: ["var(--font-josefin-sans)"],

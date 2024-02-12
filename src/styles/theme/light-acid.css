@@ -10,11 +10,14 @@ html[data-theme="light-acid"] {
   --color-lime-800: 86.3 69% 22.7%; /* #3f6212 */
   --color-lime-900: 87.6 61.2% 20.2%; /* #365314 */
 
+  --color-orange-050: 33.3 100% 96.5%; /* #fff7ed */
+  --color-orange-500: 24.6 95% 53.1%; /* #f97316 */
+
   --background: var(--color-lime-050);
   --foreground: var(--color-lime-900);
 
-  --primary: var(--color-lime-700);
-  --primary-foreground: var(--color-lime-050);
+  --primary: var(--color-orange-500);
+  --primary-foreground: var(--color-orange-050);
 
   --secondary: var(--color-lime-100);
   --secondary-foreground: var(--color-lime-900);
@@ -31,8 +34,10 @@ html[data-theme="light-acid"] {
   --accent: var(--color-lime-100);
   --accent-foreground: var(--color-lime-900);
 
-  --border: var(--color-lime-400);
+  --border: var(--color-orange-500);
   --input: var(--color-lime-200);
+
+  --border-base: 3px;
 
   --shadow-sm: 1px 1px 0px hsl(var(--border));
   --shadow: 1px 1px 0px hsl(var(--border)), 0 1px 2px -1px hsl(var(--border));

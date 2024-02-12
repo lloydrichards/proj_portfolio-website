@@ -41,10 +41,18 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning={true}>
         <ThemeProvider
-          attribute="class"
           defaultTheme="light"
           enableSystem
-          disableTransitionOnChange
+          enableColorScheme
+          themes={[
+            "light-classic",
+            "dark-classic",
+            "light-professional",
+            "dark-professional",
+            "light-soft",
+            "light-acid",
+            "dark-midnight",
+          ]}
         >
           <Layout>{children}</Layout>
           <Analytics />

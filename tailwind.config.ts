@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config = {
-  darkMode: ["class"],
+  darkMode: ["class", '[data-theme^="dark-"]'],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -17,6 +17,23 @@ const config = {
       screens: {
         "2xl": "1400px",
       },
+    },
+    boxShadow: {
+      DEFAULT: "var(--shadow)",
+      sm: "var(--shadow-sm)",
+      md: "var(--shadow-md)",
+      lg: "var(--shadow-lg)",
+      xl: "var(--shadow-xl)",
+      "2xl": "var(--shadow-2xl)",
+      inner: "var(--shadow-inner)",
+      none: "none",
+    },
+    borderWidth: {
+      DEFAULT: "var(--border-base)",
+      "0": "0",
+      "2": "calc(var(--border-base) * 2)",
+      "4": "calc(var(--border-base) * 4)",
+      "8": "calc(var(--border-base) * 8)",
     },
     extend: {
       fontFamily: {
@@ -41,6 +58,18 @@ const config = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",

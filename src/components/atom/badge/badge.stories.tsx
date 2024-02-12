@@ -52,6 +52,34 @@ export const Destructive: Story = {
 };
 
 /**
+ * Use the `warning` badge to indicate caution or a warning that requires
+ * attention.
+ */
+export const Warning: Story = {
+  args: {
+    variant: "warning",
+  },
+};
+
+/**
+ * Use the `success` badge to indicate success or a positive change.
+ */
+export const Success: Story = {
+  args: {
+    variant: "success",
+  },
+};
+
+/**
+ * Use the `info` badge to indicate information or a neutral change.
+ */
+export const Info: Story = {
+  args: {
+    variant: "info",
+  },
+};
+
+/**
  * Use the `outline` badge for overlaying without obscuring interface details,
  * emphasizing clarity and subtlety..
  */

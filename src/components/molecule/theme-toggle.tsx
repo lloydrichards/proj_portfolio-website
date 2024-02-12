@@ -9,10 +9,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/atom/dropdown-menu/dropdown-menu";
 
-export function ModeToggle() {
+export function ThemeToggle() {
   const { setTheme } = useTheme();
 
   return (
@@ -26,13 +27,26 @@ export function ModeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
+          Classic (Light)
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+        <DropdownMenuItem onClick={() => setTheme("dark-classic")}>
+          Classic (Dark)
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => setTheme("light-professional")}>
+          Professional
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark-professional")}>
+          Professional (Dark)
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("light-soft")}>
+          Soft
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("light-acid")}>
+          Acid
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark-midnight")}>
+          Midnight (Dark)
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

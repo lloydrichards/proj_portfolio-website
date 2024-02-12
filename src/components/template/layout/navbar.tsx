@@ -1,7 +1,7 @@
 "use client";
 
 import { buttonVariants } from "@/components/atom/button/button";
-import { ModeToggle } from "@/components/molecule/mode-toggle";
+import { ThemeToggle } from "@/components/molecule/theme-toggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,7 +19,6 @@ import {
 import { Github, Instagram, Linkedin, Menu } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";
-import { ThemeToggle } from "@/components/molecule/theme-toggle";
 
 interface NavRouteProps {
   vertical?: boolean;
@@ -97,7 +96,6 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
         </NavigationMenuContent>
       </NavigationMenuItem>
       <ThemeToggle />
-      <ModeToggle />
     </NavigationMenuList>
   );
 };

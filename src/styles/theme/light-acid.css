@@ -1,4 +1,4 @@
-html[data-theme="lime"] {
+html[data-theme="light-acid"] {
   --color-lime-050: 78.3 92% 95.1%; /* #f7fee7 */
   --color-lime-100: 79.6 89.1% 89.2%; /* #ecfccb */
   --color-lime-200: 80.9 88.5% 79.6%; /* #d9f99d */
@@ -31,32 +31,16 @@ html[data-theme="lime"] {
   --accent: var(--color-lime-100);
   --accent-foreground: var(--color-lime-900);
 
-  --border: var(--color-lime-200);
+  --border: var(--color-lime-400);
   --input: var(--color-lime-200);
-}
 
-html[data-theme="lime"].dark {
-  --background: var(--color-lime-900);
-  --foreground: var(--color-lime-050);
-
-  --card: var(--color-lime-800);
-  --card-foreground: var(--color-lime-050);
-
-  --popover: var(--color-lime-900);
-  --popover-foreground: var(--color-lime-050);
-
-  --primary: var(--color-lime-050);
-  --primary-foreground: var(--color-lime-900);
-
-  --secondary: var(--color-lime-900);
-  --secondary-foreground: var(--color-lime-050);
-
-  --muted: var(--color-lime-900);
-  --muted-foreground: var(--color-lime-050);
-
-  --accent: var(--color-lime-900);
-  --accent-foreground: var(--color-lime-050);
-
-  --border: var(--color-lime-100);
-  --input: var(--color-lime-100);
+  --shadow-sm: 1px 1px 0px hsl(var(--border));
+  --shadow: 1px 1px 0px hsl(var(--border)), 0 1px 2px -1px hsl(var(--border));
+  --shadow-md: 4px 4px 0px hsl(var(--border)), 0 2px 0px hsl(var(--border));
+  --shadow-lg: 10px 10px 0px hsl(var(--border)),
+    0 4px 0px -4px hsl(var(--border));
+  --shadow-xl: 20px 20px 0pxhsl (var(--border)),
+    0 8px 0px -6px hsl(var(--border));
+  --shadow-2xl: 25px 25px 0px hsl(var(--border));
+  --shadow-inner: inset 2px 2px 4px hsl(var(--border));
 }

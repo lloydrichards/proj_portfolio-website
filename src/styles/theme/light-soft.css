@@ -1,4 +1,4 @@
-html[data-theme="rose"] {
+html[data-theme="light-soft"] {
   --color-red-050: 0 85.7% 97.3%; /* #fef2f2 */
   --color-red-100: 0 93.3% 94.1%; /* #fee2e2 */
   --color-red-200: 0 96.3% 89.4%; /* #fecaca */
@@ -33,34 +33,6 @@ html[data-theme="rose"] {
 
   --border: var(--color-red-200);
   --input: var(--color-red-200);
-
-  --radius: 1rem;
-}
-
-html[data-theme="rose"].dark {
-  --background: var(--color-red-900);
-  --foreground: var(--color-red-050);
-
-  --card: var(--color-red-800);
-  --card-foreground: var(--color-red-050);
-
-  --popover: var(--color-red-900);
-  --popover-foreground: var(--color-red-050);
-
-  --primary: var(--color-red-050);
-  --primary-foreground: var(--color-red-900);
-
-  --secondary: var(--color-red-900);
-  --secondary-foreground: var(--color-red-050);
-
-  --muted: var(--color-red-900);
-  --muted-foreground: var(--color-red-050);
-
-  --accent: var(--color-red-900);
-  --accent-foreground: var(--color-red-050);
-
-  --border: var(--color-red-100);
-  --input: var(--color-red-100);
 
   --radius: 1rem;
 }

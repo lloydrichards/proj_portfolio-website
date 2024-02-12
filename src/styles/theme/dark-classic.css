@@ -1,0 +1,41 @@
+html[data-theme="dark-classic"] {
+  color-scheme: dark;
+  --background: var(--color-mono-900);
+  --foreground: var(--color-mono-050);
+
+  --card: var(--color-mono-800);
+  --card-foreground: var(--color-mono-050);
+
+  --popover: var(--color-mono-900);
+  --popover-foreground: var(--color-mono-050);
+
+  --primary: var(--color-mono-050);
+  --primary-foreground: var(--color-mono-900);
+
+  --secondary: var(--color-mono-800);
+  --secondary-foreground: var(--color-mono-050);
+
+  --muted: var(--color-mono-800);
+  --muted-foreground: var(--color-mono-050);
+
+  --accent: var(--color-mono-800);
+  --accent-foreground: var(--color-mono-050);
+
+  --destructive: var(--color-ui-error);
+  --destructive-foreground: var(--color-mono-900);
+
+  --warning: var(--color-ui-warning);
+  --warning-foreground: var(--color-mono-900);
+
+  --success: var(--color-ui-success);
+  --success-foreground: var(--color-mono-900);
+
+  --info: var(--color-ui-info);
+  --info-foreground: var(--color-mono-900);
+
+  --border: var(--color-mono-300);
+  --input: var(--color-mono-200);
+  --ring: var(--color-primary-600);
+
+  --radius: 0.5rem;
+}

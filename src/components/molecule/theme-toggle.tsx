@@ -1,37 +1,52 @@
 "use client";
 
+import * as React from "react";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+
 import { Button } from "@/components/atom/button/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/atom/dropdown-menu/dropdown-menu";
-import { useColor } from "@/hooks/use-theme";
 
 export function ThemeToggle() {
-  const [_, setTheme] = useColor();
+  const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <div className="size-6 rounded-full bg-primary" />
-          <span className="sr-only">Toggle color</span>
+          <SunIcon className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <MoonIcon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem onClick={() => setTheme(undefined)}>
-          Default
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          Classic (Light)
         </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2" onClick={() => setTheme("lime")}>
-          <div className="size-4 rounded-full bg-[#bef264]" /> Lime
+        <DropdownMenuItem onClick={() => setTheme("dark-classic")}>
+          Classic (Dark)
         </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2" onClick={() => setTheme("sky")}>
-          <div className="size-4 rounded-full bg-[#60a5fa]" /> Sky Pro
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => setTheme("light-professional")}>
+          Professional
         </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2" onClick={() => setTheme("rose")}>
-          <div className="size-4 rounded-full bg-[#f87171]" /> Soft Rose
+        <DropdownMenuItem onClick={() => setTheme("dark-professional")}>
+          Professional (Dark)
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("light-soft")}>
+          Soft
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("light-acid")}>
+          Acid
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark-midnight")}>
+          Midnight (Dark)
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

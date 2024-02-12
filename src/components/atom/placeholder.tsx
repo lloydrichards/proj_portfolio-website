@@ -5,16 +5,16 @@ import { typefaceValue2 } from "../typeface";
 
 const PlaceholderIcon = {
   image: (
-    <TentTree className="h-full max-h-24 w-full max-w-24 p-1 text-destructive" />
+    <TentTree className="size-full max-h-24 max-w-24 p-1 text-destructive" />
   ),
   icon: (
-    <Apple className="h-full max-h-24 w-full max-w-24 p-1 text-destructive" />
+    <Apple className="size-full max-h-24 max-w-24 p-1 text-destructive" />
   ),
   text: (
-    <Text className="h-full max-h-24 w-full max-w-24 p-1 text-destructive" />
+    <Text className="size-full max-h-24 max-w-24 p-1 text-destructive" />
   ),
   chart: (
-    <LineChart className="h-full max-h-24 w-full max-w-24 p-1 text-destructive" />
+    <LineChart className="size-full max-h-24 max-w-24 p-1 text-destructive" />
   ),
 };
 export const Placeholder = React.forwardRef<

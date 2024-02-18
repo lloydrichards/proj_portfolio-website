@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 const config = {
   darkMode: ["class", '[data-theme^="dark-"]'],
@@ -18,16 +19,6 @@ const config = {
         "2xl": "1400px",
       },
     },
-    boxShadow: {
-      DEFAULT: "var(--shadow)",
-      sm: "var(--shadow-sm)",
-      md: "var(--shadow-md)",
-      lg: "var(--shadow-lg)",
-      xl: "var(--shadow-xl)",
-      "2xl": "var(--shadow-2xl)",
-      inner: "var(--shadow-inner)",
-      none: "none",
-    },
     borderWidth: {
       DEFAULT: "var(--border-base)",
       "0": "0",
@@ -40,6 +31,15 @@ const config = {
         serif: ["var(--font-josefin-sans)"],
         sans: ["var(--font-inter)"],
         mono: ["var(--font-roboto-mono)"],
+      },
+      boxShadow: {
+        DEFAULT: `var(--shadow, ${defaultTheme.boxShadow.DEFAULT})`,
+        sm: `var(--shadow-sm, ${defaultTheme.boxShadow.sm})`,
+        md: `var(--shadow-md, ${defaultTheme.boxShadow.md})`,
+        lg: `var(--shadow-lg, ${defaultTheme.boxShadow.lg})`,
+        xl: `var(--shadow-xl, ${defaultTheme.boxShadow.xl})`,
+        "2xl": `var(--shadow-2xl, ${defaultTheme.boxShadow["2xl"]})`,
+        inner: `var(--shadow-inner, ${defaultTheme.boxShadow.inner})`,
       },
       colors: {
         border: "hsl(var(--border))",

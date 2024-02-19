@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/lloydrichards/portfolio-website/compare/v1.4.0...v1.5.0) (2024-02-19)
+
+
+### Features
+
+* **storybook:** :memo: add stories for colors, padding and typefaces ([eb8c830](https://github.com/lloydrichards/portfolio-website/commit/eb8c830bf0b9fd18044f8186ec954fef889e5ed6))
+
 # [1.4.0](https://github.com/lloydrichards/portfolio-website/compare/v1.3.6...v1.4.0) (2024-02-12)
 
 

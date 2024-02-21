@@ -25,33 +25,43 @@ const meta: Meta<{
     }),
   },
   render: (args) => (
-    <div className="dark:prose-dark prose prose-slate max-w-none">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Size</th>
-            <th className="hidden sm:table-cell">
-              <span className="sr-only">Preview</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {args.radius.map(({ name, value }) => (
-            <tr key={name}>
-              <td>{name}</td>
-              <td>{value}</td>
-              <td className="hidden sm:table-cell">
+    <table className="w-full table-auto text-left text-sm text-foreground rtl:text-right">
+      <thead className="text-xs bg-muted uppercase">
+        <tr>
+          <th scope="col" className="px-6 py-3">
+            Name
+          </th>
+          <th scope="col" className="hidden px-6 py-3 sm:table-cell">
+            Size
+          </th>
+          <th scope="col" className="px-6 py-3">
+            <span className="sr-only">Preview</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {args.radius.map(({ name, value }) => {
+          const style = window.getComputedStyle(document.body);
+          const variable = value.match(/var\(([^)]+)\)/)?.[1] ?? "";
+          const resolved = style.getPropertyValue(variable);
+          const resolvedValue = value.replace(/var\(--(.*?)\)/, resolved);
+          return (
+            <tr key={name} className="border-b bg-card">
+              <td className="px-6 py-4">{name}</td>
+              <td className="hidden px-6 py-4 sm:table-cell">
+                {resolvedValue}
+              </td>
+              <td className="px-6 py-4">
                 <div
-                  className="size-20 border bg-card"
+                  className="size-20 border-2 bg-background"
                   style={{ borderRadius: value }}
                 />
               </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          );
+        })}
+      </tbody>
+    </table>
   ),
 };
 

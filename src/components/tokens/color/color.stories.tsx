@@ -12,48 +12,45 @@ const meta: Meta<{
   title: "design/Color",
   argTypes: {},
   render: (args) => (
-    <div className="dark:prose-dark prose prose-slate max-w-none">
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Swatch</th>
+    <table className="w-full table-auto text-left text-sm text-foreground rtl:text-right">
+      <thead className="text-x bg-muted uppercase">
+        <tr>
+          <th scope="col" className="px-6 py-3">
+            Name
+          </th>
+          <th scope="col" className="px-6 py-3">
+            <span className="sr-only">Swatch</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {args.swatch.map(({ name, colors }) => (
+          <tr key={name} className="border-b bg-card">
+            <td className="px-6 py-4">{name}</td>
+            <td className="px-6 py-4">
+              <div className="flex overflow-x-clip rounded-md border shadow">
+                {Object.entries(colors).map(([name, value]) => (
+                  <ColorBlock key={name} title={name} value={value} />
+                ))}
+              </div>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {args.swatch.map(({ name, colors }) => (
-            <tr key={name}>
-              <td>{name}</td>
-              <td className="not-prose">
-                <div className="mx-2 my-4 flex overflow-x-clip rounded-md border shadow">
-                  {Object.entries(colors).map(([name, value]) => (
-                    <ColorBlock key={name} title={name} value={value} />
-                  ))}
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   ),
 };
 
 export default meta;
 
 const fullConfig = resolveConfig(tailwindConfig);
+type ColorKey = keyof typeof fullConfig.theme.colors;
 
 type Story = StoryObj<typeof meta>;
 
 export const Core: Story = {
   args: {
     swatch: [
-      {
-        name: "White",
-        colors: {
-          white: "hsl(var(--color-white))",
-        },
-      },
       {
         name: "mono",
         colors: {
@@ -112,27 +109,49 @@ export const Core: Story = {
   },
 };
 
-const functionalSwatch: Array<keyof typeof fullConfig.theme.colors> = [
-  "accent",
-  "card",
+const functionalSwatch: Array<ColorKey> = [
   "foreground",
   "background",
-  "muted",
-  "border",
-  "destructive",
-  "secondary",
   "primary",
+  "secondary",
+  "card",
+  "accent",
+  "muted",
   "popover",
-  "input",
+  "destructive",
   "warning",
+  "success",
   "info",
+  "input",
+  "border",
+  "ring",
 ];
 
 export const Functional: Story = {
   args: {
     swatch: Object.entries(fullConfig.theme.colors)
-      .filter((d) =>
-        functionalSwatch.includes(d[0] as keyof typeof fullConfig.theme.colors),
+      .filter((d) => functionalSwatch.includes(d[0] as ColorKey))
+      .sort(
+        ([a], [b]) =>
+          functionalSwatch.indexOf(a as ColorKey) -
+          functionalSwatch.indexOf(b as ColorKey),
+      )
+      .map(([name, colors]) => {
+        return {
+          name,
+          colors: typeof colors === "string" ? { [name]: colors } : colors,
+        };
+      }),
+  },
+};
+export const Tailwind: Story = {
+  args: {
+    swatch: Object.entries(fullConfig.theme.colors)
+      .filter(
+        (d) =>
+          ![...functionalSwatch, "inherit", "current", "transparent"].includes(
+            d[0] as keyof typeof fullConfig.theme.colors,
+          ),
       )
       .map(([name, colors]) => {
         return {

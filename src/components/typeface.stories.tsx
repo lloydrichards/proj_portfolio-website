@@ -38,30 +38,37 @@ const meta: Meta<{
     },
   },
   render: (args) => (
-    <div className="dark:prose-dark prose prose-slate max-w-none">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Classes</th>
-            <th>Typeface</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(args.typeface).map(([name, className]) => (
-            <tr key={name}>
-              <td>{name}</td>
-              <td className="whitespace-pre-wrap">
-                {className.replaceAll(" ", "\n")}
+    <table className="w-full table-auto text-left text-sm text-foreground rtl:text-right">
+      <thead className="text-xs bg-muted uppercase">
+        <tr>
+          <th scope="col" className="px-6 py-3">
+            Name
+          </th>
+          <th scope="col" className="hidden px-6 py-3 sm:table-cell">
+            Utilities
+          </th>
+          <th scope="col" className="px-6 py-3">
+            <span className="sr-only">Preview</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.entries(args.typeface).map(([name, className]) => {
+          const resolvedValue = className.replaceAll(" ", "\n");
+          return (
+            <tr key={name} className="border-b bg-card">
+              <td className="px-6 py-4">{name}</td>
+              <td className="hidden whitespace-pre-wrap px-6 py-4 sm:table-cell">
+                {resolvedValue}
               </td>
-              <td className="not-prose">
+              <td className="px-6 py-4">
                 <p className={className}>{args.children}</p>
               </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          );
+        })}
+      </tbody>
+    </table>
   ),
   parameters: {},
 };

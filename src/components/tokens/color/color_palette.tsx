@@ -15,6 +15,12 @@ const hslToHex = (h: number, s: number, l: number) => {
   return `#${f(0)}${f(8)}${f(4)}`;
 };
 const hexToHSL = (hex: string) => {
+  if (hex === "#fff" || hex === "#ffffff") {
+    return "hsl(0, 0%, 100%)";
+  }
+  if (hex === "#000" || hex === "#000000") {
+    return "hsl(0, 0%, 0%)";
+  }
   const r = parseInt(hex.substring(1, 3), 16) / 255;
   const g = parseInt(hex.substring(3, 5), 16) / 255;
   const b = parseInt(hex.substring(5, 7), 16) / 255;

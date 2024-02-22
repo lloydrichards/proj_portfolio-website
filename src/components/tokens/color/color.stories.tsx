@@ -28,7 +28,7 @@ const meta: Meta<{
           <tr key={name} className="border-b bg-card">
             <td className="px-6 py-4">{name}</td>
             <td className="px-6 py-4">
-              <div className="flex overflow-x-clip rounded-md border shadow">
+              <div className="flex overflow-hidden rounded-md border shadow">
                 {Object.entries(colors).map(([name, value]) => (
                   <ColorBlock key={name} title={name} value={value} />
                 ))}
@@ -64,6 +64,7 @@ export const Core: Story = {
           "700": "hsl(var(--color-mono-700))",
           "800": "hsl(var(--color-mono-800))",
           "900": "hsl(var(--color-mono-900))",
+          "950": "hsl(var(--color-mono-950))",
         },
       },
       {
@@ -79,6 +80,7 @@ export const Core: Story = {
           "700": "hsl(var(--color-primary-700))",
           "800": "hsl(var(--color-primary-800))",
           "900": "hsl(var(--color-primary-900))",
+          "950": "hsl(var(--color-primary-950))",
         },
       },
       {
@@ -94,6 +96,7 @@ export const Core: Story = {
           "700": "hsl(var(--color-secondary-700))",
           "800": "hsl(var(--color-secondary-800))",
           "900": "hsl(var(--color-secondary-900))",
+          "950": "hsl(var(--color-secondary-950))",
         },
       },
       {
@@ -135,23 +138,6 @@ export const Functional: Story = {
         ([a], [b]) =>
           functionalSwatch.indexOf(a as ColorKey) -
           functionalSwatch.indexOf(b as ColorKey),
-      )
-      .map(([name, colors]) => {
-        return {
-          name,
-          colors: typeof colors === "string" ? { [name]: colors } : colors,
-        };
-      }),
-  },
-};
-export const Tailwind: Story = {
-  args: {
-    swatch: Object.entries(fullConfig.theme.colors)
-      .filter(
-        (d) =>
-          ![...functionalSwatch, "inherit", "current", "transparent"].includes(
-            d[0] as keyof typeof fullConfig.theme.colors,
-          ),
       )
       .map(([name, colors]) => {
         return {

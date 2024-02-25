@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import { Github, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
 export const Footer: React.FC = () => {

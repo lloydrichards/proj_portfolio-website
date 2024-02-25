@@ -41,7 +41,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
             {project.description}
           </CardDescription>
         </CardContent>
-        <CardFooter className="x-10 pointer-events-none justify-end gap-1">
+        <CardFooter className="px-10 pointer-events-none justify-end gap-1">
           {project.category.map((category) => (
             <Badge variant="outline" key={`${project.slug}-${category}`}>
               {category}

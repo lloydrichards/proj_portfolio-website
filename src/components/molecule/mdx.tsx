@@ -15,7 +15,7 @@ import {
   typefaceOList,
   typefaceListItem,
   typefaceBlockQuote,
-} from "../typeface";
+} from "../tokens/typeface/typeface";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -100,7 +100,7 @@ const components = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "rounded-lg bg-black mb-4 mt-6 overflow-x-auto border py-4",
+        "rounded-lg mb-4 mt-6 overflow-x-auto border bg-foreground py-4",
         className,
       )}
       {...props}

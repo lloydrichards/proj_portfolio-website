@@ -7,7 +7,7 @@ import { Button } from "./button";
  * Displays a button or a component that looks like a button.
  */
 const meta = {
-  title: "atom/Button",
+  title: "ui/Button",
   component: Button,
   tags: ["autodocs"],
   argTypes: {

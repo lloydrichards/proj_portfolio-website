@@ -1,6 +1,6 @@
 "use client";
 import type { FC } from "react";
-import { typefaceBody1, typefaceMeta2 } from "../../typeface";
+import { typefaceBody1, typefaceMeta2 } from "../typeface/typeface";
 
 const hslToHex = (h: number, s: number, l: number) => {
   l /= 100;

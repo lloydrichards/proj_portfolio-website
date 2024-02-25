@@ -70,7 +70,7 @@ const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
       </CardHeader>
       <CardContent>
         <CardTitle className="flex gap-2">
-          <FlaskConical className="fill-neutral" />
+          <FlaskConical className="text-muted-foreground" />
           {lab.title}
         </CardTitle>
         <CardDescription>{lab.description}</CardDescription>

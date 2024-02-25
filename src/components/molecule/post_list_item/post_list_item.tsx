@@ -1,10 +1,8 @@
 "use client";
 import {
-  NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   navigationMenuTriggerStyle,
-  NavigationMenuList,
 } from "@/components/atom/navigation-menu/navigation-menu";
 import { cn } from "@/lib/utils";
 import { Blog, Lab } from "@generated";
@@ -17,7 +15,7 @@ interface PostsListItemProps {
   post: Lab | Blog;
   className?: string;
 }
-const PostListItem: FC<PostsListItemProps> = ({ post }) => {
+export const PostListItem: FC<PostsListItemProps> = ({ post }) => {
   return (
     <NavigationMenuItem>
       <Link href={post.slug} legacyBehavior passHref>
@@ -32,7 +30,6 @@ const PostListItem: FC<PostsListItemProps> = ({ post }) => {
     </NavigationMenuItem>
   );
 };
-
 interface PostIconProps {
   type: "Lab" | "Blog";
   className?: string;
@@ -44,31 +41,4 @@ const PostIcon: FC<PostIconProps> = ({ type }) => {
     case "Blog":
       return <Mic size={24} />;
   }
-};
-
-interface PostsNavigationProps {
-  allPosts: Array<Lab | Blog>;
-  className?: string;
-}
-export const PostsNavigation: FC<PostsNavigationProps> = ({
-  allPosts,
-  className,
-}) => {
-  return (
-    <NavigationMenu
-      orientation="vertical"
-      className={cn("flex-col items-start justify-start gap-4", className)}
-    >
-      <Link href={"/posts"}>
-        <h1 className="text-lg">All Posts</h1>
-      </Link>
-      <NavigationMenuList className="flex-col items-start space-x-0">
-        {allPosts
-          .filter((d) => d.published)
-          .map((post) => (
-            <PostListItem key={post.slugAsParams} post={post}></PostListItem>
-          ))}
-      </NavigationMenuList>
-    </NavigationMenu>
-  );
 };

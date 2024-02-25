@@ -44,6 +44,8 @@ const config = {
       inner: `var(--shadow-inner, ${defaultTheme.boxShadow.inner})`,
     },
     colors: {
+      transparent: "transparent",
+      current: "currentColor",
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",

@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/lloydrichards/portfolio-website/compare/v1.5.0...v1.5.1) (2024-02-25)
+
+
+### Bug Fixes
+
+* **presentation:** :bug: replace tailwind utilities in mdx.css ([336e06b](https://github.com/lloydrichards/portfolio-website/commit/336e06b5af15159aea0fea17da4d2c4c09faa4d8))
+
 # [1.5.0](https://github.com/lloydrichards/portfolio-website/compare/v1.4.0...v1.5.0) (2024-02-19)
 
 

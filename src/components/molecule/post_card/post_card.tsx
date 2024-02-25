@@ -1,5 +1,5 @@
 import { formatDate } from "@/lib/format";
-import { Blog, Lab } from "contentlayer/generated";
+import { Blog, Lab } from "@generated";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -22,7 +22,7 @@ export const PostCard: React.FC<IPostCard> = ({ post }) => {
       key={post.slugAsParams}
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
-      className="not-prose rounded-lg shadow-md dark:prose-invert"
+      className="not-prose rounded shadow-md dark:prose-invert"
     >
       <Link href={post.slug} className="no-underline">
         <Card className="flex h-full flex-col">

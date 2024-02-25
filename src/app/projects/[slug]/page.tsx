@@ -1,5 +1,5 @@
-import { Mdx } from "@/components/molecule/mdx";
-import { allProjects } from "contentlayer/generated";
+import { MdxContent } from "@/components/molecule/mdx_content/mdx_content";
+import { allProjects } from "@generated";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -54,7 +54,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
     <main className="flex min-h-screen flex-col items-center py-16">
       <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center dark:prose-invert">
         <h1 className="text-4xl font-bold">{project.title}</h1>
-        <Mdx code={project.body.code} />
+        <MdxContent code={project.body.code} />
       </div>
     </main>
   );

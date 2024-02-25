@@ -1,5 +1,5 @@
-import { RecentPosts } from "@/components/organism/recent_posts/RecentPosts";
-import { allBlogs, allLabs } from "contentlayer/generated";
+import { RecentPosts } from "@/components/organism/recent_posts/recent_posts";
+import { allBlogs, allLabs } from "@generated";
 
 const PostsPage = () => {
   const allPosts = [...allBlogs, ...allLabs].sort(

@@ -15,7 +15,7 @@ import {
   typefaceOList,
   typefaceListItem,
   typefaceBlockQuote,
-} from "../tokens/typeface/typeface";
+} from "../../tokens/typeface/typeface";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -100,7 +100,7 @@ const components = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "rounded-lg mb-4 mt-6 overflow-x-auto border bg-foreground py-4",
+        "mb-4 mt-6 overflow-x-auto rounded border bg-foreground py-4",
         className,
       )}
       {...props}
@@ -121,7 +121,7 @@ interface MdxProps {
   code: string;
 }
 
-export function Mdx({ code }: MdxProps) {
+export function MdxContent({ code }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return (

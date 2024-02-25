@@ -1,6 +1,6 @@
-import { SpotlightProjects } from "@/components/organism/spotlight_projects/SpotlightProjects";
+import { SpotlightProjects } from "@/components/organism/spotlight_projects/spotlight_projects";
 import { formatDate } from "@/lib/format";
-import { allProjects } from "contentlayer/generated";
+import { allProjects } from "@generated";
 import Link from "next/link";
 
 const ProjectsPage = () => {

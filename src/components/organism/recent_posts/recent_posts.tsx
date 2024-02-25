@@ -1,9 +1,9 @@
 "use client";
 
-import { Blog, Lab } from "contentlayer/generated";
+import { Blog, Lab } from "@generated";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
-import { PostCard } from "../../molecule/post_card/PostCard";
+import { PostCard } from "../../molecule/post_card/post_card";
 import { Button } from "@/components/atom/button/button";
 
 interface RecentPostsProps {

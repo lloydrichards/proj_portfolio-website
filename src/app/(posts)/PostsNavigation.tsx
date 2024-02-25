@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
 } from "@/components/atom/navigation-menu/navigation-menu";
 import { cn } from "@/lib/utils";
-import { Blog, Lab } from "contentlayer/generated";
+import { Blog, Lab } from "@generated";
 import Link from "next/link";
 import { FC } from "react";
 import { formatDate } from "@/lib/format";

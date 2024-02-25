@@ -13,9 +13,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/atom/dropdown-menu/dropdown-menu";
 
-export function ThemeToggle() {
+export const ThemeSelect = () => {
   const { setTheme } = useTheme();
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -51,4 +50,4 @@ export function ThemeToggle() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

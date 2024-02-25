@@ -1,13 +1,6 @@
 "use client";
-import { allOccupations } from "contentlayer/generated";
-import dynamic from "next/dynamic";
-
-const TimelineDashboard = dynamic(
-  () => import("@/components/organism/timeline_dashboard/timeline_dashboard"),
-  {
-    ssr: false,
-  },
-);
+import { TimelineDashboard } from "@/components/organism/timeline_dashboard/timeline_dashboard";
+import { allOccupations } from "@generated";
 
 const TimelinePage = () => {
   return (

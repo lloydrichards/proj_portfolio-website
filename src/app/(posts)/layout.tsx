@@ -1,4 +1,4 @@
-import { allBlogs, allLabs } from "contentlayer/generated";
+import { allBlogs, allLabs } from "@generated";
 import { FC } from "react";
 import { PostsNavigation } from "./PostsNavigation";
 

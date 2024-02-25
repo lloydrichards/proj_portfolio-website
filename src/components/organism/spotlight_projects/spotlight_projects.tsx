@@ -1,5 +1,5 @@
 import { allProjects } from "../../../../.contentlayer/generated";
-import { ProjectCard } from "../../molecule/project_card/ProjectCard";
+import { ProjectCard } from "../../molecule/project_card/project_card";
 
 export const SpotlightProjects: React.FC = () => {
   const sortedProjects = allProjects

@@ -1,16 +1,9 @@
-import { RecentPosts } from "@/components/organism/recent_posts/RecentPosts";
-import { SpotlightProjects } from "@/components/organism/spotlight_projects/SpotlightProjects";
-import { allBlogs, allLabs, allOccupations } from "contentlayer/generated";
+import { RecentPosts } from "@/components/organism/recent_posts/recent_posts";
+import { SpotlightProjects } from "@/components/organism/spotlight_projects/spotlight_projects";
+import { TimelineDashboard } from "@/components/organism/timeline_dashboard/timeline_dashboard";
+import { allBlogs, allLabs, allOccupations } from "@generated";
 import { isAfter, subYears } from "date-fns";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-
-const TimelineDashboard = dynamic(
-  () => import("@/components/organism/timeline_dashboard/timeline_dashboard"),
-  {
-    ssr: false,
-  },
-);
 
 export default function Home() {
   return (

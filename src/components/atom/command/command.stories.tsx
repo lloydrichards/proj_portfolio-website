@@ -19,7 +19,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {},
   args: {
-    className: "rounded-lg w-96 border shadow-md",
+    className: "rounded w-96 border shadow-md",
   },
   render: (args) => (
     <Command {...args}>

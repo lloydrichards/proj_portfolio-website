@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atom/card/card";
-import { Project } from "contentlayer/generated";
+import { Project } from "@generated";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -41,7 +41,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
             {project.description}
           </CardDescription>
         </CardContent>
-        <CardFooter className="px-10 pointer-events-none justify-end gap-1">
+        <CardFooter className="pointer-events-none justify-end gap-1 px-10">
           {project.category.map((category) => (
             <Badge variant="outline" key={`${project.slug}-${category}`}>
               {category}

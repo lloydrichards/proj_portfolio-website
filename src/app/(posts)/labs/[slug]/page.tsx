@@ -1,4 +1,4 @@
-import { Mdx } from "@/components/molecule/mdx";
+import { MdxContent } from "@/components/molecule/mdx_content/mdx_content";
 import { Badge } from "@/components/atom/badge/badge";
 import { Button } from "@/components/atom/button/button";
 import {
@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/atom/card/card";
 import { formatDate } from "@/lib/format";
-import { Lab, allLabs } from "contentlayer/generated";
+import { Lab, allLabs } from "@generated";
 import { FlaskConical, Github } from "lucide-react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -96,7 +96,7 @@ const LabPage = async ({ params }: LabPageProps) => {
     <main className="flex min-h-screen flex-col items-center py-4">
       <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center p-2 dark:prose-invert">
         <LabInfoCard lab={lab} />
-        <Mdx code={lab.body.code} />
+        <MdxContent code={lab.body.code} />
       </div>
     </main>
   );

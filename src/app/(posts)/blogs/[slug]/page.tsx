@@ -1,5 +1,5 @@
-import { Mdx } from "@/components/molecule/mdx";
-import { allBlogs } from "contentlayer/generated";
+import { MdxContent } from "@/components/molecule/mdx_content/mdx_content";
+import { allBlogs } from "@generated";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/mdx.css";
@@ -47,7 +47,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
     <main className="flex min-h-screen flex-col items-center py-16">
       <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center dark:prose-invert">
         <h1 className="text-4xl font-bold">{blog.title}</h1>
-        <Mdx code={blog.body.code} />
+        <MdxContent code={blog.body.code} />
       </div>
     </main>
   );

@@ -1,0 +1,40 @@
+html[data-theme="light-professional"] {
+  --color-stone-050: 60 9.1% 97.8%; /* #fafaf9 */
+  --color-stone-100: 60 4.8% 95.9%; /* #f5f5f4 */
+  --color-stone-200: 20 5.9% 90%; /* #e7e5e4 */
+  --color-stone-300: 24 5.7% 82.9%; /* #d6d3d1 */
+  --color-stone-400: 24 5.4% 63.9%; /* #a8a29e */
+  --color-stone-500: 25 5.3% 44.7%; /* #78716c */
+  --color-stone-600: 33.3 5.5% 32.4%; /* #57534e */
+  --color-stone-700: 30 6.3% 25.1%; /* #44403c */
+  --color-stone-800: 12 6.5% 15.1%; /* #292524 */
+  --color-stone-900: 24 9.8% 10%; /* #1c1917 */
+
+  --background: var(--color-stone-050);
+  --foreground: var(--color-stone-900);
+
+  --primary: var(--color-stone-700);
+  --primary-foreground: var(--color-stone-050);
+
+  --secondary: var(--color-stone-100);
+  --secondary-foreground: var(--color-stone-900);
+
+  --card: var(--background);
+  --card-foreground: var(--color-stone-900);
+
+  --popover: var(--color-stone-050);
+  --popover-foreground: var(--color-stone-900);
+
+  --muted: var(--color-stone-100);
+  --muted-foreground: var(--color-stone-900);
+
+  --accent: var(--color-stone-100);
+  --accent-foreground: var(--color-stone-900);
+
+  --border: var(--color-stone-400);
+  --input: var(--color-stone-300);
+
+  --radius: 0rem;
+
+  --border-base: 2px;
+}

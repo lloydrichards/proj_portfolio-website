@@ -1,0 +1,54 @@
+html[data-theme="dark-midnight"] {
+  --color-indigo-050: 225.9 100% 96.7%; /* #eef2ff */
+  --color-indigo-100: 226.5 100% 93.9%; /* #e0e7ff */
+  --color-indigo-200: 228 96.5% 88.8%; /* #c7d2fe */
+  --color-indigo-300: 229.7 93.5% 81.8%; /* #a5b4fc */
+  --color-indigo-400: 234.5 89.5% 73.9%; /* #818cf8 */
+  --color-indigo-500: 238.7 83.5% 66.7%; /* #6366f1 */
+  --color-indigo-600: 243.4 75.4% 58.6%; /* #4f46e5 */
+  --color-indigo-700: 244.5 57.9% 50.6%; /* #4338ca */
+  --color-indigo-800: 243.7 54.5% 41.4%; /* #3730a3 */
+  --color-indigo-900: 242.2 47.4% 34.3%; /* #312e81 */
+
+  color-scheme: dark;
+  --background: var(--color-indigo-900);
+  --foreground: var(--color-indigo-050);
+
+  --card: var(--color-indigo-900);
+  --card-foreground: var(--color-indigo-050);
+
+  --popover: var(--color-indigo-900);
+  --popover-foreground: var(--color-indigo-050);
+
+  --primary: var(--color-indigo-050);
+  --primary-foreground: var(--color-indigo-900);
+
+  --secondary: var(--color-indigo-800);
+  --secondary-foreground: var(--color-indigo-050);
+
+  --muted: var(--color-indigo-800);
+  --muted-foreground: var(--color-indigo-050);
+
+  --accent: var(--color-indigo-800);
+  --accent-foreground: var(--color-indigo-050);
+
+  --destructive: var(--color-ui-error);
+  --destructive-foreground: var(--color-indigo-900);
+
+  --warning: var(--color-ui-warning);
+  --warning-foreground: var(--color-indigo-900);
+
+  --success: var(--color-ui-success);
+  --success-foreground: var(--color-indigo-900);
+
+  --info: var(--color-ui-info);
+  --info-foreground: var(--color-indigo-900);
+
+  --border: var(--color-indigo-600);
+  --input: var(--color-indigo-050);
+  --ring: var(--color-primary-600);
+
+  --radius: 0.5rem;
+
+  --border-base: 4px;
+}

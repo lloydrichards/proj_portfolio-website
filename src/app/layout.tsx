@@ -1,9 +1,8 @@
-import { Footer } from "@/components/layout/footer/Footer";
-import { Navbar } from "@/components/layout/navbar/Navbar";
 import { inter, josefin_sans, roboto_mono } from "@/styles/font";
 import { Analytics } from "@vercel/analytics/react";
-import "../styles/globals.css";
 import { ThemeProvider } from "./theme-provider";
+import { Layout } from "@/components/template/layout/layout";
+import "../styles/globals.css";
 
 export const metadata = {
   title: "Lloyd Richards Design",
@@ -42,15 +41,21 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning={true}>
         <ThemeProvider
-          attribute="class"
           defaultTheme="light"
           enableSystem
-          disableTransitionOnChange
+          enableColorScheme
+          themes={[
+            "light-classic",
+            "dark-classic",
+            "light-professional",
+            "dark-professional",
+            "light-soft",
+            "light-acid",
+            "dark-midnight",
+          ]}
         >
-          <Navbar />
-          {children}
+          <Layout>{children}</Layout>
           <Analytics />
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

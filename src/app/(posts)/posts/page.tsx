@@ -1,4 +1,4 @@
-import { RecentPosts } from "@/components/posts/recent_posts/RecentPosts";
+import { RecentPosts } from "@/components/organism/recent_posts/RecentPosts";
 import { allBlogs, allLabs } from "contentlayer/generated";
 
 const PostsPage = () => {

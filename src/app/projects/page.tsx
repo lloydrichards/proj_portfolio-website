@@ -1,4 +1,4 @@
-import { SpotlightProjects } from "@/components/projects/spotlight_projects/SpotlightProjects";
+import { SpotlightProjects } from "@/components/organism/spotlight_projects/SpotlightProjects";
 import { formatDate } from "@/lib/format";
 import { allProjects } from "contentlayer/generated";
 import Link from "next/link";

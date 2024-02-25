@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import * as d3 from "d3";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 

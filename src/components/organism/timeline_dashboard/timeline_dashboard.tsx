@@ -1,13 +1,16 @@
 "use client";
 import { Timeline } from "@/components/chart/timeline/Timeline";
 import { ResponsiveChart } from "@/components/chart/utils/ResponsiveChart";
-import { Occupation } from "contentlayer/generated";
+import { Occupation } from "@generated";
 import { FC } from "react";
 
-type Props = {
+type TimelineDashboardProps = {
   occupations: Occupation[];
 };
-const TimelineDashboard: FC<Props> = ({ occupations }) => {
+
+export const TimelineDashboard: FC<TimelineDashboardProps> = ({
+  occupations,
+}) => {
   return (
     <section className="prose mt-8 min-h-96 w-full px-2 dark:prose-invert">
       <h2 className="font-serif">CV Timeline</h2>
@@ -20,5 +23,3 @@ const TimelineDashboard: FC<Props> = ({ occupations }) => {
     </section>
   );
 };
-
-export default TimelineDashboard;

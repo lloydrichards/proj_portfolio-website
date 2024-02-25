@@ -128,3 +128,9 @@
     @apply bg-background text-foreground transition duration-300;
   }
 }
+
+@layer utilities {
+  .prototype {
+    @apply ring-2 ring-destructive;
+  }
+}

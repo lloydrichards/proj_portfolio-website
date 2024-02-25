@@ -24,7 +24,7 @@ import {
  * triggered by a button.
  */
 const meta = {
-  title: "atom/DropdownMenu",
+  title: "ui/DropdownMenu",
   component: DropdownMenu,
   tags: ["autodocs"],
   argTypes: {},

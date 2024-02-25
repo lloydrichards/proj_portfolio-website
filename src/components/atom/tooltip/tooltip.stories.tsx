@@ -13,7 +13,7 @@ import {
  * receives keyboard focus or the mouse hovers over it.
  */
 const meta: Meta<typeof TooltipContent> = {
-  title: "atom/Tooltip",
+  title: "ui/Tooltip",
   component: TooltipContent,
   tags: ["autodocs"],
   argTypes: {

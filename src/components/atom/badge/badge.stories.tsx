@@ -6,7 +6,7 @@ import { Badge } from "./badge";
  * Displays a badge or a component that looks like a badge.
  */
 const meta = {
-  title: "atom/Badge",
+  title: "ui/Badge",
   component: Badge,
   tags: ["autodocs"],
   argTypes: {
@@ -48,34 +48,6 @@ export const Secondary: Story = {
 export const Destructive: Story = {
   args: {
     variant: "destructive",
-  },
-};
-
-/**
- * Use the `warning` badge to indicate caution or a warning that requires
- * attention.
- */
-export const Warning: Story = {
-  args: {
-    variant: "warning",
-  },
-};
-
-/**
- * Use the `success` badge to indicate success or a positive change.
- */
-export const Success: Story = {
-  args: {
-    variant: "success",
-  },
-};
-
-/**
- * Use the `info` badge to indicate information or a neutral change.
- */
-export const Info: Story = {
-  args: {
-    variant: "info",
   },
 };
 

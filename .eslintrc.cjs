@@ -2,6 +2,7 @@
 const config = {
   root: true,
   parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint", "tailwindcss"],
   extends: [
     "next/core-web-vitals",
     "eslint:recommended",
@@ -9,11 +10,15 @@ const config = {
     "plugin:storybook/recommended",
     "plugin:tailwindcss/recommended",
   ],
-  plugins: ["@typescript-eslint"],
+  settings: {
+    tailwindcss: {
+      callees: ["cn", "cva"],
+      config: "tailwind.config.ts",
+    },
+  },
   rules: {
     "@typescript-eslint/no-empty-interface": "off",
     "tailwindcss/classnames-order": "off",
-    "tailwindcss/no-custom-classname": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
@@ -27,6 +32,13 @@ const config = {
         argsIgnorePattern: "^_",
         varsIgnorePattern: "^_",
         caughtErrorsIgnorePattern: "^_",
+      },
+    ],
+    // Tailwind CSS
+    "tailwindcss/no-custom-classname": [
+      "warn",
+      {
+        callees: ["clsx", "cn"],
       },
     ],
   },

@@ -16,7 +16,7 @@ import {
  * content of the screen.
  */
 const meta: Meta<typeof SheetContent> = {
-  title: "atom/Sheet",
+  title: "ui/Sheet",
   component: Sheet,
   tags: ["autodocs"],
   argTypes: {

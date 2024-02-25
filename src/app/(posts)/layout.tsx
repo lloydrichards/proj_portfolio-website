@@ -1,6 +1,6 @@
-import { allBlogs, allLabs } from "contentlayer/generated";
+import { allBlogs, allLabs } from "@generated";
 import { FC } from "react";
-import { PostsNavigation } from "./PostsNavigation";
+import { PostsNavigation } from "@/components/organism/posts_navigation/posts_navigation";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];

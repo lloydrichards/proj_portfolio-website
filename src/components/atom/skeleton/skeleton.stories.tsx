@@ -6,7 +6,7 @@ import { Skeleton } from "./skeleton";
  * Use to show a placeholder while content is loading.
  */
 const meta = {
-  title: "atom/Skeleton",
+  title: "ui/Skeleton",
   component: Skeleton,
   tags: ["autodocs"],
   argTypes: {},

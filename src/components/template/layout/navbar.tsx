@@ -1,7 +1,7 @@
 "use client";
 
 import { buttonVariants } from "@/components/atom/button/button";
-import { ThemeToggle } from "@/components/molecule/theme-toggle";
+import { ThemeSelect } from "@/components/molecule/theme-select/theme-select";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -95,7 +95,7 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
-      <ThemeToggle />
+      <ThemeSelect />
     </NavigationMenuList>
   );
 };

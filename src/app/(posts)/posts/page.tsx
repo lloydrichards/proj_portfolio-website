@@ -1,10 +1,8 @@
 import { RecentPosts } from "@/components/organism/recent_posts/recent_posts";
-import { allBlogs, allLabs } from "@generated";
+import { getAllPosts } from "@/service/get-all-posts";
 
 const PostsPage = () => {
-  const allPosts = [...allBlogs, ...allLabs].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
+  const allPosts = getAllPosts();
   return (
     <section className="flex min-h-screen flex-col items-stretch">
       <RecentPosts posts={allPosts} />

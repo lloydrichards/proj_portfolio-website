@@ -1,4 +1,3 @@
-"use client";
 import { TimelineDashboard } from "@/components/organism/timeline_dashboard/timeline_dashboard";
 import { allOccupations } from "@generated";
 

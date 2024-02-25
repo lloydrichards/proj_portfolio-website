@@ -1,11 +1,14 @@
 import { RecentPosts } from "@/components/organism/recent_posts/recent_posts";
 import { SpotlightProjects } from "@/components/organism/spotlight_projects/spotlight_projects";
 import { TimelineDashboard } from "@/components/organism/timeline_dashboard/timeline_dashboard";
-import { allBlogs, allLabs, allOccupations } from "@generated";
+import { getAllOccupations } from "@/service/get-all-occupations";
+import { getAllPosts } from "@/service/get-all-posts";
 import { isAfter, subYears } from "date-fns";
 import Image from "next/image";
 
-export default function Home() {
+const HomePage = async () => {
+  const allPosts = await getAllPosts();
+  const allOccupations = await getAllOccupations();
   return (
     <main className="mb-8 flex min-h-screen flex-col items-center gap-8 text-foreground">
       <section className="flex min-h-[98vh] w-full justify-center bg-accent ">
@@ -39,7 +42,7 @@ export default function Home() {
       </section>
       <SpotlightProjects />
       <div className="w-full bg-accent p-8">
-        <RecentPosts posts={[...allLabs, ...allBlogs]} />
+        <RecentPosts posts={allPosts} />
       </div>
       <TimelineDashboard
         occupations={allOccupations.filter((d) =>
@@ -48,4 +51,6 @@ export default function Home() {
       />
     </main>
   );
-}
+};
+
+export default HomePage;

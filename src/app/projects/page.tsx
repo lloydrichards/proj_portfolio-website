@@ -3,7 +3,7 @@ import { formatDate } from "@/lib/format";
 import { allProjects } from "@generated";
 import Link from "next/link";
 
-const ProjectsPage = () => {
+const ProjectsPage = async () => {
   const sortedProjects = allProjects
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .filter((d) => d.published);

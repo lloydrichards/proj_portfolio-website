@@ -1,7 +1,7 @@
 import { MdxContent } from "@/components/molecule/mdx_content/mdx_content";
-import { allProjects } from "@generated";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { getProject } from "@/service/get-project";
+import { getAllProjects } from "@/service/get-all-project";
 
 export interface ProjectPageProps {
   params: {
@@ -9,16 +9,10 @@ export interface ProjectPageProps {
   };
 }
 
-const getProjectFromParams = async (slug: string) => {
-  const project = allProjects.find((project) => project.slugAsParams === slug);
-  if (!project) notFound();
-  return project;
-};
-
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
-  const project = await getProjectFromParams(params.slug);
+  const project = await getProject(params.slug);
 
   return {
     title: project.title,
@@ -42,13 +36,14 @@ export async function generateMetadata({
 export async function generateStaticParams(): Promise<
   ProjectPageProps["params"][]
 > {
+  const allProjects = await getAllProjects();
   return allProjects.map((project) => ({
     slug: project.slugAsParams,
   }));
 }
 
 const ProjectPage = async ({ params }: ProjectPageProps) => {
-  const project = await getProjectFromParams(params.slug);
+  const project = await getProject(params.slug);
 
   return (
     <main className="flex min-h-screen flex-col items-center py-16">

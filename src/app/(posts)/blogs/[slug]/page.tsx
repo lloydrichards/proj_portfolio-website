@@ -1,8 +1,8 @@
 import { MdxContent } from "@/components/molecule/mdx_content/mdx_content";
-import { allBlogs } from "@generated";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 import "@/styles/mdx.css";
+import { getBlog } from "@/service/get-blog";
+import { getAllBlogs } from "@/service/get-all-blog";
 
 export interface BlogPageProps {
   params: {
@@ -10,16 +10,10 @@ export interface BlogPageProps {
   };
 }
 
-const getBlogFromParams = async (slug: string) => {
-  const blog = allBlogs.find((blog) => blog.slugAsParams === slug);
-  if (!blog) notFound();
-  return blog;
-};
-
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const blog = await getBlogFromParams(params.slug);
+  const blog = await getBlog(params.slug);
 
   return {
     title: blog.title,
@@ -35,13 +29,14 @@ export async function generateMetadata({
 export async function generateStaticParams(): Promise<
   BlogPageProps["params"][]
 > {
+  const allBlogs = await getAllBlogs();
   return allBlogs.map((blog) => ({
     slug: blog.slugAsParams,
   }));
 }
 
 const BlogPage = async ({ params }: BlogPageProps) => {
-  const blog = await getBlogFromParams(params.slug);
+  const blog = await getBlog(params.slug);
 
   return (
     <main className="flex min-h-screen flex-col items-center py-16">

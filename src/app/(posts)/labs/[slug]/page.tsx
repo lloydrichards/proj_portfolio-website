@@ -10,11 +10,12 @@ import {
   CardTitle,
 } from "@/components/atom/card/card";
 import { formatDate } from "@/lib/format";
-import { Lab, allLabs } from "@generated";
+import { Lab } from "@generated";
 import { FlaskConical, Github } from "lucide-react";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { FC } from "react";
+import { getLab } from "@/service/get-lab";
+import { getAllLabs } from "@/service/get-all-lab";
 
 export interface LabPageProps {
   params: {
@@ -22,16 +23,10 @@ export interface LabPageProps {
   };
 }
 
-const getLabFromParams = async (slug: string) => {
-  const lab = allLabs.find((lab) => lab.slugAsParams === slug);
-  if (!lab) notFound();
-  return lab;
-};
-
 export async function generateMetadata({
   params,
 }: LabPageProps): Promise<Metadata> {
-  const lab = await getLabFromParams(params.slug);
+  const lab = await getLab(params.slug);
 
   return {
     title: lab.title,
@@ -47,6 +42,7 @@ export async function generateMetadata({
 export async function generateStaticParams(): Promise<
   LabPageProps["params"][]
 > {
+  const allLabs = await getAllLabs();
   return allLabs.map((lab) => ({
     slug: lab.slugAsParams,
   }));
@@ -91,7 +87,7 @@ const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
 };
 
 const LabPage = async ({ params }: LabPageProps) => {
-  const lab = await getLabFromParams(params.slug);
+  const lab = await getLab(params.slug);
   return (
     <main className="flex min-h-screen flex-col items-center py-4">
       <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center p-2 dark:prose-invert">

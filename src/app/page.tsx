@@ -1,4 +1,4 @@
-import { RecentPosts } from "@/components/organism/recent_posts/recent_posts";
+import { PostsGallery } from "@/components/organism/posts_gallery/posts_gallery";
 import { SpotlightProjects } from "@/components/organism/spotlight_projects/spotlight_projects";
 import { TimelineDashboard } from "@/components/organism/timeline_dashboard/timeline_dashboard";
 import { getAllOccupations } from "@/service/get-all-occupations";
@@ -42,7 +42,7 @@ const HomePage = async () => {
       </section>
       <SpotlightProjects />
       <div className="w-full bg-accent p-8">
-        <RecentPosts posts={allPosts} />
+        <PostsGallery limit={6} posts={allPosts} />
       </div>
       <TimelineDashboard
         occupations={allOccupations.filter((d) =>

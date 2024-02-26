@@ -1,11 +1,11 @@
-import { RecentPosts } from "@/components/organism/recent_posts/recent_posts";
+import { PostsGallery } from "@/components/organism/posts_gallery/posts_gallery";
 import { getAllPosts } from "@/service/get-all-posts";
 
 const PostsPage = () => {
   const allPosts = getAllPosts();
   return (
     <section className="flex min-h-screen flex-col items-stretch">
-      <RecentPosts posts={allPosts} />
+      <PostsGallery posts={allPosts} />
     </section>
   );
 };

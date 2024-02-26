@@ -2,29 +2,20 @@
 
 import { Blog, Lab } from "@generated";
 import { AnimatePresence, motion } from "framer-motion";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { PostCard } from "../../molecule/post_card/post_card";
 import { Button } from "@/components/atom/button/button";
+import { useRecentPosts } from "./use-recent-posts";
 
-interface RecentPostsProps {
+interface PostsGalleryProps {
   posts: (Blog | Lab)[];
+  limit?: number;
 }
 
-export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
+export const PostsGallery: React.FC<PostsGalleryProps> = ({ posts, limit }) => {
   const [filter, setFilter] = useState<"Lab" | "Blog" | null>(null);
-  const allPosts = useMemo(
-    () =>
-      posts
-        .filter((d) => !filter || d.type === filter)
-        .sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-        ),
-    [filter, posts],
-  );
-  const recentPosts = useMemo(
-    () => allPosts.filter((d) => d.published).slice(0, 6),
-    [allPosts],
-  );
+
+  const recentPosts = useRecentPosts(posts, { limit, filter });
 
   return (
     <section className={`flex w-full flex-col items-center`}>

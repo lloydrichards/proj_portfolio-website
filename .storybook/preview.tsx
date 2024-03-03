@@ -36,11 +36,26 @@ export const decorators = [
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
+      },
+    },
+    nextjs: {
+      appDirectory: true,
+    },
+    options: {
+      storySort: {
+        order: [
+          "design",
+          "atom",
+          "molecule",
+          "chart",
+          "organism",
+          "template",
+          "page",
+        ],
       },
     },
   },

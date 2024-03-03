@@ -14,13 +14,15 @@ import { FlaskConical, Mic } from "lucide-react";
 interface PostsListItemProps {
   post: Lab | Blog;
   className?: string;
+  onClick?: () => void;
 }
-export const PostListItem: FC<PostsListItemProps> = ({ post }) => {
+export const PostListItem: FC<PostsListItemProps> = ({ post, onClick }) => {
   return (
     <NavigationMenuItem>
       <Link href={post.slug} legacyBehavior passHref>
         <NavigationMenuLink
           className={cn(navigationMenuTriggerStyle(), "w-full gap-2")}
+          onClick={onClick}
         >
           <PostIcon type={post.type} />
           <h4 className="line-clamp-1 flex-1 text-clip">{post.title}</h4>

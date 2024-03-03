@@ -13,9 +13,10 @@ import { Badge } from "@/components/atom/badge/badge";
 
 export interface IPostCard {
   post: Blog | Lab;
+  onClick?: () => void;
 }
 
-export const PostCard: React.FC<IPostCard> = ({ post }) => {
+export const PostCard: React.FC<IPostCard> = ({ post, onClick }) => {
   return (
     <motion.div
       layout
@@ -24,7 +25,7 @@ export const PostCard: React.FC<IPostCard> = ({ post }) => {
       animate={{ opacity: 1, x: 0, y: 0 }}
       className="not-prose rounded shadow-md dark:prose-invert"
     >
-      <Link href={post.slug} className="no-underline">
+      <Link href={post.slug} className="no-underline" onClick={onClick}>
         <Card className="flex h-full flex-col">
           <CardHeader className="flex-1 gap-2">
             <div className="flex justify-between">

@@ -13,13 +13,16 @@ import Link from "next/link";
 
 export interface IProjectCard {
   project: Project;
+  onClick?: () => void;
 }
 
-export const ProjectCard: React.FC<IProjectCard> = ({ project }) => {
+export const ProjectCard: React.FC<IProjectCard> = ({ project, onClick }) => {
   return (
     <Link
       href={project.slug}
       className="not-prose rounded no-underline dark:prose-invert "
+      onClick={onClick}
+      data-testid="project-card"
     >
       <Card className="relative flex h-full flex-col text-clip hover:shadow">
         {!!project.image && (

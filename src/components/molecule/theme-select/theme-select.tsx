@@ -13,8 +13,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/atom/dropdown-menu/dropdown-menu";
 
-export const ThemeSelect = () => {
+export const ThemeSelect = ({ onSelect }: { onSelect?: () => void }) => {
   const { setTheme } = useTheme();
+  const handleSelect = (theme: string) => {
+    setTheme(theme);
+    onSelect?.();
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,26 +29,26 @@ export const ThemeSelect = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => handleSelect("light")}>
           Classic (Light)
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark-classic")}>
+        <DropdownMenuItem onClick={() => handleSelect("dark-classic")}>
           Classic (Dark)
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => setTheme("light-professional")}>
+        <DropdownMenuItem onClick={() => handleSelect("light-professional")}>
           Professional
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark-professional")}>
+        <DropdownMenuItem onClick={() => handleSelect("dark-professional")}>
           Professional (Dark)
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("light-soft")}>
+        <DropdownMenuItem onClick={() => handleSelect("light-soft")}>
           Soft
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("light-acid")}>
+        <DropdownMenuItem onClick={() => handleSelect("light-acid")}>
           Acid
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark-midnight")}>
+        <DropdownMenuItem onClick={() => handleSelect("dark-midnight")}>
           Midnight (Dark)
         </DropdownMenuItem>
       </DropdownMenuContent>

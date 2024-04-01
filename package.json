@@ -100,7 +100,7 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "storybook": "^8.0.0-rc.1",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss": "3.4.1",
+    "tailwindcss": "3.4.3",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.3.3"
   }

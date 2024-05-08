@@ -5,12 +5,12 @@ export const baseUrl = "https://www.lloydrichardsdesign.com";
 
 export default async function sitemap() {
   const labs = (await getAllLabs()).map((lab) => ({
-    url: `${baseUrl}/lab/${lab.slug}`,
+    url: `${baseUrl}/labs/${lab.slug}`,
     lastModified: lab.date,
   }));
 
   const blogs = (await getAllBlogs()).map((blog) => ({
-    url: `${baseUrl}/blog/${blog.slug}`,
+    url: `${baseUrl}/blogs/${blog.slug}`,
     lastModified: blog.date,
   }));
 

@@ -15,7 +15,7 @@ import {
   typefaceOList,
   typefaceListItem,
   typefaceBlockQuote,
-} from "../../tokens/typeface/typeface";
+} from "@/components/tokens/typeface/typeface";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -62,7 +62,6 @@ const components = {
     alt,
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
     <img className={cn("rounded-md border", className)} alt={alt} {...props} />
   ),
   hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
@@ -74,10 +73,7 @@ const components = {
     </div>
   ),
   tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
-    <tr
-      className={cn("m-0 border-t p-0 even:bg-muted", className)}
-      {...props}
-    />
+    <tr className={cn("m-0 border-t p-0", className)} {...props} />
   ),
   th: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <th
@@ -100,7 +96,7 @@ const components = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded border bg-foreground py-4",
+        "mb-4 mt-6 overflow-x-auto rounded-md border bg-foreground",
         className,
       )}
       {...props}
@@ -108,10 +104,7 @@ const components = {
   ),
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
-      className={cn(
-        "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
-        className,
-      )}
+      className={cn("relative font-mono text-sm tracking-wider", className)}
       {...props}
     />
   ),

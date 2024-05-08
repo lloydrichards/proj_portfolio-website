@@ -34,6 +34,7 @@
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.5",
     "@vercel/analytics": "^1.2.2",
+    "@vercel/speed-insights": "^1.0.10",
     "@visx/axis": "^3.10.1",
     "@visx/brush": "^3.6.1",
     "@visx/visx": "^3.10.2",

@@ -16,6 +16,7 @@ import { Metadata } from "next";
 import { FC } from "react";
 import { getLab } from "@/service/get-lab";
 import { getAllLabs } from "@/service/get-all-lab";
+import { baseUrl } from "@/app/sitemap";
 
 export interface LabPageProps {
   params: {
@@ -26,15 +27,28 @@ export interface LabPageProps {
 export async function generateMetadata({
   params,
 }: LabPageProps): Promise<Metadata> {
-  const lab = await getLab(params.slug);
+  const { title, description, slug } = await getLab(params.slug);
+  const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(title)}`;
 
   return {
-    title: lab.title,
-    description: lab.description,
+    title,
+    description,
     openGraph: {
-      title: lab.title,
-      description: lab.description,
+      title,
+      description,
       type: "article",
+      url: `${baseUrl}/lab/${slug}`,
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -67,7 +81,6 @@ const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
       <CardContent>
         <CardTitle className="flex gap-2">
           <FlaskConical className="text-muted-foreground" />
-          {lab.title}
         </CardTitle>
         <CardDescription>{lab.description}</CardDescription>
       </CardContent>

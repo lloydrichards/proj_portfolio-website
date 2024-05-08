@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import "@/styles/mdx.css";
 import { getBlog } from "@/service/get-blog";
 import { getAllBlogs } from "@/service/get-all-blog";
+import { baseUrl } from "@/app/sitemap";
 
 export interface BlogPageProps {
   params: {
@@ -13,15 +14,28 @@ export interface BlogPageProps {
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const blog = await getBlog(params.slug);
+  const { title, description, slug } = await getBlog(params.slug);
+  const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(title)}`;
 
   return {
-    title: blog.title,
-    description: blog.description,
+    title,
+    description,
     openGraph: {
-      title: blog.title,
-      description: blog.description,
+      title,
+      description,
       type: "article",
+      url: `${baseUrl}/blog/${slug}`,
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }

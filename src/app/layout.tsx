@@ -1,5 +1,6 @@
 import { inter, josefin_sans, roboto_mono } from "@/styles/font";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "./theme-provider";
 import { Layout } from "@/components/template/layout/layout";
 import "../styles/globals.css";
@@ -19,7 +20,7 @@ export const metadata = {
       "Digital playground of Lloyd Richards, a designer and developer.",
     images: [
       {
-        url: "/images/lloyd_richards_portrait.png",
+        url: "https://lloydrichardsdesign.com/images/lloyd_richards_portrait.png",
         width: 400,
         height: 600,
         alt: "Lloyd Richards Portrait",
@@ -39,7 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
     >
-      <body suppressHydrationWarning={true}>
+      <body>
         <ThemeProvider
           defaultTheme="light"
           enableSystem
@@ -56,6 +57,7 @@ export default function RootLayout({
         >
           <Layout>{children}</Layout>
           <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

@@ -64,7 +64,7 @@
     "remark-gfm": "3.0.1",
     "shiki": "^1.1.1",
     "three": "^0.161.0",
-    "usehooks-ts": "^2.14.0"
+    "usehooks-ts": "^3.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",

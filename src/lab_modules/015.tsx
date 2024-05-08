@@ -12,7 +12,7 @@ export const NotificationForm = () => {
 
   React.useEffect(() => {
     if (tasks.length > 4) {
-      console.log("OVER");
+      // console.log("OVER");
       updateTasks([...tasks.slice(1)]);
     }
   }, [tasks]);
@@ -23,7 +23,7 @@ export const NotificationForm = () => {
     if (formData) {
       const newArr = { task: formData, id: Math.random().toString() };
       updateTasks([...tasks, newArr]);
-      console.log(tasks);
+      // console.log(tasks);
       updateFormData("");
     }
   };

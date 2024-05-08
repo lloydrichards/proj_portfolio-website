@@ -111,7 +111,7 @@ export const SVGSystem = () => {
         <button
           onClick={() => {
             addGarbage();
-            console.log("Added");
+            // console.log("Added");
           }}
           style={{
             zIndex: 5,
@@ -125,7 +125,7 @@ export const SVGSystem = () => {
         </button>
         <button
           onClick={() => {
-            console.log(state);
+            // console.log(state);
           }}
           style={{
             zIndex: 5,
@@ -404,7 +404,7 @@ export const Garbage = ({ pathRef, onComplete, delay }: BoxProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const path = anime.path(pathRef);
-    console.log("garbage path", path);
+    // console.log("garbage path", path);
     const instance = anime({
       targets: ref.current,
       translateX: path("x"),

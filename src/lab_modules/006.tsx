@@ -162,7 +162,7 @@ export const AddSVGExample = () => {
     const newId = Math.random().toString();
     setState((state) => {
       const boxes = state.boxes.concat({ id: newId });
-      console.log(boxes);
+      // console.log(boxes);
       return { ...state, boxes };
     });
   };
@@ -205,7 +205,7 @@ export const AddSVGExample2 = () => {
     const newId = Math.random().toString();
     setState((state) => {
       const boxes = state.boxes.concat({ id: newId });
-      console.log(boxes);
+      // console.log(boxes);
       return { ...state, boxes };
     });
   };
@@ -247,7 +247,7 @@ export const AddSVGExample3 = () => {
     const newId = Math.random().toString();
     setState((state) => {
       const boxes2 = state.boxes2.concat({ id: newId });
-      console.log(boxes2);
+      // console.log(boxes2);
       return { ...state, boxes2 };
     });
   };
@@ -256,14 +256,14 @@ export const AddSVGExample3 = () => {
     const newId = Math.random().toString();
     setState((state) => {
       const circles = state.circles.concat({ id: newId });
-      console.log(circles);
+      // console.log(circles);
       return { ...state, circles };
     });
   };
 
   const onComplete = (id: string) => {
     const boxes = state.boxes.filter((item) => id === item.id);
-    console.log("completed!");
+    // console.log("completed!");
     addCircle();
     return { boxes };
   };

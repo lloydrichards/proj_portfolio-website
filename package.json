@@ -60,15 +60,15 @@
     "rehype-autolink-headings": "^7.1.0",
     "rehype-pretty-code": "^0.13.1",
     "rehype-slug": "^6.0.0",
-    "remark-gfm": "3.0.1",
+    "remark-gfm": "4.0.0",
     "shiki": "^1.4.0",
     "three": "^0.164.1",
-    "usehooks-ts": "^2.14.0"
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/github": "^10.0.3",
     "@storybook/addon-a11y": "^8.0.10",
     "@storybook/addon-essentials": "^8.0.10",
     "@storybook/addon-interactions": "^8.0.10",

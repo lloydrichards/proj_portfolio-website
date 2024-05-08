@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as Ap from "fp-ts/lib/Apply";
 import * as A from "fp-ts/lib/Array";
 import * as E from "fp-ts/lib/Either";
@@ -36,8 +37,8 @@ const tupleResult = pipe(
   O.map(A.map(double)),
 );
 
-console.log(structResult); // Output: Some(7)
-console.log(tupleResult); // Output: Some([2, 4, 6])
+// console.log(structResult); // Output: Some(7)
+// console.log(tupleResult); // Output: Some([2, 4, 6])
 
 /**
  * Do
@@ -52,7 +53,7 @@ const doResult = pipe(
   O.map(increment),
 );
 
-console.log(doResult); // Output: Some(7)
+// console.log(doResult); // Output: Some(7)
 
 /**
  * Reader
@@ -76,7 +77,7 @@ const readerResult = pipe(
   O.map(getPort),
 );
 
-console.log(readerResult); // Output: Some(3000)
+// console.log(readerResult); // Output: Some(3000)
 
 /**
  * Covariant
@@ -86,7 +87,7 @@ const someNumber = O.some(1);
 
 const someNumberResult = pipe(someNumber, O.map(double));
 
-console.log(someNumberResult); // Output: Some(2)
+// console.log(someNumberResult); // Output: Some(2)
 
 const maybeNumber = E.right<string, number>(1);
 
@@ -98,7 +99,7 @@ const maybeNumberResult = pipe(
   ),
 );
 
-console.log(maybeNumberResult); // Output: Right(2)
+// console.log(maybeNumberResult); // Output: Right(2)
 
 /**
  * Contravariant
@@ -123,7 +124,7 @@ const sortResult = pipe(
   A.map((user) => user.name),
 );
 
-console.log(sortResult); // Output: [ 'Jane', 'John' ]
+// console.log(sortResult); // Output: [ 'Jane', 'John' ]
 
 /**
  * Profunctor
@@ -153,7 +154,7 @@ const isEligible = pipe(
 
 const isEligibleResult = pipe(someUser, isEligible);
 
-console.log(isEligibleResult); // Output: true
+// console.log(isEligibleResult); // Output: true
 
 const isVerified = pipe(
   O.fromPredicate((user: UserProfile) => user.verified),
@@ -165,7 +166,7 @@ const isVerified = pipe(
 
 const isVerifiedResult = isVerified(someUser);
 
-console.log(isVerifiedResult); // Output: Left("User is not verified")
+// console.log(isVerifiedResult); // Output: Left("User is not verified")
 
 /**
  * Moniod
@@ -219,7 +220,7 @@ const sortSomeObj = pipe(
   A.map((obj) => obj.id),
 );
 
-console.log(sortSomeObj); // Output: [ 3, 1, 2, 4 ]
+// console.log(sortSomeObj); // Output: [ 3, 1, 2, 4 ]
 
 const sortByArray = pipe(
   someObj,
@@ -227,7 +228,7 @@ const sortByArray = pipe(
   A.map((obj) => obj.id),
 );
 
-console.log(sortByArray); // Output: [ 3, 1, 2, 4 ]
+// console.log(sortByArray); // Output: [ 3, 1, 2, 4 ]
 
 // order by first "Circle" then "Box" then "Pyramid"
 const byOrdinal = pipe(
@@ -252,7 +253,7 @@ const sortByOrdinal = pipe(
   A.map((obj) => obj.id),
 );
 
-console.log(sortByOrdinal); // Output: [ 1, 2, 3, 4 ]
+// console.log(sortByOrdinal); // Output: [ 1, 2, 3, 4 ]
 /**
  * ReadonlyArray
  */
@@ -351,7 +352,7 @@ const gradesByCategory = (groupBy: string) =>
     ),
   );
 
-console.log(gradesByCategory("quantitative"));
+// console.log(gradesByCategory("quantitative"));
 
 const groupGrades = pipe(
   studentsGrades,
@@ -386,4 +387,4 @@ const groupGrades = pipe(
   Re.fromEntries,
 );
 
-console.log(groupGrades);
+// console.log(groupGrades);

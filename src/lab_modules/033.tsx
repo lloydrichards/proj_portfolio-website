@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as IO from "fp-ts/IO";
 import * as T from "fp-ts/Task";
 import * as TE from "fp-ts/TaskEither";
@@ -45,8 +46,8 @@ const filter1: Filter = {
     id: 1,
   },
 };
-console.log(isEqual(filter1, filter1)); // Output: true
-console.log(isEqual(filter1, { ...filter1, user: { name: "Fred", id: 2 } })); // Output: false
+// console.log(isEqual(filter1, filter1)); // Output: true
+// console.log(isEqual(filter1, { ...filter1, user: { name: "Fred", id: 2 } })); // Output: false
 
 /*
  * Elegant IO Layer (Error Handling)

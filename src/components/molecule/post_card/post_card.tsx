@@ -17,6 +17,7 @@ export interface IPostCard {
 }
 
 export const PostCard: React.FC<IPostCard> = ({ post, onClick }) => {
+  console.log(post.slug);
   return (
     <motion.div
       layout
@@ -25,7 +26,12 @@ export const PostCard: React.FC<IPostCard> = ({ post, onClick }) => {
       animate={{ opacity: 1, x: 0, y: 0 }}
       className="not-prose rounded shadow-md dark:prose-invert"
     >
-      <Link href={post.slug} className="no-underline" onClick={onClick}>
+      <Link
+        href={post.slug}
+        className="no-underline"
+        onClick={onClick}
+        prefetch={false}
+      >
         <Card className="flex h-full flex-col">
           <CardHeader className="flex-1 gap-2">
             <div className="flex justify-between">

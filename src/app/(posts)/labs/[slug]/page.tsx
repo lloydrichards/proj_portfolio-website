@@ -16,7 +16,7 @@ import { Metadata } from "next";
 import { FC } from "react";
 import { getLab } from "@/service/get-lab";
 import { getAllLabs } from "@/service/get-all-lab";
-import { baseUrl } from "@/app/sitemap";
+import { getBaseUrl } from "@/lib/utils";
 
 export interface LabPageProps {
   params: {
@@ -28,7 +28,7 @@ export async function generateMetadata({
   params,
 }: LabPageProps): Promise<Metadata> {
   const { title, description, slug } = await getLab(params.slug);
-  const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(title)}`;
+  const ogImage = `${getBaseUrl()}/api/og?title=${encodeURIComponent(title)}`;
 
   return {
     title,
@@ -37,7 +37,7 @@ export async function generateMetadata({
       title,
       description,
       type: "article",
-      url: `${baseUrl}/lab/${slug}`,
+      url: `${getBaseUrl()}${slug}`,
       images: [
         {
           url: ogImage,

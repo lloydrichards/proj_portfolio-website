@@ -1,10 +1,12 @@
-import { baseUrl } from "@/app/sitemap";
+import { getBaseUrl } from "@/lib/utils";
+import { getAllLabs } from "@/service/get-all-lab";
 import { getAllPosts } from "@/service/get-all-posts";
 
 export async function GET() {
-  const allPosts = await getAllPosts();
+  const allLabs = await getAllLabs();
+  const allBlogs = await getAllPosts();
 
-  const itemsXml = allPosts
+  const labItemsXml = allLabs
     .sort((a, b) => {
       if (new Date(a.date) > new Date(b.date)) {
         return -1;
@@ -12,12 +14,30 @@ export async function GET() {
       return 1;
     })
     .map(
-      (post) =>
+      (lab) =>
         `<item>
-          <title>${post.title}</title>
-          <link>${baseUrl}/blog/${post.slug}</link>
-          <description>${post.description || ""}</description>
-          <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+          <title>${lab.title}</title>
+          <link>${getBaseUrl()}${lab.slug}</link>
+          <description>${lab.description || ""}</description>
+          <pubDate>${new Date(lab.date).toUTCString()}</pubDate>
+        </item>`,
+    )
+    .join("\n");
+
+  const blogItemsXml = allBlogs
+    .sort((a, b) => {
+      if (new Date(a.date) > new Date(b.date)) {
+        return -1;
+      }
+      return 1;
+    })
+    .map(
+      (blog) =>
+        `<item>
+          <title>${blog.title}</title>
+          <link>${getBaseUrl()}${blog.slug}</link>
+          <description>${blog.description || ""}</description>
+          <pubDate>${new Date(blog.date).toUTCString()}</pubDate>
         </item>`,
     )
     .join("\n");
@@ -26,9 +46,10 @@ export async function GET() {
   <rss version="2.0">
     <channel>
         <title>My Portfolio</title>
-        <link>${baseUrl}</link>
+        <link>${getBaseUrl()}</link>
         <description>This is my portfolio RSS feed</description>
-        ${itemsXml}
+        ${labItemsXml}
+        ${blogItemsXml}
     </channel>
   </rss>`;
 

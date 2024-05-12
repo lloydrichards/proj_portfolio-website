@@ -58,13 +58,6 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <Link href="/storybook" legacyBehavior passHref>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-            Storybook
-          </NavigationMenuLink>
-        </Link>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
         <NavigationMenuTrigger>Social</NavigationMenuTrigger>
         <NavigationMenuContent>
           <div className="flex w-72 flex-col gap-4 p-4">

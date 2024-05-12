@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import "@/styles/mdx.css";
-import { useMDXComponent } from "next-contentlayer/hooks";
+import { useMDXComponent } from "next-contentlayer2/hooks";
 import {
   typefaceHeading1,
   typefaceHeading2,

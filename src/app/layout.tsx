@@ -5,30 +5,30 @@ import { Layout } from "@/components/template/layout/layout";
 import { ThemeProvider } from "next-themes";
 
 import "../styles/globals.css";
-import { getBaseUrl } from "@/lib/utils";
 
 export const metadata = {
   title: "Lloyd Richards Design",
   description:
     "Digital playground of Lloyd Richards, a designer and developer.",
   icons: {
-    icon: "/favicon.svg",
+    icon: `/favicon.svg`,
   },
   openGraph: {
-    locale: "en_US",
-    url: getBaseUrl(),
     title: "Lloyd Richards Design",
     description:
       "Digital playground of Lloyd Richards, a designer and developer.",
     images: [
       {
-        url: `${getBaseUrl()}/images/lloyd_richards_portrait.png`,
-        width: 400,
-        height: 600,
-        alt: "Lloyd Richards Portrait",
+        url: `/images/lloyd_richards_portrait.png`,
       },
     ],
-    siteName: "Lloyd Richards Design",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lloyd Richards Design",
+    description:
+      "Digital playground of Lloyd Richards, a designer and developer.",
+    images: [`/images/lloyd_richards_portrait.png`],
   },
 };
 

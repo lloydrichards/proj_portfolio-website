@@ -87,7 +87,7 @@ const handleErrors = (appError: AppError): T.Task<string> => {
   }
 };
 
-const getFromUrl = (url: string) =>
+const _getFromUrl = (url: string) =>
   pipe(
     TE.tryCatch(
       () => fetch(url),
@@ -105,7 +105,7 @@ const getFromUrl = (url: string) =>
     TE.fold(handleErrors, (data) => T.of(data.value.name)),
   );
 
-getFromUrl("https://api.chucknorris.io/jokes/random")().then(console.log); // Output: "Invalid value undefined supplied to : { status: string, value: { id: number, name: string } }/status: string"
+// getFromUrl("https://api.chucknorris.io/jokes/random")().then(console.log); // Output: "Invalid value undefined supplied to : { status: string, value: { id: number, name: string } }/status: string"
 
 /*
  * Branching Render Logic

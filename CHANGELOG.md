@@ -1,3 +1,26 @@
+## [1.5.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.5.1...v1.5.2) (2024-05-19)
+
+
+### Bug Fixes
+
+* :rotating_light: install speed check correctly ([9c1fa46](https://github.com/lloydrichards/proj_portfolio-website/commit/9c1fa46633d41937e5dddf4e4a6444c927146856))
+* **deps:** :arrow_down: downgrade remark-gfm to v3.0.1 ([b271f29](https://github.com/lloydrichards/proj_portfolio-website/commit/b271f29522e887d1fe1ff69bd6b952dd841d9c0d))
+* **routing:** :bug: fix post routes ([ebde2de](https://github.com/lloydrichards/proj_portfolio-website/commit/ebde2de6eb8a49dc1ca52a7dce80666e106f4302))
+* **routing:** :bug: remove baseUrl ([b1ca8d3](https://github.com/lloydrichards/proj_portfolio-website/commit/b1ca8d3306b35259849a2bf4ebe8077fb579e0a3))
+
+
+### Performance Improvements
+
+* **lab:** :zap: remove imports of fp-ts examples ([e3c84c5](https://github.com/lloydrichards/proj_portfolio-website/commit/e3c84c50dba752a728a44b732a38e7a59c3e93e7))
+* **routing:** :zap: don't prefetch labs ([18e6371](https://github.com/lloydrichards/proj_portfolio-website/commit/18e637180974792c1ef5ccc8e846e7aa3246f002))
+* **routing:** :zap: improve metadata and ogimages ([2362dc4](https://github.com/lloydrichards/proj_portfolio-website/commit/2362dc484e2f9a8d9f2f72fe077bf194816f2d7d))
+* **routing:** :zap: remove incrementat static regeneration ([f8076be](https://github.com/lloydrichards/proj_portfolio-website/commit/f8076beb55935e3511e18692aae7f858b50a5b59))
+
+
+### Reverts
+
+* **storybook:** :rewind: add back storybook ([ca8e73e](https://github.com/lloydrichards/proj_portfolio-website/commit/ca8e73e5196dd99de8c3ad99a27f9c55c570a182))
+
 ## [1.5.1](https://github.com/lloydrichards/portfolio-website/compare/v1.5.0...v1.5.1) (2024-02-25)
 
 

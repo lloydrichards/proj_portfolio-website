@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "bun build:content && next build",
+    "build": "bun build:content && bun build:storybook && next build",
     "build:content": "contentlayer2 build",
+    "build:storybook": "storybook build -o public/storybook",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",

@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.5.2...v1.5.3) (2024-05-20)
+
+
+### Performance Improvements
+
+* :zap: remove generateStaticParams() ([cca07c5](https://github.com/lloydrichards/proj_portfolio-website/commit/cca07c576f40a9e29815aced29b141697bbcf30c))
+
 ## [1.5.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.5.1...v1.5.2) (2024-05-19)
 
 

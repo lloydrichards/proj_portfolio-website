@@ -15,8 +15,6 @@ import { FlaskConical, Github } from "lucide-react";
 import { Metadata } from "next";
 import { FC } from "react";
 import { getLab } from "@/service/get-lab";
-import { getAllLabs } from "@/service/get-all-lab";
-import { notFound } from "next/navigation";
 
 export interface LabPageProps {
   params: {
@@ -53,14 +51,6 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams(): Promise<
-  LabPageProps["params"][]
-> {
-  const allLabs = await getAllLabs();
-  return allLabs.map((lab) => ({
-    slug: lab.slugAsParams,
-  }));
-}
 interface LabInfoCardProps {
   lab: Lab;
 }
@@ -101,7 +91,6 @@ const LabInfoCard: FC<LabInfoCardProps> = ({ lab }) => {
 
 const LabPage = async ({ params }: LabPageProps) => {
   const lab = await getLab(params.slug);
-  if (!lab) return notFound();
   return (
     <main className="flex min-h-screen flex-col items-center py-4">
       <div className="prose mx-auto flex w-full max-w-2xl flex-col items-center justify-center p-2 dark:prose-invert">

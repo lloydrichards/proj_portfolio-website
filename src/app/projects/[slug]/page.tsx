@@ -1,7 +1,6 @@
 import { MdxContent } from "@/components/molecule/mdx_content/mdx_content";
 import { Metadata } from "next";
 import { getProject } from "@/service/get-project";
-import { getAllProjects } from "@/service/get-all-project";
 
 export interface ProjectPageProps {
   params: {
@@ -31,15 +30,6 @@ export async function generateMetadata({
       ],
     },
   };
-}
-
-export async function generateStaticParams(): Promise<
-  ProjectPageProps["params"][]
-> {
-  const allProjects = await getAllProjects();
-  return allProjects.map((project) => ({
-    slug: project.slugAsParams,
-  }));
 }
 
 const ProjectPage = async ({ params }: ProjectPageProps) => {

@@ -1,3 +1,20 @@
+# [1.6.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.5.2...v1.6.0) (2024-10-27)
+
+
+### Bug Fixes
+
+* **routing:** :bug: rebuild rss api ([d7f329f](https://github.com/lloydrichards/proj_portfolio-website/commit/d7f329f7660a5e5e4f7f02acc76e5c644925e009))
+
+
+### Features
+
+* **routing:** :sparkles: add healthcheck api ([db2a03b](https://github.com/lloydrichards/proj_portfolio-website/commit/db2a03b192876ca883e95c1ac1e6c647d7f0e5c1))
+
+
+### Performance Improvements
+
+* :zap: remove generateStaticParams() ([cca07c5](https://github.com/lloydrichards/proj_portfolio-website/commit/cca07c576f40a9e29815aced29b141697bbcf30c))
+
 ## [1.5.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.5.2...v1.5.3) (2024-05-20)
 
 

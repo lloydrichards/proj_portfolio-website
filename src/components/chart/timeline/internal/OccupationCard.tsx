@@ -5,21 +5,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atom/card/card";
-import { Occupation } from "../../../../../.contentlayer/generated";
 import { FC } from "react";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import { utcFormat } from "d3";
+import { OccupationMeta } from "@/types/domain";
 
 interface OccupationCardProps {
-  data: Occupation;
+  data: OccupationMeta;
   className?: string;
 }
 export const OccupationCard: FC<OccupationCardProps> = ({
   data,
   className,
 }) => {
-  const formatDate = (date?: string) =>
-    date && format(new Date(date), "MMM yyyy");
+  const formatDate = (date?: Date) => date && utcFormat("%B %Y")(date);
   return (
     <Card
       className={cn("h-full border-none bg-transparent shadow-none", className)}

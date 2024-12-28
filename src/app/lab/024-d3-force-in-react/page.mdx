@@ -1,0 +1,108 @@
+export const metadata = {
+  id: "024",
+  title: "Applying D3 Force in React",
+  date: "2023-05-25",
+  description: "Getting a feel for how to apply D3 force in React",
+  tags: ["d3", "physics"]
+}
+
+import {
+  BubblePacking,
+  BubblePacking2,
+  MockBubbles,
+} from "../023-mdx-contentlayer/024";
+
+For a new visualization I'm working on, I wanted to use D3's force layout to
+position nodes. I've used D3 force before, but never in React. I was curious how
+to apply the force to the DOM nodes in React, in a way that would be performant
+and not cause React to re-render the nodes on every tick.
+
+I got some solid advice for [Bia](https://www.biamalveiro.com/) who had worked
+on a similar problem before. In her
+[Lego Chart](https://github.com/biamalveiro/charts-with-legos) project, she uses
+a useState hook to rerender the nodes when the force layout ticks. This is a
+great solution, resulted in the following:
+
+<BubblePacking data={MockBubbles} />
+
+The interesting this solution is that the `setRenderRounter` is used to trigger
+the render of the component on every tick. This is a bit of a hack, but it
+works. The downside is that it causes the component to re-render on every tick,
+which is not ideal.
+
+```typescript
+useEffect(() => {
+  const nodes = data.map((d) => ({ ...d, color: randomColor() }));
+  setItems(nodes);
+
+  simulation
+    .force("forceX", forceX(width / 2))
+    .force("forceY", forceY(height / 2))
+    .force("charge", forceManyBody())
+    .force(
+      "collide",
+      forceCollide<Node>()
+        .strength(0.1)
+        .radius((d) => d.count + 10),
+    )
+    .on("tick", updateSimulation)
+    .on("end", endSimulation)
+    .nodes(nodes)
+    .alpha(0.5)
+    .restart();
+}, [data]);
+```
+
+The useEffect triggers the initial simulation and applies the correct forces
+based on the data. The important part is that the `nodes` are creates and set to
+the items before being passed to the `.nodes()` method of the simulation. This
+is what allows the simulation to update the items with new x and y coordinates
+without rerendering the component. Then with the `.alpha()` method, the
+simulation is stopped once the elements settle to save performance.
+
+Finally, the component returns a `div` that contains an SVG element. The SVG
+element contains a `circle` element for each Node object in the 'items' array.
+The `cx`, `cy`, and `r` attributes of each `circle` element are set to the `x`,
+`y`, and `count` properties of the corresponding Node object, respectively.
+
+### Alternative
+
+<BubblePacking2 data={MockBubbles} />
+
+This second approach is a little cleaner with the nodes from the simulation
+being updated a layout property which can be mapped over. I've noticed that this
+resulted in a little more type issues as I needed to extend the
+SimulationNodeDatum with the Node type of the data point.  
+This is a little more complex, but I think it's a little cleaner.
+
+```typescript
+useEffect(() => {
+  const simulation = forceSimulation()
+    .alphaMin(0.1)
+    .force("forceX", forceX(width / 2))
+    .force("forceY", forceY(height / 2))
+    .force("charge", forceManyBody())
+    .force(
+      "collide",
+      forceCollide<Node>()
+        .strength(0.5)
+        .radius((d) => d.count + 10),
+    );
+
+  simulation.on("tick", () => {
+    simulation.tick(1);
+    setLayout([...simulation.nodes()]);
+  });
+  simulation.nodes([...data.map((d) => ({ ...d, color: randomColor() }))]);
+
+  simulation.alpha(0.5).restart();
+
+  return () => {
+    simulation.stop();
+  };
+}, [data]);
+```
+
+In the useEffect there is now only a scoped instance of the simulation and
+callback functions for the tick are applied on initial load here. There is also
+a cleanup function for when the component unmounts.

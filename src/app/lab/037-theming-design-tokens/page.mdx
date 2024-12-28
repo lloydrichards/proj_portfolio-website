@@ -1,0 +1,233 @@
+export const metadata = {
+  id: "037",
+  title: "Tailwind Themes with Design Tokens",
+  date: "2024-02-17",
+  isFeatured: true,
+  description:
+    "Learn how to use design tokens to create Tailwind themes and how to use them for my website.",
+  tags: ["design tokens", "tailwind"],
+};
+
+# Tailwind Themes with Design Tokens
+
+For my website, I want to use Tailwind CSS and shadcn/ui to create and style my
+compoonents. I want to use design tokens to create a theme for my website. I
+will use the design tokens to create multiple themes for my website.
+
+## Design Tokens
+
+Design tokens are a way to abstract the design of a website into a set of
+variables. These variables can be used as fundimental building blocks for
+creating a design system.
+
+> Design tokens are the visual design atoms of the design system — specifically,
+> they are named entities that store visual design attributes. We use them in
+> place of hard-coded values (such as hex values for color or pixel values for
+> spacing) in order to maintain a scalable and consistent visual system for UI
+> development.
+>
+> ~
+> [Salesforce Design Tokens](https://www.lightningdesignsystem.com/design-tokens/)
+
+While I could use something like Token Dictionary to create my design tokens, I
+will instead just use the css variables directly in my Tailwind CSS themes.
+
+## CSS Variables
+
+From shadcn/ui, there are a set of css variables that are used as a basis for
+the functional design tokens. To explan how to use these variables, I will
+create a set of core design tokens for things like colors, spacing, and
+typography. Then reference these in the shadcn/ui tokens.
+
+```css
+@layer base {
+  :root {
+    /* Core Colors */
+    --color-mono-050: 210 40% 98%; /* #f8fafc */
+    --color-mono-100: 210 40% 96.1%; /* #f1f5f9 */
+    --color-mono-200: 214.3 31.8% 91.4%; /* #e2e8f0 */
+    --color-mono-300: 212.7 26.8% 83%; /* #cbd5e1 */
+    --color-mono-400: 215 20.2% 65.1%; /* #94a3b8 */
+    --color-mono-500: 215.4 16.3% 46.9%; /* #64748b */
+    --color-mono-600: 215.3 19.3% 34.5%; /* #475569 */
+    --color-mono-700: 215.3 25% 26.7%; /* #334155 */
+    --color-mono-800: 217.2 32.6% 17.5%; /* #1e293b */
+    --color-mono-900: 222.2 47.4% 11.2%; /* #0f172a */
+
+    /* Functional Colors */
+    --card: var(--background);
+    --card-foreground: var(--color-mono-900);
+
+    --popover: var(--color-mono-050);
+    --popover-foreground: var(--color-mono-900);
+
+    --muted: var(--color-mono-100);
+    --muted-foreground: var(--color-mono-900);
+  }
+}
+```
+
+Creating this abstraction allows me to create a theme for my website that can be
+easily changed and updated. I can also create multiple themes for my website
+that can be easily switched between.
+
+In `tailwind.config.ts`, I can specify the funcational tokens that each theme
+can use.
+
+```typescript
+const config = {
+  ...
+  theme: {
+    ...
+    extend: {
+      ...
+      colors: {
+        ...
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+      },
+    },
+  },
+} satisfies Config;
+```
+
+## Multi-Themes
+
+Normally, for dark and light themes, I would use tailwind to create a dark class
+that would change the colors of the website. However, I want to create a set of
+themes that can be easily switched between. To do this I'm using
+[next-themes](https://github.com/pacocoursey/next-themes) to manage the themes
+and help persist the theme between visits.
+
+Next-theme uses a `ThemeProvider` to manage the theme state. I can use this to
+create a set of themes that can be easily switched between.
+
+```tsx
+"use client";
+
+import { useTheme } from "next-themes";
+
+export function ThemeToggle() {
+  const { setTheme } = useTheme();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon">
+          <SunIcon className="size-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+          <MoonIcon className="absolute size-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          Classic (Light)
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          Classic (Dark)
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```
+
+This works for light and dark but what about more themes? I can use the
+`ThemeProvider` to create a set of themes that can be easily switched between.
+
+```tsx
+import { ThemeProvider } from "./theme-provider";
+
+import "../styles/globals.css";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html>
+      <body>
+        <ThemeProvider
+          defaultTheme="light"
+          enableSystem
+          enableColorScheme
+          themes={[
+            "light-classic",
+            "dark-classic",
+            "light-professional",
+            "dark-professional",
+          ]}
+        >
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+Now I can create a set of themes using css classes on the `html` element. These
+will be in their own folder and imported into the `global.css` file.
+
+```css
+html[data-theme="dark-professional"] {
+  color-scheme: dark;
+
+  /* Core Colors */
+  --color-stone-050: 60 9.1% 97.8%; /* #fafaf9 */
+  --color-stone-100: 60 4.8% 95.9%; /* #f5f5f4 */
+  --color-stone-200: 20 5.9% 90%; /* #e7e5e4 */
+  --color-stone-300: 24 5.7% 82.9%; /* #d6d3d1 */
+  --color-stone-400: 24 5.4% 63.9%; /* #a8a29e */
+  --color-stone-500: 25 5.3% 44.7%; /* #78716c */
+  --color-stone-600: 33.3 5.5% 32.4%; /* #57534e */
+  --color-stone-700: 30 6.3% 25.1%; /* #44403c */
+  --color-stone-800: 12 6.5% 15.1%; /* #292524 */
+  --color-stone-900: 24 9.8% 10%; /* #1c1917 */
+
+  /* Functional Colors */
+  --popover: var(--color-stone-900);
+  --popover-foreground: var(--color-stone-050);
+
+  --card: var(--color-stone-800);
+  --card-foreground: var(--color-stone-050);
+
+  --muted: var(--color-stone-800);
+  --muted-foreground: var(--color-stone-050);
+}
+```
+
+Okay, this changes the colors, but now tailwind is not using the correct colors
+for light and dark themes. Thankfully, I can use the `darkMode` property in the
+tailwind config to change the color mode based on a class selector.
+
+```typescript
+const config = {
+  darkMode: ["class", '[data-theme^="dark-"]'],
+  ...
+} satisfies Config;
+```
+
+Now I can create a set of themes that can be easily switched between. And for
+any themes that are dark, I just need to prefix the class with `dark-` and it
+will automatically switch to the dark mode.
+
+## Conclusion
+
+Using design tokens and tailwind themes, I can create a set of themes that can
+be easily switched between. This allows me to create a set of themes for my
+website that can be easily switched between. This works for both light and dark
+themes and can be easily extended to create more themes.
+
+Give it a try now, the theme toggle is at the top right of the page.

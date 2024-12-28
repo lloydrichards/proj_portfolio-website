@@ -1,10 +1,10 @@
-import { Occupation } from "../../../../../.contentlayer/generated";
 import { FC } from "react";
 import { OccupationCard } from "./OccupationCard";
 import { motion } from "framer-motion";
+import { OccupationMeta } from "@/types/domain";
 
 interface OccupationItemProps {
-  data: Occupation;
+  data: OccupationMeta;
   idx: number;
   x: number;
   y: number;

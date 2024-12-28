@@ -1,12 +1,11 @@
-import { Occupation } from "../../../../.contentlayer/generated";
+"use client";
 import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
-import { isBefore } from "date-fns";
 import { FC } from "react";
-import { AxisLeft } from "@visx/axis";
 import { OccupationItem } from "./internal/OccupationItem";
+import { OccupationMeta } from "@/types/domain";
 
 interface TimelineProps {
-  data: Occupation[];
+  data: OccupationMeta[];
   maxHeight?: number;
   width: number;
   margin?: {
@@ -17,6 +16,9 @@ interface TimelineProps {
   };
 }
 
+const isBefore = (date1: Date, date2: Date): boolean => {
+  return date1.getTime() < date2.getTime();
+};
 export const Timeline: FC<TimelineProps> = ({
   data,
   maxHeight,
@@ -51,7 +53,7 @@ export const Timeline: FC<TimelineProps> = ({
   // Helpers
   const lookupInRange = (
     corner: Date,
-    allValues: Array<Occupation>,
+    allValues: Array<OccupationMeta>,
   ): boolean => {
     let result: boolean = false;
     allValues.forEach((i) => {
@@ -90,6 +92,7 @@ export const Timeline: FC<TimelineProps> = ({
 
   return (
     <div
+      suppressHydrationWarning
       style={{
         height,
         width,
@@ -127,12 +130,6 @@ export const Timeline: FC<TimelineProps> = ({
             );
           }
         })}
-        <AxisLeft
-          scale={yScale}
-          top={margin.top}
-          left={margin.left - 2}
-          strokeWidth={2}
-        />
       </svg>
     </div>
   );

@@ -28,7 +28,7 @@ const meta: Meta<{
           <tr key={name} className="border-b bg-card">
             <td className="px-6 py-4">{name}</td>
             <td className="px-6 py-4">
-              <div className="flex overflow-hidden rounded-md border shadow">
+              <div className="flex overflow-hidden rounded-md border shadow-sm">
                 {Object.entries(colors).map(([name, value]) => (
                   <ColorBlock key={name} title={name} value={value} />
                 ))}
@@ -127,7 +127,7 @@ const functionalSwatch: Array<ColorKey> = [
   "info",
   "input",
   "border",
-  "ring",
+  "ring-3",
 ];
 
 export const Functional: Story = {

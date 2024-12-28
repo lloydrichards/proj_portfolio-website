@@ -56,7 +56,7 @@ const meta: Meta<{
               </td>
               <td className="px-6 py-4">
                 <div
-                  className="size-20 rounded border bg-background"
+                  className="size-20 rounded-sm border bg-background"
                   style={{ boxShadow: value }}
                 />
               </td>

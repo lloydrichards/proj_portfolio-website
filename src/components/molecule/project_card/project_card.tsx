@@ -20,15 +20,15 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project, onClick }) => {
   return (
     <Link
       href={project.slug}
-      className="not-prose rounded no-underline dark:prose-invert "
+      className="not-prose rounded-sm no-underline dark:prose-invert "
       onClick={onClick}
       data-testid="project-card"
     >
-      <Card className="relative flex h-full flex-col text-clip hover:shadow">
+      <Card className="relative flex h-full flex-col text-clip hover:shadow-sm">
         {!!project.image && (
           <div className="absolute z-0 size-full opacity-20 ">
             <Image
-              className="object-cover blur-sm grayscale hover:blur-0 hover:grayscale-0"
+              className="object-cover blur-xs grayscale hover:blur-0 hover:grayscale-0"
               src={project.image}
               alt={project.title}
               fill

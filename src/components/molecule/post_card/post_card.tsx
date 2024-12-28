@@ -24,7 +24,7 @@ export const PostCard: React.FC<IPostCard> = ({ post, onClick }) => {
       key={post.slugAsParams}
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
-      className="not-prose rounded shadow-md dark:prose-invert"
+      className="not-prose rounded-sm shadow-md dark:prose-invert"
     >
       <Link
         href={post.slug}

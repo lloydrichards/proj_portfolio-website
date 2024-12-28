@@ -1,0 +1,24 @@
+{
+  "conventionalCommits.scopes": [
+    "portfolio",
+    "occupation",
+    "layout",
+    "lab",
+    "analytics",
+    "deps",
+    "blog",
+    "components",
+    "storybook",
+    "routing",
+    "theme",
+    "presentation",
+    "tokens",
+    "infrastructure"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
+}

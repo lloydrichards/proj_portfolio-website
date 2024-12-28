@@ -1,56 +1,101 @@
-import { PostsGallery } from "@/components/organism/posts_gallery/posts_gallery";
-import { SpotlightProjects } from "@/components/organism/spotlight_projects/spotlight_projects";
-import { TimelineDashboard } from "@/components/organism/timeline_dashboard/timeline_dashboard";
-import { getAllOccupations } from "@/service/get-all-occupations";
-import { getAllPosts } from "@/service/get-all-posts";
-import { isAfter, subYears } from "date-fns";
 import Image from "next/image";
 
-const HomePage = async () => {
-  const allPosts = await getAllPosts();
-  const allOccupations = await getAllOccupations();
+export default function Home() {
   return (
-    <main className="mb-8 flex min-h-screen flex-col items-center gap-8 text-foreground">
-      <section className="flex min-h-[98vh] w-full justify-center bg-accent ">
-        <div className="prose grid grid-cols-5 gap-8 p-0 dark:prose-invert">
-          <Image
-            className="col-span-5 mb-0 self-end md:col-span-3"
-            src="/images/lloyd_richards_portrait.png"
-            alt="Half body head shot of Lloyd Richards"
-            width={400}
-            height={600}
-            priority
-          />
-          <div className="col-span-5 self-center px-4 md:col-span-2">
-            <h1 className="font-serif">Hello, I&apos;m Lloyd</h1>
-            <blockquote>
-              Exploring innovative ways of visualizing a sustainable future
-              through data
-            </blockquote>
-          </div>
-        </div>
-      </section>
-      <section className="prose px-2 dark:prose-invert">
-        <h2 className="font-serif">How to Use</h2>
-        <p>
-          This website is a personal portfolio and lab space where I can
-          showcase my projects, experiment with new ideas, and share my thoughts
-          and experiences through blogging. Please feel free to explore my
-          recent projects, read my lab and blog posts, or connect with me
-          through social media.
-        </p>
-      </section>
-      <SpotlightProjects />
-      <div className="w-full bg-accent p-8">
-        <PostsGallery limit={6} posts={allPosts} />
-      </div>
-      <TimelineDashboard
-        occupations={allOccupations.filter((d) =>
-          isAfter(new Date(d.start_date), subYears(new Date(), 5)),
-        )}
-      />
-    </main>
-  );
-};
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <Image
+          className="dark:invert"
+          src="/next.svg"
+          alt="Next.js logo"
+          width={180}
+          height={38}
+          priority
+        />
+        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+          <li className="mb-2">
+            Get started by editing{" "}
+            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
+              src/app/page.tsx
+            </code>
+            .
+          </li>
+          <li>Save and see your changes instantly.</li>
+        </ol>
 
-export default HomePage;
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <a
+            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              className="dark:invert"
+              src="/vercel.svg"
+              alt="Vercel logomark"
+              width={20}
+              height={20}
+            />
+            Deploy now
+          </a>
+          <a
+            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read our docs
+          </a>
+        </div>
+      </main>
+      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/file.svg"
+            alt="File icon"
+            width={16}
+            height={16}
+          />
+          Learn
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/window.svg"
+            alt="Window icon"
+            width={16}
+            height={16}
+          />
+          Examples
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/globe.svg"
+            alt="Globe icon"
+            width={16}
+            height={16}
+          />
+          Go to nextjs.org →
+        </a>
+      </footer>
+    </div>
+  );
+}

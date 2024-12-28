@@ -58,7 +58,7 @@ export const OccupationItem: FC<OccupationItemProps> = ({
         y={idx * textHeight + 16}
         width={width - textMargin}
         height={textHeight - 8}
-        className="rounded-lg peer-hover:bg-card"
+        className="peer-hover:bg-card rounded-lg"
       >
         <OccupationCard data={data} />
       </foreignObject>

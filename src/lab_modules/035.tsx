@@ -280,7 +280,7 @@ const ErrorCard: FC<{
 }> = ({ type, isLoading, onRetry }) => {
   return (
     <div
-      className={`grid items-center justify-center rounded border-2 border-destructive p-4 shadow-md ${
+      className={`border-destructive grid items-center justify-center rounded border-2 p-4 shadow-md ${
         isLoading ? "opacity-50" : "opacity-100"
       }`}
     >
@@ -294,7 +294,7 @@ const ErrorCard: FC<{
 
 const LoadingCard: FC = () => {
   return (
-    <div className="grid items-center justify-center rounded border bg-background p-4 shadow-md">
+    <div className="bg-background grid items-center justify-center rounded border p-4 shadow-md">
       <p>Loading...</p>
     </div>
   );
@@ -322,7 +322,7 @@ const ShopCard: FC<{
 
   return (
     <div
-      className={`not-prose grid grid-cols-5 rounded border bg-background p-4 shadow-md dark:prose-invert ${
+      className={`not-prose bg-background dark:prose-invert grid grid-cols-5 rounded border p-4 shadow-md ${
         isLoading ? "opacity-50" : "opacity-100"
       } `}
     >
@@ -342,7 +342,7 @@ const ShopCard: FC<{
           ))}
         </div>
       </section>
-      <aside className=" col-span-2 w-full flex-col border p-2">
+      <aside className="col-span-2 w-full flex-col border p-2">
         <h2 className="flex gap-2">
           <ShoppingBasket />
           Cart
@@ -396,10 +396,7 @@ const CartItem: FC<{
   onDelete: (product: Product, amount: number) => void;
 }> = ({ item, onDelete }) => {
   return (
-    <li
-      key={item.product.id}
-      className=" flex items-center gap-1 bg-background"
-    >
+    <li key={item.product.id} className="bg-background flex items-center gap-1">
       <p className="w-full">
         {item.product.name} x {item.quantity}
       </p>

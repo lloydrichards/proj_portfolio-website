@@ -116,12 +116,12 @@ export const Navbar: React.FC = () => {
         </SheetContent>
       </Sheet>
       <div className="flex flex-1 items-center gap-2">
-        <Link href="/" className=" text-xl normal-case">
+        <Link href="/" className="text-xl normal-case">
           Lloyd Richards Design
         </Link>
       </div>
 
-      <NavigationMenu className=" hidden justify-end md:flex">
+      <NavigationMenu className="hidden justify-end md:flex">
         <NavRoutes />
       </NavigationMenu>
     </div>

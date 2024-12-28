@@ -96,7 +96,7 @@ const components = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-md border bg-foreground",
+        "bg-foreground mt-6 mb-4 overflow-x-auto rounded-md border",
         className,
       )}
       {...props}
@@ -118,7 +118,7 @@ export function MdxContent({ code }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return (
-    <div className="w-full overflow-scroll ">
+    <div className="w-full overflow-scroll">
       <Component components={components} />
     </div>
   );

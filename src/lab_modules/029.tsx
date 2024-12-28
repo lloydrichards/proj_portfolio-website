@@ -205,23 +205,23 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
           />
         </g>
       </svg>
-      <div className="not-prose grid h-8 grid-flow-col grid-cols-3 items-center gap-1 dark:prose-invert">
+      <div className="not-prose dark:prose-invert grid h-8 grid-flow-col grid-cols-3 items-center gap-1">
         <div className="flex gap-2">
           <button
             onClick={() => setSpeed(speed - 1)}
-            className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 w-36 rounded px-4 py-2"
           >
             <Rewind />
           </button>
           <button
             onClick={() => setSpeed(speed == 0 ? 1 : 0)}
-            className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 w-36 rounded px-4 py-2"
           >
             {speed != 0 ? <Pause /> : <Play />}
           </button>
           <button
             onClick={() => setSpeed(speed + 1)}
-            className="w-36 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 w-36 rounded px-4 py-2"
           >
             <FastForward />
           </button>

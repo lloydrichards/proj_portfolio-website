@@ -138,7 +138,7 @@ export const Timeline: FC<ChartProps> = ({ height, width }) => {
           />
         </g>
       </svg>
-      <div className="not-prose grid h-8 grid-flow-col grid-cols-2 gap-2 dark:prose-invert">
+      <div className="not-prose dark:prose-invert grid h-8 grid-flow-col grid-cols-2 gap-2">
         <p className="line-clamp-1">
           Brush Start:{" "}
           {selected != undefined ? format(selected[0], "LLL d, yyy") : null}

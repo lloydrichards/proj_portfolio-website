@@ -26,9 +26,10 @@ creating a design system.
 > they are named entities that store visual design attributes. We use them in
 > place of hard-coded values (such as hex values for color or pixel values for
 > spacing) in order to maintain a scalable and consistent visual system for UI
-> development. 
+> development.
 >
-> ~ [Salesforce Design Tokens](https://www.lightningdesignsystem.com/design-tokens/)
+> ~
+> [Salesforce Design Tokens](https://www.lightningdesignsystem.com/design-tokens/)
 
 While I could use something like Token Dictionary to create my design tokens, I
 will instead just use the css variables directly in my Tailwind CSS themes.
@@ -125,8 +126,8 @@ export function ThemeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <SunIcon className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <MoonIcon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <SunIcon className="size-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+          <MoonIcon className="absolute size-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
@@ -184,7 +185,7 @@ will be in their own folder and imported into the `global.css` file.
 ```css
 html[data-theme="dark-professional"] {
   color-scheme: dark;
-  
+
   /* Core Colors */
   --color-stone-050: 60 9.1% 97.8%; /* #fafaf9 */
   --color-stone-100: 60 4.8% 95.9%; /* #f5f5f4 */
@@ -196,7 +197,6 @@ html[data-theme="dark-professional"] {
   --color-stone-700: 30 6.3% 25.1%; /* #44403c */
   --color-stone-800: 12 6.5% 15.1%; /* #292524 */
   --color-stone-900: 24 9.8% 10%; /* #1c1917 */
-
 
   /* Functional Colors */
   --popover: var(--color-stone-900);
@@ -229,7 +229,7 @@ will automatically switch to the dark mode.
 
 Using design tokens and tailwind themes, I can create a set of themes that can
 be easily switched between. This allows me to create a set of themes for my
-website that can be easily switched between. This works for both light and
-dark themes and can be easily extended to create more themes.
+website that can be easily switched between. This works for both light and dark
+themes and can be easily extended to create more themes.
 
 Give it a try now, the theme toggle is at the top right of the page.

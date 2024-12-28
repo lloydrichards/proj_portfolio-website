@@ -12,7 +12,7 @@ const meta: Meta<{
   title: "design/Color",
   argTypes: {},
   render: (args) => (
-    <table className="w-full table-auto text-left text-sm text-foreground rtl:text-right">
+    <table className="text-foreground w-full table-auto text-left text-sm rtl:text-right">
       <thead className="bg-muted text-xs uppercase">
         <tr>
           <th scope="col" className="px-6 py-3">
@@ -25,7 +25,7 @@ const meta: Meta<{
       </thead>
       <tbody>
         {args.swatch.map(({ name, colors }) => (
-          <tr key={name} className="border-b bg-card">
+          <tr key={name} className="bg-card border-b">
             <td className="px-6 py-4">{name}</td>
             <td className="px-6 py-4">
               <div className="flex overflow-hidden rounded-md border shadow-sm">
@@ -137,7 +137,7 @@ export const Functional: Story = {
       .sort(
         ([a], [b]) =>
           functionalSwatch.indexOf(a as ColorKey) -
-          functionalSwatch.indexOf(b as ColorKey)
+          functionalSwatch.indexOf(b as ColorKey),
       )
       .map(([name, colors]) => {
         return {

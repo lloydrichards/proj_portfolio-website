@@ -25,8 +25,8 @@ const meta: Meta<{
     }),
   },
   render: (args) => (
-    <table className="w-full table-auto text-left text-sm text-foreground rtl:text-right">
-      <thead className="text-xs bg-muted uppercase">
+    <table className="text-foreground w-full table-auto text-left text-sm rtl:text-right">
+      <thead className="bg-muted text-xs uppercase">
         <tr>
           <th scope="col" className="px-6 py-3">
             Name
@@ -49,14 +49,14 @@ const meta: Meta<{
             .replaceAll(",", ",\n")
             .replaceAll("\n\n", "\n");
           return (
-            <tr key={name} className="border-b bg-card">
+            <tr key={name} className="bg-card border-b">
               <td className="px-6 py-4">{name}</td>
-              <td className="hidden whitespace-pre-line px-6 py-4 sm:table-cell">
+              <td className="hidden px-6 py-4 whitespace-pre-line sm:table-cell">
                 {resolvedValue}
               </td>
               <td className="px-6 py-4">
                 <div
-                  className="size-20 rounded-sm border bg-background"
+                  className="bg-background size-20 rounded-sm border"
                   style={{ boxShadow: value }}
                 />
               </td>

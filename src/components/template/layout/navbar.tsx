@@ -1,7 +1,5 @@
 "use client";
-
 import { buttonVariants } from "@/components/atom/button/button";
-import { ThemeSelect } from "@/components/molecule/theme-select/theme-select";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -24,46 +22,24 @@ interface NavRouteProps {
   vertical?: boolean;
 }
 const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
+  const routes = [
+    // { href: "/about", label: "About" },
+    { href: "/project", label: "Projects" },
+    { href: "/lab", label: "Lab" },
+    { href: "/timeline", label: "Timeline" },
+  ];
+
   return (
     <NavigationMenuList className={vertical ? "flex-col gap-4" : "flex-row"}>
-      <NavigationMenuItem>
-        <Link href="/about" legacyBehavior passHref>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-            About
-          </NavigationMenuLink>
-        </Link>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuTrigger>Portfolio</NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <div className="flex w-72 flex-col gap-4 p-4">
-            <Link href="/posts" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Posts
-              </NavigationMenuLink>
-            </Link>
-            <Link href="/projects" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Projects
-              </NavigationMenuLink>
-            </Link>
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <Link href="/timeline" legacyBehavior passHref>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-            Timeline
-          </NavigationMenuLink>
-        </Link>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <Link href="/storybook" legacyBehavior passHref>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-            Storybook
-          </NavigationMenuLink>
-        </Link>
-      </NavigationMenuItem>
+      {routes.map((route) => (
+        <NavigationMenuItem key={route.href}>
+          <Link href={route.href} legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              {route.label}
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+      ))}
       <NavigationMenuItem>
         <NavigationMenuTrigger>Social</NavigationMenuTrigger>
         <NavigationMenuContent>
@@ -95,7 +71,6 @@ const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
-      <ThemeSelect />
     </NavigationMenuList>
   );
 };

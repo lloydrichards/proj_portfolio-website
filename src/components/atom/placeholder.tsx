@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Apple, LineChart, TentTree, Text } from "lucide-react";
 import React from "react";
-import { typefaceValue2 } from "../tokens/typeface/typeface";
+import { typefaceValue2 } from "../tokens/typeface";
 
 const PlaceholderIcon = {
   image: (

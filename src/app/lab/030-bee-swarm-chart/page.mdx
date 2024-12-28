@@ -1,0 +1,39 @@
+export const metadata = {
+  id: "030",
+  title: "Animated Bee Swarm Chart",
+  date: "2023-06-09",
+  description:
+    "Creating an animated bee swarm chart using d3 and force simulation",
+  tags: ["gui", "d3", "physics"],
+};
+
+import { BeeSwarmChart, MockBubbles } from "./030.tsx";
+
+A bee swarm chart is a type of scatter plot that uses a force simulation to
+prevent overlapping points. This is a great way to visualize a large number of
+points in a small space. It also allows for single dimension data to be
+visualized in a 2D space. By using a force simulation, the points will
+automatically move to avoid overlapping each other.
+
+    <BeeSwarmChart width={600} height={400} data={MockBubbles} />
+
+The **BeeSwarmChart** above works with the `forceSimulation` from d3. Taking the
+data and applying a forces to it, the points will move to avoid overlapping
+while clustering around the `timestamp` value. The forces include:
+
+- **forceX**: Moves the points along the x-axis based on the `xScale` and the
+  `timestamp` value.
+- **forceY**: Moves the points towards the center of the chart.
+- **collide**: Prevents overlapping of points by applying a radius to each based
+  on the `count` value.
+
+To add some interesting interactions, when you click on a point, it will
+highlight all points of that type and apply an additional force to move them
+closer to each other while increasing the **forceY** towards the center.
+
+### Interaction GUI
+
+Using [Leva](https://github.com/pmndrs/leva), I created a GUI to control the
+forces and the data. This allows you to change the forces and see the
+interactions in real time. The GUI can be expanded by clicking the dark grey
+panel in the top right and changing the values to update the chart.

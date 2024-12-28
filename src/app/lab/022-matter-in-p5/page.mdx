@@ -1,0 +1,106 @@
+export const metadata = {
+  id: "022",
+  title: "Intergrating P5.js and Matter.js",
+  date: "2020-07-29",
+  description: "Learning to use Matter.js with P5.js",
+  tags: ["Matter.js", "P5.js"],
+};
+
+One of the things I've been thinking about is how to intergrate physics into
+P5.js. I've been looking at Matter.js and it seems like a good option. I've
+already worked with d3-force which worked well with D3.js but I think Matter.js
+might be a better option for P5.js.
+
+## Basic Physics
+
+I started with a basic example from the Matter.js website. I wanted to see how
+it would work with P5.js. It was pretty easy to get it working. I just had to
+create the Engine, World and Bodies with Matter and then with my Box class I can
+create a new Box and pass in the Matter.js body. Then in the draw loop I just
+have to update the Engine and then draw the boxes.
+
+```typescript
+import React from "react";
+import p5 from "p5";
+import Matter from "matter-js";
+
+const sketch = (p: p5) => {
+  const Engine = Matter.Engine,
+    World = Matter.World,
+    Bodies = Matter.Bodies;
+
+  class Box {
+    body: Matter.Body;
+    w: number;
+    h: number;
+
+    constructor(x: number, y: number, w: number, h: number) {
+      this.h = h;
+      this.w = w;
+      this.body = Bodies.rectangle(x, y, w, h, { restitution: 0.9 });
+      World.add(world, this.body);
+    }
+    show() {
+      const pos = this.body.position;
+      const angle = this.body.angle;
+
+      p.push();
+      p.translate(pos.x, pos.y);
+      p.rotate(angle);
+      p.rect(0, 0, this.w, this.h);
+      p.rectMode("center");
+      p.pop();
+    }
+  }
+  var engine = Engine.create(),
+    world = engine.world,
+    boxes: Array<Box> = [],
+    ground = Bodies.rectangle(200, 300, 200, 25, {
+      isStatic: true,
+    });
+
+  p.windowResized = () => {
+    p.resizeCanvas(p.windowWidth - 87, p.windowHeight / 2);
+    drawBackground();
+  };
+
+  const drawBackground = () => {
+    p.background(51);
+  };
+  p.mousePressed = () => {
+    boxes.push(new Box(p.mouseX, p.mouseY, 20, 20));
+  };
+  p.setup = () => {
+    p.createCanvas(window.innerWidth - 87, window.innerHeight / 2);
+    drawBackground();
+    Engine.run(engine);
+    World.add(world, ground);
+  };
+
+  p.draw = () => {
+    drawBackground();
+    boxes.forEach((box) => {
+      box.show();
+    });
+    p.rectMode("center");
+    p.rect(ground.position.x, ground.position.y, 200, 25);
+  };
+};
+
+export class BasicPhysicsSketch extends React.Component {
+  myRef: React.RefObject<HTMLDivElement>;
+  myP5?: p5;
+  constructor(props: any) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+
+  componentDidMount() {
+    const p5 = require("p5");
+    this.myP5 = new p5(sketch, this.myRef.current);
+  }
+  render() {
+    return <div ref={this.myRef}></div>;
+  }
+}
+```

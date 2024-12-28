@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atom/card/card";
-import { Project } from "@generated";
+import { Project } from "@/types/domain";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ export interface IProjectCard {
 export const ProjectCard: React.FC<IProjectCard> = ({ project, onClick }) => {
   return (
     <Link
-      href={project.slug}
+      href={project.pathname}
       className="not-prose dark:prose-invert rounded-sm no-underline"
       onClick={onClick}
       data-testid="project-card"

@@ -1,0 +1,284 @@
+export const metadata = {
+  id: "032",
+  title: "fp-ts: The Basics (Part 1)",
+  date: "2023-10-03",
+  description:
+    "Exploring fp-ts, and some of the less documented features or practical examples.",
+  tags: ["fp-ts"],
+};
+
+## The Basics
+
+I've been using `fp-ts` for a little over three years now and has been a
+fundemental part of my development process. I've been using it in production for
+the last two years and have been very happy with it. I've been using it in a
+variety of projects, from small personal projects to large enterprise
+applications. I've also been using it in a variety of languages, from TypeScript
+to Dart.
+
+While the majority of what I do with `fp-ts` is pretty standard, there are a few
+things that I would like to improve upon. This series of posts will be a
+collection of things that I've learned about `fp-ts` that I think are worth
+sharing or exploring further.
+
+Some important resources to check out:
+
+- [fp-ts](https://gcanti.github.io/fp-ts/)
+  ([GitHub](https://github.com/gcanti/fp-ts))
+- [fp-ts recipes](https://grossbart.github.io/fp-ts-recipes/#/)
+- [Practical Guide to Fp-ts](https://rlee.dev/practical-guide-to-fp-ts-part-1)
+- [fp-ts and Beautiful API Calls](https://dev.to/gnomff_65/fp-ts-and-beautiful-api-calls-1f55)
+
+## Primatives
+
+### `Array`
+
+The `Array` type is a primative that is used to represent a list of values. It
+is a very common type in functional programming and is generally used to replace
+`for` loops.
+
+```ts
+import * as A from "fp-ts/lib/Array";
+import { pipe } from "fp-ts/lib/function";
+
+const double = (n: number): number => n * 2;
+const square = (n: number): number => n * n;
+const inc = (n: number): number => n + 1;
+
+const doubleSquareAndInc = pipe(
+  [1, 2, 3, 4, 5],
+  A.map(double), // apply the double function
+  A.map(inc), // apply the inc function
+  A.map(square), // apply the square function
+);
+
+console.log(doubleSquareAndInc); // Output: [ 9, 25, 49, 81, 121 ]
+```
+
+### `Option`
+
+The `Option` type is a primative that is used to represent a value that may or
+may not exist. It is a very common type in functional programming and is
+generally used to replace `null` or `undefined` values.
+
+```ts
+import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+
+const double = (x: number): number => x * 2;
+const square = (x: number): number => x ** 2;
+
+// Map over the right value
+const maybeNumber: O.Option<number> = O.some(3);
+
+const result = pipe(
+  maybeNumber, // start with an Option<number>
+  O.map(double), // apply double function
+  O.map(square), // apply square function
+);
+
+console.log(result); // Output: Some(36)
+```
+
+### `Either`
+
+The `Either` type is a primative that is used to represent a value that may be
+one of two types. It is a very common type in functional programming and is
+generally used to replace `throw` statements.
+
+```ts
+import { pipe, flow } from "fp-ts/lib/function";
+import * as E from "fp-ts/lib/Either";
+
+const divide = (x: number, y: number): E.Either<string, number> =>
+  pipe(
+    y,
+    E.fromPredicate(
+      (y) => y != 0,
+      () => "Division by zero",
+    ),
+    E.map((y) => x / y),
+  );
+
+const squareRoot = (x: number): E.Either<string, number> =>
+  pipe(
+    x,
+    E.fromPredicate(
+      (x) => x < 0,
+      () => "Cannot calculate square root of a negative number",
+    ),
+    E.map((x) => Math.sqrt(x)),
+  );
+
+const calculate = flow(
+  divide, // Start with an Either<string, number>
+  E.chain((value) => squareRoot(value)), // Apply squareRoot function
+);
+
+console.log(calculate(10, 2)); // Output: Right(2.5)
+```
+
+### `Task`
+
+The `Task` type is a primative that is used to represent a value that may be
+computed asynchronously. It is a very common type in functional programming and
+is generally used to replace `Promise` objects.
+
+```ts
+import { pipe } from "fp-ts/function";
+import * as T from "fp-ts/Task";
+
+const alwaysResolve: T.Task<number> = () => Promise.resolve(42);
+
+const response = pipe(
+  alwaysResolve,
+  T.map((n) => "The answer is " + n),
+);
+
+console.log(response().then((d) => d)); // Output: "The answer is 42"
+```
+
+### `TaskEither`
+
+The `TaskEither` type is a primative that is used to represent a value that may
+be computed asynchronously and may be one of two types. It is a very common type
+in functional programming and is generally used to replace `Promise` objects
+that may throw errors.
+
+```ts
+import { pipe } from "fp-ts/function";
+import * as TE from "fp-ts/TaskEither";
+
+const fetchData = (url: string) =>
+  TE.tryCatch(
+    () => fetch(url).then((res) => res.text()),
+    (e) => `Error fetching data, ${String(e)}`,
+  );
+const parse = (str: string) =>
+  TE.tryCatch(
+    () => JSON.parse(str),
+    (e) => `Error parsing data, ${String(e)}`,
+  );
+const stringify = (obj: unknown) =>
+  TE.tryCatch(
+    async () => JSON.stringify(obj),
+    (e) => `Error stringify-ing data, ${String(e)}`,
+  );
+
+const getJson = pipe(
+  fetchData("https://example.com"), // try to fetch data or return error message
+  TE.chain(parse), // if successful, parse the data or return error message
+  TE.chain(stringify), // if successful, stringify the data or return error message
+);
+
+console.log(getJson().then((e) => e)); // Output: Right("{\"foo\":\"bar\"}")
+```
+
+## Composition
+
+### `pipe` vs `flow`
+
+The `pipe` and `flow` functions are used to compose functions together. They are
+very similar, but have a few key differences. The `pipe` function starts with a
+value and then applies a series of functions to it. The `flow` function composes
+a series of functions together and then returns a new function that can be
+applied to a value.
+
+```ts
+import { pipe, flow } from "fp-ts/lib/function";
+
+const double = (x: number): number => x * 2;
+const square = (x: number): number => x ** 2;
+
+const doubleSquarePipe = (input: number) =>
+  pipe(
+    input,
+    double, // apply double function
+    square, // apply square function
+  );
+
+const doubleSquareFlow = flow(
+  double, // apply double function
+  square, // apply square function
+);
+```
+
+### `chain`
+
+The `chain` function is used to flatten nested primatives. When you need to
+flatten left or right values, you can use the `chain` function. It is very
+similar to the `flatMap` function in other languages.
+
+```ts
+import { pipe } from "fp-ts/lib/function";
+import * as TE from "fp-ts/lib/TaskEither";
+
+const maybeUserId: TE.TaskEither<string, number> = TE.right(3);
+
+const parseUser = pipe(
+  maybeUserId, // start with a TaskEither<string, number>
+  TE.chain((id) =>
+    pipe(
+      id,
+      double, // apply double function
+      TE.fromPredicate(
+        (n) => n > 0, // check if the value is positive
+        () => "ID is not positive",
+      ),
+      TE.map((id) => ({
+        id,
+        name: "John Doe",
+      })),
+    ),
+  ),
+);
+
+console.log(parseUser()); // Output: Right({ id: 6, name: 'John Doe' })
+```
+
+### `match` or `fold`
+
+The `match` function is used to extract values from primatives. When you need to
+extract a value to be used in the application, `match` forces you to think about
+both the left and right values.
+
+```ts
+import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+
+const maybeNumber: O.Option<number> = O.some(3);
+
+const result = pipe(
+  maybeNumber, // start with an Option<number>
+  O.map(double), // apply double function
+  O.map(square), // apply square function
+  O.match(
+    () => "No number found",
+    (n) => "The result is " + n,
+  ),
+);
+
+console.log(result); // Output: "The result is 36"
+```
+
+sometimes its needed to return multiple types from a match. In this case, you
+can use the `foldW` function.
+
+```ts
+import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+
+const maybeNumber: O.Option<number> = O.some(3);
+
+const result = pipe(
+  maybeNumber, // start with an Option<number>
+  O.map(double), // apply double function
+  O.map(square), // apply square function
+  O.matchW(
+    () => ({ status: "error", error: "No number" }), // return an error object
+    (n) => ({ status: "ok", data: n }), // return a data object
+  ),
+);
+
+console.log(result); // Output: { status: 'ok', data: 36 }
+```

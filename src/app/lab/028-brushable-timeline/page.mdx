@@ -1,0 +1,246 @@
+export const metadata = {
+  id: "028",
+  title: "Brushable Timeline with Visx",
+  date: "2023-06-08",
+  description: "Learn how to create a brushable timeline with Visx",
+  tags: ["visx", "d3"],
+};
+
+There are some things that are more tedious to do with D3 than others. Brushable
+timelines are one of them. In this lab, going to explore how to create a
+brushable timeline with [Visx](https://airbnb.io/visx). Visx is basiclly a low
+lever wrapper for D3 and accepts a lot of the same data structure such as
+scales. This makes sprinckling in a few of the more annpying parts such as Axis
+and Brushes more flexible.
+
+What I wanted to do was create a brush which I could use to return back the
+domain of the scale so I can use it to select or filter data. In this first
+example I made a quick timetable which can be brushed to highlight any
+intersecting boxes.
+
+```tsx
+<Brush
+  xScale={xScale}
+  yScale={yScale}
+  height={height}
+  width={width}
+  onChange={(domain: Bounds | null) => {
+    if (!domain) return;
+    setSelected([new Date(domain.x0), new Date(domain.x1)]);
+  }}
+  onClick={() => setSelected(undefined)}
+  //   innerRef={brushRef}
+  //   useWindowMoveEvents
+  //   resizeTriggerAreas={["left", "right"]}
+  //   brushDirection="horizontal"
+/>
+```
+
+The `Brush` from Visx was quite easy to drop in, taking the same `xScale` and
+`yScale` I built using D3. There is an onChange that returns the `Bound` that
+can be destructured into the domain values of the scales. There are also several
+default values for the `resizeTriggerAreas` and `brushDirection` which can be
+used to change the direction of the brush, but the default worked for my use
+case.
+
+Using the value returned from the brush it was then possible to change the fill
+of the boxes that intersected the brush.
+
+```tsx {1-2, 18-22}
+const intersect = (a: [Date, Date], b: [Date, Date]) =>
+  a[0] <= b[1] && b[0] <= a[1];
+
+export const Timeline = () => {
+  // ...
+  return (
+    <svg>
+      {/* ... */}
+      {channels.map((c, i) => (
+        <rect
+          key={`rect-${i}`}
+          rx={4}
+          x={xScale(c.start)}
+          y={yScale(c.channel) || 0}
+          width={clampZero(xScale(c.end) - xScale(c.start))}
+          height={yScale.bandwidth()}
+          fill={
+            selected != undefined
+              ? intersect(selected, [c.start, c.end])
+                ? "tomato"
+                : "SteelBlue"
+              : "SeaGreen"
+          }
+        />
+      ))}
+    </svg>
+  );
+};
+```
+
+### Margin Bug
+
+I noticed while looking at the example that there is a bug with the current
+version where the margin on the `<Brush />` doesnt actually do anything. I've
+reported this [issue](https://github.com/airbnb/visx/issues/1711) to
+airbnb/visx, but for the time being its needed to change the D3 Pattern to match
+the translated `<g />` similar to how is done in the `<ChartArea />` of Visx.
+
+```tsx
+import { Brush } from "@visx/brush";
+import { Bounds } from "@visx/brush/lib/types";
+import { max, scaleBand, scaleTime } from "d3";
+import { eachMonthOfInterval, format } from "date-fns";
+import { FC, useState } from "react";
+
+const channels = [
+  {
+    channel: "CH 1",
+    start: new Date("2021-01-01"),
+    end: new Date("2021-02-01"),
+  },
+  {
+    channel: "CH 2",
+    start: new Date("2021-02-01"),
+    end: new Date("2021-05-01"),
+  },
+  {
+    channel: "CH 2",
+    start: new Date("2021-08-01"),
+    end: new Date("2021-09-01"),
+  },
+  {
+    channel: "CH 3",
+    start: new Date("2021-04-01"),
+    end: new Date("2021-07-01"),
+  },
+];
+
+const timeDomain = [new Date("2021-01-01"), new Date("2022-01-01")];
+const channelDomain = Array.from(new Set(channels.map((c) => c.channel)));
+
+interface ChartProps {
+  height: number;
+  width: number;
+}
+
+export const Timeline: FC<ChartProps> = ({ height, width }) => {
+  const [selected, setSelected] = useState<[Date, Date] | undefined>();
+  // Dimensions
+  const margin = {
+    top: 24,
+    bottom: 32,
+    left: 48,
+    right: 0,
+  };
+  const innerHeight = height - margin.top - margin.bottom;
+  const innerWidth = width - margin.left - margin.right;
+  const intervals = eachMonthOfInterval({
+    start: timeDomain[0],
+    end: timeDomain[1],
+  });
+
+  // Scales
+  const xScale = scaleTime().domain(timeDomain).range([0, innerWidth]);
+  const yScale = scaleBand()
+    .domain(channelDomain)
+    .range([0, innerHeight])
+    .paddingInner(0.1);
+
+  // Handlers
+  const onBrushChange = (domain: Bounds | null) => {
+    if (!domain) return;
+    setSelected([new Date(domain.x0), new Date(domain.x1)]);
+  };
+
+  return (
+    <div
+      style={{
+        background: "light grey",
+        height: height,
+        width: width,
+        overflow: "scroll",
+      }}
+    >
+      <svg width={width} height={margin.top + innerHeight}>
+        <g transform={`translate(${margin.left} ${margin.top})`}>
+          {/* Axis */}
+          {intervals.map((i, idx) => {
+            const barWidth = clampZero(xScale(intervals[idx + 1]) - xScale(i));
+            const label = format(i, "LLL");
+            return (
+              <g
+                key={`g-${idx}`}
+                transform={`translate(${xScale(i)} ${-margin.top / 2})`}
+              >
+                <text x={barWidth / 2} textAnchor="middle">
+                  {label}
+                </text>
+                <line x1={0} x2={0} y1={0} y2={height} stroke="grey" />
+              </g>
+            );
+          })}
+          {/* Labels */}
+          {channels.map((c, i) => (
+            <text
+              key={`text-${i}`}
+              x={-margin.left}
+              y={(yScale(c.channel) || 0) + yScale.bandwidth() / 2}
+              fill="black"
+              alignmentBaseline="middle"
+            >
+              {c.channel}
+            </text>
+          ))}
+          {/* Rects */}
+          {channels.map((c, i) => (
+            <rect
+              key={`rect-${i}`}
+              rx={4}
+              x={xScale(c.start)}
+              y={yScale(c.channel) || 0}
+              width={clampZero(xScale(c.end) - xScale(c.start))}
+              height={yScale.bandwidth()}
+              fill={
+                selected != undefined
+                  ? intersect(selected, [c.start, c.end])
+                    ? "tomato"
+                    : "SteelBlue"
+                  : "SeaGreen"
+              }
+            />
+          ))}
+        </g>
+        <g transform={`translate(${margin.left} ${margin.top})`}>
+          <Brush
+            xScale={xScale}
+            yScale={yScale}
+            height={innerHeight}
+            width={innerWidth}
+            margin={margin}
+            //   innerRef={brushRef}
+            //   useWindowMoveEvents
+            //   resizeTriggerAreas={["left", "right"]}
+            //   brushDirection="horizontal"
+            onChange={onBrushChange}
+            onClick={() => setSelected(undefined)}
+          />
+        </g>
+      </svg>
+      <div className="not-prose dark:prose-invert grid h-8 grid-flow-col grid-cols-2 gap-2">
+        <p className="line-clamp-1">
+          Brush Start:{" "}
+          {selected != undefined ? format(selected[0], "LLL d, yyy") : null}
+        </p>
+        <p className="line-clamp-1">
+          Brush End:{" "}
+          {selected != undefined ? format(selected[1], "LLL d, yyy") : null}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const clampZero = (n: number) => max([n, 0]) || 0;
+const intersect = (a: [Date, Date], b: [Date, Date]) =>
+  a[0] <= b[1] && b[0] <= a[1];
+```

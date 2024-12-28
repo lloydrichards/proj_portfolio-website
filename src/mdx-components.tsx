@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { ComponentPropsWithoutRef } from "react";
 import { highlight } from "sugar-high";
 
-const components = {
+export const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1 className="fade-in mb-0 pt-12 font-medium" {...props} />
   ),

@@ -16,6 +16,6 @@ export const getAllProjects = async () => {
   return projects
     .filter((p) => p !== null)
     .sort(
-      (a, b) => a!.frontmatter.date.getTime() - b!.frontmatter.date.getTime(),
+      (a, b) => b!.frontmatter.date.getTime() - a!.frontmatter.date.getTime(),
     );
 };

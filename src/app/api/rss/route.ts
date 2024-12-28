@@ -1,9 +1,11 @@
 import { metadata } from "@/app/layout";
 import { getBaseUrl } from "@/lib/utils";
-import { getAllPosts } from "@/service/get-all-posts";
+import { getAllLabs } from "@/services/get-all-labs";
+import { getAllProjects } from "@/services/get-all-projects";
 
 export async function GET() {
-  const blogPosts = await getAllPosts();
+  const allLabs = await getAllLabs();
+  const allProjects = await getAllProjects();
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>
     <rss version="2.0">
@@ -12,14 +14,14 @@ export async function GET() {
             <link>${getBaseUrl()}</link>
             <description>${metadata.description}</description>
             <language>en-us</language>
-            ${blogPosts
+            ${[...allLabs, ...allProjects]
               .map(
-                (post) => `
+                ({ frontmatter }) => `
             <item>
-                <title>${post.title}</title>
-                <link>${getBaseUrl()}${post.slug}</link>
-                <description>${post.description}</description>
-                <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+                <title>${frontmatter.title}</title>
+                <link>${getBaseUrl()}${frontmatter.slug}</link>
+                <description>${frontmatter.description}</description>
+                <pubDate>${new Date(frontmatter.date).toUTCString()}</pubDate>
             </item>
             `,
               )

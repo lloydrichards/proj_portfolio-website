@@ -1,50 +1,77 @@
 import Link from "next/link";
 import React, { ComponentPropsWithoutRef } from "react";
-import { highlight } from "sugar-high";
+import {
+  typefaceHeading1,
+  typefaceHeading2,
+  typefaceHeading3,
+  typefaceHeading4,
+  typefaceHeading5,
+  typefaceHeading6,
+  typefaceAnchor,
+  typefaceBody1,
+  typefaceUList,
+  typefaceOList,
+  typefaceListItem,
+  typefaceBlockQuote,
+} from "./components/tokens/typeface";
+import { cn } from "./lib/utils";
 
 export const components = {
-  h1: (props: ComponentPropsWithoutRef<"h1">) => (
-    <h1 className="fade-in mb-0 pt-12 font-medium" {...props} />
+  h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h1 className={typefaceHeading1(className)} {...props} />
   ),
-  h2: (props: ComponentPropsWithoutRef<"h2">) => (
-    <h2 className="mt-8 mb-3 font-medium" {...props} />
+  h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h2 className={typefaceHeading2(className)} {...props} />
   ),
-  h3: (props: ComponentPropsWithoutRef<"h3">) => (
-    <h3 className="mt-8 mb-3 font-medium" {...props} />
+  h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h3 className={typefaceHeading3(className)} {...props} />
   ),
-  h4: (props: ComponentPropsWithoutRef<"h4">) => (
-    <h4 className="font-medium" {...props} />
+  h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h4 className={typefaceHeading4(className)} {...props} />
   ),
-  p: (props: ComponentPropsWithoutRef<"p">) => (
-    <p className="leading-snug" {...props} />
+  h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h5 className={typefaceHeading5(className)} {...props} />
   ),
-  ol: (props: ComponentPropsWithoutRef<"ul">) => (
-    <ol className="list-decimal space-y-2 pl-5" {...props} />
+  h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h6 className={typefaceHeading6(className)} {...props} />
   ),
-  ul: (props: ComponentPropsWithoutRef<"ul">) => (
-    <ul className="list-disc space-y-1 pl-5" {...props} />
+  p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
+    <p className={typefaceBody1(className)} {...props} />
   ),
-  li: (props: ComponentPropsWithoutRef<"li">) => (
-    <li className="pl-1" {...props} />
+  ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
+    <ul className={typefaceUList(className)} {...props} />
   ),
-  em: (props: ComponentPropsWithoutRef<"em">) => (
-    <em className="font-medium" {...props} />
+  ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
+    <ol className={typefaceOList(className)} {...props} />
+  ),
+  li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
+    <li className={typefaceListItem(className)} {...props} />
+  ),
+  blockquote: ({
+    className,
+    ...props
+  }: React.HTMLAttributes<HTMLQuoteElement>) => (
+    <blockquote className={typefaceBlockQuote(className)} {...props} />
   ),
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
     <strong className="font-medium" {...props} />
   ),
-  a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
-    const className = "text-blue-500 hover:text-blue-700";
+  a: ({
+    className,
+    href,
+    children,
+    ...props
+  }: ComponentPropsWithoutRef<"a">) => {
     if (href?.startsWith("/")) {
       return (
-        <Link href={href} className={className} {...props}>
+        <Link href={href} className={typefaceAnchor(className)} {...props}>
           {children}
         </Link>
       );
     }
     if (href?.startsWith("#")) {
       return (
-        <a href={href} className={className} {...props}>
+        <a href={href} className={typefaceAnchor(className)} {...props}>
           {children}
         </a>
       );
@@ -54,40 +81,54 @@ export const components = {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={className}
+        className={typefaceAnchor(className)}
         {...props}
       >
         {children}
       </a>
     );
   },
-  code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
-    const codeHTML = highlight(children as string);
-    return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
-  },
-  Table: ({ data }: { data: { headers: string[]; rows: string[][] } }) => (
-    <table>
-      <thead>
-        <tr>
-          {data.headers.map((header, index) => (
-            <th key={index}>{header}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.rows.map((row, index) => (
-          <tr key={index}>
-            {row.map((cell, cellIndex) => (
-              <td key={cellIndex}>{cell}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+  hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
+    <hr className="my-4 md:my-8" {...props} />
   ),
-  blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
-    <blockquote
-      className="ml-[0.075em] border-l-3 border-gray-300 pl-4 text-gray-700"
+  table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
+    <div className="my-6 w-full overflow-y-auto">
+      <table className={cn("w-full", className)} {...props} />
+    </div>
+  ),
+  tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
+    <tr className={cn("m-0 border-t p-0", className)} {...props} />
+  ),
+  th: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <th
+      className={cn(
+        "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
+        className,
+      )}
+      {...props}
+    />
+  ),
+  td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
+    <td
+      className={cn(
+        "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
+        className,
+      )}
+      {...props}
+    />
+  ),
+  pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
+    <pre
+      className={cn(
+        "bg-foreground text-background mt-6 mb-4 overflow-x-auto rounded-md border p-4",
+        className,
+      )}
+      {...props}
+    />
+  ),
+  code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <code
+      className={cn("relative font-mono text-sm tracking-wider", className)}
       {...props}
     />
   ),

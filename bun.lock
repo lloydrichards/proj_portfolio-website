@@ -7,6 +7,7 @@
         "@radix-ui/react-dialog": "^1.1.4",
         "@radix-ui/react-navigation-menu": "^1.2.3",
         "@radix-ui/react-toast": "^1.2.4",
+        "@uidotdev/usehooks": "^2.4.1",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "d3": "^7.9.0",
@@ -478,6 +479,8 @@
     "@typescript-eslint/utils": ["@typescript-eslint/utils@8.18.2", "", { "dependencies": { "@eslint-community/eslint-utils": "^4.4.0", "@typescript-eslint/scope-manager": "8.18.2", "@typescript-eslint/types": "8.18.2", "@typescript-eslint/typescript-estree": "8.18.2" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0", "typescript": ">=4.8.4 <5.8.0" } }, "sha512-Cr4A0H7DtVIPkauj4sTSXVl+VBWewE9/o40KcF3TV9aqDEOWoXF3/+oRXNby3DYzZeCATvbdksYsGZzplwnK/Q=="],
 
     "@typescript-eslint/visitor-keys": ["@typescript-eslint/visitor-keys@8.18.2", "", { "dependencies": { "@typescript-eslint/types": "8.18.2", "eslint-visitor-keys": "^4.2.0" } }, "sha512-zORcwn4C3trOWiCqFQP1x6G3xTRyZ1LYydnj51cRnJ6hxBlr/cKPckk+PKPUw/fXmvfKTcw7bwY3w9izgx5jZw=="],
+
+    "@uidotdev/usehooks": ["@uidotdev/usehooks@2.4.1", "", { "peerDependencies": { "react": ">=18.0.0", "react-dom": ">=18.0.0" } }, "sha512-1I+RwWyS+kdv3Mv0Vmc+p0dPYH0DTRAo04HLyXReYBL9AeseDWUJyi4THuksBJcu9F0Pih69Ak150VDnqbVnXg=="],
 
     "@ungap/structured-clone": ["@ungap/structured-clone@1.2.1", "", {}, "sha512-fEzPV3hSkSMltkw152tJKNARhOupqbH96MZWyRjNaYZOMIzbrTeQDG+MTc6Mr2pgzFQzFxAfmhGDNP5QK++2ZA=="],
 

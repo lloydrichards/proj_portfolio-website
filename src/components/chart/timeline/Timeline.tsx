@@ -3,11 +3,11 @@ import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
 import { FC } from "react";
 import { OccupationItem } from "./internal/OccupationItem";
 import { OccupationMeta } from "@/types/domain";
+import { useResponsive } from "@/components/template/responsive_wrapper";
 
 interface TimelineProps {
   data: OccupationMeta[];
   maxHeight?: number;
-  width: number;
   margin?: {
     top: number;
     right: number;
@@ -22,7 +22,6 @@ const isBefore = (date1: Date, date2: Date): boolean => {
 export const Timeline: FC<TimelineProps> = ({
   data,
   maxHeight,
-  width,
   margin = {
     top: 16,
     right: 0,
@@ -30,6 +29,7 @@ export const Timeline: FC<TimelineProps> = ({
     left: 48,
   },
 }) => {
+  const { width } = useResponsive();
   const textBlockHeight = 160;
   const textMargin = 180;
   const height = data.length * textBlockHeight || maxHeight || 400;

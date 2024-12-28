@@ -16,7 +16,7 @@ export const getAllOccupations = async () => {
     .filter((o) => o !== null)
     .sort(
       (a, b) =>
-        a!.frontmatter.start_date.getTime() -
-        b!.frontmatter.start_date.getTime(),
+        b!.frontmatter.start_date.getTime() -
+        a!.frontmatter.start_date.getTime(),
     );
 };

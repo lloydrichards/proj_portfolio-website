@@ -17,6 +17,6 @@ export const getAllLabs = async () => {
   return labs
     .filter((l) => l !== null)
     .sort(
-      (a, b) => a!.frontmatter.date.getTime() - b!.frontmatter.date.getTime(),
+      (a, b) => b!.frontmatter.date.getTime() - a!.frontmatter.date.getTime(),
     );
 };

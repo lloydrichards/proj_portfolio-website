@@ -8,7 +8,7 @@ type LabContent = {
 };
 export const getLab = async (slug: string): Promise<LabContent | null> =>
   pipe(
-    await import(`@/app/lab/${slug}/page.mdx`),
+    await import(`@/app/lab/(content)/${slug}/page.mdx`),
     (d) => d.metadata,
     LabMeta.decode,
     E.fold(
@@ -18,10 +18,11 @@ export const getLab = async (slug: string): Promise<LabContent | null> =>
       },
       (metadata) => ({
         frontmatter: {
+          ...metadata,
           pathname: `/lab/${slug}`,
           slug,
           lastModified: new Date(),
-          ...metadata,
+          isPublished: metadata.isPublished ?? true,
         },
       }),
     ),

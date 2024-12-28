@@ -1,12 +1,12 @@
 import { getProject } from "@/services/get-project";
 import { notFound } from "next/navigation";
 
-export default async function ProjectPage({
+const ProjectPage = async ({
   params,
 }: {
-  params: { slug: string };
-}) {
-  const slug = await params.slug;
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await params;
   const project = await getProject(slug);
 
   if (!project) {
@@ -21,4 +21,6 @@ export default async function ProjectPage({
       {content}
     </div>
   );
-}
+};
+
+export default ProjectPage;

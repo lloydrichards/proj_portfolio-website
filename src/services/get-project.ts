@@ -39,10 +39,11 @@ export const getProject = async (
       (frontmatter) => ({
         content,
         frontmatter: {
+          ...frontmatter,
           slug,
           lastModified: new Date(),
           pathname: `/project/${slug}`,
-          ...frontmatter,
+          isPublished: frontmatter.isPublished ?? true,
         },
       }),
     ),

@@ -6,6 +6,7 @@ export const LabMeta = t.type({
   title: t.string,
   date: td.DateFromISOString,
   isFeatured: t.union([t.boolean, t.undefined]),
+  isPublished: t.union([t.boolean, t.undefined]),
   description: t.string,
   tags: t.array(t.string),
 });
@@ -62,6 +63,7 @@ export const ProjectMeta = t.type({
   title: t.string,
   description: t.string,
   isFeatured: t.union([t.boolean, t.undefined]),
+  isPublished: t.union([t.boolean, t.undefined]),
   date: td.DateFromISOString,
   category: t.array(PROJECT_CATEGORY),
   image: t.string,

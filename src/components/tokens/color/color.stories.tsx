@@ -137,7 +137,7 @@ export const Functional: Story = {
       .sort(
         ([a], [b]) =>
           functionalSwatch.indexOf(a as ColorKey) -
-          functionalSwatch.indexOf(b as ColorKey),
+          functionalSwatch.indexOf(b as ColorKey)
       )
       .map(([name, colors]) => {
         return {

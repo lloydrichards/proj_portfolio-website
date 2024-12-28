@@ -24,7 +24,7 @@ export const PostCard: React.FC<IPostCard> = ({ post, onClick }) => {
       key={post.slugAsParams}
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
-      className="not-prose rounded-sm shadow-md dark:prose-invert"
+      className="not-prose dark:prose-invert rounded-sm shadow-md"
     >
       <Link
         href={post.slug}
@@ -36,7 +36,7 @@ export const PostCard: React.FC<IPostCard> = ({ post, onClick }) => {
           <CardHeader className="flex-1 gap-2">
             <div className="flex justify-between">
               <Badge variant="outline">{post.type}</Badge>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 {formatDate(new Date(post.date))}
               </p>
             </div>

@@ -3,13 +3,11 @@ import { Github, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
 export const Footer: React.FC = () => {
   return (
-    <footer className=" bg-accent text-accent-foreground">
+    <footer className="bg-accent text-accent-foreground">
       <div className="mx-auto w-[65ch] max-w-(--breakpoint-xl)">
-        <div className="grid  grid-cols-1 gap-8 px-4 py-6 md:grid-cols-2 lg:py-8">
+        <div className="grid grid-cols-1 gap-8 px-4 py-6 md:grid-cols-2 lg:py-8">
           <div className="flex flex-col gap-2">
-            <h2 className=" font-bold uppercase text-muted-foreground">
-              Links
-            </h2>
+            <h2 className="text-muted-foreground font-bold uppercase">Links</h2>
             <Link href="/about" className="link-hover link">
               About
             </Link>
@@ -24,7 +22,7 @@ export const Footer: React.FC = () => {
             </Link>
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="font-bold uppercase text-muted-foreground">
+            <h2 className="text-muted-foreground font-bold uppercase">
               Social
             </h2>
             <div className="grid grid-flow-col gap-4">

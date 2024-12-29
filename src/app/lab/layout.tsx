@@ -2,6 +2,8 @@ import { FC, ReactNode } from "react";
 import { LabNavigation } from "@/components/organism/lab_navigation";
 import { getAllLabs } from "@/services/get-all-labs";
 import { LabInfoCard } from "@/components/molecule/lab-info-card";
+import { LabContent } from "@/components/template/lab-content";
+import { Mosaic } from "@/components/template/mosaic";
 
 const LabLayout: FC<{
   children: ReactNode;
@@ -9,13 +11,16 @@ const LabLayout: FC<{
   const content = await getAllLabs();
   const allLabs = content.map(({ frontmatter }) => frontmatter);
   return (
-    <main className="col-span-full grid grid-cols-subgrid">
-      <LabNavigation labs={allLabs} className="col-span-3" />
-      <article className="col-span-8 grid grid-cols-subgrid *:col-span-full">
-        <LabInfoCard labs={allLabs} />
-        {children}
-      </article>
-    </main>
+    <Mosaic>
+      <LabNavigation
+        labs={allLabs}
+        className="col-span-2 col-start-1 lg:col-span-6 lg:col-start-1"
+      />
+
+      <LabInfoCard labs={allLabs} />
+
+      <LabContent labs={allLabs}>{children}</LabContent>
+    </Mosaic>
   );
 };
 

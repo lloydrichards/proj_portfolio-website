@@ -1,6 +1,8 @@
 import { FC, ReactNode } from "react";
 import { ProjectNavigation } from "@/components/organism/project_navigation";
 import { getAllProjects } from "@/services/get-all-projects";
+import { cn } from "@/lib/utils";
+import { Mosaic } from "@/components/template/mosaic";
 
 const ProjectLayout: FC<{
   children: ReactNode;
@@ -8,12 +10,13 @@ const ProjectLayout: FC<{
   const content = await getAllProjects();
   const allProjects = content.map(({ frontmatter }) => frontmatter);
   return (
-    <main className="col-span-full grid grid-cols-subgrid">
-      <ProjectNavigation projects={allProjects} className="col-span-3" />
-      <article className="col-span-8 grid grid-cols-subgrid *:col-span-full">
-        {children}
-      </article>
-    </main>
+    <Mosaic>
+      <ProjectNavigation
+        projects={allProjects}
+        className="col-span-2 col-start-1 lg:col-span-6 lg:col-start-1"
+      />
+      {children}
+    </Mosaic>
   );
 };
 

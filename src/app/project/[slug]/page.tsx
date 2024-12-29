@@ -15,11 +15,15 @@ const ProjectPage = async ({
   const { frontmatter, content } = project;
 
   return (
-    <div>
-      <h1>{frontmatter.title}</h1>
-      <p>{frontmatter.description}</p>
-      {content}
-    </div>
+    <>
+      <section className="col-span-full row-span-2 md:col-[3/-1] lg:col-[7/-1]">
+        <h1>{frontmatter.title}</h1>
+        <p>{frontmatter.description}</p>
+      </section>
+      <article className="col-span-full row-span-10 md:col-[3/-1] md:row-span-24 lg:col-[7/-1]">
+        {content}
+      </article>
+    </>
   );
 };
 

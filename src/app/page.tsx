@@ -1,11 +1,8 @@
-import { PostCard } from "@/components/molecule/post_card";
+import { Tile } from "@/components/atom/tile";
+import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
-import {
-  typefaceBlockQuote,
-  typefaceBody1,
-  typefaceHeading1,
-  typefaceHeading2,
-} from "@/components/tokens/typeface";
+import { Mosaic } from "@/components/template/mosaic";
+import { typefaceBody1, typefaceHeading1 } from "@/components/tokens/typeface";
 import { getFeaturedLabs } from "@/services/get-featured-labs";
 import { getFeaturedProjects } from "@/services/get-featured-projects";
 import Image from "next/image";
@@ -15,24 +12,25 @@ const HomePage = async () => {
   const allLabs = await getFeaturedLabs();
 
   return (
-    <main className="col-span-full grid grid-cols-subgrid grid-rows-4 gap-3">
+    <Mosaic>
       <Image
-        className="col-span-4 row-span-2"
+        className="col-span-full row-span-2 rounded-md border md:col-span-4 md:row-span-6 lg:col-span-6 lg:row-span-8"
         src="/images/lloyd_richards_portrait.png"
         alt="Half body head shot of Lloyd Richards"
         width={400}
         height={600}
         priority
       />
-      <section className="col-span-6 col-start-7 self-center justify-self-center">
-        <h1 className={typefaceHeading1()}>Hello, I&apos;m Lloyd</h1>
-        <blockquote className={typefaceBlockQuote()}>
-          Exploring innovative ways of visualizing a sustainable future through
-          data
-        </blockquote>
-      </section>
-      <section className="col-span-8 self-center justify-self-center">
-        <h2 className={typefaceHeading2()}>How to Use</h2>
+      <Tile
+        size="unset"
+        className="col-span-full row-span-2 grid items-center px-8 md:col-span-12 lg:col-span-18 lg:row-span-2"
+      >
+        <h1 className={typefaceHeading1("mt-0")}>Hello, I&apos;m Lloyd</h1>
+      </Tile>
+      <Tile
+        size="unset"
+        className="col-span-full row-span-4 grid items-center p-4 md:col-span-12 lg:col-span-17 lg:row-span-6"
+      >
         <p className={typefaceBody1()}>
           This website is a personal portfolio and lab space where I can
           showcase my projects, experiment with new ideas, and share my thoughts
@@ -40,19 +38,22 @@ const HomePage = async () => {
           recent projects, read my lab and blog posts, or connect with me
           through social media.
         </p>
-      </section>
+      </Tile>
       {allProjects.map(({ frontmatter }) => (
-        <ProjectCard key={"project" + frontmatter.slug} project={frontmatter} />
+        <Tile size="box-md" key={"project" + frontmatter.slug}>
+          <ProjectCard
+            key={"project" + frontmatter.slug}
+            project={frontmatter}
+            className="col-span-8 row-span-6"
+          />
+        </Tile>
       ))}
-      <div className="col-span-3" />
       {allLabs.map(({ frontmatter }) => (
-        <PostCard
-          key={"lab" + frontmatter.slug}
-          post={frontmatter}
-          className="col-span-3"
-        />
+        <Tile size="square-md" key={"lab" + frontmatter.slug}>
+          <LabCard lab={frontmatter} />
+        </Tile>
       ))}
-    </main>
+    </Mosaic>
   );
 };
 

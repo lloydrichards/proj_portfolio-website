@@ -1,5 +1,6 @@
 import { Timeline } from "@/components/chart/timeline/Timeline";
 import { ResponsiveWrapper } from "@/components/template/responsive_wrapper";
+import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { getAllOccupations } from "@/services/get-all-occupations";
 
 const TimelinePage: React.FC = async () => {
@@ -7,7 +8,7 @@ const TimelinePage: React.FC = async () => {
   const data = allOccupations.map((o) => o.frontmatter);
   return (
     <main className="col-span-full">
-      <h1>Welcome to the timeline page</h1>
+      <h1 className={typefaceHeading1()}>Welcome to the timeline page</h1>
       <ResponsiveWrapper>
         <Timeline data={data} />
       </ResponsiveWrapper>

@@ -32,6 +32,13 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  --grid-auto-rows-lg: calc(
+    min(100vw, var(--container-6xl)) / 24 - var(--spacing) * 48 / 23
+  );
+  --grid-auto-rows-md: calc(100vw / 16 - var(--spacing) * 32 / 15);
+  --grid-auto-rows-sm: calc(100vw / 12 - var(--spacing) * 24 / 11);
+  --grid-auto-rows-xs: calc(100vw / 8 - var(--spacing) * 16 / 7);
 }
 
 /* Default theme */
@@ -139,4 +146,12 @@
     --ring: var(--color-blue-100);
     --radius: 0.3rem;
   }
+}
+
+@utility mosaic-rows {
+  @apply auto-rows-xs sm:auto-rows-xs md:auto-rows-md lg:auto-rows-lg gap-2;
+}
+
+@utility mosaic-columns {
+  @apply grid-cols-8 gap-2 sm:grid-cols-12 md:grid-cols-16 lg:grid-cols-24;
 }

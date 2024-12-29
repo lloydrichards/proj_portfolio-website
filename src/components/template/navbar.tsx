@@ -1,99 +1,71 @@
-import { buttonVariants } from "@/components/atom/button";
+"use client";
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/atom/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/atom/sheet";
-import { typefaceHeading3 } from "@/components/tokens/typeface";
-import { Github, Instagram, Linkedin, Menu } from "lucide-react";
+  typefaceHeading3,
+  typefaceListItem,
+} from "@/components/tokens/typeface";
+import { cva } from "class-variance-authority";
 import Link from "next/link";
-import { FC } from "react";
+import { usePathname } from "next/navigation";
+import { Tile } from "../atom/tile";
+import { FlaskConical, Layers, Ruler, User } from "lucide-react";
 
-interface NavRouteProps {
-  vertical?: boolean;
-}
-const NavRoutes: FC<NavRouteProps> = ({ vertical }) => {
+const navLinkVariant = cva("flex size-full items-center justify-center", {
+  variants: {
+    active: {
+      true: "bg-accent text-accent-foreground",
+      false: "hover:bg-accent hover:text-accent-foreground",
+    },
+  },
+  defaultVariants: {
+    active: false,
+  },
+});
+
+export const Navbar: React.FC = () => {
+  const pathname = usePathname();
   const routes = [
-    // { href: "/about", label: "About" },
-    { href: "/project", label: "Projects" },
-    { href: "/lab", label: "Lab" },
-    { href: "/timeline", label: "Timeline" },
+    { href: "/about", label: "About", icon: <User className="md:hidden" /> },
+    {
+      href: "/project",
+      label: "Projects",
+      icon: <Layers className="md:hidden" />,
+    },
+    {
+      href: "/lab",
+      label: "Lab",
+      icon: <FlaskConical className="md:hidden" />,
+    },
+    {
+      href: "/timeline",
+      label: "Timeline",
+      icon: <Ruler className="md:hidden" />,
+    },
   ];
 
   return (
-    <NavigationMenuList className={vertical ? "flex-col gap-4" : "flex-row"}>
-      {routes.map((route) => (
-        <NavigationMenuItem key={route.href}>
-          <Link href={route.href} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {route.label}
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      ))}
-      <NavigationMenuItem>
-        <NavigationMenuTrigger>Social</NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <div className="flex w-72 flex-col gap-4 p-4">
-            <NavigationMenuLink
-              className="flex gap-2"
-              target="_blank"
-              href="https://www.instagram.com/lloyd_bydesign/"
-            >
-              <Instagram />
-              Instagram
-            </NavigationMenuLink>
-            <NavigationMenuLink
-              className="flex gap-2"
-              target="_blank"
-              href="https://www.linkedin.com/in/lloyddrichards/"
-            >
-              <Linkedin />
-              LinkedIn
-            </NavigationMenuLink>
-            <NavigationMenuLink
-              className="flex gap-2"
-              target="_blank"
-              href="https://github.com/lloydrichards"
-            >
-              <Github />
-              Github
-            </NavigationMenuLink>
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    </NavigationMenuList>
-  );
-};
-
-export const Navbar: React.FC = () => {
-  return (
-    <div className="col-span-full grid grid-cols-subgrid py-2">
-      <Sheet>
-        <SheetTrigger className="md:hidden">
-          <div className={buttonVariants({ variant: "ghost", size: "sm" })}>
-            <Menu size={32} />
-          </div>
-        </SheetTrigger>
-        <SheetContent side="left" className="w-[80vw] py-24">
-          <NavigationMenu orientation="vertical">
-            <NavRoutes vertical />
-          </NavigationMenu>
-        </SheetContent>
-      </Sheet>
-
-      <Link href="/" className={typefaceHeading3("col-span-6")}>
+    <section className="mosaic-rows col-span-full grid grid-cols-subgrid">
+      <Link
+        href="/"
+        className={typefaceHeading3(
+          "col-[1/-5] mt-0 md:col-[1/-9] lg:col-[1/-13]",
+        )}
+      >
         Lloyd Richards .dev
       </Link>
-
-      <NavigationMenu className="col-end-14 hidden justify-end md:flex">
-        <NavRoutes />
-      </NavigationMenu>
-    </div>
+      {routes.map((route) => (
+        <Tile key={route.href} size="box-xxs">
+          <Link
+            href={route.href}
+            className={navLinkVariant({
+              active: pathname.includes(route.href),
+              className: typefaceListItem("mt-0 flex-col gap-2 uppercase"),
+            })}
+          >
+            {route.icon}
+            <span className="hidden md:block">{route.label}</span>
+          </Link>
+        </Tile>
+      ))}
+    </section>
   );
 };

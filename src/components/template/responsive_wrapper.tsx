@@ -9,6 +9,7 @@ import {
 } from "react";
 
 import { useMeasure } from "@uidotdev/usehooks";
+import { cn } from "@/lib/utils";
 
 type ResponsiveState = {
   width: number;
@@ -19,9 +20,11 @@ const ResponsiveContext = createContext<ResponsiveState | null>(null);
 
 export const ResponsiveWrapper = ({
   children,
+  className,
   onHeightChange,
 }: {
   children?: ReactNode;
+  className?: string;
   onHeightChange?: (height: number) => void;
 }) => {
   const [ref, { width, height }] = useMeasure();
@@ -34,7 +37,7 @@ export const ResponsiveWrapper = ({
     <ResponsiveContext.Provider
       value={{ width: width ?? 0, height: height ?? 0 }}
     >
-      <div ref={ref} style={{ width: "100%", height: "100%" }}>
+      <div ref={ref} className={cn("size-full", className)}>
         {children}
       </div>
     </ResponsiveContext.Provider>

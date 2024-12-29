@@ -30,7 +30,7 @@ export const Timeline: FC<TimelineProps> = ({
   },
 }) => {
   const { width } = useResponsive();
-  const textBlockHeight = 160;
+  const textBlockHeight = 180;
   const textMargin = 180;
   const height = data.length * textBlockHeight || maxHeight || 400;
   const innerHeight = height - margin.top - margin.bottom;
@@ -97,7 +97,7 @@ export const Timeline: FC<TimelineProps> = ({
         height,
         width,
         maxHeight: maxHeight || undefined,
-        overflow: "scroll",
+        overflow: "hidden",
       }}
     >
       <svg width={width} height={height}>

@@ -209,3 +209,5 @@
     @apply bg-background text-foreground m-2 transition duration-300;
   }
 }
+
+@import "./mdx.css";

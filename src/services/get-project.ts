@@ -7,6 +7,10 @@ import { PROJECT_PATH } from "./consts";
 import { getSource } from "./utils";
 import { Project, ProjectMeta } from "@/types/domain";
 import { ReactElement } from "react";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 
 type ProjectContent = {
   content: ReactElement;
@@ -25,6 +29,22 @@ export const getProject = async (
     source,
     options: {
       parseFrontmatter: true,
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+          rehypeSlug,
+          rehypePrettyCode,
+          [
+            rehypeAutolinkHeadings,
+            {
+              properties: {
+                className: ["subheading-anchor"],
+                ariaLabel: "Link to section",
+              },
+            },
+          ],
+        ],
+      },
     },
     components: { ...components },
   });

@@ -1,18 +1,8 @@
-"use client";
-
-import Link from "next/link";
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import { Project } from "@/types/domain";
-import { usePathname } from "next/navigation";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "../atom/navigation-menu";
-import { Tile } from "../atom/tile";
-import { cn } from "@/lib/utils";
+import { NavigationMenu, NavigationMenuList } from "../atom/navigation-menu";
+import { NavListItem } from "../molecule/nav_list_item";
+import { Badge } from "../atom/badge";
 
 interface ProjectNavigationProps {
   projects: Array<Project>;
@@ -26,57 +16,20 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
     <aside className="hidden md:contents">
       <NavigationMenu aria-label="Project Navigation" orientation="vertical">
         <NavigationMenuList className="contents">
-          <ProjectNavItem href="/projects" exact className={className}>
+          <NavListItem href="/project" exact className={className}>
             All Projects
-          </ProjectNavItem>
+          </NavListItem>
 
           {projects
             .filter((d) => d.isPublished)
             .map((p) => (
-              <ProjectNavItem
-                key={p.slug}
-                href={p.pathname}
-                className={className}
-              >
-                {p.id}
-                <span className="hidden lg:line-clamp-1"> - {p.title}</span>
-              </ProjectNavItem>
+              <NavListItem key={p.slug} href={p.pathname} className={className}>
+                <Badge variant="outline">{p.id}</Badge>
+                <span className="hidden lg:line-clamp-1">{p.title}</span>
+              </NavListItem>
             ))}
         </NavigationMenuList>
       </NavigationMenu>
-      {projects.length % 2 == 0 ? (
-        <Tile size="box-xxs" outline={false} className={className} />
-      ) : null}
     </aside>
-  );
-};
-
-const ProjectNavItem: FC<{
-  children: ReactNode;
-  href: string;
-  exact?: boolean;
-  className?: string;
-}> = ({ children, href, exact, className }) => {
-  const pathname = usePathname();
-  return (
-    <Tile
-      key={href}
-      size="box-xxs"
-      outline={false}
-      className={cn("overflow-visible", className)}
-    >
-      <NavigationMenuItem>
-        <Link href={href} legacyBehavior passHref>
-          <NavigationMenuLink
-            className={navigationMenuTriggerStyle({
-              active: exact ? pathname == href : pathname.includes(href),
-              className: "@min-[120px]:justify-start",
-            })}
-          >
-            {children}
-          </NavigationMenuLink>
-        </Link>
-      </NavigationMenuItem>
-    </Tile>
   );
 };

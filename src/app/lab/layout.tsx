@@ -11,11 +11,8 @@ const LabLayout: FC<{
   const content = await getAllLabs();
   const allLabs = content.map(({ frontmatter }) => frontmatter);
   return (
-    <Mosaic>
-      <LabNavigation
-        labs={allLabs}
-        className="md:col-span-2 md:col-start-1 lg:col-span-6 lg:col-start-1"
-      />
+    <Mosaic sidebar>
+      <LabNavigation labs={allLabs} />
       <LabInfoCard labs={allLabs} />
       <LabContent labs={allLabs}>{children}</LabContent>
     </Mosaic>

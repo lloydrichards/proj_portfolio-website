@@ -6,7 +6,7 @@ import { FC } from "react";
 const LabOverviewPage: FC = async () => {
   const allLabs = await getAllLabs();
   return (
-    <>
+    <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       {allLabs.map(({ frontmatter }) => (
         <Tile
           key={frontmatter.slug}
@@ -15,7 +15,7 @@ const LabOverviewPage: FC = async () => {
           <LabCard lab={frontmatter} asLink />
         </Tile>
       ))}
-    </>
+    </article>
   );
 };
 

@@ -29,7 +29,7 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
     return null;
   }
   return (
-    <Tile size="unset" className="col-[3/-1] row-span-4 lg:col-[7/-1]">
+    <Tile size="unset" className="col-span-full">
       <Card className={className}>
         <CardHeader className="flex-row justify-between pb-0">
           <div className="flex items-center gap-2 opacity-60">

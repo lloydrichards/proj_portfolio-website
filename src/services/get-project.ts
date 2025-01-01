@@ -37,6 +37,7 @@ export const getProject = async (
           [
             rehypeAutolinkHeadings,
             {
+              behavior: "append",
               properties: {
                 className: ["subheading-anchor"],
                 ariaLabel: "Link to section",

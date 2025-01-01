@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.6.0...v1.7.0) (2025-01-01)
+
+
+### Features
+
+* **layout:** create mosaic layout ([434d5b8](https://github.com/lloydrichards/proj_portfolio-website/commit/434d5b804e96ca5c8dc9895277b754fb777b6a15))
+
 # [1.6.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.5.2...v1.6.0) (2024-10-27)
 
 ### Bug Fixes

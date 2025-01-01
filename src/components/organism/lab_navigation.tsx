@@ -1,18 +1,9 @@
-"use client";
-
-import Link from "next/link";
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import { Lab } from "@/types/domain";
-import { usePathname } from "next/navigation";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "../atom/navigation-menu";
-import { Tile } from "../atom/tile";
+import { NavigationMenu, NavigationMenuList } from "../atom/navigation-menu";
 import { cn } from "@/lib/utils";
+import { NavListItem } from "../molecule/nav_list_item";
+import { Badge } from "../atom/badge";
 
 interface LabNavigationProps {
   labs: Array<Lab>;
@@ -20,55 +11,29 @@ interface LabNavigationProps {
 }
 export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
   return (
-    <aside className="hidden md:contents">
-      <NavigationMenu aria-label="Lab Navigation" orientation="vertical">
-        <NavigationMenuList className="contents">
-          <LabNavItem href="/Labs" exact className={className}>
-            All Labs
-          </LabNavItem>
+    <NavigationMenu
+      aria-label="Lab Navigation"
+      orientation="vertical"
+      className="hidden md:contents"
+    >
+      <NavigationMenuList className="contents">
+        <NavListItem href="/Labs" exact className={className}>
+          All Labs
+        </NavListItem>
 
-          {labs
-            .filter((d) => d.isPublished)
-            .map((p) => (
-              <LabNavItem
-                key={p.slug}
-                href={p.pathname}
-                className={cn("overflow-visible", className)}
-              >
-                {p.id}
-                <span className="hidden lg:line-clamp-1"> - {p.title}</span>
-              </LabNavItem>
-            ))}
-        </NavigationMenuList>
-      </NavigationMenu>
-      {labs.length % 2 == 0 ? (
-        <Tile size="box-xxs" outline={false} className={className} />
-      ) : null}
-    </aside>
-  );
-};
-
-const LabNavItem: FC<{
-  children: ReactNode;
-  href: string;
-  exact?: boolean;
-  className?: string;
-}> = ({ children, href, exact, className }) => {
-  const pathname = usePathname();
-  return (
-    <Tile key={href} size="box-xxs" outline={false} className={className}>
-      <NavigationMenuItem>
-        <Link href={href} legacyBehavior passHref>
-          <NavigationMenuLink
-            className={navigationMenuTriggerStyle({
-              active: exact ? pathname == href : pathname.includes(href),
-              className: "@min-[120px]:justify-start",
-            })}
-          >
-            {children}
-          </NavigationMenuLink>
-        </Link>
-      </NavigationMenuItem>
-    </Tile>
+        {labs
+          .filter((d) => d.isPublished)
+          .map((p) => (
+            <NavListItem
+              key={p.slug}
+              href={p.pathname}
+              className={cn("overflow-visible", className)}
+            >
+              <Badge variant="outline">{p.id}</Badge>
+              <span className="hidden lg:line-clamp-1">{p.title}</span>
+            </NavListItem>
+          ))}
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 };

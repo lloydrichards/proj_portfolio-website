@@ -9,11 +9,8 @@ const ProjectLayout: FC<{
   const content = await getAllProjects();
   const allProjects = content.map(({ frontmatter }) => frontmatter);
   return (
-    <Mosaic>
-      <ProjectNavigation
-        projects={allProjects}
-        className="md:col-span-2 md:col-start-1 lg:col-span-6 lg:col-start-1"
-      />
+    <Mosaic sidebar>
+      <ProjectNavigation projects={allProjects} />
       {children}
     </Mosaic>
   );

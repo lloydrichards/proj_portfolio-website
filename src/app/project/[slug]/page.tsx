@@ -16,13 +16,11 @@ const ProjectPage = async ({
 
   return (
     <>
-      <section className="col-span-full row-span-2 md:col-[3/-1] lg:col-[7/-1]">
+      <section className="mosaic-rows col-span-full grid">
         <h1>{frontmatter.title}</h1>
-        <p>{frontmatter.description}</p>
+        <p className="row-span-2">{frontmatter.description}</p>
       </section>
-      <article className="col-span-full row-span-10 md:col-[3/-1] md:row-span-24 lg:col-[7/-1]">
-        {content}
-      </article>
+      <article className="col-span-full mb-16">{content}</article>
     </>
   );
 };

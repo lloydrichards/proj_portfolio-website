@@ -6,7 +6,7 @@ import { FC } from "react";
 const ProjectOverviewPage: FC = async () => {
   const allProjects = await getAllProjects();
   return (
-    <>
+    <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       {allProjects.map(({ frontmatter }, idx) => (
         <Tile
           key={frontmatter.slug}
@@ -15,7 +15,7 @@ const ProjectOverviewPage: FC = async () => {
           <ProjectCard project={frontmatter} asLink />
         </Tile>
       ))}
-    </>
+    </article>
   );
 };
 

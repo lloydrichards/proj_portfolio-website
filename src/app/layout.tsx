@@ -1,22 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "@/styles/globals.css";
 import { inter, josefin_sans, roboto_mono } from "@/styles/fonts";
+
+import "@/styles/globals.css";
 
 import { Navbar } from "@/components/organism/navbar";
 import { Footer } from "@/components/organism/footer";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "next-themes";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Lloyd Richards Design",
@@ -59,7 +49,7 @@ export default function RootLayout({
         className={cn(
           "min-h-dvh w-full lg:max-w-6xl",
           "mosaic-columns grid grid-flow-dense",
-          "justify-self-center",
+          "justify-self-center p-2",
         )}
       >
         <ThemeProvider attribute="class" enableSystem>

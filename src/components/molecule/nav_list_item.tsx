@@ -4,26 +4,32 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@/components/atom/navigation-menu";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { FC } from "react";
+import { usePathname } from "next/navigation";
+import { FC, ReactNode } from "react";
+import { Tile } from "../atom/tile";
 
-interface PostsListItemProps {
+export const NavListItem: FC<{
+  children: ReactNode;
   href: string;
-  children?: React.ReactNode;
+  exact?: boolean;
   className?: string;
-}
-
-export const NavListItem: FC<PostsListItemProps> = ({ children, href }) => {
+}> = ({ children, href, exact, className }) => {
+  const pathname = usePathname();
   return (
-    <NavigationMenuItem className="w-full">
-      <Link href={href} legacyBehavior passHref>
-        <NavigationMenuLink
-          className={cn(navigationMenuTriggerStyle(), "group w-full gap-1")}
-        >
-          {children}
-        </NavigationMenuLink>
-      </Link>
-    </NavigationMenuItem>
+    <Tile key={href} size="box-xxs" outline={false} className={className}>
+      <NavigationMenuItem>
+        <Link href={href} legacyBehavior passHref>
+          <NavigationMenuLink
+            className={navigationMenuTriggerStyle({
+              active: exact ? pathname == href : pathname.includes(href),
+              className: "flex gap-2 @min-[120px]:justify-start",
+            })}
+          >
+            {children}
+          </NavigationMenuLink>
+        </Link>
+      </NavigationMenuItem>
+    </Tile>
   );
 };

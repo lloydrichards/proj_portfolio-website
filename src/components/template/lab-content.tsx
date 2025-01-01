@@ -22,12 +22,7 @@ export const LabContent: FC<LabContentProps> = ({
     return <>{children}</>;
   }
   return (
-    <article
-      className={cn(
-        "col-span-full row-span-24 *:col-span-full md:col-[3/-1] lg:col-span-18 lg:row-span-24",
-        className,
-      )}
-    >
+    <article className={cn("col-span-full mb-16", className)}>
       {children}
     </article>
   );

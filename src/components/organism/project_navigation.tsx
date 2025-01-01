@@ -3,8 +3,16 @@
 import Link from "next/link";
 import { FC, ReactNode } from "react";
 import { Project } from "@/types/domain";
-import { cva } from "class-variance-authority";
 import { usePathname } from "next/navigation";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "../atom/navigation-menu";
+import { Tile } from "../atom/tile";
+import { cn } from "@/lib/utils";
 
 interface ProjectNavigationProps {
   projects: Array<Project>;
@@ -15,38 +23,33 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
   className,
 }) => {
   return (
-    <nav className="hidden md:contents">
-      <ProjectNavItem href="/project" exact className={className}>
-        All Projects
-      </ProjectNavItem>
-      {projects
-        .filter((d) => d.isPublished)
-        .map((p) => (
-          <ProjectNavItem key={p.slug} href={p.pathname} className={className}>
-            {p.id}
-            <span className="hidden lg:line-clamp-1"> - {p.title}</span>
+    <aside className="hidden md:contents">
+      <NavigationMenu aria-label="Project Navigation" orientation="vertical">
+        <NavigationMenuList className="contents">
+          <ProjectNavItem href="/projects" exact className={className}>
+            All Projects
           </ProjectNavItem>
-        ))}
-      {projects.length % 2 == 0 ? <div className={className} /> : null}
-    </nav>
+
+          {projects
+            .filter((d) => d.isPublished)
+            .map((p) => (
+              <ProjectNavItem
+                key={p.slug}
+                href={p.pathname}
+                className={className}
+              >
+                {p.id}
+                <span className="hidden lg:line-clamp-1"> - {p.title}</span>
+              </ProjectNavItem>
+            ))}
+        </NavigationMenuList>
+      </NavigationMenu>
+      {projects.length % 2 == 0 ? (
+        <Tile size="box-xxs" outline={false} className={className} />
+      ) : null}
+    </aside>
   );
 };
-
-const navLinkVariant = cva(
-  "flex size-full items-center justify-center rounded-md",
-  {
-    variants: {
-      active: {
-        true: "bg-accent-foreground/50 text-accent",
-        false:
-          "bg-accent-foreground/10 hover:bg-accent-foreground/20 hover:text-accent-foreground",
-      },
-    },
-    defaultVariants: {
-      active: false,
-    },
-  },
-);
 
 const ProjectNavItem: FC<{
   children: ReactNode;
@@ -56,14 +59,24 @@ const ProjectNavItem: FC<{
 }> = ({ children, href, exact, className }) => {
   const pathname = usePathname();
   return (
-    <Link
-      href={href}
-      className={navLinkVariant({
-        active: exact ? pathname == href : pathname.includes(href),
-        className,
-      })}
+    <Tile
+      key={href}
+      size="box-xxs"
+      outline={false}
+      className={cn("overflow-visible", className)}
     >
-      {children}
-    </Link>
+      <NavigationMenuItem>
+        <Link href={href} legacyBehavior passHref>
+          <NavigationMenuLink
+            className={navigationMenuTriggerStyle({
+              active: exact ? pathname == href : pathname.includes(href),
+              className: "@min-[120px]:justify-start",
+            })}
+          >
+            {children}
+          </NavigationMenuLink>
+        </Link>
+      </NavigationMenuItem>
+    </Tile>
   );
 };

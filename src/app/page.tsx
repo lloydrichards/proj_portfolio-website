@@ -1,6 +1,7 @@
 import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
+import { ThemeToggle } from "@/components/molecule/theme-toggle";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody1, typefaceHeading1 } from "@/components/tokens/typeface";
 import { getFeaturedLabs } from "@/services/get-featured-labs";
@@ -14,7 +15,7 @@ const HomePage = async () => {
   return (
     <Mosaic>
       <Image
-        className="col-span-full row-span-2 rounded-md border md:col-span-4 md:row-span-6 lg:col-span-6 lg:row-span-8"
+        className="col-span-full row-span-2 rounded-md md:col-span-4 md:row-span-6 lg:col-span-6 lg:row-span-8"
         src="/images/lloyd_richards_portrait.png"
         alt="Half body head shot of Lloyd Richards"
         width={400}
@@ -53,6 +54,9 @@ const HomePage = async () => {
           <LabCard lab={frontmatter} />
         </Tile>
       ))}
+      <Tile>
+        <ThemeToggle />
+      </Tile>
     </Mosaic>
   );
 };

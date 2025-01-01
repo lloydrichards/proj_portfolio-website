@@ -1,8 +1,8 @@
 import { FC, ReactNode } from "react";
-import { LabNavigation } from "@/components/organism/lab_navigation";
+import { LabNavigation } from "./lab_navigation";
 import { getAllLabs } from "@/services/get-all-labs";
-import { LabInfoCard } from "@/components/molecule/lab-info-card";
-import { LabContent } from "@/components/template/lab-content";
+import { LabInfoCard } from "@/app/lab/lab-info-card";
+import { LabContent } from "@/app/lab/lab-content";
 import { Mosaic } from "@/components/template/mosaic";
 
 const LabLayout: FC<{

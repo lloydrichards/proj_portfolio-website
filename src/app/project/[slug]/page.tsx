@@ -1,3 +1,4 @@
+import { ProjectInfoCard } from "@/app/project/[slug]/project-info-card";
 import { getProject } from "@/services/get-project";
 import { notFound } from "next/navigation";
 
@@ -16,11 +17,8 @@ const ProjectPage = async ({
 
   return (
     <>
-      <section className="mosaic-rows col-span-full grid">
-        <h1>{frontmatter.title}</h1>
-        <p className="row-span-2">{frontmatter.description}</p>
-      </section>
-      <article className="col-span-full mb-16">{content}</article>
+      <ProjectInfoCard project={frontmatter} />
+      <article className="col-span-full mt-8 mb-16">{content}</article>
     </>
   );
 };

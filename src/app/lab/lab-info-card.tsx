@@ -8,13 +8,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../atom/card";
+} from "@/components/atom/card";
 import { formatDate } from "@/lib/format";
 import { Github } from "lucide-react";
-import { Button } from "../atom/button";
-import { Badge } from "../atom/badge";
+import { Button } from "@/components/atom/button";
+import { Badge } from "@/components/atom/badge";
 import { usePathname } from "next/navigation";
-import { Tile } from "../atom/tile";
+import { Tile } from "@/components/atom/tile";
 
 interface LabInfoCardProps {
   labs: Array<Lab>;

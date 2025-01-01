@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
+    "release": "semantic-release",
     "type-check": "tsc --build"
   },
   "dependencies": {

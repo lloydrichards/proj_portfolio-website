@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
+import { inter, josefin_sans, roboto_mono } from "@/styles/fonts";
+
 import { Navbar } from "@/components/organism/navbar";
 import { Footer } from "@/components/organism/footer";
 import { cn } from "@/lib/utils";
@@ -48,10 +50,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
+      suppressHydrationWarning
+    >
       <body
         className={cn(
-          `${geistSans.variable} ${geistMono.variable}`,
           "min-h-dvh w-full lg:max-w-6xl",
           "mosaic-columns grid grid-flow-dense",
           "justify-self-center",

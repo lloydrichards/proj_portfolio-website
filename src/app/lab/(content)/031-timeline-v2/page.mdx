@@ -3,7 +3,7 @@ export const metadata = {
   title: "D3 Timeline for CV (v2)",
   date: "2023-07-02",
   description: "Recreating my CV timeline with D3.",
-  tags: ["d3"]
+  tags: ["d3"],
 };
 
 import { SimpleTimelineChart, mockOccupations } from "./031.tsx";
@@ -15,7 +15,6 @@ how to draw the lines, its easier to start with a simple version of the chart.
 ### Simple Timeline
 
     <SimpleTimelineChart width={500} data={mockOccupations} />
-
 
 It was quite easy to get the helper functions for `lookupInRange()` and using it
 to map over the data to add the channel property. This can be used with a

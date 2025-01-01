@@ -14,11 +14,9 @@ const LabLayout: FC<{
     <Mosaic>
       <LabNavigation
         labs={allLabs}
-        className="col-span-2 col-start-1 lg:col-span-6 lg:col-start-1"
+        className="md:col-span-2 md:col-start-1 lg:col-span-6 lg:col-start-1"
       />
-
       <LabInfoCard labs={allLabs} />
-
       <LabContent labs={allLabs}>{children}</LabContent>
     </Mosaic>
   );

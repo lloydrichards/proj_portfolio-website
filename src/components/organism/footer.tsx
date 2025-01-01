@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
       <Tile
         size="unset"
         outline={false}
-        className="col-[1/-4] grid items-center"
+        className="col-[1/-4] grid items-center bg-transparent"
       >
         lloydrichards.dev
       </Tile>

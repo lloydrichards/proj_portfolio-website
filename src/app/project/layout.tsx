@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 import { ProjectNavigation } from "@/components/organism/project_navigation";
 import { getAllProjects } from "@/services/get-all-projects";
-import { cn } from "@/lib/utils";
 import { Mosaic } from "@/components/template/mosaic";
 
 const ProjectLayout: FC<{
@@ -13,7 +12,7 @@ const ProjectLayout: FC<{
     <Mosaic>
       <ProjectNavigation
         projects={allProjects}
-        className="col-span-2 col-start-1 lg:col-span-6 lg:col-start-1"
+        className="md:col-span-2 md:col-start-1 lg:col-span-6 lg:col-start-1"
       />
       {children}
     </Mosaic>

@@ -24,13 +24,13 @@ const HomePage = async () => {
       />
       <Tile
         size="unset"
-        className="col-span-full row-span-2 grid items-center px-8 md:col-span-12 lg:col-span-18 lg:row-span-2"
+        className="col-[1/-2] row-span-1 grid items-center px-8 md:col-span-10 md:row-span-2 lg:col-span-16 lg:row-span-2"
       >
         <h1 className={typefaceHeading1("mt-0")}>Hello, I&apos;m Lloyd</h1>
       </Tile>
       <Tile
         size="unset"
-        className="col-span-full row-span-4 grid items-center p-4 md:col-span-12 lg:col-span-17 lg:row-span-6"
+        className="col-span-full row-span-4 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-6"
       >
         <p className={typefaceBody1()}>
           This website is a personal portfolio and lab space where I can

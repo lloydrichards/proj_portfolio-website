@@ -1,0 +1,65 @@
+---
+id: 2400
+title: Outlier Micro Frontend
+date: 2024-06-12
+description:
+  Web application for the localized schedule for the Outlier Conference.
+  Full-stack NextJS application with a Postgres database. The application uses a
+  micro-frontend architecture to allow for independent development and
+  deployment of each section of the application.
+isFeatured: true
+category:
+  - DEVELOP
+  - DESIGN
+image: /images/projects/2400/thumb_outlier-micro-frontend.png
+href: https://www.outlierconf.com/outlier-2024/home#agenda
+repo: https://github.com/lloydrichards/proj_outlier-microfrontend
+---
+
+For the Outlier Conference, I developed a web application to display the
+localized schedule for the event. In the past with the
+[Outlier Conf App](/project/2100-outlier-conf-app) we had a native mobile
+application, but this year we wanted to try something different. The application
+is a full-stack NextJS application with a Postgres database, and is embedded
+directly into the Outlier Conference website using an iFrame.
+
+<iframe
+  src="https://outlier-microfrontend.vercel.app/embed"
+  className="h-200 w-full p-2"
+></iframe>
+
+## Project Overview
+
+The Outlier Conference app is a way for attendees to view the schedule for the
+conference in their local timezone. With attendees from all over the world, it
+was important to have a way for them to see the schedule in their local time,
+and in the past we had issues with attendees missing sessions because they were
+in a different timezone.
+
+Another important feature of the application is the Unconf sessions. These are
+sessions that are submitted by the attendees and are not part of the official
+schedule. Creating a way for attendees to submit and view these sessions was
+important for the conference, and required the data to be updated in real-time.
+
+## Challenges and Insights
+
+Working from the designs build for the first version of the Outlier Conference
+App it was fairly easy to build the application. Creating specific pages for the
+embedded layout allowed for the application to have separate dashboards for
+adding and monitoring the schedule.
+
+With the authentication system in place, the application was able to be manage
+the Unconf sessions submitted by the attendees. The unconf dashboard could then
+be used to approve or reject the sessions, making them visible on the schedule.
+
+![](/images/projects/2400/outlier-micro-frontend-06.png)
+
+## Key Learnings
+
+Rebuilding the Outlier Conference App as a web application provided valuable
+insights:
+
+- The importance of having a localized schedule for a global event
+- The benefits of using a micro-frontend architecture to allow for independent
+  development and deployment of each section of the application
+- The importance of real-time data updates for user-generated content

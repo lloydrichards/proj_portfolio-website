@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { ProjectNavigation } from "@/components/organism/project_navigation";
+import { ProjectNavigation } from "./project_navigation";
 import { getAllProjects } from "@/services/get-all-projects";
 import { Mosaic } from "@/components/template/mosaic";
 

@@ -3,9 +3,10 @@ id: 2401
 title: Cancer Monitoring Dashboard
 date: 2024-10-01
 description:
-  A web application to provide visualization on data for cancer incidence,
-  deaths, and survival rates. The dashboard will be hosted on a dedicated server
-  by the Federal Statistical Office (BFS).
+  A web application to visualise data for cancer incidence, deaths, and survival
+  rates data, provided by the Federal Statistical Office (BFS). The
+  visualisations are interactive tools to explore the data using filtering,
+  tooltips, and focus elements.
 isFeatured: true
 category:
   - DEVELOP
@@ -14,40 +15,40 @@ href: https://krebs-monitoring.bfs.admin.ch/de/
 ---
 
 In collaboration with the Swiss Federal Statistical Office (BFS), I worked on
-the team developing a comprehensive cancer monitoring dashboard that transforms
-complex statistical data into accessible, meaningful visualizations. This
-project showcases our expertise in creating user-friendly data visualization
-tools while addressing unique challenges in public health communication.
+the team developing the Cancer Monitoring Dashboard, which visualises
+statistical data on cancer incidence, mortality, and survival. This project
+showcases our expertise in creating user-friendly data visualisation tools while
+addressing unique challenges in public health communication.
 
 ## Project Overview
 
-The dashboard consisted of three main pages with around 8 different chart types
-that showed statistical information about cancer incidence, deaths, and survival
-rates. The data was provided by the BFS and was visualized in a way that was
-easy to understand for the general public.
+The dashboard consisted of three main pages with around eight chart types
+showing statistical information about cancer incidence, deaths, and survival
+rates. The data was provided by the BFS and visualised in a way that was easy
+for the general public to understand.
 
 The development team split responsibilities across three main areas: Line
-Charts, Table Charts, and Layout + Theming. We emphasized accessibility and
-modularity by building charts using semantic HTML tables, though this approach
-presented its own challenges in terms of flexible height and state management.
+Charts, Table Charts, and Layout + Theming. To make the charts accessible and
+easy to navigate, they were built using a combination of semantic HTML tables
+and SVG built using D3.js. However, this approach presented challenges regarding
+flexible height and state management.
 
-A significant achievement was the expansion of our `swiss-federal-ci` library,
-which now acts as a component library, shared across multiple projects. This
-standardization effort improved consistency and efficiency in development.
+A significant achievement was expanding our `swiss-federal-ci` library, which is
+now a shared component library across multiple projects. This effort to
+standardise the UI components helps us work quickly and effectively to bring the
+design to life.
 
 ![](/images/projects/2401/cancer-monitoring-dashboard-01.png)
 
 ## Challenges and Insights
 
-Throughout the project, we encountered and overcame several significant
-challenges:
+Throughout the project, we encountered and overcame several challenges:
 
 - Managing complex data representations, including the distinction between zero
   values and non-existent data
 - Implementing sophisticated visual elements while maintaining accessibility
-- Communicating technical concepts to non-technical stakeholders
-- Ensuring absolute data accuracy, particularly important given the sensitive
-  nature of health statistics
+- Ensuring absolute data accuracy is critical, given the sensitive nature of
+  health statistics
 
 ## Key Learnings
 
@@ -57,14 +58,15 @@ This project provided valuable insights that will inform our future work:
   clients
 - The benefits of being flexible with initial project specifications when it
   serves the end product
-- The value of thorough planning and independent architecture decisions
+- The value of thorough planning and coordination between developers for
+  efficiency.
 
 ## Impact
 
-The Cancer Monitoring Dashboard represents a significant step forward in making
-public health data more accessible and understandable. It serves as a crucial
-tool for both healthcare professionals and the public, while maintaining the
-highest standards of data accuracy and user accessibility.
+The success of the Cancer Monitoring Dashboard is a practical step in making
+public health data more accessible and understandable. It serves as a tool for
+healthcare professionals and the public while maintaining the highest data
+accuracy standards and user accessibility expected from the BFS.
 
 ### Team
 

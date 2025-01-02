@@ -14,12 +14,12 @@ image: /images/projects/thumb_ipen-plastic-map.png
 href: https://ipen-plastic-map.vercel.app/
 ---
 
-I was approached by
-[Annabelle Vuille](https://www.linkedin.com/in/annabelle-vuille/) to develop her
-vision for the IPEN Plastic Map. The map visualizes the global distribution of
-plastic pollution data collected by the International Pollutants Elimination
-Network (IPEN). The map provides an interactive way to explore the data and
-learn more about the impact of plastic pollution on the environment.
+[Annabelle Vuille](https://www.linkedin.com/in/annabelle-vuille/) approached me
+to develop her vision for the IPEN Plastic Map. The map visualizes the global
+distribution of plastic pollution data collected by the
+[International Pollutants Elimination Network](https://www.stoppoisonplastic.org/)
+(IPEN) and provides an interactive way to explore the data and learn more about
+the impact of plastic pollution on the environment.
 
 ## Project Overview
 
@@ -28,50 +28,48 @@ distribution of plastic pollution data collected by the International Pollutants
 Elimination Network (IPEN). The map provides an interactive way to explore the
 data and learn more about the impact of plastic pollution on the environment.
 
-The map is built using Next.js, Mapbox, and React. The data is processed and
-provided through static files which were processed into GeoJSON format. The
-frontend application consumes the data and renders it on the map. The user can
-interact with the map by panning and zooming, and by selecting a data point to
-view more information about the pollution data.
+The application uses Next.js, Mapbox, and React. In the backend, raw data is
+provided and processed from static files into GeoJSONs. The frontend application
+consumes the data and renders it on the map. The user interacts with the map by
+panning, zooming, and selecting a data point to view more information about the
+pollution data.
 
 ![](/images/projects/2402/ipen-plastic-map-01.png)
 
 ## Challenges and Insights
 
 One of the main challenges of this project was processing and providing the data
-in a format that could be consumed by the frontend application. The data was
-provided in excel file, which needed to be processed into GeoJSON format. This
-required writing a script to parse the excel file and convert it into GeoJSON
-format.
+in a format that the frontend application could consume. The raw data, an Excel
+file provided by IPEN and collected from project leaders, was parsed and
+transformed through a series of scripts to create the static GeoJSON files.
 
-Another challenge was rendering the data on the map in a way that was performant
-and user-friendly. The data consisted of hundreds of data points, with many
-unique attributes. To address this, we parsed and grouped the unique attributes
-and displayed them the filter panel. This allowed the user to filter the data
-points based on the attributes, making it easier to explore the data.
+Another challenge was rendering the data on the map in a performant and
+user-friendly way. The data comprises hundreds of tabular data points, each
+representing a report from IPEN. To make it easier for users to navigate the
+reports, I normalized common attributes like countries, partners, and types and
+grouped them into dropdown menus that the user could use to filter the data.
+
 ![](/images/projects/2402/ipen-plastic-map-02.png)
 
 ## Key Learnings
 
 This project provided valuable insights that will inform our future work:
 
-- The importance of data processing and providing the data in a format that can
-  be consumed by the frontend application
-- The benefits of using static files to provide the data, as it allows for
+- The importance of data processing and providing the data in a format that the
+  frontend application can consume
+- The benefits of using static files to provide the data are that it allows for
   faster loading times and better performance
 - The value of user-friendly design and interactivity in data visualization
   projects
 
 ## Impact
 
-The IPEN Plastic Map provides a valuable resource for researchers, policymakers,
-and the public to explore the global distribution of plastic pollution data. The
-map is designed to be easy to use and navigate, and provides a powerful tool for
-understanding the impact of plastic pollution on the environment.
-
-The success of this project has highlighted the value of visualizing complex
-data in an accessible way, and has provided a valuable resource for those
-working to address the issue of plastic pollution.
+The IPEN Plastic Map is a valuable resource for partners and the public to
+explore the global impact of work on plastic pollution. It is easy to use and
+navigate and demonstrates IPEN's impact on plastic pollution worldwide. This
+project's success has highlighted the value of visualizing complex data in an
+accessible way. It has also provided a valuable resource for IPEN to demonstrate
+its impact on plastic pollution.
 
 ### Team
 

@@ -16,6 +16,7 @@ import {
 } from "./components/tokens/typeface";
 import { cn } from "./lib/utils";
 import { Mermaid } from "./components/molecule/mermaid";
+import Image, { ImageProps } from "next/image";
 
 export const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -132,6 +133,10 @@ export const components = {
       className={cn("relative font-mono text-sm tracking-wider", className)}
       {...props}
     />
+  ),
+  img: ({ ...props }: ImageProps) => (
+    // eslint-disable-next-line jsx-a11y/alt-text
+    <Image sizes="100vw" width={100} height={200} {...props} />
   ),
   Mermaid,
   mermaid: Mermaid,

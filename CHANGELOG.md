@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.7.1...v1.8.0) (2025-01-04)
+
+
+### Features
+
+* :sparkles: add mermaid for creating charts in mdx ([3c37eb9](https://github.com/lloydrichards/proj_portfolio-website/commit/3c37eb9b65115e0a802900345597614173517411))
+
 ## [1.7.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.7.0...v1.7.1) (2025-01-04)
 
 

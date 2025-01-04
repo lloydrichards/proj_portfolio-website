@@ -1,3 +1,12 @@
+## [1.7.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.7.0...v1.7.1) (2025-01-04)
+
+
+### Bug Fixes
+
+* :bug: fit height of info card ([894ec05](https://github.com/lloydrichards/proj_portfolio-website/commit/894ec059dc133336f1656d82a1fff19998b53f0e))
+* :bug: fix up the layout of project info cards ([8a15401](https://github.com/lloydrichards/proj_portfolio-website/commit/8a15401bf7c66f1b42f822830ccb581d75b2065b))
+* fix images href ([bc561b7](https://github.com/lloydrichards/proj_portfolio-website/commit/bc561b7f5cebc50e267eb64c0088841022f66316))
+
 # [1.7.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.6.0...v1.7.0) (2025-01-01)
 
 

@@ -11,6 +11,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import mdxMermaid from "mdx-mermaid";
 
 type ProjectContent = {
   content: ReactElement;
@@ -30,7 +31,7 @@ export const getProject = async (
     options: {
       parseFrontmatter: true,
       mdxOptions: {
-        remarkPlugins: [remarkGfm],
+        remarkPlugins: [remarkGfm, mdxMermaid],
         rehypePlugins: [
           rehypeSlug,
           rehypePrettyCode,

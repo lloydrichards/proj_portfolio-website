@@ -15,6 +15,7 @@ import {
   typefaceBlockQuote,
 } from "./components/tokens/typeface";
 import { cn } from "./lib/utils";
+import { Mermaid } from "./components/molecule/mermaid";
 
 export const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -132,6 +133,8 @@ export const components = {
       {...props}
     />
   ),
+  Mermaid,
+  mermaid: Mermaid,
 };
 
 declare global {

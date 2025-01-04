@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+import mdxMermaid from "mdx-mermaid";
 
 const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
@@ -7,8 +8,11 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    // @ts-expect-error wrong types
-    remarkPlugins: [["remark-gfm", { strict: true, throwOnError: true }]],
+    remarkPlugins: [
+      [mdxMermaid],
+      // @ts-expect-error wrong types
+      ["remark-gfm", { strict: true, throwOnError: true }],
+    ],
     rehypePlugins: [
       // @ts-expect-error wrong types
       ["rehype-pretty-code", { strict: true, throwOnError: true }],

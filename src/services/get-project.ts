@@ -12,6 +12,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import mdxMermaid from "mdx-mermaid";
+import rehypeMdxImportMedia from "rehype-mdx-import-media";
 
 type ProjectContent = {
   content: ReactElement;
@@ -33,6 +34,7 @@ export const getProject = async (
       mdxOptions: {
         remarkPlugins: [remarkGfm, mdxMermaid],
         rehypePlugins: [
+          rehypeMdxImportMedia,
           rehypeSlug,
           rehypePrettyCode,
           [

@@ -8,6 +8,7 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
+    jsx: true,
     remarkPlugins: [
       [mdxMermaid],
       // @ts-expect-error wrong types
@@ -15,7 +16,12 @@ const withMDX = createMDX({
     ],
     rehypePlugins: [
       // @ts-expect-error wrong types
-      ["rehype-pretty-code", { strict: true, throwOnError: true }],
+      ["rehype-mdx-import-media", { strict: true, throwOnError: true }],
+      [
+        // @ts-expect-error wrong types
+        "rehype-pretty-code",
+        { strict: true, throwOnError: true, keepBackground: false },
+      ],
       // @ts-expect-error wrong types
       ["rehype-slug", { strict: true, throwOnError: true }],
       [

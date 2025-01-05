@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.8.0...v1.8.1) (2025-01-05)
+
+
+### Performance Improvements
+
+* :zap: optimize images ([5c20a30](https://github.com/lloydrichards/proj_portfolio-website/commit/5c20a30f44dab72413085dee19d8068d3726661c))
+
 # [1.8.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.7.1...v1.8.0) (2025-01-04)
 
 

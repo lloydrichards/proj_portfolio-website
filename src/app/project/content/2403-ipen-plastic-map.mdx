@@ -28,11 +28,11 @@ distribution of plastic pollution data collected by the International Pollutants
 Elimination Network (IPEN). The map provides an interactive way to explore the
 data and learn more about the impact of plastic pollution on the environment.
 
-The application uses Next.js, Mapbox, and React. In the backend, raw data is
-provided and processed from static files into GeoJSONs. The frontend application
-consumes the data and renders it on the map. The user interacts with the map by
-panning, zooming, and selecting a data point to view more information about the
-pollution data.
+The application uses `Next.js`, `Mapbox`, and `React`. In the backend, raw data
+is provided and processed from static files into GeoJSONs. The frontend
+application consumes the data and renders it on the map. The user interacts with
+the map by panning, zooming, and selecting a data point to view more information
+about the pollution data.
 
 ![](/images/projects/2403/ipen-plastic-map-01.png)
 
@@ -40,36 +40,46 @@ pollution data.
 
 One of the main challenges of this project was processing and providing the data
 in a format that the frontend application could consume. The raw data, an Excel
-file provided by IPEN and collected from project leaders, was parsed and
-transformed through a series of scripts to create the static GeoJSON files.
+file provided by IPEN and collected from project leaders, was difficult to
+normalize and included a lot of rich text. To create consistent data, I created
+a pipeline to parse and transform the data through a series of scripts and
+create static GeoJSON files.
 
 Another challenge was rendering the data on the map in a performant and
 user-friendly way. The data comprises hundreds of tabular data points, each
-representing a report from IPEN. To make it easier for users to navigate the
-reports, I normalized common attributes like countries, partners, and types and
-grouped them into dropdown menus that the user could use to filter the data.
+could represent multiple data points on the map. By normalizing string values in
+the raw data like countries, partners, and type, it was easier for users to
+navigate the reports through dropdown menus that the user could use to filter
+the data.
+
+Also, because of the data pipeline, it was possible to aggregate the GeoJSON
+into regional data points, which allowed new views of the data while keeping the
+map performant without the need for client-side aggregation. The country data
+was around 100kb, while the regional data only 5kb, which made the map load
+faster and more responsive.
 
 ![](/images/projects/2403/ipen-plastic-map-02.png)
 
 ## Key Learnings
 
-This project provided valuable insights that will inform our future work:
+This project provided great insights that I will carry forward in my future
+work:
 
-- The importance of data processing and providing the data in a format that the
-  frontend application can consume
-- The benefits of using static files to provide the data are that it allows for
-  faster loading times and better performance
-- The value of user-friendly design and interactivity in data visualization
-  projects
+- Creating a pipeline to process and transform raw data into a domain-specific
+  format made it easier for the frontend application to consume the data
+- Static files created in the build process allows for faster loading times and
+  better performance
+- Normalizing values like countries was very important when mapping to
+  geo-spacial data and creating aggregations
 
 ## Impact
 
 The IPEN Plastic Map is a valuable resource for partners and the public to
-explore the global impact of work on plastic pollution. It is easy to use and
-navigate and demonstrates IPEN's impact on plastic pollution worldwide. This
-project's success has highlighted the value of visualizing complex data in an
-accessible way. It has also provided a valuable resource for IPEN to demonstrate
-its impact on plastic pollution.
+explore the global impact of work on plastic pollution. Despite the small budget
+and tight timeline, the project was a success and the map is now live and
+available for use. IPEN can now use the map to communicate the impact of their
+work to a wider audience and raise awareness about the importance of reducing
+plastic pollution.
 
 ### Team
 

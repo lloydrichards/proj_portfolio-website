@@ -14,11 +14,11 @@ image: /images/projects/2402/thumb_cancer-monitoring-dashboard.png
 href: https://krebs-monitoring.bfs.admin.ch/de/
 ---
 
-In collaboration with the Swiss Federal Statistical Office (BFS), I worked on
-the team developing the Cancer Monitoring Dashboard, which visualises
-statistical data on cancer incidence, mortality, and survival. This project
-showcases our expertise in creating user-friendly data visualisation tools while
-addressing unique challenges in public health communication.
+In collaboration with the Swiss Federal Statistical Office (BFS) I worked on the
+team developing the Cancer Monitoring Dashboard which visualises statistical
+data on cancer incidence, mortality, and survival. This project showcases our
+expertise in creating user-friendly data visualisation tools while addressing
+unique challenges in public health communication.
 
 ## Project Overview
 
@@ -28,13 +28,15 @@ rates. The data was provided by the BFS and visualised in a way that was easy
 for the general public to understand.
 
 The development team split responsibilities across three main areas: Line
-Charts, Table Charts, and Layout + Theming. To make the charts accessible and
-easy to navigate, they were built using a combination of semantic HTML tables
-and SVG built using D3.js. However, this approach presented challenges regarding
-flexible height and state management.
+Charts, Table Charts, and Layout + Theming. My role was to tackle the Table
+Charts, consisting of Butterfly, Lollipop, Population Pyramids, Arrow and
+BoxPlot charts. To make them accessible and easy to navigate, my strategy was a
+combination of semantic HTML tables and SVG built using D3.js, where each row of
+the table was a separate SVG element, allowing for a flexible template for each
+chart type.
 
-A significant achievement was expanding our `swiss-federal-ci` library, which is
-now a shared component library across multiple projects. This effort to
+Another significant achievement was expanding our `swiss-federal-ci` library,
+which is now a shared component library across multiple projects. This effort to
 standardise the UI components helps us work quickly and effectively to bring the
 design to life.
 

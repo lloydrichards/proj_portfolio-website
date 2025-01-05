@@ -134,10 +134,6 @@ export const components = {
       {...props}
     />
   ),
-  img: ({ ...props }: ImageProps) => (
-    // eslint-disable-next-line jsx-a11y/alt-text
-    <Image sizes="100vw" width={100} height={200} {...props} />
-  ),
   Mermaid,
   mermaid: Mermaid,
 };

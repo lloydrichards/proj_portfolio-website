@@ -1,7 +1,11 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { typefaceBody, typefaceHeading3 } from "../tokens/typeface";
+import {
+  typefaceBody,
+  typefaceHeading3,
+  typefaceMeta,
+} from "../tokens/typeface";
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -24,7 +28,10 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 px-3 pt-6 pb-1", className)}
+    className={cn(
+      typefaceMeta("flex flex-col space-y-1.5 px-3 pt-1 pb-1"),
+      className,
+    )}
     {...props}
   />
 ));
@@ -68,7 +75,7 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-3 pt-0", className)}
+    className={cn("flex items-center px-3 pt-0 pb-1", className)}
     {...props}
   />
 ));

@@ -39,7 +39,7 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
               </Badge>
             ))}
           </div>
-          <CardDescription>{formatDate(new Date(lab.date))}</CardDescription>
+          {formatDate(new Date(lab.date))}
         </CardHeader>
         <CardContent>
           <CardTitle className="flex gap-2">{lab.title}</CardTitle>

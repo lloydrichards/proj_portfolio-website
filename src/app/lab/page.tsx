@@ -1,7 +1,13 @@
 import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
+import { createPageMetadata } from "@/lib/seo";
 import { getAllLabs } from "@/services/get-all-labs";
 import { FC } from "react";
+
+export const metadata = createPageMetadata({
+  title: "Labs",
+  description: "Rag tag collection of experiments and prototypes.",
+});
 
 const LabOverviewPage: FC = async () => {
   const allLabs = await getAllLabs();

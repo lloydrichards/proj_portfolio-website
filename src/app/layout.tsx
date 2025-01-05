@@ -7,32 +7,47 @@ import { Navbar } from "@/components/organism/navbar";
 import { Footer } from "@/components/organism/footer";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "next-themes";
+import { siteMetadata } from "@/lib/metadata";
 
-export const metadata = {
-  title: "Lloyd Richards Design",
-  description:
-    "Digital playground of Lloyd Richards, a designer and developer.",
-  icons: {
-    icon: `/favicon.svg`,
+export const metadata: Metadata = {
+  metadataBase: new URL(siteMetadata.siteUrl),
+  title: {
+    default: siteMetadata.title,
+    template: `%s | ${siteMetadata.title}`,
   },
+  description: siteMetadata.description,
   openGraph: {
-    title: "Lloyd Richards Design",
-    description:
-      "Digital playground of Lloyd Richards, a designer and developer.",
-    images: [
-      {
-        url: `/images/lloyd_richards_portrait.png`,
-      },
-    ],
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    url: "./",
+    siteName: siteMetadata.title,
+    images: [siteMetadata.social.socialBanner],
+    locale: siteMetadata.language,
+    type: "website",
+  },
+  alternates: {
+    canonical: "./",
+    types: {
+      "application/rss+xml": `${siteMetadata.siteUrl}/api/rss`,
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   twitter: {
+    title: siteMetadata.title,
     card: "summary_large_image",
-    title: "Lloyd Richards Design",
-    description:
-      "Digital playground of Lloyd Richards, a designer and developer.",
-    images: [`/images/lloyd_richards_portrait.png`],
+    images: [siteMetadata.social.socialBanner],
   },
-} satisfies Metadata;
+};
 
 export default function RootLayout({
   children,
@@ -41,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang={siteMetadata.language}
       className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
       suppressHydrationWarning
     >

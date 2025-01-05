@@ -3,6 +3,12 @@ import {
   typefaceHeading1,
   typefaceListItem,
 } from "@/components/tokens/typeface";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "About",
+  description: "About me and my journey.",
+});
 
 const AboutPage = () => {
   return (

@@ -19,33 +19,35 @@
 
 ## [1.8.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.8.0...v1.8.1) (2025-01-05)
 
-
 ### Performance Improvements
 
-* :zap: optimize images ([5c20a30](https://github.com/lloydrichards/proj_portfolio-website/commit/5c20a30f44dab72413085dee19d8068d3726661c))
+- :zap: optimize images
+  ([5c20a30](https://github.com/lloydrichards/proj_portfolio-website/commit/5c20a30f44dab72413085dee19d8068d3726661c))
 
 # [1.8.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.7.1...v1.8.0) (2025-01-04)
 
-
 ### Features
 
-* :sparkles: add mermaid for creating charts in mdx ([3c37eb9](https://github.com/lloydrichards/proj_portfolio-website/commit/3c37eb9b65115e0a802900345597614173517411))
+- :sparkles: add mermaid for creating charts in mdx
+  ([3c37eb9](https://github.com/lloydrichards/proj_portfolio-website/commit/3c37eb9b65115e0a802900345597614173517411))
 
 ## [1.7.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.7.0...v1.7.1) (2025-01-04)
 
-
 ### Bug Fixes
 
-* :bug: fit height of info card ([894ec05](https://github.com/lloydrichards/proj_portfolio-website/commit/894ec059dc133336f1656d82a1fff19998b53f0e))
-* :bug: fix up the layout of project info cards ([8a15401](https://github.com/lloydrichards/proj_portfolio-website/commit/8a15401bf7c66f1b42f822830ccb581d75b2065b))
-* fix images href ([bc561b7](https://github.com/lloydrichards/proj_portfolio-website/commit/bc561b7f5cebc50e267eb64c0088841022f66316))
+- :bug: fit height of info card
+  ([894ec05](https://github.com/lloydrichards/proj_portfolio-website/commit/894ec059dc133336f1656d82a1fff19998b53f0e))
+- :bug: fix up the layout of project info cards
+  ([8a15401](https://github.com/lloydrichards/proj_portfolio-website/commit/8a15401bf7c66f1b42f822830ccb581d75b2065b))
+- fix images href
+  ([bc561b7](https://github.com/lloydrichards/proj_portfolio-website/commit/bc561b7f5cebc50e267eb64c0088841022f66316))
 
 # [1.7.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.6.0...v1.7.0) (2025-01-01)
 
-
 ### Features
 
-* **layout:** create mosaic layout ([434d5b8](https://github.com/lloydrichards/proj_portfolio-website/commit/434d5b804e96ca5c8dc9895277b754fb777b6a15))
+- **layout:** create mosaic layout
+  ([434d5b8](https://github.com/lloydrichards/proj_portfolio-website/commit/434d5b804e96ca5c8dc9895277b754fb777b6a15))
 
 # [1.6.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.5.2...v1.6.0) (2024-10-27)
 

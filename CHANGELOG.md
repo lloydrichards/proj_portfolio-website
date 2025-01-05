@@ -1,3 +1,22 @@
+# [1.9.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.8.1...v1.9.0) (2025-01-05)
+
+
+### Bug Fixes
+
+* :bug: header links on hover ([c94b3b0](https://github.com/lloydrichards/proj_portfolio-website/commit/c94b3b04ccfab1c3677b5e1cfac1cb6c6066046e))
+
+
+### Features
+
+* **portfolio:** :sparkles: add team with avatars ([b9fd38a](https://github.com/lloydrichards/proj_portfolio-website/commit/b9fd38a673deb61677b649b54a3c2c7c0200639a))
+
+
+### Performance Improvements
+
+* :mag: improve metadata and seo ([e3d903d](https://github.com/lloydrichards/proj_portfolio-website/commit/e3d903d5d42f0c088a9c48b7bfd17b0dba77c44c))
+* :sparkles: better rss feed ([f99a47c](https://github.com/lloydrichards/proj_portfolio-website/commit/f99a47c2394c03cda26fa28b8206e725324b20e0))
+* :zap: better sitemap ([0f131c5](https://github.com/lloydrichards/proj_portfolio-website/commit/0f131c5fa33b5fae37083be42352578f11d47e5f))
+
 ## [1.8.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.8.0...v1.8.1) (2025-01-05)
 
 

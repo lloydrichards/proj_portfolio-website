@@ -15,6 +15,11 @@ export async function GET() {
             <description>${metadata.description}</description>
             <language>en-us</language>
             ${[...allLabs, ...allProjects]
+              .sort(
+                (a, b) =>
+                  new Date(b.frontmatter.date).getTime() -
+                  new Date(a.frontmatter.date).getTime(),
+              )
               .map(
                 ({ frontmatter }) => `
             <item>

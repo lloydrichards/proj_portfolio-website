@@ -1,4 +1,7 @@
-import { Github, Instagram, Linkedin, Rss } from "lucide-react";
+import { Rss } from "lucide-react";
+import Instagram from "@/components/icons/instagram";
+import Linkedin from "@/components/icons/linkedin";
+import Github from "@/components/icons/github";
 import { Tile } from "../atom/tile";
 import { siteMetadata } from "@/lib/metadata";
 import { Button } from "../atom/button";

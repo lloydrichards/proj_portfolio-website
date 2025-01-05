@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { formatDate } from "@/lib/format";
-import { Github } from "lucide-react";
+import Github from "@/components/icons/github";
 import { Button } from "@/components/atom/button";
 import { Badge } from "@/components/atom/badge";
 import { usePathname } from "next/navigation";
@@ -49,8 +49,7 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
           <Button variant="outline" asChild>
             <a
               target="_blank"
-              href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/content/${lab.pathname}`}
-              className="flex gap-2 no-underline"
+              href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/app/lab/(content)/${lab.slug}`}
             >
               <Github /> Source
             </a>

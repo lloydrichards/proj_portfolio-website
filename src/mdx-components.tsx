@@ -7,12 +7,8 @@ import {
   typefaceHeading4,
   typefaceHeading5,
   typefaceHeading6,
+  typefaceBody,
   typefaceAnchor,
-  typefaceBody1,
-  typefaceUList,
-  typefaceOList,
-  typefaceListItem,
-  typefaceBlockQuote,
 } from "./components/tokens/typeface";
 import { cn } from "./lib/utils";
 import { Mermaid } from "./components/molecule/mermaid";
@@ -20,43 +16,81 @@ import Image, { ImageProps } from "next/image";
 
 export const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h1 className={typefaceHeading1(className)} {...props} />
+    <h1
+      className={cn(typefaceHeading1(), "mt-2 scroll-m-20", className)}
+      {...props}
+    />
   ),
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2 className={typefaceHeading2(className)} {...props} />
+    <h2
+      className={cn(
+        typefaceHeading2(),
+        "mt-10 scroll-m-20 first:mt-0",
+        className,
+      )}
+      {...props}
+    />
   ),
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3 className={typefaceHeading3(className)} {...props} />
+    <h3
+      className={cn(typefaceHeading3(), "mt-8 scroll-m-20", className)}
+      {...props}
+    />
   ),
   h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h4 className={typefaceHeading4(className)} {...props} />
+    <h4
+      className={cn(typefaceHeading4(), "mt-8 scroll-m-20", className)}
+      {...props}
+    />
   ),
   h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h5 className={typefaceHeading5(className)} {...props} />
+    <h5
+      className={cn(typefaceHeading5(), "mt-8 scroll-m-20", className)}
+      {...props}
+    />
   ),
   h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h6 className={typefaceHeading6(className)} {...props} />
+    <h6
+      className={cn(typefaceHeading6(), "mt-8 scroll-m-20", className)}
+      {...props}
+    />
   ),
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p className={typefaceBody1(className)} {...props} />
+    <p
+      className={cn(typefaceBody("[&:not(:first-child)]:mt-6"), className)}
+      {...props}
+    />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className={typefaceUList(className)} {...props} />
+    <ul
+      className={cn(typefaceBody(), "my-6 ml-6 list-disc", className)}
+      {...props}
+    />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol className={typefaceOList(className)} {...props} />
+    <ol
+      className={cn(typefaceBody(), "my-6 ml-6 list-decimal", className)}
+      {...props}
+    />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className={typefaceListItem(className)} {...props} />
+    <li className={cn(typefaceBody(), "mt-2", className)} {...props} />
   ),
   blockquote: ({
     className,
     ...props
   }: React.HTMLAttributes<HTMLQuoteElement>) => (
-    <blockquote className={typefaceBlockQuote(className)} {...props} />
+    <blockquote
+      className={cn(
+        typefaceBody(),
+        "[&>*]:text-muted-foreground mt-6 border-l-2 pl-6 italic",
+        className,
+      )}
+      {...props}
+    />
   ),
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
-    <strong className="font-medium" {...props} />
+    <strong className="text-primary font-bold" {...props} />
   ),
   a: ({
     className,

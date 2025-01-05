@@ -26,7 +26,7 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
   return (
     <Tile size="unset" className="col-span-full">
       <Card className={className}>
-        <CardHeader className="flex-row justify-between pb-0">
+        <CardHeader className="flex-row justify-between pb-3">
           <div className="flex items-center gap-2 opacity-60">
             {project.category?.map((t) => (
               <Badge key={t} variant="outline">
@@ -34,9 +34,7 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
               </Badge>
             ))}
           </div>
-          <CardDescription>
-            {formatDate(new Date(project.date))}
-          </CardDescription>
+          {formatDate(new Date(project.date))}
         </CardHeader>
         <CardContent>
           <CardTitle className="flex gap-2">{project.title}</CardTitle>

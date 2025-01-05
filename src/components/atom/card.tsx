@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { typefaceBody2, typefaceHeading3 } from "../tokens/typeface";
+import { typefaceBody, typefaceHeading3 } from "../tokens/typeface";
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -34,7 +34,7 @@ const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
-  <h3
+  <h2
     ref={ref}
     className={cn(typefaceHeading3("mt-0"), className)}
     {...props}
@@ -48,7 +48,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn(typefaceBody2("text-muted-foreground"), className)}
+    className={cn(typefaceBody("text-muted-foreground pt-3"), className)}
     {...props}
   />
 ));

@@ -3,7 +3,7 @@ import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { ThemeToggle } from "@/components/molecule/theme-toggle";
 import { Mosaic } from "@/components/template/mosaic";
-import { typefaceBody1, typefaceHeading1 } from "@/components/tokens/typeface";
+import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
 import { getFeaturedLabs } from "@/services/get-featured-labs";
 import { getFeaturedProjects } from "@/services/get-featured-projects";
 import Image from "next/image";
@@ -43,7 +43,7 @@ const HomePage = async () => {
         size="unset"
         className="col-span-full row-span-3 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-4"
       >
-        <p className={typefaceBody1()}>
+        <p className={typefaceBody()}>
           This website is a personal portfolio and lab space where I can
           showcase my projects, experiment with new ideas, and share my thoughts
           and experiences through blogging. Please feel free to explore my

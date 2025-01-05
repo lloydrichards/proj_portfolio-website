@@ -9,50 +9,29 @@ export const typefaceDisplay2 = (className?: string) =>
   cn("text-8xl leading-normal font-normal", className);
 
 export const typefaceHeading1 = (className?: string) =>
-  cn("mt-2 scroll-m-20 text-4xl font-bold tracking-tight", className);
+  cn("text-4xl font-bold tracking-tight", className);
 
 export const typefaceHeading2 = (className?: string) =>
-  cn(
-    "mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0",
-    className,
-  );
+  cn("border-b pb-1 text-3xl font-semibold tracking-tight", className);
 
 export const typefaceHeading3 = (className?: string) =>
-  cn("mt-8 scroll-m-20 text-2xl font-semibold tracking-tight", className);
+  cn("text-2xl font-semibold tracking-tight", className);
 
 export const typefaceHeading4 = (className?: string) =>
-  cn("mt-8 scroll-m-20 text-xl font-semibold tracking-tight", className);
+  cn("text-xl font-semibold tracking-tight", className);
 
 export const typefaceHeading5 = (className?: string) =>
-  cn("mt-8 scroll-m-20 text-lg font-semibold tracking-tight", className);
+  cn("text-lg font-semibold tracking-tight", className);
 
 export const typefaceHeading6 = (className?: string) =>
-  cn("mt-8 scroll-m-20 text-base font-semibold tracking-tight", className);
+  cn("text-base font-semibold tracking-tight", className);
 
-export const typefaceBody1 = (className?: string) =>
-  cn("leading-7 [&:not(:first-child)]:mt-6", className);
+export const typefaceBody = (className?: string) => cn("leading-7", className);
 
-export const typefaceBody2 = (className?: string) =>
+export const typefaceMeta = (className?: string) =>
   cn("text-sm font-normal", className);
-
-export const typefaceMeta1 = (className?: string) =>
-  cn("text-sm font-normal", className);
-
-export const typefaceMeta2 = (className?: string) =>
-  cn("text-xs font-normal", className);
 
 // Component Typefaces
-
-export const typefaceBlockQuote = (className?: string) =>
-  cn("[&>*]:text-muted-foreground mt-6 border-l-2 pl-6 italic", className);
-
-export const typefaceListItem = (className?: string) => cn("mt-2", className);
-
-export const typefaceOList = (className?: string) =>
-  cn("my-6 ml-6 list-decimal", className);
-
-export const typefaceUList = (className?: string) =>
-  cn("my-6 ml-6 list-disc", className);
 
 export const typefaceAnchor = (className?: string) =>
   cn("font-medium underline underline-offset-4", className);

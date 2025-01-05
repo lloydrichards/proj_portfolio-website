@@ -31,11 +31,18 @@
   @apply mt-0;
 }
 .subheading-anchor {
-  color: var(--color-accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    opacity: 100%;
+  }
   .icon {
     content: url("/icons/link.svg");
     width: 18px;
     display: inline-block;
-    margin-left: 8px;
+    margin: 0px 8px;
   }
 }

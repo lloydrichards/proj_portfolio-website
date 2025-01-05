@@ -7,6 +7,8 @@ import { typefaceBody1, typefaceHeading1 } from "@/components/tokens/typeface";
 import { getFeaturedLabs } from "@/services/get-featured-labs";
 import { getFeaturedProjects } from "@/services/get-featured-projects";
 import Image from "next/image";
+import logoImg from "../../public/images/logo.svg";
+import logoWinkImg from "../../public/images/logo-wink.svg";
 
 const HomePage = async () => {
   const allProjects = await getFeaturedProjects();
@@ -14,14 +16,23 @@ const HomePage = async () => {
 
   return (
     <Mosaic>
-      <Image
-        className="col-span-full row-span-2 rounded-md md:col-span-4 md:row-span-6 lg:col-span-6 lg:row-span-8"
-        src="/images/lloyd_richards_portrait.png"
-        alt="Half body head shot of Lloyd Richards"
-        width={400}
-        height={600}
-        priority
-      />
+      <Tile
+        size="square-md"
+        className="bg-background group grid items-center p-2"
+      >
+        <Image
+          src={logoImg}
+          alt="Half body head shot of Lloyd Richards"
+          priority
+          className="fill-foreground block group-hover:hidden"
+        />
+        <Image
+          src={logoWinkImg}
+          alt="Half body head shot of Lloyd Richards"
+          priority
+          className="fill-foreground hidden group-hover:block"
+        />
+      </Tile>
       <Tile
         size="unset"
         className="col-[1/-2] row-span-1 grid items-center px-8 md:col-span-10 md:row-span-2 lg:col-span-16 lg:row-span-2"
@@ -30,7 +41,7 @@ const HomePage = async () => {
       </Tile>
       <Tile
         size="unset"
-        className="col-span-full row-span-4 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-6"
+        className="col-span-full row-span-3 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-4"
       >
         <p className={typefaceBody1()}>
           This website is a personal portfolio and lab space where I can

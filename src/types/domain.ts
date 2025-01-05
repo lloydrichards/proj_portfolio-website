@@ -58,6 +58,13 @@ export const PROJECT_CATEGORY = t.union([
 ]);
 export type PROJECT_CATEGORY = t.TypeOf<typeof PROJECT_CATEGORY>;
 
+export const TeamMember = t.type({
+  name: t.string,
+  role: t.string,
+  image: t.union([t.string, t.undefined]),
+});
+export type TeamMember = t.TypeOf<typeof TeamMember>;
+
 export const ProjectMeta = t.type({
   id: t.number,
   title: t.string,
@@ -69,6 +76,7 @@ export const ProjectMeta = t.type({
   image: t.string,
   href: t.union([t.string, t.undefined]),
   repo: t.union([t.string, t.undefined]),
+  team: t.union([t.array(TeamMember), t.undefined]),
 });
 export type ProjectMeta = t.TypeOf<typeof ProjectMeta>;
 

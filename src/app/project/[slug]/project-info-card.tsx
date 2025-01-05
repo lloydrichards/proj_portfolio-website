@@ -13,6 +13,13 @@ import { Github } from "lucide-react";
 import { Button } from "@/components/atom/button";
 import { Badge } from "@/components/atom/badge";
 import { Tile } from "@/components/atom/tile";
+import { TeamMemberAvatar } from "@/components/molecule/team_member_avatar";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/atom/accordion";
 
 interface ProjectInfoCardProps {
   project: Project;
@@ -39,6 +46,18 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
         <CardContent>
           <CardTitle className="flex gap-2">{project.title}</CardTitle>
           <CardDescription>{project.description}</CardDescription>
+          {project.team && project.team.length > 0 && (
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>Team</AccordionTrigger>
+                <AccordionContent>
+                  {project.team.map((t) => (
+                    <TeamMemberAvatar key={t.name} {...t} />
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          )}
         </CardContent>
         <CardFooter className="justify-end">
           {project.repo && (

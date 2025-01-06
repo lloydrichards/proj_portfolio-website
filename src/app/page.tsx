@@ -6,9 +6,7 @@ import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
 import { getFeaturedLabs } from "@/services/get-featured-labs";
 import { getFeaturedProjects } from "@/services/get-featured-projects";
-import Image from "next/image";
-import logoImg from "../../public/images/logo.svg";
-import logoWinkImg from "../../public/images/logo-wink.svg";
+import { Logo } from "@/components/organism/logo";
 
 const HomePage = async () => {
   const allProjects = await getFeaturedProjects();
@@ -16,22 +14,8 @@ const HomePage = async () => {
 
   return (
     <Mosaic>
-      <Tile
-        size="square-md"
-        className="bg-background group grid items-center p-2"
-      >
-        <Image
-          src={logoImg}
-          alt="Half body head shot of Lloyd Richards"
-          priority
-          className="fill-foreground block group-hover:hidden"
-        />
-        <Image
-          src={logoWinkImg}
-          alt="Half body head shot of Lloyd Richards"
-          priority
-          className="fill-foreground hidden group-hover:block"
-        />
+      <Tile size="square-md" className="bg-background group grid items-center">
+        <Logo className="text-primary scale-110 transition-transform hover:scale-115" />
       </Tile>
       <Tile
         size="unset"

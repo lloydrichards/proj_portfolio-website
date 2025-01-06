@@ -89,7 +89,7 @@ with expanding content, better used with a `flex` system. The solution was a
 combination of Tailwind utility classes and `subgrid` which could be implemented
 when flexbox was not needed:
 
-```css
+```css showLineNumbers {2-6} title="global.css"
 @theme inline {
   --grid-auto-rows-lg: calc(
     min(100vw, var(--container-6xl)) / 24 - var(--spacing) * 48 / 23
@@ -117,7 +117,7 @@ used to apply the grid system to any element, and when combined with the
 
 The resulting structure looks like this:
 
-```html
+```htm showLineNumbers {5}  title="index.html"
 <body className="mosaic-columns grid">
   <head className="col-span-full grid-cols-subgrid mosaic-rows grid" />
   <main className="col-span-full grid-cols-subgrid grid">

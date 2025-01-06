@@ -20,7 +20,12 @@ const withMDX = createMDX({
       [
         // @ts-expect-error wrong types
         "rehype-pretty-code",
-        { strict: true, throwOnError: true, keepBackground: false },
+        {
+          strict: true,
+          throwOnError: true,
+          keepBackground: false,
+          theme: "synthwave-84",
+        },
       ],
       // @ts-expect-error wrong types
       ["rehype-slug", { strict: true, throwOnError: true }],

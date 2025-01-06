@@ -156,7 +156,7 @@ export const components = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "bg-foreground mt-6 mb-4 overflow-x-auto rounded-md border p-3",
+        "bg-code text-code-foreground mb-4 overflow-x-auto rounded-md p-3",
         className,
       )}
       {...props}
@@ -165,11 +165,14 @@ export const components = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        "bg-foreground text-background relative px-1 font-mono text-sm tracking-wider",
+        "bg-code text-code-foreground px-1 font-mono text-sm tracking-wider",
         className,
       )}
       {...props}
     />
+  ),
+  figure: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <figure className={cn("my-6", className)} {...props} />
   ),
   img: (props: ImageProps) => (
     <Image

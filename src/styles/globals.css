@@ -25,6 +25,14 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -108,6 +116,7 @@
     --color-ui-warning: hsl(45.9 96.7% 64.5%);
     --color-ui-success: hsl(160.1 84.1% 39.4%);
     --color-ui-info: hsl(215 16% 47%);
+    --color-ui-code: hsl(250 20% 17%);
 
     /* Functional Colors */
     --background: var(--color-mono-050);
@@ -142,6 +151,9 @@
 
     --info: var(--color-ui-info);
     --info-foreground: var(--background);
+
+    --code: var(--color-ui-code);
+    --code-foreground: var(--color-mono-100);
 
     --border: var(--color-mono-300);
     --input: var(--color-mono-200);

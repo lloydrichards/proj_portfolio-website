@@ -32,7 +32,7 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
     <Tile size="unset" className="col-span-full">
       <Card className={className}>
         <CardHeader className="flex-row justify-between pb-0">
-          <div className="flex items-center gap-2 opacity-60">
+          <div className="flex items-center gap-1 opacity-60">
             {lab.tags?.map((t) => (
               <Badge key={t} variant="outline">
                 {t.toUpperCase()}

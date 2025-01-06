@@ -34,7 +34,7 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
     <Tile size="unset" className="col-span-full">
       <Card className={className}>
         <CardHeader className="flex-row justify-between pb-3">
-          <div className="flex items-center gap-2 opacity-60">
+          <div className="flex items-center gap-1 opacity-60">
             {project.category?.map((t) => (
               <Badge key={t} variant="outline">
                 {t.toUpperCase()}

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { inter, josefin_sans, roboto_mono } from "@/styles/fonts";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "@/styles/globals.css";
 
@@ -71,6 +73,8 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

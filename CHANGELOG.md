@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.1...v1.9.2) (2025-01-07)
+
+
+### Bug Fixes
+
+* :bug: fix paths ([d70e20a](https://github.com/lloydrichards/proj_portfolio-website/commit/d70e20a00f96147a5dc2ac6b14b65e79f567d615))
+
 ## [1.9.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.0...v1.9.1) (2025-01-07)
 
 

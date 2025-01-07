@@ -28,7 +28,7 @@ or services. Normally this would be a database or a web service. In this example
 i'm just returning a stringified JSON object, saves me having to mock a http
 request.
 
-```ts
+```ts showLineNumbers
 const fetchProducts = (): TE.TaskEither<AppError, Product[]> =>
   pipe(
     TE.right(
@@ -68,7 +68,7 @@ The pipe makes it very easy for me to add additional validation or checks to the
 data. For example, if I wanted to check that the data returned from the server
 was not empty I could do something like this:
 
-```ts
+```ts showLineNumbers
 const fetchProducts = (): TE.TaskEither<AppError, Product[]> =>
   pipe(
     ...// <- same as above
@@ -99,7 +99,7 @@ application and nothing more. This means that I can be very specific about the
 data that is required and also the data that is returned. This makes it very
 easy to reason about the application and also makes it very easy to test.
 
-```ts
+```ts showLineNumbers
 const Product = t.type({
   id: t.number,
   name: t.string,
@@ -135,7 +135,7 @@ to be able to handle them in a consistent way. This is why I have defined a
 `NetworkError` and a `ParseError`. These errors are thrown by the
 `fetchProducts` function and are handled in the application layer.
 
-```ts
+```ts showLineNumbers
 type NetworkError = {
   type: "NetworkError";
   message: string;
@@ -162,7 +162,7 @@ state of the application. In this example we are using `fp-ts` to define the
 functions. This allows us to compose the functions and handle any errors that
 may occur.
 
-```ts
+```ts showLineNumbers
 const getProductList = (): TE.TaskEither<AppError, Product[]> =>
   pipe(fetchProducts());
 
@@ -239,7 +239,7 @@ Storing the state of the application in a `useState` hook is not ideal. It would
 be better to use a state management library like `redux` or `zustand`. I have
 used `useState` here to keep the example simple.
 
-```ts
+```ts showLineNumbers
 const useShoppingCart = () => {
   const [products, setProducts] = useState<O.Option<Product[]>>(O.none);
   const [error, setError] = useState<O.Option<AppError>>(O.none);
@@ -290,7 +290,7 @@ responsible for handeling the state of the application. This is where we use the
 `pipe` function to compose the functions and handle any errors, or loading that
 may occur.
 
-```tsx
+```tsx showLineNumbers
 export const ShoppingApp: FC = () => {
   const { toast } = useToast();
   const { products, error, addItem, cart, removeItem } = useShoppingCart();
@@ -342,7 +342,7 @@ Since the `ShoppingApp` component is responsible for seperating the states of
 the application, I don't need to worry about errors or loading in the `ShopCard`
 component. I can just focus on displaying the data to the user in each state.
 
-```tsx
+```tsx showLineNumbers
 const ErrorCard: FC<{ type: string }> = ({ type }) => {
   return (
     <div className="border-destructive grid items-center justify-center rounded border-2 p-4 shadow-md">
@@ -404,7 +404,7 @@ data to the user. Since I've already delt with errors and loading in the
 `ShoppingApp` component I don't need to worry about them here. I can just focus
 on displaying the data to the user.
 
-```tsx
+```tsx showLineNumbers
 const ProductCard: FC<{
   product: Product;
   onAdd: (product: Product) => void;

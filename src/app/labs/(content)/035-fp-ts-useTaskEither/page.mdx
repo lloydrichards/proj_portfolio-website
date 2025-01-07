@@ -30,7 +30,7 @@ application. It also adds the `match` function. This function is responsible for
 pattern matching over all possible states of the application. This allows us to
 seperate the states of the application in the presentation layer.
 
-```ts
+```ts showLineNumbers
 function useTaskEither<E, A>(timeToLoad: number) {
   const [value, setValue] = useState<O.Option<E.Either<E, A>>>(O.none);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -73,7 +73,7 @@ function useTaskEither<E, A>(timeToLoad: number) {
 
 I've also seperated the `fetchProduct` function from the `useShoppingCart` hook.
 
-```ts
+```ts showLineNumbers
 const useShoppingCart = () => {
   const [error, setError] = useState<O.Option<AppError>>(O.none);
   const [cart, setCart] = useState<Cart>({ items: [] });
@@ -108,7 +108,7 @@ The refactored presentation layer uses the `match` function to pattern match
 over all possible states of the application. This allows us to seperate the
 states of the application in the presentation layer.
 
-```tsx
+```tsx showLineNumbers
 export const ShoppingApp: FC = () => {
   const [matchProducts, runProducts] = useTaskEither<AppError, Product[]>(1000);
 

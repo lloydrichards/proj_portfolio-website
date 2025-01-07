@@ -31,13 +31,13 @@ Some important resources to check out:
 
 ## Primatives
 
-### `Array`
+### Array
 
 The `Array` type is a primative that is used to represent a list of values. It
 is a very common type in functional programming and is generally used to replace
 `for` loops.
 
-```ts
+```ts showLineNumbers
 import * as A from "fp-ts/lib/Array";
 import { pipe } from "fp-ts/lib/function";
 
@@ -55,13 +55,13 @@ const doubleSquareAndInc = pipe(
 console.log(doubleSquareAndInc); // Output: [ 9, 25, 49, 81, 121 ]
 ```
 
-### `Option`
+### Option
 
 The `Option` type is a primative that is used to represent a value that may or
 may not exist. It is a very common type in functional programming and is
 generally used to replace `null` or `undefined` values.
 
-```ts
+```ts showLineNumbers
 import { pipe } from "fp-ts/lib/function";
 import * as O from "fp-ts/lib/Option";
 
@@ -80,13 +80,13 @@ const result = pipe(
 console.log(result); // Output: Some(36)
 ```
 
-### `Either`
+### Either
 
 The `Either` type is a primative that is used to represent a value that may be
 one of two types. It is a very common type in functional programming and is
 generally used to replace `throw` statements.
 
-```ts
+```ts showLineNumbers
 import { pipe, flow } from "fp-ts/lib/function";
 import * as E from "fp-ts/lib/Either";
 
@@ -118,13 +118,13 @@ const calculate = flow(
 console.log(calculate(10, 2)); // Output: Right(2.5)
 ```
 
-### `Task`
+### Task
 
 The `Task` type is a primative that is used to represent a value that may be
 computed asynchronously. It is a very common type in functional programming and
 is generally used to replace `Promise` objects.
 
-```ts
+```ts showLineNumbers
 import { pipe } from "fp-ts/function";
 import * as T from "fp-ts/Task";
 
@@ -138,14 +138,14 @@ const response = pipe(
 console.log(response().then((d) => d)); // Output: "The answer is 42"
 ```
 
-### `TaskEither`
+### TaskEither
 
 The `TaskEither` type is a primative that is used to represent a value that may
 be computed asynchronously and may be one of two types. It is a very common type
 in functional programming and is generally used to replace `Promise` objects
 that may throw errors.
 
-```ts
+```ts showLineNumbers
 import { pipe } from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 
@@ -176,7 +176,7 @@ console.log(getJson().then((e) => e)); // Output: Right("{\"foo\":\"bar\"}")
 
 ## Composition
 
-### `pipe` vs `flow`
+### pipe vs flow
 
 The `pipe` and `flow` functions are used to compose functions together. They are
 very similar, but have a few key differences. The `pipe` function starts with a
@@ -184,7 +184,7 @@ value and then applies a series of functions to it. The `flow` function composes
 a series of functions together and then returns a new function that can be
 applied to a value.
 
-```ts
+```ts showLineNumbers
 import { pipe, flow } from "fp-ts/lib/function";
 
 const double = (x: number): number => x * 2;
@@ -203,13 +203,13 @@ const doubleSquareFlow = flow(
 );
 ```
 
-### `chain`
+### chain
 
 The `chain` function is used to flatten nested primatives. When you need to
 flatten left or right values, you can use the `chain` function. It is very
 similar to the `flatMap` function in other languages.
 
-```ts
+```ts showLineNumbers
 import { pipe } from "fp-ts/lib/function";
 import * as TE from "fp-ts/lib/TaskEither";
 
@@ -236,13 +236,13 @@ const parseUser = pipe(
 console.log(parseUser()); // Output: Right({ id: 6, name: 'John Doe' })
 ```
 
-### `match` or `fold`
+### match or fold
 
 The `match` function is used to extract values from primatives. When you need to
 extract a value to be used in the application, `match` forces you to think about
 both the left and right values.
 
-```ts
+```ts showLineNumbers
 import { pipe } from "fp-ts/lib/function";
 import * as O from "fp-ts/lib/Option";
 
@@ -264,7 +264,7 @@ console.log(result); // Output: "The result is 36"
 sometimes its needed to return multiple types from a match. In this case, you
 can use the `foldW` function.
 
-```ts
+```ts showLineNumbers
 import { pipe } from "fp-ts/lib/function";
 import * as O from "fp-ts/lib/Option";
 

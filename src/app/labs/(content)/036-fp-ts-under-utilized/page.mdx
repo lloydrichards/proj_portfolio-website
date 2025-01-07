@@ -16,9 +16,9 @@ In this lab I'm going to explore some of the other functions in fp-ts that I
 don't use as often. Some of these are just concepts that I don't understamd
 (yet) and others are just functions that I've never had a need for.
 
-## `Apply`
+## Apply
 
-```ts
+```ts showLineNumbers
 const double = (n: number): number => n * 2;
 const increment = (n: number): number => n + 1;
 
@@ -53,9 +53,9 @@ This seems very useful when needing to do validation on a struct or tuple of
 values. Especially when applying multiple validations to a struct or tuple of
 values.
 
-## `Do`
+## Do
 
-```ts
+```ts showLineNumbers
 const doResult = pipe(
   O.Do,
   O.bind("a", () => O.some(1)),
@@ -77,9 +77,9 @@ I think this is a very useful function, and I'm going to start using it more
 often. Especially when used as `TaskEither` or `IO` to chain together
 computations that rely on multiple successful steps.
 
-## `Reader`
+## Reader
 
-```ts
+```ts showLineNumbers
 interface Config {
   port: number;
   host: string;
@@ -110,9 +110,9 @@ I think it would be useful when you have a function that needs to access a
 configuration object, but you don't want to pass the configuration object to the
 function every time it is called.
 
-## `Covariant`
+## Covariant
 
-```ts
+```ts showLineNumbers
 const someNumber = O.some(1);
 
 const someNumberResult = pipe(someNumber, O.map(double));
@@ -141,9 +141,9 @@ This can be useful when consolidating functions that might return an `Either` or
 an `Option`. Such as when editing error messages, or when you want to apply a
 function to the `right` value of an `Either`.
 
-## `Contravariant`
+## Contravariant
 
-```ts
+```ts showLineNumbers
 type User = {
   id: number;
   name: string;
@@ -174,9 +174,9 @@ This can be useful when you want to sort a list of objects by a property of the
 object. The `contramap` function can be used to apply a function to the input of
 the `Ord` function.
 
-## `Profunctor`
+## Profunctor
 
-```ts
+```ts showLineNumbers
 type UserProfile = User & {
   email: string;
   verified: boolean;
@@ -222,9 +222,9 @@ This was a little harder for me to wrap my head around. I understand that it can
 be used to apply a function to the input and output of a function, but I'm not
 sure when I would use this.
 
-## `Moniod`
+## Moniod
 
-```ts
+```ts showLineNumbers
 type Shape = "Circle" | "Box" | "Pyramid";
 type SomeObj = {
   id: number;
@@ -309,91 +309,94 @@ This can be useful when you want to sort a list of objects by multiple
 properties of the object. I've done this through the use of `M.concatAll` and by
 `A.sortBy` as well as trying out custom ordinal sorting.
 
-## `ReadonlyArray`
+## ReadonlyArray
 
-```ts
-const studentsGrades = [
+```json title="data.json"
+[
   {
-    name: "john",
-    age: 21,
-    classes: {
-      history: {
-        grade: 89,
-        semester: "spring",
-        category: "humanities",
+    "name": "john",
+    "age": 21,
+    "classes": {
+      "history": {
+        "grade": 89,
+        "semester": "spring",
+        "category": "humanities"
       },
-      math: {
-        grade: 95,
-        semester: "all_year",
-        category: "quantitative",
+      "math": {
+        "grade": 95,
+        "semester": "all_year",
+        "category": "quantitative"
       },
-      physics: {
-        grade: 81,
-        semester: "fall",
-        category: "quantitative",
+      "physics": {
+        "grade": 81,
+        "semester": "fall",
+        "category": "quantitative"
       },
-      literature: {
-        grade: 77,
-        semester: "spring",
-        category: "humanities",
-      },
-    },
+      "literature": {
+        "grade": 77,
+        "semester": "spring",
+        "category": "humanities"
+      }
+    }
   },
 
   {
-    name: "amanda",
-    age: 20,
-    classes: {
-      history: {
-        grade: 95,
-        semester: "spring",
-        category: "humanities",
+    "name": "amanda",
+    "age": 20,
+    "classes": {
+      "history": {
+        "grade": 95,
+        "semester": "spring",
+        "category": "humanities"
       },
-      math: {
-        grade: 99,
-        semester: "all_year",
-        category: "quantitative",
+      "math": {
+        "grade": 99,
+        "semester": "all_year",
+        "category": "quantitative"
       },
-      physics: {
-        grade: 89,
-        semester: "fall",
-        category: "quantitative",
+      "physics": {
+        "grade": 89,
+        "semester": "fall",
+        "category": "quantitative"
       },
-      literature: {
-        grade: 65,
-        semester: "spring",
-        category: "humanities",
-      },
-    },
+      "literature": {
+        "grade": 65,
+        "semester": "spring",
+        "category": "humanities"
+      }
+    }
   },
-
   {
-    name: "rachel",
-    age: 19,
-    classes: {
-      history: {
-        grade: 80,
-        semester: "spring",
-        category: "humanities",
+    "name": "rachel",
+    "age": 19,
+    "classes": {
+      "history": {
+        "grade": 80,
+        "semester": "spring",
+        "category": "humanities"
       },
-      math: {
-        grade: 90,
-        semester: "all_year",
-        category: "quantitative",
+      "math": {
+        "grade": 90,
+        "semester": "all_year",
+        "category": "quantitative"
       },
-      physics: {
-        grade: 100,
-        semester: "fall",
-        category: "quantitative",
+      "physics": {
+        "grade": 100,
+        "semester": "fall",
+        "category": "quantitative"
       },
-      literature: {
-        grade: 88,
-        semester: "spring",
-        category: "humanities",
-      },
-    },
-  },
-];
+      "literature": {
+        "grade": 88,
+        "semester": "spring",
+        "category": "humanities"
+      }
+    }
+  }
+]
+```
+
+```ts showLineNumbers
+import studentsGrades from "./data.json";
 
 const gradesByCategory = (groupBy: string) =>
   pipe(

@@ -6,6 +6,8 @@ import {
 } from "@/components/atom/navigation-menu";
 import { NavListItem } from "@/components/molecule/nav_list_item";
 import { Badge } from "@/components/atom/badge";
+import { cn } from "@/lib/utils";
+import { NavToggleItem } from "@/components/molecule/nav_toggle_item";
 
 interface ProjectNavigationProps {
   projects: Array<Project>;
@@ -15,24 +17,45 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
   projects,
   className,
 }) => {
-  return (
-    <aside className="hidden md:contents">
-      <NavigationMenu aria-label="Project Navigation" orientation="vertical">
-        <NavigationMenuList className="contents">
-          <NavListItem href="/projects" exact className={className}>
-            All Projects
-          </NavListItem>
+  const categoryRoutes = [
+    { category: "DEVELOP", label: "Develop" },
+    { category: "DESIGN", label: "Design" },
+    { category: "GARDEN", label: "Garden" },
+  ];
 
-          {projects
-            .filter((d) => d.isPublished)
-            .map((p) => (
-              <NavListItem key={p.slug} href={p.pathname} className={className}>
-                <Badge variant="outline">{p.id}</Badge>
-                <span className="hidden lg:line-clamp-1">{p.title}</span>
-              </NavListItem>
-            ))}
-        </NavigationMenuList>
-      </NavigationMenu>
-    </aside>
+  return (
+    <NavigationMenu
+      aria-label="Project Navigation"
+      orientation="vertical"
+      className="hidden md:contents"
+    >
+      <NavigationMenuList className="contents">
+        <NavToggleItem href="/projects" className={className}>
+          All
+        </NavToggleItem>
+        {categoryRoutes.map(({ category, label }) => (
+          <NavToggleItem
+            key={category}
+            href={{ pathname: "/projects", query: { category } }}
+            className={className}
+          >
+            {label}
+          </NavToggleItem>
+        ))}
+
+        {projects
+          .filter((d) => d.isPublished)
+          .map((p) => (
+            <NavListItem
+              key={p.slug}
+              href={p.pathname}
+              className={cn("col-span-full", className)}
+            >
+              <Badge variant="outline">{p.id}</Badge>
+              <span className="hidden lg:line-clamp-1">{p.title}</span>
+            </NavListItem>
+          ))}
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 };

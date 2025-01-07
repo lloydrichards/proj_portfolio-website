@@ -3,6 +3,8 @@ import { promises as fs } from "fs";
 import { PROJECT_PATH } from "./consts";
 import { getProject } from "./get-project";
 
+import { descContent, notEmpty } from "./utils";
+
 export const getAllProjects = async () => {
   const filenames = await fs.readdir(PROJECT_PATH);
 
@@ -13,9 +15,5 @@ export const getAllProjects = async () => {
     }),
   );
 
-  return projects
-    .filter((p) => p !== null)
-    .sort(
-      (a, b) => b!.frontmatter.date.getTime() - a!.frontmatter.date.getTime(),
-    );
+  return projects.filter(notEmpty).sort(descContent);
 };

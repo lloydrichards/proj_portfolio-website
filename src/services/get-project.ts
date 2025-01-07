@@ -66,7 +66,7 @@ export const getProject = async (
           ...frontmatter,
           slug,
           lastModified: new Date(),
-          pathname: `/project/${slug}`,
+          pathname: `/projects/${slug}`,
           isPublished: frontmatter.isPublished ?? true,
         },
       }),

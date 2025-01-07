@@ -20,8 +20,12 @@ export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
       className="hidden md:contents"
     >
       <NavigationMenuList className="contents">
-        <NavListItem href="/labs" exact className={className}>
-          All Labs
+        <NavListItem
+          href="/labs"
+          exact
+          className={cn("col-span-full border", className)}
+        >
+          <span className="w-full text-center">All Labs</span>
         </NavListItem>
 
         {labs
@@ -30,7 +34,7 @@ export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
             <NavListItem
               key={p.slug}
               href={p.pathname}
-              className={cn("overflow-visible", className)}
+              className={cn("col-span-full overflow-visible", className)}
             >
               <Badge variant="outline">{p.id}</Badge>
               <span className="hidden lg:line-clamp-1">{p.title}</span>

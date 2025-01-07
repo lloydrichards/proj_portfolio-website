@@ -1,4 +1,4 @@
-import { ProjectInfoCard } from "@/app/project/[slug]/project-info-card";
+import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
 import { createPageMetadata } from "@/lib/seo";
 import { siteMetadata } from "@/lib/metadata";
 import { getAllProjects } from "@/services/get-all-projects";

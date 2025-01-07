@@ -20,7 +20,7 @@ export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
       className="hidden md:contents"
     >
       <NavigationMenuList className="contents">
-        <NavListItem href="/lab" exact className={className}>
+        <NavListItem href="/labs" exact className={className}>
           All Labs
         </NavListItem>
 

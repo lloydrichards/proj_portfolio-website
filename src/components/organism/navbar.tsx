@@ -14,12 +14,12 @@ export const Navbar: React.FC = () => {
   const routes = [
     { href: "/about", label: "About", icon: <User className="md:hidden" /> },
     {
-      href: "/project",
+      href: "/projects",
       label: "Projects",
       icon: <Layers className="md:hidden" />,
     },
     {
-      href: "/lab",
+      href: "/labs",
       label: "Lab",
       icon: <FlaskConical className="md:hidden" />,
     },

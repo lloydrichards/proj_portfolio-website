@@ -49,7 +49,7 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
           <Button variant="outline" asChild>
             <a
               target="_blank"
-              href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/app/lab/(content)/${lab.slug}`}
+              href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/app/labs/(content)/${lab.slug}`}
             >
               <Github /> Source
             </a>

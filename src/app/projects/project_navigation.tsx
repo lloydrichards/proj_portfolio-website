@@ -19,7 +19,7 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
     <aside className="hidden md:contents">
       <NavigationMenu aria-label="Project Navigation" orientation="vertical">
         <NavigationMenuList className="contents">
-          <NavListItem href="/project" exact className={className}>
+          <NavListItem href="/projects" exact className={className}>
             All Projects
           </NavListItem>
 

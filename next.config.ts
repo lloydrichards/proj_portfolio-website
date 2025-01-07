@@ -4,6 +4,9 @@ import mdxMermaid from "mdx-mermaid";
 
 const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
+  experimental: {
+    reactCompiler: true,
+  },
 } as NextConfig;
 
 const withMDX = createMDX({

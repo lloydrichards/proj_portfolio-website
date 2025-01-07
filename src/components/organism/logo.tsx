@@ -55,7 +55,7 @@ export const Logo = ({ className, ...rest }: SVGProps<SVGSVGElement>) => {
       <path
         d="M244.739 144.576C240.807 145.109 237.243 146.711 234.223 149.107C230.454 152.096 227.532 156.321 225.8 161.247L244.858 161.131L267.421 155.608C263.227 149.568 257.126 145.497 250.44 144.581C248.575 144.325 246.665 144.315 244.739 144.576Z"
         stroke="currentColor"
-        className="visible stroke-4 group-hover:invisible dark:stroke-2"
+        className="visible stroke-4 group-hover:invisible group-active:invisible dark:stroke-2"
       />
       {/* left eye */}
       <path
@@ -74,7 +74,7 @@ export const Logo = ({ className, ...rest }: SVGProps<SVGSVGElement>) => {
       <path
         d="M225.8 161.247C227.532 156.321 230.454 152.096 234.223 149.107C237.243 146.711 240.807 145.109 244.739 144.576C246.665 144.315 248.575 144.325 250.44 144.581C257.126 145.497 263.227 149.568 267.421 155.608"
         stroke="currentColor"
-        className="invisible stroke-4 group-hover:visible dark:stroke-2"
+        className="invisible stroke-4 group-hover:visible group-active:visible dark:stroke-2"
       />
       <path
         d="M176.22 161.13C174.488 156.204 171.566 151.979 167.797 148.99C164.777 146.594 161.213 144.992 157.282 144.459C155.355 144.198 153.445 144.208 151.58 144.464C144.895 145.38 138.793 149.451 134.6 155.491"
@@ -86,7 +86,7 @@ export const Logo = ({ className, ...rest }: SVGProps<SVGSVGElement>) => {
         d="M252 153C252 156.866 248.642 160 244.5 160C240.358 160 237 156.866 237 153C237 149.134 240.358 146 244.5 146C248.642 146 252 149.134 252 153Z"
         stroke="currentColor"
         fill="currentColor"
-        className="visible stroke-4 group-hover:invisible dark:fill-transparent dark:stroke-2"
+        className="visible stroke-4 group-hover:invisible group-active:invisible dark:fill-transparent dark:stroke-2"
       />
     </svg>
   );

@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.0...v1.9.1) (2025-01-07)
+
+
+### Performance Improvements
+
+* :zap: use react compiler ([59035bf](https://github.com/lloydrichards/proj_portfolio-website/commit/59035bf4419a1af82a80d07daa74d304ccdf2966))
+
 # [1.9.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.8.1...v1.9.0) (2025-01-05)
 
 

@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.2...v1.10.0) (2025-01-07)
+
+
+### Features
+
+* :sparkles: filter projects by category in nav ([57ba502](https://github.com/lloydrichards/proj_portfolio-website/commit/57ba50241fd6c5faf71cd5ea4cfbea5e78de8bc5))
+
 ## [1.9.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.1...v1.9.2) (2025-01-07)
 
 

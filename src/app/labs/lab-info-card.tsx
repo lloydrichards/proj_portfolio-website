@@ -46,6 +46,20 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
           <CardDescription>{lab.description}</CardDescription>
         </CardContent>
         <CardFooter className="justify-end">
+          {lab.href && (
+            <Button variant="outline" asChild>
+              <a target="_blank" href={lab.href}>
+                View
+              </a>
+            </Button>
+          )}
+          {lab.repo && (
+            <Button variant="outline" asChild>
+              <a target="_blank" href={lab.repo}>
+                <Github /> Repo
+              </a>
+            </Button>
+          )}
           <Button variant="outline" asChild>
             <a
               target="_blank"

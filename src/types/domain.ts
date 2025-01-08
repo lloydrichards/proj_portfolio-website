@@ -9,6 +9,8 @@ export const LabMeta = t.type({
   isPublished: t.union([t.boolean, t.undefined]),
   description: t.string,
   tags: t.array(t.string),
+  repo: t.union([t.string, t.undefined]),
+  href: t.union([t.string, t.undefined]),
 });
 export type LabMeta = t.TypeOf<typeof LabMeta>;
 

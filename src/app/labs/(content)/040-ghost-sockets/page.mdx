@@ -75,26 +75,31 @@ package which provides a simple API for building a WebSocket servers and the
 simplicity of Go modules made separating the logic between the server, database
 and manager.
 
-```text /main.go/#success
+```text /main.go/#success /App.tsx/#success
 .
-├── 📁 cmd
-│   └── 📁 api
-│       └── main.go       # Main entry point for the server
-├── 📂 internal
-│   ├── 📁 database
-│   │   ├── database.go   # Database connection and CRUD operations
-│   │   ├── migration.go  # Database migrations
-│   │   └── schema.go     # Database schema
-│   └── 📁 server
-│       ├── client.go     # Client connection and message handling
-│       ├── event.go      # Event handling
-│       ├── manager.go    # WebSocket manager
-│       ├── routes.go     # HTTP routes
-│       └── server.go     # Setting up the HTTP server
+├── 📁 client
+│   └── 📁 src
+│       ├── 📁 components
+│       │   ├── 📁 ui
+│       │   │   └── cursor.tsx  # Cursor component
+│       │   └── Dashboard.tsx   # Main dashboard component
+│       └── App.tsx             # Main entry point for the client
 │
-├── go.mod
-├── go.sum
-└── Makefile
+└── 📁 server
+    ├── 📁 cmd
+    │   └── 📁 api
+    │       └── main.go         # Main entry point for the server
+    └── 📂 internal
+        ├── 📁 database
+        │   ├── database.go     # Database connection and CRUD operations
+        │   ├── migration.go    # Database migrations
+        │   └── schema.go       # Database schema
+        └── 📁 server
+            ├── client.go       # Client connection and message handling
+            ├── event.go        # Event handling
+            ├── manager.go      # WebSocket manager
+            ├── routes.go       # HTTP routes
+            └── server.go       # Setting up the HTTP server
 ```
 
 With the server built, the client was built using Vite, React and the

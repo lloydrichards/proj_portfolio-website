@@ -36,7 +36,7 @@ export const getProject = async (
         rehypePlugins: [
           rehypeMdxImportMedia,
           rehypeSlug,
-          rehypePrettyCode,
+          [rehypePrettyCode, { keepBackground: false, theme: "synthwave-84" }],
           [
             rehypeAutolinkHeadings,
             {

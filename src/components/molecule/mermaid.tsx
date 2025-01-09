@@ -8,12 +8,13 @@ const MdxMermaid = dynamic(
 );
 // Workaround for https://github.com/vercel/next.js/discussions/36369
 export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
+  console.log(props);
   return (
     <MdxMermaid
       config={{
         theme: {
-          light: "neutral",
-          dark: "forest",
+          light: "dark",
+          dark: "dark",
         },
       }}
       {...props}

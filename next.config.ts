@@ -13,13 +13,15 @@ const withMDX = createMDX({
   options: {
     jsx: true,
     remarkPlugins: [
-      [mdxMermaid],
       // @ts-expect-error wrong types
       ["remark-gfm", { strict: true, throwOnError: true }],
+      [mdxMermaid],
     ],
     rehypePlugins: [
       // @ts-expect-error wrong types
       ["rehype-mdx-import-media", { strict: true, throwOnError: true }],
+      // @ts-expect-error wrong types
+      ["rehype-slug", { strict: true, throwOnError: true }],
       [
         // @ts-expect-error wrong types
         "rehype-pretty-code",
@@ -30,8 +32,6 @@ const withMDX = createMDX({
           theme: "synthwave-84",
         },
       ],
-      // @ts-expect-error wrong types
-      ["rehype-slug", { strict: true, throwOnError: true }],
       [
         // @ts-expect-error wrong types
         "rehype-autolink-headings",

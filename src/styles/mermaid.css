@@ -1,0 +1,3 @@
+div.mermaid {
+  @apply bg-code text-code-foreground my-4 overflow-x-auto rounded-md p-3;
+}

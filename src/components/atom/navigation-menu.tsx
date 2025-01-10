@@ -44,12 +44,12 @@ const NavigationMenuItem = React.forwardRef<
 NavigationMenuItem.displayName = NavigationMenuPrimitive.Item.displayName;
 
 const navigationMenuTriggerStyle = cva(
-  "group bg-background ring-ring hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 flex size-full items-center justify-center rounded-md px-2 transition-colors focus:ring-2 disabled:pointer-events-none disabled:opacity-50",
+  "group ring-ring hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 flex size-full items-center justify-center rounded-md px-2 transition-colors focus:ring-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       active: {
         true: "bg-accent text-accent-foreground",
-        false: "",
+        false: "bg-background",
       },
     },
     defaultVariants: {

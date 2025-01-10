@@ -22,12 +22,13 @@ interface LabInfoCardProps {
 }
 
 export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
-  const pathName = usePathname();
-  const lab = labs.find((l) => l.pathname === pathName);
+  const pathname = usePathname();
+  const lab = labs.find((l) => l.pathname === pathname);
 
   if (!lab) {
     return null;
   }
+
   return (
     <Tile size="unset" className="col-span-full">
       <Card className={className}>

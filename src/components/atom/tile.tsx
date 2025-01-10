@@ -12,13 +12,13 @@ const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
       "box-xs": "col-span-2 row-span-1 md:col-span-4 md:row-span-2",
       // "box-sm": "col-span-8 row-span-4 lg:col-span-10 lg:row-span-5",
       "box-md":
-        "col-span-8 row-span-4 md:col-span-10 md:row-span-4 lg:col-span-12 lg:row-span-6",
+        "col-span-8 row-span-3 md:col-span-10 md:row-span-4 lg:col-span-12 lg:row-span-6",
       "square-xxs": "col-span-1 row-span-1",
       "square-xs": "col-span-1 row-span-1 md:col-span-2 md:row-span-2",
       // "square-sm":
       //   "col-span-2 row-span-2 md:col-span-3 md:row-span-3 lg:col-span-4 lg:row-span-4",
       "square-md":
-        "col-span-4 row-span-4 md:col-span-4 md:row-span-4 lg:col-span-6 lg:row-span-6",
+        "col-span-4 row-span-3 md:col-span-4 md:row-span-4 lg:col-span-6 lg:row-span-6",
     },
     outline: {
       true: "border",

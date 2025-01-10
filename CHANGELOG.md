@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.0...v1.10.1) (2025-01-10)
+
+
+### Bug Fixes
+
+* :goal_net: add graceful error handling for 404 ([2077d47](https://github.com/lloydrichards/proj_portfolio-website/commit/2077d47c6830039abbfa42dab536b40272cd539c))
+
 # [1.10.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.2...v1.10.0) (2025-01-07)
 
 

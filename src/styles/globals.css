@@ -178,10 +178,10 @@
     --foreground: var(--color-mono-100);
 
     --primary: var(--color-primary-500);
-    --primary-foreground: var(--foreground);
+    --primary-foreground: var(--background);
 
     --secondary: var(--color-secondary-500);
-    --secondary-foreground: var(--foreground);
+    --secondary-foreground: var(--background);
 
     --card: var(--color-mono-800);
     --card-foreground: var(--foreground);

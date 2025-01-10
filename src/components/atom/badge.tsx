@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { typefaceBody, typefaceMeta } from "../tokens/typeface";
 
 const badgeVariants = cva(
-  "focus:ring-ring inline-flex items-center rounded-full border transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-hidden",
+  "focus:ring-ring inline-flex items-center rounded-full border transition-colors hover:no-underline focus:ring-2 focus:ring-offset-2 focus:outline-hidden",
   {
     variants: {
       variant: {

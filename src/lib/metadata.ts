@@ -1,4 +1,3 @@
-/** @type {import("pliny/config").PlinyConfig } */
 export const siteMetadata = {
   title: "Lloyd Richards .dev",
   author: "Lloyd Richards",

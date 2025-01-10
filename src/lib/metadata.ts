@@ -1,5 +1,5 @@
 export const siteMetadata = {
-  title: "Lloyd Richards .dev",
+  title: "lloydrichards.dev",
   author: "Lloyd Richards",
   description:
     "Digital playground of Lloyd Richards, a designer and developer.",

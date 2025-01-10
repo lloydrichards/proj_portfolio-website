@@ -38,7 +38,7 @@ export const Navbar: React.FC = () => {
           "col-[1/-5] mt-0 md:col-[1/-9] lg:col-[1/-13]",
         )}
       >
-        Lloyd Richards .dev
+        lloydrichards.dev
       </Link>
       <NavigationMenu>
         <NavigationMenuList className="contents">

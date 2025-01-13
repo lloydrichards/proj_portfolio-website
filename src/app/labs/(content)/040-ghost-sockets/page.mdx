@@ -28,21 +28,21 @@ then broadcasts messages to all connected clients. The server also maintains a
 connection to a database to store records of users that have connected.
 
 ```mermaid
-sequenceDiagram;
-    participant Client;
-    participant Server;
-    participant Database;
+sequenceDiagram
+    participant Client
+    participant Server
+    participant Database
 
-    Client->>+Server: Initiates WebSocket handshake;
-    Server->>Database: Update record;
-    Server-->>Client: Accepts WebSocket handshake;
+    Client->>+Server: Initiates WebSocket handshake
+    Server->>Database: Update record
+    Server-->>Client: Accepts WebSocket handshake
 
-    Client->>Server: Sends position;
-    Server->>Client: Broadcast state;
+    Client->>Server: Sends position
+    Server->>Client: Broadcast state
 
-    Client->>Server: Closes connection;
-    Server->>Database: Update record;
-    Server-->>-Client: Acknowledged;
+    Client->>Server: Closes connection
+    Server->>Database: Update record
+    Server-->>-Client: Acknowledged
 ```
 
 In this way its possible to build multiple http routes for various clients data
@@ -50,20 +50,20 @@ streams, for example an Active User feed which would broadcast the most recent
 users and if they are currently active.
 
 ```mermaid
-sequenceDiagram;
-    participant Client;
-    participant Server;
-    participant Database;
+sequenceDiagram
+    participant Client
+    participant Server
+    participant Database
 
-    Server-->>Database: Update record;
-    Client->>+Server: Initiates WebSocket handshake;
-    Server-->>Client: Accepts WebSocket handshake;
+    Server-->>Database: Update record
+    Client->>+Server: Initiates WebSocket handshake
+    Server-->>Client: Accepts WebSocket handshake
 
-    Database-->>Server: Read Clients;
-    Server->>Client: Broadcast Recent Clients;
+    Database-->>Server: Read Clients
+    Server->>Client: Broadcast Recent Clients
 
 
-    Server-->>-Client: Closed;
+    Server-->>-Client: Closed
 ```
 
 ## Implementation

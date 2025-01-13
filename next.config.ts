@@ -11,7 +11,6 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    jsx: true,
     remarkPlugins: [
       // @ts-expect-error wrong types
       ["remark-gfm", { strict: true, throwOnError: true }],

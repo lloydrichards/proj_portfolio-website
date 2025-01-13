@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.1...v1.10.2) (2025-01-13)
+
+
+### Bug Fixes
+
+* :bug: fix mermaid charts needing semi-colons ([4816928](https://github.com/lloydrichards/proj_portfolio-website/commit/48169281e5bf3c8548b847c53296042352b986fd))
+
 ## [1.10.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.0...v1.10.1) (2025-01-10)
 
 

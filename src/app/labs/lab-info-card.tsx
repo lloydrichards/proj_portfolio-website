@@ -65,22 +65,24 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
         <CardContent>
           <CardTitle className="flex gap-2">{lab.title}</CardTitle>
           <CardDescription>{lab.description}</CardDescription>
-          <div className="flex justify-end gap-1">
-            {lab.href && (
-              <Button variant="outline" asChild>
-                <a target="_blank" href={lab.href}>
-                  <ExternalLink /> Website
-                </a>
-              </Button>
-            )}
-            {lab.repo && (
-              <Button variant="outline" asChild>
-                <a target="_blank" href={lab.repo}>
-                  <Github /> Repo
-                </a>
-              </Button>
-            )}
-          </div>
+          {(lab.repo || lab.href) && (
+            <div className="mt-3 flex justify-end gap-1">
+              {lab.href && (
+                <Button variant="outline" asChild>
+                  <a target="_blank" href={lab.href}>
+                    <ExternalLink /> Website
+                  </a>
+                </Button>
+              )}
+              {lab.repo && (
+                <Button variant="outline" asChild>
+                  <a target="_blank" href={lab.repo}>
+                    <Github /> Repo
+                  </a>
+                </Button>
+              )}
+            </div>
+          )}
           {relatedLabs.length > 0 && (
             <Accordion type="single" collapsible>
               <AccordionItem value="item-1">

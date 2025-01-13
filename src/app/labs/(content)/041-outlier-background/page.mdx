@@ -1,0 +1,70 @@
+export const metadata = {
+  id: "041",
+  title: "Outlier Background",
+  date: "2025-01-13",
+  description:
+    "Building a 3D background for the Outlier conf website using Three.js.",
+  tags: ["three.js"],
+  repo: "https://github.com/lloydrichards/proj_outlier-background",
+  href: "https://www.outlierconf.com/",
+};
+
+import "./background";
+
+While I was building the [Outlier conf app](/projects/2100-outlier-conf-app), I
+wanted to create a 3D background for the website that would be visually
+interesting and inline with the conference's branding of thinking outside the
+box. I decided to use Three.js to create a simple 3D background that would be
+rendered in the browser.
+
+<canvas
+  suppressHydrationWarning
+  className="my-6 h-160 w-full overflow-clip rounded-2xl border-4"
+  id="bg"
+></canvas>
+> If you can't see the 3D background, please refresh the page.
+
+The challenge I had was that the website was build using SquareSpace, which
+isn't the most developer-friendly platform. I had to find a way to inject the
+Three.js code into the website without breaking the existing layout and still
+being able to use the SquareSpace editor to make changes.
+
+I decided to create a simple script that would inject the Three.js code into the
+website. The script would create a canvas element and render the 3D background
+in the browser. I then added the script to the website using the SquareSpace
+embedded script feature.
+
+## Parallax Effect
+
+The code for the 3D background is quite simple. I created a new Three.js scene
+and added a few 3D objects to it. I then created a simple animation loop that
+would rotate the objects in the scene. The code is shown below:
+
+```js showLineNumbers
+// Render Loop
+const render = function () {
+  requestAnimationFrame(render);
+  if (!outlier) return;
+  const t = document.body.getBoundingClientRect().top;
+  outlier.rotation.x += 0.01;
+  outlier.rotation.y += 0.01;
+  outlier.position.y = t * 0.005;
+
+  outlierLight.position.y = t * 0.005;
+
+  // rotates stars
+  stars.forEach((star: { rotation: { x: number; y: number } }) => {
+    star.rotation.x += 0.005;
+    star.rotation.y += 0.005;
+  });
+
+  camera.position.y = t * +0.01;
+
+  // Render the scene
+  renderer.render(scene, camera);
+};
+```
+
+At the same time I attach the y position of the `outlier`, `camera.position` and
+`outlierLight` to the scroll position of the page. This creates a parallax
+effect where the 3D objects move in response to the user scrolling the page.

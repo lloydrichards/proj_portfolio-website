@@ -1,0 +1,122 @@
+---
+id: 2006
+title: Outlier Conf Websites
+date: 2021-02-14
+description: Websites for the Outlier Conf, between 2021 and 2024
+category:
+  - DESIGN
+  - DEVELOP
+image: /images/projects/2006/thumb_outlier-conf-websites.png
+href: https://www.outlierconf.com/
+---
+
+In 2020, I joined the events committee to help organize the first Outlier Conf,
+a conference for the
+[Data Visualization Society](https://www.datavisualizationsociety.org/). With
+the COVID-19 pandemic, the conference was moved online, and I was tasked with
+designing and developing the conference website. THe websites became an
+important source of information for attendees, speakers, and sponsors. I
+continues working and maintaining the websites between 2021 and 2024.
+
+## 2021
+
+https://www.outlierconf.com/outlier-2021/home
+
+![Outlier Conf 2021](/images/projects/2006/outlier-conf-websites_2021.png)
+
+In the first year of the conference we were using a Wordpress service provided
+by the conference platform. The site was fairly basic but this time provided us
+an opportunity to define our brand and graphical styles. With our
+[Brand Guidelines](https://workbyoliver.notion.site/Outlier-2021-Brand-Book-68882ee176994e2ab2309a512179da03)
+from Oliver Todd I was able to create some atomic ideas for content blocks
+
+![Color Palettes](/images/projects/2006/outlier-conf-web-design-01.png)
+
+From the color palettes I created some atomic ideas for content blocks, defining
+five different types of blocks that could be used to create the website. These
+blocks had various levels of complexity but were always balanced with accessible
+colors and typography.
+
+![Color Blocks](/images/projects/2006/outlier-conf-web-design-02.png)
+
+## 2022
+
+In 2022, we adopted a more flat design. We still used the same color block
+elements, but the website was more focused on the content and the speakers
+blocks and used less motion.
+
+![Outlier Conf 2022](/images/projects/2006/outlier-conf-websites_2022.png)
+
+## 2023
+
+https://www.outlierconf.com/outlier-2023/home
+
+In 2023, we moved the website to SquareSpace and changed to a more dynamic
+design with an open 3D space with flat blocks overlaid. The background provided
+visual interest while still being able to be turned off for accessibility, and
+the blocks were configurable with some CSS injection into SquareSpace.
+
+```css showLineNumbers title="injected.css"
+.card-turquoise {
+  background-color: #2db1a4;
+  color: #231f20;
+  padding: 2rem;
+  border-width: 4px 8px 8px 4px;
+  border-color: #231f20;
+  border-style: solid;
+  border-radius: 1rem;
+}
+
+.card-plum {
+  background-color: #9f5f9c;
+  color: #f1edea;
+  padding: 2rem;
+  border-width: 4px 8px 8px 4px;
+  border-color: #231f20;
+  border-style: solid;
+  border-radius: 1rem;
+}
+
+.card-mustard {
+  background-color: #dcb229;
+  color: #231f20;
+  padding: 2rem;
+  border-width: 4px 8px 8px 4px;
+  border-color: #231f20;
+  border-style: solid;
+  border-radius: 1rem;
+}
+
+.card-white {
+  background-color: #f1edea;
+  color: #231f20;
+  padding: 2rem;
+  border-width: 4px 8px 8px 4px;
+  border-color: #231f20;
+  border-style: solid;
+  border-radius: 1rem;
+}
+```
+
+Using these classes it was possible to style the text blocks in the website,
+even through SquareSpace's editor isn't the most flexible.
+
+You can learn more about the background in the
+[(041) Outlier Background](/labs/041-outlier-background) lab.
+
+![Outlier Conf 2023](/images/projects/2006/outlier-conf-websites_2023.png)
+
+## 2024
+
+https://www.outlierconf.com/outlier-2024/home
+
+In 2024, there wasn't a lot of redesign as the website was already working well.
+We did at this time add a micro-frontend to the website to allow for the agenda
+of the conference to be embedded directly into the SquareSpace website.
+
+![Outlier Conf 2024](/images/projects/2006/outlier-conf-websites_2024-1.png)
+
+You can learn more about the
+[Outlier Micro-frontend](/projects/2400-outlier-micro-frontend) project.
+
+![Outlier Conf Agenda](/images/projects/2006/outlier-conf-websites_2024-2.png)

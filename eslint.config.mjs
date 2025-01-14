@@ -21,6 +21,18 @@ const eslintConfig = [
           caughtErrorsIgnorePattern: "^_",
         },
       ],
+      "drizzle/enforce-delete-with-where": [
+        "error",
+        {
+          drizzleObjectName: ["db", "ctx.db"],
+        },
+      ],
+      "drizzle/enforce-update-with-where": [
+        "error",
+        {
+          drizzleObjectName: ["db", "ctx.db"],
+        },
+      ],
     },
   },
 ];

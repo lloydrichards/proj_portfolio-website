@@ -13,7 +13,8 @@
     "theme",
     "presentation",
     "tokens",
-    "infrastructure"
+    "infrastructure",
+    "db"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "tailwindCSS.experimental.classRegex": [

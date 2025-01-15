@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import { OCCUPATION_PATH } from "./consts";
+import { OCCUPATION_PATH } from "../consts";
 import { getOccupation } from "./get-occupation";
 
 export const getAllOccupations = async () => {

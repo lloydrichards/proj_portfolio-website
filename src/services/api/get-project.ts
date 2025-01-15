@@ -3,7 +3,7 @@ import * as E from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/lib/function";
 import { failure } from "io-ts/lib/PathReporter";
 import { compileMDX } from "next-mdx-remote/rsc";
-import { PROJECT_PATH } from "./consts";
+import { PROJECT_PATH } from "../consts";
 import { getSource } from "./utils";
 import { Project, ProjectMeta } from "@/types/domain";
 import { ReactElement } from "react";

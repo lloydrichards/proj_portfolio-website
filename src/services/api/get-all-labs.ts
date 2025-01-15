@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import { LAB_PATH } from "./consts";
+import { LAB_PATH } from "../consts";
 import { getLab } from "./get-lab";
 
 export const getAllLabs = async () => {

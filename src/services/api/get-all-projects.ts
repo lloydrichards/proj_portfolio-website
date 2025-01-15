@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 
-import { PROJECT_PATH } from "./consts";
+import { PROJECT_PATH } from "../consts";
 import { getProject } from "./get-project";
 
 import { descContent, notEmpty } from "./utils";

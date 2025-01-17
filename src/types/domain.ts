@@ -22,35 +22,6 @@ export const Lab = t.type({
 });
 export type Lab = t.TypeOf<typeof Lab>;
 
-export const OCCUPATION_CATEGORY = t.union([
-  t.literal("VOLUNTEER"),
-  t.literal("WORK"),
-  t.literal("EDUCATION"),
-]);
-export type OCCUPATION_CATEGORY = t.TypeOf<typeof OCCUPATION_CATEGORY>;
-
-export const OccupationMeta = t.type({
-  id: t.number,
-  title: t.string,
-  company: t.string,
-  location: t.string,
-  description: t.string,
-  skills: t.union([t.array(t.string), t.undefined]),
-  characters: t.union([t.array(t.string), t.undefined]),
-  tags: t.union([t.array(t.string), t.undefined]),
-  category: OCCUPATION_CATEGORY,
-  start_date: td.DateFromISOString,
-  end_date: t.union([td.DateFromISOString, t.undefined]),
-});
-export type OccupationMeta = t.TypeOf<typeof OccupationMeta>;
-
-export const Occupation = t.type({
-  ...OccupationMeta.props,
-  slug: t.string,
-  lastModified: td.DateFromISOString,
-});
-export type Occupation = t.TypeOf<typeof Occupation>;
-
 export const PROJECT_CATEGORY = t.union([
   t.literal("DESIGN"),
   t.literal("DEVELOP"),

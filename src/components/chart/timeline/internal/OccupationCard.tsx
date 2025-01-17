@@ -8,10 +8,10 @@ import {
 import { FC } from "react";
 import { cn } from "@/lib/utils";
 import { utcFormat } from "d3";
-import { OccupationMeta } from "@/types/domain";
+import { Occupations } from "../Timeline";
 
 interface OccupationCardProps {
-  data: OccupationMeta;
+  data: Occupations[0];
   className?: string;
 }
 export const OccupationCard: FC<OccupationCardProps> = ({
@@ -28,7 +28,7 @@ export const OccupationCard: FC<OccupationCardProps> = ({
         <CardDescription className="text-sm">{data.company}</CardDescription>
         <CardDescription className="text-sm">
           {formatDate(data.start_date)} -{" "}
-          {formatDate(data.end_date) || "Present"}
+          {data.end_date ? formatDate(data.end_date) : "Present"}
         </CardDescription>
       </CardHeader>
       <CardContent className="px-2">

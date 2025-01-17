@@ -8,6 +8,13 @@
       "when": 1736978294734,
       "tag": "0000_far_scarecrow",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1737103746837,
+      "tag": "0001_jazzy_shard",
+      "breakpoints": true
     }
   ]
 }

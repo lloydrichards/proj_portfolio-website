@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import { ProjectNavigation } from "./project_navigation";
-import { getAllProjects } from "@/services/get-all-projects";
+import { getAllProjects } from "@/services/api/get-all-projects";
 import { Mosaic } from "@/components/template/mosaic";
 
 const ProjectLayout: FC<{

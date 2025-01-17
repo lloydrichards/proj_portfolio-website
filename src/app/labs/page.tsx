@@ -1,7 +1,7 @@
 import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { createPageMetadata } from "@/lib/seo";
-import { getAllLabs } from "@/services/get-all-labs";
+import { getAllLabs } from "@/services/api/get-all-labs";
 import { FC } from "react";
 
 export const metadata = createPageMetadata({

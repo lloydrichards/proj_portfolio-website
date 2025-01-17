@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { OccupationCard } from "./OccupationCard";
 import { motion } from "framer-motion";
-import { OccupationMeta } from "@/types/domain";
+import { Occupations } from "../Timeline";
 
 interface OccupationItemProps {
-  data: OccupationMeta;
+  data: Occupations[0];
   idx: number;
   x: number;
   y: number;

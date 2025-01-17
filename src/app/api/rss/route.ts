@@ -1,7 +1,7 @@
 import { metadata } from "@/app/layout";
 import { getBaseUrl } from "@/lib/utils";
-import { getAllLabs } from "@/services/get-all-labs";
-import { getAllProjects } from "@/services/get-all-projects";
+import { getAllLabs } from "@/services/api/get-all-labs";
+import { getAllProjects } from "@/services/api/get-all-projects";
 
 export async function GET() {
   const allLabs = await getAllLabs();

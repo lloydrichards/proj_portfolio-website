@@ -4,8 +4,8 @@ import { ProjectCard } from "@/components/molecule/project_card";
 import { ThemeToggle } from "@/components/molecule/theme-toggle";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
-import { getFeaturedLabs } from "@/services/get-featured-labs";
-import { getFeaturedProjects } from "@/services/get-featured-projects";
+import { getFeaturedLabs } from "@/services/api/get-featured-labs";
+import { getFeaturedProjects } from "@/services/api/get-featured-projects";
 import { Logo } from "@/components/organism/logo";
 
 const HomePage = async () => {

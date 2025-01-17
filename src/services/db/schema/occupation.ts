@@ -1,4 +1,4 @@
-import { desc, relations } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
   integer,
   primaryKey,
@@ -14,11 +14,13 @@ export const occupation = sqliteTable("occupation", {
   company: text().notNull(),
   location: text().notNull(),
   jobDescription: text("job_description"),
-  category: integer("category_id").references(() => category.id, {
-    onDelete: "cascade",
-  }),
-  startDate: text("start_date").$type<Date>().notNull(),
-  endDate: text("end_date").$type<Date | null>(),
+  category: integer("category_id")
+    .references(() => category.id, {
+      onDelete: "cascade",
+    })
+    .notNull(),
+  startDate: text("start_date").notNull(),
+  endDate: text("end_date"),
 });
 
 export const occupationRelations = relations(occupation, ({ one, many }) => ({

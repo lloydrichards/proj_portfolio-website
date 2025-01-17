@@ -1,6 +1,6 @@
 import { siteMetadata } from "@/lib/metadata";
-import { getAllLabs } from "@/services/get-all-labs";
-import { getAllProjects } from "@/services/get-all-projects";
+import { getAllLabs } from "@/services/api/get-all-labs";
+import { getAllProjects } from "@/services/api/get-all-projects";
 
 export default async function sitemap() {
   const projects = await getAllProjects();

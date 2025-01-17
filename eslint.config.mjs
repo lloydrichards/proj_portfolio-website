@@ -11,6 +11,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.plugins("@typescript-eslint", "drizzle"),
   {
     rules: {
       "@typescript-eslint/no-unused-vars": [

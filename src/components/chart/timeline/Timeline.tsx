@@ -2,11 +2,12 @@
 import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
 import { FC } from "react";
 import { OccupationItem } from "./internal/OccupationItem";
-import { OccupationMeta } from "@/types/domain";
 import { useResponsive } from "@/components/template/responsive_wrapper";
+import { getAllOccupations } from "@/services/api/get-all-occupations-2";
 
+export type Occupations = Awaited<ReturnType<typeof getAllOccupations>>;
 interface TimelineProps {
-  data: OccupationMeta[];
+  data: Occupations;
   maxHeight?: number;
   margin?: {
     top: number;
@@ -51,10 +52,7 @@ export const Timeline: FC<TimelineProps> = ({
     .range(["#CBE0F2", "#EECEC9", "#F0E2CE"]);
 
   // Helpers
-  const lookupInRange = (
-    corner: Date,
-    allValues: Array<OccupationMeta>,
-  ): boolean => {
+  const lookupInRange = (corner: Date, allValues: Occupations): boolean => {
     let result: boolean = false;
     allValues.forEach((i) => {
       if (

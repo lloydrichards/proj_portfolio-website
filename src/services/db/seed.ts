@@ -10,7 +10,7 @@ import {
   skill,
 } from "./schema";
 
-async function resetTable(db: any, table: Table) {
+async function resetTable(db: db, table: Table) {
   return db.run(
     sql.raw(
       `DELETE FROM ${getTableName(table)}; DELETE FROM sqlite_sequence WHERE name='${getTableName(table)}'`,
@@ -83,9 +83,9 @@ const main = async () => {
       .values({
         title: o.title,
         jobDescription: o.description || "",
-        startDate: o.start_date.toISOString().split("T")[0] as unknown as Date,
-        endDate: o.end_date?.toISOString().split("T")[0] as unknown as Date,
-        category: categoryId,
+        startDate: o.start_date.toISOString().split("T")[0],
+        endDate: o.end_date?.toISOString().split("T")[0],
+        category: categoryId || 1,
         company: o.company || "",
         location: o.location || "",
       })

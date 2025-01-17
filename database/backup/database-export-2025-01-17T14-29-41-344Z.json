@@ -1,0 +1,820 @@
+{
+  "attribute": [
+    {
+      "id": 17,
+      "name": "Multidisciplinary Team Player",
+      "description": null
+    },
+    {
+      "id": 18,
+      "name": "Self Motivated",
+      "description": null
+    },
+    {
+      "id": 19,
+      "name": "Leadership",
+      "description": null
+    },
+    {
+      "id": 20,
+      "name": "Communication",
+      "description": null
+    },
+    {
+      "id": 21,
+      "name": "Problem Solver",
+      "description": null
+    },
+    {
+      "id": 22,
+      "name": "Team Player",
+      "description": null
+    },
+    {
+      "id": 23,
+      "name": "Task Oriented",
+      "description": null
+    },
+    {
+      "id": 24,
+      "name": "Multilingual",
+      "description": null
+    },
+    {
+      "id": 25,
+      "name": "Community Leader",
+      "description": null
+    },
+    {
+      "id": 26,
+      "name": "Specialized Expert",
+      "description": null
+    },
+    {
+      "id": 27,
+      "name": "Consultant",
+      "description": null
+    },
+    {
+      "id": 28,
+      "name": "Local Collaborator",
+      "description": null
+    },
+    {
+      "id": 29,
+      "name": "Social Impact",
+      "description": null
+    },
+    {
+      "id": 30,
+      "name": "Independent",
+      "description": null
+    },
+    {
+      "id": 31,
+      "name": "Team Leader",
+      "description": null
+    },
+    {
+      "id": 32,
+      "name": "Organized",
+      "description": null
+    }
+  ],
+  "category": [
+    {
+      "id": 4,
+      "name": "Work",
+      "description": null
+    },
+    {
+      "id": 5,
+      "name": "Education",
+      "description": null
+    },
+    {
+      "id": 6,
+      "name": "Volunteer",
+      "description": null
+    }
+  ],
+  "occupation": [
+    {
+      "id": 1,
+      "title": "Events Committee Member (2024)",
+      "company": "Outlier Conference",
+      "location": "Online",
+      "jobDescription": "Continuing my work with the Outlier Conference, I will be joining the Events Committee to help plan and execute the 2024 conference. This will involve working with the team to plan the event, create the website, and develop the app. I will also be responsible for the design and development of the conference website and app.",
+      "category": 4,
+      "startDate": "2024-02-27",
+      "endDate": null
+    },
+    {
+      "id": 2,
+      "title": "Organizer",
+      "company": "Data Visualization Zurich MeetUp",
+      "location": "Switzerland",
+      "jobDescription": "Organizer of the Data Visualization Zurich MeetUp. The MeetUp is a community of data visualization enthusiasts who meet regularly to share knowledge and experiences. As an organizer, I am responsible for the organization of the events, the selection of the speakers, and the promotion of the MeetUp.",
+      "category": 6,
+      "startDate": "2023-10-26",
+      "endDate": null
+    },
+    {
+      "id": 3,
+      "title": "Professional Interaction Engineer",
+      "company": "Interactive Things",
+      "location": "Switzerland",
+      "jobDescription": "Full stack developer with a focus on data visualization and interaction design. I work with a multidisciplinary team of designers, developers and researchers to create data-driven products and services.",
+      "category": 4,
+      "startDate": "2023-02-01",
+      "endDate": null
+    },
+    {
+      "id": 4,
+      "title": "Events Committee Member (2023)",
+      "company": "Outlier Conference",
+      "location": "Online",
+      "jobDescription": "Worked as the web and app developer on the Events Committee to help bring together the hybrid Outlier Conference (2023) for Data Visualization.  My current focus in the committee is keeping the website uptodate and developing an app for the conference schedule.",
+      "category": 4,
+      "startDate": "2022-07-01",
+      "endDate": "2023-04-30"
+    },
+    {
+      "id": 5,
+      "title": "Events Committee Member (2022)",
+      "company": "Outlier Conference",
+      "location": "Online",
+      "jobDescription": "Volunteer on the Events Committee to help bring together the online Outlier Conference 2022, a 2 day online event for Data Visualization.  My focus in the committee was keeping the website uptodate and developing an app for the conference schedule.",
+      "category": 6,
+      "startDate": "2021-07-01",
+      "endDate": "2022-04-30"
+    },
+    {
+      "id": 6,
+      "title": "Data Visualization Specialist",
+      "company": "Vatorex AG.",
+      "location": "Switzerland",
+      "jobDescription": "Took charge of the development of new digital products and updating existing ones.  Working through UX to design to code and on to production.  Work closely with the CEO on bringing ideas to the development team and organizing work loads and schedules.",
+      "category": 4,
+      "startDate": "2021-04-01",
+      "endDate": "2023-01-31"
+    },
+    {
+      "id": 7,
+      "title": "Data Visualization Intern",
+      "company": "Vatorex AG.",
+      "location": "Switzerland",
+      "jobDescription": "Building digital products and design data structures for improving existing databases.  Build the companies first design system to create cohersion across platforms.  Worked with a web and app developer to bring design into production.",
+      "category": 4,
+      "startDate": "2020-10-01",
+      "endDate": "2021-03-31"
+    },
+    {
+      "id": 8,
+      "title": "Events Committee Member (2021)",
+      "company": "Outlier Conference",
+      "location": "Online",
+      "jobDescription": "Volunteer on the Events Committee to help bring together the first Outlier Conference in 2021. Outlier Conference was a new conference for the multidisciplinary community of Data Visualization Societ. The conference was held online and featured speakers from a variety of disciplines.",
+      "category": 6,
+      "startDate": "2020-07-15",
+      "endDate": "2021-04-01"
+    },
+    {
+      "id": 9,
+      "title": "Data Visualization Intern",
+      "company": "Interactive Things",
+      "location": "Switzerland",
+      "jobDescription": "Involved across the process of digital content creation. Working with designers on ideation, prototyping and client coordination as well as assisting developers with implementation from cleaning data, building web app features, and continuous integration and deployment.",
+      "category": 4,
+      "startDate": "2020-01-03",
+      "endDate": "2020-07-11"
+    },
+    {
+      "id": 10,
+      "title": "Gardener",
+      "company": "Der Holländer Pflanzencenter",
+      "location": "Germany",
+      "jobDescription": "Responsible for designing and maintaining the nursery while interacting and problem solving for customers. Worked and practised in both spoken and written German. Additionally, kept the social media up-to-date with regular posts and content.",
+      "category": 4,
+      "startDate": "2019-03-01",
+      "endDate": "2019-10-31"
+    },
+    {
+      "id": 11,
+      "title": "Intensive German (A1-B1)",
+      "company": "SpeakEasy",
+      "location": "Germany",
+      "jobDescription": "Intensive language course with focus on practical and conversational skills. Small classroom lectures with vocal practise and 1 on 1 conversation skills. Course taken in conjunction with language meet ups and immersion housing.",
+      "category": 5,
+      "startDate": "2019-01-01",
+      "endDate": "2019-04-03"
+    },
+    {
+      "id": 12,
+      "title": "Design Consultant",
+      "company": "Lloyd Richards Design",
+      "location": "UK",
+      "jobDescription": "Volunteered my design skills to assist local community projects with regenerative design problems.  Included Hardcliffe Elementary, Incredible Edible, Red Hill Bars, Bristol Fish Project, and Bearpit Bristol.",
+      "category": 6,
+      "startDate": "2016-11-01",
+      "endDate": "2018-12-21"
+    },
+    {
+      "id": 13,
+      "title": "Fellowship Programme",
+      "company": "School for Social Entrepreneurs",
+      "location": "UK",
+      "jobDescription": "Practical and theoretical course on running a social enterprise. Focus on leadership, business skills (finances, marketings, planning) and measuring impact in communities",
+      "category": 5,
+      "startDate": "2016-10-01",
+      "endDate": "2017-10-01"
+    },
+    {
+      "id": 14,
+      "title": "Regenerative Garden Designer",
+      "company": "Lloyd Richards Design",
+      "location": "UK",
+      "jobDescription": "Self employed garden designer and contractor focusing on residential clients and community groups. Designing ecologically gardens. Managing sub-contractors, materials, budgets. Complying with building regulations and planning permission.",
+      "category": 4,
+      "startDate": "2016-04-01",
+      "endDate": "2018-10-01"
+    },
+    {
+      "id": 15,
+      "title": "Senior Landscaper",
+      "company": "Acer ltd",
+      "location": "UK",
+      "jobDescription": "Worked with the team designers to impliment and build gardens for residencial clients.  Worked closely with the client to meet their needs while ording materials, scheduling labour and detailing production.",
+      "category": 4,
+      "startDate": "2015-08-01",
+      "endDate": "2016-02-01"
+    },
+    {
+      "id": 16,
+      "title": "Volunteer",
+      "company": "La Loma Vida",
+      "location": "Spain",
+      "jobDescription": "Ran day to day operations of a permaculture project, including managing volunteers, planting, watering and general maintenance.  Included design and builds of earth works and water collection systems.",
+      "category": 6,
+      "startDate": "2015-02-01",
+      "endDate": "2015-07-15"
+    },
+    {
+      "id": 17,
+      "title": "WWOOF'er",
+      "company": "WWOOF.org",
+      "location": "Costa Rica, Spain, Morocco, Turkey",
+      "jobDescription": "Various jobs on organic farms across tropical and mediterranean climates. Included general labour, ongoing maintenance, crop rotation and earth works.",
+      "category": 6,
+      "startDate": "2014-10-01",
+      "endDate": "2015-01-01"
+    },
+    {
+      "id": 18,
+      "title": "Permaculture Design Certificate",
+      "company": "Permaculture Institute",
+      "location": "Costa Rica",
+      "jobDescription": "Practical approach to design, based on participatory, community inclusion process. Land and resource management on multiple scales. Designing collaboratively with a multidisciplinary group",
+      "category": 5,
+      "startDate": "2014-02-01",
+      "endDate": "2014-06-01"
+    },
+    {
+      "id": 19,
+      "title": "System Analyst",
+      "company": "Bowden Physiotherapy",
+      "location": "Canada",
+      "jobDescription": "Examined existing systems in the physio clinic and researched new methods and technologies that would be used tp improve preformance and customer experiance.",
+      "category": 4,
+      "startDate": "2013-09-01",
+      "endDate": "2013-12-21"
+    },
+    {
+      "id": 20,
+      "title": "Crew Leader",
+      "company": "Greenworks",
+      "location": "Canada",
+      "jobDescription": "Ran one of two landscaping crews, dealing with residencil clients and implimenting urban gardens.  Included managing schedules and other crew members resources on and off site.",
+      "category": 6,
+      "startDate": "2013-04-22",
+      "endDate": "2013-08-30"
+    },
+    {
+      "id": 21,
+      "title": "Orientation Coordinator",
+      "company": "University of Calgary",
+      "location": "Canada",
+      "jobDescription": "Organized and developed a week long orientation for incoming Masters Students.  Worked with the City of Calgary to introduce Architects to the urban development as well as a design spring looking at urban fabric.",
+      "category": 6,
+      "startDate": "2013-01-01",
+      "endDate": "2013-08-15"
+    },
+    {
+      "id": 22,
+      "title": "MArch Foundation",
+      "company": "University of Calgary",
+      "location": "Canada",
+      "jobDescription": "Foundation year of Architecture Masters with focus on history, design methodology and sustainability. Individual and group design assignments of various scale. CAD supported design process and model production.",
+      "category": 5,
+      "startDate": "2012-09-01",
+      "endDate": "2013-04-21"
+    },
+    {
+      "id": 23,
+      "title": "Baker",
+      "company": "Fresh",
+      "location": "Canada",
+      "jobDescription": "Responsible for filling bakery orders and breakfast deliveries.  Produced cakes, cookies, bars, and other desserts for a large showcase for the flagship store.",
+      "category": 4,
+      "startDate": "2012-01-01",
+      "endDate": "2012-06-21"
+    },
+    {
+      "id": 24,
+      "title": "Baker",
+      "company": "Jelly Modern Doughnuts",
+      "location": "Canada",
+      "jobDescription": "Produced and filled orders of gourmet doughnuts.  Worked with several other bakers as a team to produce top quality products for business meetings, events, and store front customers.",
+      "category": 4,
+      "startDate": "2011-06-01",
+      "endDate": "2011-12-21"
+    },
+    {
+      "id": 25,
+      "title": "Landscaper",
+      "company": "Self Employeed",
+      "location": "Canada",
+      "jobDescription": "Designed and built the garden and patio area for a summer home of a clients.  Managed and ordered materials on site while producing reports of ongoing work for client abroad.",
+      "category": 4,
+      "startDate": "2010-04-21",
+      "endDate": "2010-09-01"
+    },
+    {
+      "id": 26,
+      "title": "Store Clerk",
+      "company": "Stör",
+      "location": "Canada",
+      "jobDescription": "Served univercity students and faculty at a local conveniance store ran by the Student Union.  Responsible for opening and closing the store as well as taking in stock and resupplying.",
+      "category": 4,
+      "startDate": "2009-09-01",
+      "endDate": "2011-04-21"
+    },
+    {
+      "id": 27,
+      "title": "Bachelor of Arts",
+      "company": "University of Calgary",
+      "location": "Canada",
+      "jobDescription": "Bachelor degree in liberal arts with course work focus in fine arts and history. Minor in Visual Studies with focus in sculpture and woodworking. Technical proficiency in laboratory and workshop settings.",
+      "category": 5,
+      "startDate": "2006-09-01",
+      "endDate": "2011-04-21"
+    }
+  ],
+  "occupationToAttribute": [
+    {
+      "occupation": 1,
+      "attribute": 17
+    },
+    {
+      "occupation": 1,
+      "attribute": 18
+    },
+    {
+      "occupation": 1,
+      "attribute": 19
+    },
+    {
+      "occupation": 2,
+      "attribute": 19
+    },
+    {
+      "occupation": 2,
+      "attribute": 20
+    },
+    {
+      "occupation": 3,
+      "attribute": 17
+    },
+    {
+      "occupation": 3,
+      "attribute": 18
+    },
+    {
+      "occupation": 3,
+      "attribute": 19
+    },
+    {
+      "occupation": 4,
+      "attribute": 17
+    },
+    {
+      "occupation": 4,
+      "attribute": 18
+    },
+    {
+      "occupation": 4,
+      "attribute": 19
+    },
+    {
+      "occupation": 5,
+      "attribute": 17
+    },
+    {
+      "occupation": 5,
+      "attribute": 18
+    },
+    {
+      "occupation": 5,
+      "attribute": 19
+    },
+    {
+      "occupation": 6,
+      "attribute": 17
+    },
+    {
+      "occupation": 6,
+      "attribute": 18
+    },
+    {
+      "occupation": 6,
+      "attribute": 19
+    },
+    {
+      "occupation": 7,
+      "attribute": 17
+    },
+    {
+      "occupation": 7,
+      "attribute": 18
+    },
+    {
+      "occupation": 7,
+      "attribute": 21
+    },
+    {
+      "occupation": 8,
+      "attribute": 17
+    },
+    {
+      "occupation": 8,
+      "attribute": 18
+    },
+    {
+      "occupation": 9,
+      "attribute": 17
+    },
+    {
+      "occupation": 9,
+      "attribute": 18
+    },
+    {
+      "occupation": 9,
+      "attribute": 21
+    },
+    {
+      "occupation": 10,
+      "attribute": 22
+    },
+    {
+      "occupation": 10,
+      "attribute": 23
+    },
+    {
+      "occupation": 10,
+      "attribute": 24
+    },
+    {
+      "occupation": 12,
+      "attribute": 25
+    },
+    {
+      "occupation": 12,
+      "attribute": 26
+    },
+    {
+      "occupation": 12,
+      "attribute": 27
+    },
+    {
+      "occupation": 13,
+      "attribute": 25
+    },
+    {
+      "occupation": 13,
+      "attribute": 28
+    },
+    {
+      "occupation": 13,
+      "attribute": 29
+    },
+    {
+      "occupation": 14,
+      "attribute": 30
+    },
+    {
+      "occupation": 15,
+      "attribute": 31
+    },
+    {
+      "occupation": 15,
+      "attribute": 32
+    }
+  ],
+  "occupationToSkill": [
+    {
+      "occupation": 1,
+      "skill": 26
+    },
+    {
+      "occupation": 1,
+      "skill": 27
+    },
+    {
+      "occupation": 1,
+      "skill": 28
+    },
+    {
+      "occupation": 2,
+      "skill": 29
+    },
+    {
+      "occupation": 2,
+      "skill": 30
+    },
+    {
+      "occupation": 3,
+      "skill": 31
+    },
+    {
+      "occupation": 3,
+      "skill": 32
+    },
+    {
+      "occupation": 3,
+      "skill": 33
+    },
+    {
+      "occupation": 4,
+      "skill": 26
+    },
+    {
+      "occupation": 4,
+      "skill": 27
+    },
+    {
+      "occupation": 4,
+      "skill": 28
+    },
+    {
+      "occupation": 5,
+      "skill": 26
+    },
+    {
+      "occupation": 5,
+      "skill": 27
+    },
+    {
+      "occupation": 5,
+      "skill": 28
+    },
+    {
+      "occupation": 6,
+      "skill": 26
+    },
+    {
+      "occupation": 6,
+      "skill": 27
+    },
+    {
+      "occupation": 6,
+      "skill": 32
+    },
+    {
+      "occupation": 6,
+      "skill": 34
+    },
+    {
+      "occupation": 7,
+      "skill": 26
+    },
+    {
+      "occupation": 7,
+      "skill": 28
+    },
+    {
+      "occupation": 7,
+      "skill": 32
+    },
+    {
+      "occupation": 7,
+      "skill": 34
+    },
+    {
+      "occupation": 8,
+      "skill": 26
+    },
+    {
+      "occupation": 8,
+      "skill": 35
+    },
+    {
+      "occupation": 9,
+      "skill": 36
+    },
+    {
+      "occupation": 9,
+      "skill": 28
+    },
+    {
+      "occupation": 9,
+      "skill": 37
+    },
+    {
+      "occupation": 9,
+      "skill": 34
+    },
+    {
+      "occupation": 10,
+      "skill": 38
+    },
+    {
+      "occupation": 10,
+      "skill": 39
+    },
+    {
+      "occupation": 10,
+      "skill": 40
+    },
+    {
+      "occupation": 11,
+      "skill": 41
+    },
+    {
+      "occupation": 12,
+      "skill": 42
+    },
+    {
+      "occupation": 12,
+      "skill": 43
+    },
+    {
+      "occupation": 12,
+      "skill": 44
+    },
+    {
+      "occupation": 13,
+      "skill": 45
+    },
+    {
+      "occupation": 13,
+      "skill": 46
+    },
+    {
+      "occupation": 13,
+      "skill": 47
+    },
+    {
+      "occupation": 14,
+      "skill": 48
+    },
+    {
+      "occupation": 14,
+      "skill": 42
+    },
+    {
+      "occupation": 14,
+      "skill": 49
+    },
+    {
+      "occupation": 15,
+      "skill": 50
+    }
+  ],
+  "skill": [
+    {
+      "id": 26,
+      "name": "Web Design (Figma)",
+      "description": null
+    },
+    {
+      "id": 27,
+      "name": "App Development (Flutter)",
+      "description": null
+    },
+    {
+      "id": 28,
+      "name": "Frontend (Typescript, React)",
+      "description": null
+    },
+    {
+      "id": 29,
+      "name": "Organization",
+      "description": null
+    },
+    {
+      "id": 30,
+      "name": "Public Speaking",
+      "description": null
+    },
+    {
+      "id": 31,
+      "name": "Full Stack Development (Next.js)",
+      "description": null
+    },
+    {
+      "id": 32,
+      "name": "Backend Development (GCP)",
+      "description": null
+    },
+    {
+      "id": 33,
+      "name": "Data Visualization (D3.js, Three.js)",
+      "description": null
+    },
+    {
+      "id": 34,
+      "name": "Data Visualization (D3.js)",
+      "description": null
+    },
+    {
+      "id": 35,
+      "name": "Web Development (SquareSpace)",
+      "description": null
+    },
+    {
+      "id": 36,
+      "name": "Web Design (HTML, CSS)",
+      "description": null
+    },
+    {
+      "id": 37,
+      "name": "Data Analysis (R, Tableau)",
+      "description": null
+    },
+    {
+      "id": 38,
+      "name": "Horticulture (N. European)",
+      "description": null
+    },
+    {
+      "id": 39,
+      "name": "German (B1)",
+      "description": null
+    },
+    {
+      "id": 40,
+      "name": "Landscaping (N. European)",
+      "description": null
+    },
+    {
+      "id": 41,
+      "name": "German (A1-B1)",
+      "description": null
+    },
+    {
+      "id": 42,
+      "name": "Regenerative Design (Permaculture, Horticulture)",
+      "description": null
+    },
+    {
+      "id": 43,
+      "name": "Digital Design (CAD, Illistrations)",
+      "description": null
+    },
+    {
+      "id": 44,
+      "name": "Carpentry (Framing, Furniture)",
+      "description": null
+    },
+    {
+      "id": 45,
+      "name": "Entrepreneur (StartUps, Business Planning)",
+      "description": null
+    },
+    {
+      "id": 46,
+      "name": "Finances (Planning, Bookkeeping)",
+      "description": null
+    },
+    {
+      "id": 47,
+      "name": "Impact Assessment",
+      "description": null
+    },
+    {
+      "id": 48,
+      "name": "Business Development (Planning, Running)",
+      "description": null
+    },
+    {
+      "id": 49,
+      "name": "Landscaper (Design, Building, Maintenance)",
+      "description": null
+    },
+    {
+      "id": 50,
+      "name": "Project Management",
+      "description": null
+    }
+  ]
+}

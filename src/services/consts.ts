@@ -14,9 +14,3 @@ export const PROJECT_PATH = path.join(
   "projects",
   "content",
 );
-export const OCCUPATION_PATH = path.join(
-  process.cwd(),
-  "src",
-  "content",
-  "occupation",
-);

@@ -1,22 +1,31 @@
-import { promises as fs } from "fs";
-import { OCCUPATION_PATH } from "../consts";
-import { getOccupation } from "./get-occupation";
+import { db } from "../db";
 
 export const getAllOccupations = async () => {
-  const filenames = await fs.readdir(OCCUPATION_PATH);
-
-  const occupation = await Promise.all(
-    filenames.map(async (filename) => {
-      const slug = filename.replace(/\.mdx$/, "");
-      return await getOccupation(slug);
-    }),
-  );
-
-  return occupation
+  const occupations = await db.query.occupation.findMany({
+    with: {
+      category: true,
+      skills: {
+        with: {
+          skill: true,
+        },
+      },
+      attributes: {
+        with: {
+          attribute: true,
+        },
+      },
+    },
+  });
+  return occupations
     .filter((o) => o !== null)
-    .sort(
-      (a, b) =>
-        b!.frontmatter.start_date.getTime() -
-        a!.frontmatter.start_date.getTime(),
-    );
+    .map((o) => ({
+      ...o,
+      description: o.jobDescription,
+      start_date: new Date(o.startDate),
+      end_date: o.endDate ? new Date(o.endDate) : null,
+      category: o.category?.name.toUpperCase(),
+      skills: o.skills.map((s) => s.skill.name),
+      attributes: o.attributes.map((a) => a.attribute.name),
+    }))
+    .sort((a, b) => b.start_date.getTime() - a.start_date.getTime());
 };

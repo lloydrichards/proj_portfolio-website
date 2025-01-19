@@ -4,10 +4,7 @@ import { drizzle } from "drizzle-orm/libsql";
 import { env } from "@/lib/env";
 import * as schema from "./schema";
 import path from "path";
-/**
- * Cache the database connection in development. This avoids creating a new connection on every HMR
- * update.
- */
+
 const globalForDb = globalThis as unknown as {
   client: Client | undefined;
 };

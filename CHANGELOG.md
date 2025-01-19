@@ -1,3 +1,11 @@
+## [1.11.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.11.0...v1.11.1) (2025-01-19)
+
+
+### Bug Fixes
+
+* :bug: fix focus ring on nav items ([bc04f6b](https://github.com/lloydrichards/proj_portfolio-website/commit/bc04f6b18af7edb31684b714f5566880fe448493))
+* :wheelchair: improve a11y with minor changes ([8188bad](https://github.com/lloydrichards/proj_portfolio-website/commit/8188bad82d2c766bd7371f8fd43e77b3a37bac7c))
+
 # [1.11.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.2...v1.11.0) (2025-01-19)
 
 

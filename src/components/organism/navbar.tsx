@@ -46,7 +46,10 @@ export const Navbar: React.FC = () => {
           {routes.map((route) => (
             <NavigationMenuItem
               key={route.href}
-              className={tileVariants({ size: "box-xxs" })}
+              className={tileVariants({
+                size: "box-xxs",
+                className: "overflow-visible",
+              })}
             >
               <Link href={route.href} legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>

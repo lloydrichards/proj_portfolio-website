@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { FC, ReactNode } from "react";
 import { tileVariants } from "../atom/tile";
 import { Url } from "next/dist/shared/lib/router/router";
+import { cn } from "@/lib/utils";
 
 export const NavListItem: FC<{
   children: ReactNode;
@@ -19,7 +20,11 @@ export const NavListItem: FC<{
   const pathname = usePathname();
   return (
     <NavigationMenuItem
-      className={tileVariants({ size: "unset", outline: false, className })}
+      className={tileVariants({
+        size: "unset",
+        outline: false,
+        className: cn("overflow-visible", className),
+      })}
     >
       <Link href={href} legacyBehavior passHref>
         <NavigationMenuLink

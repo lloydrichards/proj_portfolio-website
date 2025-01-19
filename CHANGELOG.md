@@ -1,3 +1,16 @@
+# [1.11.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.2...v1.11.0) (2025-01-19)
+
+
+### Bug Fixes
+
+* :card_file_box: change path on server ([6caddd1](https://github.com/lloydrichards/proj_portfolio-website/commit/6caddd16bf3dcc81243b9db4c8db6730b55bf15a))
+
+
+### Features
+
+* **db:** :sparkles: add occupation schema ([d5b1615](https://github.com/lloydrichards/proj_portfolio-website/commit/d5b1615be3d03052f88c24b956b86c0608ddefd8))
+* **db:** :sparkles: create database with drizzle ([9dc54aa](https://github.com/lloydrichards/proj_portfolio-website/commit/9dc54aaaef917be68ed4916fab45cdf89f16a107))
+
 ## [1.10.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.1...v1.10.2) (2025-01-13)
 
 

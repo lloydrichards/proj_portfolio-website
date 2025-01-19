@@ -4,6 +4,7 @@ import { getAllProjects } from "@/services/api/get-all-projects";
 import { FC } from "react";
 import { createPageMetadata } from "@/lib/seo";
 import { categoryPredicate } from "@/services/api/project-helpers";
+import { typefaceHeading1 } from "@/components/tokens/typeface";
 
 export const metadata = createPageMetadata({
   title: "Projects",
@@ -17,6 +18,13 @@ const ProjectOverviewPage: FC<{
   const allProjects = await getAllProjects();
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
+      <h1
+        className={typefaceHeading1(
+          "col-span-full row-span-2 flex items-center",
+        )}
+      >
+        Project Grid
+      </h1>
       {allProjects
         .map(({ frontmatter }) => frontmatter)
         .filter(categoryPredicate({ category }))

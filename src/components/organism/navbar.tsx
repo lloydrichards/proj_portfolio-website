@@ -1,6 +1,6 @@
 import { typefaceHeading3 } from "@/components/tokens/typeface";
 import Link from "next/link";
-import { Tile } from "../atom/tile";
+import { tileVariants } from "../atom/tile";
 import { FlaskConical, Layers, Ruler, User } from "lucide-react";
 import {
   NavigationMenu,
@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <section className="mosaic-rows col-span-full grid grid-cols-subgrid">
+    <header className="mosaic-rows col-span-full grid grid-cols-subgrid">
       <Link
         href="/"
         className={typefaceHeading3(
@@ -43,19 +43,20 @@ export const Navbar: React.FC = () => {
       <NavigationMenu>
         <NavigationMenuList className="contents">
           {routes.map((route) => (
-            <Tile key={route.href} size="box-xxs" className="overflow-visible">
-              <NavigationMenuItem>
-                <Link href={route.href} legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    {route.icon}
-                    <span className="hidden md:block">{route.label}</span>
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </Tile>
+            <NavigationMenuItem
+              key={route.href}
+              className={tileVariants({ size: "box-xxs" })}
+            >
+              <Link href={route.href} legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  {route.icon}
+                  <span className="hidden md:block">{route.label}</span>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
           ))}
         </NavigationMenuList>
       </NavigationMenu>
-    </section>
+    </header>
   );
 };

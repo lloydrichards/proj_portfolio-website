@@ -18,6 +18,7 @@ export const Footer: React.FC = () => {
       <Tile size="square-xxs">
         <Button variant="ghost" size="unset" asChild>
           <a target="_blank" href="/api/rss">
+            <span className="sr-only">RSS</span>
             <Rss />
           </a>
         </Button>
@@ -25,6 +26,7 @@ export const Footer: React.FC = () => {
       <Tile size="square-xxs">
         <Button variant="ghost" size="unset" asChild>
           <a target="_blank" href={siteMetadata.social.instagram}>
+            <span className="sr-only">Instagram</span>
             <Instagram />
           </a>
         </Button>
@@ -32,6 +34,7 @@ export const Footer: React.FC = () => {
       <Tile size="square-xxs">
         <Button variant="ghost" size="unset" asChild>
           <a target="_blank" href={siteMetadata.social.linkedin}>
+            <span className="sr-only">LinkedIn</span>
             <Linkedin />
           </a>
         </Button>
@@ -39,6 +42,7 @@ export const Footer: React.FC = () => {
       <Tile size="square-xxs">
         <Button variant="ghost" size="unset" asChild>
           <a target="_blank" href={siteMetadata.social.github}>
+            <span className="sr-only">GitHub</span>
             <Github />
           </a>
         </Button>

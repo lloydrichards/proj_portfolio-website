@@ -56,7 +56,7 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
           <div className="flex items-center gap-1 opacity-60">
             {lab.tags?.map((t) => (
               <Badge key={t} variant="outline">
-                {t.toUpperCase()}
+                <h1>{t.toUpperCase()}</h1>
               </Badge>
             ))}
           </div>

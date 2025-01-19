@@ -37,7 +37,7 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
           <div className="flex items-center gap-1 opacity-60">
             {project.category?.map((t) => (
               <Badge key={t} variant="outline">
-                {t.toUpperCase()}
+                <h1>{t.toUpperCase()}</h1>
               </Badge>
             ))}
           </div>

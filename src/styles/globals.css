@@ -116,7 +116,7 @@
     --color-ui-warning: hsl(45.9 96.7% 64.5%);
     --color-ui-success: hsl(160.1 84.1% 39.4%);
     --color-ui-info: hsl(215 16% 47%);
-    --color-ui-code: hsl(250 20% 17%);
+    --color-ui-code: hsl(250 20% 16%);
 
     /* Functional Colors */
     --background: var(--color-mono-050);
@@ -192,7 +192,7 @@
     --muted: var(--color-mono-600);
     --muted-foreground: var(--foreground);
 
-    --accent: var(--color-mono-500);
+    --accent: var(--color-mono-600);
     --accent-foreground: var(--foreground);
 
     --destructive: var(--color-ui-error);

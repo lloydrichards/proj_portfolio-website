@@ -7,7 +7,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, ReactNode } from "react";
-import { Tile } from "../atom/tile";
+import { tileVariants } from "../atom/tile";
 import { Url } from "next/dist/shared/lib/router/router";
 
 export const NavListItem: FC<{
@@ -18,26 +18,21 @@ export const NavListItem: FC<{
 }> = ({ children, href, exact, className }) => {
   const pathname = usePathname();
   return (
-    <Tile
-      key={href.toString()}
-      size="unset"
-      outline={false}
-      className={className}
+    <NavigationMenuItem
+      className={tileVariants({ size: "unset", outline: false, className })}
     >
-      <NavigationMenuItem>
-        <Link href={href} legacyBehavior passHref>
-          <NavigationMenuLink
-            className={navigationMenuTriggerStyle({
-              active: exact
-                ? pathname == href
-                : pathname.includes(href.toString()),
-              className: "flex gap-2 @min-[120px]:justify-start",
-            })}
-          >
-            {children}
-          </NavigationMenuLink>
-        </Link>
-      </NavigationMenuItem>
-    </Tile>
+      <Link href={href} legacyBehavior passHref>
+        <NavigationMenuLink
+          className={navigationMenuTriggerStyle({
+            active: exact
+              ? pathname == href
+              : pathname.includes(href.toString()),
+            className: "flex gap-2 @min-[120px]:justify-start",
+          })}
+        >
+          {children}
+        </NavigationMenuLink>
+      </Link>
+    </NavigationMenuItem>
   );
 };

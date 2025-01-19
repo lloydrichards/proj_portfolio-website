@@ -9,6 +9,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "../atom/navigation-menu";
+import { ThemeToggle } from "../molecule/theme-toggle";
 
 export const Navbar: React.FC = () => {
   const routes = [
@@ -35,7 +36,7 @@ export const Navbar: React.FC = () => {
       <Link
         href="/"
         className={typefaceHeading3(
-          "col-[1/-5] mt-0 md:col-[1/-9] lg:col-[1/-13]",
+          "col-[1/-6] mt-0 overflow-clip md:col-[1/-10] lg:col-[1/-14]",
         )}
       >
         lloydrichards.dev
@@ -57,6 +58,7 @@ export const Navbar: React.FC = () => {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
+      <ThemeToggle className={tileVariants({ size: "unset" })} />
     </header>
   );
 };

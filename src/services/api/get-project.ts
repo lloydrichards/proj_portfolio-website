@@ -13,6 +13,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import mdxMermaid from "mdx-mermaid";
 import rehypeMdxImportMedia from "rehype-mdx-import-media";
+import { getTeamMembers } from "./get-team-members";
 
 type ProjectContent = {
   content: ReactElement;
@@ -27,6 +28,7 @@ export const getProject = async (
   if (!source) {
     return null;
   }
+
   const { content, frontmatter } = await compileMDX<ProjectMeta>({
     source,
     options: {
@@ -53,6 +55,8 @@ export const getProject = async (
     components: { ...components },
   });
 
+  const teamMembers = await getTeamMembers(frontmatter.team);
+
   return pipe(
     ProjectMeta.decode(frontmatter),
     E.fold(
@@ -65,6 +69,7 @@ export const getProject = async (
         frontmatter: {
           ...frontmatter,
           slug,
+          team: teamMembers,
           lastModified: new Date(),
           pathname: `/projects/${slug}`,
           isPublished: frontmatter.isPublished ?? true,

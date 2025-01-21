@@ -52,7 +52,7 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
                 <AccordionTrigger>Team</AccordionTrigger>
                 <AccordionContent>
                   {project.team.map((t) => (
-                    <TeamMemberAvatar key={t.name} {...t} />
+                    <TeamMemberAvatar key={t.id} {...t} />
                   ))}
                 </AccordionContent>
               </AccordionItem>

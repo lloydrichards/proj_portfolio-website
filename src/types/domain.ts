@@ -31,13 +31,6 @@ export const PROJECT_CATEGORY = t.union([
 ]);
 export type PROJECT_CATEGORY = t.TypeOf<typeof PROJECT_CATEGORY>;
 
-export const TeamMember = t.type({
-  name: t.string,
-  role: t.string,
-  image: t.union([t.string, t.undefined]),
-});
-export type TeamMember = t.TypeOf<typeof TeamMember>;
-
 export const ProjectMeta = t.type({
   id: t.number,
   title: t.string,
@@ -49,12 +42,21 @@ export const ProjectMeta = t.type({
   image: t.string,
   href: t.union([t.string, t.undefined]),
   repo: t.union([t.string, t.undefined]),
-  team: t.union([t.array(TeamMember), t.undefined]),
+  team: t.union([t.array(t.array(t.string)), t.undefined]),
 });
 export type ProjectMeta = t.TypeOf<typeof ProjectMeta>;
 
 export const Project = t.type({
   ...ProjectMeta.props,
+  team: t.array(
+    t.type({
+      id: t.number,
+      firstName: t.string,
+      lastName: t.string,
+      role: t.string,
+      imgUrl: t.union([t.string, t.null]),
+    }),
+  ),
   slug: t.string,
   pathname: t.string,
   lastModified: td.DateFromISOString,

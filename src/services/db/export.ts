@@ -12,7 +12,6 @@ const exportDatabaseToJson = async () => {
       ([_, value]) =>
         typeof value === "object" && Symbol.for("drizzle:Name") in value,
     );
-    console.log(Object.entries(schema));
 
     // Fetch data from all tables
     for (const [tableName, table] of tables) {

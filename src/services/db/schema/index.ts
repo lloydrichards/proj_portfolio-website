@@ -10,3 +10,5 @@ export {
   occupationToSkill,
   occupationToSkillRelations,
 } from "./occupation";
+
+export { teamMember } from "./team_member";

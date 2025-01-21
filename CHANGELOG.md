@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.11.1...v1.12.0) (2025-01-21)
+
+
+### Features
+
+* **db:** :sparkles: add team members to db ([afa3e8d](https://github.com/lloydrichards/proj_portfolio-website/commit/afa3e8d029f9123880d7dcef4885e255fcf402a6))
+
 ## [1.11.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.11.0...v1.11.1) (2025-01-19)
 
 

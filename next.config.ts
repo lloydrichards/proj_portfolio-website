@@ -5,6 +5,9 @@ import "@/lib/env";
 
 const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
+  outputFileTracingIncludes: {
+    "database/db.sqlite": ["./database/db.sqlite"],
+  },
   experimental: {
     reactCompiler: true,
   },

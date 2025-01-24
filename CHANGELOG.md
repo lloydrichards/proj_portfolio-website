@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.0...v1.12.1) (2025-01-24)
+
+
+### Bug Fixes
+
+* :bug: expose SQLite to edge functions ([b4aeb9a](https://github.com/lloydrichards/proj_portfolio-website/commit/b4aeb9ad90005bff1b90a37e3dac39d9d9093ce2))
+
 # [1.12.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.11.1...v1.12.0) (2025-01-21)
 
 

@@ -1,3 +1,11 @@
+## [1.12.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.2...v1.12.3) (2025-01-25)
+
+
+### Bug Fixes
+
+* :bug: fix block height for timeline ([f099476](https://github.com/lloydrichards/proj_portfolio-website/commit/f099476feb56962e319b093047c1de95c1476802))
+* :bug: only call SQLite on build tasks ([6fb8649](https://github.com/lloydrichards/proj_portfolio-website/commit/6fb8649d161fe3c82283296ef690d3af3a4c915c))
+
 ## [1.12.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.1...v1.12.2) (2025-01-25)
 
 

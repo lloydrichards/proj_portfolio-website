@@ -18,22 +18,18 @@ export const OccupationCard: FC<OccupationCardProps> = ({
   data,
   className,
 }) => {
-  const formatDate = (date?: Date) => date && utcFormat("%B %Y")(date);
+  const formatDate = (date?: Date) => date && utcFormat("%b %Y")(date);
   return (
     <Card
       className={cn("h-full border-none bg-transparent shadow-none", className)}
     >
       <CardHeader className="p-2">
-        <CardTitle className="my-0 line-clamp-1">
-          {data.title} ({data.id})
-        </CardTitle>
-        <CardDescription className="text-sm">{data.company}</CardDescription>
+        <CardTitle className="my-0 line-clamp-1">{data.title}</CardTitle>
+        <CardDescription className="text-sm">{data.company} </CardDescription>
         <CardDescription className="text-sm">
-          {data.skills.join(", ")}
-        </CardDescription>
-        <CardDescription className="text-sm">
-          {formatDate(data.start_date)} -{" "}
-          {data.end_date ? formatDate(data.end_date) : "Present"}
+          {formatDate(data.start_date)}
+          {" - "}
+          {data.end_date ? formatDate(data.end_date) : "Present"}{" "}
         </CardDescription>
       </CardHeader>
       <CardContent className="px-2">

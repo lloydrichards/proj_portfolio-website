@@ -11,8 +11,6 @@ const globalForDb = globalThis as unknown as {
 
 const dbPath = path.join(process.cwd(), env.DB_FILE_NAME);
 
-console.info(`Using database at ${dbPath}`);
-
 export const client =
   globalForDb.client ?? createClient({ url: `file:${dbPath}` });
 if (env.NODE_ENV !== "production") globalForDb.client = client;

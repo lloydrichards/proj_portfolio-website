@@ -31,7 +31,7 @@ export const Timeline: FC<TimelineProps> = ({
   },
 }) => {
   const { width } = useResponsive();
-  const textBlockHeight = 180;
+  const textBlockHeight = 240;
   const textMargin = 180;
   const height = data.length * textBlockHeight || maxHeight || 400;
   const innerHeight = height - margin.top - margin.bottom;
@@ -45,43 +45,20 @@ export const Timeline: FC<TimelineProps> = ({
     ])
     .range([innerHeight, margin.bottom]);
   const xScale = scaleOrdinal<number, number>()
-    .domain([0, 1, 2])
-    .range([margin.left, margin.left + 16, margin.left + 32]);
+    .domain([0, 1, 2, 3])
+    .range([margin.left, margin.left + 16, margin.left + 32, margin.left + 48]);
   const cScale = scaleOrdinal<string>()
     .domain(Array.from(new Set(data.map((d) => d.category))))
     .range(["#CBE0F2", "#EECEC9", "#F0E2CE"]);
-
-  // Helpers
-  const lookupInRange = (corner: Date, allValues: Occupations): boolean => {
-    let result: boolean = false;
-    allValues.forEach((i) => {
-      if (
-        corner > new Date(i.start_date) &&
-        corner < new Date(i.end_date || new Date())
-      ) {
-        result = true;
-        return true;
-      }
-    });
-    return result;
-  };
 
   const dataWithChannels = data
     .sort((a, b) =>
       isBefore(new Date(a.start_date), new Date(b.start_date)) ? 1 : -1,
     )
-    .map((d) => {
-      if (
-        lookupInRange(new Date(d.end_date || new Date()), data) &&
-        lookupInRange(new Date(d.start_date), data)
-      ) {
-        return { ...d, channel: 2 };
-      } else if (lookupInRange(new Date(d.start_date), data)) {
-        return { ...d, channel: 1 };
-      } else {
-        return { ...d, channel: 0 };
-      }
-    });
+    .map((d, i) => ({
+      ...d,
+      channel: i % 3,
+    }));
 
   const lineConnector = line()
     .curve(curveStep)

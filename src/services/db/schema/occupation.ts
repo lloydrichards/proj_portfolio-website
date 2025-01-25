@@ -49,6 +49,7 @@ export const categoryRelations = relations(category, ({ many }) => ({
 export const skill = sqliteTable("skill", {
   id: integer().primaryKey({ autoIncrement: true }),
   name: text().notNull().unique(),
+  type: text(),
   description: text(),
 });
 

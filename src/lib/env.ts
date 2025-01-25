@@ -8,6 +8,7 @@ export const env = createEnv({
    */
   server: {
     DB_FILE_NAME: z.string(),
+    NEXT_RUNTIME: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -28,6 +29,7 @@ export const env = createEnv({
    */
   runtimeEnv: {
     DB_FILE_NAME: process.env.DB_FILE_NAME,
+    NEXT_RUNTIME: process.env.NEXT_RUNTIME,
     NODE_ENV: process.env.NODE_ENV,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },

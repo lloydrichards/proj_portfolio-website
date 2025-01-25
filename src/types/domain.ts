@@ -48,15 +48,6 @@ export type ProjectMeta = t.TypeOf<typeof ProjectMeta>;
 
 export const Project = t.type({
   ...ProjectMeta.props,
-  team: t.array(
-    t.type({
-      id: t.number,
-      firstName: t.string,
-      lastName: t.string,
-      role: t.string,
-      imgUrl: t.union([t.string, t.null]),
-    }),
-  ),
   slug: t.string,
   pathname: t.string,
   lastModified: td.DateFromISOString,

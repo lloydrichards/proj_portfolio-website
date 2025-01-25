@@ -20,14 +20,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/atom/accordion";
+import { TeamMember } from "@/services/db/schema/team_member";
 
 interface ProjectInfoCardProps {
   project: Project;
+  team: TeamMember[];
   className?: string;
 }
 
 export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
   project,
+  team,
   className,
 }) => {
   return (
@@ -51,7 +54,7 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
               <AccordionItem value="item-1">
                 <AccordionTrigger>Team</AccordionTrigger>
                 <AccordionContent>
-                  {project.team.map((t) => (
+                  {team.map((t) => (
                     <TeamMemberAvatar key={t.id} {...t} />
                   ))}
                 </AccordionContent>

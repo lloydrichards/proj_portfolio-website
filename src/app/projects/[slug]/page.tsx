@@ -5,6 +5,7 @@ import { getAllProjects } from "@/services/api/get-all-projects";
 import { getProject } from "@/services/api/get-project";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTeamMembers } from "@/services/api/get-team-members";
 
 export async function generateMetadata({
   params,
@@ -38,11 +39,12 @@ const ProjectPage = async ({
   if (!project) {
     return notFound();
   }
+  const team = await getTeamMembers(project.frontmatter.team);
   const { frontmatter, content } = project;
 
   return (
     <>
-      <ProjectInfoCard project={frontmatter} />
+      <ProjectInfoCard project={frontmatter} team={team} />
       <article className="col-span-full mt-8 mb-16">{content}</article>
     </>
   );

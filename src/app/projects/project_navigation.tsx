@@ -4,7 +4,6 @@ import {
   NavigationMenuList,
 } from "@/components/atom/navigation-menu";
 import { NavListItem } from "@/components/molecule/nav_list_item";
-import { NavToggleItem } from "@/components/molecule/nav_toggle_item";
 import { cn } from "@/lib/utils";
 import { Project } from "@/types/domain";
 import { FC } from "react";
@@ -17,12 +16,6 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
   projects,
   className,
 }) => {
-  const categoryRoutes = [
-    { category: "DEVELOP", label: "Develop" },
-    { category: "DESIGN", label: "Design" },
-    { category: "GARDEN", label: "Garden" },
-  ];
-
   return (
     <NavigationMenu
       aria-label="Project Navigation"
@@ -30,19 +23,13 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
       className="hidden md:contents"
     >
       <NavigationMenuList className="contents">
-        <NavToggleItem href="/projects" className={className}>
-          All
-        </NavToggleItem>
-        {categoryRoutes.map(({ category, label }) => (
-          <NavToggleItem
-            key={category}
-            href={{ pathname: "/projects", query: { category } }}
-            className={className}
-          >
-            {label}
-          </NavToggleItem>
-        ))}
-
+        <NavListItem
+          href="/projects"
+          exact
+          className={cn("col-span-full row-span-2 border", className)}
+        >
+          <span className="w-full text-center">All Projects</span>
+        </NavListItem>
         {projects
           .filter((d) => d.isPublished)
           .map((p) => (

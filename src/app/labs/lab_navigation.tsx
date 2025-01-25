@@ -23,7 +23,7 @@ export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
         <NavListItem
           href="/labs"
           exact
-          className={cn("col-span-full border", className)}
+          className={cn("col-span-full row-span-2 border", className)}
         >
           <span className="w-full text-center">All Labs</span>
         </NavListItem>

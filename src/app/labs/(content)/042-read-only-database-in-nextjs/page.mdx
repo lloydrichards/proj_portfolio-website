@@ -45,7 +45,7 @@ layer like this.
 Probably the most important part of the setup is the `/db/index.ts` file. This
 is where the database is setup and the connection is established.
 
-```typescript showLineNumbers {12} title="src/service/db/index.ts"
+```typescript showLineNumbers {17} title="src/service/db/index.ts"
 import { createClient, type Client } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 
@@ -57,10 +57,17 @@ const globalForDb = globalThis as unknown as {
   client: Client | undefined;
 };
 
-const dbPath = path.join(process.cwd(), env.DB_FILE_NAME);
+const initClient = () => {
+  if (env.NEXT_RUNTIME === "edge") {
+    // HACK: Skip database initialization in edge runtime
+    return null as unknown as Client;
+  }
+  const dbPath = path.join(process.cwd(), env.DB_FILE_NAME);
+  return globalForDb.client ?? createClient({ url: `file:${dbPath}` });
+};
 
-export const client =
-  globalForDb.client ?? createClient({ url: `file:${dbPath}` });
+export const client = initClient();
+
 if (env.NODE_ENV !== "production") globalForDb.client = client;
 
 export const db = drizzle(client, { schema });

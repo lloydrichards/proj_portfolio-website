@@ -11,7 +11,7 @@ const globalForDb = globalThis as unknown as {
 
 const initClient = () => {
   if (env.NEXT_RUNTIME === "edge") {
-    // Skip database initialization in edge runtime
+    // HACK: Skip database initialization in edge runtime
     return null as unknown as Client;
   }
   const dbPath = path.join(process.cwd(), env.DB_FILE_NAME);

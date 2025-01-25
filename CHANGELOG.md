@@ -1,3 +1,10 @@
+## [1.13.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.2...v1.13.3) (2025-01-25)
+
+
+### Bug Fixes
+
+* :mag: fix favicon ([cd4a585](https://github.com/lloydrichards/proj_portfolio-website/commit/cd4a585ad9941cb6a2084e06f6e88a813a897a67))
+
 ## [1.13.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.1...v1.13.2) (2025-01-25)
 
 

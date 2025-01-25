@@ -32,7 +32,7 @@ export const NavListItem: FC<{
             active: exact
               ? pathname == href
               : pathname.includes(href.toString()),
-            className: "flex gap-2 @min-[120px]:justify-start",
+            className: "flex gap-2 lg:justify-start",
           })}
         >
           {children}

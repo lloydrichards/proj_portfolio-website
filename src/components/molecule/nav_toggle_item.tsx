@@ -30,7 +30,7 @@ export const NavToggleItem: FC<{
         <NavigationMenuLink
           className={navigationMenuTriggerStyle({
             active: pathname == href,
-            className: "flex gap-2 border @min-[120px]:justify-start",
+            className: "flex gap-2 border lg:justify-start",
           })}
         >
           {children}

@@ -21,7 +21,7 @@ export interface IPostCard {
 
 export const LabCard: React.FC<IPostCard> = ({ lab, className, asLink }) => {
   const content = (
-    <Card className="flex h-full flex-col">
+    <Card className="@container flex h-full flex-col">
       <CardHeader className="flex-1 gap-2 @max-[108px]:p-2">
         <div className="hidden gap-1 @min-sm:flex">
           {lab.tags?.map((t) => (

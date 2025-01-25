@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
+import { TooltipProvider } from "@/components/atom/tooltip";
 import { Footer } from "@/components/organism/footer";
 import { Navbar } from "@/components/organism/navbar";
 import { siteMetadata } from "@/lib/metadata";
@@ -70,9 +71,11 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" enableSystem>
-          <Navbar />
-          {children}
-          <Footer />
+          <TooltipProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </TooltipProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

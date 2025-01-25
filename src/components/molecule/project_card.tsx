@@ -25,7 +25,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({
   asLink,
 }) => {
   const content = (
-    <Card className="group relative flex h-full flex-col text-clip hover:shadow-sm dark:hover:shadow-none">
+    <Card className="group @container relative flex h-full flex-col text-clip hover:shadow-sm dark:hover:shadow-none">
       <CardHeader className="z-10 flex-1">
         <CardTitle className="line-clamp-2">{project.title}</CardTitle>
       </CardHeader>

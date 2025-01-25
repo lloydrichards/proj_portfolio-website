@@ -28,13 +28,13 @@ const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
     },
     display: {
       grid: "grid grid-cols-subgrid grid-rows-subgrid",
-      container: "@container",
+      default: "",
     },
   },
   defaultVariants: {
     size: "square-xs",
     outline: true,
-    display: "container",
+    display: "default",
   },
 });
 

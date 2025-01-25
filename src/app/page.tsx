@@ -3,6 +3,7 @@ import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { ThemeToggle } from "@/components/molecule/theme-toggle";
 import { Logo } from "@/components/organism/logo";
+import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
 import { getFeaturedLabs } from "@/services/api/get-featured-labs";
@@ -34,6 +35,9 @@ const HomePage = async () => {
           recent projects, read my lab and blog posts, or connect with me
           through social media.
         </p>
+      </Tile>
+      <Tile size="square-lg" className="bg-background group grid items-center">
+        <SkillBarChart />
       </Tile>
       {allProjects.map(({ frontmatter }) => (
         <Tile size="box-md" key={"project" + frontmatter.slug}>

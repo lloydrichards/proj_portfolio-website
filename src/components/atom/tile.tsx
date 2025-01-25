@@ -19,6 +19,8 @@ const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
       //   "col-span-2 row-span-2 md:col-span-3 md:row-span-3 lg:col-span-4 lg:row-span-4",
       "square-md":
         "col-span-4 row-span-3 md:col-span-4 md:row-span-4 lg:col-span-6 lg:row-span-6",
+      "square-lg":
+        "col-span-full row-span-4 md:col-span-8 md:row-span-8 lg:col-span-12 lg:row-span-12",
     },
     outline: {
       true: "border",

@@ -3,6 +3,14 @@ import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { occupation, occupationToSkill, skill } from "../db/schema";
 
+export type SkillData = {
+  type: string;
+  name: string;
+  description: string;
+  years: number;
+  months: number;
+};
+
 export const getSkillData = async () => {
   const rawData = await db
     .select({
@@ -24,13 +32,11 @@ export const getSkillData = async () => {
       if (!row.name || !row.type) return null;
       return {
         ...row,
-        startDate,
-        endDate,
         years: differenceInYears(endDate, startDate),
         months: differenceInMonths(endDate, startDate),
       };
     })
     .filter(Boolean);
 
-  return Object.groupBy(data, (item) => item?.name ?? "");
+  return data as SkillData[];
 };

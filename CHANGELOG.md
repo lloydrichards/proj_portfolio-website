@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.1...v1.13.2) (2025-01-25)
+
+
+### Bug Fixes
+
+* :bug: fix tooltips so they work in tiles ([74ada02](https://github.com/lloydrichards/proj_portfolio-website/commit/74ada0267e221663333ee951af306bd89d40003a))
+
 ## [1.13.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.0...v1.13.1) (2025-01-25)
 
 

@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.0...v1.13.1) (2025-01-25)
+
+
+### Bug Fixes
+
+* :iphone: fix chart for mobile ([7c650aa](https://github.com/lloydrichards/proj_portfolio-website/commit/7c650aa668fa2ee09f0c0c7290708f79fa4b7903))
+
 # [1.13.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.4...v1.13.0) (2025-01-25)
 
 

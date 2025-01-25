@@ -32,7 +32,9 @@ export const getSkillData = async () => {
 
       if (!row.name || !row.type) return null;
       return {
-        ...row,
+        type: row.type || "",
+        name: row.name || "",
+        description: row.description || "",
         years: differenceInYears(endDate, startDate),
         months: differenceInMonths(endDate, startDate),
       };

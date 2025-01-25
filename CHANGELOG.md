@@ -1,3 +1,10 @@
+## [1.13.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.3...v1.13.4) (2025-01-25)
+
+
+### Bug Fixes
+
+* :bug: skip client initialization on edge ([82a28af](https://github.com/lloydrichards/proj_portfolio-website/commit/82a28af4069a15079b0c27f27fabacb83ac0b0d3))
+
 ## [1.13.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.2...v1.13.3) (2025-01-25)
 
 

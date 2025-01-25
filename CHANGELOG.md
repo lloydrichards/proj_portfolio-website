@@ -1,3 +1,16 @@
+# [1.13.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.4...v1.13.0) (2025-01-25)
+
+
+### Bug Fixes
+
+* :bug: fix the order of the timeline ([19428af](https://github.com/lloydrichards/proj_portfolio-website/commit/19428af89fd22bbcf254b8ea971a10124e5054a3))
+
+
+### Features
+
+* :sparkles: add skill bar chart ([5cecd43](https://github.com/lloydrichards/proj_portfolio-website/commit/5cecd43ee84627dfec4d63d4e07f43572b0b8902))
+* :sparkles: get skill data ([0675695](https://github.com/lloydrichards/proj_portfolio-website/commit/0675695dcd54de3ab50719e6a827abe6f0f51346))
+
 ## [1.12.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.3...v1.12.4) (2025-01-25)
 
 

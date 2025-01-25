@@ -2,6 +2,7 @@ import { differenceInMonths, differenceInYears } from "date-fns";
 import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { occupation, occupationToSkill, skill } from "../db/schema";
+import { notEmpty } from "./utils";
 
 export type SkillData = {
   type: string;
@@ -36,7 +37,7 @@ export const getSkillData = async () => {
         months: differenceInMonths(endDate, startDate),
       };
     })
-    .filter(Boolean);
+    .filter(notEmpty);
 
-  return data as SkillData[];
+  return data;
 };

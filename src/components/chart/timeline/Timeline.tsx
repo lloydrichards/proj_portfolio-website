@@ -17,9 +17,6 @@ interface TimelineProps {
   };
 }
 
-const isBefore = (date1: Date, date2: Date): boolean => {
-  return date1.getTime() < date2.getTime();
-};
 export const Timeline: FC<TimelineProps> = ({
   data,
   maxHeight,
@@ -51,14 +48,10 @@ export const Timeline: FC<TimelineProps> = ({
     .domain(Array.from(new Set(data.map((d) => d.category))))
     .range(["#CBE0F2", "#EECEC9", "#F0E2CE"]);
 
-  const dataWithChannels = data
-    .sort((a, b) =>
-      isBefore(new Date(a.start_date), new Date(b.start_date)) ? 1 : -1,
-    )
-    .map((d, i) => ({
-      ...d,
-      channel: i % 3,
-    }));
+  const dataWithChannels = data.map((d, i) => ({
+    ...d,
+    channel: i % 3,
+  }));
 
   const lineConnector = line()
     .curve(curveStep)

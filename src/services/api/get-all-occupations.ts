@@ -27,5 +27,8 @@ export const getAllOccupations = async () => {
       skills: o.skills.map((s) => s.skill.name),
       attributes: o.attributes.map((a) => a.attribute.name),
     }))
-    .sort((a, b) => b.start_date.getTime() - a.start_date.getTime());
+    .sort((a, b) => {
+      if (!a.end_date) return -1;
+      return b.start_date.getTime() - a.start_date.getTime();
+    });
 };

@@ -24,8 +24,13 @@ export const OccupationCard: FC<OccupationCardProps> = ({
       className={cn("h-full border-none bg-transparent shadow-none", className)}
     >
       <CardHeader className="p-2">
-        <CardTitle className="my-0 line-clamp-1">{data.title}</CardTitle>
+        <CardTitle className="my-0 line-clamp-1">
+          {data.title} ({data.id})
+        </CardTitle>
         <CardDescription className="text-sm">{data.company}</CardDescription>
+        <CardDescription className="text-sm">
+          {data.skills.join(", ")}
+        </CardDescription>
         <CardDescription className="text-sm">
           {formatDate(data.start_date)} -{" "}
           {data.end_date ? formatDate(data.end_date) : "Present"}

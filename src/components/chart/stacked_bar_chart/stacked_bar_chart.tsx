@@ -178,8 +178,15 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                   width={xScale.bandwidth()}
                   height={max([0, yScale(d[0]) - yScale(d[1])])}
                   fill={colorScale(d.data.stack)}
-                  className="stroke-background stroke-3"
+                  className="stroke-background stroke-3 hover:opacity-60"
                   opacity={0.8}
+                  onTouchStart={() =>
+                    setSelected({
+                      series: s.key,
+                      value: d.data[s.key] as number,
+                    })
+                  }
+                  onTouchEnd={() => setSelected(null)}
                   onHoverStart={() => {
                     setSelected({
                       series: s.key,

@@ -1,7 +1,6 @@
 import { typefaceHeading3 } from "@/components/tokens/typeface";
-import Link from "next/link";
-import { tileVariants } from "../atom/tile";
 import { FlaskConical, Layers, Ruler, User } from "lucide-react";
+import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,6 +8,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "../atom/navigation-menu";
+import { tileVariants } from "../atom/tile";
 import { ThemeToggle } from "../molecule/theme-toggle";
 
 export const Navbar: React.FC = () => {

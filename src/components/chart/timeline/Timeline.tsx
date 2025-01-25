@@ -1,9 +1,9 @@
 "use client";
+import { useResponsive } from "@/components/template/responsive_wrapper";
+import { getAllOccupations } from "@/services/api/get-all-occupations";
 import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
 import { FC } from "react";
 import { OccupationItem } from "./internal/OccupationItem";
-import { useResponsive } from "@/components/template/responsive_wrapper";
-import { getAllOccupations } from "@/services/api/get-all-occupations";
 
 export type Occupations = Awaited<ReturnType<typeof getAllOccupations>>;
 interface TimelineProps {

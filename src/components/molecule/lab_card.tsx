@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Badge } from "@/components/atom/badge";
 import {
   Card,
   CardContent,
@@ -7,10 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atom/card";
-import { Badge } from "@/components/atom/badge";
-import { Lab } from "@/types/domain";
 import { formatDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { Lab } from "@/types/domain";
+import Link from "next/link";
 import { Button } from "../atom/button";
 
 export interface IPostCard {

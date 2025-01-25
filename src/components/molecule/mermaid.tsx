@@ -1,6 +1,6 @@
 "use client";
-import dynamic from "next/dynamic.js";
 import type { MermaidProps } from "mdx-mermaid/lib/Mermaid";
+import dynamic from "next/dynamic.js";
 
 const MdxMermaid = dynamic(
   () => import("mdx-mermaid/lib/Mermaid").then((res) => res.Mermaid),

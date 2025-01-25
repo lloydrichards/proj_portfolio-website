@@ -1,7 +1,7 @@
 "use client";
+import { extent, line, scaleLinear } from "d3";
 import { motion } from "framer-motion";
 import { useRef } from "react";
-import { extent, line, scaleLinear } from "d3";
 export interface Data {
   timestamp: Date;
   value: number;

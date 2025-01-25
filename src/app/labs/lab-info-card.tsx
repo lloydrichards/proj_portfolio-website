@@ -1,6 +1,12 @@
 "use client";
-import { Lab } from "@/types/domain";
-import { FC } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/atom/accordion";
+import { Badge } from "@/components/atom/badge";
+import { Button } from "@/components/atom/button";
 import {
   Card,
   CardContent,
@@ -9,25 +15,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atom/card";
-import { formatDate } from "@/lib/format";
-import Github from "@/components/icons/github";
-import { Button } from "@/components/atom/button";
-import { Badge } from "@/components/atom/badge";
-import { usePathname } from "next/navigation";
 import { Tile } from "@/components/atom/tile";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/atom/accordion";
-import Link from "next/link";
+import Github from "@/components/icons/github";
+import { formatDate } from "@/lib/format";
+import { Lab } from "@/types/domain";
 import {
   ChevronsLeft,
   ChevronsRight,
   CodeXml,
   ExternalLink,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FC } from "react";
 
 interface LabInfoCardProps {
   labs: Array<Lab>;

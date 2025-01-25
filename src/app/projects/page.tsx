@@ -1,10 +1,10 @@
 import { Tile } from "@/components/atom/tile";
 import { ProjectCard } from "@/components/molecule/project_card";
-import { getAllProjects } from "@/services/api/get-all-projects";
-import { FC } from "react";
-import { createPageMetadata } from "@/lib/seo";
-import { categoryPredicate } from "@/services/api/project-helpers";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
+import { createPageMetadata } from "@/lib/seo";
+import { getAllProjects } from "@/services/api/get-all-projects";
+import { categoryPredicate } from "@/services/api/project-helpers";
+import { FC } from "react";
 
 export const metadata = createPageMetadata({
   title: "Projects",

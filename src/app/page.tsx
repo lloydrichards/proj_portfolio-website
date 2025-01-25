@@ -2,11 +2,11 @@ import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { ThemeToggle } from "@/components/molecule/theme-toggle";
+import { Logo } from "@/components/organism/logo";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
 import { getFeaturedLabs } from "@/services/api/get-featured-labs";
 import { getFeaturedProjects } from "@/services/api/get-featured-projects";
-import { Logo } from "@/components/organism/logo";
 
 const HomePage = async () => {
   const allProjects = await getFeaturedProjects();

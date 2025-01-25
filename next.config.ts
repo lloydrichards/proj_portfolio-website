@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+import "@/lib/env";
 import createMDX from "@next/mdx";
 import mdxMermaid from "mdx-mermaid";
-import "@/lib/env";
+import type { NextConfig } from "next";
 
 const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],

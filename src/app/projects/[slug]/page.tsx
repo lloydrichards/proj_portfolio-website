@@ -1,11 +1,11 @@
 import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
-import { createPageMetadata } from "@/lib/seo";
 import { siteMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/seo";
 import { getAllProjects } from "@/services/api/get-all-projects";
 import { getProject } from "@/services/api/get-project";
+import { getTeamMembers } from "@/services/api/get-team-members";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTeamMembers } from "@/services/api/get-team-members";
 
 export async function generateMetadata({
   params,

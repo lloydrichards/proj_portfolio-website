@@ -83,6 +83,7 @@
     "eslint-plugin-drizzle": "^0.2.3",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.10",
     "semantic-release": "^24.2.1",
     "tailwind-merge": "^2.6.0",

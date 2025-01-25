@@ -1,6 +1,6 @@
 import { Project, PROJECT_CATEGORY } from "@/types/domain";
-import { pipe } from "fp-ts/lib/function";
 import * as E from "fp-ts/lib/Either";
+import { pipe } from "fp-ts/lib/function";
 
 type SearchOptions = {
   isPublished?: boolean;

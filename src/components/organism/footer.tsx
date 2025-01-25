@@ -1,10 +1,10 @@
-import { Rss } from "lucide-react";
+import Github from "@/components/icons/github";
 import Instagram from "@/components/icons/instagram";
 import Linkedin from "@/components/icons/linkedin";
-import Github from "@/components/icons/github";
-import { Tile } from "../atom/tile";
 import { siteMetadata } from "@/lib/metadata";
+import { Rss } from "lucide-react";
 import { Button } from "../atom/button";
+import { Tile } from "../atom/tile";
 export const Footer: React.FC = () => {
   return (
     <footer className="mosaic-rows col-span-full grid grid-cols-subgrid">

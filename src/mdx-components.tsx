@@ -1,18 +1,18 @@
+import Image, { ImageProps } from "next/image";
 import Link from "next/link";
 import React, { ComponentPropsWithoutRef } from "react";
+import { Mermaid } from "./components/molecule/mermaid";
 import {
+  typefaceAnchor,
+  typefaceBody,
   typefaceHeading1,
   typefaceHeading2,
   typefaceHeading3,
   typefaceHeading4,
   typefaceHeading5,
   typefaceHeading6,
-  typefaceBody,
-  typefaceAnchor,
 } from "./components/tokens/typeface";
 import { cn } from "./lib/utils";
-import { Mermaid } from "./components/molecule/mermaid";
-import Image, { ImageProps } from "next/image";
 
 export const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (

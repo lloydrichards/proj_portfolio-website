@@ -5,9 +5,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atom/card";
-import { FC } from "react";
 import { cn } from "@/lib/utils";
 import { utcFormat } from "d3";
+import { FC } from "react";
 import { Occupations } from "../Timeline";
 
 interface OccupationCardProps {

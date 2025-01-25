@@ -1,14 +1,14 @@
 export {
-  occupation,
-  occupationRelations,
+  attribute,
   category,
   categoryRelations,
-  attribute,
+  occupation,
+  occupationRelations,
   occupationToAttribute,
   occupationToAttributeRelations,
-  skill,
   occupationToSkill,
   occupationToSkillRelations,
+  skill,
 } from "./occupation";
 
 export { teamMember } from "./team_member";

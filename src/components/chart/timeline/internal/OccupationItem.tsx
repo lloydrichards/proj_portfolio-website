@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { OccupationCard } from "./OccupationCard";
 import { motion } from "framer-motion";
+import { FC } from "react";
 import { Occupations } from "../Timeline";
+import { OccupationCard } from "./OccupationCard";
 
 interface OccupationItemProps {
   data: Occupations[0];

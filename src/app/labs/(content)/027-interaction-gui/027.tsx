@@ -1,15 +1,15 @@
 "use client";
 import {
-  Simulation,
-  SimulationNodeDatum,
   forceCollide,
   forceSimulation,
   forceX,
   forceY,
+  Simulation,
+  SimulationNodeDatum,
   sum,
 } from "d3";
+import { folder, Leva, useControls } from "leva";
 import { FC, useEffect, useState } from "react";
-import { useControls, folder, Leva } from "leva";
 
 type Topic = "SPORT" | "NEWS" | "MEDIA";
 type Node = {

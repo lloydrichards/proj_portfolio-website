@@ -1,9 +1,9 @@
+import { LabContent } from "@/app/labs/lab-content";
+import { LabInfoCard } from "@/app/labs/lab-info-card";
+import { Mosaic } from "@/components/template/mosaic";
+import { getAllLabs } from "@/services/api/get-all-labs";
 import { FC, ReactNode } from "react";
 import { LabNavigation } from "./lab_navigation";
-import { getAllLabs } from "@/services/api/get-all-labs";
-import { LabInfoCard } from "@/app/labs/lab-info-card";
-import { LabContent } from "@/app/labs/lab-content";
-import { Mosaic } from "@/components/template/mosaic";
 
 const LabLayout: FC<{
   children: ReactNode;

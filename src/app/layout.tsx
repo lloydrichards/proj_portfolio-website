@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import { inter, josefin_sans, roboto_mono } from "@/styles/fonts";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
-import { Navbar } from "@/components/organism/navbar";
 import { Footer } from "@/components/organism/footer";
+import { Navbar } from "@/components/organism/navbar";
+import { siteMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "next-themes";
-import { siteMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),

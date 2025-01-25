@@ -1,12 +1,12 @@
-import { FC } from "react";
-import { Lab } from "@/types/domain";
+import { Badge } from "@/components/atom/badge";
 import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/components/atom/navigation-menu";
-import { cn } from "@/lib/utils";
 import { NavListItem } from "@/components/molecule/nav_list_item";
-import { Badge } from "@/components/atom/badge";
+import { cn } from "@/lib/utils";
+import { Lab } from "@/types/domain";
+import { FC } from "react";
 
 interface LabNavigationProps {
   labs: Array<Lab>;

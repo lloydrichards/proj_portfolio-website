@@ -4,12 +4,12 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@/components/atom/navigation-menu";
+import { cn } from "@/lib/utils";
+import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, ReactNode } from "react";
 import { tileVariants } from "../atom/tile";
-import { Url } from "next/dist/shared/lib/router/router";
-import { cn } from "@/lib/utils";
 
 export const NavListItem: FC<{
   children: ReactNode;

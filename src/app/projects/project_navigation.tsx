@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { Project } from "@/types/domain";
+import { Badge } from "@/components/atom/badge";
 import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/components/atom/navigation-menu";
 import { NavListItem } from "@/components/molecule/nav_list_item";
-import { Badge } from "@/components/atom/badge";
-import { cn } from "@/lib/utils";
 import { NavToggleItem } from "@/components/molecule/nav_toggle_item";
+import { cn } from "@/lib/utils";
+import { Project } from "@/types/domain";
+import { FC } from "react";
 
 interface ProjectNavigationProps {
   projects: Array<Project>;

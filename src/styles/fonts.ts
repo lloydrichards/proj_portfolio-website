@@ -1,8 +1,8 @@
 import {
+  IBM_Plex_Mono,
   Inter,
   Josefin_Sans,
   Roboto_Mono,
-  IBM_Plex_Mono,
 } from "next/font/google";
 
 export const inter = Inter({

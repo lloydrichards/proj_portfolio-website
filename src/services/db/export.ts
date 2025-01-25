@@ -1,7 +1,7 @@
 import { $IntentionalAny } from "@/types/helpers";
+import path from "path";
 import { db } from ".";
 import * as schema from "./schema";
-import path from "path";
 
 const exportDatabaseToJson = async () => {
   try {

@@ -1,12 +1,12 @@
 import { components } from "@/mdx-components";
 import { compileMDX } from "next-mdx-remote/rsc";
 
+import mdxMermaid from "mdx-mermaid";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeMdxImportMedia from "rehype-mdx-import-media";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
-import mdxMermaid from "mdx-mermaid";
-import rehypeMdxImportMedia from "rehype-mdx-import-media";
 
 export const createMDX = async <T>(source: string) =>
   await compileMDX<T>({

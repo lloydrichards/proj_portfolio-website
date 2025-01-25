@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as A from "fp-ts/lib/Array";
-import * as O from "fp-ts/lib/Option";
 import * as E from "fp-ts/lib/Either";
+import * as O from "fp-ts/lib/Option";
 import * as T from "fp-ts/Task";
 import * as TE from "fp-ts/TaskEither";
 
-import { pipe, flow } from "fp-ts/lib/function";
+import { flow, pipe } from "fp-ts/lib/function";
 
 const double = (n: number): number => n * 2;
 const square = (n: number): number => n * n;

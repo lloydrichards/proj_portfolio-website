@@ -1,5 +1,11 @@
-import { Project } from "@/types/domain";
-import { FC } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/atom/accordion";
+import { Badge } from "@/components/atom/badge";
+import { Button } from "@/components/atom/button";
 import {
   Card,
   CardContent,
@@ -8,19 +14,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atom/card";
-import { formatDate } from "@/lib/format";
-import { Github } from "lucide-react";
-import { Button } from "@/components/atom/button";
-import { Badge } from "@/components/atom/badge";
 import { Tile } from "@/components/atom/tile";
 import { TeamMemberAvatar } from "@/components/molecule/team_member_avatar";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/atom/accordion";
+import { formatDate } from "@/lib/format";
 import { TeamMember } from "@/services/db/schema/team_member";
+import { Project } from "@/types/domain";
+import { Github } from "lucide-react";
+import { FC } from "react";
 
 interface ProjectInfoCardProps {
   project: Project;

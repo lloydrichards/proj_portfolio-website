@@ -1,9 +1,9 @@
 import { $IntentionalAny } from "@/types/helpers";
-import { db } from ".";
-import * as schema from "./schema";
-import path from "path";
 import { sql } from "drizzle-orm";
 import { readdir } from "node:fs/promises";
+import path from "path";
+import { db } from ".";
+import * as schema from "./schema";
 
 const importJsonToDatabase = async (fileName: string) => {
   try {

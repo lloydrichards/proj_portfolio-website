@@ -1,7 +1,7 @@
-import { ResponsiveWrapper } from "@/components/template/responsive_wrapper";
-import { getAllOccupations } from "@/services/api/get-all-occupations";
-import { createPageMetadata } from "@/lib/seo";
 import { Timeline } from "@/components/chart/timeline/Timeline";
+import { ResponsiveWrapper } from "@/components/template/responsive_wrapper";
+import { createPageMetadata } from "@/lib/seo";
+import { getAllOccupations } from "@/services/api/get-all-occupations";
 
 export const metadata = createPageMetadata({
   title: "Timeline",

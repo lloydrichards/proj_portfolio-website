@@ -1,3 +1,10 @@
+## [1.12.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.1...v1.12.2) (2025-01-25)
+
+
+### Bug Fixes
+
+* :goal_net: add 500 error page ([b473318](https://github.com/lloydrichards/proj_portfolio-website/commit/b473318222e00f1515921bb5edd6c5aabd509d00))
+
 ## [1.12.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.0...v1.12.1) (2025-01-24)
 
 

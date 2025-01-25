@@ -36,9 +36,6 @@ const HomePage = async () => {
           through social media.
         </p>
       </Tile>
-      <Tile size="square-lg" className="bg-background group grid items-center">
-        <SkillBarChart />
-      </Tile>
       {allProjects.map(({ frontmatter }) => (
         <Tile size="box-md" key={"project" + frontmatter.slug}>
           <ProjectCard
@@ -48,6 +45,9 @@ const HomePage = async () => {
           />
         </Tile>
       ))}
+      <Tile size="square-lg" className="bg-background group grid items-center">
+        <SkillBarChart />
+      </Tile>
       {allLabs.map(({ frontmatter }) => (
         <Tile size="square-md" key={"lab" + frontmatter.slug}>
           <LabCard lab={frontmatter} />

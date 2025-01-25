@@ -9,6 +9,7 @@ export const siteMetadata = {
   siteRepo: "https://github.com/lloydrichards/proj_portfolio-website",
   siteLogo: `${process.env.BASE_PATH || ""}/images/logo.png`,
   locale: "en-US",
+  icon: `/favicon.svg`,
   social: {
     email: "lloyd.d.richards@gmail.com",
     socialBanner: `${process.env.BASE_PATH || ""}/images/twitter-card.png`,

@@ -1,3 +1,10 @@
+## [1.12.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.3...v1.12.4) (2025-01-25)
+
+
+### Performance Improvements
+
+* **portfolio:** :zap: remove project categories select from project list ([ea207d8](https://github.com/lloydrichards/proj_portfolio-website/commit/ea207d8c7266793cb967cb9d5d23c29b3292363c))
+
 ## [1.12.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.2...v1.12.3) (2025-01-25)
 
 

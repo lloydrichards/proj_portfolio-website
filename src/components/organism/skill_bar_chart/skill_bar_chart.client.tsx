@@ -1,11 +1,13 @@
 "use client";
+import { DateRangeSlider } from "@/components/atom/range-slider";
 import { StackedBarChart } from "@/components/chart/stacked_bar_chart/stacked_bar_chart";
 import {
   useResponsive,
   withResponsive,
 } from "@/components/template/responsive_wrapper";
 import { SkillData } from "@/services/api/get-skill-data";
-import { FC } from "react";
+import { timeFormat } from "d3";
+import { FC, useState } from "react";
 import { useSkillBarChartData } from "./use-skill-bar-chart-data";
 
 type SkillBarChartClientProps = {
@@ -14,21 +16,37 @@ type SkillBarChartClientProps = {
 
 export const SkillBarChartClient: FC<SkillBarChartClientProps> = withResponsive(
   ({ data }) => {
-    const parsed = useSkillBarChartData(data);
+    const minDate = new Date(data.at(0)?.date ?? new Date());
+    const maxDate = new Date();
+    const [values, setValues] = useState<[Date, Date]>([minDate, maxDate]);
+    const parsed = useSkillBarChartData(data, values);
     const { height, width } = useResponsive();
     return (
-      <StackedBarChart
-        title="Skills from occupations (hrs)"
-        data={parsed}
-        margins={{
-          top: 32,
-          right: 10,
-          bottom: 96,
-          left: 64,
-        }}
-        height={height}
-        width={width}
-      />
+      <div className="relative">
+        <StackedBarChart
+          title="Skills from occupations (hrs)"
+          data={parsed}
+          margins={{
+            top: 32,
+            right: 10,
+            bottom: 120,
+            left: 64,
+          }}
+          height={height - 56}
+          width={width}
+        />
+        <div className="absolute bottom-0 w-full px-8">
+          <DateRangeSlider
+            labelPosition="bottom"
+            label={(value) => <span>{timeFormat("%b %Y")(value)}</span>}
+            value={values}
+            onValueChange={setValues}
+            min={minDate}
+            max={maxDate}
+            step={2592000000}
+          />
+        </div>
+      </div>
     );
   },
 );

@@ -1,4 +1,4 @@
-import { differenceInMonths, differenceInYears } from "date-fns";
+import { addMonths, differenceInMonths } from "date-fns";
 import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { occupation, occupationToSkill, skill } from "../db/schema";
@@ -8,9 +8,13 @@ export type SkillData = {
   type: string;
   name: string;
   description: string;
-  years: number;
-  months: number;
   pensum: number;
+  date: string;
+};
+
+const generateMonthlyDates = (startDate: Date, endDate: Date): Date[] => {
+  const months = differenceInMonths(endDate, startDate);
+  return Array.from({ length: months + 1 }, (_, i) => addMonths(startDate, i));
 };
 
 export const getSkillData = async () => {
@@ -28,21 +32,22 @@ export const getSkillData = async () => {
     .leftJoin(occupation, eq(occupation.id, occupationToSkill.occupation));
 
   const data = rawData
-    .map((row) => {
+    .flatMap((row) => {
       const startDate = row.startDate ? new Date(row.startDate) : new Date();
       const endDate = row.endDate ? new Date(row.endDate) : new Date();
 
       if (!row.name || !row.type) return null;
-      return {
+
+      return generateMonthlyDates(startDate, endDate).map((date) => ({
         type: row.type || "",
         name: row.name || "",
         pensum: row.pensum || 100,
         description: row.description || "",
-        years: differenceInYears(endDate, startDate),
-        months: differenceInMonths(endDate, startDate),
-      };
+        date: date.toISOString(),
+      }));
     })
-    .filter(notEmpty);
+    .filter(notEmpty)
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return data;
 };

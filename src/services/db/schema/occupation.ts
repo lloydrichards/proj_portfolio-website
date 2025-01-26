@@ -14,6 +14,7 @@ export const occupation = sqliteTable("occupation", {
   company: text().notNull(),
   location: text().notNull(),
   jobDescription: text("job_description"),
+  pensum: integer().notNull().default(100),
   category: integer("category_id")
     .references(() => category.id, {
       onDelete: "cascade",

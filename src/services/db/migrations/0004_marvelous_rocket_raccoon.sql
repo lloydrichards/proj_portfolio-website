@@ -1,0 +1,1 @@
+ALTER TABLE `occupation` ADD `pensum` integer DEFAULT 100 NOT NULL;

@@ -10,6 +10,7 @@ export type SkillData = {
   description: string;
   years: number;
   months: number;
+  pensum: number;
 };
 
 export const getSkillData = async () => {
@@ -20,6 +21,7 @@ export const getSkillData = async () => {
       description: skill.description,
       startDate: occupation.startDate,
       endDate: occupation.endDate,
+      pensum: occupation.pensum,
     })
     .from(occupationToSkill)
     .leftJoin(skill, eq(skill.id, occupationToSkill.skill))
@@ -34,6 +36,7 @@ export const getSkillData = async () => {
       return {
         type: row.type || "",
         name: row.name || "",
+        pensum: row.pensum || 100,
         description: row.description || "",
         years: differenceInYears(endDate, startDate),
         months: differenceInMonths(endDate, startDate),

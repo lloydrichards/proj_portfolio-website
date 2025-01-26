@@ -22,5 +22,7 @@ export const client = initClient();
 
 if (env.NODE_ENV !== "production") globalForDb.client = client;
 
-export const db = drizzle(client, { schema });
+export const db = drizzle(client, {
+  schema,
+});
 export type db = typeof db;

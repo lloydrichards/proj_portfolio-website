@@ -1,3 +1,10 @@
+## [1.13.5](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.4...v1.13.5) (2025-01-27)
+
+
+### Bug Fixes
+
+* :bug: fix SkillBarChart crashing on overlapping slider ([dd54787](https://github.com/lloydrichards/proj_portfolio-website/commit/dd54787e88547b08acff66eeffbdda2d128e052d))
+
 ## [1.13.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.3...v1.13.4) (2025-01-25)
 
 

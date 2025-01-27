@@ -23,6 +23,7 @@ export interface StackedBarChartProps {
   };
   title?: string;
   data: StackedData[];
+  seriesDomain?: string[];
 }
 
 export const StackedBarChart: React.FC<StackedBarChartProps> = ({
@@ -31,6 +32,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   height = 200,
   width = 300,
   title,
+  seriesDomain,
 }) => {
   const [selected, setSelected] = useState<{
     series: string;
@@ -43,6 +45,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   const { cScale, series, xScale, yScale } = useStackedBarData(data, {
     innerHeight,
     innerWidth,
+    cDomain: seriesDomain,
   });
 
   if (height <= 0 || width <= 0) {

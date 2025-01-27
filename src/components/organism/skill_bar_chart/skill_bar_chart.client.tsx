@@ -20,7 +20,7 @@ export const SkillBarChartClient: FC<SkillBarChartClientProps> = withResponsive(
     const minDate = new Date(data.at(0)?.date ?? new Date());
     const maxDate = new Date();
     const [values, setValues] = useState<[Date, Date]>([minDate, maxDate]);
-    const parsed = useSkillBarChartData(data, values);
+    const { parsed, seriesDomain } = useSkillBarChartData(data, values);
     const { height, width } = useResponsive();
 
     const handleSliderChange = (value: [Date, Date]) => {
@@ -35,6 +35,7 @@ export const SkillBarChartClient: FC<SkillBarChartClientProps> = withResponsive(
         <StackedBarChart
           title="Skills from occupations (hrs)"
           data={parsed}
+          seriesDomain={seriesDomain}
           margins={{
             top: 32,
             right: 10,

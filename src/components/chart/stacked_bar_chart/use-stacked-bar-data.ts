@@ -9,7 +9,11 @@ import { StackedData } from "./stacked_bar_chart";
 
 export const useStackedBarData = (
   data: StackedData[],
-  { innerHeight, innerWidth }: { innerHeight: number; innerWidth: number },
+  {
+    innerHeight,
+    innerWidth,
+    cDomain,
+  }: { innerHeight: number; innerWidth: number; cDomain?: string[] },
 ) => {
   // Move all data processing here
   const allSeries = Array.from(new Set(data.map((d) => d.series)));
@@ -51,7 +55,7 @@ export const useStackedBarData = (
     .range([innerHeight, 0]);
 
   const cScale = scaleOrdinal<string>()
-    .domain(allStacks)
+    .domain(cDomain ?? allStacks)
     .range(schemeObservable10);
 
   return {

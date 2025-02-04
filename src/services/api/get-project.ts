@@ -1,7 +1,5 @@
 import { Project, ProjectMeta } from "@/types/domain";
-import * as E from "fp-ts/lib/Either";
-import { pipe } from "fp-ts/lib/function";
-import { failure } from "io-ts/lib/PathReporter";
+import { Either, pipe, Schema } from "effect";
 import { ReactElement } from "react";
 import { PROJECT_PATH } from "../consts";
 import { createMDX } from "./create-mdx";
@@ -24,13 +22,14 @@ export const getProject = async (
   const { content, frontmatter } = await createMDX<ProjectMeta>(source);
 
   return pipe(
-    ProjectMeta.decode(frontmatter),
-    E.fold(
-      (errors) => {
-        console.error(failure(errors).join("\n"));
+    frontmatter,
+    Schema.decodeUnknownEither(ProjectMeta),
+    Either.match({
+      onLeft: (errors) => {
+        console.error(errors);
         return null;
       },
-      (frontmatter) => ({
+      onRight: (frontmatter) => ({
         content,
         frontmatter: {
           ...frontmatter,
@@ -40,6 +39,6 @@ export const getProject = async (
           isPublished: frontmatter.isPublished ?? true,
         },
       }),
-    ),
+    }),
   );
 };

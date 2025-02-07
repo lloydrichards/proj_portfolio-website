@@ -1,3 +1,10 @@
+## [1.13.7](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.6...v1.13.7) (2025-02-07)
+
+
+### Bug Fixes
+
+* :bug: fix date in og image ([c7a6ad1](https://github.com/lloydrichards/proj_portfolio-website/commit/c7a6ad18aeefd8e1d93f697a2a3d0dbf728a40b4))
+
 ## [1.13.6](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.5...v1.13.6) (2025-02-07)
 
 

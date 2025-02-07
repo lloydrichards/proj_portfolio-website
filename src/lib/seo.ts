@@ -64,7 +64,7 @@ export const createOGImageMetadata = ({
   twitter: {
     title: `${title} | ${siteMetadata.title}`,
     description: description || siteMetadata.description,
-    card: "summary",
+    card: "summary_large_image",
     images: [makeOGImageURL({ title, description, tags, date })],
   },
   ...rest,

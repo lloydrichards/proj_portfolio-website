@@ -4,13 +4,13 @@ export const metadata = {
   date: "2023-10-03",
   description:
     "Exploring fp-ts, and some of the less documented features or practical examples.",
-  tags: ["fp-ts"],
+  tags: ["fp-ts", "functional-programming"],
 };
 
 ## The Basics
 
 I've been using `fp-ts` for a little over three years now and has been a
-fundemental part of my development process. I've been using it in production for
+fundamental part of my development process. I've been using it in production for
 the last two years and have been very happy with it. I've been using it in a
 variety of projects, from small personal projects to large enterprise
 applications. I've also been using it in a variety of languages, from TypeScript
@@ -29,11 +29,11 @@ Some important resources to check out:
 - [Practical Guide to Fp-ts](https://rlee.dev/practical-guide-to-fp-ts-part-1)
 - [fp-ts and Beautiful API Calls](https://dev.to/gnomff_65/fp-ts-and-beautiful-api-calls-1f55)
 
-## Primatives
+## Primitives
 
 ### Array
 
-The `Array` type is a primative that is used to represent a list of values. It
+The `Array` type is a primitive that is used to represent a list of values. It
 is a very common type in functional programming and is generally used to replace
 `for` loops.
 
@@ -57,7 +57,7 @@ console.log(doubleSquareAndInc); // Output: [ 9, 25, 49, 81, 121 ]
 
 ### Option
 
-The `Option` type is a primative that is used to represent a value that may or
+The `Option` type is a primitive that is used to represent a value that may or
 may not exist. It is a very common type in functional programming and is
 generally used to replace `null` or `undefined` values.
 
@@ -82,7 +82,7 @@ console.log(result); // Output: Some(36)
 
 ### Either
 
-The `Either` type is a primative that is used to represent a value that may be
+The `Either` type is a primitive that is used to represent a value that may be
 one of two types. It is a very common type in functional programming and is
 generally used to replace `throw` statements.
 
@@ -120,7 +120,7 @@ console.log(calculate(10, 2)); // Output: Right(2.5)
 
 ### Task
 
-The `Task` type is a primative that is used to represent a value that may be
+The `Task` type is a primitive that is used to represent a value that may be
 computed asynchronously. It is a very common type in functional programming and
 is generally used to replace `Promise` objects.
 
@@ -140,7 +140,7 @@ console.log(response().then((d) => d)); // Output: "The answer is 42"
 
 ### TaskEither
 
-The `TaskEither` type is a primative that is used to represent a value that may
+The `TaskEither` type is a primitive that is used to represent a value that may
 be computed asynchronously and may be one of two types. It is a very common type
 in functional programming and is generally used to replace `Promise` objects
 that may throw errors.
@@ -205,7 +205,7 @@ const doubleSquareFlow = flow(
 
 ### chain
 
-The `chain` function is used to flatten nested primatives. When you need to
+The `chain` function is used to flatten nested primitives. When you need to
 flatten left or right values, you can use the `chain` function. It is very
 similar to the `flatMap` function in other languages.
 
@@ -238,7 +238,7 @@ console.log(parseUser()); // Output: Right({ id: 6, name: 'John Doe' })
 
 ### match or fold
 
-The `match` function is used to extract values from primatives. When you need to
+The `match` function is used to extract values from primitives. When you need to
 extract a value to be used in the application, `match` forces you to think about
 both the left and right values.
 

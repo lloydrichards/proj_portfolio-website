@@ -1,0 +1,272 @@
+export const metadata = {
+  id: "044",
+  title: "Effect: The Basics (Part 1)",
+  date: "2025-02-07",
+  description: "Exploring Effect as an evolution of my use of fp-ts.",
+  tags: ["effect", "functional-programming", "fp-ts"],
+  repo: "https://github.com/lloydrichards/edu_effect-playground",
+  isFeatured: true,
+};
+
+Every early in my development career I was introduced to functional programming
+through Professor Fisby's
+[Mostly Adequate Guide to Functional Programming](https://mostly-adequate.gitbook.io/mostly-adequate-guide)
+and then the adoptions of [`fp-ts`](https://gcanti.github.io/fp-ts/) and
+[`io-ts`](https://github.com/gcanti/io-ts) in my day-to-day work. I've been
+using `fp-ts` for a little over five years now and has been a fundamental part
+of my development process.
+
+I even have a whole series of lab posts from two years ago diving deeper into
+the subject and improving my skills.
+
+- [fp-ts: The Basics (Part 1)](/labs/032-fp-ts-basics)
+- [fp-ts: The Practical (Part 2)](/labs/033-fp-ts-practical)
+- [fp-ts: The Application (Part 3)](/labs/034-fp-ts-application)
+- [fp-ts: useTaskEither (Part 4)](/labs/035-fp-ts-useTaskEither)
+- [fp-ts: Under Utilized Functions (Part 5)](/labs/036-fp-ts-under-utilized)
+
+So last year I was a little sad / apprehensive to see the
+[Giulio Canti](https://gcanti.github.io/) announcement
+([cabd677](https://github.com/gcanti/fp-ts/commit/cabd6777aaf86f99740952cb66993820ea6ef564))
+that `fp-ts` future development would be in the `Effect` ecosystem, and that the
+`fp-ts` library would be only maintained going forward. I've put off learning
+`Effect` mostly because of the resistance I already get for using `fp-ts` in my
+day-to-day work. But I've decided to take the plunge and start learning `Effect`
+and see how it compares to `fp-ts`.
+
+## What is Effect?
+
+> TypeScript/JavaScript, the most popular programming language, is still missing
+> a standard library. Effect is filling this gap by providing a solid foundation
+> of data structures, utilities, and abstractions to make building applications
+> easier.
+
+Once you get past all the tag-lines and fluff, `Effect` is essentially a pattern
+of writing code that has strong focusing on addressing the complexity of writing
+applications in TypeScript/JavaScript. It's a library that provides a set of
+data structures, utilities, and abstractions to make building applications
+easier to write, read, test, observe, and (ultimately) maintain.
+
+This means its kind of hard to compare when looking at "simple" examples, cause
+the "simple" way of doing things is already easy. But in reality, most programs
+are not made complex by the accumulation of simple things, but by continuous
+creep and ambiguity of the development process and maintenance. `Effect` offers
+a kind of common hand-shake between developers (past me and future me) to help
+make the logic of the program more explicit, easier to understand, and
+(hopefully) more maintainable.
+
+## Overlap with fp-ts
+
+Its easy to see the overlap when you start looking at the examples with all the
+`pipe` functions, `Either` types, and `.match` function. But there are also
+clear differences with how `Effect` approaches problem solving such as the more
+implicit `Effect.gen` that use of JS generators to allow for a more
+"conventional" look.
+
+While I wait patiently for the `pipe` operator to be added to JavaScript
+([TC39 spec](https://tc39.es/proposal-pipeline-operator/)), the `pipe` function
+is still my favorite way to write code in `fp-ts` and now in `Effect`.
+
+```ts showLineNumbers
+import { pipe } from "effect";
+
+const double = (n: number): number => n * 2;
+const square = (n: number): number => n * n;
+const inc = (n: number): number => n + 1;
+
+const map =
+  <T>(fn: (a: T) => T) =>
+  (arr: T[]): T[] =>
+    arr.map(fn);
+
+const program = pipe(
+  [1, 2, 3, 4, 5],
+  map(double),
+  map(inc),
+  map(square),
+  map(double),
+  map(inc),
+);
+
+console.log(program); // <- [ 19, 51, 99, 163, 243 ]
+```
+
+This, in my mind, looks so much cleaner then:
+
+```ts showLineNumbers
+const programGen = () => {
+  const values = [1, 2, 3, 4, 5];
+  const doubled = values.map(double);
+  const incremented = doubled.map(inc);
+  const squared = incremented.map(square);
+  const doubled2 = squared.map(double);
+  const incremented2 = doubled2.map(inc);
+  return incremented2;
+};
+
+console.log(program); // <- [ 19, 51, 99, 163, 243 ]
+```
+
+## Primitives
+
+Since I have a bunch of examples in
+[fp-ts: The Basics (Part 1)](/labs/032-fp-ts-basics), this seems like a good way
+to make the comparison between `fp-ts` and `Effect`. Not all the examples will
+apply, but I'll jot down my thoughts for the ones that do.
+
+### Option
+
+`Effect` has a drop in replacement for `Option` that is very similar to `fp-ts`.
+With the `pipe` function there is almost no change apart from the import and
+name which is really nice for these little functions.
+
+```ts showLineNumbers
+import { Option, pipe } from "effect";
+
+const double = (x: number): number => x * 2;
+const square = (x: number): number => x ** 2;
+
+const result = pipe(
+  Option.some(3),
+  Option.map(double),
+  Option.map(square),
+  Option.map(double),
+);
+
+console.log(result); // Output: Some(72)
+```
+
+### Either
+
+Very similar to `Option`, `Effect` has a near drop in replacement for `Either`.
+The major caveat though is that the type signature is a little backwards. In
+`fp-ts` the `Either` type is `Either<Left, Right>` where `Left` is typically an
+error type and `Right` is the success type. But in `Effect` this is backwards to
+match `Effect<Value, Error, Context>` pattern. This is a little confusing at
+first, but once you get used to it, it's not that bad.
+
+There are also few methods, such as the `.fromPredicate()` that need be replaces
+with the `.liftPredicate()` function. But the `pipe` function is still the same.
+
+```ts showLineNumbers
+import { Either, flow, pipe } from "effect";
+
+const isPositive = (x: number): boolean => x > 0;
+const isNotZero = (x: number): boolean => x !== 0;
+
+const divide = (x: number, y: number): Either.Either<number, string> =>
+  pipe(
+    y,
+    Either.liftPredicate(isNotZero, () => "Division by zero"),
+    Either.map((y) => x / y),
+  );
+
+const squareRoot = flow(
+  Either.liftPredicate<number, string>(
+    isPositive,
+    () => "Cannot calculate square root of a negative number",
+  ),
+  Either.map((x) => Math.sqrt(x)),
+);
+
+const calculate = flow(
+  divide,
+  Either.andThen((value) => squareRoot(value)),
+);
+
+console.log(calculate(10, 2)); // Output: Right(2.5)
+console.log(calculate(10, 0)); // Output: Left(Division by zero)
+console.log(calculate(-10, 2)); // Output: Left("Cannot calculate square root of a negative number")
+```
+
+### Task
+
+This was where I thought things were going to start to get a little different.
+In `fp-ts` the `Task` type is used to represent an asynchronous computation that
+can fail. But in `Effect`, its more about how the `Effect` type is run using
+`Effect.runPromise()`. I actually find this much easier to understand, as
+figuring out when to run the `Task` in `fp-ts` was always a little tricky.
+
+Another nice DX improvement is the object structure of the `Effect.tryPromise()`
+which makes it implicit what is happening. There was also some nice validation
+checks like the `parse` function below not using `.tryPromise()` since the
+`JSON.parse` function is synchronous. When tried to use `.tryPromise()` it throw
+an error.
+
+```ts showLineNumbers
+import { Effect, pipe } from "effect";
+
+const fetchData = (url: string) =>
+  Effect.tryPromise({
+    try: () => fetch(url).then((res) => res.text()),
+    catch: (e) => `Error fetching data, ${String(e)}`,
+  });
+
+const parse = (str: string) =>
+  Effect.try({
+    try: () => JSON.parse(str),
+    catch: (e) => `Error parsing data, ${String(e)}`,
+  });
+
+const stringify = (obj: unknown) =>
+  Effect.tryPromise({
+    try: async () => JSON.stringify(obj),
+    catch: (e) => `Error stringify-ing data, ${String(e)}`,
+  });
+
+const getJson = () =>
+  pipe(
+    fetchData("/api/healthcheck"),
+    Effect.andThen(parse),
+    Effect.andThen(stringify),
+    Effect.runPromise,
+  );
+
+getJson().then(console.log).catch(console.error); // Output: Right("{"status":"ok","timestamp":"2025-02-07T10:01:07.568Z"}")
+```
+
+## Composition
+
+For the most part composition has already been covered with `pipe` and `flow`
+working in the same way. But there are some nice additions to the `Effect`
+library that make it easier to compose functions together. As well as the option
+to create generators with `Effect.gen`.
+
+### matching
+
+Pattern matching was one place I noticed a different where the `Option.match()`
+accepts an object with `onNone` and `onSome` keys. This is actually a nice
+improvement and makes the code a little easier to read. The same can be said for
+other functions like `Effect.catchTags()` which can map out the Error keys to a
+more readable format.
+
+```ts showLineNumbers
+import { flow, Option } from "effect";
+
+const double = (x: number): number => x * 2;
+const square = (x: number): number => x ** 2;
+
+const result = flow(
+  Option.fromNullable<number>,
+  Option.map(double),
+  Option.map(square),
+  Option.match({
+    onNone: () => "No value",
+    onSome: double,
+  }),
+);
+
+console.log(result(3)); // Output: 72
+console.log(result(undefined)); // Output: No value
+```
+
+## Conclusion
+
+Its still early days in the adoption of `Effect`, but so far I'm enjoying
+learning it and seeing how it compares to `fp-ts`. I'm not sure if I'll be able
+to use it in my day-to-day work, but hopefully I can sprinkle it in here and
+there to see how it goes.
+
+There are still a bunch of things I want to explore like validation (`Schema`),
+dependency injection (`Effect.Context`), and observability (`Effect.withSpan()`)
+so I'm sure there will be more parts to come.

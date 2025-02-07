@@ -42,8 +42,6 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
     return null;
   }
 
-  console.log(lab.ogImageURL);
-
   const prevLab = labs[labs.indexOf(lab) + 1];
   const nextLab = labs[labs.indexOf(lab) - 1];
 

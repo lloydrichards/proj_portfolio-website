@@ -14,9 +14,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProject(slug);
+  console.log(project);
   return createPageMetadata({
     title: project?.frontmatter.title ?? siteMetadata.title,
     description: project?.frontmatter.description,
+    openGraph: {
+      title: project?.frontmatter.title,
+      description: project?.frontmatter.description,
+      siteName: siteMetadata.title,
+      locale: "en_US",
+      type: "article",
+      publishedTime: project?.frontmatter.date.toISOString(),
+      modifiedTime: project?.frontmatter.date.toISOString(),
+      url: "./",
+      images: project?.frontmatter.ogImageURL,
+      authors: [siteMetadata.author],
+    },
   });
 }
 

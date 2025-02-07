@@ -50,5 +50,6 @@ export const Project = Schema.Struct({
   slug: Schema.String,
   pathname: Schema.String,
   lastModified: Schema.Date,
+  ogImageURL: Schema.String,
 });
 export type Project = typeof Project.Type;

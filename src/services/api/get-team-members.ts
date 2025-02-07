@@ -2,7 +2,7 @@ import { db } from "../db";
 import { TeamMember } from "../db/schema/team_member";
 
 export const getTeamMembers = async (
-  team?: string[][],
+  team?: readonly (readonly string[])[],
 ): Promise<Array<TeamMember>> => {
   if (!team) {
     return [];

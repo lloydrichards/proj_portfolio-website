@@ -29,7 +29,7 @@ export function createPageMetadata({
     twitter: {
       title: `${title} | ${siteMetadata.title}`,
       description: description || siteMetadata.description,
-      card: "summary_large_image",
+      card: "summary",
       images: image ? [image] : [siteMetadata.social.socialBanner],
     },
     ...rest,
@@ -64,7 +64,7 @@ export const createOGImageMetadata = ({
   twitter: {
     title: `${title} | ${siteMetadata.title}`,
     description: description || siteMetadata.description,
-    card: "summary_large_image",
+    card: "summary",
     images: [makeOGImageURL({ title, description, tags, date })],
   },
   ...rest,

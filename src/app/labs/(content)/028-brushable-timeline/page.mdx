@@ -1,10 +1,11 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "028",
   title: "Brushable Timeline with Visx",
   date: "2023-06-08",
   description: "Learn how to create a brushable timeline with Visx",
   tags: ["visx", "d3"],
-};
+});
 
 There are some things that are more tedious to do with D3 than others. Brushable
 timelines are one of them. In this lab, going to explore how to create a

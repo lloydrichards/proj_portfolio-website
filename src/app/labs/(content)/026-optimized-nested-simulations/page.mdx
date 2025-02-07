@@ -1,11 +1,12 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "026",
   title: "Optimized Nested Bubble Packing",
   date: "2023-06-05",
   description: "This is a continuation of the previous post on bubble packing.",
   tags: ["d3", "physics"],
   isFeatured: true,
-};
+});
 
 import {
   OptimizedNestedBubblePacking,

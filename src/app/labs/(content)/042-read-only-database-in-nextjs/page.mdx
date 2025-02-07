@@ -1,4 +1,5 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "042",
   title: "Read-only Database in Next.js",
   date: "2025-01-17",
@@ -6,7 +7,7 @@ export const metadata = {
     "How I'm using SQLite in a Next.js app to create a read-only database.",
   tags: ["database", "drizzle", "sqlite"],
   isFeatured: true,
-};
+});
 
 In the past, I've relied on frontmatter and MDX files to create the dataset for
 my occupations and timeline. Since moving away from `contentLayer` this setup

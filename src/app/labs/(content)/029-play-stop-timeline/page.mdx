@@ -1,11 +1,12 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "029",
   title: "Play and Stop Timeline",
   date: "2023-06-09",
   description:
     "Using the Brush from Visx; creating a timeline that is automaticaly moves with a set of controls to start and stop the timeline.",
   tags: ["visx", "d3", "simulation"],
-};
+});
 
 Followinf in the success of the **028** lab, I'm not going to use the
 `@visx/brush` component to create a timeline that is automaticaly moves across

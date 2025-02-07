@@ -1,10 +1,11 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "019",
   title: "CV Timeline",
   date: "2020-07-22",
   description: "Create a timeline visualization of my CV",
   tags: ["D3.js", "Data Visualization"],
-};
+});
 
 import { BasicTimeline, CVTimeline } from "./019";
 

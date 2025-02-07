@@ -3,7 +3,7 @@ import { Either, pipe, Schema } from "effect";
 import { ReactElement } from "react";
 import { PROJECT_PATH } from "../consts";
 import { createMDX } from "./create-mdx";
-import { getSource } from "./utils";
+import { getSource, makeOGImageURL } from "./utils";
 
 type ProjectContent = {
   content: ReactElement;
@@ -36,6 +36,12 @@ export const getProject = async (
           slug,
           lastModified: new Date(),
           pathname: `/projects/${slug}`,
+          ogImageURL: makeOGImageURL({
+            title: frontmatter.title,
+            description: frontmatter.description,
+            tags: [...frontmatter.category],
+            date: frontmatter.date,
+          }),
           isPublished: frontmatter.isPublished ?? true,
         },
       }),

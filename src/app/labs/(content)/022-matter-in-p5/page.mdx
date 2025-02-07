@@ -1,10 +1,11 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "022",
   title: "Intergrating P5.js and Matter.js",
   date: "2020-07-29",
   description: "Learning to use Matter.js with P5.js",
   tags: ["Matter.js", "P5.js"],
-};
+});
 
 One of the things I've been thinking about is how to intergrate physics into
 P5.js. I've been looking at Matter.js and it seems like a good option. I've

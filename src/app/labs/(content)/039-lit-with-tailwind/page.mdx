@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { createOGImageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = createOGImageMetadata({
   id: "039",
   title: "How to: Setup Lit with Tailwind",
   date: "2025-01-08",
@@ -9,7 +10,7 @@ export const metadata = {
     "A step-by-step guide to setting up a Lit project with Tailwind CSS.",
   tags: ["lit", "tailwind", "web-components"],
   repo: "https://github.com/lloydrichards/base_lit-with-tailwind",
-};
+});
 
 Recently, I've been experimenting with
 [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)

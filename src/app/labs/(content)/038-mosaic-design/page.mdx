@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { createOGImageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = createOGImageMetadata({
   id: "038",
   title: "Mosaic Design",
   date: "2025-01-04",
@@ -8,7 +9,7 @@ export const metadata = {
   description:
     "Create a mosaic design using Tailwind CSS for my website. A bento-style layout with a flexible grid system.",
   tags: ["design", "tailwind"],
-};
+});
 
 For my website redesign, I want to create a mosaic design using Tailwind CSS. To
 recycle as much of the existing design as possible, my idea is to create a

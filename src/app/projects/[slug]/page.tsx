@@ -14,9 +14,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProject(slug);
+  if (!project) {
+    return {};
+  }
   return createPageMetadata({
-    title: project?.frontmatter.title ?? siteMetadata.title,
-    description: project?.frontmatter.description,
+    title: project.frontmatter.title,
+    description: project.frontmatter.description,
+    image: project.frontmatter.ogImageURL,
+    twitter: {
+      title: `${project.frontmatter.title} | ${siteMetadata.title}`,
+      description: project.frontmatter.description || siteMetadata.description,
+      card: "summary_large_image",
+      images: [project.frontmatter.ogImageURL],
+    },
   });
 }
 

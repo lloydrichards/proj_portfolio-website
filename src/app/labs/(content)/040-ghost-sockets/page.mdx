@@ -1,4 +1,5 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "040",
   title: "Ghost Sockets",
   date: "2025-01-10",
@@ -8,7 +9,7 @@ export const metadata = {
   tags: ["go", "web-sockets", "react"],
   repo: "https://github.com/lloydrichards/proj_ghost-sockets",
   href: "https://ghost.lloydrichards.dev/",
-};
+});
 
 With this lab project I wanted to explore of the usage of WebSockets across both
 the client and server side. The basic idea was to track cursor movements on the

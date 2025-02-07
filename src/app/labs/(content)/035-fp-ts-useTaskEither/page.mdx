@@ -1,11 +1,12 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "034",
   title: "fp-ts: useTaskEither (Part 4)",
   date: "2023-10-08",
   description:
     "Exploring fp-ts, building off the previous application to create a more oure network connection.",
   tags: ["fp-ts", "io-ts", "functional-programming"],
-};
+});
 
 import { ShoppingApp } from "./035";
 

@@ -10,14 +10,14 @@ export const metadata = createOGImageMetadata({
 
 # Tailwind Themes with Design Tokens
 
-For my website, I want to use Tailwind CSS and shadcn/ui to create and style my
-compoonents. I want to use design tokens to create a theme for my website. I
+For my website, I want to use `Tailwind CSS` and `shadcn/ui` to create and style my
+components. I want to use design tokens to create a theme for my website. I
 will use the design tokens to create multiple themes for my website.
 
 ## Design Tokens
 
 Design tokens are a way to abstract the design of a website into a set of
-variables. These variables can be used as fundimental building blocks for
+variables. These variables can be used as fundamental building blocks for
 creating a design system.
 
 > Design tokens are the visual design atoms of the design system — specifically,
@@ -34,10 +34,10 @@ will instead just use the css variables directly in my Tailwind CSS themes.
 
 ## CSS Variables
 
-From shadcn/ui, there are a set of css variables that are used as a basis for
-the functional design tokens. To explan how to use these variables, I will
+From `shadcn/ui`, there are a set of css variables that are used as a basis for
+the functional design tokens. To explain how to use these variables, I will
 create a set of core design tokens for things like colors, spacing, and
-typography. Then reference these in the shadcn/ui tokens.
+typography. Then reference these in the `shadcn/ui` tokens.
 
 ```css showLineNumbers title="global.css"
 @layer base {
@@ -71,7 +71,7 @@ Creating this abstraction allows me to create a theme for my website that can be
 easily changed and updated. I can also create multiple themes for my website
 that can be easily switched between.
 
-In `tailwind.config.ts`, I can specify the funcational tokens that each theme
+In `tailwind.config.ts`, I can specify the functional tokens that each theme
 can use.
 
 ```typescript title="tailwind.config.ts"

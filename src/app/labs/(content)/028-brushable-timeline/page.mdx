@@ -9,9 +9,9 @@ export const metadata = createOGImageMetadata({
 
 There are some things that are more tedious to do with D3 than others. Brushable
 timelines are one of them. In this lab, going to explore how to create a
-brushable timeline with [Visx](https://airbnb.io/visx). Visx is basiclly a low
+brushable timeline with [Visx](https://airbnb.io/visx). Visx is basically a low
 lever wrapper for D3 and accepts a lot of the same data structure such as
-scales. This makes sprinckling in a few of the more annpying parts such as Axis
+scales. This makes sprinkling in a few of the more annoying parts such as Axis
 and Brushes more flexible.
 
 What I wanted to do was create a brush which I could use to return back the
@@ -81,7 +81,7 @@ export const Timeline = () => {
 ### Margin Bug
 
 I noticed while looking at the example that there is a bug with the current
-version where the margin on the `<Brush />` doesnt actually do anything. I've
+version where the margin on the `<Brush />` doesn't actually do anything. I've
 reported this [issue](https://github.com/airbnb/visx/issues/1711) to
 airbnb/visx, but for the time being its needed to change the D3 Pattern to match
 the translated `<g />` similar to how is done in the `<ChartArea />` of Visx.

@@ -10,7 +10,7 @@ export const metadata = createOGImageMetadata({
 import { BasicTimeline, CVTimeline } from "./019";
 
 The plan here is to build a system in which a timeline of past education and
-experiance. There are several pieces here that I'd like to include in this
+experience. There are several pieces here that I'd like to include in this
 diagram including linking blurbs and their place on the timeline, as well as
 tooltips for included skills.
 
@@ -22,8 +22,8 @@ squares. Lets have a go at the new(er) `.join()` pattern in React.
 <BasicTimeline />
 
 Okay, so thats a working D3 example. With this, the data is being managed by
-React and `useStae()` and then using`useEffect()`  
-D3 can take over the manipulation of the svgs inside its box. While I'm sure D3
+React and `useState()` and then using`useEffect()`  
+D3 can take over the manipulation of the SVGs inside its box. While I'm sure D3
 could build the whole timeline I'm thinking off, what I think is better is if
 the text blurbs are generated as a list beside the timeline and then using D3,
 build the timeline and draw lines that connect to the appropriate list item.
@@ -35,7 +35,7 @@ build the timeline and draw lines that connect to the appropriate list item.
 This feels really good. I've built a `TimeLine.tsx` component that can take in
 props for the data, including occupations and events which it then renders into
 this horizontal timeline. The graph scales to the size of the data and even
-orders the boxes and colours them accoring to their overlap and props. So cool
+orders the boxes and colours them according to their overlap and props. So cool
 to see this come together so nicely!
 
 The timeline here is build with some dummy data which is being managed in the
@@ -49,5 +49,5 @@ boxes not being removed when changing layers, but i'm not really sure what to do
 about this.
 
 The question now is: Do I render the whole chart in one go, including the text
-on the side? Or should this be a seperate component that lists the items and
+on the side? Or should this be a separate component that lists the items and
 then I can figure out how to draw a line between them?

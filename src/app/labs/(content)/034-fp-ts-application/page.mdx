@@ -287,7 +287,7 @@ const useShoppingCart = () => {
 The presentation layer is responsible for displaying the data to the user. In
 this example we are using `react` to display the data. The `ShoppingApp`
 component is responsible for displaying the data to the user. It is also
-responsible for handeling the state of the application. This is where we use the
+responsible for handling the state of the application. This is where we use the
 `pipe` function to compose the functions and handle any errors, or loading that
 may occur.
 
@@ -339,7 +339,7 @@ export const ShoppingApp: FC = () => {
 };
 ```
 
-Since the `ShoppingApp` component is responsible for seperating the states of
+Since the `ShoppingApp` component is responsible for separating the states of
 the application, I don't need to worry about errors or loading in the `ShopCard`
 component. I can just focus on displaying the data to the user in each state.
 
@@ -401,7 +401,7 @@ const ShopCard: FC<{
 ```
 
 The `ProductCard` and `CartItem` components are responsible for displaying the
-data to the user. Since I've already delt with errors and loading in the
+data to the user. Since I've already dealt with errors and loading in the
 `ShoppingApp` component I don't need to worry about them here. I can just focus
 on displaying the data to the user.
 

@@ -17,7 +17,7 @@ this lab we will build off the previous application to create a more pure
 network connection. From the learning of
 [pure network request with TaskEither](https://www.youtube.com/watch?v=ZbP40gv9Udw),
 I'll refactor the application and presentation layer to include the
-`useTaskEither` hook and seperate the `fetchProduct` from the `useShoppingCart`
+`useTaskEither` hook and separate the `fetchProduct` from the `useShoppingCart`
 hook.
 
 <ShoppingApp />
@@ -28,7 +28,7 @@ The refactored application layer adds the `useTaskEither` hook. This hook is
 responsible for running the `TaskEither` and updating the state of the
 application. It also adds the `match` function. This function is responsible for
 pattern matching over all possible states of the application. This allows us to
-seperate the states of the application in the presentation layer.
+separate the states of the application in the presentation layer.
 
 ```ts showLineNumbers
 function useTaskEither<E, A>(timeToLoad: number) {
@@ -71,7 +71,7 @@ function useTaskEither<E, A>(timeToLoad: number) {
 }
 ```
 
-I've also seperated the `fetchProduct` function from the `useShoppingCart` hook.
+I've also separated the `fetchProduct` function from the `useShoppingCart` hook.
 
 ```ts showLineNumbers
 const useShoppingCart = () => {
@@ -105,7 +105,7 @@ const useShoppingCart = () => {
 ### Presentation Layer
 
 The refactored presentation layer uses the `match` function to pattern match
-over all possible states of the application. This allows us to seperate the
+over all possible states of the application. This allows us to separate the
 states of the application in the presentation layer.
 
 ```tsx showLineNumbers

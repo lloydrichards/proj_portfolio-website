@@ -7,8 +7,8 @@ export const metadata = createOGImageMetadata({
   tags: ["frontend", "animation"],
 });
 
-Goign to playing around with SVGs and anime.js. Using this nifty SVG line
-creater [SVG Path Builder](https://codepen.io/anthonydugois/pen/mewdyZ) I made a
+Going to playing around with SVGs and anime.js. Using this nifty SVG line
+creator [SVG Path Builder](https://codepen.io/anthonydugois/pen/mewdyZ) I made a
 path and drew it below
 
 Now I've added a second blue svg path and using the timeline function to link
@@ -20,15 +20,15 @@ or another animations added between them.
 Now lets see if we can add a button and add a new svg each time I press it.
 
 This doesn't work because the `useEffect()` rerenders each time a new id is
-created. Instead I think I need to break this up into seperate components that
+created. Instead I think I need to break this up into separate components that
 each deal with their own rendering and have the path and id passed into them.
 
 Ta Da! That wasn't too hard. For this, I made a new component that took in the
 id and a string reference to the path. Inside the component I was able to then
 animate each piece individually without reloading the others. In this way each
 component deals with its own animation and complete state and can then pass
-wheather its finished or not onto the next part of the state. There are two ways
-this could be implimented now:
+whether its finished or not onto the next part of the state. There are two ways
+this could be implemented now:
 
 - Either by having several arrays of objects for each part of the assembly line.
   For example
@@ -76,7 +76,7 @@ this could be implimented now:
 
 For now, lets try use the callback function to trigger a second animation
 
-Using the `complet: () =>{}` properties I could pass in a callback function that
+Using the `complete: () =>{}` properties I could pass in a callback function that
 could be used to add the circle once the square was completed. At this time I
 could also remove the square or call on a different animation like fading it
 out. I'd also like to experiment with adding several circles when a single

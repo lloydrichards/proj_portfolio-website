@@ -37,23 +37,23 @@ a console log to make sure everything is working.
 Hooked up some simple random logic that generates a new piece each time
 something gets to the end. By pressing 'Add' you can introduce parts to the
 system which will cycle around and around. Need to set up some more logic as
-well as a seperate state for the possible direction. Will also be usefull to
+well as a separate state for the possible direction. Will also be useful to
 figure out how to remove the elements after they complete as it slows down after
 a while.
 
 Would also be interesting to play around with the 'speed' of the assembly line
-by having a contant that can be changed which effects the speed proportionally.
+by having a constant that can be changed which effects the speed proportionally.
 There is a method on the `anime.path()` that should allow to figure out its
 length and then use some kind of velocity calculated off of distance/time.
 
 Added a filter that removes the object when its converted to the next type. Have
-also implimented a lookup table for what paths the item can take. Now the state
+also implemented a lookup table for what paths the item can take. Now the state
 remains the same size throughout, though the ids of each object changes. Would
 like to next work on a click event to highlight something and then pass this
 property along to the next conversion. Additionally Id like to try splitting up
 the conversion so when 'garbage' converts to 'grind' it results in say 5 smaller
 circles which could go either way. Additionally, some conversions could only
-take place when a certain amount have accomulated, say when 5 pellets are turned
+take place when a certain amount have accumulated, say when 5 pellets are turned
 into a product.
 
 ```typescript

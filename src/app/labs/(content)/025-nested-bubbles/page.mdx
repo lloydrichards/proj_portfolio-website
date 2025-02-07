@@ -12,13 +12,13 @@ import { NestedBubblePacking, MockBubbles } from "./025";
 With an idea on how D3 force layout works, I wanted to try to nest bubbles in
 bubbles. The broad stroked of the idea is to have a parent bubble that contains
 child bubbles. There will be two simulations, one for the parent that will
-calculate the center of a topic and a seocnd for the child which will calculate
+calculate the center of a topic and a second for the child which will calculate
 the force on the child based on their topic type.
 
 <NestedBubblePacking data={MockBubbles} />
 
 With the nesting bubbles i'm basically running two simulations at once. The
-first calcualtes the center of the topic area and updates the `layout` property
+first calculates the center of the topic area and updates the `layout` property
 with the x and y coord. Using the sum of all the elements by type its possible
 to effect the radius of the area within the `collide` force.
 

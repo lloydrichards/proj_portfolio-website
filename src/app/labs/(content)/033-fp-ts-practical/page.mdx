@@ -13,7 +13,7 @@ export const metadata = createOGImageMetadata({
 I find many of the tutorials on fp-ts to be a bit too low level. They are great
 for learning the fundamentals, but I wanted to see some more practical examples.
 I've been using fp-ts in production for a while now, and I wanted to explore
-some commone use cases that I've encountered.
+some common use cases that I've encountered.
 
 Before jumping into the examples, I want to mention another library that I found
 to be very useful. [io-ts](https://github.com/gcanti/io-ts) is a library for
@@ -74,7 +74,7 @@ console.log(isEqual(settings, { ...settings, user: { name: "Fred", id: 2 } })); 
 
 This is borrowed heavily from
 [fp-ts and Even More Beautiful API Calls (w/ sum types!)](https://dev.to/anthonyjoeseph/fp-ts-and-even-more-beautiful-api-calls-w-sum-types-53j0)
-but also expands on it a bit. This pattern is great for handeling APIs that are
+but also expands on it a bit. This pattern is great for handling APIs that are
 less trustworthy. It allows you to handle errors in a very elegant way, without
 having to crash the application.
 
@@ -193,9 +193,9 @@ export const ConditionalRender: FC<{ value?: number }> = ({ value }) => {
 
 ### Responsive Values
 
-When working with repsonsiveness it can sometimes be nessisary to conditionally
+When working with responsiveness it can sometimes be necessary to conditionally
 return values based on the screen size. This pattern allows you to do that in a
-very elegant way. While its not nessisary to use fp-ts for this, it does make it
+very elegant way. While its not necessary to use fp-ts for this, it does make it
 use of functional programming concepts such as currying and composition.
 
 ```ts showLineNumbers

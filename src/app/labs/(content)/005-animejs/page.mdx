@@ -32,7 +32,7 @@ import anime from "animejs";
 
 Lets try move some squares around the place
 
-For this, i had to create a class based component for the box that toook in the
+For this, i had to create a class based component for the box that took in the
 props for the translateX. This was then rendered during componentDidMount and
 componentDidUpdate through a this.anime function. The click action was then
 taken care of by a button on the page (also a class based component) that
@@ -42,11 +42,11 @@ Added another class and then used the same button to effect its movement but in
 a different way. When updating the props I ran into an issue with typescript
 that it didn't recognize the this.box reference. I'm not sure how to fix this
 but will ask Peter. This will also be a key issue when wanting to make new
-objects on click and each one having a seperate ref
+objects on click and each one having a separate ref
 
 The problem I see with this current version is that the state is currently being
 help on the page component, and I need each object to have its own stored state
-and then for the top level to controll how many of these there are.
+and then for the top level to control how many of these there are.
 
 After Chatting with Peter After a long chat with Peter about using Typescript
 with anime.js I've made some big changes to how to write the components for
@@ -82,7 +82,7 @@ const Box2 = ({ translateX, translateY, initX, initY }: BoxProps) => {
 
 Here is a box made from a 'pure' functional component
 
-Peter also suggested ways to clean up the state managment system. Suggesting
+Peter also suggested ways to clean up the state management system. Suggesting
 that there should be a BoxManagement component that uses hooks to manage an
 array of boxes that holds the id's and internal states of each box. Then each
 box can be be rendered using map.

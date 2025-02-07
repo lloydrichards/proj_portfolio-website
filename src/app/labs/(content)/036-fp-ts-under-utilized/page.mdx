@@ -13,7 +13,7 @@ export const metadata = createOGImageMetadata({
 ## Under Utilized Functions
 
 In this lab I'm going to explore some of the other functions in fp-ts that I
-don't use as often. Some of these are just concepts that I don't understamd
+don't use as often. Some of these are just concepts that I don't understand
 (yet) and others are just functions that I've never had a need for.
 
 ## Apply
@@ -101,7 +101,7 @@ const readerResult = pipe(
 console.log(readerResult); // Output: Some(3000)
 ```
 
-The `Reader` type is used to maniplulate the object passed to a function. It is
+The `Reader` type is used to manipulate the object passed to a function. It is
 used create a function that takes a config object and returns a value. The `ask`
 function is used to get the config object from the context.
 
@@ -133,7 +133,7 @@ console.log(maybeNumberResult); // Output: Right(2)
 ```
 
 The `Covariant` type class is the group of types that support the `map`
-function. Similar to the `map` funtions that iterates over the `right` value of
+function. Similar to the `map` functions that iterates over the `right` value of
 an `Either`, or the `some` value of an `Option`. The `bimap` function is used to
 apply a function to the `left` or `right` value of an `Either`.
 

@@ -1,10 +1,11 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "015",
   title: "Intergrating P5.js",
   date: "2020-07-01",
   description: "Learning to import P5.js into a React app",
   tags: ["P5.js", "Animation"],
-};
+});
 
 P5.js is actually where I started with coding and data visualization and a lot
 of love goes out to [Daniel Shiffman](https://shiffman.net/) and his channel

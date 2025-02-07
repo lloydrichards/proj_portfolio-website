@@ -7,7 +7,7 @@ export const siteMetadata = {
   theme: "system", // system, dark or light
   siteUrl: "https://lloydrichards.dev",
   siteRepo: "https://github.com/lloydrichards/proj_portfolio-website",
-  siteLogo: `${process.env.BASE_PATH || ""}/images/logo.png`,
+  siteLogo: `${process.env.BASE_PATH || ""}/images/avatar.png`,
   locale: "en-US",
   icon: `/favicon.svg`,
   social: {

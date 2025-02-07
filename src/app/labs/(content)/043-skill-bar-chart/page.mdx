@@ -1,11 +1,12 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "043",
   title: "Skill Bar Chart",
   date: "2025-01-26",
   description:
     "Create a bar chart that displays the my skills built from the Occupation and Skill tables.",
   tags: ["database", "drizzle", "sqlite"],
-};
+});
 
 With the addition of the SQLite database to hold my occupation and skill data,
 there was an opportunity to create an interesting visualization. With some

@@ -1,11 +1,12 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "030",
   title: "Animated Bee Swarm Chart",
   date: "2023-06-09",
   description:
     "Creating an animated bee swarm chart using d3 and force simulation",
   tags: ["gui", "d3", "physics"],
-};
+});
 
 import { BeeSwarmChart, MockBubbles } from "./030.tsx";
 

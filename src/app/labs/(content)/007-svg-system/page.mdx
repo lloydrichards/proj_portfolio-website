@@ -1,10 +1,11 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "007",
   title: "Little SVG System",
   date: "2020-06-03",
   description: "Playing around with SVGs and anime.js",
   tags: ["frontend", "animation"],
-};
+});
 
 The plan with this is to have a small system of pipes and boxes that move around
 in a circle. There needs to be multiple paths that it can take with an input, a

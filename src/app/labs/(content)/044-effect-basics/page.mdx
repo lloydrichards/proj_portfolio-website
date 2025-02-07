@@ -1,12 +1,13 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "044",
   title: "Effect: The Basics (Part 1)",
-  date: "2025-02-07",
   description: "Exploring Effect as an evolution of my use of fp-ts.",
   tags: ["effect", "functional-programming", "fp-ts"],
+  date: "2025-02-07",
   repo: "https://github.com/lloydrichards/edu_effect-playground",
   isFeatured: true,
-};
+});
 
 Every early in my development career I was introduced to functional programming
 through Professor Fisby's

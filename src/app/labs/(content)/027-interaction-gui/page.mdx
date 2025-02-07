@@ -1,11 +1,12 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "027",
   title: "GUI for Interaction Design",
   date: "2023-06-06",
   description:
     "Experimenting with using Leva as a GUI for tweaking interactions.",
   tags: ["gui", "d3", "physics"],
-};
+});
 
 import { OptimizedNestedBubblePacking, MockBubbles } from "./027";
 

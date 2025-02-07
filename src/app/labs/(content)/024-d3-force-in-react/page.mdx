@@ -1,10 +1,11 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "024",
   title: "Applying D3 Force in React",
   date: "2023-05-25",
   description: "Getting a feel for how to apply D3 force in React",
   tags: ["d3", "physics"],
-};
+});
 
 import {
   BubblePacking,

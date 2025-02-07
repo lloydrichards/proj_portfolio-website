@@ -1,11 +1,12 @@
-export const metadata = {
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
   id: "036",
   title: "fp-ts: Under Utilized Functions (Part 5)",
   date: "2023-10-14",
   description:
     "Exploring fp-ts, and some of the less used functions. In this lab we will look at some of the other functions in fp-ts that I don't use as often.",
   tags: ["fp-ts", "io-ts", "functional-programming"],
-};
+});
 
 // import "../../lab_modules/036";
 

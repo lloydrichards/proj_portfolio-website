@@ -1,3 +1,10 @@
+## [1.13.6](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.5...v1.13.6) (2025-02-07)
+
+
+### Performance Improvements
+
+* 🔍 improve open graph data ([#90](https://github.com/lloydrichards/proj_portfolio-website/issues/90)) ([177faaf](https://github.com/lloydrichards/proj_portfolio-website/commit/177faaf4a47e401891330780ae18065cfa986260))
+
 ## [1.13.5](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.4...v1.13.5) (2025-01-27)
 
 

@@ -30,7 +30,7 @@ export function createPageMetadata({
       title: `${title} | ${siteMetadata.title}`,
       description: description || siteMetadata.description,
       card: "summary",
-      images: image ? [image] : [siteMetadata.social.socialBanner],
+      images: image ? [image] : [siteMetadata.siteLogo],
     },
     ...rest,
   };

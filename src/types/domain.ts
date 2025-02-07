@@ -18,6 +18,7 @@ export const Lab = Schema.Struct({
   slug: Schema.String,
   pathname: Schema.String,
   lastModified: Schema.Date,
+  ogImageURL: Schema.String,
 });
 export type Lab = typeof Lab.Type;
 

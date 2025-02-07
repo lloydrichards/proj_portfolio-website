@@ -45,7 +45,7 @@ export const makeOGImageURL = ({
     baseUrl.searchParams.set("tags", tags.join(","));
   }
   if (date) {
-    baseUrl.searchParams.set("date", formatDate(date));
+    baseUrl.searchParams.set("date", formatDate(new Date(date)));
   }
   return baseUrl.pathname + baseUrl.search;
 };

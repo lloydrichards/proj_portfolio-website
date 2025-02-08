@@ -3,6 +3,7 @@ import { ProjectCard } from "@/components/molecule/project_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
 import { getAllProjects } from "@/services/api/get-all-projects";
+import { Effect } from "effect";
 
 export const metadata = createPageMetadata({
   title: "Projects",
@@ -10,7 +11,7 @@ export const metadata = createPageMetadata({
 });
 
 const ProjectOverviewPage = async () => {
-  const allProjects = await getAllProjects();
+  const allProjects = await Effect.runPromise(getAllProjects);
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1

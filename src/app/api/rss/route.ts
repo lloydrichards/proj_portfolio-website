@@ -7,7 +7,7 @@ import { Effect } from "effect";
 
 export async function GET() {
   const allLabs = await Effect.runPromise(getAllLabs);
-  const allProjects = await getAllProjects();
+  const allProjects = await Effect.runPromise(getAllProjects);
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>
     <rss version="2.0">

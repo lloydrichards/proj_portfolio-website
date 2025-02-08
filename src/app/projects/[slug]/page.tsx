@@ -4,6 +4,7 @@ import { createPageMetadata } from "@/lib/seo";
 import { getAllProjects } from "@/services/api/get-all-projects";
 import { getProject } from "@/services/api/get-project";
 import { getTeamMembers } from "@/services/api/get-team-members";
+import { Effect } from "effect";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -13,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = await getProject(slug);
+  const project = await Effect.runPromise(getProject(slug));
   if (!project) {
     return {};
   }
@@ -31,7 +32,7 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
-  const allProjects = await getAllProjects();
+  const allProjects = await Effect.runPromise(getAllProjects);
   const paths = allProjects.map(({ frontmatter }) => ({
     slug: encodeURI(frontmatter.slug),
   }));
@@ -44,7 +45,7 @@ const ProjectPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const project = await getProject(slug);
+  const project = await Effect.runPromise(getProject(slug));
 
   if (!project) {
     return notFound();

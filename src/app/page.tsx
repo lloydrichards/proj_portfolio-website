@@ -11,7 +11,7 @@ import { getFeaturedProjects } from "@/services/api/get-featured-projects";
 import { Effect } from "effect";
 
 const HomePage = async () => {
-  const allProjects = await getFeaturedProjects();
+  const allProjects = await Effect.runPromise(getFeaturedProjects);
   const allLabs = await Effect.runPromise(getFeaturedLabs);
 
   return (

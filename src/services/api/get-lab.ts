@@ -1,15 +1,11 @@
 import { LabMeta } from "@/types/domain";
+import { ContentNotFoundError, ImportError } from "@/types/errors";
 import { Effect, pipe, Schema } from "effect";
 import { makeOGImageURL } from "./utils";
 
-class ImportError {
-  _tag = "ImportError";
-  constructor(readonly slug: unknown) {}
-}
-
 const getLabMetadata = (slug: string) =>
   Effect.tryPromise({
-    try: async () => await import(`@/app/labs/(content)/${slug}/page.mdx`),
+    try: () => import(`@/app/labs/(content)/${slug}/page.mdx`),
     catch: () => new ImportError(slug),
   }).pipe(
     Effect.map((d) => d.metadata),
@@ -34,4 +30,7 @@ export const getLab = (slug: string) =>
         isPublished: metadata.isPublished ?? true,
       },
     })),
+    Effect.catchTag("FSReadDirError", () =>
+      Effect.fail(new ContentNotFoundError(slug)),
+    ),
   );

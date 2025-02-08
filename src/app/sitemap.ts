@@ -4,7 +4,7 @@ import { getAllProjects } from "@/services/api/get-all-projects";
 import { Effect } from "effect";
 
 export default async function sitemap() {
-  const projects = await getAllProjects();
+  const projects = await Effect.runPromise(getAllProjects);
   const labs = await Effect.runPromise(getAllLabs);
 
   const notes = [...projects, ...labs].map(({ frontmatter }) => ({

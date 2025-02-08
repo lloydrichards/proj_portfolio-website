@@ -1,7 +1,7 @@
+import { Effect, pipe } from "effect";
 import { getAllLabs } from "./get-all-labs";
 
-export const getFeaturedLabs = async () => {
-  const allLabs = await getAllLabs();
-
-  return allLabs.filter((lab) => lab.frontmatter.isFeatured);
-};
+export const getFeaturedLabs = pipe(
+  getAllLabs,
+  Effect.andThen((labs) => labs.filter((lab) => lab.frontmatter.isFeatured)),
+);

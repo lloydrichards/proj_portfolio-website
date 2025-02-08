@@ -3,6 +3,7 @@ import { LabCard } from "@/components/molecule/lab_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
 import { getAllLabs } from "@/services/api/get-all-labs";
+import { Effect } from "effect";
 import { FC } from "react";
 
 export const metadata = createPageMetadata({
@@ -11,7 +12,7 @@ export const metadata = createPageMetadata({
 });
 
 const LabOverviewPage: FC = async () => {
-  const allLabs = await getAllLabs();
+  const allLabs = await Effect.runPromise(getAllLabs);
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1

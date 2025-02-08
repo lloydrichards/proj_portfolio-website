@@ -1,22 +1,27 @@
+import { Effect, pipe } from "effect";
 import { promises as fs } from "fs";
 import { LAB_PATH } from "../consts";
 import { getLab } from "./get-lab";
+import { descContent, filterT, mapT, notEmpty } from "./utils";
 
-export const getAllLabs = async () => {
-  const filenames = await fs.readdir(LAB_PATH);
+class FSReadDirError {
+  readonly _tag = "FSReadDirError";
+  constructor(readonly path: string) {}
+}
 
-  const labs = await Promise.all(
-    filenames
-      .filter((filename) => !filename.endsWith(".tsx"))
-      .map(async (filename) => {
-        const slug = filename.replace(/\.mdx$/, "");
-        return await getLab(slug);
-      }),
-  );
-
-  return labs
-    .filter((l) => l !== null)
-    .sort(
-      (a, b) => b!.frontmatter.date.getTime() - a!.frontmatter.date.getTime(),
-    );
-};
+export const getAllLabs = pipe(
+  Effect.tryPromise({
+    try: async () => await fs.readdir(LAB_PATH),
+    catch: () => new FSReadDirError(LAB_PATH),
+  }),
+  Effect.andThen((fileNames) =>
+    Effect.all(
+      pipe(
+        fileNames,
+        filterT((f) => !f.endsWith(".tsx")),
+        mapT((f) => getLab(f)),
+      ),
+    ),
+  ),
+  Effect.map((labs) => labs.filter(notEmpty).sort(descContent)),
+);

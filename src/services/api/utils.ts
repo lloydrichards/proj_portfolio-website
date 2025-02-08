@@ -12,11 +12,19 @@ export const getSource = async (dir: string) => {
   }
 };
 
-export const notEmpty = <TValue>(
-  value: TValue | null | undefined,
-): value is TValue => {
+export const notEmpty = <T>(value: T | null | undefined): value is T => {
   return value !== null && value !== undefined;
 };
+
+export const filterT =
+  <T>(fn: (v: T) => boolean) =>
+  (arr: T[]) =>
+    arr.filter(fn);
+
+export const mapT =
+  <T, U>(fn: (v: T) => U) =>
+  (arr: T[]) =>
+    arr.map(fn);
 
 type Content = {
   frontmatter: {
@@ -25,7 +33,8 @@ type Content = {
 };
 
 export const descContent = (a: Content, b: Content) =>
-  b.frontmatter.date.getTime() - a.frontmatter.date.getTime();
+  new Date(b.frontmatter.date).getTime() -
+  new Date(a.frontmatter.date).getTime();
 
 export const makeOGImageURL = ({
   title,

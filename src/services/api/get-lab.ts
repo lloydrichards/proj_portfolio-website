@@ -1,34 +1,37 @@
-import { Lab, LabMeta } from "@/types/domain";
-import { Either, pipe, Schema } from "effect";
+import { LabMeta } from "@/types/domain";
+import { Effect, pipe, Schema } from "effect";
 import { makeOGImageURL } from "./utils";
 
-type LabContent = {
-  frontmatter: Lab;
-};
-export const getLab = async (slug: string): Promise<LabContent | null> =>
+class ImportError {
+  _tag = "ImportError";
+  constructor(readonly slug: unknown) {}
+}
+
+const getLabMetadata = (slug: string) =>
+  Effect.tryPromise({
+    try: async () => await import(`@/app/labs/(content)/${slug}/page.mdx`),
+    catch: () => new ImportError(slug),
+  }).pipe(
+    Effect.map((d) => d.metadata),
+    Effect.andThen(Schema.decodeUnknown(LabMeta)),
+  );
+
+export const getLab = (slug: string) =>
   pipe(
-    await import(`@/app/labs/(content)/${slug}/page.mdx`),
-    (d) => d.metadata,
-    Schema.decodeUnknownEither(LabMeta),
-    Either.match({
-      onLeft: (errors) => {
-        console.error(errors);
-        return null;
+    getLabMetadata(slug),
+    Effect.andThen((metadata) => ({
+      frontmatter: {
+        ...metadata,
+        pathname: `/labs/${slug}`,
+        slug,
+        lastModified: new Date(),
+        ogImageURL: makeOGImageURL({
+          title: metadata.title,
+          description: metadata.description,
+          tags: [...metadata.tags],
+          date: metadata.date,
+        }),
+        isPublished: metadata.isPublished ?? true,
       },
-      onRight: (metadata) => ({
-        frontmatter: {
-          ...metadata,
-          pathname: `/labs/${slug}`,
-          slug,
-          lastModified: new Date(),
-          ogImageURL: makeOGImageURL({
-            title: metadata.title,
-            description: metadata.description,
-            tags: [...metadata.tags],
-            date: metadata.date,
-          }),
-          isPublished: metadata.isPublished ?? true,
-        },
-      }),
-    }),
+    })),
   );

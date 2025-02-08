@@ -8,10 +8,11 @@ import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
 import { getFeaturedLabs } from "@/services/api/get-featured-labs";
 import { getFeaturedProjects } from "@/services/api/get-featured-projects";
+import { Effect } from "effect";
 
 const HomePage = async () => {
   const allProjects = await getFeaturedProjects();
-  const allLabs = await getFeaturedLabs();
+  const allLabs = await Effect.runPromise(getFeaturedLabs);
 
   return (
     <Mosaic>

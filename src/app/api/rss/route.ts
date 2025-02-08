@@ -2,9 +2,11 @@ import { metadata } from "@/app/layout";
 import { getBaseUrl } from "@/lib/utils";
 import { getAllLabs } from "@/services/api/get-all-labs";
 import { getAllProjects } from "@/services/api/get-all-projects";
+import { descContent } from "@/services/api/utils";
+import { Effect } from "effect";
 
 export async function GET() {
-  const allLabs = await getAllLabs();
+  const allLabs = await Effect.runPromise(getAllLabs);
   const allProjects = await getAllProjects();
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>
@@ -15,11 +17,7 @@ export async function GET() {
             <description>${metadata.description}</description>
             <language>en-us</language>
             ${[...allLabs, ...allProjects]
-              .sort(
-                (a, b) =>
-                  new Date(b.frontmatter.date).getTime() -
-                  new Date(a.frontmatter.date).getTime(),
-              )
+              .sort(descContent)
               .map(
                 ({ frontmatter }) => `
             <item>

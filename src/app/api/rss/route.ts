@@ -1,13 +1,11 @@
 import { metadata } from "@/app/layout";
 import { getBaseUrl } from "@/lib/utils";
-import { getAllLabs } from "@/services/api/get-all-labs";
-import { getAllProjects } from "@/services/api/get-all-projects";
+import { api } from "@/services/api";
 import { descContent } from "@/services/api/utils";
-import { Effect } from "effect";
 
 export async function GET() {
-  const allLabs = await Effect.runPromise(getAllLabs);
-  const allProjects = await Effect.runPromise(getAllProjects);
+  const allLabs = await api.labs.fetchAllLabs();
+  const allProjects = await api.projects.fetchAllProjects();
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>
     <rss version="2.0">
@@ -19,12 +17,12 @@ export async function GET() {
             ${[...allLabs, ...allProjects]
               .sort(descContent)
               .map(
-                ({ frontmatter }) => `
+                (content) => `
             <item>
-                <title>${frontmatter.title}</title>
-                <link>${getBaseUrl()}${frontmatter.slug}</link>
-                <description>${frontmatter.description}</description>
-                <pubDate>${new Date(frontmatter.date).toUTCString()}</pubDate>
+                <title>${content.title}</title>
+                <link>${getBaseUrl()}${content.slug}</link>
+                <description>${content.description}</description>
+                <pubDate>${new Date(content.date).toUTCString()}</pubDate>
             </item>
             `,
               )

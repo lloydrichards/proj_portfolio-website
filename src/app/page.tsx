@@ -6,13 +6,11 @@ import { Logo } from "@/components/organism/logo";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
-import { getFeaturedLabs } from "@/services/api/get-featured-labs";
-import { getFeaturedProjects } from "@/services/api/get-featured-projects";
-import { Effect } from "effect";
+import { api } from "@/services/api";
 
 const HomePage = async () => {
-  const allProjects = await Effect.runPromise(getFeaturedProjects);
-  const allLabs = await Effect.runPromise(getFeaturedLabs);
+  const allProjects = await api.projects.fetchFeaturedProjects();
+  const allLabs = await api.labs.fetchFeaturedLabs();
 
   return (
     <Mosaic>
@@ -37,11 +35,11 @@ const HomePage = async () => {
           through social media.
         </p>
       </Tile>
-      {allProjects.map(({ frontmatter }) => (
-        <Tile size="box-md" key={"project" + frontmatter.slug}>
+      {allProjects.map((project) => (
+        <Tile size="box-md" key={"project" + project.slug}>
           <ProjectCard
-            key={"project" + frontmatter.slug}
-            project={frontmatter}
+            key={"project" + project.slug}
+            project={project}
             className="col-span-8 row-span-6"
           />
         </Tile>
@@ -49,9 +47,9 @@ const HomePage = async () => {
       <Tile size="square-lg" className="bg-background group grid items-center">
         <SkillBarChart />
       </Tile>
-      {allLabs.map(({ frontmatter }) => (
-        <Tile size="square-md" key={"lab" + frontmatter.slug}>
-          <LabCard lab={frontmatter} />
+      {allLabs.map((lab) => (
+        <Tile size="square-md" key={"lab" + lab.slug}>
+          <LabCard lab={lab} />
         </Tile>
       ))}
       <Tile>

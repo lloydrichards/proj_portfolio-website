@@ -1,15 +1,13 @@
 import { siteMetadata } from "@/lib/metadata";
-import { getAllLabs } from "@/services/api/get-all-labs";
-import { getAllProjects } from "@/services/api/get-all-projects";
-import { Effect } from "effect";
+import { api } from "@/services/api";
 
 export default async function sitemap() {
-  const projects = await Effect.runPromise(getAllProjects);
-  const labs = await Effect.runPromise(getAllLabs);
+  const projects = await api.projects.fetchAllProjects();
+  const labs = await api.labs.fetchAllLabs();
 
-  const notes = [...projects, ...labs].map(({ frontmatter }) => ({
-    url: siteMetadata.siteUrl + frontmatter.pathname,
-    lastModified: frontmatter.lastModified,
+  const notes = [...projects, ...labs].map((content) => ({
+    url: siteMetadata.siteUrl + content.pathname,
+    lastModified: content.lastModified,
   }));
 
   const routes = ["", "/about", "/projects", "/labs", "/timeline"].map(

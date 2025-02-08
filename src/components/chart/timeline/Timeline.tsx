@@ -1,11 +1,13 @@
 "use client";
 import { useResponsive } from "@/components/template/responsive_wrapper";
-import { getAllOccupations } from "@/services/api/get-all-occupations";
+import { api } from "@/services/api";
 import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
 import { FC } from "react";
 import { OccupationItem } from "./internal/OccupationItem";
 
-export type Occupations = Awaited<ReturnType<typeof getAllOccupations>>;
+export type Occupations = Awaited<
+  ReturnType<typeof api.occupations.fetchAllOccupations>
+>;
 interface TimelineProps {
   data: Occupations;
   maxHeight?: number;

@@ -5,7 +5,7 @@ import {
   useResponsive,
   withResponsive,
 } from "@/components/template/responsive_wrapper";
-import { SkillData } from "@/services/api/get-skill-data";
+import { SkillData } from "@/services/api/actions/get-skill-data";
 import { timeFormat } from "d3";
 import { isSameMonth } from "date-fns";
 import { FC, useState } from "react";

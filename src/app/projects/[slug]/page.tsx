@@ -1,10 +1,8 @@
 import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
 import { siteMetadata } from "@/lib/metadata";
 import { createPageMetadata } from "@/lib/seo";
-import { getAllProjects } from "@/services/api/get-all-projects";
-import { getProject } from "@/services/api/get-project";
-import { getTeamMembers } from "@/services/api/get-team-members";
-import { Effect } from "effect";
+import { api } from "@/services/api";
+import { getTeamMembers } from "@/services/api/actions/get-team-members";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -14,27 +12,31 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = await Effect.runPromise(getProject(slug));
-  if (!project) {
+  const found = await api.projects.queryProjectBySlug(slug);
+
+  if (!found) {
     return {};
   }
+
+  const [_, project] = found;
+
   return createPageMetadata({
-    title: project.frontmatter.title,
-    description: project.frontmatter.description,
-    image: project.frontmatter.ogImageURL,
+    title: project.title,
+    description: project.description,
+    image: project.ogImageURL,
     twitter: {
-      title: `${project.frontmatter.title} | ${siteMetadata.title}`,
-      description: project.frontmatter.description || siteMetadata.description,
+      title: `${project.title} | ${siteMetadata.title}`,
+      description: project.description || siteMetadata.description,
       card: "summary_large_image",
-      images: [project.frontmatter.ogImageURL],
+      images: [project.ogImageURL],
     },
   });
 }
 
 export const generateStaticParams = async () => {
-  const allProjects = await Effect.runPromise(getAllProjects);
-  const paths = allProjects.map(({ frontmatter }) => ({
-    slug: encodeURI(frontmatter.slug),
+  const allProjects = await api.projects.fetchAllProjects();
+  const paths = allProjects.map(({ slug }) => ({
+    slug: encodeURI(slug),
   }));
   return paths;
 };
@@ -45,17 +47,19 @@ const ProjectPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const project = await Effect.runPromise(getProject(slug));
+  const found = await api.projects.queryProjectBySlug(slug);
 
-  if (!project) {
+  if (!found) {
     return notFound();
   }
-  const team = await getTeamMembers(project.frontmatter.team);
-  const { frontmatter, content } = project;
+
+  const [content, project] = found;
+
+  const team = await getTeamMembers(project.team);
 
   return (
     <>
-      <ProjectInfoCard project={frontmatter} team={team} />
+      <ProjectInfoCard project={project} team={team} />
       <article className="col-span-full mt-8 mb-16">{content}</article>
     </>
   );

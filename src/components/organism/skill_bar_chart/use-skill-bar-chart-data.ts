@@ -1,4 +1,4 @@
-import { SkillData } from "@/services/api/get-skill-data";
+import { SkillData } from "@/services/api/actions/get-skill-data";
 
 const WORKING_HOURS_PER_MONTH = 160;
 

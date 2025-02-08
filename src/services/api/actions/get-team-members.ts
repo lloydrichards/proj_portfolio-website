@@ -1,5 +1,5 @@
-import { db } from "../db";
-import { TeamMember } from "../db/schema/team_member";
+import { db } from "../../db";
+import { TeamMember } from "../../db/schema/team_member";
 
 export const getTeamMembers = async (
   team?: readonly (readonly string[])[],

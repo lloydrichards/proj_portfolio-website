@@ -1,16 +1,14 @@
 import { LabContent } from "@/app/labs/lab-content";
 import { LabInfoCard } from "@/app/labs/lab-info-card";
 import { Mosaic } from "@/components/template/mosaic";
-import { getAllLabs } from "@/services/api/get-all-labs";
-import { Effect } from "effect";
+import { api } from "@/services/api";
 import { FC, ReactNode } from "react";
 import { LabNavigation } from "./lab_navigation";
 
 const LabLayout: FC<{
   children: ReactNode;
 }> = async ({ children }) => {
-  const content = await Effect.runPromise(getAllLabs);
-  const allLabs = content.map(({ frontmatter }) => frontmatter);
+  const allLabs = await api.labs.fetchAllLabs();
   return (
     <Mosaic sidebar>
       <LabNavigation labs={allLabs} />

@@ -21,14 +21,11 @@ export const notEmpty = <T>(value: T | null | undefined): value is T => {
 };
 
 type Content = {
-  frontmatter: {
-    date: Date;
-  };
+  date: Date;
 };
 
 export const descContent = (a: Content, b: Content) =>
-  new Date(b.frontmatter.date).getTime() -
-  new Date(a.frontmatter.date).getTime();
+  new Date(b.date).getTime() - new Date(a.date).getTime();
 
 export const makeOGImageURL = ({
   title,

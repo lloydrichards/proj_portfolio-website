@@ -2,8 +2,7 @@ import { Tile } from "@/components/atom/tile";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
-import { getAllProjects } from "@/services/api/get-all-projects";
-import { Effect } from "effect";
+import { api } from "@/services/api";
 
 export const metadata = createPageMetadata({
   title: "Projects",
@@ -11,7 +10,7 @@ export const metadata = createPageMetadata({
 });
 
 const ProjectOverviewPage = async () => {
-  const allProjects = await Effect.runPromise(getAllProjects);
+  const allProjects = await api.projects.fetchAllProjects();
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1
@@ -21,13 +20,11 @@ const ProjectOverviewPage = async () => {
       >
         Project Grid
       </h1>
-      {allProjects
-        .map(({ frontmatter }) => frontmatter)
-        .map((project, idx) => (
-          <Tile key={project.slug} size={idx % 3 == 0 ? "box-md" : "square-md"}>
-            <ProjectCard project={project} asLink />
-          </Tile>
-        ))}
+      {allProjects.map((project, idx) => (
+        <Tile key={project.slug} size={idx % 3 == 0 ? "box-md" : "square-md"}>
+          <ProjectCard project={project} asLink />
+        </Tile>
+      ))}
     </article>
   );
 };

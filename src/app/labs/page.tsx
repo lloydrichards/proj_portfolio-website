@@ -2,8 +2,7 @@ import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
-import { getAllLabs } from "@/services/api/get-all-labs";
-import { Effect } from "effect";
+import { api } from "@/services/api";
 import { FC } from "react";
 
 export const metadata = createPageMetadata({
@@ -12,7 +11,7 @@ export const metadata = createPageMetadata({
 });
 
 const LabOverviewPage: FC = async () => {
-  const allLabs = await Effect.runPromise(getAllLabs);
+  const allLabs = await api.labs.fetchAllLabs();
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1
@@ -22,12 +21,9 @@ const LabOverviewPage: FC = async () => {
       >
         Lab Grid
       </h1>
-      {allLabs.map(({ frontmatter }) => (
-        <Tile
-          key={frontmatter.slug}
-          size={frontmatter.isFeatured ? "box-md" : "square-md"}
-        >
-          <LabCard lab={frontmatter} asLink />
+      {allLabs.map((lab) => (
+        <Tile key={lab.slug} size={lab.isFeatured ? "box-md" : "square-md"}>
+          <LabCard lab={lab} asLink />
         </Tile>
       ))}
     </article>

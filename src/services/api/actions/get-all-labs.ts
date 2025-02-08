@@ -1,7 +1,7 @@
 import { Array, Effect, pipe } from "effect";
-import { LAB_PATH } from "../consts";
+import { LAB_PATH } from "../../consts";
+import { descContent, getDirectoryFilenames, notEmpty } from "../utils";
 import { getLab } from "./get-lab";
-import { descContent, getDirectoryFilenames, notEmpty } from "./utils";
 
 export const getAllLabs = pipe(
   getDirectoryFilenames(LAB_PATH),
@@ -12,6 +12,7 @@ export const getAllLabs = pipe(
         Array.filter((f) => !f.endsWith(".tsx")),
         Array.map((f) => getLab(f)),
       ),
+      { concurrency: "unbounded" },
     ),
   ),
   Effect.map((labs) => labs.filter(notEmpty).sort(descContent)),

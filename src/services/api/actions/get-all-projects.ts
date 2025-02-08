@@ -1,8 +1,8 @@
-import { PROJECT_PATH } from "../consts";
+import { PROJECT_PATH } from "../../consts";
 import { getProject } from "./get-project";
 
 import { Array, Effect, pipe } from "effect";
-import { descContent, getDirectoryFilenames, notEmpty } from "./utils";
+import { descContent, getDirectoryFilenames, notEmpty } from "../utils";
 
 export const getAllProjects = pipe(
   getDirectoryFilenames(PROJECT_PATH),
@@ -13,7 +13,13 @@ export const getAllProjects = pipe(
         Array.map((f) => f.replace(/\.mdx$/, "")),
         Array.map((f) => getProject(f)),
       ),
+      { concurrency: "unbounded" },
     ),
   ),
-  Effect.map((projects) => projects.filter(notEmpty).sort(descContent)),
+  Effect.map((projects) =>
+    projects
+      .filter(notEmpty)
+      .map(([_, p]) => p)
+      .sort(descContent),
+  ),
 );

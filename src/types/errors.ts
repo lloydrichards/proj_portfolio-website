@@ -12,3 +12,8 @@ export class ImportError {
   _tag = "ImportError";
   constructor(readonly slug: unknown) {}
 }
+
+export class DatabaseError {
+  _tag = "DatabaseError";
+  constructor(readonly error: unknown) {}
+}

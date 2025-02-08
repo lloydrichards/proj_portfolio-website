@@ -69,24 +69,19 @@ While I wait patiently for the `pipe` operator to be added to JavaScript
 is still my favorite way to write code in `fp-ts` and now in `Effect`.
 
 ```ts showLineNumbers
-import { pipe } from "effect";
+import { pipe, Array } from "effect";
 
 const double = (n: number): number => n * 2;
 const square = (n: number): number => n * n;
 const inc = (n: number): number => n + 1;
 
-const map =
-  <T>(fn: (a: T) => T) =>
-  (arr: T[]): T[] =>
-    arr.map(fn);
-
 const program = pipe(
   [1, 2, 3, 4, 5],
-  map(double),
-  map(inc),
-  map(square),
-  map(double),
-  map(inc),
+  Array.map(double),
+  Array.map(inc),
+  Array.map(square),
+  Array.map(double),
+  Array.map(inc),
 );
 
 console.log(program); // <- [ 19, 51, 99, 163, 243 ]

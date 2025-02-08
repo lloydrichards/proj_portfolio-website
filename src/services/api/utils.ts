@@ -16,16 +16,6 @@ export const notEmpty = <T>(value: T | null | undefined): value is T => {
   return value !== null && value !== undefined;
 };
 
-export const filterT =
-  <T>(fn: (v: T) => boolean) =>
-  (arr: T[]) =>
-    arr.filter(fn);
-
-export const mapT =
-  <T, U>(fn: (v: T) => U) =>
-  (arr: T[]) =>
-    arr.map(fn);
-
 type Content = {
   frontmatter: {
     date: Date;

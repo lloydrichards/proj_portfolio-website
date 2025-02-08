@@ -1,8 +1,8 @@
-import { Effect, pipe } from "effect";
+import { Array, Effect, pipe } from "effect";
 import { promises as fs } from "fs";
 import { LAB_PATH } from "../consts";
 import { getLab } from "./get-lab";
-import { descContent, filterT, mapT, notEmpty } from "./utils";
+import { descContent, notEmpty } from "./utils";
 
 class FSReadDirError {
   readonly _tag = "FSReadDirError";
@@ -18,8 +18,8 @@ export const getAllLabs = pipe(
     Effect.all(
       pipe(
         fileNames,
-        filterT((f) => !f.endsWith(".tsx")),
-        mapT((f) => getLab(f)),
+        Array.filter((f) => f.endsWith(".tsx")),
+        Array.map((f) => getLab(f)),
       ),
     ),
   ),

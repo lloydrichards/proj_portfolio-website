@@ -1,3 +1,10 @@
+## [1.13.9](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.8...v1.13.9) (2025-02-09)
+
+
+### Bug Fixes
+
+* 🐛 filter correct skill data ([4769116](https://github.com/lloydrichards/proj_portfolio-website/commit/4769116c2eae9fb0a2fe625e4856fb21aa06f9ef))
+
 ## [1.13.8](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.7...v1.13.8) (2025-02-09)
 
 

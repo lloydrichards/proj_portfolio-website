@@ -1,27 +1,25 @@
 import { ProjectMeta } from "@/types/domain";
 import { ContentNotFoundError } from "@/types/errors";
 import { Effect, pipe, Schema } from "effect";
-import { ReactElement } from "react";
+import React from "react";
 import { PROJECT_PATH } from "../../consts";
 import { createMDX } from "../create-mdx";
 import { getSource, makeOGImageURL } from "../utils";
+
+const ProjectMdx = Schema.Struct({
+  content: Schema.declare(React.isValidElement),
+  frontmatter: ProjectMeta,
+});
 
 export const getProject = (slug: string) =>
   pipe(
     getSource(PROJECT_PATH + `/${slug}.mdx`),
     Effect.flatMap(createMDX),
-    Effect.flatMap(
-      Schema.decodeUnknown(
-        Schema.Struct({
-          content: Schema.Unknown,
-          frontmatter: ProjectMeta,
-        }),
-      ),
-    ),
+    Effect.flatMap(Schema.decodeUnknown(ProjectMdx)),
     Effect.andThen(
       ({ content, frontmatter }) =>
         [
-          content as ReactElement,
+          content,
           {
             ...frontmatter,
             slug,

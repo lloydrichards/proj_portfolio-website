@@ -38,7 +38,6 @@ export const getSkillData = pipe(
   Effect.map((data) =>
     pipe(
       data,
-      Array.filter((r) => !r.name || !r.type),
       Array.map((row) =>
         generateMonthlyDates(
           row.startDate ? new Date(row.startDate) : new Date(),

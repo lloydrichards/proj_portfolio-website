@@ -6,7 +6,10 @@ import { makeOGImageURL } from "../utils";
 const getLabMetadata = (slug: string) =>
   Effect.tryPromise({
     try: () => import(`@/app/labs/(content)/${slug}/page.mdx`),
-    catch: () => new ImportError(slug),
+    catch: () =>
+      new ImportError({
+        path: `@/app/labs/(content)/${slug}/page.mdx`,
+      }),
   }).pipe(
     Effect.map((d) => d.metadata),
     Effect.andThen(Schema.decodeUnknown(LabMeta)),
@@ -28,7 +31,7 @@ export const getLab = (slug: string) =>
       }),
       isPublished: metadata.isPublished ?? true,
     })),
-    Effect.catchTag("FSReadDirError", () =>
-      Effect.fail(new ContentNotFoundError(slug)),
+    Effect.catchTag("ImportError", () =>
+      Effect.fail(new ContentNotFoundError({ slug })),
     ),
   );

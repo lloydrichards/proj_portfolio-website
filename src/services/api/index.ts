@@ -23,9 +23,9 @@ export const api = {
     fetchFeaturedProjects: async () => Effect.runPromise(getFeaturedProjects),
     fetchProjectTeam: getTeamMembers,
     queryProjectBySlug: async (slug: string) =>
-      Effect.runPromise(
-        getProject(slug).pipe(Effect.catchAll(() => Effect.succeed(null))),
-      ),
+      Effect.runPromise(getProject(slug).pipe(Effect.either)),
+    getProjectBySlug: async (slug: string) =>
+      Effect.runPromise(getProject(slug)),
   },
   occupations: {
     fetchAllOccupations: async () => Effect.runPromise(getAllOccupations),

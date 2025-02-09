@@ -1,19 +1,19 @@
-export class FSReadDirError {
-  readonly _tag = "FSReadDirError";
-  constructor(readonly path: string) {}
-}
+import { Data } from "effect";
 
-export class ContentNotFoundError {
-  readonly _tag = "ContentNotFoundError";
-  constructor(readonly slug: string) {}
-}
+export class FSReadDirError extends Data.TaggedError("FSReadDirError")<{
+  path: string;
+}> {}
 
-export class ImportError {
-  _tag = "ImportError";
-  constructor(readonly slug: unknown) {}
-}
+export class ContentNotFoundError extends Data.TaggedError(
+  "ContentNotFoundError",
+)<{
+  slug: string;
+}> {}
 
-export class DatabaseError {
-  _tag = "DatabaseError";
-  constructor(readonly error: unknown) {}
-}
+export class ImportError extends Data.TaggedError("ImportError")<{
+  path: string;
+}> {}
+
+export class DatabaseError extends Data.TaggedError("DatabaseError")<{
+  error: unknown;
+}> {}

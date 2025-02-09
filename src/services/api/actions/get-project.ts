@@ -38,6 +38,6 @@ export const getProject = (slug: string) =>
         ] as const,
     ),
     Effect.catchTag("FSReadDirError", () =>
-      Effect.fail(new ContentNotFoundError(slug)),
+      Effect.fail(new ContentNotFoundError({ slug })),
     ),
   );

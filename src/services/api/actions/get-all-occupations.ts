@@ -21,7 +21,7 @@ export const getAllOccupations = pipe(
           },
         },
       }),
-    catch: (error) => new DatabaseError(error),
+    catch: (error) => new DatabaseError({ error }),
   }),
   Effect.map(Array.filter(notEmpty)),
   Effect.map((occupations) =>

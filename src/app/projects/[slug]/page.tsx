@@ -3,6 +3,7 @@ import { siteMetadata } from "@/lib/metadata";
 import { createPageMetadata } from "@/lib/seo";
 import { api } from "@/services/api";
 import { getTeamMembers } from "@/services/api/actions/get-team-members";
+import { Either } from "effect";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -12,13 +13,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const found = await api.projects.queryProjectBySlug(slug);
-
-  if (!found) {
-    return {};
-  }
-
-  const [_, project] = found;
+  const [_, project] = await api.projects.getProjectBySlug(slug);
 
   return createPageMetadata({
     title: project.title,
@@ -47,13 +42,16 @@ const ProjectPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const found = await api.projects.queryProjectBySlug(slug);
+  const result = await api.projects.queryProjectBySlug(slug);
 
-  if (!found) {
-    return notFound();
+  if (Either.isLeft(result)) {
+    if (result.left._tag == "ContentNotFoundError") {
+      return notFound();
+    }
+    throw new Error(result.left._tag);
   }
 
-  const [content, project] = found;
+  const [content, project] = result.right;
 
   const team = await getTeamMembers(project.team);
 

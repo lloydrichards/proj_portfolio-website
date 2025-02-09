@@ -33,7 +33,7 @@ export const getSkillData = pipe(
         .from(occupationToSkill)
         .leftJoin(skill, eq(skill.id, occupationToSkill.skill))
         .leftJoin(occupation, eq(occupation.id, occupationToSkill.occupation)),
-    catch: (error) => new DatabaseError(error),
+    catch: (error) => new DatabaseError({ error }),
   }),
   Effect.map((data) =>
     pipe(

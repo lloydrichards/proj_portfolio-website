@@ -7,13 +7,13 @@ import { promises as fs } from "fs";
 export const getSource = (dir: string) =>
   Effect.tryPromise({
     try: () => fs.readFile(dir, "utf-8"),
-    catch: () => new FSReadDirError(dir),
+    catch: () => new FSReadDirError({ path: dir }),
   });
 
 export const getDirectoryFilenames = (dir: string) =>
   Effect.tryPromise({
     try: async () => await fs.readdir(dir),
-    catch: () => new FSReadDirError(dir),
+    catch: () => new FSReadDirError({ path: dir }),
   });
 
 export const notEmpty = <T>(value: T | null | undefined): value is T => {

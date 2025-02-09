@@ -1,3 +1,11 @@
+## [1.13.8](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.7...v1.13.8) (2025-02-09)
+
+
+### Performance Improvements
+
+* **lab:** :zap: use Effect for all lab actions ([a88c838](https://github.com/lloydrichards/proj_portfolio-website/commit/a88c838a7d2b89b9bef984fdef6c303cd8f45ac3))
+* **portfolio:** :zap: use Effect for all project actions ([10663c9](https://github.com/lloydrichards/proj_portfolio-website/commit/10663c9b211e9f91a3cda347f06269448eb36cfa))
+
 ## [1.13.7](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.6...v1.13.7) (2025-02-07)
 
 

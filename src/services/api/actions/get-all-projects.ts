@@ -2,8 +2,7 @@ import { PROJECT_PATH } from "../../consts";
 import { getProject } from "./get-project";
 
 import { FileSystem } from "@effect/platform";
-import { Array, Effect, pipe } from "effect";
-import { descContent, notEmpty } from "../utils";
+import { Array, Effect, flow, Order, pipe } from "effect";
 
 export const getAllProjects = pipe(
   FileSystem.FileSystem,
@@ -13,15 +12,16 @@ export const getAllProjects = pipe(
       pipe(
         filenames,
         Array.map((f) => f.replace(/\.mdx$/, "")),
-        Array.map((f) => getProject(f)),
+        Array.map(getProject),
       ),
       { concurrency: "unbounded" },
     ),
   ),
-  Effect.map((projects) =>
-    projects
-      .filter(notEmpty)
-      .map(([_, p]) => p)
-      .sort(descContent),
+  Effect.map(
+    flow(
+      Array.map(([_, p]) => p),
+      Array.sortBy(Order.mapInput(Order.number, (d) => d.id)),
+      Array.reverse,
+    ),
   ),
 );

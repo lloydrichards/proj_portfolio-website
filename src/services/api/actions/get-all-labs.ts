@@ -1,7 +1,6 @@
 import { FileSystem } from "@effect/platform";
-import { Array, Effect, pipe } from "effect";
+import { Array, Effect, flow, Order, pipe } from "effect";
 import { LAB_PATH } from "../../consts";
-import { descContent, notEmpty } from "../utils";
 import { getLab } from "./get-lab";
 
 export const getAllLabs = pipe(
@@ -17,5 +16,10 @@ export const getAllLabs = pipe(
       { concurrency: "unbounded" },
     ),
   ),
-  Effect.map((labs) => labs.filter(notEmpty).sort(descContent)),
+  Effect.map(
+    flow(
+      Array.sortBy(Order.mapInput(Order.number, (d) => +d.id)),
+      Array.reverse,
+    ),
+  ),
 );

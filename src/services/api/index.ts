@@ -5,7 +5,6 @@ import { getAllOccupations } from "./actions/get-all-occupations";
 import { getAllProjects } from "./actions/get-all-projects";
 import { getFeaturedLabs } from "./actions/get-featured-labs";
 import { getFeaturedProjects } from "./actions/get-featured-projects";
-import { getLab } from "./actions/get-lab";
 import { getProject } from "./actions/get-project";
 import { getSkillData } from "./actions/get-skill-data";
 import { getTeamMembers } from "./actions/get-team-members";
@@ -17,8 +16,6 @@ export const api = {
   labs: {
     fetchAllLabs: async () => runEffect(getAllLabs),
     fetchFeaturedLabs: async () => runEffect(getFeaturedLabs),
-    queryLabBySlug: async (slug: string) =>
-      runEffect(getLab(slug).pipe(Effect.catchAll(() => Effect.succeed(null)))),
   },
   projects: {
     fetchAllProjects: async () => runEffect(getAllProjects),

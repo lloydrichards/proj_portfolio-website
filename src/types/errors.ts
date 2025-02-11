@@ -4,8 +4,8 @@ export class FSReadDirError extends Data.TaggedError("FSReadDirError")<{
   path: string;
 }> {}
 
-export class ContentNotFoundError extends Data.TaggedError(
-  "ContentNotFoundError",
+export class MissingContentError extends Data.TaggedError(
+  "MissingContentError",
 )<{
   slug: string;
 }> {}

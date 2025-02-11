@@ -1,5 +1,5 @@
 import { ProjectMeta } from "@/types/domain";
-import { ContentNotFoundError } from "@/types/errors";
+import { MissingContentError } from "@/types/errors";
 import { FileSystem } from "@effect/platform";
 import { Effect, pipe, Schema } from "effect";
 import React from "react";
@@ -38,6 +38,6 @@ export const getProject = (slug: string) =>
         ] as const,
     ),
     Effect.catchTag("BadArgument", () =>
-      Effect.fail(new ContentNotFoundError({ slug })),
+      Effect.fail(new MissingContentError({ slug })),
     ),
   );

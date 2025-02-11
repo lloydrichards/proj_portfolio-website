@@ -1,0 +1,219 @@
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
+  id: "045",
+  title: "Effect: The Practical (Part 2)",
+  description: "Diving deeping into Effect with practical patterns.",
+  tags: ["effect", "functional-programming", "fp-ts"],
+  date: "2025-02-07",
+  repo: "https://github.com/lloydrichards/edu_effect-playground",
+  isFeatured: true,
+});
+
+Continuing with the theme of looking back on what I learnt with
+[fp-ts: The Practical (Part 2)](/labs/033-fp-ts-practical) I want to look at
+some practical examples with `Effect`. With `fp-ts` I've found certain patterns
+to be useful when tackling common problems and want to see how they translate to
+`Effect`.
+
+At the same time, I've been doing some remodeling of my website by introducing
+some of these patterns here too. Where possible I'll try to provide examples and
+links to the changes I've made in a working application.
+
+### Manipulating Arrays
+
+Add the data level is always important to know how to manipulation can be
+cleanly represented. With `Effect` I've found that the `Array` be an essential
+api to understand.
+
+```ts showLineNumbers {5-12} {15-19} title="get-all-projects.ts"
+export const getAllProjects = pipe(
+  FileSystem.FileSystem,
+  Effect.andThen((fs) => fs.readDirectory(PROJECT_PATH)),
+  Effect.andThen((filenames) =>
+    Effect.all(
+      pipe(
+        filenames,
+        Array.map((f) => f.replace(/\.mdx$/, "")),
+        Array.map(getProject),
+      ),
+      { concurrency: "unbounded" },
+    ),
+  ),
+  Effect.map(
+    flow(
+      Array.map(([_, p]) => p),
+      Array.sortBy(Order.mapInput(Order.number, (d) => d.id)),
+      Array.reverse,
+    ),
+  ),
+);
+```
+
+In this function, I'm reading a directory of files, then mapping over the
+filenames to get the project data. The first highlighted section for the
+`Effect.all` shows how `Array.map` can be used to clean up the data before
+passing it to the `getProject` function. The second highlighted section shows
+how to sort and reverse the data using the `Array` api.
+
+In particular I'm a huge fan on the `Order.mapInput` function as it allows for
+careful selection of properties to sort by and can be combined with multiple
+operations to create integrate sorting logic.
+
+```ts
+type Lab = {
+  readonly title: string;
+  readonly date: string;
+};
+
+const byYear = Order.mapInput(Order.number, (lab: Lab) =>
+  new Date(lab.date).getFullYear(),
+);
+const byName = Order.mapInput(Order.string, (lab: Lab) => lab.title);
+
+const labOrd = Order.combine(byYear, byName); // Sort first by year, then by name
+```
+
+### Result Type
+
+Something that I found very useful in `fp-ts` was the `Either` type. Such a
+powerful way to represent success and failure of a non synchronous operation. In
+`Effect` the same can be achieved with the `Effect` type, but with the added
+benefit off being able to collect multiple errors throughout the operations.
+
+```ts showLineNumbers {8-12} {14} title="get-lab.ts"
+class ImportError extends Data.TaggedError("ImportError")<{
+  path: string;
+}> {}
+
+//             ┏━━ Effect.Effect<Lab, ImportError | ParseError, never>
+export const getLab = (slug: string) =>
+  pipe(
+    Effect.tryPromise({
+      try: () => import(`@/app/labs/(content)/${slug}/page.mdx`),
+      catch: () =>
+        new ImportError({ path: `@/app/labs/(content)/${slug}/page.mdx` }), // fail with ImportError
+    }),
+    Effect.map((d) => d.metadata),
+    Effect.andThen(Schema.decodeUnknown(LabMeta)), // might fail with ParseError
+    Effect.andThen((metadata) => ({
+      ...metadata,
+      pathname: `/labs/${slug}`,
+      slug,
+      lastModified: new Date(),
+      ogImageURL: makeOGImageURL({
+        title: metadata.title,
+        description: metadata.description,
+        tags: [...metadata.tags],
+        date: metadata.date,
+      }),
+      isPublished: metadata.isPublished ?? true,
+    })),
+  );
+```
+
+Firs thing I noticed when implementing this pattern was using a class to define
+the errors. This was rather shocking for a functional programming pattern, but
+I'm getting use to them. In the function there are two places that might fail
+with the `Effect.tryPromise` and the `Schema.decodeUnknown`. The first has a
+defined `ImportError` and the second has a `ParseError` from Schema.
+
+Without any type casting, the `Effect` type is able to infer the error types and
+bubble them up into the return type of the functions.
+
+```ts /Lab/#success /ImportError/#destructive /ParseError/#destructive
+//                           ┌────────────────────────────────── on Success
+//                           │        ┌─────────────┬─────────── on Failure
+type Return = Effect.Effect<Lab, ImportError | ParseError, never>;
+```
+
+### Graceful Error Handling
+
+What makes this so powerful is then being able to chose how to deal with these
+failures later in the program as needed. This makes functions very composable
+and flexible in that they can be combined in multiple ways and the resulting
+errors can either be handled or bubbled further up.
+
+```ts showLineNumbers {10} title="api/index.ts"
+const runEffect = <A, E>(effect: Effect.Effect<A, E, BunContext.BunContext>) =>
+  Effect.runPromise(effect.pipe(Effect.provide(BunContext.layer)));
+
+export const api = {
+  labs: {},
+  projects: {
+    fetchAllProjects: async () => runEffect(getAllProjects),
+    fetchFeaturedProjects: async () => runEffect(getFeaturedProjects),
+    queryProjectBySlug: async (slug: string) =>
+      runEffect(getProject(slug).pipe(Effect.either)),
+    getProjectBySlug: async (slug: string) => runEffect(getProject(slug)),
+  },
+  occupations: {},
+  skills: {},
+} as const;
+```
+
+At the edge of my application logic where I need to pass this information to the
+presentation layer (React), I get to make the choice what to do with the
+failures. Since I'm using `Effect.runPromise`, anything that fails will throw a
+rejected promise that can be caught and handled by `Suspense` or crash the
+application.
+
+Sometimes I want to handle the errors explicitly, in which case I can use the
+`Effect.either` function to return a `Either` type that can be pattern matched
+on in the presentation layer.
+
+```tsx showLineNumbers {9-14} title="projects/[slug]/page.tsx"
+const ProjectPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await params;
+  const result = await api.projects.queryProjectBySlug(slug);
+
+  if (Either.isLeft(result)) {
+    if (result.left._tag == "MissingContentError") {
+      return notFound();
+    }
+    throw new Error(result.left._tag);
+  }
+
+  const [content, project] = result.right;
+
+  const team = await getTeamMembers(project.team);
+
+  return (
+    <>
+      <ProjectInfoCard project={project} team={team} />
+      <article className="col-span-full mt-8 mb-16">{content}</article>
+    </>
+  );
+};
+```
+
+This means that for other places like the `generateStaticParams` function that
+is used in the build process, I expect this to throw an error if something goes
+wrong. In this way I can simplify my code and just let the error bubble up into
+the promise and let the build fail.
+
+```ts
+const generateStaticParams = async () => {
+  const allProjects = await api.projects.fetchAllProjects();
+  const paths = allProjects.map(({ slug }) => ({
+    slug: encodeURI(slug),
+  }));
+  return paths;
+};
+```
+
+## Conclusion
+
+I'm really enjoying the patterns that I've been able to implement with `Effect`
+so far. The code is cleaner and easier to reason about and makes for changes to
+be made with confidence. Recently I've been playing around with the sorting
+order of the projects and labs and have been able to make changes with ease.
+
+I also realize that my api boundary between the presentation layer and the
+application layer is a big of an anti-pattern when it comes to `Effect` but in
+this way I can keep the impact of `Effect` contained and use some of the error
+handling patterns of React to deal with the failures too. Maybe this is what the
+next part should be about.

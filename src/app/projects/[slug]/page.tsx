@@ -45,7 +45,7 @@ const ProjectPage = async ({
   const result = await api.projects.queryProjectBySlug(slug);
 
   if (Either.isLeft(result)) {
-    if (result.left._tag == "ContentNotFoundError") {
+    if (result.left._tag == "MissingContentError") {
       return notFound();
     }
     throw new Error(result.left._tag);

@@ -1,10 +1,11 @@
 import { ProjectMeta } from "@/types/domain";
 import { ContentNotFoundError } from "@/types/errors";
+import { FileSystem } from "@effect/platform";
 import { Effect, pipe, Schema } from "effect";
 import React from "react";
 import { PROJECT_PATH } from "../../consts";
 import { createMDX } from "../create-mdx";
-import { getSource, makeOGImageURL } from "../utils";
+import { makeOGImageURL } from "../utils";
 
 const ProjectMdx = Schema.Struct({
   content: Schema.declare(React.isValidElement),
@@ -13,7 +14,8 @@ const ProjectMdx = Schema.Struct({
 
 export const getProject = (slug: string) =>
   pipe(
-    getSource(PROJECT_PATH + `/${slug}.mdx`),
+    FileSystem.FileSystem,
+    Effect.andThen((fs) => fs.readFileString(PROJECT_PATH + `/${slug}.mdx`)),
     Effect.flatMap(createMDX),
     Effect.flatMap(Schema.decodeUnknown(ProjectMdx)),
     Effect.andThen(
@@ -35,7 +37,7 @@ export const getProject = (slug: string) =>
           },
         ] as const,
     ),
-    Effect.catchTag("FSReadDirError", () =>
+    Effect.catchTag("BadArgument", () =>
       Effect.fail(new ContentNotFoundError({ slug })),
     ),
   );

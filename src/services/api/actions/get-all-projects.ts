@@ -1,11 +1,13 @@
 import { PROJECT_PATH } from "../../consts";
 import { getProject } from "./get-project";
 
+import { FileSystem } from "@effect/platform";
 import { Array, Effect, pipe } from "effect";
-import { descContent, getDirectoryFilenames, notEmpty } from "../utils";
+import { descContent, notEmpty } from "../utils";
 
 export const getAllProjects = pipe(
-  getDirectoryFilenames(PROJECT_PATH),
+  FileSystem.FileSystem,
+  Effect.andThen((fs) => fs.readDirectory(PROJECT_PATH)),
   Effect.andThen((filenames) =>
     Effect.all(
       pipe(

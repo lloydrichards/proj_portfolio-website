@@ -20,6 +20,8 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache"
   },
   "dependencies": {
+    "@effect/platform": "^0.75.4",
+    "@effect/platform-bun": "^0.55.4",
     "@libsql/client": "^0.14.0",
     "@mdx-js/loader": "^3.1.0",
     "@next/mdx": "^15.1.6",

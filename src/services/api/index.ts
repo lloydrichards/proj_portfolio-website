@@ -1,3 +1,4 @@
+import { BunContext } from "@effect/platform-bun";
 import { Effect } from "effect";
 import { getAllLabs } from "./actions/get-all-labs";
 import { getAllOccupations } from "./actions/get-all-occupations";
@@ -9,28 +10,28 @@ import { getProject } from "./actions/get-project";
 import { getSkillData } from "./actions/get-skill-data";
 import { getTeamMembers } from "./actions/get-team-members";
 
+const runEffect = <A, E>(effect: Effect.Effect<A, E, BunContext.BunContext>) =>
+  Effect.runPromise(effect.pipe(Effect.provide(BunContext.layer)));
+
 export const api = {
   labs: {
-    fetchAllLabs: async () => Effect.runPromise(getAllLabs),
-    fetchFeaturedLabs: async () => Effect.runPromise(getFeaturedLabs),
+    fetchAllLabs: async () => runEffect(getAllLabs),
+    fetchFeaturedLabs: async () => runEffect(getFeaturedLabs),
     queryLabBySlug: async (slug: string) =>
-      Effect.runPromise(
-        getLab(slug).pipe(Effect.catchAll(() => Effect.succeed(null))),
-      ),
+      runEffect(getLab(slug).pipe(Effect.catchAll(() => Effect.succeed(null)))),
   },
   projects: {
-    fetchAllProjects: async () => Effect.runPromise(getAllProjects),
-    fetchFeaturedProjects: async () => Effect.runPromise(getFeaturedProjects),
+    fetchAllProjects: async () => runEffect(getAllProjects),
+    fetchFeaturedProjects: async () => runEffect(getFeaturedProjects),
     fetchProjectTeam: getTeamMembers,
     queryProjectBySlug: async (slug: string) =>
-      Effect.runPromise(getProject(slug).pipe(Effect.either)),
-    getProjectBySlug: async (slug: string) =>
-      Effect.runPromise(getProject(slug)),
+      runEffect(getProject(slug).pipe(Effect.either)),
+    getProjectBySlug: async (slug: string) => runEffect(getProject(slug)),
   },
   occupations: {
-    fetchAllOccupations: async () => Effect.runPromise(getAllOccupations),
+    fetchAllOccupations: async () => runEffect(getAllOccupations),
   },
   skills: {
-    fetchSkillData: async () => Effect.runPromise(getSkillData),
+    fetchSkillData: async () => runEffect(getSkillData),
   },
 } as const;

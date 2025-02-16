@@ -70,6 +70,7 @@ const DateRangeSlider = React.forwardRef<
     return (
       <SliderPrimitive.Root
         ref={ref}
+        suppressHydrationWarning
         className={cn(
           "relative flex w-full touch-none items-center select-none",
           className,

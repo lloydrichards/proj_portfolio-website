@@ -25,7 +25,7 @@ const HomePage = async () => {
       </Tile>
       <Tile
         size="unset"
-        className="col-span-full row-span-3 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-4"
+        className="col-span-full row-span-4 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-4"
       >
         <p className={typefaceBody()}>
           This website is a personal portfolio and lab space where I can

@@ -2,7 +2,9 @@
 id: 2003
 title: mimirHome
 date: 2020-04-29
-description: Taking envir. data and ML to create house plant recommendations
+description:
+  Designing the UI and UX for a plant care app. Taking sensor data and ML to
+  create house plant recommendations.
 category:
   - DESIGN
   - DEVELOP
@@ -10,6 +12,45 @@ category:
 image: /images/projects/2003/thumb_mimirHome.png
 ---
 
+`mimirHome` is a digital application designed to support the
+[mimirOpen](/projects/2002-mimir-open) project. The data collected from the
+sensors in the mimirOpen device can be used to answer questions like:
+
+> What kind of house plant should I get?
+
+We can answer this question by understanding where it is going to grow. With a
+small home sensor and web app we can take the customer through a series of
+features to determine the best plant for their space, first analysing and then
+monitoring its success.
+
+While I work with two engineers to bring this idea into a product, my primary
+job has been to design and implement the UX/UI for the app; working through
+ideation, wire-framing, high fidelity prototypes and data visualization. Data is
+processed in Javascript on the back-end via `node.js` and then using `p5.js` to
+visualize the data on the front-end.
+
 ![Flowchart of user journey](/images/projects/2003/mimirHome-01.png)
 ![Flowchart of screen navigation](/images/projects/2003/mimirHome-02.png)
+
+The app works to allow users to dive deeper and deeper into the data the device
+is collecting. On a superficial level they can see a snapshot of their rooms,
+spaces and plants. But if they choose then they can click further to explore
+each in detail with links back to larger databased of plants, shops, and
+analysis.
+
 ![Small-multiple line charts of environmental data](/images/projects/2003/mimirHome-03.png)
+
+As an exploration of the data, I prototyped how the data could be visualized
+through annotating interesting points in the data. This could be used to show
+the user how the environment is changing over time and how the plant is
+responding to the environment.
+
+While a line graph is a conventional way of understanding the environmental data
+we were collecting, I ultimately wanted to connect this back to the
+[mimir](/projects/1901-mimir-visualization) project. I wanted something more
+intuitive to show the relationships between days.
+
+The data was downloaded from our server as a JSON object that could be read by a
+`p5.js` script I had written. I can quickly update the data to show the reading
+in real-time or explore older data to understand the changes experienced by the
+space

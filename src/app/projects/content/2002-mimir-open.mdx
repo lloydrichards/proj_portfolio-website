@@ -2,12 +2,180 @@
 id: 2002
 title: mimirOpen
 date: 2020-02-29
-description: Open Hardware Project based on the mimirHome sensor
+description:
+  Development history of the open hardware project based on the mimirHome
+  sensor. How the project evolved from a breadboard to a fully integrated PCB.
 category:
   - DESIGN
   - DEVELOP
   - GARDEN
-image: /images/projects/thumb_mimirOpen.png
+image: /images/projects/2002/thumb_mimirOpen.png
+repo: https://github.com/lloydrichards/mimirOpen
 ---
 
+For many years I had fumbled my way through creating and IoT device from the
+hardware, firmware, backend, frontend and data visualization. These included the
+[mimir visualization](/projects/1901-mimir-visualization) and
+[mimirHome](/projects/2003-mimir-home) projects. In this project I wanted to
+show the development process of the hardware that would eventually become the
+mimirOpen sensor.
+
+## Prototypes
+
+| Version         | Description                                                    | Link                                                              |
+| --------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
+| mimirPrototype2 | First working breadboard that was able to record and save data |                                                                   |
+| mimirPrototype3 | Shield designed to fit on an ESP32 development board           | [github](https://github.com/lloydrichards/P2003_mimir-Prototype3) |
+| mimirPrototype4 | Second shield with more sensors                                | [github](https://github.com/lloydrichards/P2004_mimir-Prototype4) |
+| mimirPrototype5 | Custom development board for ESP32                             | [github](https://github.com/lloydrichards/mimirHEAD)              |
+| mimirPrototype6 | Fully functional PCB designed from scratch                     |                                                                   |
+| mimirOpen       | Open Hardware Project based on the mimirHome sensor            | [github](https://github.com/lloydrichards/mimirOpen)              |
+| mimirCUBE       | Multiple interconnected PCBs with various functions            |                                                                   |
+| mimirCUBEv2     | Self assembled cube of boards                                  |                                                                   |
+
+### mimirPrototype2
+
+At the very beginning I was just buying off the shelf components and trying to
+get them to work together. This was a very simple breadboard that was able to
+record and save data. For a time, this was running without issue sending data to
+a firebase backend and visualizing using the
+[mimir visualization](/projects/1901-mimir-visualization).
+
+This version include:
+
+- `SHT31` temperature and humidity sensor
+- `TSL2561` light sensor
+- `ESP8266` microcontroller
+- OLED display
+
+![Breakout board under plants](/images/projects/2002/mimir_proto_2_1.jpg)
+
+### mimirPrototype3
+
+Next version was my first go at designing a shield to fit on an ESP32
+development board. Taking what I learnt from the sensors, I learnt to design
+PCBs in a weekend and had them manufactured in China. This was a big step up
+from the breadboard and allowed me to add more sensors and functionality.
+
+This version include:
+
+- 2x `SHT31` temperature and humidity sensor
+- `TEMT600` ambient light sensor
+- `VEML6030` UV sensor
+- `BME280` temperature, humidity and pressure sensor
+
+![First PCB delivered from manufacturer](/images/projects/2002/mimir_proto_3_raw.jpg)
+
+### mimirPrototype4
+
+With the success of the first shield, I designed a second shield with more
+consistent sensors, as well as an air quality sensor. Also learnt more about PCB
+design and manufacturing, taking advantage of multiple layers and more complex
+designs.
+
+This design was also where I got much better ad firmware development and
+understanding how to write programs in C++ for the ESP32. This allowed me to add
+more states to the application to power the various LEDs for indicating the
+state of the device.
+
+This version include:
+
+- 2x `SHT31` temperature and humidity sensor
+- 2x `BH1715` light sensor
+- `TEMT600` ambient light sensor
+- `VEML6030` UV sensor
+- `CCS811` air quality sensor
+- `BME280` temperature, humidity and pressure sensor
+- OLED display
+
+![Multiple working devices](/images/projects/2002/mimir_proto_4_1.jpg)
+![Fresh PDBs from manufacturer](/images/projects/2002/mimir_proto_4-raw.jpg)
+
+### mimirPrototype5
+
+After designing two shields it was time to test out creating an full development
+board for a ESP32 module. This was a big step up in complexity and required a
+lot more planning and testing. Here I learnt how to make power circuits, USB-C
+connectors and how to layout a board for manufacturing, testing and assembly.
+
+![CAD design for PDB](/images/projects/2002/mimir_proto_5.jpg)
+
+### mimirPrototype6
+
+Combining all the knowledge from the previous prototypes, I designed a fully
+integrated sensor board that could be used for the mimirOpen project. This was
+where I started to get serious about sourcing components and designing for
+manufacturing. At the time I was scaling up the number of devices I could build
+with at once point receiving data from over 20 devices, all hand build.
+
+This version include:
+
+- `SHT31` temperature and humidity sensor
+- `BME360` temperature, humidity and pressure sensor
+- `HSCDT008A` compass
+- `VEML6030` UV sensor
+- `BME280` temperature, humidity and pressure sensor
+- `ESP32-WROOM` microcontroller
+
+![Side by side of multiple boards](/images/projects/2002/mimir_proto_6.jpg)
+
+This was also the first time designing 3D printed cases for the devices. This
+allowed me to test out different configurations and how the devices would be
+mounted in the final product.
+
+![Render of casing for 3D printing](/images/projects/2002/mimir_proto_6-case.png)
+
+![Device in 3D printed case](/images/projects/2002/mimir_proto_6-2.jpg)
+
 ## mimirOpen
+
+After much prototyping and an attempt to create a startup around the device, I
+eventually started putting all my learnings into a more formal repository of
+content in an effort to open source the project.
+
+Final version include:
+
+- `SHT31` temperature and humidity sensor
+- `BME360` temperature, humidity and pressure sensor
+- `LSM303` compass
+- `VEML6030` UV sensor
+- `BME280` temperature, humidity and pressure sensor
+- `ESP32-WROOM` microcontroller
+
+![Schematic diagram of board](/images/projects/2002/mimir_open-schematic.png)
+
+This was where I swapped from EasyEDA to KiCAD for designing the PCBs. This
+allowed me to have a proper git version control system for the hardware and
+firmware changes so I could track the progress over time. This repository is
+still alive, but not active at all.
+
+![CAD design of PCB board](/images/projects/2002/mimir_open-pcb.png)
+
+Was also a time where I was experimenting more with the vision of a product for
+this device so for time designed some shiny renders of the device.
+
+![Render of product in case](/images/projects/2002/mimir_open-visualization_1.png)
+![Render of multiple color options](/images/projects/2002/mimir_open-visualization_2.png)
+
+## Future Prototypes
+
+Since creating the mimirOpen project I have been working on a new version of the
+device that is more modular and can be used in a variety of different
+configurations. This is the mimirCUBE project. There is a private repository of
+all the hardware, firmware and software for this project, but I'm still unsure
+If I will make it public.
+
+![Mini prototypes for different cub forms](/images/projects/2002/mimir_proto_7.jpg)
+
+This project was a lot of fun to design and learn from. I got to apply a real
+example of the problems with IoT development and learn how to overcome them. I
+also got to learn a lot about PCB design and manufacturing, as well as how to
+design for a product that could be used by others. I also got to learn a lot
+about PCB design and manufacturing, as well as how to design for a product that
+could be used by others.
+
+While I'm sure there will never be a commercial version of this device, I'm
+happy to have learnt so much from the process and understand the complexities of
+creating a product from scratch.
+
+![Render of PCB assembly](/images/projects/2002/mimir_proto-8.jpg)

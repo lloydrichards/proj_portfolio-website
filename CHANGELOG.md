@@ -1,3 +1,10 @@
+## [1.13.10](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.9...v1.13.10) (2025-02-21)
+
+
+### Performance Improvements
+
+* :zap: use webp for thumb images ([96e7b82](https://github.com/lloydrichards/proj_portfolio-website/commit/96e7b828251ec14e4b102ccd0e70853bc20b39a6))
+
 ## [1.13.9](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.8...v1.13.9) (2025-02-09)
 
 

@@ -23,7 +23,7 @@ export const getTeamMembers = async (
           firstName: name.split(" ")[0],
           lastName: name.split(" ")[1],
           role,
-          id: Infinity,
+          id: -Math.random(),
           imgUrl: null,
         }
       );

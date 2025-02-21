@@ -2,14 +2,168 @@
 id: 2001
 title: Coming Soon Visualisation
 date: 2020-02-10
-description: Data Visualization breaking down Vietnamese Dishes
+description:
+  Visualizing Tasty Vietnamese Food from Coming Soon. Using data to create a
+  large printed visualization for a local restaurant.
 category:
   - DESIGN
 image: /images/projects/2001/thumb_coming-soon.png
 href: https://blog.interactivethings.com/visualizing-tasty-vietnamese-food-929e07a10d5c
-team: [["Annina Walker", "Designer"], ["Lloyd Richards", "Intern"]]
+team:
+  [
+    ["Annina Walker", "Designer"],
+    ["Christian Siegrist", "Project Manager"],
+    ["Natalia Kobylinska", "Photographer"],
+    ["Lloyd Richards", "Intern"],
+  ]
 ---
+
+`Coming Soon` is a local Vietnamese restaurant, close to our office. Along with
+wonderful food, they also provide a cultural hub for local artists. Part of the
+restaurant is a large vintage poster board that offers a creative platform to
+showcase local businesses. We were approached to exhibit our work in April 2020
+and decided that this would be an excellent opportunity for an internal lab
+project that could explore data about the restaurant through a large printed
+visualization. Together with Annina and Christian, we were excited to kick off
+the project and explore the story behind the data.
+
+## Research & Design Iteration
+
+Like most of our projects, we started with a thorough brainstorming session and
+plenty of sticky notes and markers to quickly get our ideas and impressions down
+for the team to see. We collected our thoughts and started organizing them into
+bins so we could see the directions to explore. Researching brought up lots of
+inspirational work as well as clarifying the data we would need to collect for
+our ideas. We started our ideation with quick sketches that framed our ideas and
+represented the data in a way that tells a story and provides insight or
+understanding.
+
+![Collection of quick idea sketches, exploring ingredients, nutrition, history,
+origins, methodologies.](/images/projects/2001/coming-soon-sketch_1.webp)
+
+Eliminating ideas that might be out of scope or in the wrong direction and
+instead focus down on a few ideas that we see having the most potential. Diving
+deep into the narrower selection, we explored what we needed to produce them
+with data, as well as what kind of resources we needed to collect or allocate
+for production.
+
+![Detailed sketches with observations/methodology](/images/projects/2001/coming-soon-sketch_2.webp)
+
+By the end of our design ideation, we had focused down on two ideas to explore.
+The first was based on the concept of a decision tree, something that would help
+customers to decide what dish to order or try something new. The second was a
+more thorough breakdown of a single dish, overlaying graphical elements that
+represent the data and focusing more on the visual representation, rather than
+the tooling. Before we could make a decision, it was important to build these
+examples using actual data and assets so we shifted our attention towards the
+dishes themselves.
+
+![Digital mockups; decision tree](/images/projects/2001/coming-soon-mockups_2.webp)
+![Digital mockup; dish breakdown](/images/projects/2001/coming-soon-mockups_3.webp)
+
+## Pop-Up Photoshoot
+
+Both of the designs were in part inspired by the graphical styles from our
+initial research. Specifically, the work by Ryan MacEachern on
+`Food x Design`[^1] and Yum Tang on `SHUSHI`[^2] has great visual appeal and fit
+nicely with the vibrance and complexity of the dishes. We partnered with a local
+video/photographer, Natalia Kobylinksa, and set up a photoshoot of the dishes.
+Together with Coming Soon, we built a pop-up photo studio inside the restaurant
+and, during their dinner rush, seamlessly photographed every dish on the menu as
+they were being ordered.
+
+![Pop up photo studio set up in the restaurant](/images/projects/2001/coming-soon-photoshoot_1.webp)
+
+Our next step was to clean and colour correct the images so we could use them in
+our designs. Thanks to some very clever machine learning tools from
+`Kaleido AI`[^3], we were able to remove a lot of the backgrounds fairly
+effortlessly and then use them in photoshop to create perfect images for our
+ideas.
+
+![Example of photography assets (Xa Lach Tron)](/images/projects/2001/coming-soon-photoshoot_2.webp)
+
+Exploring the Data While we collected photo assets, we organized the information
+provided by Coming Soon as well as added additional data through researched or
+scrapping. For the decision tree idea, this involved creating nested datasets of
+the menu categories, items, and their components. We first built tabular
+datasets using excel and then imported into D3.js which could be used to
+restructure the data and visualize it as a force tree diagram. From here we
+could organize the data in different categorizations to look at how the decision
+tree could be graphically represented on the board.
+
+The second idea, breaking down an individual dish, required much more
+information about the dish themselves and so we gathered information of their
+sales and popularity for the last year as well as a breakdown of their
+ingredients. By combining the information collected with the USDA's FoodData
+Central[^4] we could build detailed nutritional tables for each dish in Tableau.
+Tableau also allowed us to visualize layers of the information to see trends or
+patterns and create quick graphs to test with our concept.
+
+## Layering the Data
+
+With the data and the pictures in front of us, we were able to identify problems
+and potential focus from our initial ideas. We realized that while the force
+tree diagrams for the decision tree were interesting looking and fun to explore
+on a computer when it came to a large print we quickly lost the essential beauty
+of the photographs when so many were on the board at once. We could see that the
+individual breakdown offered much more interesting insight into the dishes and
+invoked the most intrigue for further exploration. From here we could start to
+design the final layout, working with proportions and typology to best represent
+and highlight the data.
+
+![Digital mockup; with data](/images/projects/2001/coming-soon-mockups_1.webp)
+
+Working first with Tableau and Illustrator we created many different graphical
+styles for the data, representing different relationships or focusing on
+different topics. Similar to our initial design process, we quickly saw what
+ideas work and which created confusion. We focused on representing the
+nutritional information of each dish/ingredient in a way that allowed you to
+compare them easily as well as highlight interesting nutritional facts. We
+created a stacked radial graph for the nutrition of each ingredient that
+proportionally sized itself around the dish based on its weight like a pie
+chart, to create a stacked radial pie chart. Building this in D3.js allowed us
+to quickly experiment and format the atypical graph structure and refine its
+proportions and layout with feedback from the design.
+
+![Wireframes combined with visualization mockups and scaled assets](/images/projects/2001/coming-soon-mockups_4.webp)
+
+## Graphical Production
+
+From our D3.js code, we extracted SVG files that imported directly into
+Photoshop to be combined with our cleaned photos and layout. With a bit of back
+and forth, we were able to quickly test ideas and produce polished designs for
+review. With the posters being so large, we came up with a hybrid method of
+testing the ideas on a projector to get a feel for the proportions of the design
+as a whole while at the same time test printing smaller components to ensure
+adequate readability and accessibility. With our final design reviewed, refined,
+and approved we were ready to start printing. Working with a local print shop we
+tested colours and quality and make any final adjustments before sending the
+final proof to print.
+
+We hope you have enjoyed reading about our process in producing this project.
+With the pandemic going on, we hope to have the first edition up in May 2020.
+Coming Soon will be reopening their doors May 11th and will be displaying a
+slightly smaller version in their store window until times when they can return
+to normal business.
 
 ![Radial stacked bar for Bun Bo Xao](/images/projects/2001/coming-soon-01.png)
 ![Radial stacked bar for Pho Bo](/images/projects/2001/coming-soon-02.png)
 ![Radial stacked bar for Cari Viet Nam](/images/projects/2001/coming-soon-03.png)
+
+---
+
+[^1]:
+    Maceachern, Ryan. “Design x Food.” Issuu. Accessed January 29, 2020.
+    https://issuu.com/ryanmaceachern/docs/designxfood.
+
+[^2]:
+    Tang, Yum. “‘SHUSHI.’” Edited by WildAid. Behance. Accessed January
+    22, 2020. https://www.behance.net/gallery/72884621/SHUSHI.
+
+[^3]:
+    Kaleido. “Remove Background from Image.” remove.bg. Accessed February
+    24, 2020. https://www.remove.bg/.
+
+[^4]:
+    “FoodData Central.” FoodData Central. Accessed February 25, 2020.
+    https://fdc.nal.usda.gov/.

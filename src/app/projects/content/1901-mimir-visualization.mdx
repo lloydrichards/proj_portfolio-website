@@ -8,4 +8,23 @@ category:
 image: /images/projects/1901/thumb_mimirHome_visualization.png
 ---
 
+Early in the development of a side project that would eventually turn into
+[mimirOpen](/projects/2002-mimir-open) was an idea to create data visualizations
+that help bridge the understanding between environmental data and the user. The
+data was collected from a rudimentary IoT device that was placed in a room to
+monitor the environment. Collecting temperature, humidity and light levels, the
+device built a dataset that could be used to understand the environment over
+time.
+
+The visualizations were created using `p5.js` to create a heatmap of the data
+over time. This was done using the sensor data to encode indoor temperature
+levels though colour and date-time to x and y position in the grid. Later, I
+added the stoke outlines and iconography to connect indoor and outdoor
+environments to see what correlations could be made.
+
 ![Heatmap of data recorded from IoT device](/images/projects/1901/mimirHome-visualization-01.png)
+
+The final visualization was a digital mockup of a realtime application that
+showed the current and daily trend in a line chart at the bottom that slowly
+built up the heatmap above. This was a way to show the user how the environment
+was changing over time and how the plant was responding to the environment.

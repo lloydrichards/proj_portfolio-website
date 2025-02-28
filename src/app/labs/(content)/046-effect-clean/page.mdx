@@ -115,11 +115,13 @@ export const api = {
   },
   projects: {
     fetchAllProjects: async () => ApiRuntime.runPromise(getAllProjects),
-    fetchFeaturedProjects: async () => ApiRuntime.runPromise(getFeaturedProjects),
+    fetchFeaturedProjects: async () =>
+      ApiRuntime.runPromise(getFeaturedProjects),
     fetchProjectTeam: getTeamMembers,
     queryProjectBySlug: async (slug: string) =>
       ApiRuntime.runPromise(getProject(slug).pipe(Effect.either)),
-    getProjectBySlug: async (slug: string) => ApiRuntime.runPromise(getProject(slug)),
+    getProjectBySlug: async (slug: string) =>
+      ApiRuntime.runPromise(getProject(slug)),
   },
   occupations: {
     fetchAllOccupations: async () => ApiRuntime.runPromise(getAllOccupations),
@@ -130,9 +132,9 @@ export const api = {
 } as const;
 ```
 
-Creating the `ApiRuntime` is a way to use a managed runtime and  able to pass in the `Context`
-at the top level of the application. This is then used to run the `Effect` and return a `Promise`
-that can be used in the `Presentation` layer.
+Creating the `ApiRuntime` is a way to use a managed runtime and able to pass in
+the `Context` at the top level of the application. This is then used to run the
+`Effect` and return a `Promise` that can be used in the `Presentation` layer.
 
 Most in useful part here is that I have the opportunity to handle errors in
 different ways while only defining the application logic once. For example; in

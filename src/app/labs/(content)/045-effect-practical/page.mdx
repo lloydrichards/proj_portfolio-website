@@ -140,10 +140,12 @@ export const api = {
   labs: {},
   projects: {
     fetchAllProjects: async () => ApiRuntime.runPromise(getAllProjects),
-    fetchFeaturedProjects: async () => ApiRuntime.runPromise(getFeaturedProjects),
+    fetchFeaturedProjects: async () =>
+      ApiRuntime.runPromise(getFeaturedProjects),
     queryProjectBySlug: async (slug: string) =>
       ApiRuntime.runPromise(getProject(slug).pipe(Effect.either)),
-    getProjectBySlug: async (slug: string) => ApiRuntime.runPromise(getProject(slug)),
+    getProjectBySlug: async (slug: string) =>
+      ApiRuntime.runPromise(getProject(slug)),
   },
   occupations: {},
   skills: {},

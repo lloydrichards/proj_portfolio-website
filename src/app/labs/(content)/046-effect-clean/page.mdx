@@ -106,33 +106,32 @@ using an exported map of functions that are used to fetch data from the
 `Application` layer:
 
 ```ts {1-2} showLineNumbers title="api/index.ts"
-const runEffect = <A, E>(effect: Effect.Effect<A, E, BunContext.BunContext>) =>
-  Effect.runPromise(effect.pipe(Effect.provide(BunContext.layer)));
+const ApiRuntime = ManagedRuntime.make(Layer.mergeAll(BunContext.layer));
 
 export const api = {
   labs: {
-    fetchAllLabs: async () => runEffect(getAllLabs),
-    fetchFeaturedLabs: async () => runEffect(getFeaturedLabs),
+    fetchAllLabs: async () => ApiRuntime.runPromise(getAllLabs),
+    fetchFeaturedLabs: async () => ApiRuntime.runPromise(getFeaturedLabs),
   },
   projects: {
-    fetchAllProjects: async () => runEffect(getAllProjects),
-    fetchFeaturedProjects: async () => runEffect(getFeaturedProjects),
+    fetchAllProjects: async () => ApiRuntime.runPromise(getAllProjects),
+    fetchFeaturedProjects: async () => ApiRuntime.runPromise(getFeaturedProjects),
     fetchProjectTeam: getTeamMembers,
     queryProjectBySlug: async (slug: string) =>
-      runEffect(getProject(slug).pipe(Effect.either)),
-    getProjectBySlug: async (slug: string) => runEffect(getProject(slug)),
+      ApiRuntime.runPromise(getProject(slug).pipe(Effect.either)),
+    getProjectBySlug: async (slug: string) => ApiRuntime.runPromise(getProject(slug)),
   },
   occupations: {
-    fetchAllOccupations: async () => runEffect(getAllOccupations),
+    fetchAllOccupations: async () => ApiRuntime.runPromise(getAllOccupations),
   },
   skills: {
-    fetchSkillData: async () => runEffect(getSkillData),
+    fetchSkillData: async () => ApiRuntime.runPromise(getSkillData),
   },
 } as const;
 ```
 
-Creating the `runEffect()` is just a helper to be able to pass in the `Context`
-in a single place. This is then used to run the `Effect` and return a `Promise`
+Creating the `ApiRuntime` is a way to use a managed runtime and  able to pass in the `Context`
+at the top level of the application. This is then used to run the `Effect` and return a `Promise`
 that can be used in the `Presentation` layer.
 
 Most in useful part here is that I have the opportunity to handle errors in
@@ -151,19 +150,19 @@ const getProject = Effect.Effect<
 >;
 
 // Throw a rejected promise on error
-const canThrow = (slug: string) => runEffect(getProject(slug));
+const canThrow = (slug: string) => ApiRuntime.runPromise(getProject(slug));
 
 // Handle the error in the presentation layer
 const canCatch = (slug: string) =>
-  runEffect(getProject(slug).pipe(Effect.either));
+  ApiRuntime.runPromise(getProject(slug).pipe(Effect.either));
 
 // Fall back to a default value on error
 const canDefault = (slug: string) =>
-  runEffect(getProject(slug).pipe(Effect.orElse(defaultProject)));
+  ApiRuntime.runPromise(getProject(slug).pipe(Effect.orElse(defaultProject)));
 
 // Log the error and continue
 const canLog = (slug: string) =>
-  runEffect(getProject(slug).pipe(Effect.orElseLog(console.error)));
+  ApiRuntime.runPromise(getProject(slug).pipe(Effect.orElseLog(console.error)));
 ```
 
 This is incredibly powerful because it allows me to define the error handling

@@ -134,17 +134,16 @@ and flexible in that they can be combined in multiple ways and the resulting
 errors can either be handled or bubbled further up.
 
 ```ts showLineNumbers {10} title="api/index.ts"
-const runEffect = <A, E>(effect: Effect.Effect<A, E, BunContext.BunContext>) =>
-  Effect.runPromise(effect.pipe(Effect.provide(BunContext.layer)));
+const ApiRuntime = ManagedRuntime.make(Layer.mergeAll(BunContext.layer));
 
 export const api = {
   labs: {},
   projects: {
-    fetchAllProjects: async () => runEffect(getAllProjects),
-    fetchFeaturedProjects: async () => runEffect(getFeaturedProjects),
+    fetchAllProjects: async () => ApiRuntime.runPromise(getAllProjects),
+    fetchFeaturedProjects: async () => ApiRuntime.runPromise(getFeaturedProjects),
     queryProjectBySlug: async (slug: string) =>
-      runEffect(getProject(slug).pipe(Effect.either)),
-    getProjectBySlug: async (slug: string) => runEffect(getProject(slug)),
+      ApiRuntime.runPromise(getProject(slug).pipe(Effect.either)),
+    getProjectBySlug: async (slug: string) => ApiRuntime.runPromise(getProject(slug)),
   },
   occupations: {},
   skills: {},

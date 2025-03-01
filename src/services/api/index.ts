@@ -27,7 +27,9 @@ export const api = {
     fetchAllProjects: async () => ApiRuntime.runPromise(getAllProjects),
     fetchFeaturedProjects: async () =>
       ApiRuntime.runPromise(getFeaturedProjects),
-    fetchProjectTeam: getTeamMembers,
+    fetchProjectTeam: async (
+      team: readonly (readonly [string, string])[] | undefined,
+    ) => ApiRuntime.runPromise(getTeamMembers(team)),
     queryProjectBySlug: async (slug: string) =>
       ApiRuntime.runPromise(getProject(slug).pipe(Effect.either)),
     getProjectBySlug: async (slug: string) =>

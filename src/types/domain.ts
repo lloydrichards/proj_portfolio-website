@@ -42,7 +42,9 @@ export const ProjectMeta = Schema.Struct({
   image: Schema.String,
   href: Schema.optional(Schema.String),
   repo: Schema.optional(Schema.String),
-  team: Schema.optional(Schema.Array(Schema.Array(Schema.String))),
+  team: Schema.optional(
+    Schema.Array(Schema.Tuple(Schema.String, Schema.String)),
+  ),
 });
 export type ProjectMeta = typeof ProjectMeta.Type;
 

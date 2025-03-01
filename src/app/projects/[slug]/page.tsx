@@ -2,7 +2,6 @@ import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
 import { siteMetadata } from "@/lib/metadata";
 import { createPageMetadata } from "@/lib/seo";
 import { api } from "@/services/api";
-import { getTeamMembers } from "@/services/api/actions/get-team-members";
 import { Either } from "effect";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -53,7 +52,7 @@ const ProjectPage = async ({
 
   const [content, project] = result.right;
 
-  const team = await getTeamMembers(project.team);
+  const team = await api.projects.fetchProjectTeam(project.team);
 
   return (
     <>

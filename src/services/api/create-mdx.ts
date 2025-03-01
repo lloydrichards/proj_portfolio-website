@@ -46,4 +46,4 @@ export const createMDX = <T>(source: string) =>
         components: { ...components },
       }),
     catch: (error) => new MDXCompileError(error),
-  });
+  }).pipe(Effect.withSpan("createMDX", { attributes: { source } }));

@@ -40,4 +40,5 @@ export const getProject = (slug: string) =>
     Effect.catchTag("BadArgument", () =>
       Effect.fail(new MissingContentError({ slug })),
     ),
+    Effect.withSpan("getProject", { attributes: { slug } }),
   );

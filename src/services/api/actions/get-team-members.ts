@@ -1,32 +1,40 @@
+import { DatabaseError } from "@/types/errors";
+import { Array, Effect, Option } from "effect";
+import { pipe } from "fp-ts/lib/function";
 import { db } from "../../db";
-import { TeamMember } from "../../db/schema/team_member";
 
-export const getTeamMembers = async (
-  team?: readonly (readonly string[])[],
-): Promise<Array<TeamMember>> => {
-  if (!team) {
-    return [];
-  }
-  const teamMembers = await db.query.teamMember.findMany({});
-
-  return team
-    ?.map(([name, role]) => {
-      const member = teamMembers.find(
-        (member) =>
-          member.firstName === name.split(" ")[0] &&
-          member.lastName === name.split(" ")[1] &&
-          member.role === role,
-      );
-
-      return (
-        member ?? {
-          firstName: name.split(" ")[0],
-          lastName: name.split(" ")[1],
-          role,
-          id: -Math.random(),
-          imgUrl: null,
-        }
-      );
-    })
-    .filter(Boolean);
-};
+export const getTeamMembers = async (team?: readonly (readonly string[])[]) =>
+  pipe(
+    Effect.tryPromise({
+      try: () => db.query.teamMember.findMany({}),
+      catch: (error) => new DatabaseError({ error }),
+    }),
+    Effect.andThen((teamMembers) =>
+      pipe(
+        Option.fromNullable(team),
+        Option.match({
+          onNone: () => [],
+          onSome: (team) => team,
+        }),
+        Array.map(([name, role]) =>
+          Array.findFirst(
+            teamMembers,
+            (m) =>
+              m.firstName === name.split(" ")[0] &&
+              m.lastName === name.split(" ")[1] &&
+              m.role === role,
+          ).pipe(
+            Option.orElseSome(() => ({
+              id: -Math.random(),
+              firstName: name.split(" ")[0],
+              lastName: name.split(" ")[1],
+              role,
+              imgUrl: null,
+            })),
+          ),
+        ),
+        Array.getSomes,
+      ),
+    ),
+    Effect.withSpan("getTeamMembers"),
+  );

@@ -1,4 +1,5 @@
-import { BunContext } from "@effect/platform-bun";
+import { DevTools } from "@effect/experimental";
+import { BunContext, BunSocket } from "@effect/platform-bun";
 import { Effect, Layer, ManagedRuntime } from "effect";
 import { getAllLabs } from "./actions/get-all-labs";
 import { getAllOccupations } from "./actions/get-all-occupations";
@@ -9,7 +10,13 @@ import { getProject } from "./actions/get-project";
 import { getSkillData } from "./actions/get-skill-data";
 import { getTeamMembers } from "./actions/get-team-members";
 
-const ApiRuntime = ManagedRuntime.make(Layer.mergeAll(BunContext.layer));
+const DevToolsLive = DevTools.layerWebSocket().pipe(
+  Layer.provide(BunSocket.layerWebSocketConstructor),
+);
+
+const ApiRuntime = ManagedRuntime.make(
+  Layer.mergeAll(DevToolsLive, BunContext.layer),
+);
 
 export const api = {
   labs: {

@@ -24,4 +24,5 @@ export const getAllProjects = pipe(
       Array.reverse,
     ),
   ),
+  Effect.withSpan("getAllProjects"),
 );

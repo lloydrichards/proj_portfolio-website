@@ -54,4 +54,5 @@ export const getSkillData = pipe(
       Array.sortBy(Order.mapInput(Order.Date, (d) => new Date(d.date))),
     ),
   ),
+  Effect.withSpan("getSkillData"),
 );

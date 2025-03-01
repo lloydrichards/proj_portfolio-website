@@ -41,4 +41,5 @@ export const getAllOccupations = pipe(
       return b.start_date.getTime() - a.start_date.getTime();
     }),
   ),
+  Effect.withSpan("getAllOccupations"),
 );

@@ -27,4 +27,5 @@ export const getLab = (slug: string) =>
       }),
       isPublished: metadata.isPublished ?? true,
     })),
+    Effect.withSpan("getLab", { attributes: { slug } }),
   );

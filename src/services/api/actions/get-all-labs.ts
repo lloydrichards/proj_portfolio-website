@@ -22,4 +22,5 @@ export const getAllLabs = pipe(
       Array.reverse,
     ),
   ),
+  Effect.withSpan("getAllLabs"),
 );

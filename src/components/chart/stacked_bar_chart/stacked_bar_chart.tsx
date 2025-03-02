@@ -12,15 +12,10 @@ export interface StackedData {
   value: number;
 }
 
-export interface StackedBarChartProps {
+interface StackedBarChartProps {
   height?: number;
   width?: number;
-  margins?: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-  };
+  margins?: { top: number; right: number; bottom: number; left: number };
   title?: string;
   data: StackedData[];
   seriesDomain?: string[];

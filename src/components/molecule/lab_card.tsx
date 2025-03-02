@@ -13,7 +13,7 @@ import { Lab } from "@/types/domain";
 import Link from "next/link";
 import { Button } from "../atom/button";
 
-export interface IPostCard {
+interface IPostCard {
   lab: Lab;
   className?: string;
   asLink?: boolean;

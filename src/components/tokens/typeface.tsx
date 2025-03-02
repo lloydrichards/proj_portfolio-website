@@ -2,11 +2,11 @@ import { cn } from "@/lib/utils";
 
 // Core Typefaces
 
-export const typefaceDisplay1 = (className?: string) =>
-  cn("text-9xl leading-normal font-normal", className);
+// export const typefaceDisplay1 = (className?: string) =>
+//   cn("text-9xl leading-normal font-normal", className);
 
-export const typefaceDisplay2 = (className?: string) =>
-  cn("text-8xl leading-normal font-normal", className);
+// export const typefaceDisplay2 = (className?: string) =>
+//   cn("text-8xl leading-normal font-normal", className);
 
 export const typefaceHeading1 = (className?: string) =>
   cn("text-4xl font-bold tracking-tight", className);
@@ -36,11 +36,11 @@ export const typefaceMeta = (className?: string) =>
 export const typefaceAnchor = (className?: string) =>
   cn("font-medium underline underline-offset-4", className);
 
-export const typefaceValue1 = (className?: string) =>
-  cn("text-3xl font-normal", "leading-none", className);
+// export const typefaceValue1 = (className?: string) =>
+//   cn("text-3xl font-normal", "leading-none", className);
 
-export const typefaceValue2 = (className?: string) =>
-  cn("text-2xl font-normal", "leading-none", className);
+// export const typefaceValue2 = (className?: string) =>
+//   cn("text-2xl font-normal", "leading-none", className);
 
-export const typefaceValue3 = (className?: string) =>
-  cn("text-lg font-normal", "leading-none", className);
+// export const typefaceValue3 = (className?: string) =>
+//   cn("text-lg font-normal", "leading-none", className);

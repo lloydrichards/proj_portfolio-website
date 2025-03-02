@@ -7,9 +7,7 @@ import { Layer } from "effect";
 import path from "path";
 import * as schema from "./schema";
 
-const globalForDb = globalThis as unknown as {
-  client: Client | undefined;
-};
+const globalForDb = globalThis as unknown as { client: Client | undefined };
 
 const initClient = () => {
   if (env.NEXT_RUNTIME === "edge") {
@@ -20,13 +18,11 @@ const initClient = () => {
   return globalForDb.client ?? createClient({ url: `file:${dbPath}` });
 };
 
-export const client = initClient();
+const client = initClient();
 
 if (env.NODE_ENV !== "production") globalForDb.client = client;
 
-export const db = drizzle(client, {
-  schema,
-});
+export const db = drizzle(client, { schema });
 export type db = typeof db;
 
 export const SqlLive = SqliteClient.layer({

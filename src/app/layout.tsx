@@ -1,4 +1,4 @@
-import { inter, josefin_sans, roboto_mono } from "@/styles/fonts";
+import { inter, josefin_sans, plex_mono, roboto_mono } from "@/styles/fonts";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
@@ -19,9 +19,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteMetadata.title}`,
   },
   description: siteMetadata.description,
-  icons: {
-    icon: siteMetadata.icon,
-  },
+  icons: { icon: siteMetadata.icon },
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
@@ -33,9 +31,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "./",
-    types: {
-      "application/rss+xml": `${siteMetadata.siteUrl}/api/rss`,
-    },
+    types: { "application/rss+xml": `${siteMetadata.siteUrl}/api/rss` },
   },
   robots: {
     index: true,
@@ -57,13 +53,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang={siteMetadata.language}
-      className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable}`}
+      className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable} ${plex_mono.variable}`}
       suppressHydrationWarning
     >
       <body

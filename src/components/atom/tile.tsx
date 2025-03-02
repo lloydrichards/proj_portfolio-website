@@ -22,23 +22,13 @@ const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
       "square-lg":
         "col-span-full row-span-8 md:col-span-8 md:row-span-8 lg:col-span-12 lg:row-span-12",
     },
-    outline: {
-      true: "border",
-      false: "",
-    },
-    display: {
-      grid: "grid grid-cols-subgrid grid-rows-subgrid",
-      default: "",
-    },
+    outline: { true: "border", false: "" },
+    display: { grid: "grid grid-cols-subgrid grid-rows-subgrid", default: "" },
   },
-  defaultVariants: {
-    size: "square-xs",
-    outline: true,
-    display: "default",
-  },
+  defaultVariants: { size: "square-xs", outline: true, display: "default" },
 });
 
-export interface TileProps
+interface TileProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof tileVariants> {
   asChild?: boolean;

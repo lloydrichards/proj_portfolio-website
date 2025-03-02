@@ -13,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../atom/button";
 
-export interface IProjectCard {
+interface IProjectCard {
   project: Project;
   className?: string;
   asLink?: boolean;

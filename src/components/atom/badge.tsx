@@ -22,14 +22,11 @@ const badgeVariants = cva(
         md: typefaceBody("px-2.5 py-0.5"),
       },
     },
-    defaultVariants: {
-      variant: "default",
-      size: "sm",
-    },
+    defaultVariants: { variant: "default", size: "sm" },
   },
 );
 
-export interface BadgeProps
+interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 

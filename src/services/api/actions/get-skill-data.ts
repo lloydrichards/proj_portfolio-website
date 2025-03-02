@@ -1,8 +1,7 @@
-import { DatabaseError } from "@/types/errors";
+import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
 import { addMonths, differenceInMonths } from "date-fns";
 import { eq } from "drizzle-orm";
 import { Array, Effect, Order, pipe } from "effect";
-import { db } from "../../db";
 import { occupation, occupationToSkill, skill } from "../../db/schema";
 
 export type SkillData = {
@@ -19,22 +18,21 @@ const generateMonthlyDates = (startDate: Date, endDate: Date): Date[] => {
 };
 
 export const getSkillData = pipe(
-  Effect.tryPromise({
-    try: () =>
-      db
-        .select({
-          type: skill.type,
-          name: skill.name,
-          description: skill.description,
-          startDate: occupation.startDate,
-          endDate: occupation.endDate,
-          pensum: occupation.pensum,
-        })
-        .from(occupationToSkill)
-        .leftJoin(skill, eq(skill.id, occupationToSkill.skill))
-        .leftJoin(occupation, eq(occupation.id, occupationToSkill.occupation)),
-    catch: (error) => new DatabaseError({ error }),
-  }),
+  SqliteDrizzle,
+  Effect.andThen((db) =>
+    db
+      .select({
+        type: skill.type,
+        name: skill.name,
+        description: skill.description,
+        startDate: occupation.startDate,
+        endDate: occupation.endDate,
+        pensum: occupation.pensum,
+      })
+      .from(occupationToSkill)
+      .leftJoin(skill, eq(skill.id, occupationToSkill.skill))
+      .leftJoin(occupation, eq(occupation.id, occupationToSkill.occupation)),
+  ),
   Effect.map((data) =>
     pipe(
       data,

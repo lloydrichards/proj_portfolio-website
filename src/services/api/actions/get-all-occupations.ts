@@ -1,38 +1,54 @@
-import { DatabaseError } from "@/types/errors";
+import {
+  attribute,
+  category,
+  occupation,
+  occupationToAttribute,
+  occupationToSkill,
+  skill,
+} from "@/services/db/schema";
+import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
+import { eq, sql } from "drizzle-orm";
 import { Array, Effect, pipe } from "effect";
-import { db } from "../../db";
 import { notEmpty } from "../utils";
 
 export const getAllOccupations = pipe(
-  Effect.tryPromise({
-    try: () =>
-      db.query.occupation.findMany({
-        with: {
-          category: true,
-          skills: {
-            with: {
-              skill: true,
-            },
-          },
-          attributes: {
-            with: {
-              attribute: true,
-            },
-          },
-        },
-      }),
-    catch: (error) => new DatabaseError({ error }),
-  }),
+  SqliteDrizzle,
+  Effect.andThen((db) =>
+    db
+      .select({
+        occupation: occupation,
+        category: category.name,
+        skills: sql<
+          string[] | null
+        >`COALESCE(GROUP_CONCAT(DISTINCT ${skill.name}), '')`,
+        attributes: sql<
+          string[] | null
+        >`COALESCE(GROUP_CONCAT(DISTINCT ${attribute.name}), '')`,
+      })
+      .from(occupation)
+      .leftJoin(category, eq(occupation.category, category.id))
+      .leftJoin(
+        occupationToSkill,
+        eq(occupation.id, occupationToSkill.occupation),
+      )
+      .leftJoin(skill, eq(occupationToSkill.skill, skill.id))
+      .leftJoin(
+        occupationToAttribute,
+        eq(occupation.id, occupationToAttribute.occupation),
+      )
+      .leftJoin(attribute, eq(occupationToAttribute.attribute, attribute.id))
+      .groupBy(occupation.id),
+  ),
   Effect.map(Array.filter(notEmpty)),
   Effect.map((occupations) =>
-    occupations.map((o) => ({
-      ...o,
-      description: o.jobDescription,
-      start_date: new Date(o.startDate),
-      end_date: o.endDate ? new Date(o.endDate) : null,
-      category: o.category?.name.toUpperCase(),
-      skills: o.skills.map((s) => s.skill.name),
-      attributes: o.attributes.map((a) => a.attribute.name),
+    occupations.map(({ occupation, category, attributes, skills }) => ({
+      ...occupation,
+      description: occupation?.jobDescription,
+      start_date: new Date(occupation?.startDate ?? ""),
+      end_date: occupation?.endDate ? new Date(occupation?.endDate) : null,
+      category: category?.toUpperCase() || "",
+      skills: skills,
+      attributes: attributes,
     })),
   ),
   Effect.map((o) =>

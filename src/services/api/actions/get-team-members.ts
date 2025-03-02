@@ -1,8 +1,7 @@
-import { TeamMember } from "@/services/db/schema/team_member";
-import { DatabaseError } from "@/types/errors";
+import { teamMember, TeamMember } from "@/services/db/schema/team_member";
+import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
 import { Array, Effect, Option, Schema } from "effect";
 import { pipe } from "fp-ts/lib/function";
-import { db } from "../../db";
 
 const TeamMemberDTO = Schema.transform(
   Schema.Tuple(Schema.String, Schema.String),
@@ -26,10 +25,8 @@ const TeamMemberDTO = Schema.transform(
 
 export const getTeamMembers = (team?: readonly (readonly [string, string])[]) =>
   pipe(
-    Effect.tryPromise({
-      try: async () => await db.query.teamMember.findMany({}),
-      catch: (error) => new DatabaseError({ error }),
-    }),
+    SqliteDrizzle,
+    Effect.andThen((db) => db.select().from(teamMember)),
     Effect.andThen((teamMembers) =>
       pipe(
         Option.fromNullable(team),

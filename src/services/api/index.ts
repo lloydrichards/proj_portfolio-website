@@ -1,6 +1,7 @@
 import { DevTools } from "@effect/experimental";
 import { BunContext, BunSocket } from "@effect/platform-bun";
 import { Effect, Layer, ManagedRuntime } from "effect";
+import { DrizzleLive } from "../db";
 import { getAllLabs } from "./actions/get-all-labs";
 import { getAllOccupations } from "./actions/get-all-occupations";
 import { getAllProjects } from "./actions/get-all-projects";
@@ -15,7 +16,7 @@ const DevToolsLive = DevTools.layerWebSocket().pipe(
 );
 
 const ApiRuntime = ManagedRuntime.make(
-  Layer.mergeAll(DevToolsLive, BunContext.layer),
+  Layer.mergeAll(DevToolsLive, BunContext.layer, DrizzleLive),
 );
 
 export const api = {

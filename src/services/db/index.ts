@@ -1,7 +1,9 @@
+import { env } from "@/lib/env";
+import * as SqliteDrizzle from "@effect/sql-drizzle/Sqlite";
+import { SqliteClient } from "@effect/sql-sqlite-node";
 import { createClient, type Client } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
-
-import { env } from "@/lib/env";
+import { Layer } from "effect";
 import path from "path";
 import * as schema from "./schema";
 
@@ -26,3 +28,9 @@ export const db = drizzle(client, {
   schema,
 });
 export type db = typeof db;
+
+export const SqlLive = SqliteClient.layer({
+  filename: path.join(process.cwd(), env.DB_FILE_NAME),
+});
+
+export const DrizzleLive = SqliteDrizzle.layer.pipe(Layer.provide(SqlLive));

@@ -13,7 +13,3 @@ export class MissingContentError extends Data.TaggedError(
 export class ImportError extends Data.TaggedError("ImportError")<{
   path: string;
 }> {}
-
-export class DatabaseError extends Data.TaggedError("DatabaseError")<{
-  error: unknown;
-}> {}

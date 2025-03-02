@@ -1,3 +1,10 @@
+## [1.13.11](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.10...v1.13.11) (2025-03-02)
+
+
+### Bug Fixes
+
+* **portfolio:** :bug: add missing img [content] ([408cfe0](https://github.com/lloydrichards/proj_portfolio-website/commit/408cfe0c5c18b41773eea55485404fdd2d91ac00))
+
 ## [1.13.10](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.9...v1.13.10) (2025-02-21)
 
 

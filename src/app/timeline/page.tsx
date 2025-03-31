@@ -1,5 +1,5 @@
-import { Timeline } from "@/components/chart/timeline/Timeline";
-import { ResponsiveWrapper } from "@/components/template/responsive_wrapper";
+import { Tile } from "@/components/atom/tile";
+import { OccupationCard } from "@/components/chart/timeline/internal/OccupationCard";
 import { createPageMetadata } from "@/lib/seo";
 import { DataApi } from "@/services/DataApi";
 import { RuntimeServer } from "@/services/RuntimeServer";
@@ -18,11 +18,21 @@ const TimelinePage: React.FC = async () => {
     ),
   );
   return (
-    <main className="col-span-full py-6">
-      <ResponsiveWrapper>
-        <Timeline data={allOccupations} />
-      </ResponsiveWrapper>
-    </main>
+    <>
+      <aside className="col-span-1 grid grid-cols-subgrid md:col-span-2 lg:col-span-6">
+        <Tile className="col-span-full h-full" size="unset" />
+      </aside>
+      <main className="mosaic-rows col-[2/-1] grid min-h-dvh grid-cols-subgrid md:col-[3/-1] lg:col-[7/-1]">
+        {allOccupations.map((o) => (
+          <Tile className="col-span-full row-span-5" size="unset" key={o.id}>
+            <OccupationCard data={o} />
+          </Tile>
+        ))}
+        {/* <ResponsiveWrapper>
+      <Timeline data={allOccupations} />
+      </ResponsiveWrapper> */}
+      </main>
+    </>
   );
 };
 

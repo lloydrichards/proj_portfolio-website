@@ -1,16 +1,17 @@
 import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
 import { addMonths, differenceInMonths } from "date-fns";
 import { eq } from "drizzle-orm";
-import { Array, Effect, Order, pipe } from "effect";
+import { Array, Effect, Order, pipe, Schema } from "effect";
 import { occupation, occupationToSkill, skill } from "../../db/schema";
 
-export type SkillData = {
-  type: string;
-  name: string;
-  description: string;
-  pensum: number;
-  date: string;
-};
+export class SkillData extends Schema.Class<SkillData>("SkillData")({
+  type: Schema.String,
+  name: Schema.String,
+  description: Schema.String,
+  pensum: Schema.Number,
+  factor: Schema.Number,
+  date: Schema.String,
+}) {}
 
 const generateMonthlyDates = (startDate: Date, endDate: Date): Date[] => {
   const months = differenceInMonths(endDate, startDate);
@@ -28,6 +29,7 @@ export const getSkillData = pipe(
         startDate: occupation.startDate,
         endDate: occupation.endDate,
         pensum: occupation.pensum,
+        occupation: occupation.id,
       })
       .from(occupationToSkill)
       .leftJoin(skill, eq(skill.id, occupationToSkill.skill))
@@ -36,17 +38,25 @@ export const getSkillData = pipe(
   Effect.map((data) =>
     pipe(
       data,
-      Array.map((row) =>
-        generateMonthlyDates(
-          row.startDate ? new Date(row.startDate) : new Date(),
-          row.endDate ? new Date(row.endDate) : new Date(),
-        ).map((date) => ({
-          type: row.type || "",
-          name: row.name || "",
-          pensum: row.pensum || 100,
-          description: row.description || "",
-          date: date.toISOString(),
-        })),
+      Array.groupBy((row) => row.occupation?.toString() ?? ""),
+      Array.fromRecord,
+      Array.map(([_, rows]) =>
+        rows.flatMap((row) =>
+          generateMonthlyDates(
+            row.startDate ? new Date(row.startDate) : new Date(),
+            row.endDate ? new Date(row.endDate) : new Date(),
+          ).map(
+            (date) =>
+              ({
+                type: row.type || "",
+                name: row.name || "",
+                pensum: row.pensum || 100,
+                factor: 1 / rows.length,
+                description: row.description || "",
+                date: date.toISOString(),
+              }) satisfies SkillData,
+          ),
+        ),
       ),
       Array.flatten,
       Array.sortBy(Order.mapInput(Order.Date, (d) => new Date(d.date))),

@@ -12,7 +12,7 @@ import { FC, useState } from "react";
 import { useSkillBarChartData } from "./use-skill-bar-chart-data";
 
 type SkillBarChartClientProps = {
-  data: SkillData[];
+  data: readonly (typeof SkillData.Encoded)[];
 };
 
 export const SkillBarChartClient: FC<SkillBarChartClientProps> = withResponsive(

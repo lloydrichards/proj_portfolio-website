@@ -3,7 +3,7 @@ import { SkillData } from "@/services/api/actions/get-skill-data";
 const WORKING_HOURS_PER_MONTH = 160;
 
 export const useSkillBarChartData = (
-  data: SkillData[],
+  data: readonly (typeof SkillData.Encoded)[],
   range: [Date, Date],
 ) => {
   const seriesDomain = Array.from(new Set(data.map((d) => d.type)));
@@ -15,7 +15,8 @@ export const useSkillBarChartData = (
   const parsed = Object.entries(group)
     .map(([name, rows]) => {
       const hours = rows?.reduce(
-        (acc, { pensum }) => acc + (pensum / 100) * WORKING_HOURS_PER_MONTH,
+        (acc, { pensum, factor }) =>
+          acc + (pensum / 100) * WORKING_HOURS_PER_MONTH * factor,
         0,
       );
       return { name, type: rows?.[0].type ?? "", hours };
@@ -23,7 +24,7 @@ export const useSkillBarChartData = (
     .map((row) => ({
       stack: row.type,
       series: row.name,
-      value: row.hours ?? 0,
+      value: Math.round(row.hours ?? 0),
     }));
 
   return { parsed, seriesDomain };

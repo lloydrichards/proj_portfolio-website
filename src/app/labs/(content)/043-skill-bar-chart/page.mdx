@@ -51,11 +51,11 @@ FROM   "occupation_to_skill"
 With the data fetched it was then possible to group and aggregate the data using
 the occupations start data, end date and pensum. Using an estimate of 160 hours
 per month, I calculated the number of hours worked on each skill weighted by the
-pensum of the occupation.
+pensum of the occupation and the number of skills in the occupation.
 
 ```typescript
 const hours = data.reduce(
-  (acc, { months, pensum }) => acc + months * (pensum / 100) * 160,
+  (acc, { months, pensum, factor }) => acc + months * (pensum / 100) * 160 * factor,
   0,
 );
 ```

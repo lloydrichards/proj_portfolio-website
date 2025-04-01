@@ -1,10 +1,10 @@
-import { Occupations } from "@/services/use-cases/get-all-occupations";
+import { Occupation } from "@/types/Occupation";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { OccupationCard } from "./OccupationCard";
 
 interface OccupationItemProps {
-  data: Occupations[0];
+  data: typeof Occupation.Encoded;
   idx: number;
   x: number;
   y: number;

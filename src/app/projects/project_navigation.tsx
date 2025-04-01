@@ -5,7 +5,7 @@ import {
 } from "@/components/atom/navigation-menu";
 import { NavListItem } from "@/components/molecule/nav_list_item";
 import { cn } from "@/lib/utils";
-import { Project } from "@/types/domain";
+import { Project } from "@/types/Project";
 import { FC } from "react";
 
 interface ProjectNavigationProps {

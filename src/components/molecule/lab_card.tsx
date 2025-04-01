@@ -9,12 +9,12 @@ import {
 } from "@/components/atom/card";
 import { formatDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { Lab } from "@/types/domain";
+import { Lab } from "@/types/Lab";
 import Link from "next/link";
 import { Button } from "../atom/button";
 
 interface IPostCard {
-  lab: Lab;
+  lab: typeof Lab.Encoded;
   className?: string;
   asLink?: boolean;
 }
@@ -30,7 +30,7 @@ export const LabCard: React.FC<IPostCard> = ({ lab, className, asLink }) => {
             </Badge>
           ))}
           <p className="text-muted-foreground flex grow justify-end text-sm">
-            {formatDate(lab.date)}
+            {formatDate(new Date(lab.date))}
           </p>
         </div>
         <CardTitle className="line-clamp-2">{lab.title}</CardTitle>

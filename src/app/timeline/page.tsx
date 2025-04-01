@@ -3,7 +3,8 @@ import { ResponsiveWrapper } from "@/components/template/responsive_wrapper";
 import { createPageMetadata } from "@/lib/seo";
 import { DataApi } from "@/services/DataApi";
 import { RuntimeServer } from "@/services/RuntimeServer";
-import { Effect } from "effect";
+import { Occupation } from "@/types/Occupation";
+import { Effect, Schema } from "effect";
 
 export const metadata = createPageMetadata({
   title: "Timeline",
@@ -12,7 +13,10 @@ export const metadata = createPageMetadata({
 
 const TimelinePage: React.FC = async () => {
   const allOccupations = await RuntimeServer.runPromise(
-    DataApi.pipe(Effect.andThen((a) => a.allOccupations)),
+    DataApi.pipe(
+      Effect.andThen((a) => a.allOccupations),
+      Effect.andThen(Schema.encode(Occupation.Array)),
+    ),
   );
   return (
     <main className="col-span-full py-6">

@@ -9,13 +9,17 @@ import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
 import { LabApi } from "@/services/LabApi";
 import { ProjectApi } from "@/services/ProjectApi";
 import { RuntimeServer } from "@/services/RuntimeServer";
-import { Effect } from "effect";
+import { Lab } from "@/types/Lab";
+import { Effect, Schema } from "effect";
 
 const HomePage = async () => {
   const [featuredLabs, allProjects] = await RuntimeServer.runPromise(
     Effect.all(
       [
-        LabApi.pipe(Effect.andThen(({ featured }) => featured)),
+        LabApi.pipe(
+          Effect.andThen(({ featured }) => featured),
+          Effect.andThen(Schema.encode(Lab.Array)),
+        ),
         ProjectApi.pipe(Effect.andThen(({ featured }) => featured)),
       ],
       { concurrency: "unbounded" },

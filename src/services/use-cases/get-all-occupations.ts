@@ -6,6 +6,7 @@ import {
   occupationToSkill,
   skill,
 } from "@/services/db/schema";
+import { Occupation } from "@/types/Occupation";
 import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
 import { eq, sql } from "drizzle-orm";
 import { Array, Effect, pipe } from "effect";
@@ -19,10 +20,10 @@ export const getAllOccupations = pipe(
         occupation: occupation,
         category: category.name,
         skills: sql<
-          string[] | null
+          string | null
         >`COALESCE(GROUP_CONCAT(DISTINCT ${skill.name}), '')`,
         attributes: sql<
-          string[] | null
+          string | null
         >`COALESCE(GROUP_CONCAT(DISTINCT ${attribute.name}), '')`,
       })
       .from(occupation)
@@ -41,15 +42,18 @@ export const getAllOccupations = pipe(
   ),
   Effect.map(Array.filter(notEmpty)),
   Effect.map((occupations) =>
-    occupations.map(({ occupation, category, attributes, skills }) => ({
-      ...occupation,
-      description: occupation?.jobDescription,
-      start_date: new Date(occupation?.startDate ?? ""),
-      end_date: occupation?.endDate ? new Date(occupation?.endDate) : null,
-      category: category?.toUpperCase() || "",
-      skills: skills,
-      attributes: attributes,
-    })),
+    occupations.map(
+      ({ occupation, category, attributes, skills }) =>
+        new Occupation({
+          ...occupation,
+          description: occupation?.jobDescription,
+          start_date: new Date(occupation?.startDate ?? ""),
+          end_date: occupation?.endDate ? new Date(occupation?.endDate) : null,
+          category: category?.toUpperCase() || "",
+          skills: skills?.split(",").map((s) => s.trim()) || null,
+          attributes: attributes?.split(",").map((s) => s.trim()) || null,
+        }),
+    ),
   ),
   Effect.map((o) =>
     o.sort((a, b) => {
@@ -59,5 +63,3 @@ export const getAllOccupations = pipe(
   ),
   Effect.withSpan("getAllOccupations"),
 );
-
-export type Occupations = Effect.Effect.Success<typeof getAllOccupations>;

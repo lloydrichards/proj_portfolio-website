@@ -18,7 +18,7 @@ import { Tile } from "@/components/atom/tile";
 import { TeamMemberAvatar } from "@/components/molecule/team_member_avatar";
 import { formatDate } from "@/lib/format";
 import { TeamMember } from "@/services/db/schema/team_member";
-import { Project } from "@/types/domain";
+import { Project } from "@/types/Project";
 import { Github } from "lucide-react";
 import { FC } from "react";
 

@@ -1,5 +1,5 @@
-import { ProjectMeta } from "@/types/domain";
-import { MissingContentError } from "@/types/errors";
+import { MissingContentError } from "@/types/Errors";
+import { Project, ProjectMeta } from "@/types/Project";
 import { FileSystem } from "@effect/platform";
 import { Effect, Schema } from "effect";
 import React from "react";
@@ -25,7 +25,7 @@ export const getProject = (slug: string) =>
       ({ content, frontmatter }) =>
         [
           content,
-          {
+          new Project({
             ...frontmatter,
             slug,
             lastModified: new Date(),
@@ -37,7 +37,7 @@ export const getProject = (slug: string) =>
               date: frontmatter.date,
             }),
             isPublished: frontmatter.isPublished ?? true,
-          },
+          }),
         ] as const,
     ),
     Effect.catchTag("BadArgument", () =>

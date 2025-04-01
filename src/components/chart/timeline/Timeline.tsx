@@ -1,12 +1,12 @@
 "use client";
 import { useResponsive } from "@/components/template/responsive_wrapper";
-import { Occupations } from "@/services/use-cases/get-all-occupations";
+import { Occupation } from "@/types/Occupation";
 import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
 import { FC } from "react";
 import { OccupationItem } from "./internal/OccupationItem";
 
 interface TimelineProps {
-  data: Occupations;
+  data: typeof Occupation.Array.Encoded;
   maxHeight?: number;
   margin?: {
     top: number;

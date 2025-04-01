@@ -18,7 +18,7 @@ import {
 import { Tile } from "@/components/atom/tile";
 import Github from "@/components/icons/github";
 import { formatDate } from "@/lib/format";
-import { Lab } from "@/types/domain";
+import { Lab } from "@/types/Lab";
 import {
   ChevronsLeft,
   ChevronsRight,
@@ -30,7 +30,7 @@ import { usePathname } from "next/navigation";
 import { FC } from "react";
 
 interface LabInfoCardProps {
-  labs: Array<Lab>;
+  labs: typeof Lab.Array.Encoded;
   className?: string;
 }
 
@@ -98,7 +98,7 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
                     >
                       <Link href={l.pathname}>
                         <Badge variant="default">{l.id}</Badge>
-                        {l.title} ({formatDate(l.date)})
+                        {l.title} ({formatDate(new Date(l.date))})
                       </Link>
                     </Button>
                   ))}
@@ -114,9 +114,9 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
 };
 
 const InfoFooter: FC<{
-  currentLab: Lab;
-  prevLab: Lab | undefined;
-  nextLab: Lab | undefined;
+  currentLab: typeof Lab.Encoded;
+  prevLab: typeof Lab.Encoded | undefined;
+  nextLab: typeof Lab.Encoded | undefined;
 }> = ({ prevLab, nextLab, currentLab }) => {
   return (
     <CardFooter className="grid grid-cols-3">

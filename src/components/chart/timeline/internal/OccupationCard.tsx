@@ -6,12 +6,12 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { cn } from "@/lib/utils";
-import { Occupations } from "@/services/use-cases/get-all-occupations";
+import { Occupation } from "@/types/Occupation";
 import { utcFormat } from "d3";
 import { FC } from "react";
 
 interface OccupationCardProps {
-  data: Occupations[0];
+  data: typeof Occupation.Encoded;
   className?: string;
 }
 export const OccupationCard: FC<OccupationCardProps> = ({
@@ -27,9 +27,9 @@ export const OccupationCard: FC<OccupationCardProps> = ({
         <CardTitle className="my-0 line-clamp-1">{data.title}</CardTitle>
         <CardDescription className="text-sm">{data.company} </CardDescription>
         <CardDescription className="text-sm">
-          {formatDate(data.start_date)}
+          {formatDate(new Date(data.start_date))}
           {" - "}
-          {data.end_date ? formatDate(data.end_date) : "Present"}{" "}
+          {data.end_date ? formatDate(new Date(data.end_date)) : "Present"}{" "}
         </CardDescription>
       </CardHeader>
       <CardContent className="px-2">

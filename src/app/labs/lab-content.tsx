@@ -1,12 +1,12 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Lab } from "@/types/domain";
+import { Lab } from "@/types/Lab";
 import { usePathname } from "next/navigation";
 import { FC, ReactNode } from "react";
 
 interface LabContentProps {
   children?: ReactNode;
-  labs: Array<Lab>;
+  labs: typeof Lab.Array.Encoded;
   className?: string;
 }
 

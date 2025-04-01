@@ -5,11 +5,11 @@ import {
 } from "@/components/atom/navigation-menu";
 import { NavListItem } from "@/components/molecule/nav_list_item";
 import { cn } from "@/lib/utils";
-import { Lab } from "@/types/domain";
+import { Lab } from "@/types/Lab";
 import { FC } from "react";
 
 interface LabNavigationProps {
-  labs: Array<Lab>;
+  labs: typeof Lab.Array.Encoded;
   className?: string;
 }
 export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {

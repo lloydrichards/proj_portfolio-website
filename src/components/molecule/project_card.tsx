@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { cn } from "@/lib/utils";
-import { Project } from "@/types/domain";
+import { Project } from "@/types/Project";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../atom/button";

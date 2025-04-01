@@ -4,7 +4,8 @@ import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
 import { LabApi } from "@/services/LabApi";
 import { RuntimeServer } from "@/services/RuntimeServer";
-import { Effect } from "effect";
+import { Lab } from "@/types/Lab";
+import { Effect, Schema } from "effect";
 import { FC } from "react";
 
 export const metadata = createPageMetadata({
@@ -14,7 +15,10 @@ export const metadata = createPageMetadata({
 
 const LabOverviewPage: FC = async () => {
   const allLabs = await RuntimeServer.runPromise(
-    LabApi.pipe(Effect.andThen((a) => a.all)),
+    LabApi.pipe(
+      Effect.andThen((a) => a.all),
+      Effect.andThen(Schema.encode(Lab.Array)),
+    ),
   );
 
   return (

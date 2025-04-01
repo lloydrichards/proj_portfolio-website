@@ -6,11 +6,21 @@ import { Logo } from "@/components/organism/logo";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
-import { api } from "@/services/api";
+import { LabApi } from "@/services/LabApi";
+import { ProjectApi } from "@/services/ProjectApi";
+import { RuntimeServer } from "@/services/RuntimeServer";
+import { Effect } from "effect";
 
 const HomePage = async () => {
-  const allProjects = await api.projects.fetchFeaturedProjects();
-  const allLabs = await api.labs.fetchFeaturedLabs();
+  const [featuredLabs, allProjects] = await RuntimeServer.runPromise(
+    Effect.all(
+      [
+        LabApi.pipe(Effect.andThen(({ featured }) => featured)),
+        ProjectApi.pipe(Effect.andThen(({ featured }) => featured)),
+      ],
+      { concurrency: "unbounded" },
+    ),
+  );
 
   return (
     <Mosaic>
@@ -47,7 +57,7 @@ const HomePage = async () => {
       <Tile size="square-lg" className="bg-background group grid items-center">
         <SkillBarChart />
       </Tile>
-      {allLabs.map((lab) => (
+      {featuredLabs.map((lab) => (
         <Tile size="square-md" key={"lab" + lab.slug}>
           <LabCard lab={lab} />
         </Tile>

@@ -1,10 +1,10 @@
 import { ProjectMeta } from "@/types/domain";
 import { MissingContentError } from "@/types/errors";
 import { FileSystem } from "@effect/platform";
-import { Effect, pipe, Schema } from "effect";
+import { Effect, Schema } from "effect";
 import React from "react";
-import { PROJECT_PATH } from "../../consts";
-import { createMDX } from "../create-mdx";
+import { PROJECT_PATH } from "../consts";
+import { MDXCompiler } from "../MDXCompiler";
 import { makeOGImageURL } from "../utils";
 
 const ProjectMdx = Schema.Struct({
@@ -13,10 +13,13 @@ const ProjectMdx = Schema.Struct({
 });
 
 export const getProject = (slug: string) =>
-  pipe(
-    FileSystem.FileSystem,
-    Effect.andThen((fs) => fs.readFileString(PROJECT_PATH + `/${slug}.mdx`)),
-    Effect.flatMap(createMDX),
+  Effect.Do.pipe(
+    Effect.bind("fs", () => FileSystem.FileSystem),
+    Effect.bind("mdx", () => MDXCompiler),
+    Effect.bind("content", ({ fs }) =>
+      fs.readFileString(PROJECT_PATH + `/${slug}.mdx`),
+    ),
+    Effect.flatMap(({ mdx, content }) => mdx.use(content)),
     Effect.flatMap(Schema.decodeUnknown(ProjectMdx)),
     Effect.andThen(
       ({ content, frontmatter }) =>

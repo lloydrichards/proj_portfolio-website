@@ -2,7 +2,9 @@ import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
-import { api } from "@/services/api";
+import { LabApi } from "@/services/LabApi";
+import { RuntimeServer } from "@/services/RuntimeServer";
+import { Effect } from "effect";
 import { FC } from "react";
 
 export const metadata = createPageMetadata({
@@ -11,7 +13,10 @@ export const metadata = createPageMetadata({
 });
 
 const LabOverviewPage: FC = async () => {
-  const allLabs = await api.labs.fetchAllLabs();
+  const allLabs = await RuntimeServer.runPromise(
+    LabApi.pipe(Effect.andThen((a) => a.all)),
+  );
+
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1

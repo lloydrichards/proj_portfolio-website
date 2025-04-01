@@ -6,9 +6,9 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { cn } from "@/lib/utils";
+import { Occupations } from "@/services/use-cases/get-all-occupations";
 import { utcFormat } from "d3";
 import { FC } from "react";
-import { Occupations } from "../Timeline";
 
 interface OccupationCardProps {
   data: Occupations[0];

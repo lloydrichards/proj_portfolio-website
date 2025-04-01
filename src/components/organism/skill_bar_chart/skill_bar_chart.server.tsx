@@ -1,8 +1,12 @@
-import { api } from "@/services/api";
+import { DataApi } from "@/services/DataApi";
+import { RuntimeServer } from "@/services/RuntimeServer";
+import { Effect } from "effect";
 import { SkillBarChartClient } from "./skill_bar_chart.client";
 
 export const SkillBarChart = async () => {
-  const data = await api.skills.fetchSkillData();
+  const data = await RuntimeServer.runPromise(
+    DataApi.pipe(Effect.andThen((a) => a.getSkillDataset)),
+  );
 
   if (!data) return null;
 

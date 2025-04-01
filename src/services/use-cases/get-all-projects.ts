@@ -1,4 +1,4 @@
-import { PROJECT_PATH } from "../../consts";
+import { PROJECT_PATH } from "../consts";
 import { getProject } from "./get-project";
 
 import { FileSystem } from "@effect/platform";

@@ -2,7 +2,7 @@ import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
 import { addMonths, differenceInMonths } from "date-fns";
 import { eq } from "drizzle-orm";
 import { Array, Effect, Order, pipe, Schema } from "effect";
-import { occupation, occupationToSkill, skill } from "../../db/schema";
+import { occupation, occupationToSkill, skill } from "../db/schema";
 
 export class SkillData extends Schema.Class<SkillData>("SkillData")({
   type: Schema.String,

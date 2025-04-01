@@ -1,6 +1,6 @@
 import { FileSystem } from "@effect/platform";
 import { Array, Effect, flow, Order, pipe } from "effect";
-import { LAB_PATH } from "../../consts";
+import { LAB_PATH } from "../consts";
 import { getLab } from "./get-lab";
 
 export const getAllLabs = pipe(

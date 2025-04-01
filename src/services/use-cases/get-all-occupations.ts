@@ -59,3 +59,5 @@ export const getAllOccupations = pipe(
   ),
   Effect.withSpan("getAllOccupations"),
 );
+
+export type Occupations = Effect.Effect.Success<typeof getAllOccupations>;

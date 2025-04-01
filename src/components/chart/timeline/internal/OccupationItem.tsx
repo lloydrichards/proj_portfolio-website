@@ -1,6 +1,6 @@
+import { Occupations } from "@/services/use-cases/get-all-occupations";
 import { motion } from "framer-motion";
 import { FC } from "react";
-import { Occupations } from "../Timeline";
 import { OccupationCard } from "./OccupationCard";
 
 interface OccupationItemProps {

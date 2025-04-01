@@ -1,11 +1,18 @@
 import { metadata } from "@/app/layout";
 import { getBaseUrl } from "@/lib/utils";
-import { api } from "@/services/api";
-import { descContent } from "@/services/api/utils";
+import { LabApi } from "@/services/LabApi";
+import { ProjectApi } from "@/services/ProjectApi";
+import { RuntimeServer } from "@/services/RuntimeServer";
+import { descContent } from "@/services/utils";
+import { Effect } from "effect";
 
 export async function GET() {
-  const allLabs = await api.labs.fetchAllLabs();
-  const allProjects = await api.projects.fetchAllProjects();
+  const [allProjects, allLabs] = await RuntimeServer.runPromise(
+    Effect.all([
+      ProjectApi.pipe(Effect.andThen((a) => a.all)),
+      LabApi.pipe(Effect.andThen((a) => a.all)),
+    ]),
+  );
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>
     <rss version="2.0">

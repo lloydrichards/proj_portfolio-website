@@ -1,8 +1,9 @@
 import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
 import { siteMetadata } from "@/lib/metadata";
 import { createPageMetadata } from "@/lib/seo";
-import { api } from "@/services/api";
-import { Either } from "effect";
+import { ProjectApi } from "@/services/ProjectApi";
+import { RuntimeServer } from "@/services/RuntimeServer";
+import { Effect, Either } from "effect";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -12,7 +13,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const [_, project] = await api.projects.getProjectBySlug(slug);
+  const [_, project] = await RuntimeServer.runPromise(
+    ProjectApi.pipe(Effect.andThen((a) => a.getProjectBySlug(slug))),
+  );
 
   return createPageMetadata({
     title: project.title,
@@ -28,7 +31,9 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
-  const allProjects = await api.projects.fetchAllProjects();
+  const allProjects = await RuntimeServer.runPromise(
+    ProjectApi.pipe(Effect.andThen((a) => a.all)),
+  );
   const paths = allProjects.map(({ slug }) => ({
     slug: encodeURI(slug),
   }));
@@ -41,8 +46,11 @@ const ProjectPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const result = await api.projects.queryProjectBySlug(slug);
-
+  const result = await RuntimeServer.runPromise(
+    ProjectApi.pipe(
+      Effect.andThen((a) => a.getProjectBySlug(slug).pipe(Effect.either)),
+    ),
+  );
   if (Either.isLeft(result)) {
     if (result.left._tag == "MissingContentError") {
       return notFound();
@@ -52,7 +60,9 @@ const ProjectPage = async ({
 
   const [content, project] = result.right;
 
-  const team = await api.projects.fetchProjectTeam(project.team);
+  const team = await RuntimeServer.runPromise(
+    ProjectApi.pipe(Effect.andThen((a) => a.getTeamMembers(project.team))),
+  );
 
   return (
     <>

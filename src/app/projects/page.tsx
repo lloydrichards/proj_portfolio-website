@@ -2,7 +2,9 @@ import { Tile } from "@/components/atom/tile";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
-import { api } from "@/services/api";
+import { ProjectApi } from "@/services/ProjectApi";
+import { RuntimeServer } from "@/services/RuntimeServer";
+import { Effect } from "effect";
 
 export const metadata = createPageMetadata({
   title: "Projects",
@@ -10,7 +12,9 @@ export const metadata = createPageMetadata({
 });
 
 const ProjectOverviewPage = async () => {
-  const allProjects = await api.projects.fetchAllProjects();
+  const allProjects = await RuntimeServer.runPromise(
+    ProjectApi.pipe(Effect.andThen((a) => a.all)),
+  );
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1

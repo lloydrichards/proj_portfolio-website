@@ -1,4 +1,3 @@
-import "@/lib/env";
 import createMDX from "@next/mdx";
 import mdxMermaid from "mdx-mermaid";
 import type { NextConfig } from "next";

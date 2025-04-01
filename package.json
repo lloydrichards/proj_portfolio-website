@@ -66,8 +66,7 @@
     "rehype-pretty-code": "^0.14.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "three": "^0.174.0",
-    "zod": "^3.24.2"
+    "three": "^0.174.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",

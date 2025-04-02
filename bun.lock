@@ -5,6 +5,7 @@
       "name": "lloyd_richards_portfolio",
       "dependencies": {
         "@effect/experimental": "^0.44.4",
+        "@effect/language-service": "^0.4.0",
         "@effect/platform": "^0.80.4",
         "@effect/platform-bun": "^0.60.7",
         "@effect/sql-drizzle": "^0.29.7",
@@ -118,6 +119,8 @@
     "@effect/cluster": ["@effect/cluster@0.29.7", "", { "peerDependencies": { "@effect/platform": "^0.80.4", "@effect/rpc": "^0.55.5", "@effect/sql": "^0.33.4", "effect": "^3.14.4" } }, "sha512-J4Lom7bIswLeY5lpZ5WvDUzYaH3F5XHVI1wR80UZYHrADaTWhkeGxM62Xfs13GVpB7I/3mtigUup7Qmf2o0sHQ=="],
 
     "@effect/experimental": ["@effect/experimental@0.44.4", "", { "dependencies": { "uuid": "^11.0.3" }, "peerDependencies": { "@effect/platform": "^0.80.4", "effect": "^3.14.4", "ioredis": "^5", "lmdb": "^3" }, "optionalPeers": ["ioredis", "lmdb"] }, "sha512-1ErLlLJKngVPjPjiEMwl7ZYjm++sOFwIx7TYiPS0qnLizpXZ8cnlwgHSmeRtQHm7vW1CJl8R/lo0wbgC6E2BKA=="],
+
+    "@effect/language-service": ["@effect/language-service@0.4.0", "", {}, "sha512-J27e4KWkeACHI0jrvc656R/SOTuA+oUDLOOf5HYjRz3xb8dO+xlbDVujIFtgIc9K0rvXrpVGlG+qjuGGaGVsfg=="],
 
     "@effect/platform": ["@effect/platform@0.80.4", "", { "dependencies": { "find-my-way-ts": "^0.1.5", "msgpackr": "^1.11.2", "multipasta": "^0.2.5" }, "peerDependencies": { "effect": "^3.14.4" } }, "sha512-8lpnqzsEjTnbqYvigKpJv5UNQOD+AKySFgHI5W6qZxnBObYZfvv4hLt1rLwDjbCTdYUGP33q4UBlh/JS5TWIdA=="],
 

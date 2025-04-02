@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@effect/experimental": "^0.44.4",
+    "@effect/language-service": "^0.4.0",
     "@effect/platform": "^0.80.4",
     "@effect/platform-bun": "^0.60.7",
     "@effect/sql-drizzle": "^0.29.7",

@@ -55,7 +55,8 @@ pensum of the occupation and the number of skills in the occupation.
 
 ```typescript
 const hours = data.reduce(
-  (acc, { months, pensum, factor }) => acc + months * (pensum / 100) * 160 * factor,
+  (acc, { months, pensum, factor }) =>
+    acc + months * (pensum / 100) * 160 * factor,
   0,
 );
 ```

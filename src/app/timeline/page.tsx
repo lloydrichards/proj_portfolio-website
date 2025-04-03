@@ -13,8 +13,7 @@ export const metadata = createPageMetadata({
 
 const TimelinePage: React.FC = async () => {
   const allOccupations = await RuntimeServer.runPromise(
-    DataApi.pipe(
-      Effect.andThen((a) => a.allOccupations),
+    DataApi.allOccupations.pipe(
       Effect.andThen(Schema.encode(Occupation.Array)),
     ),
   );

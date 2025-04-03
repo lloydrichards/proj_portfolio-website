@@ -25,7 +25,5 @@ export class ProjectApi extends Effect.Service<ProjectApi>()("app/Project", {
         ),
     ),
   ),
-}) {
-  static all = this.pipe(Effect.andThen((a) => a.all));
-  static featured = this.pipe(Effect.andThen((a) => a.featured));
-}
+  accessors: true,
+}) {}

@@ -4,7 +4,6 @@ import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
 import { ProjectApi } from "@/services/ProjectApi";
 import { RuntimeServer } from "@/services/RuntimeServer";
-import { Effect } from "effect";
 
 export const metadata = createPageMetadata({
   title: "Projects",
@@ -12,9 +11,7 @@ export const metadata = createPageMetadata({
 });
 
 const ProjectOverviewPage = async () => {
-  const allProjects = await RuntimeServer.runPromise(
-    ProjectApi.pipe(Effect.andThen((a) => a.all)),
-  );
+  const allProjects = await RuntimeServer.runPromise(ProjectApi.all);
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1

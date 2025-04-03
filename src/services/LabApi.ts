@@ -9,7 +9,5 @@ export class LabApi extends Effect.Service<LabApi>()("app/Lab", {
     Effect.bind("all", () => getAllLabs),
     Effect.bind("featured", () => getFeaturedLabs),
   ),
-}) {
-  static all = this.pipe(Effect.andThen((a) => a.all));
-  static featured = this.pipe(Effect.andThen((a) => a.featured));
-}
+  accessors: true,
+}) {}

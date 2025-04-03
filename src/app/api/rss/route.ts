@@ -8,10 +8,7 @@ import { Effect } from "effect";
 
 export async function GET() {
   const [allProjects, allLabs] = await RuntimeServer.runPromise(
-    Effect.all([
-      ProjectApi.pipe(Effect.andThen((a) => a.all)),
-      LabApi.pipe(Effect.andThen((a) => a.all)),
-    ]),
+    Effect.all([ProjectApi.all, LabApi.all]),
   );
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>

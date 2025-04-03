@@ -14,7 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const [_, project] = await RuntimeServer.runPromise(
-    ProjectApi.pipe(Effect.andThen((a) => a.getProjectBySlug(slug))),
+    ProjectApi.getProjectBySlug(slug),
   );
 
   return createPageMetadata({
@@ -31,9 +31,7 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
-  const allProjects = await RuntimeServer.runPromise(
-    ProjectApi.pipe(Effect.andThen((a) => a.all)),
-  );
+  const allProjects = await RuntimeServer.runPromise(ProjectApi.all);
   const paths = allProjects.map(({ slug }) => ({
     slug: encodeURI(slug),
   }));
@@ -47,9 +45,7 @@ const ProjectPage = async ({
 }) => {
   const { slug } = await params;
   const result = await RuntimeServer.runPromise(
-    ProjectApi.pipe(
-      Effect.andThen((a) => a.getProjectBySlug(slug).pipe(Effect.either)),
-    ),
+    ProjectApi.getProjectBySlug(slug).pipe(Effect.either),
   );
   if (Either.isLeft(result)) {
     if (result.left._tag == "MissingContentError") {
@@ -61,7 +57,7 @@ const ProjectPage = async ({
   const [content, project] = result.right;
 
   const team = await RuntimeServer.runPromise(
-    ProjectApi.pipe(Effect.andThen((a) => a.getTeamMembers(project.team))),
+    ProjectApi.getTeamMembers(project.team),
   );
 
   return (

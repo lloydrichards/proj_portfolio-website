@@ -12,10 +12,7 @@ const LabLayout: FC<{
   children: ReactNode;
 }> = async ({ children }) => {
   const allLabs = await RuntimeServer.runPromise(
-    LabApi.pipe(
-      Effect.andThen((a) => a.all),
-      Effect.andThen(Schema.encode(Lab.Array)),
-    ),
+    LabApi.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
   );
   return (
     <Mosaic sidebar>

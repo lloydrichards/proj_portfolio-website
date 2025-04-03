@@ -6,10 +6,7 @@ import { Effect } from "effect";
 
 export default async function sitemap() {
   const [projects, labs] = await RuntimeServer.runPromise(
-    Effect.all([
-      ProjectApi.pipe(Effect.andThen((a) => a.all)),
-      LabApi.pipe(Effect.andThen((a) => a.all)),
-    ]),
+    Effect.all([ProjectApi.all, LabApi.all]),
   );
 
   const notes = [...projects, ...labs].map((content) => ({

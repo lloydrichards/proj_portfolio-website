@@ -7,9 +7,7 @@ export class DataApi extends Effect.Service<DataApi>()("app/Data", {
   dependencies: [DrizzleLive],
   effect: Effect.Do.pipe(
     Effect.bind("allOccupations", () => getAllOccupations),
-    Effect.bind("getSkillDataset", () => getSkillData),
+    Effect.bind("skillDataset", () => getSkillData),
   ),
-}) {
-  static allOccupations = this.pipe(Effect.andThen((a) => a.allOccupations));
-  static getSkillDataset = this.pipe(Effect.andThen((a) => a.getSkillDataset));
-}
+  accessors: true,
+}) {}

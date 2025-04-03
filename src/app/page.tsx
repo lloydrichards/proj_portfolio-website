@@ -16,11 +16,8 @@ const HomePage = async () => {
   const [featuredLabs, allProjects] = await RuntimeServer.runPromise(
     Effect.all(
       [
-        LabApi.pipe(
-          Effect.andThen(({ featured }) => featured),
-          Effect.andThen(Schema.encode(Lab.Array)),
-        ),
-        ProjectApi.pipe(Effect.andThen(({ featured }) => featured)),
+        LabApi.featured.pipe(Effect.andThen(Schema.encode(Lab.Array))),
+        ProjectApi.featured,
       ],
       { concurrency: "unbounded" },
     ),

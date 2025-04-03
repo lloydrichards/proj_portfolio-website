@@ -17,7 +17,6 @@ class MDXCompileError {
 export class MDXCompiler extends Effect.Service<MDXCompiler>()(
   "app/MDXCompiler",
   {
-    dependencies: [],
     effect: Effect.Do.pipe(
       Effect.let("use", () =>
         Effect.fn(<T>(source: string) =>

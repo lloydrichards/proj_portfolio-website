@@ -9,7 +9,7 @@ import {
 import { Occupation } from "@/types/Occupation";
 import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
 import { eq, sql } from "drizzle-orm";
-import { Array, Effect, Order, pipe } from "effect";
+import { Array, Effect, Option, Order, pipe } from "effect";
 import { notEmpty } from "../utils";
 
 const byStartDate = Order.mapInput(
@@ -59,11 +59,27 @@ export const getAllOccupations = pipe(
           start_date: new Date(occupation?.startDate ?? ""),
           end_date: occupation?.endDate ? new Date(occupation?.endDate) : null,
           category: category?.toUpperCase() || "",
-          skills: skills?.split(",").map((s) => s.trim()) || null,
-          attributes: attributes?.split(",").map((s) => s.trim()) || null,
+          skills: splitCoalesce(skills),
+          attributes: splitCoalesce(attributes),
         }),
     ),
   ),
   Effect.map(Array.sortBy(Order.combine(byCurrent, byStartDate))),
   Effect.withSpan("getAllOccupations"),
 );
+
+const splitCoalesce = (data: string | null) =>
+  pipe(
+    data,
+    Option.fromNullable,
+    Option.flatMap((s) =>
+      pipe(
+        s.split(","),
+        Array.map((a) => a.trim()),
+        Array.filter((a) => a.length > 0),
+        Array.sort(Order.string),
+        Option.liftPredicate((a) => a.length > 0),
+      ),
+    ),
+    Option.getOrElse(() => null),
+  );

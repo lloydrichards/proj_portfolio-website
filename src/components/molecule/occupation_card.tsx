@@ -45,7 +45,7 @@ export const OccupationCard: FC<OccupationCardProps> = ({
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell className="font-medium">Location</TableCell>
+              <TableCell className="w-32 font-medium">Location</TableCell>
               <TableCell>{data.location}</TableCell>
             </TableRow>
             {data.skills ? (

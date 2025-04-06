@@ -1,3 +1,11 @@
+## [1.13.12](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.11...v1.13.12) (2025-04-06)
+
+
+### Bug Fixes
+
+* :bug: fix the skills and attributes when empty ([ede3360](https://github.com/lloydrichards/proj_portfolio-website/commit/ede3360cdf34e828a565d9fb0d0bdb5fd8426dc9))
+* :wheelchair: add header for accessibility ([2c352a4](https://github.com/lloydrichards/proj_portfolio-website/commit/2c352a4d79883082b62b560af318f0ee681d8807))
+
 ## [1.13.11](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.10...v1.13.11) (2025-03-02)
 
 

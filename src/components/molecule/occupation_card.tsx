@@ -7,6 +7,12 @@ import {
 } from "@/components/atom/card";
 import { cn } from "@/lib/utils";
 import { utcFormat } from "d3";
+import {
+  BriefcaseBusiness,
+  GraduationCap,
+  HeartHandshake,
+  Waypoints,
+} from "lucide-react";
 import { FC } from "react";
 import { Badge } from "../atom/badge";
 import { Table, TableBody, TableCell, TableRow } from "../atom/table";
@@ -24,7 +30,10 @@ export const OccupationCard: FC<OccupationCardProps> = ({
   return (
     <Card className={cn("group h-full group-focus-visible:ring-2", className)}>
       <CardHeader className="p-2">
-        <CardTitle className="my-0 line-clamp-1">{data.title}</CardTitle>
+        <CardTitle className="my-0 mb-2 flex items-center gap-4">
+          <OccupationIcon category={data.category} />
+          {data.title}
+        </CardTitle>
         <p>{data.company}</p>
         <p>
           {formatDate(data.start_date)}
@@ -73,4 +82,19 @@ export const OccupationCard: FC<OccupationCardProps> = ({
       </CardContent>
     </Card>
   );
+};
+
+const OccupationIcon: FC<{ category: string }> = ({ category }) => {
+  switch (category) {
+    case "CONFERENCE":
+      return <Waypoints />;
+    case "EDUCATION":
+      return <GraduationCap />;
+    case "WORK":
+      return <BriefcaseBusiness />;
+    case "VOLUNTEER":
+      return <HeartHandshake />;
+    default:
+      return <p>❓</p>;
+  }
 };

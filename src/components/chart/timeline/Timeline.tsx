@@ -3,11 +3,10 @@ import { useResponsive } from "@/components/template/responsive_wrapper";
 import { Occupation } from "@/types/Occupation";
 import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
 import { FC } from "react";
-import { OccupationItem } from "./internal/OccupationItem";
+import { OccupationItem } from "./occupation_item";
 
 interface TimelineProps {
   data: typeof Occupation.Array.Encoded;
-  maxHeight?: number;
   margin?: {
     top: number;
     right: number;
@@ -18,7 +17,6 @@ interface TimelineProps {
 
 export const Timeline: FC<TimelineProps> = ({
   data,
-  maxHeight,
   margin = {
     top: 16,
     right: 0,
@@ -27,9 +25,9 @@ export const Timeline: FC<TimelineProps> = ({
   },
 }) => {
   const { width } = useResponsive();
-  const textBlockHeight = 240;
+  const textBlockHeight = 253;
   const textMargin = 180;
-  const height = data.length * textBlockHeight || maxHeight || 400;
+  const height = data.length * textBlockHeight || 400;
   const innerHeight = height - margin.top - margin.bottom;
   const innerWidth = width - margin.left - margin.right;
 
@@ -63,7 +61,6 @@ export const Timeline: FC<TimelineProps> = ({
       style={{
         height,
         width,
-        maxHeight: maxHeight || undefined,
         overflow: "hidden",
       }}
     >
@@ -78,14 +75,10 @@ export const Timeline: FC<TimelineProps> = ({
             return (
               <OccupationItem
                 key={idx}
-                data={d}
-                idx={idx}
                 x={xScale(d.channel)}
                 y={y2}
                 barHeight={height}
-                textHeight={textBlockHeight}
                 width={innerWidth}
-                textMargin={textMargin}
                 color={cScale(d.category)}
                 path={
                   lineConnector([

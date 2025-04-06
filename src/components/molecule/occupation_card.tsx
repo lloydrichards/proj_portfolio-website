@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { cn } from "@/lib/utils";
+import { Occupation } from "@/types/Occupation";
 import { utcFormat } from "d3";
 import {
   BriefcaseBusiness,
@@ -16,10 +17,9 @@ import {
 import { FC } from "react";
 import { Badge } from "../atom/badge";
 import { Table, TableBody, TableCell, TableRow } from "../atom/table";
-import { Occupations } from "../chart/timeline/timeline";
 
 interface OccupationCardProps {
-  data: Occupations[0];
+  data: typeof Occupation.Encoded;
   className?: string;
 }
 export const OccupationCard: FC<OccupationCardProps> = ({
@@ -36,9 +36,9 @@ export const OccupationCard: FC<OccupationCardProps> = ({
         </CardTitle>
         <p>{data.company}</p>
         <p>
-          {formatDate(data.start_date)}
+          {formatDate(new Date(data.start_date))}
           {" - "}
-          {data.end_date ? formatDate(data.end_date) : "Present"}
+          {data.end_date ? formatDate(new Date(data.end_date)) : "Present"}
         </p>
       </CardHeader>
       <CardContent className="hidden px-2 group-hover:grid">

@@ -1,10 +1,7 @@
-import { Occupation } from "@/types/Occupation";
 import { motion } from "framer-motion";
 import { FC } from "react";
 
 interface OccupationItemProps {
-  data: typeof Occupation.Encoded;
-  idx: number;
   x: number;
   y: number;
   color: string;

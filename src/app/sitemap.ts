@@ -1,12 +1,12 @@
 import { siteMetadata } from "@/lib/metadata";
-import { LabApi } from "@/services/LabApi";
-import { ProjectApi } from "@/services/ProjectApi";
+import { Laboratory } from "@/services/Laboratory";
+import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Effect } from "effect";
 
 export default async function sitemap() {
   const [projects, labs] = await RuntimeServer.runPromise(
-    Effect.all([ProjectApi.all, LabApi.all]),
+    Effect.all([Portfolio.all, Laboratory.all]),
   );
 
   const notes = [...projects, ...labs].map((content) => ({

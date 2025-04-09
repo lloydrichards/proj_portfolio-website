@@ -1,14 +1,14 @@
 import { metadata } from "@/app/layout";
 import { getBaseUrl } from "@/lib/utils";
-import { LabApi } from "@/services/LabApi";
-import { ProjectApi } from "@/services/ProjectApi";
+import { Laboratory } from "@/services/Laboratory";
+import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { descContent } from "@/services/utils";
 import { Effect } from "effect";
 
 export async function GET() {
   const [allProjects, allLabs] = await RuntimeServer.runPromise(
-    Effect.all([ProjectApi.all, LabApi.all]),
+    Effect.all([Portfolio.all, Laboratory.all]),
   );
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>

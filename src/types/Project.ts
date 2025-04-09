@@ -1,4 +1,5 @@
 import { Schema } from "effect";
+import React from "react";
 
 const PROJECT_CATEGORY = Schema.Union(
   Schema.Literal("DESIGN"),
@@ -22,7 +23,12 @@ export class ProjectMeta extends Schema.Class<ProjectMeta>("ProjectMeta")({
   team: Schema.optional(
     Schema.Array(Schema.Tuple(Schema.String, Schema.String)),
   ),
-}) {}
+}) {
+  static readonly MDX = Schema.Struct({
+    content: Schema.declare(React.isValidElement),
+    frontmatter: this,
+  });
+}
 
 export class Project extends Schema.Class<Project>("Project")({
   ...ProjectMeta.fields,

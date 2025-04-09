@@ -1,12 +1,14 @@
 import { Layer, ManagedRuntime } from "effect";
-import { DataApi } from "./DataApi";
-import { LabApi } from "./LabApi";
-import { ProjectApi } from "./ProjectApi";
+import { Dataset } from "./Dataset";
+import { Laboratory } from "./Laboratory";
+import { Portfolio } from "./Portfolio";
+import { DrizzleLive } from "./db";
 
 const MainLayer = Layer.mergeAll(
-  LabApi.Default,
-  ProjectApi.Default,
-  DataApi.Default,
+  Laboratory.Default,
+  Portfolio.Default,
+  Dataset.Default,
+  DrizzleLive,
 );
 
 export const RuntimeServer = ManagedRuntime.make(MainLayer);

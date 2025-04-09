@@ -2,7 +2,7 @@ import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
-import { LabApi } from "@/services/LabApi";
+import { Laboratory } from "@/services/Laboratory";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
 import { Effect, Schema } from "effect";
@@ -15,7 +15,7 @@ export const metadata = createPageMetadata({
 
 const LabOverviewPage: FC = async () => {
   const allLabs = await RuntimeServer.runPromise(
-    LabApi.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
+    Laboratory.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
   );
 
   return (

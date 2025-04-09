@@ -1,7 +1,7 @@
 import { LabContent } from "@/app/labs/lab-content";
 import { LabInfoCard } from "@/app/labs/lab-info-card";
 import { Mosaic } from "@/components/template/mosaic";
-import { LabApi } from "@/services/LabApi";
+import { Laboratory } from "@/services/Laboratory";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
 import { Effect, Schema } from "effect";
@@ -12,7 +12,7 @@ const LabLayout: FC<{
   children: ReactNode;
 }> = async ({ children }) => {
   const allLabs = await RuntimeServer.runPromise(
-    LabApi.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
+    Laboratory.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
   );
   return (
     <Mosaic sidebar>

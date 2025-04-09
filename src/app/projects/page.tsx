@@ -2,7 +2,7 @@ import { Tile } from "@/components/atom/tile";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
-import { ProjectApi } from "@/services/ProjectApi";
+import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 
 export const metadata = createPageMetadata({
@@ -11,7 +11,7 @@ export const metadata = createPageMetadata({
 });
 
 const ProjectOverviewPage = async () => {
-  const allProjects = await RuntimeServer.runPromise(ProjectApi.all);
+  const allProjects = await RuntimeServer.runPromise(Portfolio.all);
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1

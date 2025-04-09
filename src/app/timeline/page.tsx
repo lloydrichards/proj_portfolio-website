@@ -4,7 +4,7 @@ import { OccupationCard } from "@/components/molecule/occupation_card";
 import { ResponsiveWrapper } from "@/components/template/responsive_wrapper";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
-import { DataApi } from "@/services/DataApi";
+import { Dataset } from "@/services/Dataset";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Occupation } from "@/types/Occupation";
 import { Effect, Schema } from "effect";
@@ -16,7 +16,7 @@ export const metadata = createPageMetadata({
 
 const TimelinePage: React.FC = async () => {
   const allOccupations = await RuntimeServer.runPromise(
-    DataApi.allOccupations.pipe(
+    Dataset.allOccupations().pipe(
       Effect.andThen(Schema.encode(Occupation.Array)),
     ),
   );

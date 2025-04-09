@@ -6,8 +6,8 @@ import { Logo } from "@/components/organism/logo";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
-import { LabApi } from "@/services/LabApi";
-import { ProjectApi } from "@/services/ProjectApi";
+import { Laboratory } from "@/services/Laboratory";
+import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
 import { Effect, Schema } from "effect";
@@ -16,8 +16,8 @@ const HomePage = async () => {
   const [featuredLabs, allProjects] = await RuntimeServer.runPromise(
     Effect.all(
       [
-        LabApi.featured.pipe(Effect.andThen(Schema.encode(Lab.Array))),
-        ProjectApi.featured,
+        Laboratory.featured.pipe(Effect.andThen(Schema.encode(Lab.Array))),
+        Portfolio.featured,
       ],
       { concurrency: "unbounded" },
     ),

@@ -112,11 +112,10 @@ For my own website this sort of looks like this:
 
 ```mermaid
 graph TB
-  A[LabApi] --> D[FileSystem]
-  B[ProjectApi] --> D
+  A[Laboratory] --> D[FileSystem]
+  B[Portfolio] --> D
   B --> E[MDXCompiler]
   B --> F[SqliteDrizzle]
-  C[DataApi] --> F
 ```
 
 ## Mocking Services
@@ -124,11 +123,11 @@ graph TB
 One of the hardest parts of testing is mocking modules and dependencies. But
 with this service structure it becomes incredible easy to mock out the
 dependencies and test very isolated parts of the application. For example say I
-want test the `LabApi` which depends on the `FileSystem`:
+want test the `Laboratory` which depends on the `FileSystem`:
 
 ```ts
-//      ┌─── Layer.Layer<LabApi, PlatformError | ImportError | ParseError, never>
-const LabApiLayer = LabApi.Default;
+//      ┌─── Layer.Layer<Laboratory, PlatformError | ImportError | ParseError, never>
+const LaboratoryLayer = Laboratory.Default;
 
 //      ┌─── Layer.Layer<FileSystem.FileSystem, never, never>
 const StubFileSystemLayer = Layer.succeed(
@@ -138,13 +137,13 @@ const StubFileSystemLayer = Layer.succeed(
   }),
 );
 
-//      ┌─── Layer.Layer<LabApi, PlatformError | ImportError | ParseError, never>
-const MockLabApi = LabApi.DefaultWithoutDependencies.pipe(
-  Layer.provide(MockFileSystemLayer),
+//      ┌─── Layer.Layer<Laboratory, PlatformError | ImportError | ParseError, never>
+const MockLaboratory = Laboratory.DefaultWithoutDependencies.pipe(
+  Layer.provide(StubFileSystemLayer),
 );
 ```
 
-I can now use the `MockLabApi` layer to test how the methods function with
+I can now use the `MockLaboratory` layer to test how the methods function with
 different `.readDirectory` implementations. This is a very powerful pattern that
 allows me to to write unit tests that are very isolated.
 

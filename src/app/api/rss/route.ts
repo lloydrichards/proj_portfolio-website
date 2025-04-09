@@ -6,6 +6,8 @@ import { RuntimeServer } from "@/services/RuntimeServer";
 import { descContent } from "@/services/utils";
 import { Effect } from "effect";
 
+export const dynamic = "force-static";
+
 export async function GET() {
   const [allProjects, allLabs] = await RuntimeServer.runPromise(
     Effect.all([Portfolio.all, Laboratory.all]),

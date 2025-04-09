@@ -7,31 +7,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atom/card";
-import { formatDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { Lab } from "@/types/Lab";
 import Link from "next/link";
 import { Button } from "../atom/button";
 
-interface IPostCard {
+type LabCardProps = {
   lab: typeof Lab.Encoded;
   className?: string;
   asLink?: boolean;
-}
+};
 
-export const LabCard: React.FC<IPostCard> = ({ lab, className, asLink }) => {
+export const LabCard: React.FC<LabCardProps> = ({ lab, className, asLink }) => {
   const content = (
     <Card className="@container flex h-full flex-col">
       <CardHeader className="flex-1 gap-2 @max-[108px]:p-2">
-        <div className="hidden gap-1 @min-sm:flex">
+        <div className="hidden flex-wrap gap-1 opacity-60 @min-sm:flex">
           {lab.tags?.map((t) => (
             <Badge key={t} variant="outline">
               {t.toUpperCase()}
             </Badge>
           ))}
-          <p className="text-muted-foreground flex grow justify-end text-sm">
-            {formatDate(new Date(lab.date))}
-          </p>
         </div>
         <CardTitle className="line-clamp-2">{lab.title}</CardTitle>
       </CardHeader>

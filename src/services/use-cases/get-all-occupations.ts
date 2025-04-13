@@ -55,7 +55,9 @@ export const getAllOccupations = pipe(
       ({ occupation, category, attributes, skills }) =>
         new Occupation({
           ...occupation,
-          description: occupation?.jobDescription,
+          description: occupation?.shortDescription,
+          longDescription: occupation?.longDescription,
+          isFeatures: occupation.isFeatured === 1,
           start_date: new Date(occupation?.startDate ?? ""),
           end_date: occupation?.endDate ? new Date(occupation?.endDate) : null,
           category: category?.toUpperCase() || "",

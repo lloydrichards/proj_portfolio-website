@@ -30,8 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "tailwind.config.js",
-    "src/app/about/page.mdx"
+    "tailwind.config.js"
   ],
   "exclude": ["node_modules", ".next"]
 }

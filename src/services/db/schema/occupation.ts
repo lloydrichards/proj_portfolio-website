@@ -13,8 +13,10 @@ export const occupation = sqliteTable("occupation", {
   title: text().notNull(),
   company: text().notNull(),
   location: text().notNull(),
-  jobDescription: text("job_description"),
+  shortDescription: text("short_description"),
+  longDescription: text("long_description"),
   pensum: integer().notNull().default(100),
+  isFeatured: integer("is_featured").notNull().default(0),
   category: integer("category_id")
     .references(() => category.id, {
       onDelete: "cascade",

@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.12...v1.14.0) (2025-04-13)
+
+
+### Features
+
+* add curriculum vitae built from database ([da2b961](https://github.com/lloydrichards/proj_portfolio-website/commit/da2b96174a09faf9f39d945b7b5f4e8929ce43ca))
+
 ## [1.13.12](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.11...v1.13.12) (2025-04-09)
 
 

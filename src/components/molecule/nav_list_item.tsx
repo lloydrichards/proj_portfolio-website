@@ -26,18 +26,15 @@ export const NavListItem: FC<{
         className: cn("overflow-visible", className),
       })}
     >
-      <Link href={href} legacyBehavior passHref>
-        <NavigationMenuLink
-          className={navigationMenuTriggerStyle({
-            active: exact
-              ? pathname == href
-              : pathname.includes(href.toString()),
-            className: "flex gap-2 lg:justify-start",
-          })}
-        >
-          {children}
-        </NavigationMenuLink>
-      </Link>
+      <NavigationMenuLink
+        className={navigationMenuTriggerStyle({
+          active: exact ? pathname == href : pathname.includes(href.toString()),
+          className: "flex gap-2 lg:justify-start",
+        })}
+        asChild
+      >
+        <Link href={href}>{children}</Link>
+      </NavigationMenuLink>
     </NavigationMenuItem>
   );
 };

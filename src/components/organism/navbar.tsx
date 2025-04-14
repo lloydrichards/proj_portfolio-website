@@ -51,12 +51,15 @@ export const Navbar: React.FC = () => {
                 className: "overflow-visible",
               })}
             >
-              <Link href={route.href} legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink
+                className={navigationMenuTriggerStyle()}
+                asChild
+              >
+                <Link href={route.href}>
                   {route.icon}
                   <span className="hidden md:block">{route.label}</span>
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>

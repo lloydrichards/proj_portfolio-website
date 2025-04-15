@@ -85,7 +85,7 @@ const CVPage = async () => {
       <section>
         <h2 className={typefaceHeading2()}>Experience</h2>
         {workExperience.map((work) => (
-          <div key={work.id} className="my-6 flex flex-col gap-2">
+          <article key={work.id} className="my-6 flex flex-col gap-2">
             <h3 className={typefaceHeading4()}>
               {work.company} – {work.title}
             </h3>
@@ -97,14 +97,14 @@ const CVPage = async () => {
             <p>
               <strong>Skills:</strong> {work.skills?.join(", ")}
             </p>
-          </div>
+          </article>
         ))}
       </section>
       <section>
         <h2 className={typefaceHeading2()}>Key Projects</h2>
         <ul className={typefaceBody()}>
           {projects.map((project) => (
-            <li className="my-4 ml-6 list-disc" key={project.id}>
+            <li className="my-4" key={project.id}>
               <Link
                 className={typefaceAnchor()}
                 href={`/projects/${project.slug}`}

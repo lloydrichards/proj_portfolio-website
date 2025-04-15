@@ -78,7 +78,8 @@ const CVPage = async () => {
             Terraform, Kubernetes, Vercel
           </li>
           <li className="my-2">
-            <strong>Other:</strong> Data Visualization, Design Systems, Git
+            <strong>Other:</strong> Data Visualization, Design Systems, Git,
+            Flutter
           </li>
         </ul>
       </section>
@@ -94,9 +95,13 @@ const CVPage = async () => {
               {work.end_date ? formatDate(work.end_date) : "Present"}
             </i>
             <p className={typefaceBody()}>{work.description}</p>
-            <p>
-              <strong>Skills:</strong> {work.skills?.join(", ")}
-            </p>
+            <ul className={typefaceBody()}>
+              {work.tasks?.map((task) => (
+                <li className="my-2 ml-6 list-disc" key={task}>
+                  {task}
+                </li>
+              ))}
+            </ul>
           </article>
         ))}
       </section>

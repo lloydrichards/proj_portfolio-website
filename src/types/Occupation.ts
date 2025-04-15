@@ -6,6 +6,7 @@ export class Occupation extends Schema.Class<Occupation>("Occupation")({
   company: Schema.String,
   location: Schema.String,
   description: Schema.NullOr(Schema.String),
+  tasks: Schema.Array(Schema.String),
   longDescription: Schema.NullOr(Schema.String),
   pensum: Schema.Number,
   isFeatures: Schema.Boolean,

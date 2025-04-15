@@ -14,6 +14,7 @@ export const occupation = sqliteTable("occupation", {
   company: text().notNull(),
   location: text().notNull(),
   shortDescription: text("short_description"),
+  tasks: text(),
   longDescription: text("long_description"),
   pensum: integer().notNull().default(100),
   isFeatured: integer("is_featured").notNull().default(0),

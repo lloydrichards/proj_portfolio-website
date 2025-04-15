@@ -21,7 +21,8 @@ const CVPage = async () => {
   const volunteering = curriculumVitae["VOLUNTEER"];
   const education = curriculumVitae["EDUCATION"];
 
-  const formatDate = (date?: Date) => date && utcFormat("%m.%Y")(date);
+  const formatDate = (date?: Date) => date && utcFormat("%b %Y")(date);
+  const formatYear = (date?: Date) => date && utcFormat("%Y")(date);
   return (
     <main className="col-span-full flex flex-col gap-4 p-4">
       <p className={typefaceHeading4()}>Curriculum Vitae</p>
@@ -39,33 +40,60 @@ const CVPage = async () => {
       <section>
         <h2 className={typefaceHeading2()}>Executive Summary</h2>
         <p className={typefaceBody("mt-2")}>
-          Zurich-based Fullstack Engineer with a background in interaction
-          design and a passion for sustainability, systems thinking, and data
-          visualization. I bring a multidisciplinary mindset and years of
-          real-world experience across design, development, and problem-solving
-          to build impactful, user-centered web applications.
+          Multidisciplinary Fullstack Engineer with 5+ years of experience
+          building data-rich, user-focused web applications. I bring a
+          background in interaction design and a passion for sustainability,
+          working end-to-end across design systems, APIs, and production
+          infrastructure.
         </p>
         <ul className={typefaceBody()}>
           <li className="my-2 ml-6 list-disc">
-            Strong focus on data-driven, sustainable digital solutions
+            Strong in both modern frontend frameworks and scalable backend
+            systems
           </li>
           <li className="my-2 ml-6 list-disc">
-            Constantly learning and experimenting across disciplines
+            Comfortable with rapid prototyping, iteration, and full product
+            ownership
           </li>
           <li className="my-2 ml-6 list-disc">
-            Experienced in full project lifecycles, from concept to deployment
+            Excels in collaborative, cross-functional teams and client-facing
+            environments
           </li>
         </ul>
       </section>
       <section>
-        <h2 className={typefaceHeading2()}>Work Experience</h2>
+        <h2 className={typefaceHeading2()}>Technical Skills</h2>
+
+        <ul className={typefaceBody()}>
+          <li className="my-2">
+            <strong>Frontend:</strong> TypeScript, React, Next.js, D3.js,
+            Storybook, Tailwind, HTML/CSS, Figma, Web Components
+          </li>
+          <li className="my-2">
+            <strong>Backend:</strong> Node.js, Go, GraphQL, REST APIs, Prisma,
+            PostgreSQL, Firebase
+          </li>
+          <li className="my-2">
+            <strong>Infra & Tooling:</strong> Docker, CI/CD (GitHub Actions),
+            Terraform, Kubernetes, Vercel
+          </li>
+          <li className="my-2">
+            <strong>Other:</strong> Data Visualization, Design Systems, Git
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2 className={typefaceHeading2()}>Experience</h2>
         {workExperience.map((work) => (
-          <div key={work.id} className="my-4 flex flex-col gap-2">
+          <div key={work.id} className="my-6 flex flex-col gap-2">
             <h3 className={typefaceHeading4()}>
-              {work.company} ({work.title}, {formatDate(work.start_date)} -{" "}
-              {work.end_date ? formatDate(work.end_date) : "Present"})
+              {work.company} – {work.title}
             </h3>
-            <p>{work.description}</p>
+            <i>
+              {formatDate(work.start_date)} →{" "}
+              {work.end_date ? formatDate(work.end_date) : "Present"}
+            </i>
+            <p className={typefaceBody()}>{work.description}</p>
             <p>
               <strong>Skills:</strong> {work.skills?.join(", ")}
             </p>
@@ -73,7 +101,7 @@ const CVPage = async () => {
         ))}
       </section>
       <section>
-        <h2 className={typefaceHeading2()}>Projects</h2>
+        <h2 className={typefaceHeading2()}>Key Projects</h2>
         <ul className={typefaceBody()}>
           {projects.map((project) => (
             <li className="my-4 ml-6 list-disc" key={project.id}>
@@ -83,7 +111,7 @@ const CVPage = async () => {
               >
                 <strong>{project.title}</strong>
               </Link>{" "}
-              ({formatDate(project.date)})<p>{project.description}</p>
+              ({formatYear(project.date)})<p>{project.description}</p>
             </li>
           ))}
         </ul>
@@ -93,24 +121,20 @@ const CVPage = async () => {
         <ul className={typefaceBody()}>
           {education.map((e) => (
             <li className="my-2 ml-6 list-disc" key={e.id}>
-              <strong>
-                {e.title} from {e.company}
-              </strong>{" "}
-              {formatDate(e.start_date)} -{" "}
+              <strong>{e.title},</strong> {e.company} -{" "}
+              {formatDate(e.start_date)} →{" "}
               {e.end_date ? formatDate(e.end_date) : "Present"}
             </li>
           ))}
         </ul>
       </section>
       <section>
-        <h2 className={typefaceHeading2()}>Volunteering</h2>
+        <h2 className={typefaceHeading2()}>Community & Volunteering</h2>
         <ul className={typefaceBody()}>
           {volunteering.map((v) => (
             <li className="my-2 ml-6 list-disc" key={v.id}>
-              <strong>
-                {v.title} at {v.company}
-              </strong>{" "}
-              {formatDate(v.start_date)} -{" "}
+              <strong>{v.title},</strong>
+              {v.company} - {formatDate(v.start_date)} →{" "}
               {v.end_date ? formatDate(v.end_date) : "Present"}
             </li>
           ))}

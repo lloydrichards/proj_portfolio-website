@@ -12,7 +12,9 @@ const globalForDb = globalThis as unknown as { client: Client | undefined };
 const initClient = () => {
   const dbPath = path.join(process.cwd(), process.env.DB_FILE_NAME ?? "");
   const exists = readdirSync(path.join(process.cwd(), "database"));
-  console.log(exists);
+  if (!exists) {
+    throw new Error(`Database file ${process.env.DB_FILE_NAME} does not exist`);
+  }
   return globalForDb.client ?? createClient({ url: `file:${dbPath}` });
 };
 

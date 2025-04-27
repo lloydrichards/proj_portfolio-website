@@ -3,17 +3,18 @@ import { SqliteClient } from "@effect/sql-sqlite-node";
 import { createClient, type Client } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import { Config, Layer } from "effect";
+import { readdirSync } from "fs";
 import path from "path";
 import * as schema from "./schema";
 
 const globalForDb = globalThis as unknown as { client: Client | undefined };
 
 const initClient = () => {
-  if (process.env.NEXT_RUNTIME === "edge") {
-    // HACK: Skip database initialization in edge runtime
-    return null as unknown as Client;
-  }
   const dbPath = path.join(process.cwd(), process.env.DB_FILE_NAME ?? "");
+  const exists = readdirSync(path.join(process.cwd(), "database"));
+  if (!exists) {
+    throw new Error(`Database file ${process.env.DB_FILE_NAME} does not exist`);
+  }
   return globalForDb.client ?? createClient({ url: `file:${dbPath}` });
 };
 

@@ -5,7 +5,7 @@ import type { NextConfig } from "next";
 const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
   outputFileTracingIncludes: {
-    "/database": ["./database/**/*"],
+    database: ["./database/**/*"],
   },
   experimental: {
     reactCompiler: true,

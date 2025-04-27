@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.0...v1.14.1) (2025-04-27)
+
+
+### Bug Fixes
+
+* database on the edge ([#92](https://github.com/lloydrichards/proj_portfolio-website/issues/92)) ([913fffc](https://github.com/lloydrichards/proj_portfolio-website/commit/913fffc91f57449fea2c098217038efeb03aadd5))
+
 # [1.14.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.12...v1.14.0) (2025-04-13)
 
 

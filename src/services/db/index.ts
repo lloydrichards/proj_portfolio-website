@@ -14,9 +14,7 @@ const initClient = () => {
   console.log(process.cwd());
   console.log(dbPath);
   console.log(readdirSync(process.cwd()));
-  console.log(
-    readdirSync(path.join(process.cwd(), process.env.DB_FILE_NAME ?? "")),
-  );
+  console.log(readdirSync(path.join(process.cwd(), "database")));
   return globalForDb.client ?? createClient({ url: `file:${dbPath}` });
 };
 

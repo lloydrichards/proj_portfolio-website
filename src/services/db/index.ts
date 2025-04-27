@@ -9,10 +9,6 @@ import * as schema from "./schema";
 const globalForDb = globalThis as unknown as { client: Client | undefined };
 
 const initClient = () => {
-  if (process.env.NEXT_RUNTIME === "edge") {
-    // HACK: Skip database initialization in edge runtime
-    return null as unknown as Client;
-  }
   const dbPath = path.join(process.cwd(), process.env.DB_FILE_NAME ?? "");
   return globalForDb.client ?? createClient({ url: `file:${dbPath}` });
 };

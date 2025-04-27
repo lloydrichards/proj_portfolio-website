@@ -3,6 +3,7 @@ import { SqliteClient } from "@effect/sql-sqlite-node";
 import { createClient, type Client } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import { Config, Layer } from "effect";
+import { readdirSync } from "fs";
 import path from "path";
 import * as schema from "./schema";
 
@@ -10,6 +11,12 @@ const globalForDb = globalThis as unknown as { client: Client | undefined };
 
 const initClient = () => {
   const dbPath = path.join(process.cwd(), process.env.DB_FILE_NAME ?? "");
+  console.log(process.cwd());
+  console.log(dbPath);
+  console.log(readdirSync(process.cwd()));
+  console.log(
+    readdirSync(path.join(process.cwd(), process.env.DB_FILE_NAME ?? "")),
+  );
   return globalForDb.client ?? createClient({ url: `file:${dbPath}` });
 };
 

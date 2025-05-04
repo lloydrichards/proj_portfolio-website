@@ -17,7 +17,8 @@
     "release": "semantic-release",
     "typecheck": "tsc --noEmit",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache"
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "test:unit": "vitest run"
   },
   "dependencies": {
     "@effect/experimental": "^0.44.18",

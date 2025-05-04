@@ -1,4 +1,4 @@
-import { SkillData } from "@/services/use-cases/get-skill-data";
+import { SkillData } from "@/services/Dataset/get-skill-data";
 
 const WORKING_HOURS_PER_MONTH = 160;
 

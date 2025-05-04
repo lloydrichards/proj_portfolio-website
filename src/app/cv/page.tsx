@@ -5,7 +5,7 @@ import {
   typefaceHeading2,
   typefaceHeading4,
 } from "@/components/tokens/typeface";
-import { Dataset } from "@/services/Dataset";
+import { Dataset } from "@/services/Dataset/Dataset";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { utcFormat } from "d3";

@@ -1,5 +1,5 @@
 import { Layer, ManagedRuntime } from "effect";
-import { Dataset } from "./Dataset";
+import { Dataset } from "./Dataset/Dataset";
 import { Laboratory } from "./Laboratory";
 import { Portfolio } from "./Portfolio";
 import { DrizzleLive } from "./db";

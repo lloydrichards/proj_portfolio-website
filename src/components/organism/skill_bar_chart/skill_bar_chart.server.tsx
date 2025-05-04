@@ -1,4 +1,4 @@
-import { Dataset } from "@/services/Dataset";
+import { Dataset } from "@/services/Dataset/Dataset";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { SkillBarChartClient } from "./skill_bar_chart.client";
 

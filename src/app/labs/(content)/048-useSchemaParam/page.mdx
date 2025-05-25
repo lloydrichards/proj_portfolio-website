@@ -1,0 +1,186 @@
+import { createOGImageMetadata } from "@/lib/seo";
+export const metadata = createOGImageMetadata({
+  id: "048",
+  title: "Runtime validation with useSchemaParam",
+  description:
+    "Creating a hook to validate query parameters using Effect.Schema",
+  tags: ["effect", "schema", "validation"],
+  date: "2025-05-25",
+  isFeatured: true,
+  href: "https://github.com/lloydrichards/edu_next-schema-params",
+});
+
+I had a thought the other day about how to validate query parameters in a React
+application for state management. I remember hearing once that the reason React
+developers are no dependent on `useState` is because ReactRouter was no terrible
+at managing state in the URL.
+
+Recently I've been working with Effect Schema and I thought it would be
+interesting to create a hook that would validate query parameters using
+Effect.Schema. This would allow us to ensure that the query parameters are valid
+and conform to a specific schema, which can help prevent bugs and improve the
+overall reliability of our application.
+
+import { SchemaCounter } from "./SchemaCounter";
+import { Suspense } from "react";
+
+<div className="py-8">
+  <Suspense fallback={<p>Loading...</p>}>
+    <SchemaCounter />
+  </Suspense>
+</div>
+
+## Something simple to validate
+
+I build a simple little app using NextJS
+([repo](https://github.com/lloydrichards/edu_next-schema-params)) to demonstrate
+this idea. The app allows you to increment and decrement a counter using a few
+different methods. The simplest was using `useState`:
+
+import { SimpleCounter } from "./SimpleCounter";
+
+<div className="py-8">
+  <SimpleCounter />
+</div>
+
+I also build one that leverages the `useSearchParams` hook from
+`next/navigation` to manage the state of the counter in the URL. This allows us
+to "save" the state of the counter in the URL, so that if we refresh the page,
+the counter will still be at the same value.
+
+The final version of the app uses Effect Schema to validate the query parameters
+and ensure that they conform to a specific schema. This allows us to catch any
+errors in the query parameters before they cause issues in the application. The
+schema is defined using Effect Schema, which provides a powerful and flexible
+way to define schemas for data validation.
+
+You can test the `Schema Counter Component` above by clicking around but you
+should also try the following:
+
+1. `Increment` and `decrement` the counter using the buttons.
+1. Toggling the `Factor` and seeing the path changes
+1. Manually changing the query parameters in the URL to invalid values (e.g.
+   `?a=abc`) and seeing how the component handles it.
+1. Refresh the page and see how the counter retains its value from the URL.
+
+## The `useSchemaParam` hook
+
+Thanks to some fancy generics, it was possible to create a hook that would
+accept a Struct or Record Schema and return the current state from the URL, as
+well as a function to build a new query string based on the current state and
+any updates.
+
+```ts showLineNumbers title="@/hooks/use-schema-params.ts"
+export function useSchemaParams<A extends Record<string, unknown>, I>(
+  schema: Schema.Schema<A, I, never>,
+  defaultValue: A,
+) {
+  const params = useSearchParams();
+
+  const paramResult = Schema.decodeUnknownEither(Schema.partial(schema))(
+    groupParamsByKey(params),
+  );
+
+  const buildQueryString = useCallback(
+    (partialParams: Partial<A>) => {
+      const newParams = new URLSearchParams(params.toString());
+
+      const encoded = Schema.encodeUnknownSync(Schema.partial(schema))({
+        ...paramResult.pipe(
+          Either.match({
+            onLeft: () => ({}) as Record<string, unknown>,
+            onRight: (p) => p,
+          }),
+        ),
+        ...partialParams,
+      });
+
+      if (encoded && typeof encoded === "object") {
+        Object.entries(encoded).forEach(([key, value]) => {
+          if (value !== undefined) {
+            newParams.set(key, String(value));
+          }
+        });
+      }
+
+      return newParams.toString();
+    },
+    [paramResult, schema, params],
+  );
+
+  return [
+    Either.getOrElse(paramResult, () => defaultValue),
+    buildQueryString,
+  ] as const;
+}
+```
+
+In usage, it feels quite similar to using `useState` where it accepts Schema and
+a default value:
+
+```ts {7-9}
+const ParamSchema = Schema.Struct({
+  foo: Schema.String,
+});
+
+export const SchemaCounter = () => {
+
+  const [data, createQueryString] = useSchemaParams(ParamSchema, {
+    foo: "default",
+  });
+
+  return <p>{data.foo}</p>
+}
+```
+
+I've tried to keep any exceptions to a minimum, so if the query parameters are
+invalid, it will return the default value instead of throwing an error. This
+allows the application to continue functioning even if the query parameters are
+invalid.
+
+## Testing the components
+
+Something that was really useful for building this was using `vitest`,
+`@testing-library/react`, and `next-router-mock` to test the components. I was
+able to mock the router and define the query parameters to test the components
+in isolation.
+
+```ts showLineNumbers {7-9, 16-24} title="@/__tests__/SchemaCounter.test.tsx"
+import { cleanup, render, screen, fireEvent } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { SchemaCounter } from "./SchemaCounter";
+import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
+import mockRouter from "next-router-mock";
+
+vi.mock("next/navigation", () =>
+  vi.importActual("next-router-mock/navigation"),
+);
+
+describe("SchemaCounter", () => {
+ afterEach(() => {
+   mockRouter.reset();
+ });
+
+ it("handles non-numeric values gracefully", () => {
+   mockRouter.push("/?a=abc");
+   render(<SchemaCounter />, {
+     wrapper: MemoryRouterProvider,
+   });
+   expect(screen.getByTestId("count").textContent).toBe("0");
+   fireEvent.click(screen.getByLabelText("Increment"));
+   expect(mockRouter.query.a).toBe("1");
+  });
+});
+```
+
+This allowed for a TDD approach to building the components and ensuring that
+they worked as expected and defining the API upfront.
+
+## Conclusion
+
+This was a fun little experiment to see how we could use Effect Schema to
+validate query parameters in a React application. It allowed us to create a hook
+that could be used to validate query parameters and ensure that they conform to
+a specific schema. This can help prevent bugs and improve the overall
+reliability of our application. It also allowed us to test the components in
+isolation and ensure that they worked as expected.

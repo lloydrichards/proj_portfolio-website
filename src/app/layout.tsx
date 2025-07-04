@@ -11,6 +11,7 @@ import { Navbar } from "@/components/organism/navbar";
 import { siteMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "next-themes";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -60,6 +61,11 @@ export default function RootLayout({
       className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable} ${plex_mono.variable}`}
       suppressHydrationWarning
     >
+      <Script
+        defer
+        src="https://umami.lloydrichards.dev/script.js"
+        data-website-id="0504d125-cb01-4703-8dd3-6ee51d56d3b1"
+      />
       <body
         className={cn(
           "min-h-dvh w-full lg:max-w-6xl",

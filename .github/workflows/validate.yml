@@ -33,7 +33,7 @@ jobs:
       - uses: oven-sh/setup-bun@v1
 
       - run: bun install --frozen-lockfile
-      - run: bun typecheck
+      - run: bun type-check
 
   verify-formatting:
     name: "Formatting"

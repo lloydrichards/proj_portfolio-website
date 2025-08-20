@@ -1,8 +1,6 @@
-import * as SqliteDrizzle from "@effect/sql-drizzle/Sqlite";
-import { SqliteClient } from "@effect/sql-sqlite-node";
 import { createClient, type Client } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
-import { Config, Layer } from "effect";
+import { Context, Layer } from "effect";
 import { readdirSync } from "fs";
 import path from "path";
 import * as schema from "./schema";
@@ -25,8 +23,11 @@ if (process.env.NODE_ENV !== "production") globalForDb.client = client;
 export const db = drizzle(client, { schema });
 export type db = typeof db;
 
-export const SqlLive = SqliteClient.layerConfig({
-  filename: Config.string("DB_FILE_NAME"),
-});
+// Create a context for the Drizzle database instance
+export class DrizzleDB extends Context.Tag("DrizzleDB")<
+  DrizzleDB,
+  typeof db
+>() {}
 
-export const DrizzleLive = SqliteDrizzle.layer.pipe(Layer.provide(SqlLive));
+// Create a layer that provides the Drizzle database instance
+export const DrizzleLive = Layer.succeed(DrizzleDB, db);

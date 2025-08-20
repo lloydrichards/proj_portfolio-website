@@ -7,9 +7,9 @@ import {
   skill,
 } from "@/services/db/schema";
 import { Occupation } from "@/types/Occupation";
-import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
 import { eq, sql } from "drizzle-orm";
 import { Array, Effect, Option, Order, pipe } from "effect";
+import { DrizzleDB } from "../db";
 import { notEmpty } from "../utils";
 
 const byStartDate = Order.mapInput(
@@ -22,32 +22,34 @@ const byCurrent = Order.mapInput(
 );
 
 export const getAllOccupations = pipe(
-  SqliteDrizzle,
+  DrizzleDB,
   Effect.andThen((db) =>
-    db
-      .select({
-        occupation: occupation,
-        category: category.name,
-        skills: sql<
-          string | null
-        >`COALESCE(GROUP_CONCAT(DISTINCT ${skill.name}), '')`,
-        attributes: sql<
-          string | null
-        >`COALESCE(GROUP_CONCAT(DISTINCT ${attribute.name}), '')`,
-      })
-      .from(occupation)
-      .leftJoin(category, eq(occupation.category, category.id))
-      .leftJoin(
-        occupationToSkill,
-        eq(occupation.id, occupationToSkill.occupation),
-      )
-      .leftJoin(skill, eq(occupationToSkill.skill, skill.id))
-      .leftJoin(
-        occupationToAttribute,
-        eq(occupation.id, occupationToAttribute.occupation),
-      )
-      .leftJoin(attribute, eq(occupationToAttribute.attribute, attribute.id))
-      .groupBy(occupation.id),
+    Effect.promise(() =>
+      db
+        .select({
+          occupation: occupation,
+          category: category.name,
+          skills: sql<
+            string | null
+          >`COALESCE(GROUP_CONCAT(DISTINCT ${skill.name}), '')`,
+          attributes: sql<
+            string | null
+          >`COALESCE(GROUP_CONCAT(DISTINCT ${attribute.name}), '')`,
+        })
+        .from(occupation)
+        .leftJoin(category, eq(occupation.category, category.id))
+        .leftJoin(
+          occupationToSkill,
+          eq(occupation.id, occupationToSkill.occupation),
+        )
+        .leftJoin(skill, eq(occupationToSkill.skill, skill.id))
+        .leftJoin(
+          occupationToAttribute,
+          eq(occupation.id, occupationToAttribute.occupation),
+        )
+        .leftJoin(attribute, eq(occupationToAttribute.attribute, attribute.id))
+        .groupBy(occupation.id),
+    ),
   ),
   Effect.map(Array.filter(notEmpty)),
   Effect.map((occupations) =>

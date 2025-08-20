@@ -3,11 +3,10 @@ import { Project, ProjectMeta } from "@/types/Project";
 import { TeamMemberDTO } from "@/types/TeamMember";
 import { FileSystem } from "@effect/platform";
 import { BunContext } from "@effect/platform-bun";
-import { SqliteDrizzle } from "@effect/sql-drizzle/Sqlite";
 import { Array, Effect, flow, Option, Order, pipe, Schema } from "effect";
 import { MDXCompiler } from "./MDXCompiler";
 import { PROJECT_PATH } from "./consts";
-import { DrizzleLive } from "./db";
+import { DrizzleDB, DrizzleLive } from "./db";
 import { teamMember } from "./db/schema";
 import { TeamMember } from "./db/schema/team_member";
 import { makeOGImageURL } from "./utils";
@@ -17,7 +16,7 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
   effect: Effect.Do.pipe(
     Effect.bind("fs", () => FileSystem.FileSystem),
     Effect.bind("mdx", () => MDXCompiler),
-    Effect.bind("db", () => SqliteDrizzle),
+    Effect.bind("db", () => DrizzleDB),
 
     Effect.let("getProject", ({ fs, mdx }) =>
       Effect.fn("Portfolio.getProject")((slug: string) =>
@@ -81,7 +80,7 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
       Effect.fn("Portfolio.getTeamMembers")(
         (team?: readonly (readonly [string, string])[]) =>
           pipe(
-            db.select().from(teamMember),
+            Effect.promise(() => db.select().from(teamMember)),
             Effect.andThen((teamMembers) =>
               pipe(
                 Option.fromNullable(team),

@@ -1,3 +1,10 @@
+## [1.14.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.1...v1.14.2) (2025-08-20)
+
+
+### Bug Fixes
+
+* rebuild using Drizzle ([7e93e1e](https://github.com/lloydrichards/proj_portfolio-website/commit/7e93e1e6dc948ad416cb6a0d38d71a77648be3ec))
+
 ## [1.14.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.0...v1.14.1) (2025-04-27)
 
 

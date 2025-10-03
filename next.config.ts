@@ -7,9 +7,6 @@ const nextConfig = {
   outputFileTracingIncludes: {
     database: ["./database/**/*"],
   },
-  experimental: {
-    reactCompiler: true,
-  },
 } as NextConfig;
 
 const withMDX = createMDX({

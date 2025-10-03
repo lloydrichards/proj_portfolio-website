@@ -1,3 +1,10 @@
+## [1.14.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.2...v1.14.3) (2025-10-03)
+
+
+### Bug Fixes
+
+* lab nav bar loading ([4042998](https://github.com/lloydrichards/proj_portfolio-website/commit/404299894ce729cbc548e6138b3796661c9e7cd4))
+
 ## [1.14.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.1...v1.14.2) (2025-08-20)
 
 

@@ -1,4 +1,4 @@
-import { metadata } from "@/app/layout";
+import { siteMetadata } from "@/lib/metadata";
 import { getBaseUrl } from "@/lib/utils";
 import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
@@ -8,6 +8,15 @@ import { Effect } from "effect";
 
 export const dynamic = "force-static";
 
+function escapeXml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 export async function GET() {
   const [allProjects, allLabs] = await RuntimeServer.runPromise(
     Effect.all([Portfolio.all, Laboratory.all]),
@@ -16,19 +25,20 @@ export async function GET() {
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>
     <rss version="2.0">
         <channel>
-            <title>${metadata.title}</title>
+            <title>${escapeXml(siteMetadata.title)}</title>
             <link>${getBaseUrl()}</link>
-            <description>${metadata.description}</description>
+            <description>${escapeXml(siteMetadata.description)}</description>
             <language>en-us</language>
             ${[...allLabs, ...allProjects]
               .sort(descContent)
               .map(
                 (content) => `
             <item>
-                <title>${content.title}</title>
+                <title>${escapeXml(content.title)}</title>
                 <link>${getBaseUrl()}${content.slug}</link>
-                <description>${content.description}</description>
+                <description>${escapeXml(content.description)}</description>
                 <pubDate>${new Date(content.date).toUTCString()}</pubDate>
+                <guid isPermaLink="true">${getBaseUrl()}${content.slug}</guid>
             </item>
             `,
               )

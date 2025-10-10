@@ -1,3 +1,10 @@
+## [1.14.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.3...v1.14.4) (2025-10-10)
+
+
+### Bug Fixes
+
+* escapeXml in rss feed ([eeb548d](https://github.com/lloydrichards/proj_portfolio-website/commit/eeb548dbeea1b7636196ea01367a25738e032320))
+
 ## [1.14.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.2...v1.14.3) (2025-10-03)
 
 

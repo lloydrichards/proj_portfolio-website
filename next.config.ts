@@ -1,5 +1,4 @@
 import createMDX from "@next/mdx";
-import mdxMermaid from "mdx-mermaid";
 import type { NextConfig } from "next";
 
 const nextConfig = {
@@ -11,18 +10,13 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [
-      ["remark-gfm", { strict: true, throwOnError: true }],
-      [mdxMermaid],
-    ],
+    remarkPlugins: ["remark-gfm", "mdx-mermaid"],
     rehypePlugins: [
-      ["rehype-mdx-import-media", { strict: true, throwOnError: true }],
-      ["rehype-slug", { strict: true, throwOnError: true }],
+      "rehype-mdx-import-media",
+      "rehype-slug",
       [
         "rehype-pretty-code",
         {
-          strict: true,
-          throwOnError: true,
           keepBackground: false,
           theme: "synthwave-84",
         },
@@ -30,8 +24,6 @@ const withMDX = createMDX({
       [
         "rehype-autolink-headings",
         {
-          strict: true,
-          throwOnError: true,
           behavior: "append",
           properties: {
             className: ["subheading-anchor"],

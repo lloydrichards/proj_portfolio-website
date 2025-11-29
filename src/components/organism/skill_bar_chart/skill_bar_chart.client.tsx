@@ -7,7 +7,7 @@ import {
 } from "@/components/template/responsive_wrapper";
 import { SkillData } from "@/services/Dataset/get-skill-data";
 import { timeFormat } from "d3";
-import { isSameMonth } from "date-fns";
+import { isSameMonth, subYears } from "date-fns";
 import { FC, useState } from "react";
 import { useSkillBarChartData } from "./use-skill-bar-chart-data";
 
@@ -17,8 +17,10 @@ type SkillBarChartClientProps = {
 
 export const SkillBarChartClient: FC<SkillBarChartClientProps> = withResponsive(
   ({ data }) => {
-    const minDate = new Date(data.at(0)?.date ?? new Date());
-    const maxDate = new Date();
+    const dataMinDate = new Date(data.at(0)?.date ?? new Date());
+    const maxDate = new Date(data.at(-1)?.date ?? new Date());
+    const fiveYearsAgo = subYears(maxDate, 5);
+    const minDate = fiveYearsAgo > dataMinDate ? fiveYearsAgo : dataMinDate;
     const [values, setValues] = useState<[Date, Date]>([minDate, maxDate]);
     const { parsed, seriesDomain } = useSkillBarChartData(data, values);
     const { height, width } = useResponsive();
@@ -51,7 +53,7 @@ export const SkillBarChartClient: FC<SkillBarChartClientProps> = withResponsive(
             label={(value) => <span>{timeFormat("%b %Y")(value)}</span>}
             value={values}
             onValueChange={handleSliderChange}
-            min={minDate}
+            min={dataMinDate}
             max={maxDate}
             step={2592000000}
           />

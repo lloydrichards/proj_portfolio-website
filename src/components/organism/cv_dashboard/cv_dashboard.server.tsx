@@ -1,9 +1,9 @@
+import { Effect, Schema } from "effect";
 import { Tile } from "@/components/atom/tile";
 import { OccupationCard } from "@/components/molecule/occupation_card";
 import { Dataset } from "@/services/Dataset/Dataset";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Occupation } from "@/types/Occupation";
-import { Effect, Schema } from "effect";
 import { CVDashboardClient } from "./cv_dashboard.client";
 import { DashboardProvider, TextBlocWrapper } from "./use-dashboard";
 

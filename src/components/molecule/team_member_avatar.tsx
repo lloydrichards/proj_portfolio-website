@@ -1,5 +1,5 @@
-import { TeamMember } from "@/services/db/schema/team_member";
-import { FC } from "react";
+import type { FC } from "react";
+import type { TeamMember } from "@/services/db/schema/team_member";
 import { Avatar, AvatarFallback, AvatarImage } from "../atom/avatar";
 
 export const TeamMemberAvatar: FC<TeamMember> = ({

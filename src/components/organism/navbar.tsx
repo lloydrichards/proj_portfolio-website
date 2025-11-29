@@ -1,6 +1,6 @@
-import { typefaceHeading3 } from "@/components/tokens/typeface";
 import { FlaskConical, Layers, Ruler, User } from "lucide-react";
 import Link from "next/link";
+import { typefaceHeading3 } from "@/components/tokens/typeface";
 import {
   NavigationMenu,
   NavigationMenuItem,

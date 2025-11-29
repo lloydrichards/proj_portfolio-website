@@ -1,14 +1,14 @@
 "use client";
+import { timeFormat } from "d3";
+import { isSameMonth, subYears } from "date-fns";
+import { type FC, useState } from "react";
 import { DateRangeSlider } from "@/components/atom/range-slider";
 import { StackedBarChart } from "@/components/chart/stacked_bar_chart/stacked_bar_chart";
 import {
   useResponsive,
   withResponsive,
 } from "@/components/template/responsive_wrapper";
-import { SkillData } from "@/services/Dataset/get-skill-data";
-import { timeFormat } from "d3";
-import { isSameMonth, subYears } from "date-fns";
-import { FC, useState } from "react";
+import type { SkillData } from "@/services/Dataset/get-skill-data";
 import { useSkillBarChartData } from "./use-skill-bar-chart-data";
 
 type SkillBarChartClientProps = {

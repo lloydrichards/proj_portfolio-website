@@ -1,7 +1,7 @@
-import { typefaceMeta } from "@/components/tokens/typeface";
-import { max, ScaleBand, ScaleLinear, ScaleOrdinal } from "d3";
+import { max, type ScaleBand, type ScaleLinear, type ScaleOrdinal } from "d3";
 import { motion } from "framer-motion";
-import { FC } from "react";
+import type { FC } from "react";
+import { typefaceMeta } from "@/components/tokens/typeface";
 
 type GeomLayerProps = {
   xScale: ScaleBand<string>;

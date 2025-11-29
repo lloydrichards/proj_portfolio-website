@@ -1,3 +1,6 @@
+import { utcFormat } from "d3";
+import { Effect } from "effect";
+import Link from "next/link";
 import {
   typefaceAnchor,
   typefaceBody,
@@ -8,18 +11,15 @@ import {
 import { Dataset } from "@/services/Dataset/Dataset";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
-import { utcFormat } from "d3";
-import { Effect } from "effect";
-import Link from "next/link";
 
 const CVPage = async () => {
   const [curriculumVitae, projects] = await RuntimeServer.runPromise(
     Effect.all([Dataset.currentCurriculumVitae(), Portfolio.featured]),
   );
 
-  const workExperience = curriculumVitae["WORK"];
-  const volunteering = curriculumVitae["VOLUNTEER"];
-  const education = curriculumVitae["EDUCATION"];
+  const workExperience = curriculumVitae.WORK;
+  const volunteering = curriculumVitae.VOLUNTEER;
+  const education = curriculumVitae.EDUCATION;
 
   const formatDate = (date?: Date) => date && utcFormat("%b %Y")(date);
   const formatYear = (date?: Date) => date && utcFormat("%Y")(date);

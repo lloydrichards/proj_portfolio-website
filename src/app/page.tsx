@@ -1,3 +1,4 @@
+import { Effect, Schema } from "effect";
 import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
@@ -10,7 +11,6 @@ import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
-import { Effect, Schema } from "effect";
 
 const HomePage = async () => {
   const [featuredLabs, allProjects] = await RuntimeServer.runPromise(
@@ -47,9 +47,9 @@ const HomePage = async () => {
         </p>
       </Tile>
       {allProjects.map((project) => (
-        <Tile size="box-md" key={"project" + project.slug}>
+        <Tile size="box-md" key={`project${project.slug}`}>
           <ProjectCard
-            key={"project" + project.slug}
+            key={`project${project.slug}`}
             project={project}
             className="col-span-8 row-span-6"
           />
@@ -59,7 +59,7 @@ const HomePage = async () => {
         <SkillBarChart />
       </Tile>
       {featuredLabs.map((lab) => (
-        <Tile size="square-md" key={"lab" + lab.slug}>
+        <Tile size="square-md" key={`lab${lab.slug}`}>
           <LabCard lab={lab} />
         </Tile>
       ))}

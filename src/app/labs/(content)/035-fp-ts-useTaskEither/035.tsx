@@ -1,13 +1,10 @@
 "use client";
-import { Button } from "@/components/atom/button";
-import { Toaster } from "@/components/atom/toaster";
-import { useToast } from "@/hooks/use-toast";
-import * as T from "fp-ts/Task";
-import * as TE from "fp-ts/TaskEither";
 import * as A from "fp-ts/lib/Array";
 import * as E from "fp-ts/lib/Either";
-import * as O from "fp-ts/lib/Option";
 import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+import type * as T from "fp-ts/Task";
+import * as TE from "fp-ts/TaskEither";
 import * as t from "io-ts";
 import { failure } from "io-ts/PathReporter";
 import {
@@ -20,7 +17,10 @@ import {
   Sofa,
   Trash,
 } from "lucide-react";
-import { FC, useCallback, useEffect, useState } from "react";
+import { type FC, useCallback, useEffect, useState } from "react";
+import { Button } from "@/components/atom/button";
+import { Toaster } from "@/components/atom/toaster";
+import { useToast } from "@/hooks/use-toast";
 
 /*
  * Infrastructure Layer
@@ -180,18 +180,23 @@ const delay =
 function useTaskEither<E, A>(timeToLoad: number) {
   const [value, setValue] = useState<O.Option<E.Either<E, A>>>(O.none);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const run = useCallback((te: TE.TaskEither<E, A>) => {
-    const start = performance.now();
+  const run = useCallback(
+    (te: TE.TaskEither<E, A>) => {
+      const start = performance.now();
 
-    const task = pipe(
-      TE.fromIO(() => setIsLoading(true)),
-      TE.chain(() => te),
-      TE.chainFirstTaskK(() => delay(timeToLoad - (performance.now() - start))),
-      TE.chainFirst(() => TE.fromIO(() => setIsLoading(false))),
-    );
+      const task = pipe(
+        TE.fromIO(() => setIsLoading(true)),
+        TE.chain(() => te),
+        TE.chainFirstTaskK(() =>
+          delay(timeToLoad - (performance.now() - start)),
+        ),
+        TE.chainFirst(() => TE.fromIO(() => setIsLoading(false))),
+      );
 
-    task().then((either) => pipe(either, O.some, setValue));
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+      task().then((either) => pipe(either, O.some, setValue));
+    },
+    [timeToLoad],
+  ); // eslint-disable-line react-hooks/exhaustive-deps
 
   const match = useCallback(
     <B, C, D, F>(
@@ -249,7 +254,7 @@ const useShoppingCart = () => {
 export const ShoppingApp: FC = () => {
   const [matchProducts, runProducts] = useTaskEither<AppError, Product[]>(1000);
 
-  useEffect(() => runProducts(getProductList()), []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => runProducts(getProductList()), [runProducts]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <main>

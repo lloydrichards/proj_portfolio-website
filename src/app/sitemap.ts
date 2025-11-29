@@ -1,8 +1,8 @@
+import { Effect } from "effect";
 import { siteMetadata } from "@/lib/metadata";
 import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
-import { Effect } from "effect";
 
 export default async function sitemap() {
   const [projects, labs] = await RuntimeServer.runPromise(

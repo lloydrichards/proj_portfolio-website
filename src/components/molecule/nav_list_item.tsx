@@ -1,14 +1,14 @@
 "use client";
+import type { Url } from "next/dist/shared/lib/router/router";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { FC, ReactNode } from "react";
 import {
   NavigationMenuItem,
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@/components/atom/navigation-menu";
 import { cn } from "@/lib/utils";
-import { Url } from "next/dist/shared/lib/router/router";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FC, ReactNode } from "react";
 import { tileVariants } from "../atom/tile";
 
 export const NavListItem: FC<{
@@ -28,7 +28,9 @@ export const NavListItem: FC<{
     >
       <NavigationMenuLink
         className={navigationMenuTriggerStyle({
-          active: exact ? pathname == href : pathname.includes(href.toString()),
+          active: exact
+            ? pathname === href
+            : pathname.includes(href.toString()),
           className: "flex gap-2 lg:justify-start",
         })}
         asChild

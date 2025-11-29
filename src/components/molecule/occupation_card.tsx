@@ -1,3 +1,11 @@
+import { utcFormat } from "d3";
+import {
+  BriefcaseBusiness,
+  GraduationCap,
+  HeartHandshake,
+  Waypoints,
+} from "lucide-react";
+import type { FC } from "react";
 import {
   Card,
   CardContent,
@@ -6,15 +14,7 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { cn } from "@/lib/utils";
-import { Occupation } from "@/types/Occupation";
-import { utcFormat } from "d3";
-import {
-  BriefcaseBusiness,
-  GraduationCap,
-  HeartHandshake,
-  Waypoints,
-} from "lucide-react";
-import { FC } from "react";
+import type { Occupation } from "@/types/Occupation";
 import { Badge } from "../atom/badge";
 import { Table, TableBody, TableCell, TableRow } from "../atom/table";
 

@@ -5,7 +5,7 @@ import {
   schemeObservable10,
   stack,
 } from "d3";
-import { StackedData } from "./stacked_bar_chart";
+import type { StackedData } from "./stacked_bar_chart";
 
 export const useStackedBarData = (
   data: StackedData[],

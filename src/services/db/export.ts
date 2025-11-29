@@ -1,5 +1,5 @@
-import { $IntentionalAny } from "@/types/helpers";
-import path from "path";
+import path from "node:path";
+import type { $IntentionalAny } from "@/types/helpers";
 import { db } from ".";
 import * as schema from "./schema";
 

@@ -1,5 +1,5 @@
 import { Either, Schema } from "effect";
-import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
+import { type ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
 export function useSchemaParams<A extends Record<string, unknown>, I>(
@@ -48,7 +48,7 @@ export function useSchemaParams<A extends Record<string, unknown>, I>(
 const groupParamsByKey = (params: ReadonlyURLSearchParams) =>
   [...params.entries()].reduce<Record<string, string | string[]>>(
     (acc, [key, val]) => {
-      if (!acc.hasOwnProperty(key)) {
+      if (!Object.hasOwn(acc, key)) {
         acc[key] = val;
         return acc;
       }

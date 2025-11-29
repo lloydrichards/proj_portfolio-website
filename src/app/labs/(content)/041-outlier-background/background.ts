@@ -182,7 +182,7 @@ function init() {
 }
 
 // Render Loop
-const render = function () {
+const render = () => {
   requestAnimationFrame(render);
   if (!outlier) return;
   const t = document.body.getBoundingClientRect().top;

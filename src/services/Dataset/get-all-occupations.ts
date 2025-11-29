@@ -1,3 +1,5 @@
+import { eq, sql } from "drizzle-orm";
+import { Array, Effect, Option, Order, pipe } from "effect";
 import {
   attribute,
   category,
@@ -7,8 +9,6 @@ import {
   skill,
 } from "@/services/db/schema";
 import { Occupation } from "@/types/Occupation";
-import { eq, sql } from "drizzle-orm";
-import { Array, Effect, Option, Order, pipe } from "effect";
 import { DrizzleDB } from "../db";
 import { notEmpty } from "../utils";
 

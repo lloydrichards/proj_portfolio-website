@@ -1,6 +1,6 @@
+import type { ScaleBand, ScaleLinear } from "d3";
+import type { FC } from "react";
 import { typefaceMeta } from "@/components/tokens/typeface";
-import { ScaleBand, ScaleLinear } from "d3";
-import { FC } from "react";
 
 type AesLayerProps = {
   xScale: ScaleBand<string>;

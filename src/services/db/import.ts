@@ -1,7 +1,7 @@
-import { $IntentionalAny } from "@/types/helpers";
-import { sql } from "drizzle-orm";
 import { readdir } from "node:fs/promises";
-import path from "path";
+import path from "node:path";
+import { sql } from "drizzle-orm";
+import type { $IntentionalAny } from "@/types/helpers";
 import { db } from ".";
 import * as schema from "./schema";
 

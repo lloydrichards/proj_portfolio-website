@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { Button } from "@/components/atom/button";
 import { Tile } from "@/components/atom/tile";
 import { typefaceBody, typefaceHeading2 } from "@/components/tokens/typeface";
-import Link from "next/link";
 
 export default function NotFound() {
   return (

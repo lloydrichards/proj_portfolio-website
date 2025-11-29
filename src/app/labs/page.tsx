@@ -1,3 +1,5 @@
+import { Effect, Schema } from "effect";
+import type { FC } from "react";
 import { Tile } from "@/components/atom/tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
@@ -5,8 +7,6 @@ import { createPageMetadata } from "@/lib/seo";
 import { Laboratory } from "@/services/Laboratory";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
-import { Effect, Schema } from "effect";
-import { FC } from "react";
 
 export const metadata = createPageMetadata({
   title: "Labs",

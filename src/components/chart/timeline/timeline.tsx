@@ -1,5 +1,4 @@
 "use client";
-import { useResponsive } from "@/components/template/responsive_wrapper";
 import {
   curveStep,
   line,
@@ -9,7 +8,8 @@ import {
   timeMonth,
   timeYear,
 } from "d3";
-import { FC } from "react";
+import type { FC } from "react";
+import { useResponsive } from "@/components/template/responsive_wrapper";
 import { ConferenceItem } from "./conference_item";
 import { OccupationItem } from "./occupation_item";
 import { useChannels } from "./use-channels";

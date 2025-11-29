@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "@/components/atom/button";
-import { useSchemaParams } from "@/hooks/use-schema-params";
 import { Schema } from "effect";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { Button } from "@/components/atom/button";
+import { useSchemaParams } from "@/hooks/use-schema-params";
 
 const ParamSchema = Schema.Struct({
   a: Schema.NumberFromString,

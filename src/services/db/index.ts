@@ -1,8 +1,8 @@
-import { createClient, type Client } from "@libsql/client";
+import { readdirSync } from "node:fs";
+import path from "node:path";
+import { type Client, createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import { Context, Layer } from "effect";
-import { readdirSync } from "fs";
-import path from "path";
 import * as schema from "./schema";
 
 const globalForDb = globalThis as unknown as { client: Client | undefined };

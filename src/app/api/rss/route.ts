@@ -1,10 +1,10 @@
+import { Effect } from "effect";
 import { siteMetadata } from "@/lib/metadata";
 import { getBaseUrl } from "@/lib/utils";
 import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { descContent } from "@/services/utils";
-import { Effect } from "effect";
 
 export const dynamic = "force-static";
 

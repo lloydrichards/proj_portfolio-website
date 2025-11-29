@@ -1,8 +1,8 @@
 "use client";
-import { cn } from "@/lib/utils";
-import { Lab } from "@/types/Lab";
 import { usePathname } from "next/navigation";
-import { FC, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import type { Lab } from "@/types/Lab";
 
 interface LabContentProps {
   children?: ReactNode;

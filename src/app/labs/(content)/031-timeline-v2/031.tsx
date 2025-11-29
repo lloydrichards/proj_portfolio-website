@@ -1,6 +1,6 @@
 "use client";
 import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
-import { FC } from "react";
+import type { FC } from "react";
 
 interface Occupation {
   start_date: string;

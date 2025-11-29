@@ -1,11 +1,11 @@
 "use client"; // Error boundaries must be Client Components
 
+import { useEffect } from "react";
 import { Button } from "@/components/atom/button";
 import { Tile } from "@/components/atom/tile";
 import { typefaceBody, typefaceHeading2 } from "@/components/tokens/typeface";
-import { useEffect } from "react";
 
-export default function Error({
+export default function GlobalError({
   error,
   reset,
 }: {

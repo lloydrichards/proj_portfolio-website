@@ -22,7 +22,7 @@ const ProjectOverviewPage = async () => {
         Project Grid
       </h1>
       {allProjects.map((project, idx) => (
-        <Tile key={project.slug} size={idx % 3 == 0 ? "box-md" : "square-md"}>
+        <Tile key={project.slug} size={idx % 3 === 0 ? "box-md" : "square-md"}>
           <ProjectCard project={project} asLink />
         </Tile>
       ))}

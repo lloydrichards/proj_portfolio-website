@@ -1,5 +1,14 @@
 "use client";
 import {
+  ChevronsLeft,
+  ChevronsRight,
+  CodeXml,
+  ExternalLink,
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { FC } from "react";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -18,16 +27,7 @@ import {
 import { Tile } from "@/components/atom/tile";
 import Github from "@/components/icons/github";
 import { formatDate } from "@/lib/format";
-import { Lab } from "@/types/Lab";
-import {
-  ChevronsLeft,
-  ChevronsRight,
-  CodeXml,
-  ExternalLink,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FC } from "react";
+import type { Lab } from "@/types/Lab";
 
 interface LabInfoCardProps {
   labs: typeof Lab.Array.Encoded;

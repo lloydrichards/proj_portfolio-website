@@ -1,7 +1,7 @@
-import { Occupation } from "@/types/Occupation";
 import { it } from "@effect/vitest";
 import { Effect } from "effect";
 import { beforeEach, describe, expect, vi } from "vitest";
+import { Occupation } from "@/types/Occupation";
 import { DrizzleLive } from "../db";
 import { Dataset } from "./Dataset";
 import * as GetAllOccupations from "./get-all-occupations";
@@ -137,13 +137,13 @@ describe("Dataset", () => {
         // Assert
         const keys = Object.keys(result);
         expect(keys).toHaveLength(2); // TECHNOLOGY and MANAGEMENT categories
-        expect(result["TECHNOLOGY"]).toBeDefined();
-        expect(result["MANAGEMENT"]).toBeDefined();
-        expect(result["TECHNOLOGY"][0].title).toBe("Software Engineer");
-        expect(result["MANAGEMENT"][0].title).toBe("Project Manager");
+        expect(result.TECHNOLOGY).toBeDefined();
+        expect(result.MANAGEMENT).toBeDefined();
+        expect(result.TECHNOLOGY[0].title).toBe("Software Engineer");
+        expect(result.MANAGEMENT[0].title).toBe("Project Manager");
 
         // DESIGN category should not be included since the Designer has isFeatures=false
-        expect(result["DESIGN"]).toBeUndefined();
+        expect(result.DESIGN).toBeUndefined();
       }).pipe(Effect.provide([Dataset.Default, DrizzleLive])),
     );
   });
@@ -287,9 +287,9 @@ describe("Dataset", () => {
         // Assert
         expect(result).toHaveLength(mixedSkills.length);
         expect(Object.keys(groupedByType)).toHaveLength(3); // Frontend, Backend, DevOps
-        expect(groupedByType["Frontend"]).toHaveLength(2);
-        expect(groupedByType["Backend"]).toHaveLength(1);
-        expect(groupedByType["DevOps"]).toHaveLength(1);
+        expect(groupedByType.Frontend).toHaveLength(2);
+        expect(groupedByType.Backend).toHaveLength(1);
+        expect(groupedByType.DevOps).toHaveLength(1);
       }).pipe(Effect.provide([Dataset.Default, DrizzleLive])),
     );
   });

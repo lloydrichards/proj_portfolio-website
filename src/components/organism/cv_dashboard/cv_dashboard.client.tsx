@@ -1,9 +1,9 @@
 "use client";
 
+import type { FC } from "react";
 import { Timeline } from "@/components/chart/timeline/timeline";
 import { withResponsive } from "@/components/template/responsive_wrapper";
-import { Occupation } from "@/types/Occupation";
-import { FC } from "react";
+import type { Occupation } from "@/types/Occupation";
 import { useDashboard } from "./use-dashboard";
 
 interface CVDashboardClientProps {

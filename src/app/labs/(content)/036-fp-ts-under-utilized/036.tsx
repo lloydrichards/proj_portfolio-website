@@ -2,14 +2,14 @@
 import * as Ap from "fp-ts/lib/Apply";
 import * as A from "fp-ts/lib/Array";
 import * as E from "fp-ts/lib/Either";
+import { pipe } from "fp-ts/lib/function";
 import * as M from "fp-ts/lib/Monoid";
+import * as N from "fp-ts/lib/number";
 import * as O from "fp-ts/lib/Option";
 import * as Ord from "fp-ts/lib/Ord";
 import * as R from "fp-ts/lib/Reader";
 import * as RA from "fp-ts/lib/ReadonlyArray";
 import * as Re from "fp-ts/lib/Record";
-import { pipe } from "fp-ts/lib/function";
-import * as N from "fp-ts/lib/number";
 import * as S from "fp-ts/lib/string";
 
 /**
@@ -22,7 +22,7 @@ const increment = (n: number): number => n + 1;
 const sequenceOptionStruct = Ap.sequenceS(O.Applicative);
 const sequenceOptionTuple = Ap.sequenceT(O.Applicative);
 
-const structResult = pipe(
+const _structResult = pipe(
   sequenceOptionStruct({
     a: O.some(1),
     b: O.some(2),
@@ -32,7 +32,7 @@ const structResult = pipe(
   O.map(increment),
 );
 
-const tupleResult = pipe(
+const _tupleResult = pipe(
   sequenceOptionTuple(O.some(1), O.some(2), O.some(3)),
   O.map(A.map(double)),
 );
@@ -44,7 +44,7 @@ const tupleResult = pipe(
  * Do
  */
 
-const doResult = pipe(
+const _doResult = pipe(
   O.Do,
   O.bind("a", () => O.some(1)),
   O.bind("b", ({ a }) => O.some(increment(a))),
@@ -72,7 +72,7 @@ const getPort = pipe(
   R.map((config) => config.port),
 );
 
-const readerResult = pipe(
+const _readerResult = pipe(
   O.some({ port: 3000, host: "localhost" }),
   O.map(getPort),
 );
@@ -85,13 +85,13 @@ const readerResult = pipe(
 
 const someNumber = O.some(1);
 
-const someNumberResult = pipe(someNumber, O.map(double));
+const _someNumberResult = pipe(someNumber, O.map(double));
 
 // console.log(someNumberResult); // Output: Some(2)
 
 const maybeNumber = E.right<string, number>(1);
 
-const maybeNumberResult = pipe(
+const _maybeNumberResult = pipe(
   maybeNumber,
   E.bimap(
     (error) => `Not a number ${error}`, // on left side; add error message
@@ -115,7 +115,7 @@ const sortById = pipe(
   Ord.contramap((user: User) => user.id), // Ord<User>
 );
 
-const sortResult = pipe(
+const _sortResult = pipe(
   [
     { id: 2, name: "John" },
     { id: 1, name: "Jane" },
@@ -152,7 +152,7 @@ const isEligible = pipe(
   // ^?
 );
 
-const isEligibleResult = pipe(someUser, isEligible);
+const _isEligibleResult = pipe(someUser, isEligible);
 
 // console.log(isEligibleResult); // Output: true
 
@@ -164,7 +164,7 @@ const isVerified = pipe(
   ),
 );
 
-const isVerifiedResult = isVerified(someUser);
+const _isVerifiedResult = isVerified(someUser);
 
 // console.log(isVerifiedResult); // Output: Left("User is not verified")
 
@@ -214,7 +214,7 @@ const byCount = pipe(
 const SomeM = Ord.getMonoid<SomeObj>();
 const byBothOrds = M.concatAll(SomeM)([byGroup, byCount]);
 
-const sortSomeObj = pipe(
+const _sortSomeObj = pipe(
   someObj,
   A.sort(byBothOrds),
   A.map((obj) => obj.id),
@@ -222,7 +222,7 @@ const sortSomeObj = pipe(
 
 // console.log(sortSomeObj); // Output: [ 3, 1, 2, 4 ]
 
-const sortByArray = pipe(
+const _sortByArray = pipe(
   someObj,
   A.sortBy([byGroup, byCount]),
   A.map((obj) => obj.id),
@@ -236,8 +236,8 @@ const byOrdinal = pipe(
     pipe(
       O.Do,
       O.bind("ordinal", () => O.fromNullable(["Circle", "Box", "Pyramid"])),
-      O.bind("aIdx", ({ ordinal }) => A.findIndex((x) => x === a)(ordinal)),
-      O.bind("bIdx", ({ ordinal }) => A.findIndex((x) => x === b)(ordinal)),
+      O.bind("aIdx", ({ ordinal }) => A.indexOf(a)(ordinal)),
+      O.bind("bIdx", ({ ordinal }) => A.indexOf(b)(ordinal)),
       O.match(
         () => 0,
         ({ aIdx, bIdx }) => N.Ord.compare(aIdx, bIdx),
@@ -247,7 +247,7 @@ const byOrdinal = pipe(
   Ord.contramap((obj: SomeObj) => obj.group),
 );
 
-const sortByOrdinal = pipe(
+const _sortByOrdinal = pipe(
   someObj,
   A.sort(byOrdinal),
   A.map((obj) => obj.id),
@@ -341,7 +341,7 @@ const studentsGrades = [
   },
 ];
 
-const gradesByCategory = (groupBy: string) =>
+const _gradesByCategory = (groupBy: string) =>
   pipe(
     studentsGrades,
     RA.chain(({ classes }) => Object.values(classes)),
@@ -354,7 +354,7 @@ const gradesByCategory = (groupBy: string) =>
 
 // console.log(gradesByCategory("quantitative"));
 
-const groupGrades = pipe(
+const _groupGrades = pipe(
   studentsGrades,
   RA.reduce({} as Record<string, Array<number>>, (acc, { classes }) => {
     const grades = Object.values(classes);

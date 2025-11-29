@@ -1,3 +1,5 @@
+import { Github } from "lucide-react";
+import type { FC } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -17,10 +19,8 @@ import {
 import { Tile } from "@/components/atom/tile";
 import { TeamMemberAvatar } from "@/components/molecule/team_member_avatar";
 import { formatDate } from "@/lib/format";
-import { TeamMember } from "@/services/db/schema/team_member";
-import { Project } from "@/types/Project";
-import { Github } from "lucide-react";
-import { FC } from "react";
+import type { TeamMember } from "@/services/db/schema/team_member";
+import type { Project } from "@/types/Project";
 
 interface ProjectInfoCardProps {
   project: Project;

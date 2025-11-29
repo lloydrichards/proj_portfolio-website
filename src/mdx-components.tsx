@@ -1,6 +1,7 @@
-import Image, { ImageProps } from "next/image";
+import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
-import React, { ComponentPropsWithoutRef } from "react";
+import type React from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import { Mermaid } from "./components/molecule/mermaid";
 import {
   typefaceAnchor,

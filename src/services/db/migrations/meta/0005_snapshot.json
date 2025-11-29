@@ -32,9 +32,7 @@
       "indexes": {
         "attribute_name_unique": {
           "name": "attribute_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "isUnique": true
         }
       },
@@ -71,9 +69,7 @@
       "indexes": {
         "category_name_unique": {
           "name": "category_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "isUnique": true
         }
       },
@@ -171,12 +167,8 @@
           "name": "occupation_category_id_category_id_fk",
           "tableFrom": "occupation",
           "tableTo": "category",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["category_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -209,12 +201,8 @@
           "name": "occupation_to_attribute_occupation_id_occupation_id_fk",
           "tableFrom": "occupation_to_attribute",
           "tableTo": "occupation",
-          "columnsFrom": [
-            "occupation_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["occupation_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -222,22 +210,15 @@
           "name": "occupation_to_attribute_attribute_id_attribute_id_fk",
           "tableFrom": "occupation_to_attribute",
           "tableTo": "attribute",
-          "columnsFrom": [
-            "attribute_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["attribute_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "occupation_to_attribute_occupation_id_attribute_id_pk": {
-          "columns": [
-            "occupation_id",
-            "attribute_id"
-          ],
+          "columns": ["occupation_id", "attribute_id"],
           "name": "occupation_to_attribute_occupation_id_attribute_id_pk"
         }
       },
@@ -268,12 +249,8 @@
           "name": "occupation_to_skill_occupation_id_occupation_id_fk",
           "tableFrom": "occupation_to_skill",
           "tableTo": "occupation",
-          "columnsFrom": [
-            "occupation_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["occupation_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -281,22 +258,15 @@
           "name": "occupation_to_skill_skill_id_skill_id_fk",
           "tableFrom": "occupation_to_skill",
           "tableTo": "skill",
-          "columnsFrom": [
-            "skill_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["skill_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "occupation_to_skill_occupation_id_skill_id_pk": {
-          "columns": [
-            "occupation_id",
-            "skill_id"
-          ],
+          "columns": ["occupation_id", "skill_id"],
           "name": "occupation_to_skill_occupation_id_skill_id_pk"
         }
       },
@@ -338,9 +308,7 @@
       "indexes": {
         "skill_name_unique": {
           "name": "skill_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "isUnique": true
         }
       },

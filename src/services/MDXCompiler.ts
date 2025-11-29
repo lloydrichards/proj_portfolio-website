@@ -1,13 +1,12 @@
-import { components } from "@/mdx-components";
-import { compileMDX } from "next-mdx-remote/rsc";
-
 import { Effect } from "effect";
 import mdxMermaid from "mdx-mermaid";
+import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeMdxImportMedia from "rehype-mdx-import-media";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import { components } from "@/mdx-components";
 
 class MDXCompileError {
   readonly _tag = "MDXCompileError";

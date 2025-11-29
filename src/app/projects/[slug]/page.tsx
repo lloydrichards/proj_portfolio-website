@@ -1,11 +1,11 @@
+import { Effect, Either } from "effect";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
 import { siteMetadata } from "@/lib/metadata";
 import { createPageMetadata } from "@/lib/seo";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
-import { Effect, Either } from "effect";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -48,7 +48,7 @@ const ProjectPage = async ({
     Portfolio.getProject(slug).pipe(Effect.either),
   );
   if (Either.isLeft(result)) {
-    if (result.left._tag == "MissingContentError") {
+    if (result.left._tag === "MissingContentError") {
       return notFound();
     }
     throw new Error(result.left._tag);

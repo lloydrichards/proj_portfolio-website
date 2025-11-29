@@ -1,12 +1,9 @@
 "use client";
-import { Button } from "@/components/atom/button";
-import { Toaster } from "@/components/atom/toaster";
-import { useToast } from "@/hooks/use-toast";
-import * as TE from "fp-ts/TaskEither";
 import * as A from "fp-ts/lib/Array";
 import * as E from "fp-ts/lib/Either";
-import * as O from "fp-ts/lib/Option";
 import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+import * as TE from "fp-ts/TaskEither";
 import * as t from "io-ts";
 import { failure } from "io-ts/PathReporter";
 import {
@@ -19,7 +16,10 @@ import {
   Sofa,
   Trash,
 } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
+import { Button } from "@/components/atom/button";
+import { Toaster } from "@/components/atom/toaster";
+import { useToast } from "@/hooks/use-toast";
 
 /*
  * Infrastructure Layer

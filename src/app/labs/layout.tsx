@@ -1,11 +1,11 @@
+import { Effect, Schema } from "effect";
+import type { FC, ReactNode } from "react";
 import { LabContent } from "@/app/labs/lab-content";
 import { LabInfoCard } from "@/app/labs/lab-info-card";
 import { Mosaic } from "@/components/template/mosaic";
 import { Laboratory } from "@/services/Laboratory";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
-import { Effect, Schema } from "effect";
-import { FC, ReactNode } from "react";
 import { LabNavigation } from "./lab_navigation";
 
 const LabLayout: FC<{

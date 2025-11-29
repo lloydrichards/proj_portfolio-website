@@ -1,14 +1,14 @@
-import { MissingContentError } from "@/types/Errors";
-import { Project, ProjectMeta } from "@/types/Project";
-import { TeamMemberDTO } from "@/types/TeamMember";
 import { FileSystem } from "@effect/platform";
 import { BunContext } from "@effect/platform-bun";
 import { Array, Effect, flow, Option, Order, pipe, Schema } from "effect";
-import { MDXCompiler } from "./MDXCompiler";
+import { MissingContentError } from "@/types/Errors";
+import { Project, ProjectMeta } from "@/types/Project";
+import { TeamMemberDTO } from "@/types/TeamMember";
 import { PROJECT_PATH } from "./consts";
 import { DrizzleDB, DrizzleLive } from "./db";
 import { teamMember } from "./db/schema";
-import { TeamMember } from "./db/schema/team_member";
+import type { TeamMember } from "./db/schema/team_member";
+import { MDXCompiler } from "./MDXCompiler";
 import { makeOGImageURL } from "./utils";
 
 export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
@@ -21,7 +21,7 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
     Effect.let("getProject", ({ fs, mdx }) =>
       Effect.fn("Portfolio.getProject")((slug: string) =>
         pipe(
-          fs.readFileString(PROJECT_PATH + `/${slug}.mdx`),
+          fs.readFileString(`${PROJECT_PATH}/${slug}.mdx`),
           Effect.flatMap((content) => mdx.use(content)),
           Effect.flatMap(Schema.decodeUnknown(ProjectMeta.MDX)),
           Effect.andThen(
@@ -94,9 +94,9 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
                     Array.findFirst(
                       teamMembers,
                       (m) =>
-                        m.firstName == firstName &&
-                        m.lastName == lastName &&
-                        m.role == role,
+                        m.firstName === firstName &&
+                        m.lastName === lastName &&
+                        m.role === role,
                     ),
                     () =>
                       ({

@@ -1,14 +1,14 @@
 "use client";
 import {
-  SimulationNodeDatum,
   forceCollide,
   forceManyBody,
   forceSimulation,
   forceX,
   forceY,
+  type SimulationNodeDatum,
   sum,
 } from "d3";
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 
 type Topic = "SPORT" | "NEWS" | "MEDIA";
 type Node = {
@@ -71,7 +71,7 @@ export const NestedBubblePacking: FC<Props> = ({
         y: height / 2,
         type: "SPORT",
         color: topicColor("SPORT"),
-        count: sum(data, (d) => (d.type == "SPORT" ? d.count : 0)),
+        count: sum(data, (d) => (d.type === "SPORT" ? d.count : 0)),
       },
       {
         id: "root-NEWS",
@@ -79,7 +79,7 @@ export const NestedBubblePacking: FC<Props> = ({
         y: height / 2,
         type: "NEWS",
         color: topicColor("NEWS"),
-        count: sum(data, (d) => (d.type == "NEWS" ? d.count : 0)),
+        count: sum(data, (d) => (d.type === "NEWS" ? d.count : 0)),
       },
       {
         id: "root-MEDIA",
@@ -87,7 +87,7 @@ export const NestedBubblePacking: FC<Props> = ({
         y: height / 2,
         type: "MEDIA",
         color: topicColor("MEDIA"),
-        count: sum(data, (d) => (d.type == "MEDIA" ? d.count : 0)),
+        count: sum(data, (d) => (d.type === "MEDIA" ? d.count : 0)),
       },
     ];
     const layoutSim = forceSimulation()
@@ -122,13 +122,13 @@ export const NestedBubblePacking: FC<Props> = ({
       .force(
         "forceX",
         forceX<SimulationNodeDatum & Partial<Node>>(
-          (d) => layout.find((e) => e.type == d.type)?.x || width / 2,
+          (d) => layout.find((e) => e.type === d.type)?.x || width / 2,
         ),
       )
       .force(
         "forceY",
         forceY<SimulationNodeDatum & Partial<Node>>(
-          (d) => layout.find((e) => e.type == d.type)?.y || width / 2,
+          (d) => layout.find((e) => e.type === d.type)?.y || width / 2,
         ),
       )
       .force("charge", forceManyBody())
@@ -152,7 +152,7 @@ export const NestedBubblePacking: FC<Props> = ({
     return () => {
       nodeSim.stop();
     };
-  }, [data, layout, width, height]);
+  }, [data, layout, width]);
 
   return (
     <div className="w-full overflow-scroll">

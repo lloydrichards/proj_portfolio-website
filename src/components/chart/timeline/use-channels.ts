@@ -24,9 +24,7 @@ export const useChannels = (
     // Process each item
     sortedData.forEach((item) => {
       const itemStart = item.start_date.getTime();
-      const itemEnd = item.end_date
-        ? item.end_date.getTime()
-        : new Date().getTime();
+      const itemEnd = item.end_date ? item.end_date.getTime() : Date.now();
 
       // Find the first available channel
       let channel = 0;
@@ -41,7 +39,7 @@ export const useChannels = (
             const existingStart = existingItem.start_date.getTime();
             const existingEnd = existingItem.end_date
               ? existingItem.end_date.getTime()
-              : new Date().getTime();
+              : Date.now();
 
             // Check for overlap
             if (itemStart <= existingEnd && itemEnd >= existingStart) {

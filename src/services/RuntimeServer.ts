@@ -1,8 +1,8 @@
 import { Layer, ManagedRuntime } from "effect";
 import { Dataset } from "./Dataset/Dataset";
+import { DrizzleLive } from "./db";
 import { Laboratory } from "./Laboratory";
 import { Portfolio } from "./Portfolio";
-import { DrizzleLive } from "./db";
 
 const MainLayer = Layer.mergeAll(
   Laboratory.Default,

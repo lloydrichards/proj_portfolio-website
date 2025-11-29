@@ -1,5 +1,5 @@
-import { siteMetadata } from "@/lib/metadata";
 import { ImageResponse } from "next/og";
+import { siteMetadata } from "@/lib/metadata";
 
 export function GET(request: Request) {
   try {
@@ -18,9 +18,9 @@ export function GET(request: Request) {
         </div>
         {tags.length > 0 ? (
           <div tw="flex my-6">
-            {tags.map((tag, index) => (
+            {tags.map((tag) => (
               <span
-                key={index}
+                key={tag}
                 tw="border-2 mr-2 border-gray-700 px-4 py-2 rounded-full text-gray-300 text-lg"
               >
                 #{tag}

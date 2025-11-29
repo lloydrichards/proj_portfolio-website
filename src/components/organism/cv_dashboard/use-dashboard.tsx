@@ -1,17 +1,17 @@
 "use client";
 import {
-  useResponsive,
-  withResponsive,
-} from "@/components/template/responsive_wrapper";
-import {
-  Dispatch,
-  type ReactNode,
-  SetStateAction,
   createContext,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
   use,
   useEffect,
   useState,
 } from "react";
+import {
+  useResponsive,
+  withResponsive,
+} from "@/components/template/responsive_wrapper";
 
 type DashboardState = {
   textBlock: [number | null, Dispatch<SetStateAction<number | null>>];

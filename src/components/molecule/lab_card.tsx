@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Badge } from "@/components/atom/badge";
 import {
   Card,
@@ -8,8 +9,7 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { cn } from "@/lib/utils";
-import { Lab } from "@/types/Lab";
-import Link from "next/link";
+import type { Lab } from "@/types/Lab";
 import { Button } from "../atom/button";
 
 type LabCardProps = {

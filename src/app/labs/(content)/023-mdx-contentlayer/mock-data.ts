@@ -1,4 +1,4 @@
-import { ILineChart } from "@/components/chart/line_chart/LineChart";
+import type { ILineChart } from "@/components/chart/line_chart/LineChart";
 
 const base: ILineChart = {
   data: [

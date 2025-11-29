@@ -1,17 +1,17 @@
-import { inter, josefin_sans, plex_mono, roboto_mono } from "@/styles/fonts";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
+import { inter, josefin_sans, plex_mono, roboto_mono } from "@/styles/fonts";
 
 import "@/styles/globals.css";
 
+import Script from "next/script";
+import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/components/atom/tooltip";
 import { Footer } from "@/components/organism/footer";
 import { Navbar } from "@/components/organism/navbar";
 import { siteMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "next-themes";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),

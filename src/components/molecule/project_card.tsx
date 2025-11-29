@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/atom/badge";
 import {
   Card,
@@ -8,9 +10,7 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { cn } from "@/lib/utils";
-import { Project } from "@/types/Project";
-import Image from "next/image";
-import Link from "next/link";
+import type { Project } from "@/types/Project";
 import { Button } from "../atom/button";
 
 interface IProjectCard {

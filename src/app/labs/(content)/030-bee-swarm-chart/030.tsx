@@ -1,16 +1,16 @@
 "use client";
 import {
-  Simulation,
-  SimulationNodeDatum,
   extent,
   forceCollide,
   forceSimulation,
   forceX,
   forceY,
+  type Simulation,
+  type SimulationNodeDatum,
   scaleTime,
 } from "d3";
-import { Leva, folder, useControls } from "leva";
-import { FC, useEffect, useState } from "react";
+import { folder, Leva, useControls } from "leva";
+import { type FC, useEffect, useState } from "react";
 
 type Topic = "SPORT" | "NEWS" | "MEDIA";
 type Node = {
@@ -146,7 +146,7 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
     return () => {
       forceSim.stop();
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [alpha, nodes]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update Layout Simulator
   useEffect(() => {
@@ -159,7 +159,7 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
         .force(
           "forceY",
           forceY<Node>(height / 2).strength(
-            (d) => yStr + (d.type == selected ? selectStr : 0),
+            (d) => yStr + (d.type === selected ? selectStr : 0),
           ),
         )
         .force(
@@ -170,7 +170,7 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
               (d) =>
                 ((d.count || 0) / Math.PI) * 2 +
                 padding -
-                (d.type == selected ? selectRad : 0),
+                (d.type === selected ? selectRad : 0),
             ),
         );
 
@@ -186,7 +186,6 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
     simulator,
     alpha,
     nodes,
-    width,
     height,
     collisionStr,
     padding,
@@ -195,19 +194,20 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
     yStr,
     selected,
     selectRad,
+    xScale,
   ]);
 
   // Data Update
   useEffect(() => {
     const updatedNodes = data.map((d) => {
-      const existing = nodes.find((n) => n.id == d.id);
+      const existing = nodes.find((n) => n.id === d.id);
       if (existing) {
         return { ...existing, count: d.count };
       }
       return d;
     });
     setNodes(updatedNodes);
-  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [data, nodes.find]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="w-full overflow-scroll">
@@ -220,12 +220,12 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
               cx={d.x}
               cy={d.y}
               r={((d?.count || 0) / Math.PI) * 2}
-              opacity={selected ? (d.type == selected ? 1 : 0.2) : 0.8}
+              opacity={selected ? (d.type === selected ? 1 : 0.2) : 0.8}
               fill={d?.color}
               stroke="black"
               strokeWidth={1}
               onClick={() =>
-                setSelected(selected == d.type ? null : d.type || null)
+                setSelected(selected === d.type ? null : d.type || null)
               }
             />
           ))}

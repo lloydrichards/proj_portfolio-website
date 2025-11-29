@@ -1,8 +1,8 @@
-import { ImportError } from "@/types/Errors";
-import { Lab, LabMeta } from "@/types/Lab";
 import { FileSystem } from "@effect/platform";
 import { BunFileSystem } from "@effect/platform-bun";
 import { Array, Effect, flow, Order, pipe, Schema } from "effect";
+import { ImportError } from "@/types/Errors";
+import { Lab, LabMeta } from "@/types/Lab";
 import { LAB_PATH } from "./consts";
 import { makeOGImageURL } from "./utils";
 

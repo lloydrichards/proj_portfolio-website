@@ -1,7 +1,7 @@
 "use client";
-import { typefaceMeta } from "@/components/tokens/typeface";
 import { max } from "d3";
 import { useState } from "react";
+import { typefaceMeta } from "@/components/tokens/typeface";
 import { AesLayer } from "./aes_layer";
 import { GeomLayer } from "./geom_layer";
 import { useStackedBarData } from "./use-stacked-bar-data";

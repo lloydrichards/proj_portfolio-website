@@ -1,7 +1,8 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as d3 from "d3";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export const BasicTimeline = () => {
   const svgRef = useRef(null);
@@ -253,7 +254,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
         return frontArg;
       }
     },
-    [occupations],
+    [occupations, lookupInRange],
   );
 
   const wrap = (
@@ -268,7 +269,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
         dy = parseFloat(text.attr("dy")),
         lineHeight = 1.1; // ems
 
-      let word: string | undefined = undefined,
+      let word: string | undefined,
         line: string[] = [],
         lineNumber = 0,
         tspan = text
@@ -280,7 +281,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       while ((word = words.pop())) {
         line.push(word);
         tspan.text(line.join(" "));
-        if (tspan.node()!.getComputedTextLength() > width) {
+        if (tspan.node()?.getComputedTextLength() > width) {
           line.pop();
           tspan.text(line.join(" "));
           line = [word];
@@ -303,7 +304,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
     let textWidth = 500;
     let textSpacing = 150;
     let diagramHeight =
-      textSpacing * occupations.filter((i) => i.selected == true).length;
+      textSpacing * occupations.filter((i) => i.selected === true).length;
     if (!dimensions) return;
     if (dimensions.width < 600) {
       lineMargin = 0;
@@ -325,7 +326,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
     }
 
     diagramHeight =
-      textSpacing * occupations.filter((i) => i.selected == true).length;
+      textSpacing * occupations.filter((i) => i.selected === true).length;
 
     const yScale = d3
       .scaleTime()
@@ -504,7 +505,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .attr("font-size", "1em")
       .attr("fill", "#000000")
       .call(wrap, textWidth, textMargin);
-  }, [occupations, dimensions, orderInRange]);
+  }, [occupations, dimensions, orderInRange, categoryColor, wrap]);
 
   return (
     <div

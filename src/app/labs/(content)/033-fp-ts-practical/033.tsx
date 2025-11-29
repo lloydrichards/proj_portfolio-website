@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as IO from "fp-ts/IO";
-import * as T from "fp-ts/Task";
-import * as TE from "fp-ts/TaskEither";
 import * as A from "fp-ts/lib/Array";
 import * as E from "fp-ts/lib/Either";
-import * as O from "fp-ts/lib/Option";
 import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+import * as T from "fp-ts/Task";
+import * as TE from "fp-ts/TaskEither";
 import * as t from "io-ts";
 import * as EQ from "io-ts/Eq";
 import { failure } from "io-ts/PathReporter";
-import { FC, useEffect } from "react";
+import { type FC, useEffect } from "react";
+
 /*
  * DeepEqual of Nested Objects
  */
@@ -35,9 +36,9 @@ const FilterEq = EQ.struct<Filter>({
   }),
 });
 
-const isEqual = (a: Filter, b: Filter) => FilterEq.equals(a, b);
+const _isEqual = (a: Filter, b: Filter) => FilterEq.equals(a, b);
 
-const filter1: Filter = {
+const _filter1: Filter = {
   types: ["a", "b"],
   range: [1, 2],
   boolean: true,
@@ -115,7 +116,7 @@ export const ConditionalRender: FC<{ value?: number }> = ({ value }) => {
   useEffect(() => {
     return pipe(
       value,
-      O.fromPredicate((value) => value == 10),
+      O.fromPredicate((value) => value === 10),
       O.fold(
         () => IO.of(undefined), // no side effect
         () => IO.of(console.log("The value is very important!")), // conditional side effect
@@ -162,11 +163,11 @@ export const foldScreenWidth =
   (width: number) => {
     switch (true) {
       case width > 1200 && lg !== undefined:
-        return lg!(width);
+        return lg?.(width);
       case width > 992 && md !== undefined:
-        return md!(width);
+        return md?.(width);
       case width > 768 && sm !== undefined:
-        return sm!(width);
+        return sm?.(width);
       default:
         return xs(width);
     }

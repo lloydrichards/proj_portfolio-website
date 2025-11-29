@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import { siteMetadata } from "@/lib/metadata";
 import { makeOGImageURL } from "@/services/utils";
-import { Metadata } from "next";
 
 type PageSEOProps = {
   title: string;

@@ -1,13 +1,13 @@
 "use client";
 import {
-  SimulationNodeDatum,
   forceCollide,
   forceManyBody,
   forceSimulation,
   forceX,
   forceY,
+  type SimulationNodeDatum,
 } from "d3";
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 
 const simulation = forceSimulation();
 
@@ -86,7 +86,7 @@ export const BubblePacking: FC<Props> = ({
       .nodes(nodes)
       .alpha(0.5)
       .restart();
-  }, [data, width, height]);
+  }, [data, width, height, endSimulation, updateSimulation]);
 
   return (
     <div className="w-full overflow-scroll">

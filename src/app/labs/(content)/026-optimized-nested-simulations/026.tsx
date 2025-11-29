@@ -1,14 +1,14 @@
 "use client";
 import {
-  Simulation,
-  SimulationNodeDatum,
   forceCollide,
   forceSimulation,
   forceX,
   forceY,
+  type Simulation,
+  type SimulationNodeDatum,
   sum,
 } from "d3";
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 
 type Topic = "SPORT" | "NEWS" | "MEDIA";
 type Node = {
@@ -62,7 +62,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
       y: Math.ceil(Math.random() * height),
       type: "SPORT",
       color: topicColor("SPORT"),
-      count: sum(data, (d) => (d.type == "SPORT" ? d.count : 0)),
+      count: sum(data, (d) => (d.type === "SPORT" ? d.count : 0)),
     },
     {
       id: "root-NEWS",
@@ -70,7 +70,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
       y: Math.ceil(Math.random() * height),
       type: "NEWS",
       color: topicColor("NEWS"),
-      count: sum(data, (d) => (d.type == "NEWS" ? d.count : 0)),
+      count: sum(data, (d) => (d.type === "NEWS" ? d.count : 0)),
     },
     {
       id: "root-MEDIA",
@@ -78,7 +78,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
       y: Math.ceil(Math.random() * height),
       type: "MEDIA",
       color: topicColor("MEDIA"),
-      count: sum(data, (d) => (d.type == "MEDIA" ? d.count : 0)),
+      count: sum(data, (d) => (d.type === "MEDIA" ? d.count : 0)),
     },
   ]);
   const [dataNodes, setDataNodes] = useState<Node[]>(
@@ -116,7 +116,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
     return () => {
       layoutSim.stop();
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [topics]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update Layout Simulator
   useEffect(() => {
@@ -148,7 +148,7 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
     return () => {
       nodeSim.stop();
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dataNodes]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update Node Simulator
   useEffect(() => {
@@ -157,13 +157,13 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
         .force(
           "forceX",
           forceX<SimulationNodeDatum & Partial<Node>>(
-            (d) => layout.find((e) => e.type == d.type)?.x || width / 2,
+            (d) => layout.find((e) => e.type === d.type)?.x || width / 2,
           ),
         )
         .force(
           "forceY",
           forceY<SimulationNodeDatum & Partial<Node>>(
-            (d) => layout.find((e) => e.type == d.type)?.y || width / 2,
+            (d) => layout.find((e) => e.type === d.type)?.y || width / 2,
           ),
         );
       nodeSimulator.nodes(dataNodes);
@@ -173,12 +173,12 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
       });
       nodeSimulator.alpha(0.8).restart();
     }
-  }, [nodeSimulator, layout, dataNodes]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [nodeSimulator, layout, dataNodes, width]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Data Update
   useEffect(() => {
     const updatedNodes = data.map((d) => {
-      const existing = dataNodes.find((n) => n.id == d.id);
+      const existing = dataNodes.find((n) => n.id === d.id);
       if (existing) {
         return { ...existing, count: d.count };
       }
@@ -188,10 +188,10 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({
     setTopics(
       topics.map((t) => ({
         ...t,
-        count: sum(updatedNodes, (d) => (d.type == t.type ? d.count : 0)),
+        count: sum(updatedNodes, (d) => (d.type === t.type ? d.count : 0)),
       })),
     );
-  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [data, dataNodes.find, topics.map]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="w-full overflow-scroll">

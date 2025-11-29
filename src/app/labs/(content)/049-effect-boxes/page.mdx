@@ -105,10 +105,7 @@ that could handle escape sequences and terminal capabilities.
  * The Box data type, representing a rectangular area of text with various combinators for layout and alignment.
  */
 export interface Box<A = never>
-  extends Pipeable,
-    Equal.Equal,
-    Hash.Hash,
-    Inspectable.Inspectable {
+  extends Pipeable, Equal.Equal, Hash.Hash, Inspectable.Inspectable {
   readonly [BoxTypeId]: BoxTypeId;
   readonly rows: number;
   readonly cols: number;
@@ -126,9 +123,7 @@ export interface Box<A = never>
  * systems (like ANSI colors) to work with the Box layout system.
  */
 export interface Annotation<A = never>
-  extends Pipeable,
-    Equal.Equal,
-    Hash.Hash {
+  extends Pipeable, Equal.Equal, Hash.Hash {
   readonly [AnnotationTypeId]: "annotation";
   readonly data: A;
 }

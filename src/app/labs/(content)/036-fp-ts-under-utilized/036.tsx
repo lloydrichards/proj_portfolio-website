@@ -232,18 +232,13 @@ const _sortByArray = pipe(
 
 // order by first "Circle" then "Box" then "Pyramid"
 const byOrdinal = pipe(
-  Ord.fromCompare((a: Shape, b: Shape) =>
-    pipe(
-      O.Do,
-      O.bind("ordinal", () => O.fromNullable(["Circle", "Box", "Pyramid"])),
-      O.bind("aIdx", ({ ordinal }) => A.indexOf(a)(ordinal)),
-      O.bind("bIdx", ({ ordinal }) => A.indexOf(b)(ordinal)),
-      O.match(
-        () => 0,
-        ({ aIdx, bIdx }) => N.Ord.compare(aIdx, bIdx),
-      ),
-    ),
-  ),
+  Ord.fromCompare((a: Shape, b: Shape) => {
+    const ordinal: Shape[] = ["Circle", "Box", "Pyramid"];
+    const aIdx = ordinal.indexOf(a);
+    const bIdx = ordinal.indexOf(b);
+    if (aIdx === -1 || bIdx === -1) return 0;
+    return N.Ord.compare(aIdx, bIdx);
+  }),
   Ord.contramap((obj: SomeObj) => obj.group),
 );
 

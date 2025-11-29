@@ -1,3 +1,11 @@
+## [1.14.5](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.4...v1.14.5) (2025-11-29)
+
+
+### Bug Fixes
+
+* hydration on skill chart ([5a70723](https://github.com/lloydrichards/proj_portfolio-website/commit/5a70723ea065007604a10119f76f772ab995e0a0))
+* simplify navBar ([5d09adb](https://github.com/lloydrichards/proj_portfolio-website/commit/5d09adbe06b09d65378d5ccd8df4bf87f814e363))
+
 ## [1.14.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.3...v1.14.4) (2025-10-10)
 
 

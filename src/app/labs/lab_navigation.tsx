@@ -1,3 +1,4 @@
+"use client";
 import type { FC } from "react";
 import { Badge } from "@/components/atom/badge";
 import {
@@ -17,7 +18,7 @@ export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
     <NavigationMenu
       aria-label="Lab Navigation"
       orientation="vertical"
-      className="hidden md:contents"
+      className="contents"
     >
       <NavigationMenuList className="contents">
         <NavListItem

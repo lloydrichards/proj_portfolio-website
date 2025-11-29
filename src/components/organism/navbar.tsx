@@ -1,15 +1,10 @@
 import { FlaskConical, Layers, Ruler, User } from "lucide-react";
 import Link from "next/link";
 import { typefaceHeading3 } from "@/components/tokens/typeface";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "../atom/navigation-menu";
+import { navigationMenuTriggerStyle } from "../atom/navigation-menu";
 import { tileVariants } from "../atom/tile";
 import { ThemeToggle } from "../molecule/theme-toggle";
+import { cn } from "@/lib/utils";
 
 export const Navbar: React.FC = () => {
   const routes = [
@@ -36,34 +31,24 @@ export const Navbar: React.FC = () => {
       <Link
         href="/"
         className={typefaceHeading3(
-          "col-[1/-6] mt-0 overflow-clip md:col-[1/-10] lg:col-[1/-14]",
+          "col-[1/-6] mt-0 overflow-clip md:col-[1/-10] lg:col-[1/-14]"
         )}
       >
         lloydrichards.dev
       </Link>
-      <NavigationMenu>
-        <NavigationMenuList className="contents">
-          {routes.map((route) => (
-            <NavigationMenuItem
-              key={route.href}
-              className={tileVariants({
-                size: "box-xxs",
-                className: "overflow-visible",
-              })}
-            >
-              <NavigationMenuLink
-                className={navigationMenuTriggerStyle()}
-                asChild
-              >
-                <Link href={route.href}>
-                  {route.icon}
-                  <span className="hidden md:block">{route.label}</span>
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          ))}
-        </NavigationMenuList>
-      </NavigationMenu>
+      {routes.map((route) => (
+        <Link
+          key={route.href}
+          href={route.href}
+          className={tileVariants({
+            size: "box-xxs",
+            className: cn(navigationMenuTriggerStyle(), "overflow-visible"),
+          })}
+        >
+          {route.icon}
+          <span className="hidden md:block">{route.label}</span>
+        </Link>
+      ))}
       <ThemeToggle className={tileVariants({ size: "unset" })} />
     </header>
   );

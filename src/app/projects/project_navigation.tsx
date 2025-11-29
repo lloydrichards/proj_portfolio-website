@@ -1,3 +1,4 @@
+"use client";
 import type { FC } from "react";
 import { Badge } from "@/components/atom/badge";
 import {
@@ -9,7 +10,7 @@ import { cn } from "@/lib/utils";
 import type { Project } from "@/types/Project";
 
 interface ProjectNavigationProps {
-  projects: Array<Project>;
+  projects: typeof Project.Array.Encoded;
   className?: string;
 }
 export const ProjectNavigation: FC<ProjectNavigationProps> = ({
@@ -20,7 +21,7 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
     <NavigationMenu
       aria-label="Project Navigation"
       orientation="vertical"
-      className="hidden md:contents"
+      className="contents"
     >
       <NavigationMenuList className="contents">
         <NavListItem

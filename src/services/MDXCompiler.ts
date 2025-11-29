@@ -7,11 +7,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { components } from "@/mdx-components";
-
-class MDXCompileError {
-  readonly _tag = "MDXCompileError";
-  constructor(readonly error: unknown) {}
-}
+import { MDXCompileError } from "@/types/Errors";
 
 export class MDXCompiler extends Effect.Service<MDXCompiler>()(
   "app/MDXCompiler",
@@ -49,7 +45,12 @@ export class MDXCompiler extends Effect.Service<MDXCompiler>()(
                 },
                 components: { ...components },
               }),
-            catch: (error) => new MDXCompileError(error),
+            catch: (error) =>
+              new MDXCompileError({
+                source: source.substring(0, 100),
+                originalError:
+                  error instanceof Error ? error : new Error(String(error)),
+              }),
           }).pipe(Effect.withSpan("createMDX", { attributes: { source } })),
         ),
       ),

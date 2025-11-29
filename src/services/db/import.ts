@@ -23,11 +23,12 @@ const importJsonToDatabase = async (fileName: string) => {
         const tableData = importData[tableName];
         if (!Array.isArray(tableData)) continue;
 
-        // Clear existing data
+        // Clear existing data using safe Drizzle API
+        await db.delete(table as $IntentionalAny);
+
+        // Reset auto-increment sequence for SQLite
         await db.run(
-          sql.raw(
-            `DELETE FROM ${tableName}; DELETE FROM sqlite_sequence WHERE name='${tableName}'`,
-          ),
+          sql`DELETE FROM sqlite_sequence WHERE name = ${tableName}`,
         );
 
         // Skip if no data to import
@@ -52,7 +53,7 @@ const main = async () => {
   try {
     // Get the most recent backup file
     const backupDir = path.join(process.cwd(), "database/backup");
-    const files = await await readdir(backupDir);
+    const files = await readdir(backupDir);
     const latestBackup = files
       .filter((f) => f.startsWith("database-export-"))
       .sort()

@@ -1,10 +1,24 @@
 import { FileSystem } from "@effect/platform";
 import { BunFileSystem } from "@effect/platform-bun";
 import { Array, Effect, flow, Order, pipe, Schema } from "effect";
-import { ImportError } from "@/types/Errors";
+import { ImportError, ValidationError } from "@/types/Errors";
 import { Lab, LabMeta } from "@/types/Lab";
 import { LAB_PATH } from "./consts";
 import { makeOGImageURL } from "./utils";
+
+/**
+ * Validate slug format to prevent path traversal attacks
+ */
+const validateSlug = (slug: string): Effect.Effect<string, ValidationError> =>
+  Effect.sync(() => {
+    if (!/^[\w-]+$/.test(slug)) {
+      throw new ValidationError({
+        field: "slug",
+        message: `Invalid lab slug format: ${slug}`,
+      });
+    }
+    return slug;
+  });
 
 export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
   dependencies: [BunFileSystem.layer],
@@ -12,13 +26,17 @@ export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
     Effect.let("getLab", () =>
       Effect.fn("Laboratory.getLab")((slug: string) =>
         pipe(
-          Effect.tryPromise({
-            try: () => import(`@/app/labs/(content)/${slug}/page.mdx`),
-            catch: () =>
-              new ImportError({
-                path: `@/app/labs/(content)/${slug}/page.mdx`,
-              }),
-          }),
+          validateSlug(slug),
+          Effect.flatMap((validSlug) =>
+            Effect.tryPromise({
+              try: () => import(`@/app/labs/(content)/${validSlug}/page.mdx`),
+              catch: (error) =>
+                new ImportError({
+                  path: `@/app/labs/(content)/${validSlug}/page.mdx`,
+                  reason: error,
+                }),
+            }),
+          ),
           Effect.map((d) => d.metadata),
           Effect.andThen(Schema.decodeUnknown(LabMeta)),
           Effect.andThen(

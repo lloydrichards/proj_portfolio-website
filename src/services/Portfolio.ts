@@ -80,37 +80,56 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
       Effect.fn("Portfolio.getTeamMembers")(
         (team?: readonly (readonly [string, string])[]) =>
           pipe(
-            Effect.promise(() => db.select().from(teamMember)),
-            Effect.andThen((teamMembers) =>
-              pipe(
-                Option.fromNullable(team),
-                Option.match({
-                  onNone: () => [],
-                  onSome: (team) => team,
+            Effect.tryPromise({
+              try: () => db.select().from(teamMember),
+              catch: (error) => {
+                console.warn("Failed to fetch team members:", error);
+                return new Error("Database query failed");
+              },
+            }),
+            Effect.catchAll(() => Effect.succeed([] as TeamMember[])),
+            Effect.andThen((teamMembers) => {
+              if (!team || team.length === 0) {
+                return Effect.succeed([] as TeamMember[]);
+              }
+
+              return pipe(
+                Effect.sync(() =>
+                  Schema.decodeUnknownSync(Schema.Array(TeamMemberDTO))(team),
+                ),
+                Effect.catchAll((error) => {
+                  console.warn("Invalid team member data:", error);
+                  return Effect.succeed([] as (typeof TeamMemberDTO.Type)[]);
                 }),
-                Schema.decodeUnknownSync(Schema.Array(TeamMemberDTO)),
-                Array.map(({ firstName, lastName, role }) =>
-                  Option.orElseSome(
-                    Array.findFirst(
+                Effect.map((selectedTeam) =>
+                  selectedTeam.map(({ firstName, lastName, role }) => {
+                    const found = Array.findFirst(
                       teamMembers,
                       (m) =>
                         m.firstName === firstName &&
                         m.lastName === lastName &&
                         m.role === role,
-                    ),
-                    () =>
-                      ({
-                        id: -Math.random(),
+                    );
+
+                    return Option.orElseSome(found, () => {
+                      // Generate stable ID from name hash
+                      const hash =
+                        firstName.charCodeAt(0) +
+                        lastName.charCodeAt(0) +
+                        role.charCodeAt(0);
+                      return {
+                        id: -(Math.abs(hash) + 1),
                         firstName,
                         lastName,
                         role,
                         imgUrl: null,
-                      }) as TeamMember,
-                  ),
+                      } as TeamMember;
+                    });
+                  }),
                 ),
-                Array.getSomes,
-              ),
-            ),
+                Effect.map(Array.getSomes),
+              );
+            }),
             Effect.withSpan("getTeamMembers"),
           ),
       ),

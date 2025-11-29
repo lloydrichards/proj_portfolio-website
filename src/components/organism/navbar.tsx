@@ -1,10 +1,10 @@
 import { FlaskConical, Layers, Ruler, User } from "lucide-react";
 import Link from "next/link";
 import { typefaceHeading3 } from "@/components/tokens/typeface";
+import { cn } from "@/lib/utils";
 import { navigationMenuTriggerStyle } from "../atom/navigation-menu";
 import { tileVariants } from "../atom/tile";
 import { ThemeToggle } from "../molecule/theme-toggle";
-import { cn } from "@/lib/utils";
 
 export const Navbar: React.FC = () => {
   const routes = [
@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
       <Link
         href="/"
         className={typefaceHeading3(
-          "col-[1/-6] mt-0 overflow-clip md:col-[1/-10] lg:col-[1/-14]"
+          "col-[1/-6] mt-0 overflow-clip md:col-[1/-10] lg:col-[1/-14]",
         )}
       >
         lloydrichards.dev

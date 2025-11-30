@@ -73,12 +73,12 @@ any updates.
 ```ts showLineNumbers title="@/hooks/use-schema-params.ts"
 export function useSchemaParams<A extends Record<string, unknown>, I>(
   schema: Schema.Schema<A, I, never>,
-  defaultValue: A,
+  defaultValue: A
 ) {
   const params = useSearchParams();
 
   const paramResult = Schema.decodeUnknownEither(Schema.partial(schema))(
-    groupParamsByKey(params),
+    groupParamsByKey(params)
   );
 
   const buildQueryString = useCallback(
@@ -90,7 +90,7 @@ export function useSchemaParams<A extends Record<string, unknown>, I>(
           Either.match({
             onLeft: () => ({}) as Record<string, unknown>,
             onRight: (p) => p,
-          }),
+          })
         ),
         ...partialParams,
       });
@@ -105,7 +105,7 @@ export function useSchemaParams<A extends Record<string, unknown>, I>(
 
       return newParams.toString();
     },
-    [paramResult, schema, params],
+    [paramResult, schema, params]
   );
 
   return [

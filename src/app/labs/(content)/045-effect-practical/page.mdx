@@ -6,7 +6,6 @@ export const metadata = createOGImageMetadata({
   tags: ["effect", "functional-programming", "fp-ts"],
   date: "2025-02-07",
   repo: "https://github.com/lloydrichards/edu_effect-playground",
-  isFeatured: true,
 });
 
 Continuing with the theme of looking back on what I learnt with
@@ -34,18 +33,18 @@ export const getAllProjects = pipe(
       pipe(
         filenames,
         Array.map((f) => f.replace(/\.mdx$/, "")),
-        Array.map(getProject),
+        Array.map(getProject)
       ),
-      { concurrency: "unbounded" },
-    ),
+      { concurrency: "unbounded" }
+    )
   ),
   Effect.map(
     flow(
       Array.map(([_, p]) => p),
       Array.sortBy(Order.mapInput(Order.number, (d) => d.id)),
-      Array.reverse,
-    ),
-  ),
+      Array.reverse
+    )
+  )
 );
 ```
 
@@ -66,7 +65,7 @@ type Lab = {
 };
 
 const byYear = Order.mapInput(Order.number, (lab: Lab) =>
-  new Date(lab.date).getFullYear(),
+  new Date(lab.date).getFullYear()
 );
 const byName = Order.mapInput(Order.string, (lab: Lab) => lab.title);
 
@@ -107,7 +106,7 @@ export const getLab = (slug: string) =>
         date: metadata.date,
       }),
       isPublished: metadata.isPublished ?? true,
-    })),
+    }))
   );
 ```
 

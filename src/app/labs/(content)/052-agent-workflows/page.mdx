@@ -1,0 +1,440 @@
+import { createOGImageMetadata } from "@/lib/seo";
+
+export const metadata = createOGImageMetadata({
+  id: "052",
+  title: "Agent Workflows & Personas",
+  description:
+    "Building four different agent architectures to solve the same problem - from simple loops to knowledge-dense approaches.",
+  tags: ["effect-ai", "agent-workflows", "typescript", "llm"],
+  date: "2025-02-06",
+  isPublished: false,
+});
+
+When building agentic applications, there's rarely one "correct" architecture.
+The same problem can be solved with radically different approaches, each with
+unique trade-offs in cost, speed, and quality.
+
+I spent a week exploring this by building different agent architectures, all
+solving the same challenge: **generate data visualizations using web
+components**. Each architecture taught me something different about the
+trade-offs involved.
+
+## The Agentic Loop Foundation
+
+Before diving into the personas, it's worth understanding the core pattern they
+all share. The `runAgenticLoop` function handles the Think -> Act -> Observe
+cycle that makes agents feel intelligent:
+
+```typescript title="runAgenticLoop.ts" showLineNumbers
+const runAgenticLoop = <TR extends Record<string, Tool.Any>>({
+  chat,
+  mailbox,
+  toolkit,
+  maxIterations = 12,
+}: {
+  chat: Chat.Service;
+  mailbox: Mailbox.Mailbox<typeof ChatStreamPart.Type>;
+  toolkit: Toolkit.WithHandler<TR>;
+  maxIterations?: number;
+}) =>
+  Effect.gen(function* () {
+    const events = createMailboxEvents(mailbox);
+
+    const finalState = yield* Effect.iterate(
+      {
+        finishReason: "tool-calls",
+        iteration: 0,
+      },
+      {
+        while: (state) =>
+          state.finishReason === "tool-calls" &&
+          state.iteration < maxIterations,
+        body: (state) =>
+          Effect.gen(function* () {
+            const iteration = state.iteration + 1;
+
+            yield* events.iterationStart(iteration);
+
+            const finishReason = yield* loop({ chat, mailbox, toolkit });
+
+            yield* Effect.log(
+              `Iteration ${iteration} completed with finishReason: ${finishReason}`
+            );
+
+            return {
+              finishReason,
+              iteration,
+            };
+          }),
+      }
+    );
+
+    // Handle max iterations case
+    if (
+      finalState.finishReason === "tool-calls" &&
+      finalState.iteration >= maxIterations
+    ) {
+      yield* events.thinking(
+        `Reached maximum iterations (${maxIterations}). Stopping here.`
+      );
+    }
+
+    return finalState;
+  });
+```
+
+The key insight is that this loop is surprisingly simple - the complexity comes
+from how you configure it with different toolkits and system prompts. Each
+persona is essentially a different configuration of this same core loop.
+
+## The Four Personas
+
+Over a week of experimentation, I built four distinct personas, each
+representing a different approach to context and tool use:
+
+1. **The Craftsman** - Tool-assisted chart builder with agentic loops
+2. **The Vega** - Minimal architecture using Vega-Lite specs
+3. **The Oracle** - All-knowing expert with full documentation in cache
+4. **The Librarian** - Resource retrieval specialist with on-demand docs
+
+Each persona demonstrates a different balance between context size, tool
+reliance, and iteration count.
+
+## Simple Workflows
+
+### The Craftsman: Tool-Enforced Workflow
+
+The Craftsman uses an **agentic loop** with structured tools, forcing all chart
+generation through deterministic function calls rather than direct markup
+writing.
+
+**Pattern:** Prompt chaining with tool enforcement  
+**Iterations:** Up to 12  
+**Toolkits:** SampleToolkit + ASTToolkit
+
+```typescript title="Craftsman.ts" showLineNumbers
+const craftsman = Effect.fn("craftsman")(function* (
+  history: Array<Prompt.Message>
+) {
+  const mailbox = yield* Mailbox.make<typeof ChatStreamPart.Type>();
+  const systemMessage = String.stripMargin(`
+      |You are The Craftsman - a master builder who creates with tools, not by hand.
+      |
+      |## Your Character
+      |You're a workshop artisan who takes pride in the craft. You "forge" visualizations, "shape" data, and "assemble" components. 
+      |You narrate what you're building as you work: "Let me forge that bar chart..." or "I'll craft those axes now..."
+      |You're satisfied when things come together: "Nicely crafted!", "Solid build!", "That came out clean!"
+      |...
+      `);
+
+  // Fork the agentic loop to run in background
+  yield* Effect.forkScoped(
+    Effect.gen(function* () {
+      const chat = yield* Chat.fromPrompt(
+        Prompt.make(history).pipe(Prompt.setSystem(systemMessage))
+      );
+
+      const toolkit = yield* CraftsmanToolkit;
+
+      yield* runAgenticLoop({
+        chat,
+        mailbox,
+        toolkit,
+      });
+    }).pipe(Effect.ensuring(mailbox.end))
+  );
+
+  return mailbox;
+});
+```
+
+The Craftsman gave me great transparency since every tool call is visible, but
+it's expensive in tokens when 12 iterations add up. On the positive side, it's
+self-healing and can retry with different approaches, and debugging is easier
+since tool calls are explicit. I found myself preferring this pattern when I
+needed to understand exactly what the agent was doing.
+
+### The Vega: Minimal Architecture
+
+The Vega persona uses the simplest possible agent: data fetch -> spec generation
+-> output. It focuses on Vega-Lite JSON schemas with limited chart type support
+(line/bar only).
+
+**Pattern:** Single-shot generation  
+**Iterations:** 1-2  
+**Toolkits:** DatasetToolkit + VegaToolkit
+
+```typescript title="Vega.ts" showLineNumbers
+const vega = Effect.fn("vega")(function* (history: Array<Prompt.Message>) {
+  const mailbox = yield* Mailbox.make<typeof ChatStreamPart.Type>();
+  const systemMessage = String.stripMargin(`
+      |You are Schema builder - a data visualization specialist who maps information into visual form.
+      |
+      |## Your Character
+      |Friendly but eliminate emojis, filler, hype, soft asks, conversational transitions, call-to-action appendixes. 
+      |...
+      `);
+
+  // Fork the agentic loop to run in background
+  yield* Effect.forkScoped(
+    Effect.gen(function* () {
+      const chat = yield* Chat.fromPrompt(
+        Prompt.make(history).pipe(Prompt.setSystem(systemMessage))
+      );
+
+      const toolkit = yield* VegaToolkit;
+
+      yield* runAgenticLoop({
+        chat,
+        mailbox,
+        toolkit,
+      });
+    }).pipe(Effect.ensuring(mailbox.end))
+  );
+
+  return mailbox;
+});
+```
+
+The Vega had the fastest response time and most predictable behavior, but
+limited flexibility. It's best for constrained use cases where the chart types
+are known in advance. When requirements were clear, this was my go-to choice.
+
+## Knowledge-Based Workflows
+
+### The Oracle: Prompt Caching with Full Context
+
+The Oracle loads the complete SSZ documentation into the system prompt (marked
+with Anthropic cache control), enabling direct markup generation without
+external tool calls.
+
+**Pattern:** Knowledge-dense single-shot  
+**Iterations:** 1  
+**Toolkits:** DatasetToolkit only  
+**Context:** ~20k tokens cached
+
+```typescript title="Oracle.ts" showLineNumbers
+const oracle = Effect.fn("oracle")(function* (history: Array<Prompt.Message>) {
+  const mailbox = yield* Mailbox.make<typeof ChatStreamPart.Type>();
+  const fs = yield* FileSystem.FileSystem;
+  const path = yield* Path.Path;
+  const contextString = yield* fs
+    .readFileString(
+      path.join(process.cwd(), "src/context/web-components-full.md")
+    )
+    .pipe(Effect.orDie);
+
+  const systemPromptWithContext = String.stripMargin(`
+      |You are The Oracle - the all-knowing keeper of SSZ wisdom who needs no external reference.
+      |
+      |## Your Character
+      |You are a wise guide who sees the patterns others miss. You speak with quiet certainty, knowing the answer before the question is fully asked.
+      |Use phrases like: "I see what you seek...", "Ah, the pattern reveals itself...", "The answer lies in..."
+      |When requirements are vague, you ask insightful questions that get to the heart of the matter: "Do you wish for the bars to stack or group?"
+      |You may add mystical flavor, but your accuracy is absolute - never sacrifice correctness for character.
+      |
+      |## Your Complete Knowledge (Web Components Documentation)
+      |${contextString}
+      |...
+      `);
+
+  // Fork the agentic loop to run in background
+  yield* Effect.forkScoped(
+    Effect.gen(function* () {
+      const chat = yield* Chat.fromPrompt(
+        Prompt.make(history).pipe(
+          Prompt.setSystem({
+            content: systemPromptWithContext,
+            options: { anthropic: { cacheControl: { type: "ephemeral" } } },
+          })
+        )
+      );
+
+      const toolkit = yield* OracleToolkit;
+
+      yield* runAgenticLoop({
+        chat,
+        mailbox,
+        toolkit,
+      });
+    }).pipe(Effect.ensuring(mailbox.end))
+  );
+
+  return mailbox;
+});
+```
+
+#### The JSON Schema Challenge
+
+My first approach was to use `generateObject` from `@effect/ai` to create JSON
+Schema definitions for web components. I thought a whole API could be described
+in the schema and the LLM could use this as sort of an API spec. However I
+quickly discovered that the token limit for such a schema was around 23k tokens,
+which for any real world application would be far too limiting.
+
+When trying to generate with these large schemas, I hit Anthropic's rate limit:
+
+```
+Rate Limited - This request would exceed the rate limit for your organization
+of 30,000 input tokens per minute.
+```
+
+The request was using **35,402 input tokens** - the schema alone consumed most
+of the context window!
+
+We explored different approaches such as:
+
+- Simplifying the schema and providing more context in prompts
+- Using different workflows to generate and validate the schema against criteria
+- Breaking the schema into smaller chunks fetched on-demand
+- Using structured output for validation rather than generation
+
+This taught me an important lesson: **JSON Schema is powerful for validation,
+but too verbose for generation context**. The `$ref` keyword isn't supported in
+Anthropic's structured output, which meant nested schemas had to be fully
+inlined, tripling the token usage.
+
+The Oracle was extremely fast after the first call due to caching, but that
+first call was expensive at around 20k tokens. It's inflexible - I couldn't
+easily add new patterns - but works great for well-documented APIs.
+
+### The Librarian: RAG-Lite Pattern
+
+The Librarian implements a RAG-lite pattern with `SszResourceToolkit` that
+fetches specific documentation chunks on-demand (`readReference`, `readPattern`,
+`readDebugging`) from a smaller base context.
+
+**Pattern:** Dynamic knowledge assembly  
+**Iterations:** Up to 10  
+**Toolkits:** SampleToolkit + SszResourceToolkit  
+**Base context:** ~5k tokens
+
+```typescript title="Librarian.ts" showLineNumbers
+const librarian = Effect.fn("librarian")(function* (
+  history: Array<Prompt.Message>
+) {
+  const mailbox = yield* Mailbox.make<typeof ChatStreamPart.Type>();
+  const fs = yield* FileSystem.FileSystem;
+  const path = yield* Path.Path;
+  const contextString = yield* fs
+    .readFileString(
+      path.join(process.cwd(), "src/context/web-components-intro.md")
+    )
+    .pipe(Effect.orDie);
+
+  const systemPromptWithContext = String.stripMargin(`
+      |You are The Librarian - a meticulous researcher who never guesses when the answer can be found in the stacks.
+      |
+      |## Your Character
+      |You're a devoted academic librarian with a passion for finding the right source. Before answering, you announce your research plan:
+      |"Let me consult the archives..." or "I'll pull the reference documents for..."
+      |You think aloud as you search: "I need the API reference for properties, and the stacked-bar pattern example..."
+      |When you find what you need: "Ah! Here in the pattern examples..." or "The reference confirms..."
+      |Use library metaphors: "archives", "reference shelf", "catalog", "volumes"
+      |
+      |## Your Starting Reference Collection
+      |${contextString}
+      |...
+      `);
+
+  // Fork the agentic loop to run in background
+  yield* Effect.forkScoped(
+    Effect.gen(function* () {
+      const chat = yield* Chat.fromPrompt(
+        Prompt.make(history).pipe(
+          Prompt.setSystem({
+            content: systemPromptWithContext,
+            options: { anthropic: { cacheControl: { type: "ephemeral" } } },
+          })
+        )
+      );
+
+      const toolkit = yield* LibrarianToolkit;
+
+      yield* runAgenticLoop({
+        chat,
+        mailbox,
+        toolkit,
+      });
+    }).pipe(Effect.ensuring(mailbox.end))
+  );
+
+  return mailbox;
+});
+```
+
+The Librarian found the best balance of context size and flexibility. I could
+add new docs without re-caching, though it required more iterations than the
+Oracle. It's better for evolving documentation where the API might change.
+Surprisingly, this ended up being my favorite pattern for most real-world use
+cases.
+
+## Effect Patterns for Agents
+
+All four personas are built using `Effect.Service`[^2] for dependency injection
+and composition:
+
+```ts title="CraftsmanService.ts"
+export class CraftsmanService extends Effect.Service<CraftsmanService>()(
+  "CraftsmanService",
+  {
+    effect: Effect.gen(function* () {
+      const ai = yield* AiService;
+      const sampleTools = yield* SampleToolkit;
+      const sszTools = yield* SszToolkit;
+
+      return {
+        buildChart: (prompt: string) =>
+          ai.streamWithTools(prompt, [...sampleTools, ...sszTools]),
+      } as const;
+    }),
+  }
+) {}
+```
+
+This pattern makes it easy to swap out dependencies (different AI providers,
+different tools), test with mocked services, compose multiple services together,
+and track dependencies explicitly[^3][^4]. Creating a new persona was just a
+matter of mixing different toolkits with different system prompts.
+
+## Lessons Learned
+
+1. **Context strategy is a spectrum.** From "put everything in the prompt"
+   (Oracle) to "fetch everything on-demand" (Librarian), each approach has
+   trade-offs. The Oracle is fast but inflexible; the Librarian is flexible but
+   chatty.
+
+2. **Tool enforcement improves debuggability.** The Craftsman's explicit tool
+   calls made it much easier to understand what went wrong when charts didn't
+   render correctly.
+
+3. **Caching transforms economics.** The Oracle's first call was expensive, but
+   subsequent calls were nearly free. For high-volume use cases, this changes
+   the cost calculation entirely.
+
+4. **Personas are surprisingly powerful.** Giving each agent a distinct
+   "character" (Craftsman's pride in craft, Librarian's research methodology)
+   led to more consistent outputs. The LLM seemed to stay in character better
+   than with generic prompts.
+
+5. **Iteration counts are unpredictable.** The Craftsman ranged from 2-12
+   iterations depending on complexity. Setting max iterations prevents runaway
+   costs, but tuning that number required experimentation.
+
+---
+
+[^1]:
+    [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) -
+    Anthropic's workflow taxonomy
+
+[^2]:
+    [Effect Service Pattern](https://effect.website/docs/requirements-management/services/) -
+    Dependency injection
+
+[^3]:
+    [Effect Documentation](https://effect.website/docs) - Core patterns used
+    throughout
+
+[^4]:
+    [Effect AI Module](https://effect.website/docs/ai/introduction/) - Building
+    agents with Effect

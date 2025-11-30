@@ -157,7 +157,7 @@ export const components = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "bg-code text-code-foreground mb-4 overflow-x-auto rounded-md p-3",
+        "bg-code text-code-foreground mb-4 overflow-x-auto rounded-md p-3 font-mono",
         className,
       )}
       {...props}
@@ -166,7 +166,7 @@ export const components = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        "bg-code text-code-foreground px-1 font-mono text-sm tracking-wider",
+        "bg-code text-code-foreground px-1 font-mono text-sm",
         className,
       )}
       {...props}

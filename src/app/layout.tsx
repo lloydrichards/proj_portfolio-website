@@ -1,7 +1,7 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { inter, josefin_sans, plex_mono, roboto_mono } from "@/styles/fonts";
+import { fira_mono, josefin_sans, roboto_mono } from "@/styles/fonts";
 
 import "@/styles/globals.css";
 
@@ -58,7 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteMetadata.language}
-      className={`${inter.variable} ${roboto_mono.variable} ${josefin_sans.variable} ${plex_mono.variable}`}
+      className={`${roboto_mono.variable} ${josefin_sans.variable} ${fira_mono.variable}`}
       suppressHydrationWarning
     >
       <Script

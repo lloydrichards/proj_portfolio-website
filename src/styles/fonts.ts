@@ -1,15 +1,4 @@
-import {
-  IBM_Plex_Mono,
-  Inter,
-  Josefin_Sans,
-  Roboto_Mono,
-} from "next/font/google";
-
-export const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
+import { Fira_Mono, Josefin_Sans, Roboto_Mono } from "next/font/google";
 
 export const josefin_sans = Josefin_Sans({
   subsets: ["latin"],
@@ -23,9 +12,9 @@ export const roboto_mono = Roboto_Mono({
   variable: "--font-roboto-mono",
 });
 
-export const plex_mono = IBM_Plex_Mono({
+export const fira_mono = Fira_Mono({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "700"],
   display: "swap",
-  variable: "--font-plex-mono",
+  variable: "--font-fira-mono",
 });

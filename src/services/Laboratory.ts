@@ -78,6 +78,11 @@ export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
             Array.reverse,
           ),
         ),
+        Effect.map((labs) =>
+          process.env.NODE_ENV === "production"
+            ? Array.filter(labs, (lab) => lab.isPublished !== false)
+            : labs,
+        ),
       ),
     ),
     Effect.let("featured", ({ all }) =>

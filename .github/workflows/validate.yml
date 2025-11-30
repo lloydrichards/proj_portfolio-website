@@ -11,8 +11,8 @@ on:
       - reopened
 
 jobs:
-  lint:
-    name: "Lint"
+  check:
+    name: "Check"
     runs-on: ubuntu-latest
     env:
       DB_FILE_NAME: database/db.sqlite
@@ -21,7 +21,7 @@ jobs:
       - uses: oven-sh/setup-bun@v1
 
       - run: bun install --frozen-lockfile
-      - run: bun lint
+      - run: bun check
 
   verify-types:
     name: "Types"
@@ -34,15 +34,3 @@ jobs:
 
       - run: bun install --frozen-lockfile
       - run: bun type-check
-
-  verify-formatting:
-    name: "Formatting"
-    runs-on: ubuntu-latest
-    env:
-      DB_FILE_NAME: database/db.sqlite
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
-
-      - run: bun install --frozen-lockfile
-      - run: bun format:check

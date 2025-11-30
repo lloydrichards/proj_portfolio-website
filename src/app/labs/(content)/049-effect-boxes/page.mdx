@@ -253,10 +253,10 @@ const layout = Box.vcat(
         Box.text("Click here: "),
         Reactive.makeReactive(Box.text("[ OK ]"), "ok-button"),
       ],
-      Box.top,
+      Box.top
     ),
   ],
-  Box.left,
+  Box.left
 );
 
 // Get positions of all reactive elements
@@ -293,7 +293,7 @@ export class Renderer extends Context.Tag("Renderer")<
     readonly renderContent: <A>(box: Box.Box<A>) => Effect.Effect<string[]>;
     readonly postProcess: <A>(
       lines: string[],
-      annotation?: Annotation.Annotation<A>,
+      annotation?: Annotation.Annotation<A>
     ) => Effect.Effect<string[]>;
     readonly processor: R.TextProcessor;
   }
@@ -308,7 +308,7 @@ to create slight variations on the same renderer.
 
 ```ts title="Renderer.ts"
 export const HtmlRendererLive: Layer.Layer<Renderer> = makeHtmlRenderer.pipe(
-  Layer.provideMerge(HtmlRenderConfig.Default),
+  Layer.provideMerge(HtmlRenderConfig.Default)
 );
 
 export const HtmlPrettyRendererLive: Layer.Layer<Renderer> =
@@ -320,9 +320,9 @@ export const HtmlPrettyRendererLive: Layer.Layer<Renderer> =
           indent: true,
           indentSize: 2,
           preserveWhitespace: true,
-        }),
-      ),
-    ),
+        })
+      )
+    )
   );
 ```
 

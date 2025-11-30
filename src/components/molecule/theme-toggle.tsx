@@ -25,7 +25,9 @@ export const ThemeToggle = ({ className }: { className?: string }) => {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </TooltipTrigger>
-      <TooltipContent>Toggle between light and dark theme</TooltipContent>
+      <TooltipContent side="right">
+        Toggle between light and dark theme
+      </TooltipContent>
     </Tooltip>
   );
 };

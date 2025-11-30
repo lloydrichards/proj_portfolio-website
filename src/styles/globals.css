@@ -125,7 +125,7 @@
     --primary: var(--color-primary-700);
     --primary-foreground: var(--background);
 
-    --secondary: var(--color-mono-100);
+    --secondary: var(--color-secondary-500);
     --secondary-foreground: var(--foreground);
 
     --card: var(--color-mono-100);

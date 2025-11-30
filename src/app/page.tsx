@@ -1,5 +1,8 @@
 import { Effect, Schema } from "effect";
+import { Briefcase, FlaskConical, Star } from "lucide-react";
 import { Tile } from "@/components/atom/tile";
+import SvgGithub from "@/components/icons/github";
+import { KPICard } from "@/components/molecule/kpi_card";
 import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { ThemeToggle } from "@/components/molecule/theme-toggle";
@@ -7,17 +10,27 @@ import { Logo } from "@/components/organism/logo";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
+import { GitHub } from "@/services/GitHub";
 import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
 
 const HomePage = async () => {
-  const [featuredLabs, allProjects] = await RuntimeServer.runPromise(
+  const [
+    featuredLabs,
+    allProjects,
+    allLabs,
+    allPortfolioProjects,
+    githubStats,
+  ] = await RuntimeServer.runPromise(
     Effect.all(
       [
         Laboratory.featured.pipe(Effect.andThen(Schema.encode(Lab.Array))),
         Portfolio.featured,
+        Laboratory.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
+        Portfolio.all,
+        GitHub.getStats("lloydrichards"),
       ],
       { concurrency: "unbounded" },
     ),
@@ -46,6 +59,45 @@ const HomePage = async () => {
           through social media.
         </p>
       </Tile>
+
+      {/* KPI Cards Section - Grouped together for better visual cohesion */}
+      <Tile size="box-sm">
+        <KPICard
+          label="Projects"
+          value={allPortfolioProjects.length}
+          subtitle="Total Articles"
+          icon={<Briefcase className="size-5" />}
+        />
+      </Tile>
+
+      <Tile size="box-sm">
+        <KPICard
+          label="Labs"
+          value={allLabs.length}
+          subtitle="Total Published"
+          icon={<FlaskConical className="size-5" />}
+        />
+      </Tile>
+
+      <Tile size="box-sm">
+        <KPICard
+          label="Github"
+          value={githubStats.repos}
+          subtitle="Total Repos"
+          icon={<SvgGithub className="size-5" />}
+        />
+      </Tile>
+
+      <Tile size="box-sm">
+        <KPICard
+          label="GitHub"
+          value={githubStats.stars}
+          subtitle="Total Stars"
+          icon={<Star className="size-5" />}
+        />
+      </Tile>
+
+      {/* Projects Section */}
       {allProjects.map((project) => (
         <Tile size="box-md" key={`project${project.slug}`}>
           <ProjectCard
@@ -55,14 +107,19 @@ const HomePage = async () => {
           />
         </Tile>
       ))}
+
+      {/* Skills Chart */}
       <Tile size="square-lg" className="bg-background group grid items-center">
         <SkillBarChart />
       </Tile>
+
+      {/* Labs Section */}
       {featuredLabs.map((lab) => (
         <Tile size="square-md" key={`lab${lab.slug}`}>
           <LabCard lab={lab} />
         </Tile>
       ))}
+
       <Tile>
         <ThemeToggle />
       </Tile>

@@ -16,8 +16,10 @@ using D3 and react has always been an exploration of the best intersection
 between declarative and imperative code (even explored different patterns with
 [proj_d3-react-patterns](https://github.com/lloydrichards/proj_d3-react-patterns)).
 
-Recently I've been exploring a new idea: **What if we could build data
-visualizations using HTML as the composition language, rather than JavaScript?**
+Recently I've been exploring a new idea:
+
+> What if we could build data visualizations using HTML as the composition
+> language, rather than JavaScript?
 
 I've already explored web components for UI with
 [Lit and Tailwind](/labs/039-lit-with-tailwind), and I wanted to see if the same
@@ -85,7 +87,7 @@ This is declarative in spirit, but the structure is hidden behind method calls.
 
 My thinking goes something like:
 
-> **Doesn't web components offer a more natural way to compose visualizations?**
+> Doesn't web components offer a more natural way to compose visualizations?
 
 Instead of tons of JS boilerplate, what if we encapsulated each part of the
 visualization as a web component? The overall structure would be visible in the
@@ -115,10 +117,12 @@ nested tree describing the visualization.
 
 The component system organizes into four distinct layers:
 
-**Layer 1: Data Management** - Handle data loading, parsing, and transformation
-**Layer 2: Visualization Container** - Orchestrate rendering and manage scales
-**Layer 3: Visual Elements** - Render the actual chart marks, axes, and legends
-**Layer 4: Interaction** - Handle user interactions and annotations
+- **Layer 1: Data Management** - Handle data loading, parsing, and
+  transformation
+- **Layer 2: Visualization Container** - Orchestrate rendering and manage scales
+- **Layer 3: Visual Elements** - Render the actual chart marks, axes, and
+  legends
+- **Layer 4: Interaction** - Handle user interactions and annotations
 
 The component tree looks like this:
 
@@ -275,7 +279,7 @@ this.dispatchEvent(
   new CustomEvent("scale-ready", {
     detail: { name: "x", scaleFunction },
     bubbles: true,
-  }),
+  })
 );
 ```
 

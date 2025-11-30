@@ -1,3 +1,10 @@
+## [1.14.6](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.5...v1.14.6) (2025-11-30)
+
+
+### Bug Fixes
+
+* filter unpublished labs ([19ecd1c](https://github.com/lloydrichards/proj_portfolio-website/commit/19ecd1c7f0b6d7769101e712cf762585fe735bbd))
+
 ## [1.14.5](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.4...v1.14.5) (2025-11-29)
 
 

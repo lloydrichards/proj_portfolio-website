@@ -58,7 +58,8 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
     .filter((l) => l.tags.some((t) => lab.tags.includes(t)));
 
   const isDev = process.env.NODE_ENV === "development";
-  const showStatusBanner = isDev && lab.status !== "published";
+  const showStatusBanner =
+    lab.status === "unpublished" || (isDev && lab.status === "draft");
 
   return (
     <>

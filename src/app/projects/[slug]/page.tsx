@@ -71,7 +71,8 @@ const ProjectPage = async ({
   );
 
   const isDev = process.env.NODE_ENV === "development";
-  const showStatusBanner = isDev && project.status !== "published";
+  const showStatusBanner =
+    project.status === "unpublished" || (isDev && project.status === "draft");
 
   return (
     <>

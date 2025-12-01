@@ -6,88 +6,94 @@ import { Lab, LabMeta } from "@/types/Lab";
 import { LAB_PATH } from "./consts";
 import { makeOGImageURL } from "./utils";
 
-/**
- * Validate slug format to prevent path traversal attacks
- */
-const validateSlug = (slug: string): Effect.Effect<string, ValidationError> =>
-  Effect.sync(() => {
-    if (!/^[\w-]+$/.test(slug)) {
-      throw new ValidationError({
-        field: "slug",
-        message: `Invalid lab slug format: ${slug}`,
-      });
-    }
-    return slug;
-  });
-
 export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
   dependencies: [BunFileSystem.layer],
-  effect: Effect.Do.pipe(
-    Effect.let("getLab", () =>
-      Effect.fn("Laboratory.getLab")((slug: string) =>
-        pipe(
-          validateSlug(slug),
-          Effect.flatMap((validSlug) =>
-            Effect.tryPromise({
-              try: () => import(`@/app/labs/(content)/${validSlug}/page.mdx`),
-              catch: (error) =>
-                new ImportError({
-                  path: `@/app/labs/(content)/${validSlug}/page.mdx`,
-                  reason: error,
-                }),
-            }),
-          ),
-          Effect.map((d) => d.metadata),
-          Effect.andThen(Schema.decodeUnknown(LabMeta)),
-          Effect.andThen(
-            (metadata) =>
-              new Lab({
-                ...metadata,
-                pathname: `/labs/${slug}`,
-                slug,
-                lastModified: new Date(),
-                ogImageURL: makeOGImageURL({
-                  title: metadata.title,
-                  description: metadata.description,
-                  tags: [...metadata.tags],
-                  date: metadata.date,
-                }),
-                isPublished: metadata.isPublished ?? true,
+  effect: Effect.gen(function* (_) {
+    const fs = yield* FileSystem.FileSystem;
+    const getLab = Effect.fn("Laboratory.getLab")((slug: string) =>
+      Effect.sync(() => {
+        if (!/^[\w-]+$/.test(slug)) {
+          throw new ValidationError({
+            field: "slug",
+            message: `Invalid lab slug format: ${slug}`,
+          });
+        }
+        return slug;
+      }).pipe(
+        Effect.flatMap((validSlug) =>
+          Effect.tryPromise({
+            try: () => import(`@/app/labs/(content)/${validSlug}/page.mdx`),
+            catch: (error) =>
+              new ImportError({
+                path: `@/app/labs/(content)/${validSlug}/page.mdx`,
+                reason: error,
               }),
-          ),
+          }),
+        ),
+        Effect.map((d) => d.metadata),
+        Effect.andThen(Schema.decodeUnknown(LabMeta)),
+        Effect.andThen(
+          (metadata) =>
+            new Lab({
+              ...metadata,
+              pathname: `/labs/${slug}`,
+              slug,
+              lastModified: new Date(),
+              ogImageURL: makeOGImageURL({
+                title: metadata.title,
+                description: metadata.description,
+                tags: [...metadata.tags],
+                date: metadata.date,
+              }),
+              status: metadata.status ?? "published",
+            }),
         ),
       ),
-    ),
-    Effect.bind("all", ({ getLab }) =>
-      pipe(
-        FileSystem.FileSystem,
-        Effect.andThen((fs) => fs.readDirectory(LAB_PATH)),
-        Effect.andThen((fileNames) =>
-          Effect.all(
-            pipe(
-              fileNames,
-              Array.filter((f) => !f.endsWith(".tsx")),
-              Array.map((f) => getLab(f)),
-            ),
-            { concurrency: "unbounded" },
-          ),
+    );
+
+    const all = Effect.gen(function* () {
+      const fileNames = yield* fs.readDirectory(LAB_PATH);
+
+      return yield* Effect.all(
+        pipe(
+          fileNames,
+          Array.filter((f) => !f.endsWith(".tsx")),
+          Array.map((f) => getLab(f)),
         ),
+        { concurrency: "unbounded" },
+      ).pipe(
         Effect.map(
           flow(
             Array.sortBy(Order.mapInput(Order.number, (d) => +d.id)),
             Array.reverse,
           ),
         ),
-        Effect.map((labs) =>
-          process.env.NODE_ENV === "production"
-            ? Array.filter(labs, (lab) => lab.isPublished !== false)
-            : labs,
-        ),
+      );
+    });
+
+    const visible = all.pipe(
+      Effect.map((labs) => {
+        if (process.env.NODE_ENV === "production") {
+          // In production: show only published items
+          return Array.filter(labs, (lab) => lab.status === "published");
+        }
+        // In development: show all items
+        return labs;
+      }),
+    );
+
+    const featured = visible.pipe(
+      Effect.map((labs) =>
+        Array.filter(labs, (lab) => lab.isFeatured === true),
       ),
-    ),
-    Effect.let("featured", ({ all }) =>
-      Array.filter(all, (lab) => lab.isFeatured === true),
-    ),
-  ),
+    );
+
+    return {
+      getLab,
+      all,
+      visible,
+      featured,
+    };
+  }),
   accessors: true,
 }) {}

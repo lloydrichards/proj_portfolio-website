@@ -46,21 +46,19 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
           >
             <span className="w-full text-center">All Projects</span>
           </NavListItem>
-          {projects
-            .filter((d) => d.isPublished)
-            .map((p) => (
-              <NavListItem
-                key={p.slug}
-                href={p.pathname}
-                className={cn(
-                  "col-span-full overflow-visible hidden md:block",
-                  className,
-                )}
-              >
-                <Badge variant="outline">{p.id}</Badge>
-                <span className="hidden lg:line-clamp-1">{p.title}</span>
-              </NavListItem>
-            ))}
+          {projects.map((p) => (
+            <NavListItem
+              key={p.slug}
+              href={p.pathname}
+              className={cn(
+                "col-span-full overflow-visible hidden md:block",
+                className,
+              )}
+            >
+              <Badge variant="outline">{p.id}</Badge>
+              <span className="hidden lg:line-clamp-1">{p.title}</span>
+            </NavListItem>
+          ))}
         </NavigationMenuList>
       </NavigationMenu>
       <Select
@@ -73,16 +71,14 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
           <SelectValue placeholder="Select a project" />
         </SelectTrigger>
         <SelectContent>
-          {projects
-            .filter((d) => d.isPublished)
-            .map((p) => (
-              <SelectItem key={p.slug} value={p.slug}>
-                <Badge variant="outline" className="mr-2">
-                  {p.id}
-                </Badge>
-                {p.title}
-              </SelectItem>
-            ))}
+          {projects.map((p) => (
+            <SelectItem key={p.slug} value={p.slug}>
+              <Badge variant="outline" className="mr-2">
+                {p.id}
+              </Badge>
+              {p.title}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </>

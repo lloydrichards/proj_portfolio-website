@@ -14,8 +14,8 @@ export const metadata = createPageMetadata({
 });
 
 const LabOverviewPage: FC = async () => {
-  const allLabs = await RuntimeServer.runPromise(
-    Laboratory.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
+  const visibleLabs = await RuntimeServer.runPromise(
+    Laboratory.visible.pipe(Effect.andThen(Schema.encode(Lab.Array))),
   );
 
   return (
@@ -27,7 +27,7 @@ const LabOverviewPage: FC = async () => {
       >
         Lab Grid
       </h1>
-      {allLabs.map((lab) => (
+      {visibleLabs.map((lab) => (
         <Tile key={lab.slug} size={lab.isFeatured ? "box-md" : "square-md"}>
           <LabCard lab={lab} asLink />
         </Tile>

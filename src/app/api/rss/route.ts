@@ -19,7 +19,7 @@ function escapeXml(unsafe: string): string {
 
 export async function GET() {
   const [allProjects, allLabs] = await RuntimeServer.runPromise(
-    Effect.all([Portfolio.all, Laboratory.all]),
+    Effect.all([Portfolio.visible, Laboratory.visible]),
   );
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>

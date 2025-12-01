@@ -1,5 +1,6 @@
 import { Schema } from "effect";
 import React from "react";
+import { ContentStatus } from "./helpers";
 
 const PROJECT_CATEGORY = Schema.Union(
   Schema.Literal("DESIGN"),
@@ -14,7 +15,7 @@ export class ProjectMeta extends Schema.Class<ProjectMeta>("ProjectMeta")({
   title: Schema.String,
   description: Schema.String,
   isFeatured: Schema.optional(Schema.Boolean),
-  isPublished: Schema.optional(Schema.Boolean),
+  status: Schema.optional(ContentStatus),
   date: Schema.Date,
   category: Schema.Array(PROJECT_CATEGORY),
   image: Schema.String,

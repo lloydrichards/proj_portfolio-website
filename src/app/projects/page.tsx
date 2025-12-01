@@ -11,7 +11,8 @@ export const metadata = createPageMetadata({
 });
 
 const ProjectOverviewPage = async () => {
-  const allProjects = await RuntimeServer.runPromise(Portfolio.all);
+  const visibleProjects = await RuntimeServer.runPromise(Portfolio.visible);
+
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
       <h1
@@ -21,7 +22,7 @@ const ProjectOverviewPage = async () => {
       >
         Project Grid
       </h1>
-      {allProjects.map((project, idx) => (
+      {visibleProjects.map((project, idx) => (
         <Tile key={project.slug} size={idx % 3 === 0 ? "box-md" : "square-md"}>
           <ProjectCard project={project} asLink />
         </Tile>

@@ -1,3 +1,4 @@
+import { cva } from "class-variance-authority";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/atom/badge";
@@ -19,13 +20,36 @@ interface IProjectCard {
   asLink?: boolean;
 }
 
+const cardVariant = cva(
+  "group @container relative flex h-full flex-col text-clip hover:shadow-sm dark:hover:shadow-none",
+  {
+    variants: {
+      status: {
+        draft: "border-yellow-500 border-2",
+        unpublished: "border-orange-500 border-2",
+        published: "",
+      },
+    },
+    defaultVariants: {
+      status: "published",
+    },
+  },
+);
+
 export const ProjectCard: React.FC<IProjectCard> = ({
   project,
   className,
   asLink,
 }) => {
+  const isDev = process.env.NODE_ENV === "development";
+
   const content = (
-    <Card className="group @container relative flex h-full flex-col text-clip hover:shadow-sm dark:hover:shadow-none">
+    <Card
+      className={cardVariant({
+        className,
+        status: isDev ? project.status : "published",
+      })}
+    >
       <CardHeader className="z-10 flex-1">
         <CardTitle className="line-clamp-2">{project.title}</CardTitle>
       </CardHeader>

@@ -44,21 +44,19 @@ export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
             <span className="w-full text-center">All Labs</span>
           </NavListItem>
 
-          {labs
-            .filter((d) => d.isPublished)
-            .map((p) => (
-              <NavListItem
-                key={p.slug}
-                href={p.pathname}
-                className={cn(
-                  "col-span-full overflow-visible hidden md:block",
-                  className,
-                )}
-              >
-                <Badge variant="outline">{p.id}</Badge>
-                <span className="hidden lg:line-clamp-1">{p.title}</span>
-              </NavListItem>
-            ))}
+          {labs.map((p) => (
+            <NavListItem
+              key={p.slug}
+              href={p.pathname}
+              className={cn(
+                "col-span-full overflow-visible hidden md:block",
+                className,
+              )}
+            >
+              <Badge variant="outline">{p.id}</Badge>
+              <span className="hidden lg:line-clamp-1">{p.title}</span>
+            </NavListItem>
+          ))}
         </NavigationMenuList>
       </NavigationMenu>
       <Select
@@ -69,16 +67,14 @@ export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
           <SelectValue placeholder="Select a lab" />
         </SelectTrigger>
         <SelectContent>
-          {labs
-            .filter((d) => d.isPublished)
-            .map((p) => (
-              <SelectItem key={p.slug} value={p.slug}>
-                <Badge variant="outline" className="mr-2">
-                  {p.id}
-                </Badge>
-                {p.title}
-              </SelectItem>
-            ))}
+          {labs.map((p) => (
+            <SelectItem key={p.slug} value={p.slug}>
+              <Badge variant="outline" className="mr-2">
+                {p.id}
+              </Badge>
+              {p.title}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </>

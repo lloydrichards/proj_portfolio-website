@@ -1,3 +1,4 @@
+import { cva } from "class-variance-authority";
 import Link from "next/link";
 import { Badge } from "@/components/atom/badge";
 import {
@@ -18,9 +19,29 @@ type LabCardProps = {
   asLink?: boolean;
 };
 
+const cardVariant = cva("@container flex h-full flex-col", {
+  variants: {
+    status: {
+      draft: "border-yellow-500 border-2",
+      unpublished: "border-orange-500 border-2",
+      published: "",
+    },
+  },
+  defaultVariants: {
+    status: "published",
+  },
+});
+
 export const LabCard: React.FC<LabCardProps> = ({ lab, className, asLink }) => {
+  const isDev = process.env.NODE_ENV === "development";
+
   const content = (
-    <Card className="@container flex h-full flex-col">
+    <Card
+      className={cardVariant({
+        className,
+        status: isDev ? lab.status : "published",
+      })}
+    >
       <CardHeader className="flex-1 gap-2 @max-[108px]:p-2">
         <div className="hidden flex-wrap gap-1 opacity-60 @min-sm:flex">
           {lab.tags?.map((t) => (

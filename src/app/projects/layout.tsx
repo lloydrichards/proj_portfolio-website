@@ -15,7 +15,9 @@ const ProjectLayout: FC<{
 
   return (
     <Mosaic sidebar>
-      <ProjectNavigation projects={allProjects} />
+      <ProjectNavigation
+        projects={allProjects.filter((d) => d.status === "published")}
+      />
       {children}
     </Mosaic>
   );

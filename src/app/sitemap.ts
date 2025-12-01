@@ -6,7 +6,7 @@ import { RuntimeServer } from "@/services/RuntimeServer";
 
 export default async function sitemap() {
   const [projects, labs] = await RuntimeServer.runPromise(
-    Effect.all([Portfolio.all, Laboratory.all]),
+    Effect.all([Portfolio.visible, Laboratory.visible]),
   );
 
   const notes = [...projects, ...labs].map((content) => ({

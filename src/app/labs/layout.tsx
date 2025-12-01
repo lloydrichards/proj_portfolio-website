@@ -16,7 +16,7 @@ const LabLayout: FC<{
   );
   return (
     <Mosaic sidebar>
-      <LabNavigation labs={allLabs} />
+      <LabNavigation labs={allLabs.filter((d) => d.status === "published")} />
       <LabInfoCard labs={allLabs} />
       <LabContent labs={allLabs}>{children}</LabContent>
     </Mosaic>

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
 import { siteMetadata } from "@/lib/metadata";
 import { createPageMetadata } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 
@@ -56,12 +57,38 @@ const ProjectPage = async ({
 
   const [content, project] = result.right;
 
+  // Access control based on status
+  if (process.env.NODE_ENV === "production") {
+    if (project.status === "draft") {
+      return notFound(); // Drafts never accessible in production
+    }
+    // "unpublished" is accessible via direct URL in production
+    // "published" is fully accessible
+  }
+
   const team = await RuntimeServer.runPromise(
     Portfolio.getTeamMembers(project.team),
   );
 
+  const isDev = process.env.NODE_ENV === "development";
+  const showStatusBanner = isDev && project.status !== "published";
+
   return (
     <>
+      {showStatusBanner && (
+        <div
+          className={cn(
+            "col-span-full p-4 rounded-md mb-4 text-center font-semibold",
+            project.status === "draft" && "bg-yellow-500/20 border-yellow-500",
+            project.status === "unpublished" &&
+              "bg-orange-500/20 border-orange-500",
+          )}
+        >
+          {project.status === "draft" && "DRAFT - Only visible in development"}
+          {project.status === "unpublished" &&
+            "UNPUBLISHED - Hidden from lists in production"}
+        </div>
+      )}
       <ProjectInfoCard project={project} team={team} />
       <article className="col-span-full mt-8 mb-16">{content}</article>
     </>

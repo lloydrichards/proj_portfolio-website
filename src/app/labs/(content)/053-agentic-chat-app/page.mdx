@@ -6,7 +6,7 @@ export const metadata = createOGImageMetadata({
   description:
     "Full-stack implementation with Effect RPC streaming, monorepo architecture, and type-safe AI integration from domain to UI.",
   tags: ["effect", "rpc", "monorepo", "effect-ai"],
-  date: "2025-02-20",
+  date: "2025-12-09",
   isPublished: false,
 });
 
@@ -23,11 +23,14 @@ agent personas, and end-to-end type safety.
 
 ## The bEvr Stack
 
-The bEvr stack gives end-to-end type safety with minimal boilerplate. **Bun**
-provides a fast runtime with built-in TypeScript support. **Effect** brings
-functional patterns with dependency injection. **Vite** offers lightning-fast
-HMR and modern build tooling. **React** is the familiar UI layer, enhanced with
-`@effect-atom` for state management.
+The stack was something I put together to optimize for developer experience when
+building full-stack Effect applications:
+
+- **Bun** provides a fast runtime with built-in TypeScript support.
+- **Effect** brings functional patterns with dependency injection.
+- **Vite** offers lightning-fast HMR and modern build tooling.
+- **React** is the familiar UI layer, enhanced with `@effect-atom` for state
+  management.
 
 ```mermaid
 graph LR
@@ -139,18 +142,19 @@ flowchart TB
 
 All services follow the same pattern:
 
-```ts title="ChatService.ts"
+```ts
 export class ChatService extends Effect.Service<ChatService>()("ChatService", {
+  dependencies: [Config.Config, SharedService.Default],
   effect: Effect.gen(function* () {
-    const ai = yield* AiService;
-    const kv = yield* KeyValueStore;
+    const config = yield* Config.Config;
+    const shared = yield* SharedService;
+
+    // Define personas here
+    const persona = yield* Effect.fn("persona")(function* (params: {}) {});
 
     return {
-      streamResponse: (messages: ChatMessage[]) =>
-        ai.streamWithTools(messages).pipe(
-          Stream.tap((part) => logStreamPart(part)),
-          Stream.mapEffect((part) => saveToKV(kv, part))
-        ),
+      persona,
+      valueB,
     } as const;
   }),
 }) {}
@@ -167,6 +171,9 @@ const CraftsmanToolkit = Toolkit.merge(
   DateTimeToolkit,
   DatasetToolkit
 );
+
+// Vega: Charting focus
+const VegaToolkit = Toolkit.merge(ChartToolkit, DatasetToolkit);
 
 // Librarian: On-demand docs
 const LibrarianToolkit = Toolkit.merge(
@@ -211,7 +218,7 @@ export const EventRpcLive = EventRpc.toLayer(
 
     return EventRpc.of({
       chat: (messages) =>
-        chat.streamResponse(messages).pipe(
+        chat.persona(messages).pipe(
           Stream.filterMap((part) => {
             // Transform AI events to ChatStreamPart
             if (part.type === "text-delta") {
@@ -248,6 +255,33 @@ patterns as the server.
 
 ### Creating Streaming Atoms
 
+```ts title="packages/domain/src/ChatResponse.ts"
+export const ChatResponse = Schema.Union(
+  // Initial state - no data yet
+  Schema.TaggedStruct("initial", {}),
+
+  // Streaming state - actively receiving data
+  Schema.TaggedStruct("streaming", {
+    segments: Schema.Array(MessageSegment),
+    thinking: Schema.optional(Schema.String),
+    currentIteration: Schema.NullOr(Schema.Number),
+  }),
+
+  // Complete state - successfully finished
+  Schema.TaggedStruct("complete", {
+    segments: Schema.Array(MessageSegment),
+    usage: Schema.optional(UsageMetadata),
+    finishReason: Schema.String,
+  }),
+
+  // Error state - failed with partial data
+  Schema.TaggedStruct("error", {
+    segments: Schema.Array(MessageSegment),
+    error: ErrorMetadata,
+  })
+);
+```
+
 ```ts title="apps/client/src/lib/atoms/chatAtom.ts"
 const runtime = Atom.runtime(RpcClient.Default);
 
@@ -258,31 +292,41 @@ export const chatAtom = runtime.fn((messages: ChatMessage[]) =>
       return rpc.client.chat(messages);
     })
   ).pipe(
-    Stream.mapAccum(
-      { messages: [], isStreaming: false, toolCalls: [] },
-      (state, part) => {
+    Stream.scan(
+      {
+        _tag: "initial",
+      },
+      (state, part): ChatResponse => {
         // Accumulate stream parts into UI state
-        if (part.type === "text") {
+        if (part.type === "text-delta") {
           const updated = appendText(state, part.text);
-          return [updated, updated];
+          return { _tag: "streaming", ...updated };
         }
         if (part.type === "tool-call") {
           const updated = addToolCall(state, part);
-          return [updated, updated];
+          return { _tag: "streaming", ...updated };
         }
         if (part.type === "finish") {
           const updated = { ...state, isStreaming: false };
-          return [updated, updated];
+          return { _tag: "complete", ...updated };
         }
-        return [state, state];
+        return state;
       }
+    ),
+    Stream.drop(1), // Skip the initial seed emission
+    Stream.catchAll((error: unknown) =>
+      Stream.make({
+        _tag: "error",
+        error,
+      })
     )
   )
 );
 ```
 
-`Stream.mapAccum` maintains accumulated state and emits updated state on each
-event - perfect for building up UI from stream parts.
+`Stream.scan` accumulates incoming stream parts into a single UI state object,
+handling text deltas, tool calls, and finish events. `Stream.catchAll` converts
+errors into a structured error state.
 
 ### Using Atoms in Components
 
@@ -345,13 +389,13 @@ The event-driven architecture made debugging incredibly transparent. Every tool
 call, every text chunk, every token count appeared in real-time:
 
 ```
-[Stream] text: "I'll help you create"
-[Stream] text: " a line chart."
+[Stream] text-delta: "I'll help you create"
+[Stream] text-delta: " a line chart."
 [Stream] tool-call: getTime()
 [Stream] tool-result: "2025-01-30T14:23:10Z"
 [Stream] tool-call: makeHtmlAST({ type: "line", ... })
 [Stream] tool-result: { tagName: "ssz-line-chart", ... }
-[Stream] text: "Here's your chart:"
+[Stream] text-delta: "Here's your chart:"
 [Stream] finish: { inputTokens: 1234, outputTokens: 567 }
 ```
 

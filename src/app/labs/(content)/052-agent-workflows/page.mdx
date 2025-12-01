@@ -5,14 +5,14 @@ export const metadata = createOGImageMetadata({
   title: "Agent Workflows & Personas",
   description:
     "Building four different agent architectures to solve the same problem - from simple loops to knowledge-dense approaches.",
-  tags: ["effect-ai", "agent-workflows", "typescript", "llm"],
-  date: "2025-02-06",
+  tags: ["effect", "effect-ai", "agent-workflows", "llm"],
+  date: "2025-12-06",
   isPublished: false,
 });
 
-When building agentic applications, there's rarely one "correct" architecture.
-The same problem can be solved with radically different approaches, each with
-unique trade-offs in cost, speed, and quality.
+When building applications, I've found there's rarely one "correct"
+architecture. The same problem can be solved with radically different
+approaches, each with unique trade-offs in cost, speed, and quality.
 
 I spent a week exploring this by building different agent architectures, all
 solving the same challenge: **generate data visualizations using web
@@ -37,50 +37,57 @@ const runAgenticLoop = <TR extends Record<string, Tool.Any>>({
   toolkit: Toolkit.WithHandler<TR>;
   maxIterations?: number;
 }) =>
-  Effect.gen(function* () {
-    const events = createMailboxEvents(mailbox);
+  Effect.iterate(
+    {
+      finishReason: "tool-calls",
+      iteration: 0,
+    },
+    {
+      while: (state) =>
+        state.finishReason === "tool-calls" && state.iteration < maxIterations,
+      body: (state) =>
+        Effect.gen(function* () {
+          const iteration = state.iteration + 1;
+          yield* events.iterationStart(iteration);
 
-    const finalState = yield* Effect.iterate(
-      {
-        finishReason: "tool-calls",
-        iteration: 0,
-      },
-      {
-        while: (state) =>
-          state.finishReason === "tool-calls" &&
-          state.iteration < maxIterations,
-        body: (state) =>
-          Effect.gen(function* () {
-            const iteration = state.iteration + 1;
-
-            yield* events.iterationStart(iteration);
-
-            const finishReason = yield* loop({ chat, mailbox, toolkit });
-
-            yield* Effect.log(
-              `Iteration ${iteration} completed with finishReason: ${finishReason}`
+          // Stream the chat response and process each part into the mailbox
+          const finishReason = yield* Effect.gen(function* () {
+            const events = createMailboxEvents(mailbox);
+            const finishReasonRef = yield* Ref.make("stop");
+            const toolParamsRef = yield* Ref.make(
+              new Map<
+                string,
+                {
+                  id: string;
+                  name: string;
+                  params: string;
+                }
+              >()
             );
 
-            return {
-              finishReason,
-              iteration,
-            };
-          }),
-      }
-    );
+            yield* chat
+              .streamText({
+                prompt: [],
+                toolkit,
+              })
+              .pipe(
+                Stream.runForEach(
+                  // Process each part of the chat stream into the mailbox as needed
+                  makePartToMailbox(events, finishReasonRef, toolParamsRef)
+                ),
+                Stream.runDrain
+              );
 
-    // Handle max iterations case
-    if (
-      finalState.finishReason === "tool-calls" &&
-      finalState.iteration >= maxIterations
-    ) {
-      yield* events.thinking(
-        `Reached maximum iterations (${maxIterations}). Stopping here.`
-      );
+            return yield* Ref.get(finishReasonRef);
+          });
+
+          return {
+            finishReason,
+            iteration,
+          };
+        }),
     }
-
-    return finalState;
-  });
+  );
 ```
 
 The key insight is that this loop is surprisingly simple - the complexity comes
@@ -89,11 +96,11 @@ persona is essentially a different configuration of this same core loop.
 
 ## The Four Personas
 
-Over a week of experimentation, I built four distinct personas, each
+Over a week of experimentation, I explored four distinct personas, each
 representing a different approach to context and tool use:
 
 1. **The Craftsman** - Tool-assisted chart builder with agentic loops
-2. **The Vega** - Minimal architecture using Vega-Lite specs
+2. **The Vega** - Minimal architecture using a simplified json specs
 3. **The Oracle** - All-knowing expert with full documentation in cache
 4. **The Librarian** - Resource retrieval specialist with on-demand docs
 
@@ -108,9 +115,9 @@ The Craftsman uses an **agentic loop** with structured tools, forcing all chart
 generation through deterministic function calls rather than direct markup
 writing.
 
-**Pattern:** Prompt chaining with tool enforcement  
-**Iterations:** Up to 12  
-**Toolkits:** SampleToolkit + ASTToolkit
+- **Pattern:** Prompt chaining with tool enforcement
+- **Iterations:** Up to 12
+- **Toolkits:** SampleToolkit + ASTToolkit
 
 ```typescript title="Craftsman.ts" showLineNumbers
 const craftsman = Effect.fn("craftsman")(function* (
@@ -154,15 +161,45 @@ self-healing and can retry with different approaches, and debugging is easier
 since tool calls are explicit. I found myself preferring this pattern when I
 needed to understand exactly what the agent was doing.
 
+#### The JSON Schema Challenge
+
+My first approach was to use `generateObject` from `@effect/ai` to create JSON
+Schema definitions for web components. I thought a whole API could be described
+in the schema and the LLM could use this as sort of an API spec. However I
+quickly discovered that the token limit for such a schema was around 23k tokens,
+which for any real world application would be far too limiting.
+
+When trying to generate with these large schemas, I hit Anthropic's rate limit:
+
+```
+Rate Limited - This request would exceed the rate limit for your organization
+of 30,000 input tokens per minute.
+```
+
+The request was using **35,402 input tokens** - the schema alone consumed most
+of the context window!
+
+We explored different approaches such as:
+
+- Simplifying the schema and providing more context in prompts
+- Using different workflows to generate and validate the schema against criteria
+- Breaking the schema into smaller chunks fetched on-demand
+- Using structured output for validation rather than generation
+
+This taught me an important lesson: **JSON Schema is powerful for validation,
+but too verbose for generation context**. The `$ref` keyword isn't supported in
+Anthropic's structured output, which meant nested schemas had to be fully
+inlined, tripling the token usage.
+
 ### The Vega: Minimal Architecture
 
 The Vega persona uses the simplest possible agent: data fetch -> spec generation
--> output. It focuses on Vega-Lite JSON schemas with limited chart type support
+-> output. It focuses on simplified JSON schemas with limited chart type support
 (line/bar only).
 
-**Pattern:** Single-shot generation  
-**Iterations:** 1-2  
-**Toolkits:** DatasetToolkit + VegaToolkit
+- **Pattern:** Single-shot generation
+- **Iterations:** 1-2
+- **Toolkits:** DatasetToolkit + VegaToolkit
 
 ```typescript title="Vega.ts" showLineNumbers
 const vega = Effect.fn("vega")(function* (history: Array<Prompt.Message>) {
@@ -204,14 +241,14 @@ are known in advance. When requirements were clear, this was my go-to choice.
 
 ### The Oracle: Prompt Caching with Full Context
 
-The Oracle loads the complete SSZ documentation into the system prompt (marked
-with Anthropic cache control), enabling direct markup generation without
-external tool calls.
+The Oracle loads the complete web components documentation into the system
+prompt (marked with Anthropic cache control), enabling direct markup generation
+without external tool calls.
 
-**Pattern:** Knowledge-dense single-shot  
-**Iterations:** 1  
-**Toolkits:** DatasetToolkit only  
-**Context:** ~20k tokens cached
+- **Pattern:** Knowledge-dense single-shot
+- **Iterations:** 1
+- **Toolkits:** DatasetToolkit only
+- **Context:** ~20k tokens cached
 
 ```typescript title="Oracle.ts" showLineNumbers
 const oracle = Effect.fn("oracle")(function* (history: Array<Prompt.Message>) {
@@ -264,50 +301,22 @@ const oracle = Effect.fn("oracle")(function* (history: Array<Prompt.Message>) {
 });
 ```
 
-#### The JSON Schema Challenge
-
-My first approach was to use `generateObject` from `@effect/ai` to create JSON
-Schema definitions for web components. I thought a whole API could be described
-in the schema and the LLM could use this as sort of an API spec. However I
-quickly discovered that the token limit for such a schema was around 23k tokens,
-which for any real world application would be far too limiting.
-
-When trying to generate with these large schemas, I hit Anthropic's rate limit:
-
-```
-Rate Limited - This request would exceed the rate limit for your organization
-of 30,000 input tokens per minute.
-```
-
-The request was using **35,402 input tokens** - the schema alone consumed most
-of the context window!
-
-We explored different approaches such as:
-
-- Simplifying the schema and providing more context in prompts
-- Using different workflows to generate and validate the schema against criteria
-- Breaking the schema into smaller chunks fetched on-demand
-- Using structured output for validation rather than generation
-
-This taught me an important lesson: **JSON Schema is powerful for validation,
-but too verbose for generation context**. The `$ref` keyword isn't supported in
-Anthropic's structured output, which meant nested schemas had to be fully
-inlined, tripling the token usage.
-
 The Oracle was extremely fast after the first call due to caching, but that
 first call was expensive at around 20k tokens. It's inflexible - I couldn't
-easily add new patterns - but works great for well-documented APIs.
+easily add new patterns - but works great for well-documented APIs. If the API
+changes, the cache needs to be rebuilt. This pattern is ideal for stable,
+well-documented systems where speed is critical.
 
 ### The Librarian: RAG-Lite Pattern
 
-The Librarian implements a RAG-lite pattern with `SszResourceToolkit` that
-fetches specific documentation chunks on-demand (`readReference`, `readPattern`,
+The Librarian implements a RAG-lite pattern with `ResourceToolkit` that fetches
+specific documentation chunks on-demand (`readReference`, `readPattern`,
 `readDebugging`) from a smaller base context.
 
-**Pattern:** Dynamic knowledge assembly  
-**Iterations:** Up to 10  
-**Toolkits:** SampleToolkit + SszResourceToolkit  
-**Base context:** ~5k tokens
+- **Pattern:** Dynamic knowledge assembly
+- **Iterations:** Up to 10
+- **Toolkits:** SampleToolkit + ResourceToolkit
+- **Base context:** ~5k tokens
 
 ```typescript title="Librarian.ts" showLineNumbers
 const librarian = Effect.fn("librarian")(function* (
@@ -374,18 +383,33 @@ cases.
 All four personas are built using `Effect.Service`[^2] for dependency injection
 and composition:
 
-```ts title="CraftsmanService.ts"
-export class CraftsmanService extends Effect.Service<CraftsmanService>()(
-  "CraftsmanService",
+```ts title="PersonaService.ts"
+export class PersonaService extends Effect.Service<PersonaService>()(
+  "PersonaService",
   {
+    dependencies: [FileSystem.FileSystem, Path.Path],
     effect: Effect.gen(function* () {
-      const ai = yield* AiService;
-      const sampleTools = yield* SampleToolkit;
-      const sszTools = yield* SszToolkit;
+      const fs = yield* FileSystem.FileSystem;
+      const path = yield* Path.Path;
+
+      const craftsman = Effect.fn("craftsman")(function* (
+        history: Array<Prompt.Message>
+      ) {});
+      const vega = Effect.fn("vega")(function* (
+        history: Array<Prompt.Message>
+      ) {});
+      const oracle = Effect.fn("oracle")(function* (
+        history: Array<Prompt.Message>
+      ) {});
+      const librarian = Effect.fn("librarian")(function* (
+        history: Array<Prompt.Message>
+      ) {});
 
       return {
-        buildChart: (prompt: string) =>
-          ai.streamWithTools(prompt, [...sampleTools, ...sszTools]),
+        craftsman,
+        vega,
+        oracle,
+        librarian,
       } as const;
     }),
   }

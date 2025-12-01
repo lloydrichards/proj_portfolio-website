@@ -5,8 +5,8 @@ export const metadata = createOGImageMetadata({
   title: "Advanced Agent Patterns",
   description:
     "Exploring parallelization and evaluator-optimizer patterns for higher quality agentic outputs.",
-  tags: ["effect-ai", "agent-workflows", "typescript", "llm"],
-  date: "2025-02-13",
+  tags: ["effect", "effect-ai", "agent-workflows", "llm"],
+  date: "2025-12-12",
   isPublished: false,
 });
 
@@ -28,9 +28,9 @@ The Critic uses **parallel multi-agent analysis** by spawning concurrent LLM
 calls to evaluate all available datasets simultaneously, each producing a
 structured `DatasetScore`, then ranks and presents results.
 
-**Pattern:** Batch inference for comparison  
-**Concurrency:** 3 parallel calls  
-**Toolkits:** DatasetToolkit
+- **Pattern:** Batch inference for comparison
+- **Concurrency:** 3 parallel calls
+- **Toolkits:** DatasetToolkit
 
 ```typescript title="Critic.ts" showLineNumbers
 const critic = Effect.fn("critic")(function* (history: Array<Prompt.Message>) {
@@ -122,22 +122,6 @@ type ParallelAnalysisConfig<I, O, R> = {
   items: ReadonlyArray<I>;
   analyze: (item: I, index: number) => Effect.Effect<O, never, R>;
   concurrency?: number;
-
-  /** Callback invoked when analysis starts */
-  onStart?: (totalItems: number) => Effect.Effect<void, never, R>;
-
-  /** Callback invoked after each item is analyzed */
-  onProgress?: (
-    result: O,
-    index: number,
-    completed: number,
-    total: number
-  ) => Effect.Effect<void, never, R>;
-
-  /** Callback invoked when all analyses are complete */
-  onComplete?: (results: ReadonlyArray<O>) => Effect.Effect<void, never, R>;
-
-  /** Optional sorting function for final results */
   sortBy?: (a: O, b: O) => number;
 };
 
@@ -145,39 +129,15 @@ const runParallelAnalysis = <I, O, R>(
   config: ParallelAnalysisConfig<I, O, R>
 ): Effect.Effect<ReadonlyArray<O>, never, R> =>
   Effect.gen(function* () {
-    const totalItems = config.items.length;
-
-    // Callback: start
-    if (config.onStart) {
-      yield* config.onStart(totalItems);
-    }
-
     // Analyze items in parallel with progress tracking
-    const results = yield* Effect.all(
-      config.items.map((item, index) =>
-        Effect.gen(function* () {
-          const result = yield* config.analyze(item, index);
-
-          // Callback: progress
-          if (config.onProgress) {
-            yield* config.onProgress(result, index, index + 1, totalItems);
-          }
-
-          return result;
-        })
-      ),
-      { concurrency: config.concurrency ?? 3 }
-    );
+    const results = yield* Effect.all(config.items.map(config.analyze), {
+      concurrency: config.concurrency ?? 3,
+    });
 
     // Sort results if requested
     const sortedResults = config.sortBy
       ? [...results].sort(config.sortBy)
       : results;
-
-    // Callback: complete
-    if (config.onComplete) {
-      yield* config.onComplete(sortedResults);
-    }
 
     return sortedResults;
   });
@@ -195,10 +155,10 @@ creates chart AST JSON and an internal critic LLM evaluates it against SSZ rules
 (both using structured output schemas), iterating up to 5 times until achieving
 a quality score of 80+.
 
-**Pattern:** Generate -> Evaluate -> Refine  
-**Iterations:** Up to 5  
-**Quality gate:** 80+ score  
-**Toolkits:** SszToolkit (for generator)
+- **Pattern:** Generate -> Evaluate -> Refine
+- **Iterations:** Up to 5
+- **Quality gate:** 80+ score
+- **Toolkits:** SszToolkit (for generator)
 
 ```typescript title="Artisan.ts" showLineNumbers
 const artisan = Effect.fn("artisan")(function* (
@@ -326,7 +286,6 @@ const artisan = Effect.fn("artisan")(function* (
             return evaluationResult;
           }),
         getScore: (evaluation) => evaluation.score,
-        isFail: () => false,
       });
     }).pipe(Effect.ensuring(events.end))
   );
@@ -365,116 +324,76 @@ The refinement loop is abstracted into a reusable helper:
 type RefinementConfig<G, E, R> = {
   maxIterations: number;
   passingScore: number;
-
-  /** Generate a candidate solution */
   generate: (
     iteration: number,
     previousEvaluation?: E | null
   ) => Effect.Effect<G, never, R>;
-
-  /** Evaluate a candidate solution */
   evaluate: (generation: G, iteration: number) => Effect.Effect<E, never, R>;
-
-  /** Extract numeric score from evaluation (0-100) */
   getScore: (evaluation: E) => number;
-
-  /** Check if evaluation is a hard failure (should stop immediately) */
-  isFail: (evaluation: E) => boolean;
-
-  /** Optional callback invoked at the start of each iteration */
-  onIterationStart?: (iteration: number) => Effect.Effect<void, never, R>;
-
-  /** Optional callback invoked after each iteration completes */
-  onIterationComplete?: (
-    state: RefinementState<G, E>
-  ) => Effect.Effect<void, never, R>;
-
-  /** Optional callback invoked when refinement loop exits */
-  onExit?: (state: RefinementState<G, E>) => Effect.Effect<void, never, R>;
 };
 const runRefinementLoop = <G, E, R>(
   config: RefinementConfig<G, E, R>
 ): Effect.Effect<RefinementState<G, E>, never, R> =>
-  Effect.gen(function* () {
-    const finalState = yield* Effect.iterate<RefinementState<G, E>, R, never>(
-      {
-        iteration: 0,
-        generation: null,
-        evaluation: null,
-        shouldContinue: true,
-        exitReason: "continue",
-      },
-      {
-        while: (state) =>
-          state.shouldContinue && state.iteration < config.maxIterations,
-        body: (state) =>
-          Effect.gen(function* () {
-            const iteration = state.iteration + 1;
+  Effect.iterate<RefinementState<G, E>, R, never>(
+    {
+      iteration: 0,
+      generation: null,
+      evaluation: null,
+      shouldContinue: true,
+      exitReason: "continue",
+    },
+    {
+      while: (state) =>
+        state.shouldContinue && state.iteration < config.maxIterations,
+      body: (state) =>
+        Effect.gen(function* () {
+          const iteration = state.iteration + 1;
 
-            // Callback: iteration start
-            if (config.onIterationStart) {
-              yield* config.onIterationStart(iteration);
-            }
+          // GENERATE phase
+          const generation = yield* config.generate(
+            iteration,
+            state.evaluation
+          );
 
-            // GENERATE phase
-            const generation = yield* config.generate(
-              iteration,
-              state.evaluation
-            );
+          // EVALUATE phase
+          const evaluation = yield* config.evaluate(generation, iteration);
 
-            // EVALUATE phase
-            const evaluation = yield* config.evaluate(generation, iteration);
+          // Check quality gate
+          const score = config.getScore(evaluation);
 
-            // Check quality gate
-            const score = config.getScore(evaluation);
-            const isFail = config.isFail(evaluation);
+          let exitReason: RefinementExitReason | "continue";
+          let shouldContinue: boolean;
 
-            let exitReason: RefinementExitReason | "continue";
-            let shouldContinue: boolean;
+          if (isFail) {
+            // Hard failure - stop immediately
+            exitReason = "fail";
+            shouldContinue = false;
+          } else if (score >= config.passingScore) {
+            // Passed quality threshold
+            exitReason = "pass";
+            shouldContinue = false;
+          } else if (iteration >= config.maxIterations) {
+            // Max iterations reached
+            exitReason = "max_iterations";
+            shouldContinue = false;
+          } else {
+            // Continue refining
+            exitReason = "continue";
+            shouldContinue = true;
+          }
 
-            if (isFail) {
-              // Hard failure - stop immediately
-              exitReason = "fail";
-              shouldContinue = false;
-            } else if (score >= config.passingScore) {
-              // Passed quality threshold
-              exitReason = "pass";
-              shouldContinue = false;
-            } else if (iteration >= config.maxIterations) {
-              // Max iterations reached
-              exitReason = "max_iterations";
-              shouldContinue = false;
-            } else {
-              // Continue refining
-              exitReason = "continue";
-              shouldContinue = true;
-            }
+          const newState: RefinementState<G, E> = {
+            iteration,
+            generation,
+            evaluation,
+            shouldContinue,
+            exitReason,
+          };
 
-            const newState: RefinementState<G, E> = {
-              iteration,
-              generation,
-              evaluation,
-              shouldContinue,
-              exitReason,
-            };
-
-            // Callback: iteration complete
-            if (config.onIterationComplete) {
-              yield* config.onIterationComplete(newState);
-            }
-
-            return newState;
-          }),
-      }
-    );
-
-    // Callback: exit
-    if (config.onExit) {
-      yield* config.onExit(finalState);
+          return newState;
+        }),
     }
-
-    return finalState;
-  });
+  );
 ```
 
 What I found elegant about this pattern is how the `memoryRef` in the Artisan

@@ -1,4 +1,4 @@
-import type { SkillData } from "@/services/Dataset/get-skill-data";
+import type { SkillData } from "@/types/Dataset";
 
 const WORKING_HOURS_PER_MONTH = 160;
 

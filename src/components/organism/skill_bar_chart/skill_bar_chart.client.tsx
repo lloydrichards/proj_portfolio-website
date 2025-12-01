@@ -8,7 +8,7 @@ import {
   useResponsive,
   withResponsive,
 } from "@/components/template/responsive_wrapper";
-import type { SkillData } from "@/services/Dataset/get-skill-data";
+import type { SkillData } from "@/types/Dataset";
 import { useSkillBarChartData } from "./use-skill-bar-chart-data";
 
 type SkillBarChartClientProps = {

@@ -1,33 +1,35 @@
-import { readdirSync } from "node:fs";
 import path from "node:path";
-import { type Client, createClient } from "@libsql/client";
+import * as SqliteDrizzle from "@effect/sql-drizzle/Sqlite";
+import { LibsqlClient } from "@effect/sql-libsql";
+import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
-import { Context, Layer } from "effect";
+import { Config, Layer } from "effect";
 import * as schema from "./schema";
 
-const globalForDb = globalThis as unknown as { client: Client | undefined };
-
-const initClient = () => {
-  const dbPath = path.join(process.cwd(), process.env.DB_FILE_NAME ?? "");
-  const exists = readdirSync(path.join(process.cwd(), "database"));
-  if (!exists) {
-    throw new Error(`Database file ${process.env.DB_FILE_NAME} does not exist`);
-  }
-  return globalForDb.client ?? createClient({ url: `file:${dbPath}` });
+// Helper to create database client for standalone scripts
+const createDBClient = () => {
+  const dbFileName = process.env.DB_FILE_NAME ?? "database/db.sqlite";
+  const dbPath = path.join(process.cwd(), dbFileName);
+  return createClient({ url: `file:${dbPath}` });
 };
 
-const client = initClient();
-
-if (process.env.NODE_ENV !== "production") globalForDb.client = client;
-
-export const db = drizzle(client, { schema });
+// Raw database instance for scripts (export.ts, import.ts)
+// This is a simple, non-Effect instance for standalone scripts
+export const db = drizzle(createDBClient(), { schema });
 export type db = typeof db;
 
-// Create a context for the Drizzle database instance
-export class DrizzleDB extends Context.Tag("DrizzleDB")<
-  DrizzleDB,
-  typeof db
->() {}
+export const SqlLive = LibsqlClient.layerConfig({
+  url: Config.string("DB_FILE_NAME").pipe(
+    Config.withDefault("database/db.sqlite"),
+    Config.map((fileName) => `file:${path.join(process.cwd(), fileName)}`),
+  ),
+});
 
-// Create a layer that provides the Drizzle database instance
-export const DrizzleLive = Layer.succeed(DrizzleDB, db);
+// Create Drizzle layer with proper Effect integration
+// Layer.provide eliminates SqlLive from the requirements
+export const DrizzleLive = SqliteDrizzle.layer.pipe(
+  Layer.provideMerge(SqlLive),
+);
+export const Database = SqliteDrizzle.make({
+  schema,
+});

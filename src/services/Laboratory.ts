@@ -11,15 +11,19 @@ export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
   effect: Effect.gen(function* (_) {
     const fs = yield* FileSystem.FileSystem;
     const getLab = Effect.fn("Laboratory.getLab")((slug: string) =>
-      Effect.sync(() => {
-        if (!/^[\w-]+$/.test(slug)) {
-          throw new ValidationError({
-            field: "slug",
-            message: `Invalid lab slug format: ${slug}`,
-          });
-        }
-        return slug;
-      }).pipe(
+      pipe(
+        // Validate slug format
+        Effect.if(/^[\w-]+$/.test(slug), {
+          onTrue: () => Effect.succeed(slug),
+          onFalse: () =>
+            Effect.fail(
+              new ValidationError({
+                field: "slug",
+                message: `Invalid lab slug format: ${slug}`,
+              }),
+            ),
+        }),
+        // Import the MDX file
         Effect.flatMap((validSlug) =>
           Effect.tryPromise({
             try: () => import(`@/app/labs/(content)/${validSlug}/page.mdx`),
@@ -30,9 +34,11 @@ export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
               }),
           }),
         ),
+        // Extract and validate metadata
         Effect.map((d) => d.metadata),
-        Effect.andThen(Schema.decodeUnknown(LabMeta)),
-        Effect.andThen(
+        Effect.flatMap(Schema.decodeUnknown(LabMeta)),
+        // Transform to Lab instance
+        Effect.map(
           (metadata) =>
             new Lab({
               ...metadata,
@@ -48,6 +54,7 @@ export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
               status: metadata.status ?? "published",
             }),
         ),
+        Effect.withSpan("getLab", { attributes: { slug } }),
       ),
     );
 

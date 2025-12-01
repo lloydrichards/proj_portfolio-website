@@ -1,11 +1,24 @@
 import { FileSystem } from "@effect/platform";
 import { BunContext } from "@effect/platform-bun";
-import { Array, Effect, flow, Option, Order, pipe, Schema } from "effect";
-import { MissingContentError } from "@/types/Errors";
+import {
+  Array,
+  Effect,
+  flow,
+  Option,
+  Order,
+  ParseResult,
+  pipe,
+  Schema,
+} from "effect";
+import {
+  DatabaseError,
+  MissingContentError,
+  ValidationError,
+} from "@/types/Errors";
 import { Project, ProjectMeta } from "@/types/Project";
 import { TeamMemberDTO } from "@/types/TeamMember";
 import { PROJECT_PATH } from "./consts";
-import { DrizzleDB, DrizzleLive } from "./db";
+import { Database, DrizzleLive } from "./db";
 import { teamMember } from "./db/schema";
 import type { TeamMember } from "./db/schema/team_member";
 import { MDXCompiler } from "./MDXCompiler";
@@ -16,7 +29,7 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
   effect: Effect.gen(function* (_) {
     const fs = yield* FileSystem.FileSystem;
     const mdx = yield* MDXCompiler;
-    const db = yield* DrizzleDB;
+    const db = yield* Database;
 
     const getProject = Effect.fn("Portfolio.getProject")((slug: string) =>
       pipe(
@@ -88,54 +101,74 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
     const getTeamMembers = Effect.fn("Portfolio.getTeamMembers")(
       (team?: readonly (readonly [string, string])[]) =>
         pipe(
-          Effect.tryPromise({
-            try: () => db.select().from(teamMember),
-            catch: (error) => {
-              console.warn("Failed to fetch team members:", error);
-              return new Error("Database query failed");
-            },
-          }),
-          Effect.catchAll(() => Effect.succeed([] as TeamMember[])),
-          Effect.andThen((teamMembers) => {
+          // Handle empty team case early
+          Effect.sync(() => {
             if (!team || team.length === 0) {
+              return { skip: true as const, team: [] as typeof team };
+            }
+            return { skip: false as const, team };
+          }),
+          Effect.flatMap(({ skip, team: teamData }) => {
+            if (skip) {
               return Effect.succeed([] as TeamMember[]);
             }
 
             return pipe(
-              Effect.sync(() =>
-                Schema.decodeUnknownSync(Schema.Array(TeamMemberDTO))(team),
-              ),
-              Effect.catchAll((error) => {
-                console.warn("Invalid team member data:", error);
-                return Effect.succeed([] as (typeof TeamMemberDTO.Type)[]);
-              }),
-              Effect.map((selectedTeam) =>
-                selectedTeam.map(({ firstName, lastName, role }) => {
-                  const found = Array.findFirst(
-                    teamMembers,
-                    (m) =>
-                      m.firstName === firstName &&
-                      m.lastName === lastName &&
-                      m.role === role,
-                  );
+              // Fetch team members from database
+              // With @effect/sql-drizzle, db operations are already Effects
+              db
+                .select()
+                .from(teamMember)
+                .pipe(
+                  Effect.mapError(
+                    (error) =>
+                      new DatabaseError({
+                        message: "Failed to fetch team members from database",
+                        operation: "select",
+                        cause: error,
+                      }),
+                  ),
+                ),
+              // Validate and decode team data
+              Effect.flatMap((teamMembers) =>
+                pipe(
+                  Schema.decodeUnknown(Schema.Array(TeamMemberDTO))(teamData),
+                  Effect.mapError(
+                    (parseError) =>
+                      new ValidationError({
+                        field: "team",
+                        message:
+                          ParseResult.TreeFormatter.formatErrorSync(parseError),
+                      }),
+                  ),
+                  Effect.map((selectedTeam) =>
+                    selectedTeam.map(({ firstName, lastName, role }) => {
+                      const found = Array.findFirst(
+                        teamMembers,
+                        (m) =>
+                          m.firstName === firstName &&
+                          m.lastName === lastName &&
+                          m.role === role,
+                      );
 
-                  return Option.orElseSome(found, () => {
-                    // Generate stable ID from name hash
-                    const hash =
-                      firstName.charCodeAt(0) +
-                      lastName.charCodeAt(0) +
-                      role.charCodeAt(0);
-                    return {
-                      id: -(Math.abs(hash) + 1),
-                      firstName,
-                      lastName,
-                      role,
-                      imgUrl: null,
-                    } as TeamMember;
-                  });
-                }),
+                      return Option.getOrElse(found, () => {
+                        // Generate stable ID from name hash for non-existent team members
+                        const hash =
+                          firstName.charCodeAt(0) +
+                          lastName.charCodeAt(0) +
+                          role.charCodeAt(0);
+                        return {
+                          id: -(Math.abs(hash) + 1),
+                          firstName,
+                          lastName,
+                          role,
+                          imgUrl: null,
+                        } as TeamMember;
+                      });
+                    }),
+                  ),
+                ),
               ),
-              Effect.map(Array.getSomes),
             );
           }),
           Effect.withSpan("getTeamMembers"),

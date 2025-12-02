@@ -1,3 +1,17 @@
+# [1.15.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.6...v1.15.0) (2025-12-02)
+
+
+### Features
+
+* add KPICard with repo and articles ([aa01ce5](https://github.com/lloydrichards/proj_portfolio-website/commit/aa01ce54f607f55fb57808f56148b16d301058e9))
+* add status to project and labs ([b7747e7](https://github.com/lloydrichards/proj_portfolio-website/commit/b7747e70772c9a2ab5b744bba91cc66f2ee02e28))
+
+
+### Improved
+
+* correct effect-drizzle implementation ([356a57a](https://github.com/lloydrichards/proj_portfolio-website/commit/356a57a97b2d80107400b60a35588e44bf0585de))
+* select for navigation on mobile ([483828a](https://github.com/lloydrichards/proj_portfolio-website/commit/483828ac2552d6c1936b97414c94d1bb26642049))
+
 ## [1.14.6](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.5...v1.14.6) (2025-11-30)
 
 

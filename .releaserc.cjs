@@ -20,7 +20,7 @@ module.exports = {
           { type: "ci", release: false },
           { type: "chore", release: false },
           { type: "style", release: false },
-          { type: "revert", release: "false" },
+          { type: "revert", release: false },
         ],
         parserOpts: {
           noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES"],

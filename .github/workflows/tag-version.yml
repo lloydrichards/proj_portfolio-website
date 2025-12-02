@@ -1,6 +1,7 @@
 name: Tag Version
 
 on:
+  workflow_dispatch:
   schedule:
     # Runs every Tuesday at 9:00 AM UTC (optimal visibility during business hours)
     - cron: "0 9 * * 2"

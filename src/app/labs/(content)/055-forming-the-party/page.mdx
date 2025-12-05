@@ -52,37 +52,43 @@ When forming a party for a quest, agents fill these roles:
 ```text
 Party
 ├── Champion (0-1)           // Leads the quest, primary implementer
+│   ├── @warrior             // Spec-driven implementation
 │   ├── @paladin             // TDD-focused features
 │   ├── @oracle              // Database work
-│   └── @ranger              // Bug hunting
+│   └── @berserker           // Refactoring & tech debt
 │
 ├── Vanguard (1-3)           // Core members, essential for completion
 │   ├── @scout               // Codebase reconnaissance
 │   ├── @cleric              // Test coverage
 │   ├── @bard                // Documentation
-│   └── @warlock             // API contracts
+│   ├── @warlock             // API contracts
+│   ├── @tank                // Error handling & resilience
+│   └── @thief               // Code discovery & attribution
 │
 ├── Support (0-2)            // Secondary concerns
 │   ├── @sage                // Research
 │   ├── @scribe              // Git operations
 │   ├── @alchemist           // Performance
-│   └── @champion            // Code review
+│   ├── @armorer             // CI/CD & releases
+│   ├── @champion            // Code review
+│   ├── @ranger              // Bug hunting & debugging
+│   └── @rogue               // Spec analysis & gap detection
 │
 └── Consultants (0-2)        // Specialized guidance (read-only)
     ├── @ts-wizard           // TypeScript types
     ├── @effect-wizard       // Effect-TS patterns
     ├── @react-wizard        // React architecture
-    └── @tw-wizard           // Tailwind CSS
+    ├── @tw-wizard           // Tailwind CSS
+    ├── @lit-wizard          // Web Components & Lit
+    ├── @artisan             // CSS modernization
+    ├── @monk                // State management
+    └── @shepherd            // Accessibility (WCAG)
 ```
 
-- **Champion** leads the quest as primary implementer. For a TDD feature, that's
-  `@paladin`. For database work, `@oracle` takes the lead.
-- **Vanguard** are the core party members essential for completion, `@scout` for
-  reconnaissance, `@cleric` for test coverage, `@bard` for documentation.
-- **Support** provides assistance and handles secondary concerns, `@champion`
-  for code review, `@alchemist` for performance, `@scribe` for git operations.
-- **Consultants** are the Wizard agents called for specialized guidance. They're
-  read-only by design, they advise but don't implement.
+- **Champion** leads the quest as primary implementer. For spec-driven features, that's `@warrior`. For TDD work, `@paladin`. For database work, `@oracle`. For refactoring, `@berserker`.
+- **Vanguard** are the core party members essential for completion: `@scout` for reconnaissance, `@cleric` for test coverage, `@bard` for documentation, `@warlock` for API contracts, `@tank` for resilience, `@thief` for code discovery.
+- **Support** provides assistance and handles secondary concerns: `@champion` for code review, `@alchemist` for performance, `@scribe` for git operations, `@armorer` for CI/CD, `@ranger` for debugging, `@rogue` for spec analysis.
+- **Consultants** are the Wizard agents called for specialized guidance. They're read-only by design—they advise but don't implement. Includes `@ts-wizard`, `@react-wizard`, `@effect-wizard`, `@tw-wizard`, `@lit-wizard`, `@artisan`, `@monk`, and `@shepherd`.
 
 ## Anatomy of an Agent
 
@@ -203,26 +209,23 @@ config:
 ---
 flowchart LR
     Quest([Quest]) --> Analyze{Request}
-    Analyze -->|Feature| F["**Champion:** @paladin<br/>**Vanguard:** @scout<br/>**Consultant:** @ts-wizard"]
+    Analyze -->|Feature| F["**Champion:** @warrior<br/>**Vanguard:** @scout<br/>**Consultant:** @ts-wizard"]
     Analyze -->|Bug Fix| B["**Champion:** @ranger<br/>**Vanguard:** @scout<br/>**Support:** @champion"]
     Analyze -->|Performance| P["**Champion:** @alchemist<br/>**Vanguard:** @scout, @sage"]
     Analyze -->|Documentation| D["**Champion:** @bard<br/>**Vanguard:** @scout"]
+    Analyze -->|Refactoring| R["**Champion:** @berserker<br/>**Vanguard:** @scout<br/>**Support:** @rogue"]
     F --> Party([Form Party])
     B --> Party
     P --> Party
     D --> Party
-
+    R --> Party
 ```
 
 The command classifies the quest type and recommends a party - routing
 development tasks to different agent combinations, just like Anthropic's example
 of routing customer service queries to different processes.
 
-For a typical feature quest, I might form a party with `@paladin` as Champion
-(TDD the implementation), `@scout` as Vanguard (map the relevant code), and
-`@ts-wizard` as Consultant (type design guidance), with `@champion` providing a
-final review. The routing happens once at the start; after that, the party works
-through prompt chaining where each agent's output feeds the next.
+For a typical feature quest, I might form a party with `@warrior` as Champion (implement the specification), `@scout` as Vanguard (map the relevant code), and `@ts-wizard` as Consultant (type design guidance), with `@champion` providing a final review. For TDD-focused work, `@paladin` would lead instead. The routing happens once at the start; after that, the party works through prompt chaining where each agent's output feeds the next.
 
 ## The Framing That Stuck
 

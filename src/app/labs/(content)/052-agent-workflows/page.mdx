@@ -7,7 +7,6 @@ export const metadata = createOGImageMetadata({
     "Building four different agent architectures to solve the same problem - from simple loops to knowledge-dense approaches.",
   tags: ["effect", "effect-ai", "agent-workflows", "llm"],
   date: "2025-12-06",
-  status: "unpublished",
 });
 
 When building applications, I've found there's rarely one "correct"
@@ -15,9 +14,8 @@ architecture. The same problem can be solved with radically different
 approaches, each with unique trade-offs in cost, speed, and quality.
 
 I spent a week exploring this by building different agent architectures, all
-solving the same challenge: **generate data visualizations using web
-components**. Each architecture taught me something different about the
-trade-offs involved.
+solving the same challenge: generate data visualizations using web components.
+Each architecture taught me something different about the trade-offs involved.
 
 ## The Agentic Loop Foundation
 
@@ -171,7 +169,7 @@ which for any real world application would be far too limiting.
 
 When trying to generate with these large schemas, I hit Anthropic's rate limit:
 
-```
+```txt
 Rate Limited - This request would exceed the rate limit for your organization
 of 30,000 input tokens per minute.
 ```
@@ -432,7 +430,7 @@ matter of mixing different toolkits with different system prompts.
    calls made it much easier to understand what went wrong when charts didn't
    render correctly.
 
-3. **Caching transforms economics.** The Oracle's first call was expensive, but
+3. **Caching for cost-efficiency.** The Oracle's first call was expensive, but
    subsequent calls were nearly free. For high-volume use cases, this changes
    the cost calculation entirely.
 

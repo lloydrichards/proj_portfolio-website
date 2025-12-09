@@ -6,7 +6,6 @@ export const metadata = createOGImageMetadata({
     "Creating a hook to validate query parameters using Effect.Schema",
   tags: ["effect", "schema", "validation"],
   date: "2025-05-25",
-  isFeatured: true,
   href: "https://github.com/lloydrichards/edu_next-schema-params",
 });
 
@@ -88,7 +87,7 @@ export function useSchemaParams<A extends Record<string, unknown>, I>(
       const encoded = Schema.encodeUnknownSync(Schema.partial(schema))({
         ...paramResult.pipe(
           Either.match({
-            onLeft: () => ({}) as Record<string, unknown>,
+            onLeft: () => ({} as Record<string, unknown>),
             onRight: (p) => p,
           })
         ),
@@ -124,13 +123,12 @@ const ParamSchema = Schema.Struct({
 });
 
 export const SchemaCounter = () => {
-
   const [data, createQueryString] = useSchemaParams(ParamSchema, {
     foo: "default",
   });
 
-  return <p>{data.foo}</p>
-}
+  return <p>{data.foo}</p>;
+};
 ```
 
 I've tried to keep any exceptions to a minimum, so if the query parameters are
@@ -153,22 +151,22 @@ import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
 import mockRouter from "next-router-mock";
 
 vi.mock("next/navigation", () =>
-  vi.importActual("next-router-mock/navigation"),
+  vi.importActual("next-router-mock/navigation")
 );
 
 describe("SchemaCounter", () => {
- afterEach(() => {
-   mockRouter.reset();
- });
+  afterEach(() => {
+    mockRouter.reset();
+  });
 
- it("handles non-numeric values gracefully", () => {
-   mockRouter.push("/?a=abc");
-   render(<SchemaCounter />, {
-     wrapper: MemoryRouterProvider,
-   });
-   expect(screen.getByTestId("count").textContent).toBe("0");
-   fireEvent.click(screen.getByLabelText("Increment"));
-   expect(mockRouter.query.a).toBe("1");
+  it("handles non-numeric values gracefully", () => {
+    mockRouter.push("/?a=abc");
+    render(<SchemaCounter />, {
+      wrapper: MemoryRouterProvider,
+    });
+    expect(screen.getByTestId("count").textContent).toBe("0");
+    fireEvent.click(screen.getByLabelText("Increment"));
+    expect(mockRouter.query.a).toBe("1");
   });
 });
 ```

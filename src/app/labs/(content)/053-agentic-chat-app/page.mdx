@@ -7,16 +7,16 @@ export const metadata = createOGImageMetadata({
     "Full-stack implementation with Effect RPC streaming, monorepo architecture, and type-safe AI integration from domain to UI.",
   tags: ["effect", "rpc", "monorepo", "effect-ai"],
   date: "2025-12-09",
-  status: "unpublished",
+  isFeatured: true,
 });
 
 Building agentic applications requires more than just understanding LLM APIs. I
 needed a solid full-stack architecture that could handle streaming, state
 management, and type safety across client and server.
 
-This is how I built a production-ready agentic chat application using the bEvr
-stack[^1] (Bun + Effect + Vite + React), with streaming responses, multiple
-agent personas, and end-to-end type safety.
+This is how I built an agentic chat application using the bEvr stack[^1] (Bun +
+Effect + Vite + React), with streaming responses, multiple agent personas, and
+using effect for end-to-end type safety.
 
 **Live demo:**
 [sszvizero.lloydrichards.dev](https://sszvizero.lloydrichards.dev/)
@@ -55,14 +55,16 @@ graph LR
   C <--RPC Stream--> S1
 ```
 
-This matters because I can define schemas once in `packages/domain`, and server
-and client share the same types. Runtime validation happens automatically with
-Effect Schema, and when I change the schema, both sides update automatically.
+The application is split between a client, server, and shared domain package.
+The client and server communicate via Effect RPC with streaming support. The
+domain package contains all shared types, schemas, and API contracts.
 
 ## Domain-First Architecture
 
-Everything starts in `packages/domain` - this is our single source of truth for
-types, schemas, and API contracts.
+Everything starts in `packages/domain`, the source of truth for types, schemas,
+and API contracts. Separating the interface from the implementation made it easy
+to design and reason about the interaction between services without getting too
+bogged down in details.
 
 ```ts title="packages/domain/src/Api.ts"
 export const ChatMessage = Schema.Struct({
@@ -106,16 +108,22 @@ export class EventRpc extends RpcGroup.make(
 ) {}
 ```
 
-This gives me TypeScript types generated from schemas, runtime validation on
-both client and server, discriminated unions for type-safe event handling, and a
+With this, I get types generation from schemas, runtime validation on both
+client and server, discriminated unions for type-safe event handling, and a
 single source of truth for API contracts.
 
 ## Server Architecture
 
 The server uses `Effect.Service`[^2] for all major components, making dependency
-injection explicit and testable.
+injection explicit and testable. The `ChatService` handles the core logic of
+interacting with the LLM and tools, typically exposing methods that return
+streams of events through `Mailbox`.
 
 ### Service Composition
+
+Using Effect's layering system, services are composed together in a way that
+avoids leaking implementation details while at the same time controlling how the
+application is wired at the very edge.
 
 ```mermaid
 flowchart TB
@@ -125,36 +133,39 @@ flowchart TB
 
   subgraph RpcRouter [RpcRouter]
     RPC_0[HttpRouter]
-    RPC_1[ToolHandlers]
     RPC_2[ChatService]
   end
 
+
   LanguageModel
+  ToolHandlers
   Path
   FileSystem
 
   RPC_0 -.-> CORS_req
-  RPC_1 -.-> LanguageModel
   RPC_2 -.-> LanguageModel
+  RPC_2 -.-> ToolHandlers
   RPC_2 -.-> Path
   RPC_2 -.-> FileSystem
 ```
 
-All services follow the same pattern:
+For example the `ChatService` depends on the `LanguageModelLive` service for LLM
+access, as well as configuration from the `Config` service. Other services like
+the ToolHandlers could be defined and composed in similarly to fulfil the
+requirements of the persona.
 
 ```ts
 export class ChatService extends Effect.Service<ChatService>()("ChatService", {
-  dependencies: [Config.Config, SharedService.Default],
+  dependencies: [Config.Config, LanguageModelLive],
   effect: Effect.gen(function* () {
     const config = yield* Config.Config;
-    const shared = yield* SharedService;
+    const chat = yield* LanguageModel.LanguageModel;
 
     // Define personas here
     const persona = yield* Effect.fn("persona")(function* (params: {}) {});
 
     return {
       persona,
-      valueB,
     } as const;
   }),
 }) {}
@@ -162,7 +173,9 @@ export class ChatService extends Effect.Service<ChatService>()("ChatService", {
 
 ### Toolkit Composition
 
-Each persona uses different combinations of toolkits:
+With the agentic loop, one of the key patterns is that each persona uses
+different combinations of `Toolkit`. Using Toolkit it was possible to define and
+merge `Toolkit` easily for each persona.
 
 ```ts title="toolkits.ts"
 // Craftsman: Force tool use
@@ -186,13 +199,15 @@ const LibrarianToolkit = Toolkit.merge(
 const OracleToolkit = DatasetToolkit;
 ```
 
-Creating a new persona was just a matter of mixing different toolkits with
+Creating a new persona was just a matter of mixing different `Toolkit` with
 different system prompts.
 
 ## RPC Streaming
 
-Streaming is where the magic happens[^3][^4] - real-time updates from the server
-to the client with full type safety.
+Between the server and the client it was important to stream in the conversation
+from the LLM to provide ongoing feedback and transparency on whats was
+happening. For this I used RPC streaming[^3][^4] to send events from the server
+to the client and then map the accumulated stream into UI state.
 
 ### The Event Stream
 
@@ -204,7 +219,7 @@ sequenceDiagram
     LLM-->>Server: Chunk
     Server->>Server: Transform to ChatStreamPart
     Server-->>Client: Stream event
-    Client->>Client: Update UI
+    Client->>Client: Update UI state
   end
   Server-->>Client: Finish event
 ```
@@ -217,36 +232,23 @@ export const EventRpcLive = EventRpc.toLayer(
     const chat = yield* ChatService;
 
     return EventRpc.of({
-      chat: (messages) =>
-        chat.persona(messages).pipe(
-          Stream.filterMap((part) => {
-            // Transform AI events to ChatStreamPart
-            if (part.type === "text-delta") {
-              return Option.some({
-                type: "text" as const,
-                text: part.delta,
-              });
-            }
-            if (part.type === "tool-call") {
-              return Option.some({
-                type: "tool-call" as const,
-                name: part.toolName,
-                args: part.args,
-              });
-            }
-            return Option.none();
-          }),
-          Stream.orDie // Convert errors to defects
-        ),
+      chat: Effect.fn(function* (payload) {
+        const mailbox = yield* Mailbox.make<typeof ChatStreamPart.Type>();
+        yield* mailbox.offer({ _tag: "iteration-start" });
+
+        yield* chat.persona(payload, mailbox); // Stream events into mailbox
+
+        yield* mailbox.offer({ _tag: "finish" });
+        return mailbox;
+      }),
     });
   })
 );
 ```
 
-The key patterns here are `Stream.filterMap` to transform and filter events,
-`Option.some` / `Option.none` for conditional emission, and `Stream.orDie` to
-crash on unhandled errors. The discriminated union ensures all cases are
-handled.
+The key patterns here is using `Mailbox` to create a stream of events that can
+be offered to as they occur in the `ChatService`. The `chat` RPC method returns
+the `Mailbox` as a stream to the client.
 
 ## Client State Management
 
@@ -361,17 +363,17 @@ The `Result` type has four states: `Initial` (not yet called), `Waiting`
 (streaming in progress), `Success` (stream active or completed), and `Failure`
 (stream errored).
 
-## Streaming UI with Markdown
+### Streaming UI with Markdown
 
-The chat interface streams markdown responses from the LLM in real-time, showing
-tool calls and the agent's thinking process directly in the UI. When the agent
-uses a tool, the UI displays a badge with the tool name (like "getTime" or
-"fetchData"), along with its arguments and results.
+While the chat is streaming, the `ChatResponse` state is updated with more and
+more segments which are rendered into the UI. Each segment can be text, tool
+calls, or tool results and using components for Badged, text and Markdown its
+easy to render the ongoing conversation.
 
-The agent's reasoning appears as it streams - text chunks arrive progressively,
-tool calls appear as they're invoked, results update in real-time, and token
-usage appears at completion. This transparency helps users understand what the
-agent is doing and builds trust in the system.
+In particular, using the thinking option its possible to show the LLM's ongoing
+thought process in real-time as it composes its response. This visibility into
+the persona's processing could either be mapped from the LLM's own output or
+injected via the `Mailbox`.
 
 ## Developer Experience
 
@@ -383,37 +385,30 @@ it easy to build a robust backend for the agentic chat application. The
 streaming capabilities provided by Effect's RPC system allowed for real-time
 communication between the client and server, which was crucial for a smooth user
 experience. And the `effect-atom` package made state management on the client
-side a breeze.
+side very easy to setup and maintain.
 
 The event-driven architecture made debugging incredibly transparent. Every tool
 call, every text chunk, every token count appeared in real-time:
 
-```
+```txt
 [Stream] text-delta: "I'll help you create"
 [Stream] text-delta: " a line chart."
 [Stream] tool-call: getTime()
 [Stream] tool-result: "2025-01-30T14:23:10Z"
 [Stream] tool-call: makeHtmlAST({ type: "line", ... })
-[Stream] tool-result: { tagName: "ssz-line-chart", ... }
+[Stream] tool-result: { tagName: "line-chart", ... }
 [Stream] text-delta: "Here's your chart:"
 [Stream] finish: { inputTokens: 1234, outputTokens: 567 }
 ```
 
-The hot reload workflow was seamless. Changing a service on the server triggered
-Bun auto-reload, changing a component on the client triggered instant Vite HMR,
-and changing a schema in domain rebuilt both sides automatically.
+Combined with type safety across RPC, making changes to the domain contracts
+would quickly be reflected in both client and server code, reducing runtime
+errors.
 
-Type safety across RPC caught errors early. Misspelling an RPC method threw a
-TypeScript error, wrong payload types triggered runtime validation errors, and
-missing stream handlers were impossible because the discriminated union forced
-me to handle all cases.
-
-The pain points were real: learning Effect patterns took time, RPC debugging
-required deep understanding of streams, Effect error messages felt cryptic at
-first, and WASM files in production builds needed special handling. But the
-great moments outweighed them - adding a new persona in under 10 minutes, KV
-storage working on first try, type errors catching bugs before runtime, and
-stream state management "just working."
+While there is the ongoing cost of learning Effect and reshaping mental models
+to functional programming, the productivity gains in building complex
+applications are significant. The biggest challenge is always in discovering new
+and better ways of using the effect ecosystem to solve problems.
 
 ## Lessons Learned
 
@@ -429,66 +424,23 @@ stream state management "just working."
    costs. Tracking tokens and iterations helped me find the sweet spot for each
    persona.
 
-4. **Effect made the hard parts easy.** Dependency injection meant ChatService,
-   DatasetAnalysisService, and ChartRefinementService all composed cleanly.
-   Streaming transformations with `Stream.mapAccum`, `Stream.filterMap`, and
-   `Stream.tap` handled event processing elegantly. Error handling gave me
-   structured errors across async boundaries with full type safety. And
-   progressive enhancement let me add KV storage, observability, and new
-   personas without refactoring existing code.
+4. **Effect made the hard parts easy.** Dependency injection meant
+   `ChatService`, `HttpLayerRouter`, and `FileSystem` all composed together
+   easily. Streaming transformations with `Stream.scan`, `Stream.filterMap`, and
+   `Stream.tap` handled event processing.
 
 5. **Event-driven architecture helps debugging.** Streaming tool calls and
    responses in real-time made it much easier to understand what the LLM was
    thinking. Every tool call, every text chunk, every token count - all visible.
 
-6. **The surprises were mostly pleasant.** Features could be added shockingly
-   fast - a new persona in 10 minutes. Type safety caught bugs at compile time
-   that would have been runtime errors. Effect.Service scaled identically from 1
-   service to 10. The one unpleasant surprise was cost accumulation - more than
-   I expected in a week of development.
+6. **Solid architecture worth investing in.** With the bEvr stack, features
+   could be added fast with the architecture already in place. Adding new
+   personas, tools, or UI features was straightforward and easy to communicate.
 
 ## Try It Yourself
 
 **Live demo:**
 [sszvizero.lloydrichards.dev](https://sszvizero.lloydrichards.dev/)
-
-**Example prompts:**
-
-**For The Craftsman:**
-
-```
-Create a line chart showing Wahlberechtigte (eligible voters)
-over the years. Use Jahr for the x-axis, Wahlberechtigte for
-the y-axis, and color by Kreis.
-```
-
-**For The Oracle:**
-
-```
-Show me population trends by district as a bar chart.
-```
-
-**For The Critic:**
-
-```
-Analyze all available datasets and recommend the best one
-for visualizing demographic changes.
-```
-
-## The Finished Application
-
-The final application includes six agent personas, each with different workflow
-patterns (tool-enforced, prompt caching, RAG-lite, minimal, evaluator-optimizer,
-parallel analysis). The streaming UI displays tool calls, thinking process, and
-markdown responses in real-time. The architecture shares schemas between client
-and server with runtime validation throughout. Production features include
-Docker deployment, cost tracking, observability, and proper error handling. And
-the developer experience remained smooth with hot reload, type safety across
-RPC, and Effect composition patterns.
-
-The combination of Effect's compositional nature and the bEvr stack made it
-possible to build a production-ready agentic application with multiple
-sophisticated workflows in a single week.
 
 ---
 
@@ -501,13 +453,13 @@ sophisticated workflows in a single week.
     Dependency injection patterns
 
 [^3]:
-    [Effect Platform](https://effect.website/docs/platform) - HTTP + RPC
-    patterns used throughout
+    [Effect Platform](https://effect.website/docs/platform/introduction/) -
+    Platform-independent abstractions
 
 [^4]:
-    [Effect RPC](https://effect.website/docs/ecosystem/rpc) - Streaming RPC
-    implementation guide
+    [Effect RPC](https://github.com/Effect-TS/effect/tree/main/packages/rpc) -
+    Type-safe RPC with streaming support
 
 [^5]:
-    [@effect-atom](https://github.com/effect-ts/atom) - React state management
-    with Effect
+    [@effect-atom](https://github.com/tim-smart/effect-atom) - React state
+    management with Effect

@@ -7,13 +7,13 @@ export const metadata = createOGImageMetadata({
     "Exploring parallelization and evaluator-optimizer patterns for higher quality agentic outputs.",
   tags: ["effect", "effect-ai", "agent-workflows", "llm"],
   date: "2025-12-12",
-  status: "unpublished",
 });
 
-Building on the simple agentic workflows from the previous article, I wanted to
-explore more advanced patterns that could improve the quality and reliability of
-agent outputs. These patterns trade additional LLM calls for better results
-through parallel analysis or iterative refinement.
+Building on the simple agentic workflows from the
+[previous article](/labs/052-agent-workflows), I wanted to explore more advanced
+patterns that could improve the quality and reliability of agent outputs. These
+patterns trade additional LLM calls for better results through parallel analysis
+or iterative refinement.
 
 ## Advanced Workflow Patterns
 
@@ -192,10 +192,20 @@ const artisan = Effect.fn("artisan")(function* (
                 ? ""
                 : String.stripMargin(`
                     |Previous Attempts Feedback:
-                    |${memory.map((m, i) => `Attempt ${i + 1} (Score: ${m.evaluation.score}): ${m.evaluation.feedback}`).join("\n\n")}
+                    |${memory
+                      .map(
+                        (m, i) =>
+                          `Attempt ${i + 1} (Score: ${m.evaluation.score}): ${
+                            m.evaluation.feedback
+                          }`
+                      )
+                      .join("\n\n")}
                     |
                     |Rules to address:
-                    |${previousEvaluation?.rulesViolated?.join("\n") || "No specific rules violated"}
+                    |${
+                      previousEvaluation?.rulesViolated?.join("\n") ||
+                      "No specific rules violated"
+                    }
                   `);
 
             const generatorSystemPrompt = String.stripMargin(`

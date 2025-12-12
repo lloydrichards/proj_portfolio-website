@@ -3,7 +3,7 @@ import { eq, sql } from "drizzle-orm";
 import { Array, Effect, Option, Order, pipe } from "effect";
 import type { SkillData } from "@/types/Dataset";
 import { Occupation } from "@/types/Occupation";
-import { Database, DrizzleLive, SqlLive } from "../db";
+import { Database, DrizzleLive } from "../db";
 import {
   attribute,
   category,

@@ -8,21 +8,20 @@ import { makeOGImageURL } from "./utils";
 
 export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
   dependencies: [BunFileSystem.layer],
-  effect: Effect.gen(function* (_) {
+  effect: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem;
+
     const getLab = Effect.fn("Laboratory.getLab")((slug: string) =>
       pipe(
-        // Validate slug format
-        Effect.if(/^[\w-]+$/.test(slug), {
-          onTrue: () => Effect.succeed(slug),
-          onFalse: () =>
-            Effect.fail(
-              new ValidationError({
-                field: "slug",
-                message: `Invalid lab slug format: ${slug}`,
-              }),
-            ),
-        }),
+        Effect.succeed(slug),
+        Effect.filterOrFail(
+          (s) => /^[\w-]+$/.test(s),
+          () =>
+            new ValidationError({
+              field: "slug",
+              message: `Invalid lab slug format: ${slug}`,
+            }),
+        ),
         // Import the MDX file
         Effect.flatMap((validSlug) =>
           Effect.tryPromise({

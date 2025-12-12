@@ -50,3 +50,13 @@ export class FileSystemError extends Data.TaggedError("FileSystemError")<{
   operation: string;
   cause?: unknown;
 }> {}
+
+/**
+ * Error thrown when GitHub API requests fail
+ */
+export class GitHubAPIError extends Data.TaggedError("GitHubAPIError")<{
+  username: string;
+  statusCode?: number;
+  message: string;
+  cause?: unknown;
+}> {}

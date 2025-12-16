@@ -1,3 +1,16 @@
+## [1.15.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.0...v1.15.1) (2025-12-16)
+
+
+### Content
+
+* release 053 ([3109f47](https://github.com/lloydrichards/proj_portfolio-website/commit/3109f473cc03db4fc0633f3d88370c0614dcb016))
+* release lab 054 ([99a6931](https://github.com/lloydrichards/proj_portfolio-website/commit/99a6931a208fe497517aa3a0bed2045f3b680709))
+
+
+### Improved
+
+* use Effect.gen for all services ([0a4dbb3](https://github.com/lloydrichards/proj_portfolio-website/commit/0a4dbb3f938aa08df87bfbf397a08897cd5adc89))
+
 # [1.15.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.6...v1.15.0) (2025-12-02)
 
 

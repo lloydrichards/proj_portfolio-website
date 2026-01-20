@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.1...v1.15.2) (2026-01-20)
+
+
+### Content
+
+* release lab 055 ([d43fb0b](https://github.com/lloydrichards/proj_portfolio-website/commit/d43fb0bf2c961ad8da8468183ad001289c134c1c))
+
 ## [1.15.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.1...v1.15.2) (2025-12-23)
 
 

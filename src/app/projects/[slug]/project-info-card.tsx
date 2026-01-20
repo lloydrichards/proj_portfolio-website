@@ -1,4 +1,4 @@
-import { Github } from "lucide-react";
+import { Github, Trophy } from "lucide-react";
 import type { FC } from "react";
 import {
   Accordion,
@@ -49,6 +49,27 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
         <CardContent>
           <CardTitle className="flex gap-2">{project.title}</CardTitle>
           <CardDescription>{project.description}</CardDescription>
+          {project.awards && project.awards.length > 0 && (
+            <div className="mt-4 flex flex-col gap-2">
+              <h3 className="flex items-center gap-2 font-semibold">
+                <Trophy className="size-6 text-secondary" />
+                Awards
+              </h3>
+              <ul className="space-y-1 text-sm">
+                {project.awards.map((award) => (
+                  <li
+                    key={`${award.award}-${award.result}`}
+                    className="flex gap-3"
+                  >
+                    <span className="font-medium">{award.award}:</span>
+                    <span className="text-muted-foreground">
+                      {award.result}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           {project.team && project.team.length > 0 && (
             <Accordion type="single" collapsible>
               <AccordionItem value="item-1">

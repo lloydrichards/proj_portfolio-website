@@ -1,4 +1,5 @@
 import { cva } from "class-variance-authority";
+import { Trophy } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/atom/badge";
@@ -76,6 +77,14 @@ export const ProjectCard: React.FC<IProjectCard> = ({
           )}
         </div>
       </CardFooter>
+      {project.awards && project.awards.length > 0 && (
+        <div
+          className="absolute blur-xs top-3 right-3 flex items-center text-secondary"
+          title="Award Winning Project"
+        >
+          <Trophy className="size-10" />
+        </div>
+      )}
       {!!project.image && (
         <div className="absolute z-0 size-full opacity-20">
           <Image

@@ -10,6 +10,11 @@ const PROJECT_CATEGORY = Schema.Union(
   Schema.Literal("OTHER"),
 );
 
+export const Award = Schema.Struct({
+  award: Schema.String,
+  result: Schema.String,
+});
+
 export class ProjectMeta extends Schema.Class<ProjectMeta>("ProjectMeta")({
   id: Schema.Number,
   title: Schema.String,
@@ -24,6 +29,7 @@ export class ProjectMeta extends Schema.Class<ProjectMeta>("ProjectMeta")({
   team: Schema.optional(
     Schema.Array(Schema.Tuple(Schema.String, Schema.String)),
   ),
+  awards: Schema.optional(Schema.Array(Award)),
 }) {
   static readonly MDX = Schema.Struct({
     content: Schema.declare(React.isValidElement),

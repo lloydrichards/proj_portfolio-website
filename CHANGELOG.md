@@ -1,3 +1,15 @@
+# [1.16.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.1...v1.16.0) (2026-01-27)
+
+
+### Content
+
+* release lab 055 ([d43fb0b](https://github.com/lloydrichards/proj_portfolio-website/commit/d43fb0bf2c961ad8da8468183ad001289c134c1c))
+
+
+### Features
+
+* display detailed awards in projects ([726ec00](https://github.com/lloydrichards/proj_portfolio-website/commit/726ec00ca62b18b657205b8450652935d0de628f))
+
 ## [1.15.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.1...v1.15.2) (2026-01-20)
 
 

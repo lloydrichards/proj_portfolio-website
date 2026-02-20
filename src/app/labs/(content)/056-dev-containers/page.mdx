@@ -1,0 +1,182 @@
+import { createOGImageMetadata } from "@/lib/seo";
+
+export const metadata = createOGImageMetadata({
+  id: "056",
+  title: "Dev Containers: embracing isolation for tooling and workflow",
+  description:
+    "How I use dev containers to isolate tooling, standardize setup, and bounce between wildly different projects.",
+  tags: ["devcontainers", "docker", "tooling", "workflow"],
+  date: "2026-02-20",
+});
+
+I finally made the jump to dev containers, and it fixed the exact problem I was
+trying to ignore: every project I touch has its own toolchain, restrictions, and
+setup constraints. I needed a way to swap contexts without contaminating my
+machine or my brain.
+
+The problem came from switching between multiple projects where the dev
+environment is configured differently, and I also need to isolate what tools I
+can use.
+
+- Projects that can't use LLMs (NDA restrictions)
+- Legacy projects with outdated dependencies
+- Technologies (R, Flutter, Python) that require a specific OS or setup
+
+
+## Dev Containers
+
+> A development container (or dev container for short) allows you to use a
+> container as a full-featured development environment. It can be used to run an
+> application, to separate tools, libraries, or runtimes needed for working with
+> a codebase, and to aid in continuous integration and testing. Dev containers
+> can be run locally or remotely, in a private or public cloud, in a variety of
+> [supporting tools and editors](https://containers.dev/supporting).
+
+The best mental model is: a dev container is a repo-scoped workstation. It ships
+with the exact tools, versions, and scripts required for that project. When I
+switch folders, I switch environments too.
+
+```json showLineNumbers title="devcontainer.json"
+{
+  "name": "React Web Component Dev",
+
+  // 1. Use a built image, Dockerfile, or even docker-compose.yaml
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
+
+  // 2. (optional) This is where we pull in shared tools from your 'features' repo
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  // 3. (optional) Customize the IDE with extensions and configurations
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  },
+
+  // 4. (optional) Automatically maps the container's port 3000 to your machine's localhost:3000
+  "forwardPorts": [3000],
+
+  // 5. (optional) Runs commands during the lifecycle
+  // Runs INSIDE the container ONLY the first time it's created.
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y some-rare-utility",
+  // Runs whenever the container is created or settings change.
+  "updateContentCommand": "npm install",
+  // Runs after the container is fully setup.
+  "postCreateCommand": "npm run build:css && node --version",
+  // Runs EVERY TIME the container starts.
+  "postStartCommand": "npm run start:dev",
+  // Runs when a user connects their VS Code window.
+  "postAttachCommand": "echo 'Welcome back! Your environment is ready.'",
+
+  // 6. (optional) Setup what files from the host end up in the container
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=${localWorkspaceFolderBasename}-next,target=${containerWorkspaceFolder}/.next,type=volume"
+  ]
+}
+```
+
+## Getting Started
+
+1. **Install the Prerequisites:** You need
+   [Docker](https://www.docker.com/) and the
+   [Dev Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+   for VS Code.
+2. **Open the Project:** Open the project folder in VS Code.
+3. **Click the Green Button:** A pop-up will appear in the bottom right: "Reopen
+   in Container." Click it.
+4. **Wait for the Build:** VS Code will build the image. Once finished, your
+   terminal is now running inside the container.
+
+> Note: The first build takes a minute. Subsequent starts are almost instant.
+
+## Building Templates
+
+One of the best ways I figured I could learn was by building my own base images
+and features. Though there are plenty of great premade ones, I wanted to have my
+own templates that I could customize and share with others. For this I built a
+repo of dev container templates that I can reference in my projects. Each image
+is built for a specific use case, but most of the time I'm just pulling in the
+base image and then adding features on top.
+
+Repo: https://github.com/lloydrichards/devcontainer-templates
+
+```json showLineNumbers {3}#success title="devcontainer.json"
+{
+  "name": "My Project",
+  "image": "ghcr.io/lloydrichards/devcontainer-templates/web-app:latest"
+  // "features": { ...  },
+  // "customizations": { ...  }
+}
+```
+
+
+## Building Features
+
+Features are a little more interesting to me because they allow me to compose
+tools and customizations across projects without having to set up each one from
+scratch. For example I have a custom oh-my-posh theme that I use and wanted to be
+able to pull it into any container without having to install it manually each
+time. So I built a feature for it and now I can add it to any project with a
+single line in my devcontainer.json.
+
+Repo: https://github.com/lloydrichards/devcontainer-features
+
+```json showLineNumbers {4-6}#success title="devcontainer.json"
+{
+  "name": "My Project",
+  "image": "ghcr.io/lloydrichards/devcontainer-templates/web-app:latest",
+  "features": {
+    "ghcr.io/lloydrichards/devcontainer-features/oh-my-posh-theme:1": {}
+  }
+  // "customizations": { ...  }
+}
+```
+
+### Agent Party Feature
+
+The other exploration I did was building a feature for LLMs in dev containers.
+The container is a perfect place to isolate the tools and dependencies needed
+for agentic coding, and I wanted to see how far I could push it when it came to
+context engineering. I was already using mounts to pull in my local opencode
+configurations for providers but I wanted to see if I could seed a container
+with specific agents, skills, and contexts for the project.
+
+Using the concepts from the
+[Coding Party](/labs/055-forming-the-party),
+I ended up building a feature that allows me to pull in specific agents, skills,
+and commands. This way I can have a container that's pre-configured with the
+exact setup I need for that project, and I can bounce between different setups
+with isolated agents and tools.
+
+  Repo: https://github.com/lloydrichards/devcontainer-features/tree/main/src/agent-party
+
+```json showLineNumbers title="devcontainer.json"
+{
+  "features": {
+    "ghcr.io/lloydrichards/devcontainer-features/agent-party:1": {
+      "targets": "opencode",
+      "features": "rules,commands,subagents,skills"
+    }  
+  }
+}
+```
+
+The feature is basically a setup script that runs when the feature installs and bakes a 'rulesync' workspace into the image. It picks a user, installs 'rulesync' (npm or the fallback), creates a shared 'rulesync' root, writes a config from the feature options, and drops in the bundled overview, subagents, commands, and skills. Then it runs 'rulesync' generate so the outputs are ready and readable for anyone who uses the image.
+
+After that, it writes a tiny 'rulesync-init' script that runs when the container is created. That script copies the global setup into the user's home volume if it doesn't exist yet, regenerates for that user, and symlinks the OpenCode folders into ~/.config/opencode. So you get a pre-baked setup in the image that still turns into a personal, persistent config once the container spins up.
+
+
+## References
+
+- [you should be using dev containers](https://www.youtube.com/watch?v=kPMA9cnpScU) - a great introduction and demo by the Syntax. 
+- [Dev Containers Documentation](https://containers.dev/) - the official docs with all the details and options.

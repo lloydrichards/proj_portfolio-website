@@ -1,7 +1,6 @@
-import { Slot } from "@radix-ui/react-slot";
+import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -29,28 +28,39 @@ const buttonVariants = cva(
         "icon-lg": "size-12",
       },
     },
-    defaultVariants: { variant: "default", size: "default" },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
   },
 );
 
-interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+type ButtonProps = ButtonPrimitive.Props &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+  };
+
+function Button({
+  className,
+  variant,
+  size,
+  asChild,
+  children,
+  ...props
+}: ButtonProps) {
+  const render =
+    asChild && React.isValidElement(children) ? children : undefined;
+  return (
+    <ButtonPrimitive
+      data-slot="button"
+      render={render}
+      nativeButton={asChild ? false : undefined}
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    >
+      {render ? null : children}
+    </ButtonPrimitive>
+  );
 }
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
-Button.displayName = "Button";
 
 export { Button, buttonVariants };

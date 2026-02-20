@@ -60,13 +60,16 @@ export const LabNavigation: FC<LabNavigationProps> = ({ labs, className }) => {
         </NavigationMenuList>
       </NavigationMenu>
       <Select
-        defaultValue={pathname === "/labs" ? "" : pathname.split("/labs/")[1]}
-        onValueChange={(value) => router.push(`/labs/${value}`)}
+        value={pathname === "/labs" ? "" : (pathname.split("/labs/")[1] ?? "")}
+        onValueChange={(value) =>
+          router.push(value ? `/labs/${value}` : "/labs")
+        }
       >
         <SelectTrigger className="h-full border-border col-span-7 md:hidden">
           <SelectValue placeholder="Select a lab" />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="">All Labs</SelectItem>
           {labs.map((p) => (
             <SelectItem key={p.slug} value={p.slug}>
               <Badge variant="outline" className="mr-2">

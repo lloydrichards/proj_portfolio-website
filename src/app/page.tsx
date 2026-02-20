@@ -1,7 +1,8 @@
-import { Effect, Schema } from "effect";
+import { Effect, Option, Schema } from "effect";
 import { Briefcase, FlaskConical, Star } from "lucide-react";
 import { Tile } from "@/components/atom/tile";
 import SvgGithub from "@/components/icons/github";
+import { GitHubCommitGraphCard } from "@/components/molecule/github_commit_graph";
 import { KPICard } from "@/components/molecule/kpi_card";
 import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
@@ -10,6 +11,7 @@ import { Logo } from "@/components/organism/logo";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
+import { siteMetadata } from "@/lib/metadata";
 import { GitHub } from "@/services/GitHub";
 import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
@@ -17,12 +19,16 @@ import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
 
 const HomePage = async () => {
+  const repoUrl = new URL(siteMetadata.siteRepo);
+  const [owner, repo] = repoUrl.pathname.replace(/^\/+/, "").split("/");
+
   const [
     featuredLabs,
     allProjects,
     allLabs,
     allPortfolioProjects,
     githubStats,
+    githubCommitGraph,
   ] = await RuntimeServer.runPromise(
     Effect.all(
       [
@@ -31,6 +37,12 @@ const HomePage = async () => {
         Laboratory.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
         Portfolio.all,
         GitHub.getStats("lloydrichards"),
+        GitHub.getCommitGraph({
+          owner,
+          repo,
+          branchLimit: 4,
+          commitLimit: 20,
+        }).pipe(Effect.option),
       ],
       { concurrency: "unbounded" },
     ),
@@ -111,6 +123,10 @@ const HomePage = async () => {
       {/* Skills Chart */}
       <Tile size="square-lg" className="bg-background group grid items-center">
         <SkillBarChart />
+      </Tile>
+
+      <Tile size="square-lg">
+        <GitHubCommitGraphCard graph={Option.getOrNull(githubCommitGraph)} />
       </Tile>
 
       {/* Labs Section */}

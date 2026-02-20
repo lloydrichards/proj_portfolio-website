@@ -46,7 +46,7 @@ const TileIcon: React.FC<{
     <TooltipTrigger asChild>
       <Tile size="square-xxs">
         <Button variant="ghost" size="unset" asChild>
-          <a target="_blank" href={href}>
+          <a target="_blank" href={href} rel="noopener">
             <span className="sr-only">{label}</span>
             {icon}
           </a>

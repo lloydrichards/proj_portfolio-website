@@ -86,14 +86,14 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
         <CardFooter className="justify-end">
           {project.repo && (
             <Button variant="outline" asChild>
-              <a target="_blank" href={project.repo}>
+              <a target="_blank" href={project.repo} rel="noopener">
                 <Github /> Repo
               </a>
             </Button>
           )}
           {project.href && (
             <Button variant="outline" asChild>
-              <a target="_blank" href={project.href}>
+              <a target="_blank" href={project.href} rel="noopener">
                 Website
               </a>
             </Button>

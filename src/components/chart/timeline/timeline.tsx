@@ -99,9 +99,9 @@ export const Timeline: FC<TimelineProps> = ({
         />
 
         {/* Month ticks */}
-        {monthTicks.map((tick, i) => (
+        {monthTicks.map((tick) => (
           <line
-            key={`month-${i}`}
+            key={`month-${tick.toISOString()}`}
             x1={margin.left + 4}
             y1={yScale(tick)}
             x2={margin.left}
@@ -111,7 +111,7 @@ export const Timeline: FC<TimelineProps> = ({
           />
         ))}
 
-        {dataWithChannels.map((d, idx) => {
+        {dataWithChannels.map((d) => {
           const y1 = yScale(d.start_date);
           const y2 = yScale(d.end_date || new Date());
           const height = y1 - y2;
@@ -119,14 +119,14 @@ export const Timeline: FC<TimelineProps> = ({
           if (d.category === "CONFERENCE") {
             return (
               <ConferenceItem
-                key={idx}
+                key={`${d.category}-${d.start_date.toISOString()}`}
                 x={xScale(d.channel)}
                 y={y2}
                 color={cScale(d.category)}
                 path={
                   lineConnector([
                     [xScale(d.channel) + 16, y1 - height / 2],
-                    [innerWidth, idx * textBlockHeight + textBlockHeight / 2],
+                    [innerWidth, y2 + height / 2],
                   ]) || ""
                 }
               />
@@ -135,7 +135,7 @@ export const Timeline: FC<TimelineProps> = ({
 
           return (
             <OccupationItem
-              key={idx}
+              key={`${d.category}-${d.start_date.toISOString()}`}
               x={xScale(d.channel)}
               y={y2}
               barHeight={height}
@@ -144,7 +144,7 @@ export const Timeline: FC<TimelineProps> = ({
               path={
                 lineConnector([
                   [xScale(d.channel) + innerWidth / 4, y1 - height / 2],
-                  [innerWidth, idx * textBlockHeight + textBlockHeight / 2],
+                  [innerWidth, y2 + height / 2],
                 ]) || ""
               }
             />
@@ -152,8 +152,8 @@ export const Timeline: FC<TimelineProps> = ({
         })}
 
         {/* Year ticks and labels */}
-        {yearTicks.map((tick, i) => (
-          <g key={`year-${i}`}>
+        {yearTicks.map((tick) => (
+          <g key={`year-${tick.getFullYear()}`}>
             <line
               x1={margin.left + 8}
               y1={yScale(tick)}

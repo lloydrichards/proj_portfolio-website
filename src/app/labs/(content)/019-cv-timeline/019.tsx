@@ -211,21 +211,21 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
 
-  const lookupInRange = (
-    corner: Date,
-    allValues: Array<Occupation>,
-  ): boolean => {
-    let result: boolean = false;
-    allValues.forEach((i) => {
-      if (corner > i.start && corner < i.end) {
-        result = true;
-        return true;
-      }
-    });
-    return result;
-  };
+  const lookupInRange = useCallback(
+    (corner: Date, allValues: Array<Occupation>): boolean => {
+      let result: boolean = false;
+      allValues.forEach((i) => {
+        if (corner > i.start && corner < i.end) {
+          result = true;
+          return true;
+        }
+      });
+      return result;
+    },
+    [],
+  );
 
-  const categoryColor = (category: keyof Category) => {
+  const categoryColor = useCallback((category: keyof Category) => {
     switch (category) {
       case "Work":
         return "#CBE0F2";
@@ -234,15 +234,15 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       case "Volunteer":
         return "#F0E2CE";
     }
-  };
+  }, []);
 
   const orderInRange = useCallback(
     (
       value: Occupation,
-      backArg: any,
-      midArg: any,
-      frontArg: any,
-    ): boolean | number | string => {
+      backArg: boolean,
+      midArg: boolean,
+      frontArg: boolean,
+    ): boolean => {
       if (
         lookupInRange(value.end, occupations) &&
         lookupInRange(value.start, occupations)
@@ -257,45 +257,48 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
     [occupations, lookupInRange],
   );
 
-  const wrap = (
-    text: d3.Selection<SVGTextElement, Occupation, null, unknown>,
-    width: number,
-    textMargin: number,
-  ) => {
-    text.each(function () {
-      const text = d3.select(this),
-        words = text.text().split(/\s+/).reverse(),
-        y = text.attr("y"),
-        dy = parseFloat(text.attr("dy")),
-        lineHeight = 1.1; // ems
+  const wrap = useCallback(
+    (
+      text: d3.Selection<SVGTextElement, Occupation, null, unknown>,
+      width: number,
+      textMargin: number,
+    ) => {
+      text.each(function () {
+        const text = d3.select(this),
+          words = text.text().split(/\s+/).reverse(),
+          y = text.attr("y"),
+          dy = parseFloat(text.attr("dy")),
+          lineHeight = 1.1; // ems
 
-      let word: string | undefined,
-        line: string[] = [],
-        lineNumber = 0,
-        tspan = text
-          .text(null)
-          .append("tspan")
-          .attr("x", textMargin + 16)
-          .attr("y", y);
-
-      while ((word = words.pop())) {
-        line.push(word);
-        tspan.text(line.join(" "));
-        const node = tspan.node();
-        if (node && node.getComputedTextLength() > width) {
-          line.pop();
-          tspan.text(line.join(" "));
-          line = [word];
+        let word: string | undefined,
+          line: string[] = [],
+          lineNumber = 0,
           tspan = text
+            .text(null)
             .append("tspan")
             .attr("x", textMargin + 16)
-            .attr("y", y)
-            .attr("dy", `${++lineNumber * lineHeight + dy}em`)
-            .text(word);
+            .attr("y", y);
+
+        while ((word = words.pop())) {
+          line.push(word);
+          tspan.text(line.join(" "));
+          const node = tspan.node();
+          if (node && node.getComputedTextLength() > width) {
+            line.pop();
+            tspan.text(line.join(" "));
+            line = [word];
+            tspan = text
+              .append("tspan")
+              .attr("x", textMargin + 16)
+              .attr("y", y)
+              .attr("dy", `${++lineNumber * lineHeight + dy}em`)
+              .text(word);
+          }
         }
-      }
-    });
-  };
+      });
+    },
+    [],
+  );
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
@@ -338,13 +341,13 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .range([diagramHeight, 0]);
 
     const yAxis = d3
-      .axisLeft<any>(yScale)
+      .axisLeft<Date>(yScale)
       .ticks(d3.timeYear, 1)
       .tickSize(5)
       .tickFormat(d3.timeFormat("%Y"));
 
     const yAxisMonth = d3
-      .axisLeft<any>(yScale)
+      .axisLeft<Date>(yScale)
       .ticks(d3.timeMonth, 1)
       .tickSize(3);
 
@@ -461,7 +464,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .attr("stroke-width", "2px");
 
     svg
-      .selectAll<SVGTextElement, any>(".text-title-occupation")
+      .selectAll<SVGTextElement, Occupation>(".text-title-occupation")
       .data(occupations.filter((d) => d.selected))
       .join("text")
       .attr("class", "text-title-occupation")
@@ -477,7 +480,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .attr("fill", "#000000");
 
     svg
-      .selectAll<SVGTextElement, any>(".text-subtitle-occupation")
+      .selectAll<SVGTextElement, Occupation>(".text-subtitle-occupation")
       .data(occupations.filter((d) => d.selected))
       .join("text")
       .attr("class", "text-subtitle-occupation")
@@ -494,7 +497,7 @@ const TimeLine: React.FC<Props> = ({ occupations, dimensions }) => {
       .style("font-style", "italic");
 
     svg
-      .selectAll<SVGTextElement, any>(".text-desc-occupation")
+      .selectAll<SVGTextElement, Occupation>(".text-desc-occupation")
       .data(occupations.filter((d) => d.selected))
       .join("text")
       .attr("class", "text-desc-occupation")

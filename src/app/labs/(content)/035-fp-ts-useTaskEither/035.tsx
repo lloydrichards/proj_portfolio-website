@@ -68,6 +68,7 @@ const Product = t.type({
 type Product = t.TypeOf<typeof Product>;
 
 const Products = t.array(Product);
+// biome-ignore lint/correctness/noUnusedVariables: demo type alias for explanation
 type Products = t.TypeOf<typeof Products>;
 
 const Cart = t.type({

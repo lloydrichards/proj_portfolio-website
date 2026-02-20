@@ -229,14 +229,14 @@ function ArrowSvg(props: React.ComponentProps<"svg">) {
 
 export {
   NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
+  NavigationMenuArrow,
   NavigationMenuContent,
-  NavigationMenuTrigger,
+  NavigationMenuItem,
   NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuPopup,
   NavigationMenuPositioner,
+  NavigationMenuTrigger,
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
-  NavigationMenuPopup,
-  NavigationMenuArrow,
 };

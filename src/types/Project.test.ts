@@ -1,6 +1,6 @@
 import { Schema } from "effect";
 import { describe, expect, it } from "vitest";
-import { Project, ProjectMeta } from "./Project";
+import { ProjectMeta } from "./Project";
 
 describe("ProjectMeta", () => {
   it("should support the new awards field", () => {

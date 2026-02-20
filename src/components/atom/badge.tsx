@@ -1,4 +1,4 @@
-import { Slot } from "@radix-ui/react-slot";
+import { useRender } from "@base-ui/react/use-render";
 import { cva, type VariantProps } from "class-variance-authority";
 import type * as React from "react";
 
@@ -23,30 +23,29 @@ const badgeVariants = cva(
         md: typefaceBody("px-2.5 py-0.5"),
       },
     },
-    defaultVariants: { variant: "default", size: "sm" },
+    defaultVariants: {
+      variant: "default",
+      size: "sm",
+    },
   },
 );
-
-interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {
-  asChild?: boolean;
-}
 
 function Badge({
   className,
   variant,
   size,
-  asChild = false,
+  render = <span />,
   ...props
-}: BadgeProps) {
-  const Comp = asChild ? Slot : "div";
-  return (
-    <Comp
-      className={cn(badgeVariants({ variant, size, className }))}
-      {...props}
-    />
-  );
+}: React.ComponentProps<"span"> &
+  VariantProps<typeof badgeVariants> & { render?: useRender.RenderProp }) {
+  return useRender({
+    render,
+    props: {
+      "data-slot": "badge",
+      className: cn(badgeVariants({ variant, size }), className),
+      ...props,
+    },
+  });
 }
 
 export { Badge, badgeVariants };

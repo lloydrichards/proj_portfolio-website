@@ -25,6 +25,7 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
+    "@base-ui/react": "^1.2.0",
     "@effect/experimental": "^0.58.0",
     "@effect/language-service": "^0.62.5",
     "@effect/platform": "^0.93.8",
@@ -59,7 +60,7 @@
     "framer-motion": "^12.27.5",
     "io-ts": "^2.2.22",
     "leva": "^0.10.1",
-    "lucide-react": "^0.562.0",
+    "lucide-react": "^0.575.0",
     "mdx-mermaid": "^2.0.3",
     "mermaid": "^11.12.2",
     "next": "16.1.6",
@@ -72,6 +73,7 @@
     "rehype-pretty-code": "^0.14.1",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
+    "sonner": "^2.0.7",
     "three": "^0.182.0",
     "vitest": "^4.0.17"
   },

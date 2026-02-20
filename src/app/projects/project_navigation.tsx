@@ -62,15 +62,20 @@ export const ProjectNavigation: FC<ProjectNavigationProps> = ({
         </NavigationMenuList>
       </NavigationMenu>
       <Select
-        defaultValue={
-          pathname === "/projects" ? "" : pathname.split("/projects/")[1]
+        value={
+          pathname === "/projects"
+            ? ""
+            : (pathname.split("/projects/")[1] ?? "")
         }
-        onValueChange={(value) => router.push(`/projects/${value}`)}
+        onValueChange={(value) =>
+          router.push(value ? `/projects/${value}` : "/projects")
+        }
       >
         <SelectTrigger className="h-full border-border col-span-7 md:hidden">
           <SelectValue placeholder="Select a project" />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="">All Projects</SelectItem>
           {projects.map((p) => (
             <SelectItem key={p.slug} value={p.slug}>
               <Badge variant="outline" className="mr-2">

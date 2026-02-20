@@ -33,6 +33,7 @@ export const NavListItem: FC<{
             : pathname.includes(href.toString()),
           className: "flex gap-2 lg:justify-start",
         })}
+        active={exact ? pathname === href : pathname.includes(href.toString())}
         asChild
       >
         <Link href={href}>{children}</Link>

@@ -66,18 +66,20 @@ export default function RootLayout({
         src="https://umami.lloydrichards.dev/script.js"
         data-website-id="0504d125-cb01-4703-8dd3-6ee51d56d3b1"
       />
-      <body
-        className={cn(
-          "min-h-dvh w-full lg:max-w-6xl",
-          "mosaic-columns grid grid-flow-dense",
-          "justify-self-center p-2",
-        )}
-      >
+      <body className={cn("min-h-dvh w-full")}>
         <ThemeProvider attribute="class" enableSystem>
           <TooltipProvider>
-            <Navbar />
-            {children}
-            <Footer />
+            <div
+              className={cn(
+                "min-h-dvh w-full lg:max-w-6xl",
+                "mosaic-columns grid grid-flow-dense",
+                "mx-auto p-2",
+              )}
+            >
+              <Navbar />
+              {children}
+              <Footer />
+            </div>
           </TooltipProvider>
         </ThemeProvider>
         <Analytics />

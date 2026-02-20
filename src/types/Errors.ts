@@ -55,7 +55,9 @@ export class FileSystemError extends Data.TaggedError("FileSystemError")<{
  * Error thrown when GitHub API requests fail
  */
 export class GitHubAPIError extends Data.TaggedError("GitHubAPIError")<{
-  username: string;
+  username?: string;
+  owner?: string;
+  repo?: string;
   statusCode?: number;
   message: string;
   cause?: unknown;

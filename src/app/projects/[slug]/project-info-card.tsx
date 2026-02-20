@@ -71,7 +71,7 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
             </div>
           )}
           {project.team && project.team.length > 0 && (
-            <Accordion type="single" collapsible>
+            <Accordion>
               <AccordionItem value="item-1">
                 <AccordionTrigger>Team</AccordionTrigger>
                 <AccordionContent>

@@ -113,7 +113,7 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
               </div>
             )}
             {relatedLabs.length > 0 && (
-              <Accordion type="single" collapsible>
+              <Accordion>
                 <AccordionItem value="item-1">
                   <AccordionTrigger>Related Labs</AccordionTrigger>
                   <AccordionContent className="gap-0">

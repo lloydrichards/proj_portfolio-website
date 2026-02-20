@@ -7,7 +7,7 @@ import {
   forceY,
   type SimulationNodeDatum,
 } from "d3";
-import { type FC, useEffect, useState } from "react";
+import { type FC, useCallback, useEffect, useState } from "react";
 
 const simulation = forceSimulation();
 
@@ -58,14 +58,14 @@ export const BubblePacking: FC<Props> = ({
   const [_renderCounter, setRenderCounter] = useState(0);
   const [items, setItems] = useState<Array<Node>>([]);
 
-  function endSimulation() {
+  const endSimulation = useCallback(() => {
     setRenderCounter((count) => count + 1);
-  }
+  }, []);
 
-  function updateSimulation() {
+  const updateSimulation = useCallback(() => {
     setRenderCounter((count) => count + 1);
     simulation.tick(1);
-  }
+  }, []);
 
   useEffect(() => {
     const nodes = data.map((d) => ({ ...d, color: randomColor() }));

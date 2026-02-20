@@ -32,8 +32,8 @@ export const GeomLayer: FC<GeomLayerProps> = ({
     <g>
       {/* Bars */}
       <g>
-        {series.map((s, i) => (
-          <g key={i}>
+        {series.map((s) => (
+          <g key={`series-${s.key}`}>
             {s.map((d) => (
               <motion.rect
                 key={`series-${s.key}-stack-${d.data.stack}`}
@@ -74,17 +74,27 @@ export const GeomLayer: FC<GeomLayerProps> = ({
       </g>
       {/* Annotations */}
       <g>
-        {stackSums.map((sum, i) => (
-          <text
-            key={i}
-            x={xScale(series[0][i].data.stack)! + xScale.bandwidth() / 2}
-            y={yScale(sum) - 8}
-            textAnchor="middle"
-            className={typefaceMeta("fill-foreground text-sm")}
-          >
-            {sum.toLocaleString()}
-          </text>
-        ))}
+        {stackSums.map((sum, i) => {
+          const stackKey = series[0][i]?.data.stack;
+          if (!stackKey) {
+            return null;
+          }
+          const stackPosition = xScale(stackKey);
+          if (stackPosition === undefined) {
+            return null;
+          }
+          return (
+            <text
+              key={`stack-sum-${stackKey}`}
+              x={stackPosition + xScale.bandwidth() / 2}
+              y={yScale(sum) - 8}
+              textAnchor="middle"
+              className={typefaceMeta("fill-foreground text-sm")}
+            >
+              {sum.toLocaleString()}
+            </text>
+          );
+        })}
       </g>
     </g>
   );

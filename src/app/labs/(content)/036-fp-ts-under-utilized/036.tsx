@@ -357,10 +357,9 @@ const _groupGrades = pipe(
       grades,
       RA.reduce(acc, (acc, { category, grade }) => {
         const current = acc[category] ?? [];
-        return {
-          ...acc,
-          [category]: [...current, grade],
-        };
+        current.push(grade);
+        acc[category] = current;
+        return acc;
       }),
     );
   }),

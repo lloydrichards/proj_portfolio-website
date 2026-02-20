@@ -61,6 +61,7 @@ const ApiData = t.type({
     name: t.string,
   }),
 });
+// biome-ignore lint/correctness/noUnusedVariables: demo type alias for explanation
 type ApiData = t.TypeOf<typeof ApiData>;
 
 interface NetworkError {

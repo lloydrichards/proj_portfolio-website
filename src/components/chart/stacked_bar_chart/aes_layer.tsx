@@ -35,20 +35,27 @@ export const AesLayer: FC<AesLayerProps> = ({ xScale, yScale, height }) => {
       </g>
       {/* X-axis labels */}
       <g transform={`translate(0,${height}) `}>
-        {xScale.domain().map((stack, i) => (
-          <g
-            key={i}
-            transform={`translate(${xScale(stack)! + xScale.bandwidth() / 2},12)`}
-          >
-            <text
-              dominantBaseline="middle"
-              textAnchor="end"
-              className={typefaceMeta("fill-foreground -rotate-45")}
+        {xScale.domain().map((stack) => {
+          const stackPosition = xScale(stack);
+          if (stackPosition === undefined) {
+            return null;
+          }
+
+          return (
+            <g
+              key={stack}
+              transform={`translate(${stackPosition + xScale.bandwidth() / 2},12)`}
             >
-              {stack}
-            </text>
-          </g>
-        ))}
+              <text
+                dominantBaseline="middle"
+                textAnchor="end"
+                className={typefaceMeta("fill-foreground -rotate-45")}
+              >
+                {stack}
+              </text>
+            </g>
+          );
+        })}
       </g>
     </g>
   );

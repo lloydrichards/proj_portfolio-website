@@ -1,3 +1,20 @@
+## [1.16.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.16.0...v1.16.1) (2026-02-24)
+
+
+### Content
+
+* add 056 lab dev containers ([0fe0265](https://github.com/lloydrichards/proj_portfolio-website/commit/0fe0265e03aa003ec0af2a7ea521b3d83bd50440))
+
+
+### Improved
+
+* base-ui accordion ([2add655](https://github.com/lloydrichards/proj_portfolio-website/commit/2add655bbdbbbe5c22f4740b635b4ac0a033a16b))
+* base-ui button table card and select ([1a08606](https://github.com/lloydrichards/proj_portfolio-website/commit/1a086068b05c0263efd2979970b2cce7c5fcca87))
+* base-ui navigation menu ([bdb0a3b](https://github.com/lloydrichards/proj_portfolio-website/commit/bdb0a3be4e99b2692a04b174f515ab6cb3592ab8))
+* base-ui slider and range-slider ([4e212e8](https://github.com/lloydrichards/proj_portfolio-website/commit/4e212e865ec56aab39449c9896abf4da565a08a6))
+* base-ui tooltip avatar and badge ([a94cfba](https://github.com/lloydrichards/proj_portfolio-website/commit/a94cfbab058e3f4d4933636c0affc47af7f57ba2))
+* sonner toast ([09c3dee](https://github.com/lloydrichards/proj_portfolio-website/commit/09c3dee1d6707d938c268f7b3ba218ff74dffcf8))
+
 # [1.16.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.1...v1.16.0) (2026-01-27)
 
 

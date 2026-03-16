@@ -60,16 +60,18 @@ function TooltipPositioner({
 
 type TooltipContentProps = TooltipPrimitive.Popup.Props & {
   side?: TooltipPrimitive.Positioner.Props["side"];
+  positionerClassName?: string;
 };
 
 function TooltipContent({
   className,
   children,
   side,
+  positionerClassName,
   ...props
 }: TooltipContentProps) {
   return (
-    <TooltipPositioner side={side}>
+    <TooltipPositioner side={side} className={positionerClassName}>
       <TooltipPrimitive.Popup
         data-slot="tooltip-content"
         className={cn(
@@ -86,8 +88,8 @@ function TooltipContent({
 
 export {
   Tooltip,
-  TooltipTrigger,
   TooltipContent,
-  TooltipProvider,
   TooltipPositioner,
+  TooltipProvider,
+  TooltipTrigger,
 };

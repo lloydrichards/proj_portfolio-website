@@ -40,7 +40,7 @@ const HomePage = async () => {
         GitHub.getCommitGraph({
           owner,
           repo,
-          commitLimit: 20,
+          commitLimit: 300,
         }).pipe(Effect.option),
       ],
       { concurrency: "unbounded" },
@@ -124,7 +124,7 @@ const HomePage = async () => {
         <SkillBarChart />
       </Tile>
 
-      <Tile size="square-lg">
+      <Tile size="unset" className="col-span-full row-span-6">
         <GitHubCommitCard graph={Option.getOrNull(githubCommitGraph)} />
       </Tile>
 

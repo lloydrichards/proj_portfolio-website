@@ -147,16 +147,24 @@ export class GitHub extends Effect.Service<GitHub>()("app/GitHub", {
             const defaultBranch: string = repoData.default_branch;
             const encodedDefaultBranch = encodeURIComponent(defaultBranch);
 
-            const [commitsResponse, tagsResponse] = await Promise.all([
+            const perPage = 100;
+            const totalPages = Math.max(1, Math.ceil(commitLimit / perPage));
+            const commitRequests = Array.from(
+              { length: totalPages },
+              (_, index) =>
+                fetch(
+                  `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/commits?sha=${encodedDefaultBranch}&per_page=${perPage}&page=${index + 1}`,
+                  {
+                    headers,
+                    next: { revalidate: 3600 },
+                  },
+                ),
+            );
+
+            const [commitResponses, tagsResponse] = await Promise.all([
+              Promise.all(commitRequests),
               fetch(
-                `https://api.github.com/repos/${owner}/${repo}/commits?sha=${defaultBranch}&per_page=${commitLimit}`,
-                {
-                  headers,
-                  next: { revalidate: 3600 },
-                },
-              ),
-              fetch(
-                `https://api.github.com/repos/${owner}/${repo}/tags?per_page=50`,
+                `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/tags?per_page=100`,
                 {
                   headers,
                   next: { revalidate: 3600 },
@@ -164,12 +172,15 @@ export class GitHub extends Effect.Service<GitHub>()("app/GitHub", {
               ),
             ]);
 
-            if (!commitsResponse.ok) {
+            const failedCommitResponse = commitResponses.find(
+              (response) => !response.ok,
+            );
+            if (failedCommitResponse) {
               throw new GitHubAPIError({
                 owner,
                 repo,
-                statusCode: commitsResponse.status,
-                message: `GitHub API error: ${commitsResponse.status} ${commitsResponse.statusText}`,
+                statusCode: failedCommitResponse.status,
+                message: `GitHub API error: ${failedCommitResponse.status} ${failedCommitResponse.statusText}`,
               });
             }
 
@@ -182,15 +193,23 @@ export class GitHub extends Effect.Service<GitHub>()("app/GitHub", {
               });
             }
 
-            const commitsData: {
-              sha: string;
-              html_url: string;
-              commit: {
-                message: string;
-                committer?: { date?: string };
-                author?: { date?: string };
-              };
-            }[] = await commitsResponse.json();
+            const commitPages = await Promise.all(
+              commitResponses.map(
+                (response) =>
+                  response.json() as Promise<
+                    {
+                      sha: string;
+                      html_url: string;
+                      commit: {
+                        message: string;
+                        committer?: { date?: string };
+                        author?: { date?: string };
+                      };
+                    }[]
+                  >,
+              ),
+            );
+            const commitsData = commitPages.flat().slice(0, commitLimit);
             const tagsData: { name: string; commit: { sha: string } }[] =
               await tagsResponse.json();
 

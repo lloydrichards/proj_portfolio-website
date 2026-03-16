@@ -54,7 +54,7 @@ const HomePage = async () => {
       </Tile>
       <Tile
         size="unset"
-        className="col-[1/-2] row-span-1 grid items-center px-8 md:col-span-10 md:row-span-2 lg:col-span-16 lg:row-span-2"
+        className="col-span-full row-span-1 grid items-center px-8 md:col-span-12 md:row-span-2 lg:col-span-16 lg:row-span-2"
       >
         <h1 className={typefaceHeading1("mt-0")}>Hello, I&apos;m Lloyd</h1>
       </Tile>

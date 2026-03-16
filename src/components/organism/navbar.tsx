@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
       <Link
         href="/"
         className={typefaceHeading3(
-          "col-[1/-6] mt-0 overflow-clip md:col-[1/-10] lg:col-[1/-14]",
+          "col-span-3 mt-0 overflow-clip md:col-span-6 lg:col-span-6",
         )}
       >
         lloydrichards.dev

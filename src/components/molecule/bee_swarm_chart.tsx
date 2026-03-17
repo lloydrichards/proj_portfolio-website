@@ -80,19 +80,19 @@ const COMMIT_TYPE_STYLES: Record<string, { label: string; className: string }> =
   {
     feature: {
       label: "Feature",
-      className: "fill-emerald-500/70 stroke-emerald-400",
+      className: "fill-chart-1/70 stroke-chart-1",
     },
     fix: {
       label: "Fix",
-      className: "fill-amber-500/70 stroke-amber-400",
+      className: "fill-chart-2/70 stroke-chart-2",
     },
     docs: {
       label: "Docs",
-      className: "fill-sky-500/70 stroke-sky-400",
+      className: "fill-chart-3/70 stroke-chart-3",
     },
     refactor: {
       label: "Refactor",
-      className: "fill-violet-500/70 stroke-violet-400",
+      className: "fill-chart-4/70 stroke-chart-4",
     },
     other: {
       label: "Other",
@@ -205,11 +205,11 @@ export const BeeSwarmChart = ({
         "x",
         forceX<BeeSwarmNode>((node) => xScale(node.dateValue)).strength(1),
       )
-      .force("y", forceY(centerY).strength(0.12))
+      .force("y", forceY(centerY).strength(0.05))
       .force(
         "collide",
         forceCollide<BeeSwarmNode>((node) =>
-          node.type === "other" ? radius + 1 : radius + 2,
+          node.type === "other" ? radius + 1.5 : radius + 2.5,
         ),
       )
       .stop();

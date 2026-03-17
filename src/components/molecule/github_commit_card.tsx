@@ -1,14 +1,9 @@
 "use client";
 
 import { useMemo } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/atom/card";
+import { CardContent } from "@/components/atom/card";
 import { BeeSwarmChart } from "@/components/molecule/bee_swarm_chart";
+import { SkillCard } from "@/components/molecule/skill_card";
 import { cn } from "@/lib/utils";
 import type { GitHubCommitGraph } from "@/services/GitHub";
 
@@ -42,40 +37,30 @@ export const GitHubCommitCard = ({
 
   if (!graph || !activeData) {
     return (
-      <Card className={cn("flex h-full flex-col", className)}>
-        <CardHeader className="flex-row items-start justify-between space-y-0">
-          <div>
-            <CardTitle>GitHub activity</CardTitle>
-            <CardDescription className="pt-1 text-xs">
-              Activity unavailable
-            </CardDescription>
-          </div>
-        </CardHeader>
-        <CardContent className="text-muted-foreground text-sm">
+      <SkillCard
+        title="GitHub activity"
+        subtitle="Activity unavailable"
+        className={cn("h-full", className)}
+      >
+        <CardContent className="text-muted-foreground text-sm pt-3">
           Unable to load recent commits right now.
         </CardContent>
-      </Card>
+      </SkillCard>
     );
   }
 
   return (
-    <Card className={cn("flex h-full flex-col", className)}>
-      <CardHeader className="flex-row items-start justify-between space-y-0">
-        <div>
-          <CardTitle>Portfolio activity</CardTitle>
-          <CardDescription className="pt-1 text-xs">
-            {graph.owner}/{graph.repo}
-          </CardDescription>
-        </div>
-      </CardHeader>
-      <CardContent className="flex h-full min-h-0 flex-col gap-3">
-        <div className="bg-muted/20 flex-1 min-h-0 overflow-hidden rounded-md p-3">
-          <BeeSwarmChart
-            commits={activeData.commits}
-            tagsBySha={activeData.tagsBySha}
-          />
-        </div>
-      </CardContent>
-    </Card>
+    <SkillCard
+      title="Portfolio activity"
+      subtitle={`${graph.owner}/${graph.repo}`}
+      className={cn("h-full", className)}
+    >
+      <div className=" flex-1 overflow-hidden p-3">
+        <BeeSwarmChart
+          commits={activeData.commits}
+          tagsBySha={activeData.tagsBySha}
+        />
+      </div>
+    </SkillCard>
   );
 };

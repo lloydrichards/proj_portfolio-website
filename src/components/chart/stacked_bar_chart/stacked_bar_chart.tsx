@@ -1,6 +1,10 @@
 "use client";
 import { max } from "d3";
-import { useState } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/atom/tooltip";
 import { typefaceMeta } from "@/components/tokens/typeface";
 import { AesLayer } from "./aes_layer";
 import { GeomLayer } from "./geom_layer";
@@ -29,11 +33,6 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   title,
   seriesDomain,
 }) => {
-  const [selected, setSelected] = useState<{
-    series: string;
-    value: number;
-  } | null>(null);
-
   const innerWidth = width - margins.left - margins.right;
   const innerHeight = height - margins.top - margins.bottom;
 
@@ -47,44 +46,85 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
     return null;
   }
 
+  const chartWidth = max([0, width]);
+  const chartHeight = max([0, height]);
+
   return (
-    <svg width={max([0, width])} height={max([0, height])} overflow="visible">
-      <g transform={`translate(${margins.left},${margins.top})`}>
-        {/* Title */}
-        {title && (
-          <text
-            x={innerWidth}
-            y={-margins.top / 2}
-            textAnchor="end"
-            dominantBaseline="middle"
-            className={typefaceMeta("fill-foreground font-medium")}
-          >
-            {title}
-          </text>
-        )}
+    <div
+      className="relative"
+      style={{ width: chartWidth, height: chartHeight }}
+    >
+      <svg
+        width={chartWidth}
+        height={chartHeight}
+        overflow="visible"
+        role="img"
+        aria-label={title ? `${title} stacked bar chart` : "Stacked bar chart"}
+      >
+        <g transform={`translate(${margins.left},${margins.top})`}>
+          {/* Title */}
+          {title && (
+            <text
+              x={innerWidth}
+              y={-margins.top / 2}
+              textAnchor="end"
+              dominantBaseline="middle"
+              className={typefaceMeta("fill-muted-foreground font-medium")}
+            >
+              {title}
+            </text>
+          )}
 
-        {/* Tooltip */}
-        {selected && (
-          <text
-            x={innerWidth}
-            y={innerHeight / 2}
-            textAnchor="end"
-            dominantBaseline="middle"
-            className={typefaceMeta("fill-foreground font-medium")}
-          >
-            {`${selected.series}: ${selected.value}hrs`}
-          </text>
-        )}
+          <AesLayer xScale={xScale} yScale={yScale} height={innerHeight} />
+          <GeomLayer
+            xScale={xScale}
+            yScale={yScale}
+            cScale={cScale}
+            series={series}
+          />
+        </g>
+      </svg>
+      {series.map((s) =>
+        s.map((d) => {
+          const xValue = xScale(d.data.stack);
+          if (xValue === undefined) {
+            return null;
+          }
+          const segmentHeight = max([0, yScale(d[0]) - yScale(d[1])]);
+          if (!segmentHeight) {
+            return null;
+          }
+          const left = margins.left + xValue;
+          const top = margins.top + yScale(d[1]);
+          const widthValue = xScale.bandwidth();
+          const value = d.data[s.key] as number;
+          const label = `${s.key}: ${value}hrs`;
 
-        <AesLayer xScale={xScale} yScale={yScale} height={innerHeight} />
-        <GeomLayer
-          xScale={xScale}
-          yScale={yScale}
-          cScale={cScale}
-          series={series}
-          onSelected={setSelected}
-        />
-      </g>
-    </svg>
+          return (
+            <Tooltip key={`tooltip-${s.key}-${d.data.stack}`}>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  aria-label={label}
+                  className="absolute rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  style={{
+                    left,
+                    top,
+                    width: widthValue,
+                    height: segmentHeight,
+                  }}
+                />
+              </TooltipTrigger>
+              <TooltipContent
+                className="pointer-events-none"
+                positionerClassName="pointer-events-none"
+              >
+                <span className="text-sm font-medium">{label}</span>
+              </TooltipContent>
+            </Tooltip>
+          );
+        }),
+      )}
+    </div>
   );
 };

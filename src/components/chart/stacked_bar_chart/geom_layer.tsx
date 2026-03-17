@@ -1,5 +1,4 @@
 import { max, type ScaleBand, type ScaleLinear, type ScaleOrdinal } from "d3";
-import { motion } from "framer-motion";
 import type { FC } from "react";
 import { typefaceMeta } from "@/components/tokens/typeface";
 
@@ -11,7 +10,6 @@ type GeomLayerProps = {
     { stack: string; [key: string]: string | number },
     string
   >[];
-  onSelected: (selected: { series: string; value: number } | null) => void;
 };
 
 export const GeomLayer: FC<GeomLayerProps> = ({
@@ -19,7 +17,6 @@ export const GeomLayer: FC<GeomLayerProps> = ({
   yScale,
   cScale,
   series,
-  onSelected,
 }) => {
   const stackSums = series[0].map((_, index) => {
     return series.reduce((sum, s) => {
@@ -35,38 +32,16 @@ export const GeomLayer: FC<GeomLayerProps> = ({
         {series.map((s) => (
           <g key={`series-${s.key}`}>
             {s.map((d) => (
-              <motion.rect
+              <rect
                 key={`series-${s.key}-stack-${d.data.stack}`}
-                initial={{
-                  x: xScale(d.data.stack),
-                }}
-                animate={{
-                  x: xScale(d.data.stack),
-                }}
-                transition={{
-                  duration: 0.5,
-                  ease: "easeInOut",
-                }}
+                x={xScale(d.data.stack)}
                 y={yScale(d[1])}
                 width={xScale.bandwidth()}
-                height={max([0, yScale(d[0]) - yScale(d[1])])}
+                height={max([0, yScale(d[0]) - yScale(d[1]) - 4])}
                 fill={cScale(d.data.stack)}
-                className="stroke-background stroke-3 hover:opacity-60"
+                className="stroke-muted-foreground/40 transition-opacity duration-150 hover:opacity-70"
+                strokeWidth={1}
                 opacity={0.8}
-                onTouchStart={() =>
-                  onSelected({
-                    series: s.key,
-                    value: d.data[s.key] as number,
-                  })
-                }
-                onTouchEnd={() => onSelected(null)}
-                onHoverStart={() => {
-                  onSelected({
-                    series: s.key,
-                    value: d.data[s.key] as number,
-                  });
-                }}
-                onHoverEnd={() => onSelected(null)}
               />
             ))}
           </g>
@@ -89,7 +64,7 @@ export const GeomLayer: FC<GeomLayerProps> = ({
               x={stackPosition + xScale.bandwidth() / 2}
               y={yScale(sum) - 8}
               textAnchor="middle"
-              className={typefaceMeta("fill-foreground text-sm")}
+              className={typefaceMeta("fill-muted-foreground text-xs")}
             >
               {sum.toLocaleString()}
             </text>

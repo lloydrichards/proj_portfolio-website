@@ -1,11 +1,18 @@
-import {
-  scaleBand,
-  scaleLinear,
-  scaleOrdinal,
-  schemeObservable10,
-  stack,
-} from "d3";
+import { scaleBand, scaleLinear, scaleOrdinal, stack } from "d3";
 import type { StackedData } from "./stacked_bar_chart";
+
+const CHART_COLORS = [
+  "var(--chart-1)",
+  "var(--chart-2)",
+  "var(--chart-3)",
+  "var(--chart-4)",
+  "var(--chart-5)",
+  "var(--chart-6)",
+  "var(--chart-7)",
+  "var(--chart-8)",
+  "var(--chart-9)",
+  "var(--chart-10)",
+];
 
 export const useStackedBarData = (
   data: StackedData[],
@@ -54,9 +61,16 @@ export const useStackedBarData = (
     .domain([0, Math.max(...series.flat().map((d) => d[1]))])
     .range([innerHeight, 0]);
 
+  const colorRange = Array.from(
+    {
+      length: Math.max(allStacks.length, CHART_COLORS.length),
+    },
+    (_, index) => CHART_COLORS[index % CHART_COLORS.length],
+  );
+
   const cScale = scaleOrdinal<string>()
     .domain(cDomain ?? allStacks)
-    .range(schemeObservable10);
+    .range(colorRange);
 
   return {
     xScale,

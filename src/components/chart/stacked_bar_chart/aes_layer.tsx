@@ -10,23 +10,40 @@ type AesLayerProps = {
 export const AesLayer: FC<AesLayerProps> = ({ xScale, yScale, height }) => {
   // Add tick calculation before return statement
   const yTicks = yScale.ticks(5);
+  const clipId = `stacked-bar-clip-${xScale.domain().length}-${Math.round(
+    height,
+  )}`;
   return (
     <g>
-      {/* Y-axis */}
+      <defs>
+        <clipPath id={clipId}>
+          <rect x={0} y={0} width={xScale.range()[1]} height={height} />
+        </clipPath>
+      </defs>
+      {/* Grid + Y-axis */}
       <g>
-        <line x1={0} x2={0} y1={0} y2={height} className="stroke-foreground" />
         {yTicks.map((tick) => (
-          <g
-            key={tick}
-            transform={`translate(0,${yScale(tick)})`}
-            className="stroke-foreground"
-          >
-            <line x1={-6} x2={0} y1={0} y2={0} />
+          <g key={tick} transform={`translate(0,${yScale(tick)})`}>
+            <line
+              x1={0}
+              x2={xScale.range()[1]}
+              y1={0}
+              y2={0}
+              className="stroke-muted-foreground/20"
+              clipPath={`url(#${clipId})`}
+            />
+            <line
+              x1={-6}
+              x2={0}
+              y1={0}
+              y2={0}
+              className="stroke-muted-foreground/50"
+            />
             <text
               x={-8}
               dy=".32em"
               textAnchor="end"
-              className={typefaceMeta("fill-foreground text-sm")}
+              className={typefaceMeta("fill-muted-foreground text-xs")}
             >
               {tick}
             </text>
@@ -49,7 +66,9 @@ export const AesLayer: FC<AesLayerProps> = ({ xScale, yScale, height }) => {
               <text
                 dominantBaseline="middle"
                 textAnchor="end"
-                className={typefaceMeta("fill-foreground -rotate-45")}
+                className={typefaceMeta(
+                  "fill-muted-foreground text-xs -rotate-45",
+                )}
               >
                 {stack}
               </text>

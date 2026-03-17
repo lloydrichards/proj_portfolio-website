@@ -6,6 +6,7 @@ import { GitHubCommitCard } from "@/components/molecule/github_commit_card";
 import { KPICard } from "@/components/molecule/kpi_card";
 import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
+import { SkillCard } from "@/components/molecule/skill_card";
 import { ThemeToggle } from "@/components/molecule/theme-toggle";
 import { Logo } from "@/components/organism/logo";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
@@ -120,11 +121,17 @@ const HomePage = async () => {
       ))}
 
       {/* Skills Chart */}
-      <Tile size="square-lg" className="bg-background group grid items-center">
-        <SkillBarChart />
+      <Tile size="square-lg" className="group grid items-center">
+        <SkillCard
+          title="Skills"
+          subtitle="Hours by occupation"
+          className="h-full"
+        >
+          <SkillBarChart />
+        </SkillCard>
       </Tile>
 
-      <Tile size="unset" className="col-span-full row-span-6">
+      <Tile size="unset" className="col-span-full row-span-6 md:row-span-8">
         <GitHubCommitCard graph={Option.getOrNull(githubCommitGraph)} />
       </Tile>
 

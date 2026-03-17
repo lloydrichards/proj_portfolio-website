@@ -41,6 +41,11 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+  --color-chart-9: var(--chart-9);
+  --color-chart-10: var(--chart-10);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -72,20 +77,28 @@
     }
   }
 
-  --animate-accordion-collapse: accordion-collapse var(--tw-duration, 200ms) ease-out;
+  --animate-accordion-collapse: accordion-collapse var(--tw-duration, 200ms)
+    ease-out;
 
-  --animate-accordion-expand: accordion-expand var(--tw-duration, 200ms) ease-out
-;
+  --animate-accordion-expand: accordion-expand var(--tw-duration, 200ms)
+    ease-out;
   @keyframes accordion-collapse {
-  from {
-    height: var(--accordion-panel-height, auto);}
-  to {
-    height: 0;}}
+    from {
+      height: var(--accordion-panel-height, auto);
+    }
+    to {
+      height: 0;
+    }
+  }
   @keyframes accordion-expand {
-  from {
-    height: 0;}
-  to {
-    height: var(--accordion-panel-height, auto);}}}
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--accordion-panel-height, auto);
+    }
+  }
+}
 
 /* Default theme */
 @layer base {
@@ -178,6 +191,11 @@
     --chart-3: hsl(197 37% 24%);
     --chart-4: hsl(43 74% 66%);
     --chart-5: hsl(27 87% 67%);
+    --chart-6: hsl(258 62% 64%);
+    --chart-7: hsl(140 45% 42%);
+    --chart-8: hsl(210 65% 55%);
+    --chart-9: hsl(330 70% 58%);
+    --chart-10: hsl(5 70% 52%);
     --radius: 0.5rem;
   }
 
@@ -230,6 +248,11 @@
     --chart-3: hsl(30 80% 55%);
     --chart-4: hsl(280 65% 60%);
     --chart-5: hsl(340 75% 55%);
+    --chart-6: hsl(190 70% 45%);
+    --chart-7: hsl(90 55% 45%);
+    --chart-8: hsl(45 85% 55%);
+    --chart-9: hsl(0 75% 60%);
+    --chart-10: hsl(260 70% 60%);
   }
 }
 
@@ -253,7 +276,7 @@
     box-sizing: border-box; /* Opera/IE 8+ */
   }
   body {
-    @apply bg-background text-foreground m-2 transition duration-300;
+    @apply bg-background text-foreground transition duration-300;
   }
 }
 

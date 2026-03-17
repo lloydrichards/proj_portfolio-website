@@ -40,11 +40,11 @@ export const SkillBarChartClient: FC<SkillBarChartClientProps> = withResponsive(
           seriesDomain={seriesDomain}
           margins={{
             top: 32,
-            right: 10,
-            bottom: 120,
-            left: 64,
+            right: 8,
+            bottom: 108,
+            left: 48,
           }}
-          height={height - 56}
+          height={height - 32}
           width={width}
         />
         <div className="absolute bottom-0 w-full px-8">

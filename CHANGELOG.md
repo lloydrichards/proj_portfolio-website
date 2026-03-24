@@ -1,3 +1,26 @@
+# [1.17.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.16.1...v1.17.0) (2026-03-24)
+
+
+### Content
+
+* add 057 lab on dynamic tools ([7e45353](https://github.com/lloydrichards/proj_portfolio-website/commit/7e453536cce21857aeb8206212a4ebc6e7c75fca))
+
+
+### Features
+
+* add BeeSwarmChart ([a6e8d89](https://github.com/lloydrichards/proj_portfolio-website/commit/a6e8d894cb5437b4112ae8c9f104dd71d8b68a7f))
+* add GitCommitGraph ([dcb077e](https://github.com/lloydrichards/proj_portfolio-website/commit/dcb077eaac388f55896cf98da0377fa92d59bff4))
+
+
+### Fixed
+
+* layout shift from tooltip ([b2e232a](https://github.com/lloydrichards/proj_portfolio-website/commit/b2e232a1a686d7ca94037cee07a1bc3473d5cf0f))
+
+
+### Improved
+
+* clean up tile spacing ([10020ad](https://github.com/lloydrichards/proj_portfolio-website/commit/10020ad43ea586224f290c43f6385dd55be3d82a))
+
 ## [1.16.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.16.0...v1.16.1) (2026-02-24)
 
 

@@ -11,7 +11,7 @@ export const metadata = createOGImageMetadata({
 });
 
 Building on recent work with web components, I wanted to explore how LLMs could
-be used to help create, modify and debug a component system and even generate
+be used to help create, modify, and debug a component system and even generate
 in-chat visualizations. To do this I wanted to explore building an agentic loop
 system[^4][^5] that could use tools to help fetch data, read documentation and
 generate specs.
@@ -161,7 +161,7 @@ Each approach has trade-offs in terms of cost, speed, and flexibility.
 ## Determinism vs Indeterminism
 
 I find the whole topic of creating deterministic systems with LLMs fascinating.
-There is always a trade off between using the LLM's reasoning capabilities and
+There is always a trade-off between using the LLM's reasoning capabilities and
 using deterministic tools to provide context or perform operations. In this
 project I wanted to explore how tool use could be used to enhance the LLM's
 capabilities without over-relying on them.

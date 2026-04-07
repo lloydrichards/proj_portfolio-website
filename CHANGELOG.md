@@ -1,3 +1,12 @@
+## [1.17.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.17.0...v1.17.1) (2026-04-07)
+
+
+### Content
+
+* add 058 lab ([6d8f833](https://github.com/lloydrichards/proj_portfolio-website/commit/6d8f833de5f659af2e947ad814b5cb686840109c))
+* add lab 059 ([74d8ae6](https://github.com/lloydrichards/proj_portfolio-website/commit/74d8ae6e406fa9c837ba65e3e3e0e370d2eca3ef))
+* fix minor typos ([82f0199](https://github.com/lloydrichards/proj_portfolio-website/commit/82f0199ed51b93248d7d8167131f793f18144a30))
+
 # [1.17.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.16.1...v1.17.0) (2026-03-24)
 
 

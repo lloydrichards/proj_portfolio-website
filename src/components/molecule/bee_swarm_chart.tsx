@@ -7,7 +7,6 @@ import {
   forceX,
   forceY,
   scaleTime,
-  timeFormat,
 } from "d3";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Badge } from "@/components/atom/badge";
@@ -32,6 +31,8 @@ type BeeSwarmNode = GitHubCommit & {
   tags: string[];
   x?: number;
   y?: number;
+  vx?: number;
+  vy?: number;
 };
 
 const formatCommitMessage = (message: string) =>
@@ -54,8 +55,6 @@ const formatCommitDate = (date?: string) => {
 };
 
 const formatPercent = (value: number) => `${Number(value.toFixed(4))}%`;
-
-const axisTickFormat = timeFormat("%b %Y");
 
 const hashString = (value: string) => {
   let hash = 2166136261;
@@ -160,72 +159,93 @@ export const BeeSwarmChart = ({
   const chartWidth = Math.max(240, containerSize.width || 1000);
   const chartHeight = Math.max(120, containerSize.height || height);
 
-  const { nodes, width, padding, tickDates, xScaleDomain } = useMemo(() => {
-    const widthValue = chartWidth;
-    const paddingValue = { top: 24, right: 12, bottom: 28, left: 12 };
-    const filtered = commits.filter((commit) => commit.date);
+  const { nodes, width, padding, tickDates, xScaleDomain, tickFormat } =
+    useMemo(() => {
+      const widthValue = chartWidth;
+      const paddingValue = { top: 24, right: 12, bottom: 28, left: 12 };
+      const filtered = commits.filter((commit) => commit.date);
 
-    if (!filtered.length) {
+      if (!filtered.length) {
+        return {
+          nodes: [] as BeeSwarmNode[],
+          width: widthValue,
+          padding: paddingValue,
+          tickDates: [] as Date[],
+          tickFormat: (d: Date) => d.toLocaleDateString(),
+          xScaleDomain: null as [Date, Date] | null,
+        };
+      }
+
+      const parsed = filtered.map((commit) => ({
+        ...commit,
+        dateValue: new Date(commit.date ?? ""),
+      }));
+      const [minDate, maxDate] = extent(parsed, (item) => item.dateValue) as [
+        Date,
+        Date,
+      ];
+      const xScale = scaleTime()
+        .domain([minDate, maxDate])
+        .range([paddingValue.left, widthValue - paddingValue.right]);
+      const tickDates = xScale.ticks(5);
+      const tickFormat = xScale.tickFormat(5);
+
+      const nodesValue: BeeSwarmNode[] = parsed.map((commit) => ({
+        ...commit,
+        type: getCommitType(commit.message),
+        tags: tagsBySha[commit.sha] || [],
+      }));
+
+      const radius = 5;
+      const seed = hashString(nodesValue.map((node) => node.sha).join("|"));
+      const rng = mulberry32(seed);
+      const plotHeight = chartHeight - paddingValue.top - paddingValue.bottom;
+      const centerY = paddingValue.top + plotHeight / 2;
+      const yMin = paddingValue.top + radius + 4;
+      const yMax = chartHeight - paddingValue.bottom - radius - 4;
+
+      const boundingForce = () => {
+        for (const node of nodesValue) {
+          if (node.y != null) {
+            if (node.y < yMin) {
+              node.vy = (node.vy ?? 0) + (yMin - node.y) * 0.5;
+            }
+            if (node.y > yMax) {
+              node.vy = (node.vy ?? 0) + (yMax - node.y) * 0.5;
+            }
+          }
+        }
+      };
+
+      const simulation = forceSimulation<BeeSwarmNode>(nodesValue)
+        .randomSource(rng)
+        .force(
+          "x",
+          forceX<BeeSwarmNode>((node) => xScale(node.dateValue)).strength(1),
+        )
+        .force("y", forceY(centerY).strength(0.05))
+        .force(
+          "collide",
+          forceCollide<BeeSwarmNode>((node) =>
+            node.type === "other" ? radius + 1.5 : radius + 2.5,
+          ),
+        )
+        .force("bounds", boundingForce)
+        .stop();
+
+      for (let i = 0; i < 140; i += 1) {
+        simulation.tick();
+      }
+
       return {
-        nodes: [] as BeeSwarmNode[],
+        nodes: nodesValue,
         width: widthValue,
         padding: paddingValue,
-        tickDates: [] as Date[],
-        xScaleDomain: null as [Date, Date] | null,
+        tickDates,
+        tickFormat,
+        xScaleDomain: [minDate, maxDate],
       };
-    }
-
-    const parsed = filtered.map((commit) => ({
-      ...commit,
-      dateValue: new Date(commit.date ?? ""),
-    }));
-    const [minDate, maxDate] = extent(parsed, (item) => item.dateValue) as [
-      Date,
-      Date,
-    ];
-    const xScale = scaleTime()
-      .domain([minDate, maxDate])
-      .range([paddingValue.left, widthValue - paddingValue.right]);
-    const tickDates = xScale.ticks(5);
-
-    const nodesValue: BeeSwarmNode[] = parsed.map((commit) => ({
-      ...commit,
-      type: getCommitType(commit.message),
-      tags: tagsBySha[commit.sha] || [],
-    }));
-
-    const radius = 5;
-    const seed = hashString(nodesValue.map((node) => node.sha).join("|"));
-    const rng = mulberry32(seed);
-    const plotHeight = chartHeight - paddingValue.top - paddingValue.bottom;
-    const centerY = paddingValue.top + plotHeight / 2;
-    const simulation = forceSimulation<BeeSwarmNode>(nodesValue)
-      .randomSource(rng)
-      .force(
-        "x",
-        forceX<BeeSwarmNode>((node) => xScale(node.dateValue)).strength(1),
-      )
-      .force("y", forceY(centerY).strength(0.05))
-      .force(
-        "collide",
-        forceCollide<BeeSwarmNode>((node) =>
-          node.type === "other" ? radius + 1.5 : radius + 2.5,
-        ),
-      )
-      .stop();
-
-    for (let i = 0; i < 140; i += 1) {
-      simulation.tick();
-    }
-
-    return {
-      nodes: nodesValue,
-      width: widthValue,
-      padding: paddingValue,
-      tickDates,
-      xScaleDomain: [minDate, maxDate],
-    };
-  }, [commits, tagsBySha, chartHeight, chartWidth]);
+    }, [commits, tagsBySha, chartHeight, chartWidth]);
 
   if (!isMounted) {
     return (
@@ -366,7 +386,7 @@ export const BeeSwarmChart = ({
               className="absolute -translate-x-1/2 text-sm text-muted-foreground"
               style={{ left: formatPercent((x / width) * 100), bottom: "4px" }}
             >
-              {axisTickFormat(tick)}
+              {tickFormat(tick)}
             </span>
           );
         })}

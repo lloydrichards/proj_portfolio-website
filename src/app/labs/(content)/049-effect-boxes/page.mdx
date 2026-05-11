@@ -7,8 +7,10 @@ export const metadata = createOGImageMetadata({
   tags: ["effect", "haskell", "pretty-printing", "typescript"],
   date: "2025-10-03",
   isFeatured: true,
-  repo: "https://github.com/lloydrichards/proj_effect-boxes",
+  repo: "https://github.com/lloydrichards/effect-boxes",
 });
+
+<GitHubCommitCard owner="lloydrichards" repo="effect-boxes" title="Repository activity" className="h-64" />
 
 I recently was in need of a Terminal User Interface (TUI) library for a project
 that would interface nicely with Effect. After some research I found nothing
@@ -19,30 +21,6 @@ of the journey so far.
 This is the story of how `effect-boxes` went from a direct Haskell translation
 to something capable of building both TUI and HTML layouts, as well as some of
 the unique challenges that came up along the way.
-
-```mermaid
-gitGraph
-    commit id: "port Box"
-    commit id: "use haskell namespace" tag: "v0.0.1"
-    commit id: "use dual pattern"
-    commit id: "add pipeable pattern"
-    commit id: "add Equal and Hash" tag: "v0.1.0"
-    commit id: "add dual to rendering"
-    commit id: "annotate the Box"
-    commit id: "add Ansi annotation"
-    commit id: "render Ansi with takeP" tag: "v0.2.0"
-    commit id: "extend TextAttribute"
-    commit id: "add color256 and colorRGB"
-    commit id: "remove redundancy in render" tag: "v0.3.0"
-    commit id: "add Ansi Cmd Module" tag: "v0.4.0"
-    commit id: "add Width module"
-    commit id: "render emojis separately" tag: "v0.5.0"
-    commit id: "add Reactive module" tag: "v0.6.0"
-    commit id: "add missing interfaces"
-    commit id: "add abstracted Renderer" tag: "v0.7.0"
-    commit id: "add HtmlRenderer"
-    commit id: "bug with double annotations" tag: "v0.8.0"
-```
 
 ## The Origin Story
 

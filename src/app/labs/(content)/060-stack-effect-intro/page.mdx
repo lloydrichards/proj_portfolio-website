@@ -10,6 +10,8 @@ export const metadata = createOGImageMetadata({
   repo: "https://github.com/lloydrichards/stack-effect",
 });
 
+<GitHubCommitCard owner="lloydrichards" repo="stack-effect" title="Repository activity" className="h-64" />
+
 Have you ever built out a whole new project just because you really wanted to design a nice TUI for it? I think this is known as yak shaving, and in this case what I ended up building was a scaffolding CLI tool called Stack Effect. The idea was to take the [bEvr template](/labs/053) and turn it into a CLI tool that could scaffold out new projects with ease. At the same time I've been watching for a new `create-effect-app` for Effect v4, but the official team doesn't have any interest in maintaining one, so I figured I'd scratch my own itch.
 
 Along the way I learned a lot about applying domain-driven design for developer tooling, how to build CLI tools with Effect, and how to leverage agentic LLM workflows for rapid prototyping. The TUI itself is built on [`effect-boxes`](/labs/049)[^1], which I updated and published as an [npm package](https://www.npmjs.com/package/effect-boxes) for this project, but that deserves its own write-up.
@@ -139,6 +141,8 @@ Stack Effect is functional today, both the CLI and the TUI are working, but ther
 - **Community catalog**: Opening up the module registry so others can contribute their own targets and modules.
 
 If you're curious, the CLI is available at [github.com/lloydrichards/stack-effect](https://github.com/lloydrichards/stack-effect) and `effect-boxes` is on [npm](https://www.npmjs.com/package/effect-boxes).
+
+
 
 ---
 

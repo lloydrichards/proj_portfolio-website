@@ -9,6 +9,7 @@ import type { GitHubCommitGraph } from "@/services/GitHub";
 
 type GitHubCommitCardProps = {
   graph?: GitHubCommitGraph | null;
+  title?: string;
   className?: string;
 };
 
@@ -16,6 +17,7 @@ const formatShortSha = (sha: string) => sha.slice(0, 7);
 
 export const GitHubCommitCard = ({
   graph,
+  title,
   className,
 }: GitHubCommitCardProps) => {
   const activeData = useMemo(() => {
@@ -38,7 +40,7 @@ export const GitHubCommitCard = ({
   if (!graph || !activeData) {
     return (
       <SkillCard
-        title="GitHub activity"
+        title={title ?? "GitHub activity"}
         subtitle="Activity unavailable"
         className={cn("h-full", className)}
       >
@@ -49,10 +51,22 @@ export const GitHubCommitCard = ({
     );
   }
 
+  const repoSlug = `${graph.owner}/${graph.repo}`;
+  const repoUrl = `https://github.com/${repoSlug}`;
+
   return (
     <SkillCard
-      title="Portfolio activity"
-      subtitle={`${graph.owner}/${graph.repo}`}
+      title={title ?? "GitHub activity"}
+      subtitle={
+        <a
+          href={repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          {repoSlug}
+        </a>
+      }
       className={cn("h-full", className)}
     >
       <div className=" flex-1 overflow-hidden p-3">

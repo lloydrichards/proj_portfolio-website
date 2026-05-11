@@ -132,7 +132,10 @@ const HomePage = async () => {
       </Tile>
 
       <Tile size="unset" className="col-span-full row-span-6 md:row-span-8">
-        <GitHubCommitCard graph={Option.getOrNull(githubCommitGraph)} />
+        <GitHubCommitCard
+          graph={Option.getOrNull(githubCommitGraph)}
+          title="Portfolio activity"
+        />
       </Tile>
 
       {/* Labs Section */}

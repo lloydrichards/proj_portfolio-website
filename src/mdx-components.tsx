@@ -2,6 +2,7 @@ import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 import type React from "react";
 import type { ComponentPropsWithoutRef } from "react";
+import { GitHubCommitCardServer } from "./components/molecule/github_commit_card.server";
 import { Mermaid } from "./components/molecule/mermaid";
 import {
   typefaceAnchor,
@@ -187,6 +188,7 @@ export const components = {
   ),
   Mermaid,
   mermaid: Mermaid,
+  GitHubCommitCard: GitHubCommitCardServer,
 };
 
 declare global {

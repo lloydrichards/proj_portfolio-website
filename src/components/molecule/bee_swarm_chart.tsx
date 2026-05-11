@@ -373,19 +373,19 @@ export const BeeSwarmChart = ({
       </div>
       <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-wrap items-center justify-center gap-3 pt-1 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-emerald-500/70 ring-1 ring-emerald-400" />
+          <span className="h-2 w-2 rounded-full bg-chart-1/70 ring-1 ring-chart-1" />
           Feature
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-amber-500/70 ring-1 ring-amber-400" />
+          <span className="h-2 w-2 rounded-full bg-chart-2/70 ring-1 ring-chart-2" />
           Fix
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-sky-500/70 ring-1 ring-sky-400" />
+          <span className="h-2 w-2 rounded-full bg-chart-3/70 ring-1 ring-chart-3" />
           Docs
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-violet-500/70 ring-1 ring-violet-400" />
+          <span className="h-2 w-2 rounded-full bg-chart-4/70 ring-1 ring-chart-4" />
           Refactor
         </span>
         <span className="inline-flex items-center gap-1.5">

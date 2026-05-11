@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 type SkillCardProps = {
   title: string;
-  subtitle?: string;
+  subtitle?: ReactNode;
   className?: string;
   children?: ReactNode;
 };

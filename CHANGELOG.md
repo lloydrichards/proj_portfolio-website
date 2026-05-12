@@ -1,3 +1,26 @@
+# [1.18.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.17.1...v1.18.0) (2026-05-12)
+
+
+### Content
+
+* add 060 lab ([1ec688e](https://github.com/lloydrichards/proj_portfolio-website/commit/1ec688e97f04e140e6882649fd3daa8f862d17d2))
+* update labs with git commit card ([9220f56](https://github.com/lloydrichards/proj_portfolio-website/commit/9220f56b51ef50c042e772fbf86d11775c5a2080))
+
+
+### Features
+
+* add commit card as mdx component for labs ([e18807e](https://github.com/lloydrichards/proj_portfolio-website/commit/e18807e10b26f1ecb53a10a9e614ec19f875b48a))
+
+
+### Fixed
+
+* suspend layer creation ([49a120c](https://github.com/lloydrichards/proj_portfolio-website/commit/49a120c8bd29362eb735e55bed56b8b515a0490e))
+
+
+### Improved
+
+* use d3 ticks and force containsts ([de43892](https://github.com/lloydrichards/proj_portfolio-website/commit/de438927e2e6d71e6b8630f616cd0581a5543792))
+
 ## [1.17.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.17.0...v1.17.1) (2026-04-07)
 
 

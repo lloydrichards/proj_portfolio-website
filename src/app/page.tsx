@@ -1,6 +1,5 @@
 import { Effect, Option, Schema } from "effect";
 import { Briefcase, FlaskConical, Star } from "lucide-react";
-import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import { Tile } from "@/components/atom/tile";
 import SvgGithub from "@/components/icons/github";
 import { GitHubCommitCard } from "@/components/molecule/github_commit_card";
@@ -10,6 +9,7 @@ import { ProjectCard } from "@/components/molecule/project_card";
 import { SkillCard } from "@/components/molecule/skill_card";
 import { ThemeToggle } from "@/components/molecule/theme-toggle";
 import { Logo } from "@/components/organism/logo";
+import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
@@ -53,105 +53,108 @@ const HomePage = async () => {
     <>
       <PersonJsonLd />
       <Mosaic>
-      <Tile size="square-md" className="bg-background group grid items-center">
-        <Logo className="text-primary scale-110 transition-transform hover:scale-115" />
-      </Tile>
-      <Tile
-        size="unset"
-        className="col-span-full row-span-1 grid items-center px-8 md:col-span-12 md:row-span-2 lg:col-span-16 lg:row-span-2"
-      >
-        <h1 className={typefaceHeading1("mt-0")}>Hello, I&apos;m Lloyd</h1>
-      </Tile>
-      <Tile
-        size="unset"
-        className="col-span-full row-span-4 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-4"
-      >
-        <p className={typefaceBody()}>
-          This website is a personal portfolio and lab space where I can
-          showcase my projects, experiment with new ideas, and share my thoughts
-          and experiences through blogging. Please feel free to explore my
-          recent projects, read my lab and blog posts, or connect with me
-          through social media.
-        </p>
-      </Tile>
+        <Tile
+          size="square-md"
+          className="bg-background group grid items-center"
+        >
+          <Logo className="text-primary scale-110 transition-transform hover:scale-115" />
+        </Tile>
+        <Tile
+          size="unset"
+          className="col-span-full row-span-1 grid items-center px-8 md:col-span-12 md:row-span-2 lg:col-span-16 lg:row-span-2"
+        >
+          <h1 className={typefaceHeading1("mt-0")}>Hello, I&apos;m Lloyd</h1>
+        </Tile>
+        <Tile
+          size="unset"
+          className="col-span-full row-span-4 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-4"
+        >
+          <p className={typefaceBody()}>
+            This website is a personal portfolio and lab space where I can
+            showcase my projects, experiment with new ideas, and share my
+            thoughts and experiences through blogging. Please feel free to
+            explore my recent projects, read my lab and blog posts, or connect
+            with me through social media.
+          </p>
+        </Tile>
 
-      {/* KPI Cards Section - Grouped together for better visual cohesion */}
-      <Tile size="box-sm">
-        <KPICard
-          label="Projects"
-          value={allPortfolioProjects.length}
-          subtitle="Total Articles"
-          icon={<Briefcase className="size-5" />}
-        />
-      </Tile>
-
-      <Tile size="box-sm">
-        <KPICard
-          label="Labs"
-          value={allLabs.length}
-          subtitle="Total Published"
-          icon={<FlaskConical className="size-5" />}
-        />
-      </Tile>
-
-      <Tile size="box-sm">
-        <KPICard
-          label="Github"
-          value={githubStats.repos}
-          subtitle="Total Repos"
-          icon={<SvgGithub className="size-5" />}
-        />
-      </Tile>
-
-      <Tile size="box-sm">
-        <KPICard
-          label="GitHub"
-          value={githubStats.stars}
-          subtitle="Total Stars"
-          icon={<Star className="size-5" />}
-        />
-      </Tile>
-
-      {/* Projects Section */}
-      {allProjects.map((project) => (
-        <Tile size="box-md" key={`project${project.slug}`}>
-          <ProjectCard
-            key={`project${project.slug}`}
-            project={project}
-            className="col-span-8 row-span-6"
+        {/* KPI Cards Section - Grouped together for better visual cohesion */}
+        <Tile size="box-sm">
+          <KPICard
+            label="Projects"
+            value={allPortfolioProjects.length}
+            subtitle="Total Articles"
+            icon={<Briefcase className="size-5" />}
           />
         </Tile>
-      ))}
 
-      {/* Skills Chart */}
-      <Tile size="square-lg" className="group grid items-center">
-        <SkillCard
-          title="Skills"
-          subtitle="Hours by occupation"
-          className="h-full"
-        >
-          <SkillBarChart />
-        </SkillCard>
-      </Tile>
-
-      <Tile size="unset" className="col-span-full row-span-6 md:row-span-8">
-        <GitHubCommitCard
-          graph={Option.getOrNull(githubCommitGraph)}
-          title="Portfolio activity"
-        />
-      </Tile>
-
-      {/* Labs Section */}
-      {featuredLabs.map((lab) => (
-        <Tile size="square-md" key={`lab${lab.slug}`}>
-          <LabCard lab={lab} />
+        <Tile size="box-sm">
+          <KPICard
+            label="Labs"
+            value={allLabs.length}
+            subtitle="Total Published"
+            icon={<FlaskConical className="size-5" />}
+          />
         </Tile>
-      ))}
 
-      <Tile>
-        <ThemeToggle />
-      </Tile>
-    </Mosaic>
+        <Tile size="box-sm">
+          <KPICard
+            label="Github"
+            value={githubStats.repos}
+            subtitle="Total Repos"
+            icon={<SvgGithub className="size-5" />}
+          />
+        </Tile>
+
+        <Tile size="box-sm">
+          <KPICard
+            label="GitHub"
+            value={githubStats.stars}
+            subtitle="Total Stars"
+            icon={<Star className="size-5" />}
+          />
+        </Tile>
+
+        {/* Projects Section */}
+        {allProjects.map((project) => (
+          <Tile size="box-md" key={`project${project.slug}`}>
+            <ProjectCard
+              key={`project${project.slug}`}
+              project={project}
+              className="col-span-8 row-span-6"
+            />
+          </Tile>
+        ))}
+
+        {/* Skills Chart */}
+        <Tile size="square-lg" className="group grid items-center">
+          <SkillCard
+            title="Skills"
+            subtitle="Hours by occupation"
+            className="h-full"
+          >
+            <SkillBarChart />
+          </SkillCard>
+        </Tile>
+
+        <Tile size="unset" className="col-span-full row-span-6 md:row-span-8">
+          <GitHubCommitCard
+            graph={Option.getOrNull(githubCommitGraph)}
+            title="Portfolio activity"
+          />
+        </Tile>
+
+        {/* Labs Section */}
+        {featuredLabs.map((lab) => (
+          <Tile size="square-md" key={`lab${lab.slug}`}>
+            <LabCard lab={lab} />
+          </Tile>
+        ))}
+
+        <Tile>
+          <ThemeToggle />
+        </Tile>
+      </Mosaic>
     </>
   );
 };

@@ -25,13 +25,116 @@ interface MarkdownEditorProps {
 
 type FormatAction = "bold" | "italic" | "ul" | "h2" | "h3";
 
-function insertFormat(
+function toggleFormat(
   textarea: HTMLTextAreaElement,
   action: FormatAction,
 ): string {
   const { selectionStart, selectionEnd, value } = textarea;
   const selected = value.slice(selectionStart, selectionEnd);
 
+  // Check if we can remove existing formatting
+  switch (action) {
+    case "bold": {
+      // Check if selection is wrapped with **
+      const beforeChars = value.slice(selectionStart - 2, selectionStart);
+      const afterChars = value.slice(selectionEnd, selectionEnd + 2);
+      if (beforeChars === "**" && afterChars === "**") {
+        const newValue =
+          value.slice(0, selectionStart - 2) +
+          selected +
+          value.slice(selectionEnd + 2);
+        setTimeout(() => {
+          textarea.selectionStart = selectionStart - 2;
+          textarea.selectionEnd = selectionEnd - 2;
+          textarea.focus();
+        }, 0);
+        return newValue;
+      }
+      // Check if selected text includes the markers
+      if (selected.startsWith("**") && selected.endsWith("**")) {
+        const unwrapped = selected.slice(2, -2);
+        const newValue =
+          value.slice(0, selectionStart) +
+          unwrapped +
+          value.slice(selectionEnd);
+        setTimeout(() => {
+          textarea.selectionStart = selectionStart;
+          textarea.selectionEnd = selectionStart + unwrapped.length;
+          textarea.focus();
+        }, 0);
+        return newValue;
+      }
+      break;
+    }
+    case "italic": {
+      const beforeChar = value.slice(selectionStart - 1, selectionStart);
+      const afterChar = value.slice(selectionEnd, selectionEnd + 1);
+      if (beforeChar === "_" && afterChar === "_") {
+        const newValue =
+          value.slice(0, selectionStart - 1) +
+          selected +
+          value.slice(selectionEnd + 1);
+        setTimeout(() => {
+          textarea.selectionStart = selectionStart - 1;
+          textarea.selectionEnd = selectionEnd - 1;
+          textarea.focus();
+        }, 0);
+        return newValue;
+      }
+      if (selected.startsWith("_") && selected.endsWith("_")) {
+        const unwrapped = selected.slice(1, -1);
+        const newValue =
+          value.slice(0, selectionStart) +
+          unwrapped +
+          value.slice(selectionEnd);
+        setTimeout(() => {
+          textarea.selectionStart = selectionStart;
+          textarea.selectionEnd = selectionStart + unwrapped.length;
+          textarea.focus();
+        }, 0);
+        return newValue;
+      }
+      break;
+    }
+    case "ul": {
+      // Check if all lines start with "- "
+      const lines = selected.split("\n");
+      const allBulleted =
+        lines.length > 0 && lines.every((l) => l.startsWith("- "));
+      if (allBulleted) {
+        const stripped = lines.map((l) => l.slice(2)).join("\n");
+        const newValue =
+          value.slice(0, selectionStart) + stripped + value.slice(selectionEnd);
+        setTimeout(() => {
+          textarea.selectionStart = selectionStart;
+          textarea.selectionEnd = selectionStart + stripped.length;
+          textarea.focus();
+        }, 0);
+        return newValue;
+      }
+      break;
+    }
+    case "h2":
+    case "h3": {
+      const prefix = action === "h2" ? "## " : "### ";
+      // Find start of current line
+      const lineStart = value.lastIndexOf("\n", selectionStart - 1) + 1;
+      const linePrefix = value.slice(lineStart, lineStart + prefix.length);
+      if (linePrefix === prefix) {
+        const newValue =
+          value.slice(0, lineStart) + value.slice(lineStart + prefix.length);
+        setTimeout(() => {
+          textarea.selectionStart = selectionStart - prefix.length;
+          textarea.selectionEnd = selectionEnd - prefix.length;
+          textarea.focus();
+        }, 0);
+        return newValue;
+      }
+      break;
+    }
+  }
+
+  // Not toggling off — apply formatting
   let before: string;
   let after: string;
   let insertion: string;
@@ -87,7 +190,6 @@ function insertFormat(
     after +
     value.slice(selectionEnd);
 
-  // Schedule cursor position after React re-render
   setTimeout(() => {
     textarea.selectionStart = selectionStart + before.length;
     textarea.selectionEnd = selectionStart + before.length + insertion.length;
@@ -111,7 +213,7 @@ function MarkdownEditor({
     (action: FormatAction) => {
       const textarea = textareaRef.current;
       if (!textarea) return;
-      const newValue = insertFormat(textarea, action);
+      const newValue = toggleFormat(textarea, action);
       onChange(newValue);
     },
     [onChange],

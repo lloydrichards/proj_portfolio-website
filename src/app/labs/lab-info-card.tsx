@@ -97,17 +97,23 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
             {(lab.repo || lab.href) && (
               <div className="mt-3 flex justify-end gap-1">
                 {lab.href && (
-                  <Button variant="outline" asChild>
-                    <a target="_blank" href={lab.href} rel="noopener">
-                      <ExternalLink /> Website
-                    </a>
+                  <Button
+                    variant="outline"
+                    render={
+                      <a target="_blank" href={lab.href} rel="noopener" />
+                    }
+                  >
+                    <ExternalLink /> Website
                   </Button>
                 )}
                 {lab.repo && (
-                  <Button variant="outline" asChild>
-                    <a target="_blank" href={lab.repo} rel="noopener">
-                      <Github /> Repo
-                    </a>
+                  <Button
+                    variant="outline"
+                    render={
+                      <a target="_blank" href={lab.repo} rel="noopener" />
+                    }
+                  >
+                    <Github /> Repo
                   </Button>
                 )}
               </div>
@@ -123,12 +129,10 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
                         variant="link"
                         size="sm"
                         className="justify-start gap-2"
-                        asChild
+                        render={<Link href={l.pathname} />}
                       >
-                        <Link href={l.pathname}>
-                          <Badge variant="default">{l.id}</Badge>
-                          {l.title} ({formatDate(new Date(l.date))})
-                        </Link>
+                        <Badge variant="default">{l.id}</Badge>
+                        {l.title} ({formatDate(new Date(l.date))})
                       </Button>
                     ))}
                   </AccordionContent>
@@ -154,12 +158,10 @@ const InfoFooter: FC<{
         <Button
           variant="link"
           className="col-start-1 justify-start pl-0"
-          asChild
+          render={<Link href={prevLab.pathname} />}
         >
-          <Link href={prevLab.pathname}>
-            <ChevronsLeft />
-            Preview
-          </Link>
+          <ChevronsLeft />
+          Preview
         </Button>
       ) : (
         <Button
@@ -171,22 +173,28 @@ const InfoFooter: FC<{
           Preview
         </Button>
       )}
-      <Button variant="link" className="text-foreground/65 col-start-2" asChild>
-        <a
-          target="_blank"
-          href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/app/labs/(content)/${currentLab.slug}`}
-          rel="noopener"
-        >
-          <CodeXml />
-          Source
-        </a>
+      <Button
+        variant="link"
+        className="text-foreground/65 col-start-2"
+        render={
+          <a
+            target="_blank"
+            href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/app/labs/(content)/${currentLab.slug}`}
+            rel="noopener"
+          />
+        }
+      >
+        <CodeXml />
+        Source
       </Button>
       {nextLab ? (
-        <Button variant="link" className="col-start-3 justify-end pr-0" asChild>
-          <Link href={nextLab.pathname}>
-            Next
-            <ChevronsRight />
-          </Link>
+        <Button
+          variant="link"
+          className="col-start-3 justify-end pr-0"
+          render={<Link href={nextLab.pathname} />}
+        >
+          Next
+          <ChevronsRight />
         </Button>
       ) : (
         <Button

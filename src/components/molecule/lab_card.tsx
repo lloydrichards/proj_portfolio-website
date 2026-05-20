@@ -59,8 +59,12 @@ export const LabCard: React.FC<LabCardProps> = ({ lab, className, asLink }) => {
       </CardContent>
       {asLink ? null : (
         <CardFooter className="z-10 justify-end gap-1">
-          <Button variant="link" size="sm" asChild>
-            <Link href={lab.pathname}>Read More</Link>
+          <Button
+            variant="link"
+            size="sm"
+            render={<Link href={lab.pathname} />}
+          >
+            Read More
           </Button>
         </CardFooter>
       )}

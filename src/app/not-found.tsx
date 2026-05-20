@@ -11,9 +11,7 @@ export default function NotFound() {
         Sorry, we seem to have gotten lost for a minute there. Try going back
         home and starting over.
       </p>
-      <Button asChild>
-        <Link href="/">Back Home</Link>
-      </Button>
+      <Button render={<Link href="/" />}>Back Home</Button>
     </Tile>
   );
 }

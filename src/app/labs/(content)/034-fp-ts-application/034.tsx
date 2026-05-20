@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { type FC, useEffect, useState } from "react";
 import { Button } from "@/components/atom/button";
-import { Toaster } from "@/components/atom/toaster";
 import { useToast } from "@/hooks/use-toast";
 
 /*
@@ -307,7 +306,6 @@ export const ShoppingApp: FC = () => {
           ),
         ),
       )}
-      <Toaster />
     </main>
   );
 };

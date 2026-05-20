@@ -66,7 +66,7 @@ export default function RootLayout({
         src="https://umami.lloydrichards.dev/script.js"
         data-website-id="0504d125-cb01-4703-8dd3-6ee51d56d3b1"
       />
-      <body className={cn("min-h-dvh w-full")}>
+      <body className={cn("min-h-dvh w-full")} suppressHydrationWarning>
         <ThemeProvider attribute="class" enableSystem>
           <TooltipProvider>
             <div

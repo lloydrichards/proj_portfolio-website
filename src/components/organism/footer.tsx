@@ -43,15 +43,15 @@ const TileIcon: React.FC<{
   href: string;
 }> = ({ href, icon, label }) => (
   <Tooltip>
-    <TooltipTrigger asChild>
-      <Tile size="square-xxs">
-        <Button variant="ghost" size="unset" asChild>
-          <a target="_blank" href={href} rel="noopener">
-            <span className="sr-only">{label}</span>
-            {icon}
-          </a>
-        </Button>
-      </Tile>
+    <TooltipTrigger render={<Tile size="square-xxs" />}>
+      <Button
+        variant="ghost"
+        className="size-full p-0"
+        render={<a target="_blank" href={href} rel="noopener" />}
+      >
+        <span className="sr-only">{label}</span>
+        {icon}
+      </Button>
     </TooltipTrigger>
     <TooltipContent>{label}</TooltipContent>
   </Tooltip>

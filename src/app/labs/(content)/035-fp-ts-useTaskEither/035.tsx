@@ -19,7 +19,6 @@ import {
 } from "lucide-react";
 import { type FC, useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/atom/button";
-import { Toaster } from "@/components/atom/toaster";
 import { useToast } from "@/hooks/use-toast";
 
 /*
@@ -275,7 +274,6 @@ export const ShoppingApp: FC = () => {
           <ShopCard products={products} isLoading={isLoading} />
         ),
       )}
-      <Toaster />
     </main>
   );
 };

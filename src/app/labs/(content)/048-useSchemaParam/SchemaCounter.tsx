@@ -26,20 +26,26 @@ export const SchemaCounter = () => {
         {path}?{params.toString()}
       </p>
       <div className="flex items-center gap-4">
-        <Button variant="ghost" aria-label="Reset" asChild>
-          <Link href={path} replace>
-            Reset
-          </Link>
+        <Button
+          variant="ghost"
+          aria-label="Reset"
+          render={<Link href={path} replace />}
+        >
+          Reset
         </Button>
-        <Button variant="outline" aria-label="Decrement" asChild>
-          <Link
-            href={`?${createQueryString({
-              a: (data.a ?? 0) - 1 * (data.factor ?? 1),
-            })}`}
-            replace
-          >
-            Decrement
-          </Link>
+        <Button
+          variant="outline"
+          aria-label="Decrement"
+          render={
+            <Link
+              href={`?${createQueryString({
+                a: (data.a ?? 0) - 1 * (data.factor ?? 1),
+              })}`}
+              replace
+            />
+          }
+        >
+          Decrement
         </Button>
         <span
           data-testid="count"
@@ -47,29 +53,33 @@ export const SchemaCounter = () => {
         >
           {data.a ?? 0}
         </span>
-        <Button variant="outline" aria-label="Increment" asChild>
-          <Link
-            href={`?${createQueryString({
-              a: (data.a ?? 0) + 1 * (data.factor ?? 1),
-            })}`}
-            replace
-          >
-            Increment
-          </Link>
+        <Button
+          variant="outline"
+          aria-label="Increment"
+          render={
+            <Link
+              href={`?${createQueryString({
+                a: (data.a ?? 0) + 1 * (data.factor ?? 1),
+              })}`}
+              replace
+            />
+          }
+        >
+          Increment
         </Button>
         <Button
           variant={(data.factor ?? 1) === 10 ? "default" : "secondary"}
           aria-label="factor-10"
-          asChild
+          render={
+            <Link
+              href={`?${createQueryString({
+                factor: (data.factor ?? 1) === 10 ? 1 : 10,
+              })}`}
+              replace
+            />
+          }
         >
-          <Link
-            href={`?${createQueryString({
-              factor: (data.factor ?? 1) === 10 ? 1 : 10,
-            })}`}
-            replace
-          >
-            Factor 10
-          </Link>
+          Factor 10
         </Button>
       </div>
     </div>

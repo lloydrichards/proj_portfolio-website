@@ -102,23 +102,22 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
 
           return (
             <Tooltip key={`tooltip-${s.key}-${d.data.stack}`}>
-              <TooltipTrigger asChild>
-                <button
-                  type="button"
-                  aria-label={label}
-                  className="absolute rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  style={{
-                    left,
-                    top,
-                    width: widthValue,
-                    height: segmentHeight,
-                  }}
-                />
-              </TooltipTrigger>
-              <TooltipContent
-                className="pointer-events-none"
-                positionerClassName="pointer-events-none"
-              >
+              <TooltipTrigger
+                render={
+                  <button
+                    type="button"
+                    aria-label={label}
+                    className="absolute rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    style={{
+                      left,
+                      top,
+                      width: widthValue,
+                      height: segmentHeight,
+                    }}
+                  />
+                }
+              ></TooltipTrigger>
+              <TooltipContent className="pointer-events-none">
                 <span className="text-sm font-medium">{label}</span>
               </TooltipContent>
             </Tooltip>

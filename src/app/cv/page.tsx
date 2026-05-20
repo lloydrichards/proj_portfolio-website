@@ -13,6 +13,7 @@ import { Dataset } from "@/services/Dataset/Dataset";
 import { OccupationService } from "@/services/Dataset/OccupationService";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
+import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import { CvSectionEditable } from "./cv-section-editable";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -70,6 +71,8 @@ const CVPage = async () => {
     }));
 
   return (
+    <>
+      <PersonJsonLd />
     <main className="col-span-full flex flex-col gap-4 p-4">
       <p className={typefaceMeta("uppercase tracking-widest")}>
         Curriculum Vitae
@@ -218,6 +221,7 @@ const CVPage = async () => {
         )}
       </section>
     </main>
+    </>
   );
 };
 

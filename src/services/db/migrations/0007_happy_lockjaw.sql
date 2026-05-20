@@ -1,0 +1,1 @@
+ALTER TABLE `occupation` DROP COLUMN `tasks`;

@@ -48,7 +48,6 @@ export function AddOccupationButton({
           company: "",
           location: "",
           description: null,
-          tasks: [],
           longDescription: null,
           pensum: 100,
           isFeatures: true,

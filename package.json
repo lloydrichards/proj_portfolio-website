@@ -1,7 +1,7 @@
 {
   "name": "lloyd_richards_portfolio",
   "version": "1.6.0",
-  "type": "module",
+
   "private": true,
   "scripts": {
     "build": "next build",

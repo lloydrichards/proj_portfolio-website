@@ -1,17 +1,17 @@
 "use client";
 
-import { Plus, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/atom/badge";
 import { Button } from "@/components/atom/button";
 import { Checkbox } from "@/components/atom/checkbox";
-import { Field, FieldGroup, FieldLabel } from "@/components/atom/field";
+import { Field, FieldLabel } from "@/components/atom/field";
 import { Input } from "@/components/atom/input";
+import { MarkdownEditor } from "@/components/atom/markdown_editor";
 import {
   NativeSelect,
   NativeSelectOption,
 } from "@/components/atom/native-select";
-import { MarkdownEditor } from "@/components/atom/markdown_editor";
 import { Textarea } from "@/components/atom/textarea";
 import type { FormOptions, OccupationData } from "./types";
 
@@ -24,7 +24,6 @@ interface OccupationFormProps {
     company: string;
     location: string;
     shortDescription: string | null;
-    tasks: string[];
     longDescription: string | null;
     pensum: number;
     isFeatured: boolean;
@@ -53,9 +52,6 @@ export function OccupationForm({
   const [longDescription, setLongDescription] = useState(
     occupation?.longDescription ?? "",
   );
-  const [tasks, setTasks] = useState<string[]>([
-    ...(occupation?.tasks ?? [""]),
-  ]);
   const [pensum, setPensum] = useState(occupation?.pensum ?? 100);
   const [isFeatured, setIsFeatured] = useState(occupation?.isFeatures ?? true);
   const [categoryId, setCategoryId] = useState<number>(
@@ -96,7 +92,6 @@ export function OccupationForm({
       company,
       location,
       shortDescription: shortDescription || null,
-      tasks: tasks.filter(Boolean),
       longDescription: longDescription || null,
       pensum,
       isFeatured,
@@ -229,48 +224,6 @@ export function OccupationForm({
           onChange={setLongDescription}
         />
       </Field>
-
-      {/* Tasks */}
-      <FieldGroup>
-        <FieldLabel>Tasks</FieldLabel>
-        {tasks.length > 0 ? (
-          <div className="space-y-1.5">
-            {tasks.map((task, i) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: tasks are edited in-place, not reordered
-              <div key={i} className="flex gap-1.5">
-                <Input
-                  value={task}
-                  onChange={(e) => {
-                    const next = [...tasks];
-                    next[i] = e.target.value;
-                    setTasks(next);
-                  }}
-                  placeholder={`Task ${i + 1}`}
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="size-8 shrink-0"
-                  onClick={() => setTasks(tasks.filter((_, j) => j !== i))}
-                  disabled={tasks.length === 0}
-                >
-                  <X data-icon="inline-start" />
-                </Button>
-              </div>
-            ))}
-          </div>
-        ) : null}
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          className="self-start"
-          onClick={() => setTasks([...tasks, ""])}
-        >
-          <Plus data-icon="inline-start" /> Add Task
-        </Button>
-      </FieldGroup>
 
       {/* Skills & Attributes */}
       <div className="grid grid-cols-2 gap-3">

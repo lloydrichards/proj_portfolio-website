@@ -348,26 +348,27 @@ export const BeeSwarmChart = ({
 
           return (
             <Tooltip key={`tag-dot-${node.sha}`}>
-              <TooltipTrigger asChild>
-                <button
-                  type="button"
-                  className="absolute"
-                  style={{
-                    left: formatPercent(((node.x ?? width / 2) / width) * 100),
-                    top: formatPercent(
-                      ((chartHeight - padding.bottom) / chartHeight) * 100,
-                    ),
-                    transform: "translate(-50%, -50%)",
-                  }}
-                  aria-label={`Tags for ${node.shortSha}`}
-                >
-                  <span className="block h-2 w-2 rounded-full bg-white/20 ring-1 ring-muted-foreground/40" />
-                </button>
-              </TooltipTrigger>
-              <TooltipContent
-                className="pointer-events-none"
-                positionerClassName="pointer-events-none"
+              <TooltipTrigger
+                render={
+                  <button
+                    type="button"
+                    className="absolute"
+                    style={{
+                      left: formatPercent(
+                        ((node.x ?? width / 2) / width) * 100,
+                      ),
+                      top: formatPercent(
+                        ((chartHeight - padding.bottom) / chartHeight) * 100,
+                      ),
+                      transform: "translate(-50%, -50%)",
+                    }}
+                    aria-label={`Tags for ${node.shortSha}`}
+                  />
+                }
               >
+                <span className="block h-2 w-2 rounded-full bg-white/20 ring-1 ring-muted-foreground/40" />
+              </TooltipTrigger>
+              <TooltipContent className="pointer-events-none">
                 {tooltipContent}
               </TooltipContent>
             </Tooltip>
@@ -462,7 +463,7 @@ export const BeeSwarmChart = ({
             {node.tags.length > 0 && (
               <div className="mt-1 flex flex-wrap gap-1">
                 {node.tags.map((tag) => (
-                  <Badge key={tag} variant="outline" size="sm">
+                  <Badge key={tag} variant="outline">
                     {tag}
                   </Badge>
                 ))}
@@ -473,43 +474,42 @@ export const BeeSwarmChart = ({
 
         return (
           <Tooltip key={node.sha}>
-            <TooltipTrigger asChild>
-              <button
-                type="button"
-                className="absolute"
-                style={{
-                  left: formatPercent(((node.x ?? width / 2) / width) * 100),
-                  top: formatPercent(
-                    ((node.y ?? chartHeight / 2) / chartHeight) * 100,
-                  ),
-                  transform: "translate(-50%, -50%)",
-                }}
-                aria-label={`${node.shortSha} ${node.message}`}
-              >
-                <svg
-                  className="block"
-                  width={12}
-                  height={12}
-                  viewBox="0 0 12 12"
-                  role="img"
-                >
-                  <circle
-                    cx={6}
-                    cy={6}
-                    r={dotRadius}
-                    className={cn(
-                      "transition-transform duration-150 hover:scale-110",
-                      style.className,
-                    )}
-                    strokeWidth={1}
-                  />
-                </svg>
-              </button>
-            </TooltipTrigger>
-            <TooltipContent
-              className="pointer-events-none"
-              positionerClassName="pointer-events-none"
+            <TooltipTrigger
+              render={
+                <button
+                  type="button"
+                  className="absolute"
+                  style={{
+                    left: formatPercent(((node.x ?? width / 2) / width) * 100),
+                    top: formatPercent(
+                      ((node.y ?? chartHeight / 2) / chartHeight) * 100,
+                    ),
+                    transform: "translate(-50%, -50%)",
+                  }}
+                  aria-label={`${node.shortSha} ${node.message}`}
+                />
+              }
             >
+              <svg
+                className="block"
+                width={12}
+                height={12}
+                viewBox="0 0 12 12"
+                role="img"
+              >
+                <circle
+                  cx={6}
+                  cy={6}
+                  r={dotRadius}
+                  className={cn(
+                    "transition-transform duration-150 hover:scale-110",
+                    style.className,
+                  )}
+                  strokeWidth={1}
+                />
+              </svg>
+            </TooltipTrigger>
+            <TooltipContent className="pointer-events-none">
               {tooltipContent}
             </TooltipContent>
           </Tooltip>

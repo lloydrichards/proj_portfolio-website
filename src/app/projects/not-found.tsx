@@ -11,9 +11,7 @@ export default function NotFound() {
         Sorry, we don&apos;t seem to have what you&apos;re looking for. Try
         going to the Project overview and browsing other interesting projects.
       </p>
-      <Button asChild>
-        <Link href="/projects">All Projects</Link>
-      </Button>
+      <Button render={<Link href="/projects" />}>All Projects</Button>
     </Tile>
   );
 }

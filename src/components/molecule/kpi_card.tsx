@@ -51,7 +51,7 @@ export const KPICard: FC<KPICardProps> = ({
   }, [value]);
 
   return (
-    <Card className={cn("relative flex h-full flex-col border", className)}>
+    <Card className={cn("relative flex h-full flex-col", className)}>
       <CardHeader className="flex-row items-start justify-between space-y-0 px-2 pt-1 pb-1 md:px-3">
         <p
           className={typefaceMeta(

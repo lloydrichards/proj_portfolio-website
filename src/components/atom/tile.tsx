@@ -34,9 +34,7 @@ const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
 
 interface TileProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof tileVariants> {
-  asChild?: boolean;
-}
+    VariantProps<typeof tileVariants> {}
 
 const Tile = React.forwardRef<HTMLDivElement, TileProps>(
   ({ className, outline, display, size, children, ...props }, ref) => {

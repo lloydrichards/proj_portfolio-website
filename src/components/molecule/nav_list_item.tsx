@@ -28,15 +28,14 @@ export const NavListItem: FC<{
     >
       <NavigationMenuLink
         className={navigationMenuTriggerStyle({
-          active: exact
-            ? pathname === href
-            : pathname.includes(href.toString()),
           className: "flex gap-2 lg:justify-start",
         })}
-        active={exact ? pathname === href : pathname.includes(href.toString())}
-        asChild
+        data-active={
+          exact ? pathname === href : pathname.includes(href.toString())
+        }
+        render={<Link href={href} />}
       >
-        <Link href={href}>{children}</Link>
+        {children}
       </NavigationMenuLink>
     </NavigationMenuItem>
   );

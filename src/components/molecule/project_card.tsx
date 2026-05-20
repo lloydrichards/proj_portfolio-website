@@ -71,8 +71,12 @@ export const ProjectCard: React.FC<IProjectCard> = ({
         ))}
         <div className="flex grow justify-end">
           {asLink ? null : (
-            <Button variant="link" size="sm" asChild>
-              <Link href={project.pathname}>Read More</Link>
+            <Button
+              variant="link"
+              size="sm"
+              render={<Link href={project.pathname} />}
+            >
+              Read More
             </Button>
           )}
         </div>

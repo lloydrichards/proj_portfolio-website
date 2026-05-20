@@ -14,16 +14,21 @@ export const ThemeToggle = ({ className }: { className?: string }) => {
   };
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          variant="ghost"
-          className={cn("size-full p-0", className)}
-          onClick={() => toggleTheme()}
-        >
-          <SunIcon className="size-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <MoonIcon className="absolute size-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
+      <TooltipTrigger
+        render={
+          <button
+            type="button"
+            className={cn(
+              "size-full p-0 inline-flex items-center justify-center",
+              className,
+            )}
+            onClick={() => toggleTheme()}
+          />
+        }
+      >
+        <SunIcon className="size-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+        <MoonIcon className="absolute size-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+        <span className="sr-only">Toggle theme</span>
       </TooltipTrigger>
       <TooltipContent side="right">
         Toggle between light and dark theme

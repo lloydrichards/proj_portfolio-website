@@ -87,7 +87,7 @@ const DateRangeSlider = React.forwardRef<HTMLDivElement, RangeSliderProps>(
         {...props}
       >
         <SliderPrimitive.Control className="grid grow data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2">
-          <SliderPrimitive.Track className="bg-input relative overflow-hidden rounded-full data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full">
+          <SliderPrimitive.Track className="bg-muted relative overflow-hidden rounded-full data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full">
             <SliderPrimitive.Indicator className="bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
           </SliderPrimitive.Track>
           {initialValue.map((timestamp) => (

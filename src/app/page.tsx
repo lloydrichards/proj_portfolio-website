@@ -1,5 +1,6 @@
 import { Effect, Option, Schema } from "effect";
 import { Briefcase, FlaskConical, Star } from "lucide-react";
+import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import { Tile } from "@/components/atom/tile";
 import SvgGithub from "@/components/icons/github";
 import { GitHubCommitCard } from "@/components/molecule/github_commit_card";
@@ -49,7 +50,9 @@ const HomePage = async () => {
   );
 
   return (
-    <Mosaic>
+    <>
+      <PersonJsonLd />
+      <Mosaic>
       <Tile size="square-md" className="bg-background group grid items-center">
         <Logo className="text-primary scale-110 transition-transform hover:scale-115" />
       </Tile>
@@ -149,6 +152,7 @@ const HomePage = async () => {
         <ThemeToggle />
       </Tile>
     </Mosaic>
+    </>
   );
 };
 

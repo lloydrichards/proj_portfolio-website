@@ -16,7 +16,6 @@ export async function createOccupation(formData: {
   company: string;
   location: string;
   shortDescription: string | null;
-  tasks: string[];
   longDescription: string | null;
   pensum: number;
   isFeatured: boolean;
@@ -34,7 +33,6 @@ export async function createOccupation(formData: {
       company: formData.company,
       location: formData.location,
       shortDescription: formData.shortDescription,
-      tasks: formData.tasks.filter(Boolean).join("; ") || null,
       longDescription: formData.longDescription,
       pensum: formData.pensum,
       isFeatured: formData.isFeatured ? 1 : 0,
@@ -56,7 +54,6 @@ export async function updateOccupation(formData: {
   company: string;
   location: string;
   shortDescription: string | null;
-  tasks: string[];
   longDescription: string | null;
   pensum: number;
   isFeatured: boolean;
@@ -75,7 +72,6 @@ export async function updateOccupation(formData: {
       company: formData.company,
       location: formData.location,
       shortDescription: formData.shortDescription,
-      tasks: formData.tasks.filter(Boolean).join("; ") || null,
       longDescription: formData.longDescription,
       pensum: formData.pensum,
       isFeatured: formData.isFeatured ? 1 : 0,

@@ -15,7 +15,6 @@ export interface CreateOccupationInput {
   company: string;
   location: string;
   shortDescription: string | null;
-  tasks: string | null;
   longDescription: string | null;
   pensum: number;
   isFeatured: number;
@@ -59,7 +58,6 @@ export class OccupationService extends Effect.Service<OccupationService>()(
                 company: input.company,
                 location: input.location,
                 shortDescription: input.shortDescription,
-                tasks: input.tasks,
                 longDescription: input.longDescription,
                 pensum: input.pensum,
                 isFeatured: input.isFeatured,
@@ -101,7 +99,6 @@ export class OccupationService extends Effect.Service<OccupationService>()(
                 company: input.company,
                 location: input.location,
                 shortDescription: input.shortDescription,
-                tasks: input.tasks,
                 longDescription: input.longDescription,
                 pensum: input.pensum,
                 isFeatured: input.isFeatured,

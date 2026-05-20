@@ -1,34 +1,48 @@
 import { utcFormat } from "d3";
-import { Effect } from "effect";
+import { Array as A, Effect, Match, Option, pipe } from "effect";
 import Link from "next/link";
+import { Separator } from "@/components/atom/separator";
 import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import {
   typefaceAnchor,
   typefaceBody,
   typefaceHeading1,
   typefaceHeading2,
-  typefaceHeading4,
   typefaceMeta,
 } from "@/components/tokens/typeface";
 import { Dataset } from "@/services/Dataset/Dataset";
 import { OccupationService } from "@/services/Dataset/OccupationService";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
+import { EducationItem, VolunteerItem, WorkItem } from "./cv-items";
 import { CvSectionEditable } from "./cv-section-editable";
+import { CvViewToggle } from "./cv-view-toggle";
+import type { OccupationData } from "./types";
 
 const isDev = process.env.NODE_ENV === "development";
 
-const CVPage = async () => {
+const CVPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ view?: string }>;
+}) => {
+  const { view } = await searchParams;
+  const mode = Match.value({ isDev, view }).pipe(
+    Match.when({ isDev: false }, () => "prod" as const),
+    Match.when({ view: "prod" }, () => "prod" as const),
+    Match.orElse(() => "edit" as const),
+  );
   const [allOccupations, projects] = await RuntimeServer.runPromise(
     Effect.all([Dataset.allOccupations(), Portfolio.featured]),
   );
 
-  // In dev mode show all, in prod only featured
-  const occupations = isDev
-    ? allOccupations
-    : allOccupations.filter((o) => o.isFeatures);
+  // In edit mode show all, in prod mode only featured
+  const occupations =
+    mode === "edit"
+      ? allOccupations
+      : A.filter(allOccupations, (o) => o.isFeatures);
 
-  const grouped = Object.groupBy(occupations, (o) => o.category);
+  const grouped = A.groupBy(occupations, (o) => o.category);
   const workExperience = grouped.WORK ?? [];
   const volunteering = grouped.VOLUNTEER ?? [];
   const education = grouped.EDUCATION ?? [];
@@ -48,27 +62,17 @@ const CVPage = async () => {
       }))
     : null;
 
-  const formatDate = (date?: Date) => (date ? utcFormat("%b %Y")(date) : "");
-  const formatYear = (date?: Date) => date && utcFormat("%Y")(date);
+  const formatYear = (date?: Date) =>
+    pipe(
+      Option.fromNullable(date),
+      Option.map(utcFormat("%Y")),
+      Option.getOrUndefined,
+    );
 
-  // Serialize occupation data for client components
-  const serializeOccupations = (occs: typeof workExperience) =>
-    occs.map((o) => ({
-      id: o.id,
-      title: o.title,
-      company: o.company,
-      location: o.location,
-      description: o.description,
-      tasks: o.tasks,
-      longDescription: o.longDescription,
-      pensum: o.pensum,
-      isFeatures: o.isFeatures,
-      start_date: o.start_date,
-      end_date: o.end_date,
-      category: o.category,
-      skills: o.skills,
-      attributes: o.attributes,
-    }));
+  // Convert Schema class instances to plain objects for client components
+  const serialize = (o: (typeof occupations)[number]): OccupationData => ({
+    ...o,
+  });
 
   return (
     <>
@@ -77,16 +81,53 @@ const CVPage = async () => {
         <p className={typefaceMeta("uppercase tracking-widest")}>
           Curriculum Vitae
         </p>
-        <section className="flex items-center">
+        {isDev && <CvViewToggle mode={mode} />}
+        <section className="flex gap-8 flex-col">
           <h1 className={typefaceHeading1("grow")}>Lloyd Richards</h1>
-          <div>
-            <ul className={typefaceMeta()}>
-              <li>lloydrichards.dev</li>
-              <li>lloyd.d.richards@gmail.com</li>
-              <li>+41 77 97 30 938</li>
-              <li>github.com/lloydrichards</li>
-            </ul>
-          </div>
+          <ul
+            className={typefaceMeta(
+              "inline-flex list-none flex-wrap gap-2 p-0 [&>li:not(:first-child)]:before:mr-2 [&>li:not(:first-child)]:before:content-['·']",
+            )}
+          >
+            <li>
+              <a
+                className={typefaceAnchor("no-underline hover:underline")}
+                href="https://lloydrichards.dev"
+                rel="noopener"
+                target="_blank"
+              >
+                lloydrichards.dev
+              </a>
+            </li>
+            <li>
+              <a
+                className={typefaceAnchor("no-underline hover:underline")}
+                href="mailto:lloyd.d.richards@gmail.com"
+                rel="noopener"
+                target="_blank"
+              >
+                lloyd.d.richards@gmail.com
+              </a>
+            </li>
+            <li>
+              <a
+                className={typefaceAnchor("no-underline hover:underline")}
+                href="tel:+41779730938"
+              >
+                +41 77 97 30 938
+              </a>
+            </li>
+            <li>
+              <a
+                className={typefaceAnchor("no-underline hover:underline")}
+                href="https://github.com/lloydrichards"
+                rel="noopener"
+                target="_blank"
+              >
+                github.com/lloydrichards
+              </a>
+            </li>
+          </ul>
         </section>
         <section>
           <h2 className={typefaceHeading2()}>Executive Summary</h2>
@@ -136,31 +177,19 @@ const CVPage = async () => {
         </section>
         <section>
           <h2 className={typefaceHeading2()}>Experience</h2>
-          {isDev && formOptions ? (
+          {mode === "edit" && formOptions ? (
             <CvSectionEditable
-              occupations={serializeOccupations(workExperience)}
+              occupations={A.map(workExperience, serialize)}
               categoryName="WORK"
               formOptions={formOptions}
             />
           ) : (
             workExperience.map((work) => (
-              <article key={work.id} className="my-6 flex flex-col gap-2">
-                <h3 className={typefaceHeading4()}>
-                  {work.company} – {work.title}
-                </h3>
-                <i className={typefaceMeta("text-muted-foreground")}>
-                  {formatDate(work.start_date)} →{" "}
-                  {work.end_date ? formatDate(work.end_date) : "Present"}
-                </i>
-                <p className={typefaceBody()}>{work.description}</p>
-                <ul className={typefaceBody()}>
-                  {work.tasks?.map((task) => (
-                    <li className="my-2 ml-6 list-disc" key={task}>
-                      {task}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+              <WorkItem
+                key={work.id}
+                occupation={serialize(work)}
+                mode="prod"
+              />
             ))
           )}
         </section>
@@ -182,40 +211,40 @@ const CVPage = async () => {
         </section>
         <section>
           <h2 className={typefaceHeading2()}>Education</h2>
-          {isDev && formOptions ? (
+          {mode === "edit" && formOptions ? (
             <CvSectionEditable
-              occupations={serializeOccupations(education)}
+              occupations={A.map(education, serialize)}
               categoryName="EDUCATION"
               formOptions={formOptions}
             />
           ) : (
             <ul className={typefaceBody()}>
               {education.map((e) => (
-                <li className="my-2 ml-6 list-disc" key={e.id}>
-                  <strong>{e.title},</strong> {e.company} -{" "}
-                  {formatDate(e.start_date)} →{" "}
-                  {e.end_date ? formatDate(e.end_date) : "Present"}
-                </li>
+                <EducationItem
+                  key={e.id}
+                  occupation={serialize(e)}
+                  mode="prod"
+                />
               ))}
             </ul>
           )}
         </section>
         <section>
           <h2 className={typefaceHeading2()}>Community & Volunteering</h2>
-          {isDev && formOptions ? (
+          {mode === "edit" && formOptions ? (
             <CvSectionEditable
-              occupations={serializeOccupations(volunteering)}
+              occupations={A.map(volunteering, serialize)}
               categoryName="VOLUNTEER"
               formOptions={formOptions}
             />
           ) : (
             <ul className={typefaceBody()}>
               {volunteering.map((v) => (
-                <li className="my-2 ml-6 list-disc" key={v.id}>
-                  <strong>{v.title},</strong>
-                  {v.company} - {formatDate(v.start_date)} →{" "}
-                  {v.end_date ? formatDate(v.end_date) : "Present"}
-                </li>
+                <VolunteerItem
+                  key={v.id}
+                  occupation={serialize(v)}
+                  mode="prod"
+                />
               ))}
             </ul>
           )}

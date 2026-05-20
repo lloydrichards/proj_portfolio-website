@@ -1,20 +1,10 @@
 "use client";
 
-import { utcFormat } from "d3";
-import { Pencil, Plus, Trash2, X } from "lucide-react";
-import { useState, useTransition } from "react";
-import { toast } from "sonner";
+import { Plus, X } from "lucide-react";
+import { useState } from "react";
 import { Badge } from "@/components/atom/badge";
 import { Button } from "@/components/atom/button";
 import { Checkbox } from "@/components/atom/checkbox";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/atom/dialog";
 import { Field, FieldGroup, FieldLabel } from "@/components/atom/field";
 import { Input } from "@/components/atom/input";
 import {
@@ -23,187 +13,7 @@ import {
 } from "@/components/atom/native-select";
 import { MarkdownEditor } from "@/components/atom/markdown_editor";
 import { Textarea } from "@/components/atom/textarea";
-import {
-  typefaceBody,
-  typefaceHeading4,
-  typefaceMeta,
-} from "@/components/tokens/typeface";
-import {
-  createOccupation,
-  deleteOccupation,
-  updateOccupation,
-} from "./actions";
-
-interface OccupationData {
-  id: number;
-  title: string;
-  company: string;
-  location: string;
-  description: string | null;
-  tasks: readonly string[] | null;
-  longDescription: string | null;
-  pensum: number;
-  isFeatures: boolean;
-  start_date: Date;
-  end_date: Date | null;
-  category: string;
-  skills: readonly string[] | null;
-  attributes: readonly string[] | null;
-}
-
-interface FormOptions {
-  categories: { id: number; name: string; description: string | null }[];
-  skills: {
-    id: number;
-    name: string;
-    type: string | null;
-    description: string | null;
-  }[];
-  attributes: { id: number; name: string; description: string | null }[];
-}
-
-interface OccupationEntryProps {
-  occupation: OccupationData;
-  isDev: boolean;
-  formOptions: FormOptions;
-  editingId: number | null;
-  onEditStart: (id: number) => void;
-  onEditEnd: () => void;
-}
-
-export function OccupationEntry({
-  occupation,
-  isDev,
-  formOptions,
-  editingId,
-  onEditStart,
-  onEditEnd,
-}: OccupationEntryProps) {
-  const isEditing = editingId === occupation.id;
-  const [isPending, startTransition] = useTransition();
-  const [showDelete, setShowDelete] = useState(false);
-  const formatDate = (date: Date) => utcFormat("%b %Y")(date);
-
-  if (isEditing) {
-    return (
-      <OccupationForm
-        occupation={occupation}
-        formOptions={formOptions}
-        onCancel={onEditEnd}
-        onSave={(data) => {
-          startTransition(async () => {
-            try {
-              await updateOccupation({ ...data, id: occupation.id });
-              toast.success("Occupation updated");
-              onEditEnd();
-            } catch (_e) {
-              toast.error("Failed to update occupation");
-            }
-          });
-        }}
-        isPending={isPending}
-      />
-    );
-  }
-
-  return (
-    <article
-      className={`group my-6 flex flex-col gap-2 ${isDev && !occupation.isFeatures ? "opacity-50" : ""}`}
-    >
-      <div className="flex items-start gap-2">
-        <div className="grow">
-          <h3 className={typefaceHeading4()}>
-            {occupation.company} – {occupation.title}
-          </h3>
-          <i className={typefaceMeta("text-muted-foreground")}>
-            {formatDate(occupation.start_date)} →{" "}
-            {occupation.end_date ? formatDate(occupation.end_date) : "Present"}
-            {isDev && (
-              <span className="ml-2 text-xs">({occupation.pensum}%)</span>
-            )}
-          </i>
-        </div>
-        {isDev && (
-          <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="size-7"
-              onClick={() => onEditStart(occupation.id)}
-            >
-              <Pencil data-icon="inline-start" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-7 w-7 text-destructive"
-              onClick={() => setShowDelete(true)}
-            >
-              <Trash2 data-icon="inline-start" />
-            </Button>
-          </div>
-        )}
-      </div>
-      {occupation.description && (
-        <p className={typefaceBody()}>{occupation.description}</p>
-      )}
-      {occupation.tasks && occupation.tasks.length > 0 && (
-        <ul className={typefaceBody()}>
-          {occupation.tasks.map((task) => (
-            <li className="my-2 ml-6 list-disc" key={task}>
-              {task}
-            </li>
-          ))}
-        </ul>
-      )}
-      {isDev && occupation.skills && occupation.skills.length > 0 && (
-        <div className="flex flex-wrap gap-1 mt-1">
-          {occupation.skills.map((s) => (
-            <Badge key={s} variant="outline" className="text-primary">
-              {s}
-            </Badge>
-          ))}
-        </div>
-      )}
-
-      <Dialog open={showDelete} onOpenChange={setShowDelete}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Delete occupation</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to delete &quot;{occupation.title} at{" "}
-              {occupation.company}&quot;? This cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setShowDelete(false)}>
-              Cancel
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() => {
-                startTransition(async () => {
-                  try {
-                    await deleteOccupation(occupation.id);
-                    toast.success("Occupation deleted");
-                    setShowDelete(false);
-                  } catch (_e) {
-                    toast.error("Failed to delete occupation");
-                  }
-                });
-              }}
-              disabled={isPending}
-            >
-              Delete
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </article>
-  );
-}
-
-// --- Form Component ---
+import type { FormOptions, OccupationData } from "./types";
 
 interface OccupationFormProps {
   occupation?: OccupationData | null;
@@ -227,7 +37,7 @@ interface OccupationFormProps {
   isPending: boolean;
 }
 
-function OccupationForm({
+export function OccupationForm({
   occupation,
   formOptions,
   onCancel,
@@ -575,75 +385,5 @@ function MultiSelect({
         )}
       </div>
     </div>
-  );
-}
-
-// --- Add Occupation Button ---
-
-export function AddOccupationButton({
-  categoryName,
-  formOptions,
-}: {
-  categoryName: string;
-  formOptions: FormOptions;
-}) {
-  const [isAdding, setIsAdding] = useState(false);
-  const [isPending, startTransition] = useTransition();
-
-  if (!isAdding) {
-    return (
-      <Button
-        variant="outline"
-        size="sm"
-        className="mt-2"
-        onClick={() => setIsAdding(true)}
-      >
-        <Plus data-icon="inline-start" /> Add {categoryName}
-      </Button>
-    );
-  }
-
-  const categoryId =
-    formOptions.categories.find(
-      (c) => c.name.toUpperCase() === categoryName.toUpperCase(),
-    )?.id ??
-    formOptions.categories[0]?.id ??
-    1;
-
-  return (
-    <OccupationForm
-      formOptions={formOptions}
-      occupation={
-        {
-          id: 0,
-          title: "",
-          company: "",
-          location: "",
-          description: null,
-          tasks: [],
-          longDescription: null,
-          pensum: 100,
-          isFeatures: true,
-          start_date: new Date(),
-          end_date: null,
-          category: categoryName,
-          skills: null,
-          attributes: null,
-        } satisfies OccupationData
-      }
-      onCancel={() => setIsAdding(false)}
-      onSave={(data) => {
-        startTransition(async () => {
-          try {
-            await createOccupation({ ...data, categoryId });
-            toast.success("Occupation created");
-            setIsAdding(false);
-          } catch (_e) {
-            toast.error("Failed to create occupation");
-          }
-        });
-      }}
-      isPending={isPending}
-    />
   );
 }

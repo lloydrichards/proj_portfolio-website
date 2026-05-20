@@ -1,4 +1,4 @@
-import { Github, Trophy } from "lucide-react";
+import { Trophy } from "lucide-react";
 import type { FC } from "react";
 import {
   Accordion,
@@ -17,6 +17,7 @@ import {
   CardTitle,
 } from "@/components/atom/card";
 import { Tile } from "@/components/atom/tile";
+import SvgGithub from "@/components/icons/github";
 import { TeamMemberAvatar } from "@/components/molecule/team_member_avatar";
 import { formatDate } from "@/lib/format";
 import type { TeamMember } from "@/services/db/schema/team_member";
@@ -89,7 +90,7 @@ export const ProjectInfoCard: FC<ProjectInfoCardProps> = ({
               variant="outline"
               render={<a target="_blank" href={project.repo} rel="noopener" />}
             >
-              <Github /> Repo
+              <SvgGithub /> Repo
             </Button>
           )}
           {project.href && (

@@ -21,6 +21,7 @@ import {
   NativeSelect,
   NativeSelectOption,
 } from "@/components/atom/native-select";
+import { MarkdownEditor } from "@/components/atom/markdown_editor";
 import { Textarea } from "@/components/atom/textarea";
 import {
   typefaceBody,
@@ -412,11 +413,10 @@ function OccupationForm({
       </Field>
       <Field>
         <FieldLabel htmlFor="longDesc">Long Description</FieldLabel>
-        <Textarea
+        <MarkdownEditor
           id="longDesc"
           value={longDescription}
-          onChange={(e) => setLongDescription(e.target.value)}
-          rows={3}
+          onChange={setLongDescription}
         />
       </Field>
 

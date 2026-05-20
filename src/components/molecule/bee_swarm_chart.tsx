@@ -318,14 +318,14 @@ export const BeeSwarmChart = ({
               className="stroke-muted-foreground/25"
             />
           ))}
-        {tickDates.map((tick, index) => {
+        {tickDates.map((tick) => {
           const domain = xScaleDomain ?? [tick, tick];
           const x = scaleTime()
             .domain(domain)
             .range([padding.left, width - padding.right])
             .clamp(true)(tick);
           return (
-            <g key={`${tick.toISOString()}-${index}`}>
+            <g key={tick.toISOString()}>
               <line
                 x1={x}
                 x2={x}
@@ -375,7 +375,7 @@ export const BeeSwarmChart = ({
           );
         })}
       <div className="pointer-events-none absolute inset-x-0 bottom-0">
-        {tickDates.map((tick, index) => {
+        {tickDates.map((tick) => {
           const domain = xScaleDomain ?? [tick, tick];
           const x = scaleTime()
             .domain(domain)
@@ -383,7 +383,7 @@ export const BeeSwarmChart = ({
             .clamp(true)(tick);
           return (
             <span
-              key={`label-${tick.toISOString()}-${index}`}
+              key={`label-${tick.toISOString()}`}
               className="absolute -translate-x-1/2 text-sm text-muted-foreground"
               style={{ left: formatPercent((x / width) * 100), bottom: "4px" }}
             >

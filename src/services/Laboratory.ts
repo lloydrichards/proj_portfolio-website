@@ -1,14 +1,12 @@
-import { FileSystem } from "@effect/platform";
 import { BunFileSystem } from "@effect/platform-bun";
-import { Array, Effect, flow, Order, pipe, Schema } from "effect";
+import { Array, Context, Effect, FileSystem, flow, Layer, Order, pipe, Schema } from "effect";
 import { ImportError, ValidationError } from "@/types/Errors";
 import { Lab, LabMeta } from "@/types/Lab";
 import { LAB_PATH } from "./consts";
 import { makeOGImageURL } from "./utils";
 
-export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
-  dependencies: [BunFileSystem.layer],
-  effect: Effect.gen(function* () {
+export class Laboratory extends Context.Service<Laboratory>()("app/Laboratory", {
+  make: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem;
 
     const getLab = Effect.fn("Laboratory.getLab")((slug: string) =>
@@ -26,16 +24,18 @@ export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
         Effect.flatMap((validSlug) =>
           Effect.tryPromise({
             try: () => import(`@/app/labs/(content)/${validSlug}/page.mdx`),
-            catch: (error) =>
-              new ImportError({
+            catch: (error) => {
+              console.error(`[Laboratory] Failed to import lab "${validSlug}":`, error);
+              return new ImportError({
                 path: `@/app/labs/(content)/${validSlug}/page.mdx`,
                 reason: error,
-              }),
+              });
+            },
           }),
         ),
         // Extract and validate metadata
         Effect.map((d) => d.metadata),
-        Effect.flatMap(Schema.decodeUnknown(LabMeta)),
+        Effect.flatMap(Schema.decodeUnknownEffect(LabMeta)),
         // Transform to Lab instance
         Effect.map(
           (metadata) =>
@@ -70,7 +70,7 @@ export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
       ).pipe(
         Effect.map(
           flow(
-            Array.sortBy(Order.mapInput(Order.number, (d) => +d.id)),
+            Array.sortBy(Order.mapInput(Order.Number, (d: Lab) => +d.id)),
             Array.reverse,
           ),
         ),
@@ -101,5 +101,8 @@ export class Laboratory extends Effect.Service<Laboratory>()("app/Laboratory", {
       featured,
     };
   }),
-  accessors: true,
-}) {}
+}) {
+  static readonly layer = Layer.effect(this, this.make).pipe(
+    Layer.provide(BunFileSystem.layer),
+  );
+}

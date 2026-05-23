@@ -1,4 +1,4 @@
-import { Effect } from "effect";
+import { Context, Effect, Layer } from "effect";
 import { GitHubAPIError } from "@/types/Errors";
 
 export type GitHubStats = {
@@ -31,8 +31,8 @@ export type GitHubCommitGraph = {
   tagsBySha: Record<string, string[]>;
 };
 
-export class GitHub extends Effect.Service<GitHub>()("app/GitHub", {
-  effect: Effect.gen(function* () {
+export class GitHub extends Context.Service<GitHub>()("app/GitHub", {
+  make: Effect.gen(function* () {
     const getStats = Effect.fn("GitHub.getStats")((username: string) =>
       Effect.tryPromise({
         try: async () => {
@@ -267,5 +267,6 @@ export class GitHub extends Effect.Service<GitHub>()("app/GitHub", {
       getCommitGraph,
     };
   }),
-  accessors: true,
-}) {}
+}) {
+  static readonly layer = Layer.effect(this, this.make);
+}

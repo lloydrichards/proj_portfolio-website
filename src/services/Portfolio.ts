@@ -1,14 +1,16 @@
-import { FileSystem } from "@effect/platform";
-import { BunContext } from "@effect/platform-bun";
+import { BunServices } from "@effect/platform-bun";
 import {
   Array,
+  Context,
   Effect,
+  FileSystem,
   flow,
+  Layer,
   Option,
   Order,
-  ParseResult,
   pipe,
   Schema,
+  SchemaIssue,
 } from "effect";
 import {
   DatabaseError,
@@ -24,9 +26,8 @@ import type { TeamMember } from "./db/schema/team_member";
 import { MDXCompiler } from "./MDXCompiler";
 import { makeOGImageURL } from "./utils";
 
-export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
-  dependencies: [BunContext.layer, DrizzleLive, MDXCompiler.Default],
-  effect: Effect.gen(function* () {
+export class Portfolio extends Context.Service<Portfolio>()("app/Portfolio", {
+  make: Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem;
     const mdx = yield* MDXCompiler;
     const db = yield* Database;
@@ -35,8 +36,8 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
       pipe(
         fs.readFileString(`${PROJECT_PATH}/${slug}.mdx`),
         Effect.flatMap((content) => mdx.compile(content)),
-        Effect.flatMap(Schema.decodeUnknown(ProjectMeta.MDX)),
-        Effect.andThen(
+        Effect.flatMap(Schema.decodeUnknownEffect(ProjectMeta.MDX)),
+        Effect.map(
           ({ content, frontmatter }) =>
             [
               content,
@@ -55,7 +56,7 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
               }),
             ] as const,
         ),
-        Effect.catchTag("BadArgument", () =>
+        Effect.catchTag("PlatformError", () =>
           Effect.fail(new MissingContentError({ slug })),
         ),
         Effect.tap(() => Effect.annotateCurrentSpan("slug", slug)),
@@ -76,7 +77,7 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
         Effect.map(
           flow(
             Array.map(([_, p]) => p),
-            Array.sortBy(Order.mapInput(Order.number, (d) => d.id)),
+            Array.sortBy(Order.mapInput(Order.Number, (d: Project) => d.id)),
             Array.reverse,
           ),
         ),
@@ -113,60 +114,54 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
               return Effect.succeed([] as TeamMember[]);
             }
 
-            return db
-              .select()
-              .from(teamMember)
-              .pipe(
-                Effect.mapError(
-                  (error) =>
-                    new DatabaseError({
-                      message: "Failed to fetch team members from database",
-                      operation: "select",
-                      cause: error,
-                    }),
-                ),
-                Effect.flatMap((teamMembers) =>
-                  Schema.decodeUnknown(Schema.Array(TeamMemberDTO))(
-                    teamData,
-                  ).pipe(
-                    Effect.mapError(
-                      (parseError) =>
-                        new ValidationError({
-                          field: "team",
-                          message:
-                            ParseResult.TreeFormatter.formatErrorSync(
-                              parseError,
-                            ),
-                        }),
-                    ),
-                    Effect.map((selectedTeam) =>
-                      selectedTeam.map(({ firstName, lastName, role }) => {
-                        const found = Array.findFirst(
-                          teamMembers,
-                          (m) =>
-                            m.firstName === firstName &&
-                            m.lastName === lastName &&
-                            m.role === role,
-                        );
-
-                        return Option.getOrElse(found, () => {
-                          const hash =
-                            firstName.charCodeAt(0) +
-                            lastName.charCodeAt(0) +
-                            role.charCodeAt(0);
-                          return {
-                            id: -(Math.abs(hash) + 1),
-                            firstName,
-                            lastName,
-                            role,
-                            imgUrl: null,
-                          } as TeamMember;
-                        });
+            return Effect.tryPromise({
+              try: () => db.select().from(teamMember),
+              catch: (error) =>
+                new DatabaseError({
+                  message: "Failed to fetch team members from database",
+                  operation: "select",
+                  cause: error,
+                }),
+            }).pipe(
+              Effect.flatMap((teamMembers) =>
+                Schema.decodeUnknownEffect(Schema.Array(TeamMemberDTO))(
+                  teamData,
+                ).pipe(
+                  Effect.mapError(
+                    (parseError) =>
+                      new ValidationError({
+                        field: "team",
+                        message: String(parseError),
                       }),
-                    ),
+                  ),
+                  Effect.map((selectedTeam) =>
+                    selectedTeam.map(({ firstName, lastName, role }) => {
+                      const found = Array.findFirst(
+                        teamMembers,
+                        (m) =>
+                          m.firstName === firstName &&
+                          m.lastName === lastName &&
+                          m.role === role,
+                      );
+
+                      return Option.getOrElse(found, () => {
+                        const hash =
+                          firstName.charCodeAt(0) +
+                          lastName.charCodeAt(0) +
+                          role.charCodeAt(0);
+                        return {
+                          id: -(Math.abs(hash) + 1),
+                          firstName,
+                          lastName,
+                          role,
+                          imgUrl: null,
+                        } as TeamMember;
+                      });
+                    }),
                   ),
                 ),
-              );
+              ),
+            );
           }),
           Effect.withSpan("getTeamMembers"),
         ),
@@ -180,5 +175,10 @@ export class Portfolio extends Effect.Service<Portfolio>()("app/Portfolio", {
       getTeamMembers,
     };
   }),
-  accessors: true,
-}) {}
+}) {
+  static readonly layer = Layer.effect(this, this.make).pipe(
+    Layer.provide(BunServices.layer),
+    Layer.provide(DrizzleLive),
+    Layer.provide(MDXCompiler.layer),
+  );
+}

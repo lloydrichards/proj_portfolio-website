@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { Effect } from "effect";
+import { Context, Effect, Layer } from "effect";
 import { Database, DrizzleLive } from "../db";
 import {
   attribute,
@@ -29,59 +29,64 @@ export interface UpdateOccupationInput extends CreateOccupationInput {
   id: number;
 }
 
-export class OccupationService extends Effect.Service<OccupationService>()(
+export class OccupationService extends Context.Service<OccupationService>()(
   "app/OccupationService",
   {
-    dependencies: [DrizzleLive],
-    effect: Effect.gen(function* () {
+    make: Effect.gen(function* () {
       const db = yield* Database;
 
       const allCategories = Effect.fn("OccupationService.allCategories")(() =>
-        db.select().from(category),
+        Effect.tryPromise(() => db.select().from(category)),
       );
 
       const allSkills = Effect.fn("OccupationService.allSkills")(() =>
-        db.select().from(skill),
+        Effect.tryPromise(() => db.select().from(skill)),
       );
 
       const allAttributes = Effect.fn("OccupationService.allAttributes")(() =>
-        db.select().from(attribute),
+        Effect.tryPromise(() => db.select().from(attribute)),
       );
 
       const create = Effect.fn("OccupationService.create")(
         (input: CreateOccupationInput) =>
           Effect.gen(function* () {
-            const [inserted] = yield* db
-              .insert(occupation)
-              .values({
-                title: input.title,
-                company: input.company,
-                location: input.location,
-                shortDescription: input.shortDescription,
-                longDescription: input.longDescription,
-                pensum: input.pensum,
-                isFeatured: input.isFeatured,
-                category: input.category,
-                startDate: input.startDate,
-                endDate: input.endDate,
-              })
-              .returning();
+            const [inserted] = yield* Effect.tryPromise(() =>
+              db
+                .insert(occupation)
+                .values({
+                  title: input.title,
+                  company: input.company,
+                  location: input.location,
+                  shortDescription: input.shortDescription,
+                  longDescription: input.longDescription,
+                  pensum: input.pensum,
+                  isFeatured: input.isFeatured,
+                  category: input.category,
+                  startDate: input.startDate,
+                  endDate: input.endDate,
+                })
+                .returning(),
+            );
 
             if (input.skillIds.length > 0) {
-              yield* db.insert(occupationToSkill).values(
-                input.skillIds.map((skillId) => ({
-                  occupation: inserted.id,
-                  skill: skillId,
-                })),
+              yield* Effect.tryPromise(() =>
+                db.insert(occupationToSkill).values(
+                  input.skillIds.map((skillId) => ({
+                    occupation: inserted.id,
+                    skill: skillId,
+                  })),
+                ),
               );
             }
 
             if (input.attributeIds.length > 0) {
-              yield* db.insert(occupationToAttribute).values(
-                input.attributeIds.map((attributeId) => ({
-                  occupation: inserted.id,
-                  attribute: attributeId,
-                })),
+              yield* Effect.tryPromise(() =>
+                db.insert(occupationToAttribute).values(
+                  input.attributeIds.map((attributeId) => ({
+                    occupation: inserted.id,
+                    attribute: attributeId,
+                  })),
+                ),
               );
             }
 
@@ -92,47 +97,57 @@ export class OccupationService extends Effect.Service<OccupationService>()(
       const update = Effect.fn("OccupationService.update")(
         (input: UpdateOccupationInput) =>
           Effect.gen(function* () {
-            const [updated] = yield* db
-              .update(occupation)
-              .set({
-                title: input.title,
-                company: input.company,
-                location: input.location,
-                shortDescription: input.shortDescription,
-                longDescription: input.longDescription,
-                pensum: input.pensum,
-                isFeatured: input.isFeatured,
-                category: input.category,
-                startDate: input.startDate,
-                endDate: input.endDate,
-              })
-              .where(eq(occupation.id, input.id))
-              .returning();
+            const [updated] = yield* Effect.tryPromise(() =>
+              db
+                .update(occupation)
+                .set({
+                  title: input.title,
+                  company: input.company,
+                  location: input.location,
+                  shortDescription: input.shortDescription,
+                  longDescription: input.longDescription,
+                  pensum: input.pensum,
+                  isFeatured: input.isFeatured,
+                  category: input.category,
+                  startDate: input.startDate,
+                  endDate: input.endDate,
+                })
+                .where(eq(occupation.id, input.id))
+                .returning(),
+            );
 
             // Replace junction table entries
-            yield* db
-              .delete(occupationToSkill)
-              .where(eq(occupationToSkill.occupation, input.id));
+            yield* Effect.tryPromise(() =>
+              db
+                .delete(occupationToSkill)
+                .where(eq(occupationToSkill.occupation, input.id)),
+            );
 
-            yield* db
-              .delete(occupationToAttribute)
-              .where(eq(occupationToAttribute.occupation, input.id));
+            yield* Effect.tryPromise(() =>
+              db
+                .delete(occupationToAttribute)
+                .where(eq(occupationToAttribute.occupation, input.id)),
+            );
 
             if (input.skillIds.length > 0) {
-              yield* db.insert(occupationToSkill).values(
-                input.skillIds.map((skillId) => ({
-                  occupation: input.id,
-                  skill: skillId,
-                })),
+              yield* Effect.tryPromise(() =>
+                db.insert(occupationToSkill).values(
+                  input.skillIds.map((skillId) => ({
+                    occupation: input.id,
+                    skill: skillId,
+                  })),
+                ),
               );
             }
 
             if (input.attributeIds.length > 0) {
-              yield* db.insert(occupationToAttribute).values(
-                input.attributeIds.map((attributeId) => ({
-                  occupation: input.id,
-                  attribute: attributeId,
-                })),
+              yield* Effect.tryPromise(() =>
+                db.insert(occupationToAttribute).values(
+                  input.attributeIds.map((attributeId) => ({
+                    occupation: input.id,
+                    attribute: attributeId,
+                  })),
+                ),
               );
             }
 
@@ -141,7 +156,9 @@ export class OccupationService extends Effect.Service<OccupationService>()(
       );
 
       const remove = Effect.fn("OccupationService.remove")((id: number) =>
-        db.delete(occupation).where(eq(occupation.id, id)),
+        Effect.tryPromise(() =>
+          db.delete(occupation).where(eq(occupation.id, id)),
+        ),
       );
 
       return {
@@ -153,6 +170,9 @@ export class OccupationService extends Effect.Service<OccupationService>()(
         remove,
       };
     }),
-    accessors: true,
   },
-) {}
+) {
+  static readonly layer = Layer.effect(this, this.make).pipe(
+    Layer.provide(DrizzleLive),
+  );
+}

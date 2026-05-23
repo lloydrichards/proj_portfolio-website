@@ -1,4 +1,4 @@
-import { Effect } from "effect";
+import { Context, Effect, Layer } from "effect";
 import mdxMermaid from "mdx-mermaid";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -9,10 +9,10 @@ import remarkGfm from "remark-gfm";
 import { components } from "@/mdx-components";
 import { MDXCompileError } from "@/types/Errors";
 
-export class MDXCompiler extends Effect.Service<MDXCompiler>()(
+export class MDXCompiler extends Context.Service<MDXCompiler>()(
   "app/MDXCompiler",
   {
-    effect: Effect.gen(function* () {
+    make: Effect.gen(function* () {
       const compile = <T>(source: string) =>
         Effect.tryPromise({
           try: () =>
@@ -61,4 +61,6 @@ export class MDXCompiler extends Effect.Service<MDXCompiler>()(
       };
     }),
   },
-) {}
+) {
+  static readonly layer = Layer.effect(this, this.make);
+}

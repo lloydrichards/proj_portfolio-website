@@ -7,11 +7,11 @@ import { Portfolio } from "./Portfolio";
 
 const MainLayer = Layer.suspend(() =>
   Layer.mergeAll(
-    Laboratory.Default,
-    Portfolio.Default,
-    Dataset.Default,
-    GitHub.Default,
-    OccupationService.Default,
+    Laboratory.layer,
+    Portfolio.layer,
+    Dataset.layer,
+    GitHub.layer,
+    OccupationService.layer,
   ),
 );
 

@@ -4,7 +4,7 @@ import { ContentStatus } from "./helpers";
 export class LabMeta extends Schema.Class<LabMeta>("LabMeta")({
   id: Schema.String,
   title: Schema.String,
-  date: Schema.Date,
+  date: Schema.DateFromString,
   isFeatured: Schema.optional(Schema.Boolean),
   status: Schema.optional(ContentStatus),
   description: Schema.String,

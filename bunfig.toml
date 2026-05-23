@@ -1,2 +1,3 @@
 [install]
 minimumReleaseAge = 86400
+minimumReleaseAgeExcludes = ["typescript", "@types/node", "effect-boxes"]

@@ -9,9 +9,9 @@ export type $IntentionalAny = any; // eslint-disable-line @typescript-eslint/no-
 /** TS cannot express the proper type atm */
 export type $Unexpressable = any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
-export const ContentStatus = Schema.Literal(
+export const ContentStatus = Schema.Literals([
   "draft",
   "unpublished",
   "published",
-);
+]);
 export type ContentStatus = typeof ContentStatus.Type;

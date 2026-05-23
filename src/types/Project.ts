@@ -2,13 +2,13 @@ import { Schema } from "effect";
 import React from "react";
 import { ContentStatus } from "./helpers";
 
-const PROJECT_CATEGORY = Schema.Union(
+const PROJECT_CATEGORY = Schema.Union([
   Schema.Literal("DESIGN"),
   Schema.Literal("DEVELOP"),
   Schema.Literal("ART"),
   Schema.Literal("GARDEN"),
   Schema.Literal("OTHER"),
-);
+]);
 
 export const Award = Schema.Struct({
   award: Schema.String,
@@ -21,13 +21,13 @@ export class ProjectMeta extends Schema.Class<ProjectMeta>("ProjectMeta")({
   description: Schema.String,
   isFeatured: Schema.optional(Schema.Boolean),
   status: Schema.optional(ContentStatus),
-  date: Schema.Date,
+  date: Schema.DateFromString,
   category: Schema.Array(PROJECT_CATEGORY),
   image: Schema.String,
   href: Schema.optional(Schema.String),
   repo: Schema.optional(Schema.String),
   team: Schema.optional(
-    Schema.Array(Schema.Tuple(Schema.String, Schema.String)),
+    Schema.Array(Schema.Tuple([Schema.String, Schema.String])),
   ),
   awards: Schema.optional(Schema.Array(Award)),
 }) {

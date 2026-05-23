@@ -9,9 +9,10 @@ import { DashboardProvider, TextBlocWrapper } from "./use-dashboard";
 
 export const CVDashboard = async () => {
   const allOccupations = await RuntimeServer.runPromise(
-    Dataset.allOccupations().pipe(
-      Effect.andThen(Schema.encode(Occupation.Array)),
-    ),
+    Effect.gen(function* () {
+      const svc = yield* Dataset;
+      return yield* svc.allOccupations();
+    }).pipe(Effect.andThen(Schema.encodeEffect(Occupation.Array))),
   );
   return (
     <DashboardProvider>

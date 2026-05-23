@@ -28,19 +28,22 @@ export async function createOccupation(formData: {
   devOnly();
 
   await RuntimeServer.runPromise(
-    OccupationService.create({
-      title: formData.title,
-      company: formData.company,
-      location: formData.location,
-      shortDescription: formData.shortDescription,
-      longDescription: formData.longDescription,
-      pensum: formData.pensum,
-      isFeatured: formData.isFeatured ? 1 : 0,
-      category: formData.categoryId,
-      startDate: formData.startDate,
-      endDate: formData.endDate,
-      skillIds: formData.skillIds,
-      attributeIds: formData.attributeIds,
+    Effect.gen(function* () {
+      const svc = yield* OccupationService;
+      return yield* svc.create({
+        title: formData.title,
+        company: formData.company,
+        location: formData.location,
+        shortDescription: formData.shortDescription,
+        longDescription: formData.longDescription,
+        pensum: formData.pensum,
+        isFeatured: formData.isFeatured ? 1 : 0,
+        category: formData.categoryId,
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        skillIds: formData.skillIds,
+        attributeIds: formData.attributeIds,
+      });
     }),
   );
 
@@ -66,20 +69,23 @@ export async function updateOccupation(formData: {
   devOnly();
 
   await RuntimeServer.runPromise(
-    OccupationService.update({
-      id: formData.id,
-      title: formData.title,
-      company: formData.company,
-      location: formData.location,
-      shortDescription: formData.shortDescription,
-      longDescription: formData.longDescription,
-      pensum: formData.pensum,
-      isFeatured: formData.isFeatured ? 1 : 0,
-      category: formData.categoryId,
-      startDate: formData.startDate,
-      endDate: formData.endDate,
-      skillIds: formData.skillIds,
-      attributeIds: formData.attributeIds,
+    Effect.gen(function* () {
+      const svc = yield* OccupationService;
+      return yield* svc.update({
+        id: formData.id,
+        title: formData.title,
+        company: formData.company,
+        location: formData.location,
+        shortDescription: formData.shortDescription,
+        longDescription: formData.longDescription,
+        pensum: formData.pensum,
+        isFeatured: formData.isFeatured ? 1 : 0,
+        category: formData.categoryId,
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        skillIds: formData.skillIds,
+        attributeIds: formData.attributeIds,
+      });
     }),
   );
 
@@ -90,7 +96,12 @@ export async function updateOccupation(formData: {
 export async function deleteOccupation(id: number) {
   devOnly();
 
-  await RuntimeServer.runPromise(OccupationService.remove(id));
+  await RuntimeServer.runPromise(
+    Effect.gen(function* () {
+      const svc = yield* OccupationService;
+      return yield* svc.remove(id);
+    }),
+  );
 
   revalidatePath("/cv");
   return { success: true };
@@ -100,11 +111,14 @@ export async function getFormOptions() {
   devOnly();
 
   const [categories, skills, attributes] = await RuntimeServer.runPromise(
-    Effect.all([
-      OccupationService.allCategories(),
-      OccupationService.allSkills(),
-      OccupationService.allAttributes(),
-    ]),
+    Effect.gen(function* () {
+      const svc = yield* OccupationService;
+      return yield* Effect.all([
+        svc.allCategories(),
+        svc.allSkills(),
+        svc.allAttributes(),
+      ]);
+    }),
   );
 
   return { categories, skills, attributes };

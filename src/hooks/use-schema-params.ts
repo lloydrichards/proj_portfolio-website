@@ -1,33 +1,32 @@
-import { Either, Schema } from "effect";
+import { Exit, Schema } from "effect";
 import { type ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-export function useSchemaParams<A extends Record<string, unknown>, I>(
-  schema: Schema.Schema<A, I, never>,
+export function useSchemaParams<A extends Record<string, unknown>>(
+  schema: Schema.Schema<A> & Schema.Decoder<unknown> & Schema.Encoder<unknown>,
   defaultValue: A,
 ) {
   const params = useSearchParams();
 
-  const paramResult = Schema.decodeUnknownEither(Schema.partial(schema))(
+  const paramResult = Schema.decodeUnknownExit(schema)(
     groupParamsByKey(params),
   );
+
+  const currentValue = Exit.match(paramResult, {
+    onFailure: () => defaultValue,
+    onSuccess: (p) => p as A,
+  });
 
   const buildQueryString = useCallback(
     (partialParams: Partial<A>) => {
       const newParams = new URLSearchParams(params.toString());
 
-      const encoded = Schema.encodeUnknownSync(Schema.partial(schema))({
-        ...paramResult.pipe(
-          Either.match({
-            onLeft: () => ({}) as Record<string, unknown>,
-            onRight: (p) => p,
-          }),
-        ),
-        ...partialParams,
-      });
+      const merged = { ...currentValue, ...partialParams } as A;
+
+      const encoded = Schema.encodeUnknownSync(schema)(merged);
 
       if (encoded && typeof encoded === "object") {
-        Object.entries(encoded).forEach(([key, value]) => {
+        Object.entries(encoded as object).forEach(([key, value]) => {
           if (value !== undefined) {
             newParams.set(key, String(value));
           }
@@ -36,13 +35,10 @@ export function useSchemaParams<A extends Record<string, unknown>, I>(
 
       return newParams.toString();
     },
-    [paramResult, schema, params],
+    [currentValue, schema, params],
   );
 
-  return [
-    Either.getOrElse(paramResult, () => defaultValue),
-    buildQueryString,
-  ] as const;
+  return [currentValue, buildQueryString] as const;
 }
 
 const groupParamsByKey = (params: ReadonlyURLSearchParams) =>

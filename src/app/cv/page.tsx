@@ -1,7 +1,6 @@
 import { utcFormat } from "d3";
 import { Array as A, Effect, Match, Option, pipe } from "effect";
 import Link from "next/link";
-import { Separator } from "@/components/atom/separator";
 import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import {
   typefaceAnchor,
@@ -33,7 +32,16 @@ const CVPage = async ({
     Match.orElse(() => "edit" as const),
   );
   const [allOccupations, projects] = await RuntimeServer.runPromise(
-    Effect.all([Dataset.allOccupations(), Portfolio.featured]),
+    Effect.all([
+      Effect.gen(function* () {
+        const svc = yield* Dataset;
+        return yield* svc.allOccupations();
+      }),
+      Effect.gen(function* () {
+        const svc = yield* Portfolio;
+        return yield* svc.featured;
+      }),
+    ]),
   );
 
   // In edit mode show all, in prod mode only featured
@@ -51,9 +59,18 @@ const CVPage = async ({
   const formOptions = isDev
     ? await RuntimeServer.runPromise(
         Effect.all([
-          OccupationService.allCategories(),
-          OccupationService.allSkills(),
-          OccupationService.allAttributes(),
+          Effect.gen(function* () {
+            const svc = yield* OccupationService;
+            return yield* svc.allCategories();
+          }),
+          Effect.gen(function* () {
+            const svc = yield* OccupationService;
+            return yield* svc.allSkills();
+          }),
+          Effect.gen(function* () {
+            const svc = yield* OccupationService;
+            return yield* svc.allAttributes();
+          }),
         ]),
       ).then(([categories, skills, attributes]) => ({
         categories,
@@ -64,7 +81,7 @@ const CVPage = async ({
 
   const formatYear = (date?: Date) =>
     pipe(
-      Option.fromNullable(date),
+      Option.fromNullishOr(date),
       Option.map(utcFormat("%Y")),
       Option.getOrUndefined,
     );

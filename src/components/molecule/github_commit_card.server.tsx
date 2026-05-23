@@ -19,9 +19,10 @@ export const GitHubCommitCardServer = async ({
   className,
 }: GitHubCommitCardServerProps) => {
   const graph = await RuntimeServer.runPromise(
-    GitHub.getCommitGraph({ owner, repo, commitLimit }).pipe(
-      Effect.catchAll(() => Effect.succeed(null)),
-    ),
+    Effect.gen(function* () {
+      const svc = yield* GitHub;
+      return yield* svc.getCommitGraph({ owner, repo, commitLimit });
+    }).pipe(Effect.catch(() => Effect.succeed(null))),
   );
 
   return <GitHubCommitCard graph={graph} title={title} className={className} />;

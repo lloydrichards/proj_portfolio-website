@@ -10,7 +10,6 @@ import {
   Order,
   pipe,
   Schema,
-  SchemaIssue,
 } from "effect";
 import {
   DatabaseError,

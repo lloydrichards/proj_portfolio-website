@@ -34,15 +34,33 @@ const HomePage = async () => {
   ] = await RuntimeServer.runPromise(
     Effect.all(
       [
-        Laboratory.featured.pipe(Effect.andThen(Schema.encode(Lab.Array))),
-        Portfolio.featured,
-        Laboratory.all.pipe(Effect.andThen(Schema.encode(Lab.Array))),
-        Portfolio.all,
-        GitHub.getStats("lloydrichards"),
-        GitHub.getCommitGraph({
-          owner,
-          repo,
-          commitLimit: 300,
+        Effect.gen(function* () {
+          const svc = yield* Laboratory;
+          return yield* svc.featured;
+        }).pipe(Effect.andThen(Schema.encodeEffect(Lab.Array))),
+        Effect.gen(function* () {
+          const svc = yield* Portfolio;
+          return yield* svc.featured;
+        }),
+        Effect.gen(function* () {
+          const svc = yield* Laboratory;
+          return yield* svc.all;
+        }).pipe(Effect.andThen(Schema.encodeEffect(Lab.Array))),
+        Effect.gen(function* () {
+          const svc = yield* Portfolio;
+          return yield* svc.all;
+        }),
+        Effect.gen(function* () {
+          const svc = yield* GitHub;
+          return yield* svc.getStats("lloydrichards");
+        }),
+        Effect.gen(function* () {
+          const svc = yield* GitHub;
+          return yield* svc.getCommitGraph({
+            owner,
+            repo,
+            commitLimit: 300,
+          });
         }).pipe(Effect.option),
       ],
       { concurrency: "unbounded" },

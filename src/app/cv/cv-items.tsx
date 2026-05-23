@@ -30,7 +30,7 @@ type Mode = "edit" | "prod";
 const formatDate = utcFormat("%b %Y");
 const formatEndDate = (date: Date | null) =>
   pipe(
-    Option.fromNullable(date),
+    Option.fromNullishOr(date),
     Option.map(formatDate),
     Option.getOrElse(() => "Present"),
   );

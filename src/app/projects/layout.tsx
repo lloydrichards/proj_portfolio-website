@@ -10,7 +10,10 @@ const ProjectLayout: FC<{
   children: ReactNode;
 }> = async ({ children }) => {
   const allProjects = await RuntimeServer.runPromise(
-    Portfolio.all.pipe(Effect.andThen(Schema.encode(Project.Array))),
+    Effect.gen(function* () {
+      const svc = yield* Portfolio;
+      return yield* svc.all;
+    }).pipe(Effect.andThen(Schema.encodeEffect(Project.Array))),
   );
 
   return (

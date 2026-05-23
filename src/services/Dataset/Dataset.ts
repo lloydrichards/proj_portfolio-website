@@ -72,7 +72,10 @@ export class Dataset extends Context.Service<Dataset>()("app/Dataset", {
             occupationToAttribute,
             eq(occupation.id, occupationToAttribute.occupation),
           )
-          .leftJoin(attribute, eq(occupationToAttribute.attribute, attribute.id))
+          .leftJoin(
+            attribute,
+            eq(occupationToAttribute.attribute, attribute.id),
+          )
           .groupBy(occupation.id),
       );
 
@@ -115,7 +118,10 @@ export class Dataset extends Context.Service<Dataset>()("app/Dataset", {
           })
           .from(occupationToSkill)
           .leftJoin(skill, eq(skill.id, occupationToSkill.skill))
-          .leftJoin(occupation, eq(occupation.id, occupationToSkill.occupation)),
+          .leftJoin(
+            occupation,
+            eq(occupation.id, occupationToSkill.occupation),
+          ),
       );
 
       return pipe(

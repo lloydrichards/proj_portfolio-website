@@ -1,3 +1,4 @@
+import { Effect } from "effect";
 import { Tile } from "@/components/atom/tile";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
@@ -11,7 +12,12 @@ export const metadata = createPageMetadata({
 });
 
 const ProjectOverviewPage = async () => {
-  const visibleProjects = await RuntimeServer.runPromise(Portfolio.visible);
+  const visibleProjects = await RuntimeServer.runPromise(
+    Effect.gen(function* () {
+      const svc = yield* Portfolio;
+      return yield* svc.visible;
+    }),
+  );
 
   return (
     <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">

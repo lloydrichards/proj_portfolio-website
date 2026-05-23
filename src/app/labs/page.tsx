@@ -15,7 +15,10 @@ export const metadata = createPageMetadata({
 
 const LabOverviewPage: FC = async () => {
   const visibleLabs = await RuntimeServer.runPromise(
-    Laboratory.visible.pipe(Effect.andThen(Schema.encode(Lab.Array))),
+    Effect.gen(function* () {
+      const svc = yield* Laboratory;
+      return yield* svc.visible;
+    }).pipe(Effect.andThen(Schema.encodeEffect(Lab.Array))),
   );
 
   return (

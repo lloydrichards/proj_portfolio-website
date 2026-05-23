@@ -1,4 +1,4 @@
-import { Effect, Either } from "effect";
+import { Effect, Exit } from "effect";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
@@ -15,7 +15,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const [_, project] = await RuntimeServer.runPromise(
-    Portfolio.getProject(slug),
+    Effect.gen(function* () {
+      const svc = yield* Portfolio;
+      return yield* svc.getProject(slug);
+    }),
   );
 
   return createPageMetadata({
@@ -32,7 +35,12 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
-  const allProjects = await RuntimeServer.runPromise(Portfolio.all);
+  const allProjects = await RuntimeServer.runPromise(
+    Effect.gen(function* () {
+      const svc = yield* Portfolio;
+      return yield* svc.all;
+    }),
+  );
   const paths = allProjects.map(({ slug }) => ({
     slug: encodeURI(slug),
   }));
@@ -46,16 +54,24 @@ const ProjectPage = async ({
 }) => {
   const { slug } = await params;
   const result = await RuntimeServer.runPromise(
-    Portfolio.getProject(slug).pipe(Effect.either),
+    Effect.gen(function* () {
+      const svc = yield* Portfolio;
+      return yield* svc.getProject(slug);
+    }).pipe(Effect.exit),
   );
-  if (Either.isLeft(result)) {
-    if (result.left._tag === "MissingContentError") {
+  if (Exit.isFailure(result)) {
+    const error = result.cause.reasons[0];
+    if (
+      error &&
+      "error" in error &&
+      error.error._tag === "MissingContentError"
+    ) {
       return notFound();
     }
-    throw new Error(result.left._tag);
+    throw new Error("Failed to load project");
   }
 
-  const [content, project] = result.right;
+  const [content, project] = result.value;
 
   // Access control based on status
   if (process.env.NODE_ENV === "production") {
@@ -67,7 +83,10 @@ const ProjectPage = async ({
   }
 
   const team = await RuntimeServer.runPromise(
-    Portfolio.getTeamMembers(project.team),
+    Effect.gen(function* () {
+      const svc = yield* Portfolio;
+      return yield* svc.getTeamMembers(project.team);
+    }),
   );
 
   const isDev = process.env.NODE_ENV === "development";

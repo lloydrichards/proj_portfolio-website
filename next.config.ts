@@ -2,6 +2,7 @@ import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
 const nextConfig = {
+  transpilePackages: ["effect-boxes"],
   pageExtensions: ["mdx", "ts", "tsx"],
   outputFileTracingIncludes: {
     database: ["./database/**/*"],

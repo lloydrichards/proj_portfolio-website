@@ -1,3 +1,30 @@
+# [1.19.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.18.0...v1.19.0) (2026-05-26)
+
+
+### Content
+
+* add Lab 061 ([3eab4cc](https://github.com/lloydrichards/proj_portfolio-website/commit/3eab4ccba8bca51d952a26dcb9999bc263b5056d))
+
+
+### Features
+
+* add AnsiTerminal for rendering ansi ([734ff2a](https://github.com/lloydrichards/proj_portfolio-website/commit/734ff2a181358340bc37cda53d74c028fc1f6228))
+* add inline editing capabilities for CV sections ([e510510](https://github.com/lloydrichards/proj_portfolio-website/commit/e510510095fbf55f8f1a6c278683124b68ec93d7))
+* add Person JSON-LD for SEO profile markup ([5823287](https://github.com/lloydrichards/proj_portfolio-website/commit/58232874084aae4d6c202a17af94fdfa511263db))
+* add rich markdown editor ([c047a3e](https://github.com/lloydrichards/proj_portfolio-website/commit/c047a3ec65b76da4322000ba5141a176ababa450))
+
+
+### Improved
+
+* migrate atom components to base-ui and update variants ([560a0d1](https://github.com/lloydrichards/proj_portfolio-website/commit/560a0d12c3152df2140113bb66b431f9896c452f))
+* migrate Schema types to Effect v4 API ([46ce0c9](https://github.com/lloydrichards/proj_portfolio-website/commit/46ce0c9c5cceadcacb5e7154a2f692e616a3a3e2))
+* migrate services to Effect v4 Context.Service pattern ([a68e7bf](https://github.com/lloydrichards/proj_portfolio-website/commit/a68e7bfa75a7a2875a7e3d0a58c817baf09a4b3e))
+* remove tasks from occupation ([c7dd775](https://github.com/lloydrichards/proj_portfolio-website/commit/c7dd775b6426171efb55670fa70798f384972770))
+* simplify tick mapping keys ([3816037](https://github.com/lloydrichards/proj_portfolio-website/commit/3816037a8a385ddc400891f0529695793209cdfa))
+* toggle formatting markers in editor ([24344df](https://github.com/lloydrichards/proj_portfolio-website/commit/24344dfc3e8fa0618b5046818f4abf00c5f854ae))
+* update app layer for Effect v4 API changes ([86063b3](https://github.com/lloydrichards/proj_portfolio-website/commit/86063b32b520cd4d42865a9572e311357098aec7))
+* update occupation data ([281c1ef](https://github.com/lloydrichards/proj_portfolio-website/commit/281c1efb68e3839ffff95afe18700fdd6f20596c))
+
 # [1.18.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.17.1...v1.18.0) (2026-05-12)
 
 

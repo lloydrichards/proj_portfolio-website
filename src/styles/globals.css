@@ -264,6 +264,27 @@
   @apply grid-cols-8 gap-2 md:grid-cols-16 lg:grid-cols-24;
 }
 
+@custom-variant tile-tall {
+  @media (width < 48rem) {
+    /* sm: 8-col grid, row ≈ 12.5vw. Threshold > 4 rows (~50vw). */
+    @container tile (min-height: 55vw) {
+      @slot;
+    }
+  }
+  @media (width >= 48rem) and (width < 64rem) {
+    /* md: 16-col grid, row ≈ 6.25vw. Threshold > 4 rows (~25vw). */
+    @container tile (min-height: 28vw) {
+      @slot;
+    }
+  }
+  @media (width >= 64rem) {
+    /* lg: 24-col grid, row ≈ 4.2vw (capped at 6xl). Threshold > 6 rows (~278px). */
+    @container tile (min-height: 320px) {
+      @slot;
+    }
+  }
+}
+
 @layer base {
   *,
   ::after,

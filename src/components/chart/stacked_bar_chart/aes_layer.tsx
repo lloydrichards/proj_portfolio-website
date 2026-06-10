@@ -23,13 +23,17 @@ export const AesLayer: FC<AesLayerProps> = ({ xScale, yScale, height }) => {
       {/* Grid + Y-axis */}
       <g>
         {yTicks.map((tick) => (
-          <g key={tick} transform={`translate(0,${yScale(tick)})`}>
+          <g
+            key={tick}
+            transform={`translate(0,${yScale(tick)})`}
+            className="transition-transform duration-350 ease-out"
+          >
             <line
               x1={0}
               x2={xScale.range()[1]}
               y1={0}
               y2={0}
-              className="stroke-muted-foreground/20"
+              className="stroke-muted-foreground/20 transition-all duration-350 ease-out"
               clipPath={`url(#${clipId})`}
             />
             <line
@@ -51,7 +55,10 @@ export const AesLayer: FC<AesLayerProps> = ({ xScale, yScale, height }) => {
         ))}
       </g>
       {/* X-axis labels */}
-      <g transform={`translate(0,${height}) `}>
+      <g
+        transform={`translate(0,${height}) `}
+        className="transition-transform duration-350 ease-out"
+      >
         {xScale.domain().map((stack) => {
           const stackPosition = xScale(stack);
           if (stackPosition === undefined) {
@@ -62,6 +69,7 @@ export const AesLayer: FC<AesLayerProps> = ({ xScale, yScale, height }) => {
             <g
               key={stack}
               transform={`translate(${stackPosition + xScale.bandwidth() / 2},12)`}
+              className="transition-transform duration-350 ease-out"
             >
               <text
                 dominantBaseline="middle"

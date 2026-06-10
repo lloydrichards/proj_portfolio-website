@@ -2,6 +2,7 @@ import { Effect, Option, Schema } from "effect";
 import { Briefcase, FlaskConical, Star } from "lucide-react";
 import { ExpandableTile } from "@/components/atom/expandable-tile";
 import { Tile } from "@/components/atom/tile";
+import { TileExpandButton } from "@/components/atom/tile-expand-button";
 import SvgGithub from "@/components/icons/github";
 import { GitHubCommitCard } from "@/components/molecule/github_commit_card";
 import { KPICard } from "@/components/molecule/kpi_card";
@@ -146,22 +147,24 @@ const HomePage = async () => {
         ))}
 
         {/* Skills Chart */}
-        <Tile size="square-lg" className="group grid items-center">
+        <ExpandableTile sizes={["square-lg", "tall-lg"]}>
           <SkillCard
             title="Skills"
             subtitle="Hours by occupation"
             className="h-full"
+            action={<TileExpandButton />}
           >
             <SkillBarChart />
           </SkillCard>
-        </Tile>
+        </ExpandableTile>
 
-        <Tile size="unset" className="col-span-full row-span-6 md:row-span-8">
+        <ExpandableTile sizes={["square-lg", "full-md"]}>
           <GitHubCommitCard
             graph={Option.getOrNull(githubCommitGraph)}
             title="Portfolio activity"
+            expandable
           />
-        </Tile>
+        </ExpandableTile>
 
         {/* Labs Section */}
         {featuredLabs.map((lab) => (

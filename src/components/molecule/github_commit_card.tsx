@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { CardContent } from "@/components/atom/card";
+import { TileExpandButton } from "@/components/atom/tile-expand-button";
 import { BeeSwarmChart } from "@/components/molecule/bee_swarm_chart";
 import { SkillCard } from "@/components/molecule/skill_card";
 import { cn } from "@/lib/utils";
@@ -11,6 +12,7 @@ type GitHubCommitCardProps = {
   graph?: GitHubCommitGraph | null;
   title?: string;
   className?: string;
+  expandable?: boolean;
 };
 
 const formatShortSha = (sha: string) => sha.slice(0, 7);
@@ -19,6 +21,7 @@ export const GitHubCommitCard = ({
   graph,
   title,
   className,
+  expandable,
 }: GitHubCommitCardProps) => {
   const activeData = useMemo(() => {
     if (!graph) {
@@ -68,8 +71,9 @@ export const GitHubCommitCard = ({
         </a>
       }
       className={cn("h-full", className)}
+      action={expandable ? <TileExpandButton /> : undefined}
     >
-      <div className=" flex-1 overflow-hidden p-3">
+      <div className="flex-1 overflow-hidden p-3">
         <BeeSwarmChart
           commits={activeData.commits}
           tagsBySha={activeData.tagsBySha}

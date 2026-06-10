@@ -1,0 +1,222 @@
+/* Nerdy Theme: Terminal Phosphor
+ *
+ * Green-tinted neutrals, phosphor green primary, violet secondary.
+ * Dark mode is the native state (tight tonal range, flat terminal feel).
+ * Light mode is "paper terminal" (warm cream, aged dot-matrix output).
+ * Borders are structural and always visible (terminal window frames).
+ * Code blocks blend with the surface (everything is already code).
+ * Chart colors are ANSI-inspired.
+ *
+ * Structural divergence from standard:
+ * - Sharp corners (radius: 2px)
+ * - Single monospace family (Fira Mono everywhere)
+ * - Denser grid gap
+ * - No shadows (borders only)
+ * - Wider letter-spacing on labels (console output feel)
+ * - Custom selection + scrollbar colors
+ */
+
+:root[data-theme="nerdy"] {
+  /* === STRUCTURAL TOKENS === */
+
+  /* Sharp corners: terminals don't round */
+  --radius: 2px;
+
+  /* Single monospace family: Fira Mono for everything.
+   * Hierarchy through weight and size only, like man pages. */
+  --font-serif: var(--font-fira-mono);
+  --font-sans: var(--font-fira-mono);
+
+  /* Denser grid: terminal panes sit tight */
+  --mosaic-gap: 0.25rem;
+
+  /* === COLOR PALETTE === */
+
+  /* Palette: Mono (green-undertinted neutrals) */
+  --color-mono-050: hsl(80 20% 97%);
+  --color-mono-100: hsl(75 15% 93%);
+  --color-mono-200: hsl(70 10% 84%);
+  --color-mono-300: hsl(75 8% 70%);
+  --color-mono-400: hsl(80 6% 52%);
+  --color-mono-500: hsl(85 7% 38%);
+  --color-mono-600: hsl(90 9% 28%);
+  --color-mono-700: hsl(95 12% 20%);
+  --color-mono-800: hsl(100 14% 14%);
+  --color-mono-900: hsl(105 18% 9%);
+  --color-mono-950: hsl(110 22% 5%);
+
+  /* Palette: Primary (phosphor green) */
+  --color-primary-050: hsl(130 40% 95%);
+  --color-primary-100: hsl(132 42% 88%);
+  --color-primary-200: hsl(134 40% 76%);
+  --color-primary-300: hsl(136 38% 62%);
+  --color-primary-400: hsl(138 42% 48%);
+  --color-primary-500: hsl(140 55% 38%);
+  --color-primary-600: hsl(142 60% 30%);
+  --color-primary-700: hsl(144 58% 24%);
+  --color-primary-800: hsl(146 52% 18%);
+  --color-primary-900: hsl(148 48% 13%);
+  --color-primary-950: hsl(150 45% 8%);
+
+  /* Palette: Secondary (violet/purple) */
+  --color-secondary-050: hsl(270 40% 96%);
+  --color-secondary-100: hsl(272 38% 90%);
+  --color-secondary-200: hsl(274 35% 80%);
+  --color-secondary-300: hsl(276 32% 68%);
+  --color-secondary-400: hsl(278 35% 58%);
+  --color-secondary-500: hsl(280 40% 48%);
+  --color-secondary-600: hsl(282 42% 40%);
+  --color-secondary-700: hsl(284 40% 32%);
+  --color-secondary-800: hsl(286 38% 24%);
+  --color-secondary-900: hsl(288 35% 18%);
+  --color-secondary-950: hsl(290 32% 12%);
+
+  /* === SEMANTIC UI COLORS === */
+
+  --color-ui-error: light-dark(hsl(0 70% 55%), hsl(0 65% 62%));
+  --color-ui-warning: light-dark(hsl(40 85% 50%), hsl(40 80% 58%));
+  --color-ui-success: light-dark(hsl(140 55% 38%), hsl(140 50% 45%));
+  --color-ui-info: light-dark(hsl(210 50% 45%), hsl(210 55% 65%));
+  --color-ui-code: hsl(105 18% 9%);
+
+  /* === FUNCTIONAL COLORS === */
+
+  --background: light-dark(var(--color-mono-050), var(--color-mono-950));
+  --foreground: light-dark(var(--color-mono-900), var(--color-mono-100));
+
+  --primary: light-dark(var(--color-primary-600), var(--color-primary-400));
+  --primary-foreground: light-dark(
+    var(--color-mono-050),
+    var(--color-mono-950)
+  );
+
+  --secondary: light-dark(
+    var(--color-secondary-500),
+    var(--color-secondary-400)
+  );
+  --secondary-foreground: light-dark(
+    var(--color-mono-050),
+    var(--color-mono-950)
+  );
+
+  /* Dark: tighter range (950 → 900 → 800 instead of 900 → 800 → 700) */
+  --card: light-dark(var(--color-mono-100), var(--color-mono-900));
+  --card-foreground: var(--foreground);
+
+  --popover: light-dark(var(--color-mono-200), var(--color-mono-800));
+  --popover-foreground: var(--foreground);
+
+  --muted: light-dark(var(--color-mono-200), var(--color-mono-800));
+  --muted-foreground: light-dark(var(--color-mono-500), var(--color-mono-400));
+
+  --accent: light-dark(var(--color-mono-200), var(--color-mono-800));
+  --accent-foreground: var(--foreground);
+
+  --destructive: var(--color-ui-error);
+  --destructive-foreground: light-dark(
+    var(--color-mono-050),
+    var(--color-mono-950)
+  );
+
+  --warning: var(--color-ui-warning);
+  --warning-foreground: light-dark(
+    var(--color-mono-950),
+    var(--color-mono-950)
+  );
+
+  --success: var(--color-ui-success);
+  --success-foreground: light-dark(
+    var(--color-mono-050),
+    var(--color-mono-950)
+  );
+
+  --info: var(--color-ui-info);
+  --info-foreground: light-dark(var(--color-mono-050), var(--color-mono-950));
+
+  /* Code: one step deeper than card (subtle, everything is already "code") */
+  --code: light-dark(var(--color-mono-200), var(--color-mono-900));
+  --code-foreground: light-dark(var(--color-mono-800), var(--color-mono-200));
+
+  /* Borders: brighter, structural, terminal window frame feel */
+  --border: light-dark(var(--color-mono-300), var(--color-mono-600));
+  --input: light-dark(var(--color-mono-200), var(--color-mono-800));
+  --ring: light-dark(var(--color-primary-400), var(--color-primary-500));
+
+  /* === CHART COLORS (ANSI-inspired) === */
+
+  --chart-1: light-dark(hsl(0 65% 50%), hsl(0 60% 60%));
+  --chart-2: light-dark(hsl(140 55% 35%), hsl(140 50% 50%));
+  --chart-3: light-dark(hsl(45 80% 45%), hsl(45 75% 55%));
+  --chart-4: light-dark(hsl(220 55% 50%), hsl(220 50% 62%));
+  --chart-5: light-dark(hsl(300 40% 45%), hsl(300 38% 60%));
+  --chart-6: light-dark(hsl(180 55% 35%), hsl(180 50% 50%));
+  --chart-7: light-dark(hsl(30 70% 45%), hsl(30 65% 55%));
+  --chart-8: light-dark(hsl(260 45% 50%), hsl(260 42% 62%));
+  --chart-9: light-dark(hsl(80 50% 38%), hsl(80 45% 50%));
+  --chart-10: light-dark(hsl(340 55% 48%), hsl(340 50% 60%));
+}
+
+/* === STRUCTURAL OVERRIDES (require selectors beyond :root) === */
+
+/* Force borders on all tiles and cards: terminal panes always have frames */
+[data-theme="nerdy"] [data-slot="card"],
+[data-theme="nerdy"] .bg-card {
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+/* Kill all shadows: terminals are flat */
+[data-theme="nerdy"] *,
+[data-theme="nerdy"] *::before,
+[data-theme="nerdy"] *::after {
+  --tw-shadow: 0 0 #0000 !important;
+  --tw-shadow-colored: 0 0 #0000 !important;
+}
+
+/* Letter-spacing: console output feel on headings and labels */
+[data-theme="nerdy"] h1,
+[data-theme="nerdy"] h2,
+[data-theme="nerdy"] h3,
+[data-theme="nerdy"] h4,
+[data-theme="nerdy"] h5,
+[data-theme="nerdy"] h6 {
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* Meta/label text gets wider spacing like terminal status lines */
+[data-theme="nerdy"] [data-slot="card-header"],
+[data-theme="nerdy"] [data-slot="badge"] {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Selection: phosphor green */
+[data-theme="nerdy"] ::selection {
+  background: hsl(140 55% 38% / 0.3);
+  color: inherit;
+}
+
+/* Scrollbar: thin, terminal-colored */
+[data-theme="nerdy"] {
+  scrollbar-color: hsl(140 55% 38% / 0.4) transparent;
+  scrollbar-width: thin;
+}
+
+[data-theme="nerdy"] ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+[data-theme="nerdy"] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-theme="nerdy"] ::-webkit-scrollbar-thumb {
+  background: hsl(140 55% 38% / 0.4);
+  border-radius: 2px;
+}
+
+[data-theme="nerdy"] ::-webkit-scrollbar-thumb:hover {
+  background: hsl(140 55% 38% / 0.6);
+}

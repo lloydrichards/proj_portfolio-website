@@ -8,7 +8,14 @@ import {
   forceY,
   scaleTime,
 } from "d3";
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import { Badge } from "@/components/atom/badge";
 import {
   Tooltip,
@@ -124,13 +131,19 @@ export const BeeSwarmChart = ({
   height = 400,
   className,
 }: BeeSwarmChartProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const dotRefsMap = useRef<Map<string, HTMLButtonElement>>(new Map());
   const [isMounted, setIsMounted] = useState(false);
   const [simulationSize, setSimulationSize] = useState({
     width: 0,
     height,
   });
   const [, startTransition] = useTransition();
+
+  // Keyboard navigation state
+  const [activeDotIndex, setActiveDotIndex] = useState<number | null>(null);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const lastActiveIndexRef = useRef<number | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -250,6 +263,122 @@ export const BeeSwarmChart = ({
       };
     }, [commits, tagsBySha, simHeight, simWidth]);
 
+  // Build sorted list of navigable dots (semantic commits + tag dots, sorted by x)
+  const navigableNodes = useMemo(() => {
+    const semantic = nodes.filter((node) => node.type !== "other");
+    return semantic.sort((a, b) => (a.x ?? 0) - (b.x ?? 0));
+  }, [nodes]);
+
+  // Lookup map: sha -> index in navigableNodes for O(1) access during render
+  const navIndexBySha = useMemo(() => {
+    const map = new Map<string, number>();
+    for (let i = 0; i < navigableNodes.length; i++) {
+      map.set(navigableNodes[i].sha, i);
+    }
+    return map;
+  }, [navigableNodes]);
+
+  const setDotRef = useCallback((sha: string, el: HTMLButtonElement | null) => {
+    if (el) {
+      dotRefsMap.current.set(sha, el);
+    } else {
+      dotRefsMap.current.delete(sha);
+    }
+  }, []);
+
+  const focusDot = useCallback(
+    (index: number) => {
+      const node = navigableNodes[index];
+      if (!node) return;
+      const el = dotRefsMap.current.get(node.sha);
+      if (el) {
+        el.focus();
+      }
+      setActiveDotIndex(index);
+      lastActiveIndexRef.current = index;
+      setIsNavigating(true);
+    },
+    [navigableNodes],
+  );
+
+  const handleContainerFocus = useCallback(
+    (e: React.FocusEvent<HTMLElement>) => {
+      // Only handle direct focus on the container (not bubbled from dots)
+      if (e.target !== containerRef.current) return;
+
+      // If returning to the chart, restore last position
+      if (lastActiveIndexRef.current != null && navigableNodes.length > 0) {
+        const idx = Math.min(
+          lastActiveIndexRef.current,
+          navigableNodes.length - 1,
+        );
+        setActiveDotIndex(idx);
+        setIsNavigating(false); // Container focused, not navigating yet
+      }
+    },
+    [navigableNodes],
+  );
+
+  const handleContainerKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLElement>) => {
+      if (!navigableNodes.length) return;
+
+      switch (e.key) {
+        case "ArrowRight":
+        case "ArrowDown": {
+          e.preventDefault();
+          if (!isNavigating) {
+            // First arrow press: enter navigation, focus first (or last remembered) dot
+            const startIdx = lastActiveIndexRef.current ?? 0;
+            focusDot(Math.min(startIdx, navigableNodes.length - 1));
+          } else {
+            // Move to next dot
+            const next = (activeDotIndex ?? -1) + 1;
+            if (next < navigableNodes.length) {
+              focusDot(next);
+            }
+          }
+          break;
+        }
+        case "ArrowLeft":
+        case "ArrowUp": {
+          e.preventDefault();
+          if (!isNavigating) {
+            const startIdx = lastActiveIndexRef.current ?? 0;
+            focusDot(Math.min(startIdx, navigableNodes.length - 1));
+          } else {
+            const prev = (activeDotIndex ?? 1) - 1;
+            if (prev >= 0) {
+              focusDot(prev);
+            }
+          }
+          break;
+        }
+        case "Escape": {
+          e.preventDefault();
+          setActiveDotIndex(null);
+          setIsNavigating(false);
+          containerRef.current?.focus();
+          break;
+        }
+        default:
+          break;
+      }
+    },
+    [navigableNodes, isNavigating, activeDotIndex, focusDot],
+  );
+
+  const handleContainerBlur = useCallback(
+    (e: React.FocusEvent<HTMLElement>) => {
+      // If focus leaves the chart container entirely, deactivate navigation
+      if (!containerRef.current?.contains(e.relatedTarget as Node)) {
+        setIsNavigating(false);
+        setActiveDotIndex(null);
+      }
+    },
+    [],
+  );
+
   const renderWidth = width || simWidth;
   const renderHeight = simHeight;
 
@@ -280,16 +409,23 @@ export const BeeSwarmChart = ({
   }
 
   return (
-    <div
+    <figure
       ref={containerRef}
-      className={cn("relative h-full min-h-0 w-full", className)}
+      className={cn("relative h-full min-h-0 w-full outline-none", className)}
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: Composite widget pattern - single tab stop for keyboard navigation
+      tabIndex={0}
+      aria-roledescription="interactive chart"
+      aria-label="GitHub commits chart. Use arrow keys to explore individual commits, Tab to skip."
+      onKeyDown={handleContainerKeyDown}
+      onFocus={handleContainerFocus}
+      onBlur={handleContainerBlur}
     >
       <svg
         className="h-full w-full"
         viewBox={`0 0 ${renderWidth} ${renderHeight}`}
         preserveAspectRatio="none"
         role="img"
-        aria-label="GitHub commits bee swarm chart"
+        aria-hidden="true"
       >
         <line
           x1={padding.left}
@@ -358,6 +494,7 @@ export const BeeSwarmChart = ({
                 render={
                   <button
                     type="button"
+                    tabIndex={-1}
                     className="absolute transition-[left,top] duration-350 ease-out"
                     style={{
                       left: formatPercent(
@@ -462,6 +599,9 @@ export const BeeSwarmChart = ({
           );
         }
 
+        const navIndex = navIndexBySha.get(node.sha) ?? -1;
+        const isActive = isNavigating && activeDotIndex === navIndex;
+
         const tooltipContent = (
           <div className="max-w-65 select-none text-sm">
             <div className="font-medium">
@@ -489,7 +629,13 @@ export const BeeSwarmChart = ({
               render={
                 <button
                   type="button"
-                  className="absolute transition-[left,top] duration-350 ease-out"
+                  ref={(el) => setDotRef(node.sha, el)}
+                  tabIndex={-1}
+                  className={cn(
+                    "absolute rounded-full transition-[left,top] duration-350 ease-out",
+                    isActive &&
+                      "ring-2 ring-ring ring-offset-1 ring-offset-background",
+                  )}
                   style={{
                     left: formatPercent(
                       ((node.x ?? renderWidth / 2) / renderWidth) * 100,
@@ -528,6 +674,6 @@ export const BeeSwarmChart = ({
           </Tooltip>
         );
       })}
-    </div>
+    </figure>
   );
 };

@@ -1,43 +1,18 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import type { HTMLAttributes, Ref } from "react";
+"use client";
+
+import type { VariantProps } from "class-variance-authority";
+import { type HTMLMotionProps, motion } from "framer-motion";
+import type { Ref } from "react";
 
 import { cn } from "@/lib/utils";
+import { tileTransition, tileVariants } from "./tile.variants";
 
-export const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
-  variants: {
-    size: {
-      unset: "",
-      "box-xxs":
-        "col-span-1 row-span-1 md:col-span-2 lg:col-span-4 lg:row-span-1",
-      "box-xs":
-        "col-span-2 row-span-1 md:col-span-4 md:row-span-2 lg:col-span-6 lg:row-span-2",
-      "box-sm":
-        "col-span-2 row-span-2 md:col-span-4 md:row-span-3 lg:col-span-6 lg:row-span-4",
-      "box-md":
-        "col-span-8 row-span-4 md:col-span-8 md:row-span-4 lg:col-span-12 lg:row-span-6",
-      "square-xxs":
-        "col-span-1 row-span-1 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2",
-      "square-xs":
-        "col-span-1 row-span-1 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2",
-      "square-sm":
-        "col-span-2 row-span-2 md:col-span-4 md:row-span-4 lg:col-span-4 lg:row-span-4",
-      "square-md":
-        "col-span-4 row-span-4 md:col-span-4 md:row-span-4 lg:col-span-6 lg:row-span-6",
-      "square-lg":
-        "col-span-full row-span-8 md:col-span-8 md:row-span-8 lg:col-span-12 lg:row-span-12",
-    },
-    outline: { true: "border", false: "" },
-    display: { grid: "grid grid-cols-subgrid grid-rows-subgrid", default: "" },
-  },
-  defaultVariants: { size: "square-xs", outline: true, display: "default" },
-});
-
-export type TileSize = NonNullable<VariantProps<typeof tileVariants>["size"]>;
+export type { TileSize } from "./tile.variants";
 
 interface TileProps
-  extends HTMLAttributes<HTMLDivElement>,
+  extends HTMLMotionProps<"section">,
     VariantProps<typeof tileVariants> {
-  ref?: Ref<HTMLDivElement>;
+  ref?: Ref<HTMLElement>;
 }
 
 export function Tile({
@@ -50,12 +25,14 @@ export function Tile({
   ...props
 }: TileProps) {
   return (
-    <section
+    <motion.section
+      layout="position"
+      transition={{ layout: tileTransition }}
       className={cn(tileVariants({ size, outline, display, className }))}
       ref={ref}
       {...props}
     >
       {children}
-    </section>
+    </motion.section>
   );
 }

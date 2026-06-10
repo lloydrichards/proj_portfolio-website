@@ -9,7 +9,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/atom/navigation-menu";
 import { cn } from "@/lib/utils";
-import { tileVariants } from "../atom/tile";
+import { tileVariants } from "../atom/tile.variants";
 
 export const NavListItem: FC<{
   children: ReactNode;

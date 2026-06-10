@@ -3,7 +3,7 @@ import Link from "next/link";
 import { typefaceHeading3 } from "@/components/tokens/typeface";
 import { cn } from "@/lib/utils";
 import { navigationMenuTriggerStyle } from "../atom/navigation-menu";
-import { tileVariants } from "../atom/tile";
+import { tileVariants } from "../atom/tile.variants";
 import { ThemeToggle } from "../molecule/theme-toggle";
 
 export const Navbar: React.FC = () => {

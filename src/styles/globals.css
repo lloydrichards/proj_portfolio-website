@@ -264,6 +264,41 @@
   @apply grid-cols-8 gap-2 md:grid-cols-16 lg:grid-cols-24;
 }
 
+@utility tile-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  flex: 0;
+  min-height: 0;
+  transition:
+    grid-template-rows 250ms cubic-bezier(0.2, 0, 0, 1),
+    opacity 200ms ease,
+    flex 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+@utility tile-reveal-visible {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  flex: 1;
+
+  @starting-style {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    flex: 0;
+  }
+}
+
+@utility tile-reveal-inline {
+  display: inline-grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+
+  @starting-style {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+
 @custom-variant tile-tall {
   @media (width < 48rem) {
     /* sm: 8-col grid, row ≈ 12.5vw. Threshold > 4 rows (~50vw). */

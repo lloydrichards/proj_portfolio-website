@@ -2,9 +2,14 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import type { FC, HTMLAttributes, ReactNode, Ref } from "react";
+import { type HTMLMotionProps, motion } from "framer-motion";
+import type { FC, ReactNode, Ref } from "react";
 import { createContext, use, useCallback, useMemo, useState } from "react";
-import { type TileSize, tileVariants } from "@/components/atom/tile";
+import {
+  type TileSize,
+  tileTransition,
+  tileVariants,
+} from "@/components/atom/tile.variants";
 import { cn } from "@/lib/utils";
 
 type TileContextValue = {
@@ -24,7 +29,7 @@ export const useTileContext = () => {
   return ctx;
 };
 
-type ExpandableTileProps = HTMLAttributes<HTMLDivElement> & {
+type ExpandableTileProps = HTMLMotionProps<"section"> & {
   sizes: TileSize[];
   defaultSizeIndex?: number;
   sizeIndex?: number;
@@ -33,7 +38,7 @@ type ExpandableTileProps = HTMLAttributes<HTMLDivElement> & {
   display?: "grid" | "default" | null;
   className?: string;
   children?: ReactNode;
-  ref?: Ref<HTMLDivElement>;
+  ref?: Ref<HTMLElement>;
 };
 
 export const ExpandableTile: FC<ExpandableTileProps> = ({
@@ -75,7 +80,9 @@ export const ExpandableTile: FC<ExpandableTileProps> = ({
 
   return (
     <TileContext.Provider value={contextValue}>
-      <section
+      <motion.section
+        layout
+        transition={{ layout: tileTransition }}
         className={cn(
           tileVariants({ size: resolvedSize, outline, display, className }),
         )}
@@ -83,8 +90,10 @@ export const ExpandableTile: FC<ExpandableTileProps> = ({
         style={{ containerType: "size", containerName: "tile" }}
         {...props}
       >
-        {children}
-      </section>
+        <motion.div layout="position" className="h-full w-full overflow-hidden">
+          {children}
+        </motion.div>
+      </motion.section>
     </TileContext.Provider>
   );
 };

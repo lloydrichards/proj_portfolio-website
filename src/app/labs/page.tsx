@@ -2,6 +2,7 @@ import { Effect, Schema } from "effect";
 import type { FC } from "react";
 import { ExpandableTile } from "@/components/atom/expandable-tile";
 import { LabCard } from "@/components/molecule/lab_card";
+import { Mosaic } from "@/components/template/mosaic";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
 import { Laboratory } from "@/services/Laboratory";
@@ -22,7 +23,7 @@ const LabOverviewPage: FC = async () => {
   );
 
   return (
-    <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
+    <Mosaic render={<article />}>
       <h1
         className={typefaceHeading1(
           "col-span-full row-span-2 flex items-center",
@@ -35,7 +36,7 @@ const LabOverviewPage: FC = async () => {
           <LabCard lab={lab} expandable />
         </ExpandableTile>
       ))}
-    </article>
+    </Mosaic>
   );
 };
 

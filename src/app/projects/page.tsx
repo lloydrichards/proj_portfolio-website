@@ -1,6 +1,7 @@
 import { Effect, Schema } from "effect";
 import { ExpandableTile } from "@/components/atom/expandable-tile";
 import { ProjectCard } from "@/components/molecule/project_card";
+import { Mosaic } from "@/components/template/mosaic";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
 import { Portfolio } from "@/services/Portfolio";
@@ -21,7 +22,7 @@ const ProjectOverviewPage = async () => {
   );
 
   return (
-    <article className="mosaic-rows col-span-full grid grid-flow-dense grid-cols-subgrid">
+    <Mosaic render={<article />}>
       <h1
         className={typefaceHeading1(
           "col-span-full row-span-2 flex items-center",
@@ -34,7 +35,7 @@ const ProjectOverviewPage = async () => {
           <ProjectCard project={project} />
         </ExpandableTile>
       ))}
-    </article>
+    </Mosaic>
   );
 };
 

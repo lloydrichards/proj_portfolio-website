@@ -1,10 +1,11 @@
-import { Effect } from "effect";
-import { Tile } from "@/components/atom/tile";
+import { Effect, Schema } from "effect";
+import { ExpandableTile } from "@/components/atom/expandable-tile";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
+import { Project } from "@/types/Project";
 
 export const metadata = createPageMetadata({
   title: "Projects",
@@ -16,7 +17,7 @@ const ProjectOverviewPage = async () => {
     Effect.gen(function* () {
       const svc = yield* Portfolio;
       return yield* svc.visible;
-    }),
+    }).pipe(Effect.andThen(Schema.encodeEffect(Project.Array))),
   );
 
   return (
@@ -28,10 +29,10 @@ const ProjectOverviewPage = async () => {
       >
         Project Grid
       </h1>
-      {visibleProjects.map((project, idx) => (
-        <Tile key={project.slug} size={idx % 3 === 0 ? "box-md" : "square-md"}>
-          <ProjectCard project={project} asLink />
-        </Tile>
+      {visibleProjects.map((project) => (
+        <ExpandableTile key={project.slug} sizes={["square-md", "square-lg"]}>
+          <ProjectCard project={project} />
+        </ExpandableTile>
       ))}
     </article>
   );

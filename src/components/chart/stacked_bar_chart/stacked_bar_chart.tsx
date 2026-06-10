@@ -51,7 +51,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
 
   return (
     <div
-      className="relative"
+      className="relative transition-[width,height] duration-350 ease-out"
       style={{ width: chartWidth, height: chartHeight }}
     >
       <svg
@@ -60,6 +60,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
         overflow="visible"
         role="img"
         aria-label={title ? `${title} stacked bar chart` : "Stacked bar chart"}
+        className="transition-[width,height] duration-350 ease-out"
       >
         <g transform={`translate(${margins.left},${margins.top})`}>
           {/* Title */}

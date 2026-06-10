@@ -39,7 +39,7 @@ export const GeomLayer: FC<GeomLayerProps> = ({
                 width={xScale.bandwidth()}
                 height={max([0, yScale(d[0]) - yScale(d[1]) - 4])}
                 fill={cScale(d.data.stack)}
-                className="stroke-muted-foreground/40 transition-opacity duration-150 hover:opacity-70"
+                className="stroke-muted-foreground/40 transition-all duration-350 ease-out hover:opacity-70"
                 strokeWidth={1}
                 opacity={0.8}
               />
@@ -64,7 +64,9 @@ export const GeomLayer: FC<GeomLayerProps> = ({
               x={stackPosition + xScale.bandwidth() / 2}
               y={yScale(sum) - 8}
               textAnchor="middle"
-              className={typefaceMeta("fill-muted-foreground text-xs")}
+              className={typefaceMeta(
+                "fill-muted-foreground text-xs transition-all duration-350 ease-out",
+              )}
             >
               {sum.toLocaleString()}
             </text>

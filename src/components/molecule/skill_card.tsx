@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 type SkillCardProps = {
   title: string;
   subtitle?: ReactNode;
+  action?: ReactNode;
   className?: string;
   children?: ReactNode;
 };
@@ -13,6 +14,7 @@ type SkillCardProps = {
 export const SkillCard = ({
   title,
   subtitle,
+  action,
   className,
   children,
 }: SkillCardProps) => {
@@ -34,6 +36,7 @@ export const SkillCard = ({
           ) : null}
         </div>
       </CardHeader>
+      {action && <div className="absolute top-1 right-1 z-20">{action}</div>}
       <CardContent className="flex flex-1 min-h-0 min-w-0 flex-col">
         {children}
       </CardContent>

@@ -8,7 +8,7 @@ import {
   forceY,
   scaleTime,
 } from "d3";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { Badge } from "@/components/atom/badge";
 import {
   Tooltip,
@@ -126,10 +126,11 @@ export const BeeSwarmChart = ({
 }: BeeSwarmChartProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const [containerSize, setContainerSize] = useState({
+  const [simulationSize, setSimulationSize] = useState({
     width: 0,
     height,
   });
+  const [, startTransition] = useTransition();
 
   useEffect(() => {
     setIsMounted(true);
@@ -147,7 +148,9 @@ export const BeeSwarmChart = ({
       for (const entry of entries) {
         const nextWidth = Math.max(240, Math.round(entry.contentRect.width));
         const nextHeight = Math.max(120, Math.round(entry.contentRect.height));
-        setContainerSize({ width: nextWidth, height: nextHeight });
+        startTransition(() => {
+          setSimulationSize({ width: nextWidth, height: nextHeight });
+        });
       }
     });
     observer.observe(element);
@@ -156,12 +159,12 @@ export const BeeSwarmChart = ({
     };
   }, [isMounted]);
 
-  const chartWidth = Math.max(240, containerSize.width || 1000);
-  const chartHeight = Math.max(120, containerSize.height || height);
+  const simWidth = Math.max(240, simulationSize.width || 1000);
+  const simHeight = Math.max(120, simulationSize.height || height);
 
   const { nodes, width, padding, tickDates, xScaleDomain, tickFormat } =
     useMemo(() => {
-      const widthValue = chartWidth;
+      const widthValue = simWidth;
       const paddingValue = { top: 24, right: 12, bottom: 28, left: 12 };
       const filtered = commits.filter((commit) => commit.date);
 
@@ -199,10 +202,10 @@ export const BeeSwarmChart = ({
       const radius = 5;
       const seed = hashString(nodesValue.map((node) => node.sha).join("|"));
       const rng = mulberry32(seed);
-      const plotHeight = chartHeight - paddingValue.top - paddingValue.bottom;
+      const plotHeight = simHeight - paddingValue.top - paddingValue.bottom;
       const centerY = paddingValue.top + plotHeight / 2;
       const yMin = paddingValue.top + radius + 4;
-      const yMax = chartHeight - paddingValue.bottom - radius - 4;
+      const yMax = simHeight - paddingValue.bottom - radius - 4;
 
       const boundingForce = () => {
         for (const node of nodesValue) {
@@ -245,7 +248,10 @@ export const BeeSwarmChart = ({
         tickFormat,
         xScaleDomain: [minDate, maxDate],
       };
-    }, [commits, tagsBySha, chartHeight, chartWidth]);
+    }, [commits, tagsBySha, simHeight, simWidth]);
+
+  const renderWidth = width || simWidth;
+  const renderHeight = simHeight;
 
   if (!isMounted) {
     return (
@@ -280,58 +286,58 @@ export const BeeSwarmChart = ({
     >
       <svg
         className="h-full w-full"
-        viewBox={`0 0 ${width} ${chartHeight}`}
+        viewBox={`0 0 ${renderWidth} ${renderHeight}`}
         preserveAspectRatio="none"
         role="img"
         aria-label="GitHub commits bee swarm chart"
       >
         <line
           x1={padding.left}
-          x2={width - padding.right}
+          x2={renderWidth - padding.right}
           y1={padding.top}
           y2={padding.top}
-          className="stroke-muted-foreground/20"
+          className="stroke-muted-foreground/20 transition-all duration-350"
         />
         <line
           x1={padding.left}
-          x2={width - padding.right}
-          y1={padding.top + (chartHeight - padding.top - padding.bottom) / 2}
-          y2={padding.top + (chartHeight - padding.top - padding.bottom) / 2}
-          className="stroke-muted-foreground/10"
+          x2={renderWidth - padding.right}
+          y1={padding.top + (renderHeight - padding.top - padding.bottom) / 2}
+          y2={padding.top + (renderHeight - padding.top - padding.bottom) / 2}
+          className="stroke-muted-foreground/10 transition-all duration-350"
         />
         <line
           x1={padding.left}
-          x2={width - padding.right}
-          y1={chartHeight - padding.bottom}
-          y2={chartHeight - padding.bottom}
-          className="stroke-muted-foreground/20"
+          x2={renderWidth - padding.right}
+          y1={renderHeight - padding.bottom}
+          y2={renderHeight - padding.bottom}
+          className="stroke-muted-foreground/20 transition-all duration-350"
         />
         {nodes
           .filter((node) => node.tags.length > 0)
           .map((node) => (
             <line
               key={`tag-line-${node.sha}`}
-              x1={node.x ?? width / 2}
-              x2={node.x ?? width / 2}
-              y1={node.y ?? chartHeight / 2}
-              y2={chartHeight - padding.bottom}
-              className="stroke-muted-foreground/25"
+              x1={node.x ?? renderWidth / 2}
+              x2={node.x ?? renderWidth / 2}
+              y1={node.y ?? renderHeight / 2}
+              y2={renderHeight - padding.bottom}
+              className="stroke-muted-foreground/25 transition-all duration-350"
             />
           ))}
         {tickDates.map((tick) => {
           const domain = xScaleDomain ?? [tick, tick];
           const x = scaleTime()
             .domain(domain)
-            .range([padding.left, width - padding.right])
+            .range([padding.left, renderWidth - padding.right])
             .clamp(true)(tick);
           return (
             <g key={tick.toISOString()}>
               <line
                 x1={x}
                 x2={x}
-                y1={chartHeight - padding.bottom}
-                y2={chartHeight - padding.bottom + 6}
-                className="stroke-muted-foreground/30"
+                y1={renderHeight - padding.bottom}
+                y2={renderHeight - padding.bottom + 6}
+                className="stroke-muted-foreground/30 transition-all duration-350"
               />
             </g>
           );
@@ -352,13 +358,13 @@ export const BeeSwarmChart = ({
                 render={
                   <button
                     type="button"
-                    className="absolute"
+                    className="absolute transition-[left,top] duration-350 ease-out"
                     style={{
                       left: formatPercent(
-                        ((node.x ?? width / 2) / width) * 100,
+                        ((node.x ?? renderWidth / 2) / renderWidth) * 100,
                       ),
                       top: formatPercent(
-                        ((chartHeight - padding.bottom) / chartHeight) * 100,
+                        ((renderHeight - padding.bottom) / renderHeight) * 100,
                       ),
                       transform: "translate(-50%, -50%)",
                     }}
@@ -379,20 +385,23 @@ export const BeeSwarmChart = ({
           const domain = xScaleDomain ?? [tick, tick];
           const x = scaleTime()
             .domain(domain)
-            .range([padding.left, width - padding.right])
+            .range([padding.left, renderWidth - padding.right])
             .clamp(true)(tick);
           return (
             <span
               key={`label-${tick.toISOString()}`}
-              className="absolute -translate-x-1/2 text-sm text-muted-foreground"
-              style={{ left: formatPercent((x / width) * 100), bottom: "4px" }}
+              className="absolute -translate-x-1/2 text-sm text-muted-foreground transition-[left] duration-350 ease-out"
+              style={{
+                left: formatPercent((x / renderWidth) * 100),
+                bottom: "4px",
+              }}
             >
               {tickFormat(tick)}
             </span>
           );
         })}
       </div>
-      <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-wrap items-center justify-center gap-3 pt-1 text-xs text-muted-foreground">
+      <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-wrap items-center justify-end gap-3 pt-1 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-chart-1/70 ring-1 ring-chart-1" />
           Feature
@@ -423,11 +432,13 @@ export const BeeSwarmChart = ({
           return (
             <span
               key={node.sha}
-              className="absolute"
+              className="absolute transition-[left,top] duration-350 ease-out"
               style={{
-                left: formatPercent(((node.x ?? width / 2) / width) * 100),
+                left: formatPercent(
+                  ((node.x ?? renderWidth / 2) / renderWidth) * 100,
+                ),
                 top: formatPercent(
-                  ((node.y ?? chartHeight / 2) / chartHeight) * 100,
+                  ((node.y ?? renderHeight / 2) / renderHeight) * 100,
                 ),
                 transform: "translate(-50%, -50%)",
               }}
@@ -478,11 +489,13 @@ export const BeeSwarmChart = ({
               render={
                 <button
                   type="button"
-                  className="absolute"
+                  className="absolute transition-[left,top] duration-350 ease-out"
                   style={{
-                    left: formatPercent(((node.x ?? width / 2) / width) * 100),
+                    left: formatPercent(
+                      ((node.x ?? renderWidth / 2) / renderWidth) * 100,
+                    ),
                     top: formatPercent(
-                      ((node.y ?? chartHeight / 2) / chartHeight) * 100,
+                      ((node.y ?? renderHeight / 2) / renderHeight) * 100,
                     ),
                     transform: "translate(-50%, -50%)",
                   }}

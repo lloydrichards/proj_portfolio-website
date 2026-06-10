@@ -1,6 +1,6 @@
 import { Effect, Schema } from "effect";
 import type { FC } from "react";
-import { Tile } from "@/components/atom/tile";
+import { ExpandableTile } from "@/components/atom/expandable-tile";
 import { LabCard } from "@/components/molecule/lab_card";
 import { typefaceHeading1 } from "@/components/tokens/typeface";
 import { createPageMetadata } from "@/lib/seo";
@@ -31,9 +31,9 @@ const LabOverviewPage: FC = async () => {
         Lab Grid
       </h1>
       {visibleLabs.map((lab) => (
-        <Tile key={lab.slug} size={lab.isFeatured ? "box-md" : "square-md"}>
-          <LabCard lab={lab} asLink />
-        </Tile>
+        <ExpandableTile key={lab.slug} sizes={["square-md", "box-md"]}>
+          <LabCard lab={lab} expandable />
+        </ExpandableTile>
       ))}
     </article>
   );

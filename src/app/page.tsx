@@ -1,5 +1,6 @@
 import { Effect, Option, Schema } from "effect";
 import { Briefcase, FlaskConical, Star } from "lucide-react";
+import { ExpandableTile } from "@/components/atom/expandable-tile";
 import { Tile } from "@/components/atom/tile";
 import SvgGithub from "@/components/icons/github";
 import { GitHubCommitCard } from "@/components/molecule/github_commit_card";
@@ -19,6 +20,7 @@ import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
+import { Project } from "@/types/Project";
 
 const HomePage = async () => {
   const repoUrl = new URL(siteMetadata.siteRepo);
@@ -41,7 +43,7 @@ const HomePage = async () => {
         Effect.gen(function* () {
           const svc = yield* Portfolio;
           return yield* svc.featured;
-        }),
+        }).pipe(Effect.andThen(Schema.encodeEffect(Project.Array))),
         Effect.gen(function* () {
           const svc = yield* Laboratory;
           return yield* svc.all;
@@ -73,7 +75,7 @@ const HomePage = async () => {
       <Mosaic>
         <Tile
           size="square-md"
-          className="bg-background group grid items-center"
+          className="bg-background overflow-clip group grid items-center"
         >
           <Logo className="text-primary scale-110 transition-transform hover:scale-115" />
         </Tile>
@@ -135,13 +137,12 @@ const HomePage = async () => {
 
         {/* Projects Section */}
         {allProjects.map((project) => (
-          <Tile size="box-md" key={`project${project.slug}`}>
-            <ProjectCard
-              key={`project${project.slug}`}
-              project={project}
-              className="col-span-8 row-span-6"
-            />
-          </Tile>
+          <ExpandableTile
+            sizes={["box-md", "square-lg"]}
+            key={`project${project.slug}`}
+          >
+            <ProjectCard project={project} />
+          </ExpandableTile>
         ))}
 
         {/* Skills Chart */}
@@ -164,14 +165,13 @@ const HomePage = async () => {
 
         {/* Labs Section */}
         {featuredLabs.map((lab) => (
-          <Tile size="square-md" key={`lab${lab.slug}`}>
-            <LabCard lab={lab} />
-          </Tile>
+          <ExpandableTile
+            sizes={["square-md", "box-md"]}
+            key={`lab${lab.slug}`}
+          >
+            <LabCard lab={lab} expandable />
+          </ExpandableTile>
         ))}
-
-        <Tile>
-          <ThemeToggle />
-        </Tile>
       </Mosaic>
     </>
   );

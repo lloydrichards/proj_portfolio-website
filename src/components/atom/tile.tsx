@@ -1,9 +1,9 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import * as React from "react";
+import type { HTMLAttributes, Ref } from "react";
 
 import { cn } from "@/lib/utils";
 
-const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
+export const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
   variants: {
     size: {
       unset: "",
@@ -32,26 +32,30 @@ const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
   defaultVariants: { size: "square-xs", outline: true, display: "default" },
 });
 
+export type TileSize = NonNullable<VariantProps<typeof tileVariants>["size"]>;
+
 interface TileProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof tileVariants> {}
+  extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof tileVariants> {
+  ref?: Ref<HTMLDivElement>;
+}
 
-const Tile = React.forwardRef<HTMLDivElement, TileProps>(
-  ({ className, outline, display, size, children, ...props }, ref) => {
-    return (
-      <section
-        className={cn(tileVariants({ size, outline, display, className }))}
-        ref={ref}
-        {...props}
-      >
-        {/* <span className="text-destructive absolute top-0 right-2 z-20">
-          {size}
-        </span> */}
-        {children}
-      </section>
-    );
-  },
-);
-Tile.displayName = "Tile";
-
-export { Tile, tileVariants };
+export function Tile({
+  className,
+  outline,
+  display,
+  size,
+  children,
+  ref,
+  ...props
+}: TileProps) {
+  return (
+    <section
+      className={cn(tileVariants({ size, outline, display, className }))}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </section>
+  );
+}

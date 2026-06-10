@@ -168,7 +168,8 @@
     --muted: light-dark(var(--color-mono-200), var(--color-mono-600));
     --muted-foreground: light-dark(var(--color-mono-600), var(--foreground));
 
-    --accent: light-dark(var(--color-mono-200), var(--color-mono-600));
+    /* Accent: teal-tinted for brand presence on hovers, active states */
+    --accent: light-dark(var(--color-primary-050), var(--color-primary-950));
     --accent-foreground: var(--foreground);
 
     --destructive: var(--color-ui-error);
@@ -188,7 +189,7 @@
 
     --border: light-dark(var(--color-mono-300), var(--color-mono-700));
     --input: light-dark(var(--color-mono-200), var(--color-mono-800));
-    --ring: light-dark(var(--color-primary-400), var(--color-primary-600));
+    --ring: light-dark(var(--color-primary-500), var(--color-primary-500));
 
     --chart-1: light-dark(hsl(12 76% 61%), hsl(220 70% 50%));
     --chart-2: light-dark(hsl(173 58% 39%), hsl(160 60% 45%));
@@ -215,11 +216,13 @@
 }
 
 @utility mosaic-rows {
-  @apply auto-rows-sm md:auto-rows-md lg:auto-rows-lg gap-2;
+  @apply auto-rows-sm md:auto-rows-md lg:auto-rows-lg;
+  gap: var(--mosaic-gap, 0.5rem);
 }
 
 @utility mosaic-columns {
-  @apply grid-cols-8 gap-2 md:grid-cols-16 lg:grid-cols-24;
+  @apply grid-cols-8 md:grid-cols-16 lg:grid-cols-24;
+  gap: var(--mosaic-gap, 0.5rem);
 }
 
 @utility tile-reveal {
@@ -326,5 +329,6 @@
   }
 }
 
+@import "./themes/nerdy.css";
 @import "./mdx.css";
 @import "./mermaid.css";

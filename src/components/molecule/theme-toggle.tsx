@@ -18,7 +18,7 @@ export const ThemeToggle = ({ className }: { className?: string }) => {
           <button
             type="button"
             className={cn(
-              "size-full p-0 inline-flex items-center justify-center",
+              "size-full p-0 inline-flex items-center justify-center rounded-md focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
               className,
             )}
             onClick={() => toggleTheme()}

@@ -12,7 +12,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground overflow-hidden rounded-md shadow-xs dark:shadow-none",
+        "bg-card text-card-foreground rounded-md shadow-xs dark:shadow-none",
         className,
       )}
       {...props}
@@ -37,7 +37,12 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn(typefaceHeading3("mt-0"), className)}
+      className={cn(
+        typefaceHeading3(
+          "mt-0 border border-transparent rounded-sm has-[a:focus-visible]:ring-3 has-[a:focus-visible]:border-ring has-[a:focus-visible]:ring-ring/50 [&_a:focus-visible]:outline-none",
+        ),
+        className,
+      )}
       {...props}
     />
   );

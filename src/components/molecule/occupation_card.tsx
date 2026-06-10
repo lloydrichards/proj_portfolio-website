@@ -28,7 +28,12 @@ export const OccupationCard: FC<OccupationCardProps> = ({
 }) => {
   const formatDate = (date?: Date) => date && utcFormat("%b %Y")(date);
   return (
-    <Card className={cn("group h-full group-focus-visible:ring-2", className)}>
+    <Card
+      className={cn(
+        "group h-full group-focus-visible:ring-3 group-focus-visible:ring-ring/50",
+        className,
+      )}
+    >
       <CardHeader className="p-2">
         <CardTitle className="my-0 mb-2 flex items-center gap-4">
           <OccupationIcon category={data.category} />

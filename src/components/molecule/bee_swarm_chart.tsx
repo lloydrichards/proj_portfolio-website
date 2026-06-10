@@ -634,7 +634,7 @@ export const BeeSwarmChart = ({
                   className={cn(
                     "absolute rounded-full transition-[left,top] duration-350 ease-out",
                     isActive &&
-                      "ring-2 ring-ring ring-offset-1 ring-offset-background",
+                      "ring-2 ring-ring/50 ring-offset-1 ring-offset-background",
                   )}
                   style={{
                     left: formatPercent(

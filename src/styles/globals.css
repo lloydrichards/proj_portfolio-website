@@ -268,17 +268,20 @@
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
+  visibility: hidden;
   flex: 0;
   min-height: 0;
   transition:
     grid-template-rows 250ms cubic-bezier(0.2, 0, 0, 1),
     opacity 200ms ease,
+    visibility 250ms,
     flex 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 @utility tile-reveal-visible {
   grid-template-rows: 1fr;
   opacity: 1;
+  visibility: visible;
   flex: 1;
 
   @starting-style {
@@ -292,6 +295,7 @@
   display: inline-grid;
   grid-template-rows: 1fr;
   opacity: 1;
+  visibility: visible;
 
   @starting-style {
     grid-template-rows: 0fr;

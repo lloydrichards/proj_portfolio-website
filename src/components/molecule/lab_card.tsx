@@ -67,7 +67,7 @@ export const LabCard: React.FC<LabCardProps> = ({
           {asLink ? (
             lab.title
           ) : (
-            <Link href={lab.pathname} className="hover:underline">
+            <Link href={lab.pathname} className="hover:underline rounded-sm">
               {lab.title}
             </Link>
           )}

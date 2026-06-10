@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
-export const tileVariants = cva("bg-card relative overflow-hidden rounded-md", {
+export const tileVariants = cva("bg-card relative rounded-md", {
   variants: {
     size: {
       unset: "",

@@ -24,7 +24,7 @@ interface IProjectCard {
 }
 
 const cardVariant = cva(
-  "group relative flex h-full flex-col text-clip hover:shadow-sm dark:hover:shadow-none",
+  "group relative flex h-full flex-col hover:shadow-sm dark:hover:shadow-none",
   {
     variants: {
       status: {
@@ -52,7 +52,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project, className }) => {
       {/* --- Title + date (always visible) --- */}
       <CardHeader className="z-10 flex-1 justify-center px-4 transition-[flex] duration-250 ease-[cubic-bezier(0.2,0,0,1)] tile-tall:flex-none tile-tall:justify-start tile-tall:px-3 @sm/tile:flex-none @sm/tile:justify-start @sm/tile:px-3">
         <CardTitle className="line-clamp-3 tile-tall:line-clamp-1 @sm/tile:line-clamp-2">
-          <Link href={project.pathname} className="hover:underline">
+          <Link href={project.pathname} className="hover:underline rounded-sm">
             {project.title}
           </Link>
         </CardTitle>
@@ -95,31 +95,25 @@ export const ProjectCard: React.FC<IProjectCard> = ({ project, className }) => {
         ))}
 
         {/* External links: only at expanded state */}
-        <span className="tile-reveal @sm/tile:tile-reveal-inline">
-          <span className="inline-flex gap-1 overflow-hidden">
-            {project.repo && (
-              <Button
-                variant="ghost"
-                size="icon-xs"
-                render={
-                  <a target="_blank" href={project.repo} rel="noopener" />
-                }
-              >
-                <SvgGithub />
-              </Button>
-            )}
-            {project.href && (
-              <Button
-                variant="ghost"
-                size="icon-xs"
-                render={
-                  <a target="_blank" href={project.href} rel="noopener" />
-                }
-              >
-                <ExternalLink />
-              </Button>
-            )}
-          </span>
+        <span className="inline-flex gap-1 overflow-hidden">
+          {project.repo && (
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              render={<a target="_blank" href={project.repo} rel="noopener" />}
+            >
+              <SvgGithub />
+            </Button>
+          )}
+          {project.href && (
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              render={<a target="_blank" href={project.href} rel="noopener" />}
+            >
+              <ExternalLink />
+            </Button>
+          )}
         </span>
       </CardFooter>
 

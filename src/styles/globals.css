@@ -233,7 +233,10 @@
     grid-template-rows 250ms cubic-bezier(0.2, 0, 0, 1),
     opacity 200ms ease,
     visibility 250ms,
-    flex 250ms cubic-bezier(0.2, 0, 0, 1);
+    flex 250ms cubic-bezier(0.2, 0, 0, 1),
+    background-color 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease;
 }
 
 @utility tile-reveal-visible {
@@ -294,7 +297,32 @@
     box-sizing: border-box; /* Opera/IE 8+ */
   }
   body {
-    @apply bg-background text-foreground transition duration-300;
+    @apply bg-background text-foreground;
+  }
+
+  /* Smooth color transitions for light/dark mode toggling.
+   * Applied to all elements so everything shifts together.
+   * Palette-provider disables this temporarily during palette swaps
+   * to avoid intermediate blended states. */
+  *,
+  *::before,
+  *::after {
+    transition:
+      background-color 300ms ease,
+      border-color 300ms ease,
+      color 300ms ease,
+      fill 300ms ease,
+      stroke 300ms ease,
+      box-shadow 300ms ease,
+      outline-color 300ms ease;
+  }
+
+  /* Opt-out for elements that manage their own transitions
+   * (animations, transforms, etc.) */
+  [data-no-color-transition] *,
+  [data-no-color-transition] *::before,
+  [data-no-color-transition] *::after {
+    transition: none;
   }
 }
 

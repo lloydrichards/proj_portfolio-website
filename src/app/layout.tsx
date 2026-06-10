@@ -12,6 +12,7 @@ import { Footer } from "@/components/organism/footer";
 import { Navbar } from "@/components/organism/navbar";
 import { siteMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
+import { PaletteProvider } from "@/providers/palette-provider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -61,6 +62,11 @@ export default function RootLayout({
       className={`${roboto_mono.variable} ${josefin_sans.variable} ${fira_mono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <Script id="palette-init" strategy="beforeInteractive">
+          {`(function(){try{var p=localStorage.getItem("palette");if(p&&p!=="standard")document.documentElement.dataset.theme=p}catch(e){}})()`}
+        </Script>
+      </head>
       <Script
         defer
         src="https://umami.lloydrichards.dev/script.js"
@@ -68,19 +74,21 @@ export default function RootLayout({
       />
       <body className={cn("min-h-dvh w-full")} suppressHydrationWarning>
         <ThemeProvider attribute="class" enableSystem>
-          <TooltipProvider>
-            <div
-              className={cn(
-                "min-h-dvh w-full lg:max-w-6xl",
-                "mosaic-columns grid grid-flow-dense",
-                "mx-auto p-2",
-              )}
-            >
-              <Navbar />
-              {children}
-              <Footer />
-            </div>
-          </TooltipProvider>
+          <PaletteProvider>
+            <TooltipProvider>
+              <div
+                className={cn(
+                  "min-h-dvh w-full lg:max-w-6xl",
+                  "mosaic-columns grid grid-flow-dense",
+                  "mx-auto p-2",
+                )}
+              >
+                <Navbar />
+                {children}
+                <Footer />
+              </div>
+            </TooltipProvider>
+          </PaletteProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

@@ -92,7 +92,7 @@ const DateRangeSlider = React.forwardRef<HTMLDivElement, RangeSliderProps>(
           </SliderPrimitive.Track>
           {initialValue.map((timestamp, index) => (
             <React.Fragment key={`range-slider-thumb-${index}`}>
-              <SliderPrimitive.Thumb className="border-primary bg-background ring-offset-background focus-visible:ring-ring relative block h-4 w-4 rounded-full border-2 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
+              <SliderPrimitive.Thumb className="border-primary bg-background relative block h-4 w-4 rounded-full border-2 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
                 {label && (
                   <span
                     className={cn(

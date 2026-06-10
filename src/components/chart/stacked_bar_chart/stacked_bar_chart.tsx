@@ -76,9 +76,11 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
     (pos: SegmentPos): HTMLButtonElement | null => {
       const key = segmentGrid[pos.stackIdx]?.[pos.segIdx];
       if (!key) return null;
-      return containerRef.current?.querySelector<HTMLButtonElement>(
-        `[data-seg-key="${key}"]`,
-      ) ?? null;
+      return (
+        containerRef.current?.querySelector<HTMLButtonElement>(
+          `[data-seg-key="${key}"]`,
+        ) ?? null
+      );
     },
     [segmentGrid],
   );
@@ -102,8 +104,8 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
       stackIdx: Math.min(last.stackIdx, segmentGrid.length - 1),
       segIdx: Math.min(
         last.segIdx,
-        (segmentGrid[Math.min(last.stackIdx, segmentGrid.length - 1)]
-          ?.length ?? 1) - 1,
+        (segmentGrid[Math.min(last.stackIdx, segmentGrid.length - 1)]?.length ??
+          1) - 1,
       ),
     };
   }, [segmentGrid]);
@@ -283,7 +285,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                     data-seg-key={segKey}
                     tabIndex={-1}
                     aria-label={label}
-                    className="absolute rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="absolute rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
                     style={{
                       left,
                       top,

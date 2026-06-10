@@ -29,7 +29,7 @@ export const ThemeToggle = ({ className }: { className?: string }) => {
         <MoonIcon className="absolute size-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
         <span className="sr-only">Toggle theme</span>
       </TooltipTrigger>
-      <TooltipContent side="right">
+      <TooltipContent side="bottom">
         Toggle between light and dark theme
       </TooltipContent>
     </Tooltip>

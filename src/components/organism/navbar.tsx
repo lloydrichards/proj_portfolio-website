@@ -4,6 +4,7 @@ import { typefaceHeading3 } from "@/components/tokens/typeface";
 import { cn } from "@/lib/utils";
 import { navigationMenuTriggerStyle } from "../atom/navigation-menu";
 import { tileVariants } from "../atom/tile.variants";
+import { PaletteToggle } from "../molecule/palette-toggle";
 import { ThemeToggle } from "../molecule/theme-toggle";
 
 export const Navbar: React.FC = () => {
@@ -49,6 +50,7 @@ export const Navbar: React.FC = () => {
           <span className="hidden md:block">{route.label}</span>
         </Link>
       ))}
+      <PaletteToggle className={tileVariants({ size: "unset" })} />
       <ThemeToggle className={tileVariants({ size: "unset" })} />
     </header>
   );

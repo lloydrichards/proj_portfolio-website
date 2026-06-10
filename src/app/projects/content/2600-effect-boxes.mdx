@@ -1,0 +1,64 @@
+---
+id: 2600
+title: Effect Boxes
+date: 2026-04-29
+description: A functional layout system for terminal applications built with Effect.js. Create TUIs with composable boxes, ANSI styling, and reactive components.
+isFeatured: true
+category:
+  - DEVELOP
+image: /images/projects/2500/thumb_effect-boxes.webp
+href: https://effect-boxes.lloydrichards.dev/
+repo: https://github.com/lloydrichards/effect-boxes
+team: [["Lloyd Richards", "Developer"]]
+---
+
+`effect-boxes` was conceived out of the need for a better way to build TUIs in [Effect](https://effect.website/). I had explored a few existing libraries, but was struggling to find something clean and primitive that fit well with Effect's patterns. I wanted a system that let me compose text blocks, apply styles, and handle interactive updates without fighting the API.
+
+What started as a simple TypeScript port of Haskell's `Text.PrettyPrint.Boxes` (a [module](https://hackage.haskell.org/package/boxes-0.1.5/docs/Text-PrettyPrint-Boxes.html) for pretty-printing text in columns) quickly evolved into a more robust library with clearer module boundaries and a focus on real-world terminal layout challenges. I designed it to be flexible enough to support different rendering targets, from plain text to ANSI-styled output, and even HTML for documentation purposes.
+
+## Project Overview
+
+The core of `effect-boxes` is a tree-based layout system where you compose immutable text boxes horizontally and vertically, with configurable alignment. Rendering is deferred so the same layout tree can target plain text, ANSI, or HTML. A separate annotation layer handles styling and metadata without affecting layout dimensions, so composition logic stays pure regardless of the output target.
+
+I published it as a package with dedicated docs and a cleaner architecture across modules like `Box`, `Annotation`, `Layout`, `Renderer`, and `Reactive`. It now powers the custom prompt layouts and interactive states in [`stack-effect`](https://github.com/lloydrichards/stack-effect/tree/main/packages/tui).
+
+![](/images/projects/2500/nestselect.gif)
+
+## Challenges and Insights
+
+### Unicode Width Fidelity
+
+The hardest early challenge was rendering correctness, not visual design. Terminal layout breaks quickly when string width calculations are wrong, especially with emoji, East Asian characters, and ANSI escape sequences. I had to rework width handling so alignment and wrapping stayed stable with real-world text, not just ASCII-only examples.
+
+### Annotation and Renderer Abstraction
+
+Once basic layout worked, the next challenge was avoiding a one-off renderer. I needed a model where layout stayed pure and output-specific behavior lived in renderer implementations. The annotation system and renderer service split made that possible. The same layout tree can render as plain text, ANSI output, or HTML without rewriting composition logic.
+
+### Reactive Cursor Updates
+
+Interactive prompts introduced a different class of issues: cursor movement, partial redraws, and flicker. I used the `Reactive` annotation type to track cursor positions within the layout tree and update specific regions without full redraws. That made interactive flows feel much more stable in practice.
+
+I cover the deeper implementation details in the related lab writeups. This project page focuses on the architectural decisions and the production usage that came from them.
+
+![](/images/projects/2500/layout-demo.gif)
+
+## Key Learnings
+
+- Terminal UI work lives or dies on text measurement, and Unicode edge cases are not optional cleanup.
+- Separating layout composition from rendering concerns made the system easier to extend, test, and reuse across output targets.
+- Effect's service and layering patterns gave me a practical way to swap runtime behavior without rewriting layout code.
+
+## Impact
+
+`effect-boxes` moved past the experiment stage once it started powering the custom TUI components in [`stack-effect`](https://github.com/lloydrichards/stack-effect/tree/main/packages/tui).
+
+Beyond the package itself, it now serves as a reusable base for richer CLI interactions. It includes public documentation and a practical implementation path for teams using Effect in terminal-first tooling.
+
+It also changed how I design CLI UX systems. I now treat layout, rendering, and input flow as separate layers from the start, which makes later feature work significantly easier.
+
+![](/images/projects/2500/perlin-demo.gif)
+
+## Related Labs
+
+- [Lab 049 - how the library evolved](/labs/049-effect-boxes)
+- [Lab 061 - Prompt.custom component patterns](/labs/061-tui-components)

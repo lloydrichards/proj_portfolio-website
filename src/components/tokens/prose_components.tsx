@@ -31,7 +31,7 @@ export const proseComponents = {
     <h2
       className={cn(
         typefaceHeading2(),
-        "mt-10 scroll-m-20 first:mt-0",
+        "border-b pb-1 mt-10 scroll-m-20 first:mt-0",
         className,
       )}
       {...props}
@@ -162,21 +162,31 @@ export const proseComponents = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "bg-code text-code-foreground mb-4 overflow-x-auto rounded-md p-3 font-mono",
+        "bg-muted/50 text-foreground mb-4 overflow-x-auto rounded-md border border-border p-4 font-mono text-sm leading-relaxed",
         className,
       )}
       {...props}
     />
   ),
-  code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <code
-      className={cn(
-        "bg-code text-code-foreground px-1 font-mono text-sm",
-        className,
-      )}
-      {...props}
-    />
-  ),
+  code: ({
+    className,
+    ...props
+  }: React.HTMLAttributes<HTMLElement> & { "data-theme"?: string }) => {
+    // Code inside pre (from rehype-pretty-code) should not get inline pill styling
+    const isBlock = "data-theme" in props || "data-language" in props;
+    if (isBlock) {
+      return <code className={cn("font-mono text-sm", className)} {...props} />;
+    }
+    return (
+      <code
+        className={cn(
+          "bg-muted text-foreground rounded-sm px-1.5 py-0.5 font-mono text-[0.85em]",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
   figure: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <figure className={cn("my-6", className)} {...props} />
   ),

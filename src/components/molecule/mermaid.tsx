@@ -12,7 +12,7 @@ export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
     <MdxMermaid
       config={{
         theme: {
-          light: "dark",
+          light: "neutral",
           dark: "dark",
         },
       }}

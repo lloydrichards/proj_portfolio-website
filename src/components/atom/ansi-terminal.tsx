@@ -36,24 +36,26 @@ export const AnsiTerminal = ({
 }: AnsiTerminalProps) => (
   <div
     className={cn(
-      "my-6 overflow-hidden rounded-md border border-border shadow-lg bg-[#232131]",
+      "my-6 overflow-hidden rounded-md border border-border",
       className,
     )}
   >
     {/* Title bar */}
-    <div className="flex items-center gap-2 bg-code px-3 py-2 border-b border-border">
+    <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 border-b border-border/50">
       <div className="flex gap-1.5">
-        <span className="size-3 rounded-full bg-[#FF5F56]" />
-        <span className="size-3 rounded-full bg-[#FFBD2E]" />
-        <span className="size-3 rounded-full bg-[#27C93F]" />
+        <span className="size-2.5 rounded-full bg-[#FF5F56]" />
+        <span className="size-2.5 rounded-full bg-[#FFBD2E]" />
+        <span className="size-2.5 rounded-full bg-[#27C93F]" />
       </div>
       {title && (
-        <span className="ml-2 text-xs text-muted-foreground">{title}</span>
+        <span className="ml-2 text-xs font-medium text-muted-foreground">
+          {title}
+        </span>
       )}
     </div>
-    {/* Terminal body */}
+    {/* Terminal body — dark background required for ANSI color legibility */}
     <pre
-      className="overflow-x-auto bg-code p-4 text-sm leading-[1.3] text-code-foreground"
+      className="overflow-x-auto bg-[hsl(220_20%_12%)] p-4 text-sm leading-[1.3] text-slate-200"
       style={{
         ...vscodePalette,
         fontFamily:

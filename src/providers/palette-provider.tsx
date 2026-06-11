@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 
-export const PALETTES = ["standard", "nerdy"] as const;
+export const PALETTES = ["standard", "nerdy", "analog"] as const;
 export type Palette = (typeof PALETTES)[number];
 
 const STORAGE_KEY = "palette";
@@ -60,9 +60,12 @@ export function PaletteProvider({ children }: { children: React.ReactNode }) {
   });
 
   const setPalette = useCallback((next: Palette) => {
+    // Disable transitions during palette swap to prevent intermediate
+    // blended color states (palette changes swap many variables at once).
     const enableTransitions = disableTransitions();
     setPaletteState(next);
     applyPalette(next);
+    enableTransitions();
 
     try {
       if (next === DEFAULT_PALETTE) {
@@ -71,8 +74,6 @@ export function PaletteProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem(STORAGE_KEY, next);
       }
     } catch {}
-
-    enableTransitions();
   }, []);
 
   // Sync attribute on mount (covers hydration mismatch edge case)

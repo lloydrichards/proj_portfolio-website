@@ -147,7 +147,9 @@ const CVPage = async ({
           </ul>
         </section>
         <section>
-          <h2 className={typefaceHeading2()}>Executive Summary</h2>
+          <h2 className={typefaceHeading2("border-b pb-1")}>
+            Executive Summary
+          </h2>
           <p className={typefaceBody("mt-2")}>
             Multidisciplinary Fullstack Engineer with 6+ years of experience
             building award-winning, data-rich web applications for public sector
@@ -171,7 +173,9 @@ const CVPage = async ({
           </ul>
         </section>
         <section>
-          <h2 className={typefaceHeading2()}>Technical Skills</h2>
+          <h2 className={typefaceHeading2("border-b pb-1")}>
+            Technical Skills
+          </h2>
 
           <ul className={typefaceBody()}>
             <li className="my-2">
@@ -193,7 +197,7 @@ const CVPage = async ({
           </ul>
         </section>
         <section>
-          <h2 className={typefaceHeading2()}>Experience</h2>
+          <h2 className={typefaceHeading2("border-b pb-1")}>Experience</h2>
           {mode === "edit" && formOptions ? (
             <CvSectionEditable
               occupations={A.map(workExperience, serialize)}
@@ -211,7 +215,7 @@ const CVPage = async ({
           )}
         </section>
         <section>
-          <h2 className={typefaceHeading2()}>Key Projects</h2>
+          <h2 className={typefaceHeading2("border-b pb-1")}>Key Projects</h2>
           <ul className={typefaceBody()}>
             {projects.map((project) => (
               <li className="my-4" key={project.id}>
@@ -227,7 +231,7 @@ const CVPage = async ({
           </ul>
         </section>
         <section>
-          <h2 className={typefaceHeading2()}>Education</h2>
+          <h2 className={typefaceHeading2("border-b pb-1")}>Education</h2>
           {mode === "edit" && formOptions ? (
             <CvSectionEditable
               occupations={A.map(education, serialize)}
@@ -247,7 +251,9 @@ const CVPage = async ({
           )}
         </section>
         <section>
-          <h2 className={typefaceHeading2()}>Community & Volunteering</h2>
+          <h2 className={typefaceHeading2("border-b pb-1")}>
+            Community & Volunteering
+          </h2>
           {mode === "edit" && formOptions ? (
             <CvSectionEditable
               occupations={A.map(volunteering, serialize)}

@@ -1,3 +1,15 @@
+/* ─── Dual-theme switching (shiki multi-theme) ─────────────────────── */
+/* Shiki stores both themes as CSS variables on each span.
+   We apply the correct one based on the active color scheme. */
+code[data-theme*=" "] span {
+  color: var(--shiki-light) !important;
+}
+
+.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark) !important;
+}
+
+/* ─── Line numbers ─────────────────────────────────────────────────── */
 pre > code {
   counter-reset: line;
 }
@@ -9,36 +21,49 @@ code[data-line-numbers] {
 code[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
-  @apply text-accent mr-4 inline-block w-4 text-right;
+  @apply mr-4 inline-block w-4 text-right tabular-nums text-muted-foreground/50;
 }
 
+/* ─── Line spacing ─────────────────────────────────────────────────── */
 pre [data-line]:not([data-highlighted-line]) {
-  @apply border-l-2 border-l-transparent px-2 py-0.5;
+  @apply px-4 py-0.5;
 }
 
+/* ─── Highlighted lines ────────────────────────────────────────────── */
 [data-highlighted-line] {
-  @apply bg-accent/20 border-l-primary border-l-2 px-2 py-0.5;
+  @apply bg-foreground/[0.06] px-4 py-0.5;
 }
 
+.dark [data-highlighted-line] {
+  @apply bg-white/[0.08];
+}
+
+/* ─── Highlighted chars ────────────────────────────────────────────── */
 [data-highlighted-chars] {
-  @apply bg-accent/20 rounded;
+  @apply bg-foreground/[0.06] rounded-sm px-1;
 }
 
+.dark [data-highlighted-chars] {
+  @apply bg-white/10;
+}
+
+/* ─── Semantic line highlights ─────────────────────────────────────── */
 [data-highlighted-line-id="success"] {
-  @apply border-l-success bg-success/20 !text-success;
+  @apply bg-success/10 !text-success;
 }
 [data-highlighted-line-id="warning"] {
-  @apply border-l-warning bg-warning/20 !text-warning;
+  @apply bg-warning/10 !text-warning;
 }
 [data-highlighted-line-id="destructive"] {
-  @apply border-l-destructive bg-destructive/20 !text-destructive;
+  @apply bg-destructive/10 !text-destructive;
 }
 [data-highlighted-line-id="info"] {
-  @apply border-l-info bg-info/20 !text-info;
+  @apply bg-info/10 !text-info;
 }
 
+/* ─── Semantic char highlights ─────────────────────────────────────── */
 [data-chars-id] {
-  @apply border-b-1 px-1 py-0.5 shadow-none;
+  @apply border-b px-1 py-0.5 shadow-none;
 }
 
 [data-chars-id] span {
@@ -46,27 +71,33 @@ pre [data-line]:not([data-highlighted-line]) {
 }
 
 [data-chars-id="success"] {
-  @apply border-b-success bg-success/20 !text-success font-bold;
+  @apply border-b-success bg-success/10 !text-success font-bold;
 }
 [data-chars-id="warning"] {
-  @apply border-b-warning bg-warning/20 !text-warning font-bold;
+  @apply border-b-warning bg-warning/10 !text-warning font-bold;
 }
 [data-chars-id="destructive"] {
-  @apply border-b-destructive bg-destructive/20 !text-destructive font-bold;
+  @apply border-b-destructive bg-destructive/10 !text-destructive font-bold;
 }
 [data-chars-id="info"] {
-  @apply border-b-info bg-info/20 !text-info font-bold;
+  @apply border-b-info bg-info/10 !text-info font-bold;
 }
 
+/* ─── Title bar (figcaption) ───────────────────────────────────────── */
 [data-rehype-pretty-code-title] {
-  @apply bg-accent text-accent-foreground rounded-t-lg px-3 py-2 text-sm font-semibold;
+  @apply bg-muted/50 text-muted-foreground border-b border-border/50 px-4 py-2 text-xs font-medium tracking-wide;
 }
 
-figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
-  pre {
-  @apply !rounded-t-none;
+/* ─── Code figure container ────────────────────────────────────────── */
+figure[data-rehype-pretty-code-figure] {
+  @apply my-6 overflow-hidden rounded-md border border-border;
 }
 
+figure[data-rehype-pretty-code-figure] pre {
+  @apply !mb-0 !rounded-none !border-0 pt-3;
+}
+
+/* ─── Anchor links ─────────────────────────────────────────────────── */
 .subheading-anchor {
   opacity: 0;
   transition: opacity 0.2s;

@@ -27,7 +27,13 @@ export class MDXCompiler extends Context.Service<MDXCompiler>()(
                     rehypeSlug,
                     [
                       rehypePrettyCode,
-                      { keepBackground: false, theme: "synthwave-84" },
+                      {
+                        keepBackground: false,
+                        theme: {
+                          light: "github-light",
+                          dark: "synthwave-84",
+                        },
+                      },
                     ],
                     [
                       rehypeAutolinkHeadings,

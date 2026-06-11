@@ -1,3 +1,18 @@
 div.mermaid {
-  @apply bg-code text-code-foreground my-4 flex justify-center overflow-x-auto rounded-md p-3;
+  @apply my-6 flex justify-center overflow-x-auto rounded-md border border-border bg-muted/50 p-4 text-foreground;
+}
+
+.dark div.mermaid {
+  @apply bg-muted/30;
+}
+
+/* Override mermaid SVG background to be transparent (we control bg via container) */
+div.mermaid svg {
+  background: transparent !important;
+}
+
+/* In dark mode, invert the diagram for legibility since mermaid "neutral" theme
+   renders dark text on light nodes. The hue-rotate preserves color meaning. */
+.dark div.mermaid svg {
+  filter: invert(0.88) hue-rotate(180deg);
 }

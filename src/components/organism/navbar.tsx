@@ -32,7 +32,7 @@ export const Navbar: React.FC = () => {
       <Link
         href="/"
         className={typefaceHeading3(
-          "col-span-3 mt-0 overflow-clip md:col-span-6 lg:col-span-6",
+          "text-lg flex items-center md:text-2xl col-span-2 mt-0 overflow-clip md:col-span-6 lg:col-span-6",
         )}
       >
         lloydrichards.dev

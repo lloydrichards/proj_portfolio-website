@@ -12,6 +12,8 @@ export const tileVariants = cva("bg-card relative rounded-md", {
         "col-span-2 row-span-2 md:col-span-4 md:row-span-3 lg:col-span-6 lg:row-span-4",
       "box-md":
         "col-span-8 row-span-4 md:col-span-8 md:row-span-4 lg:col-span-12 lg:row-span-6",
+      "full-xs":
+        "col-span-full row-span-1 md:col-span-full md:row-span-1 lg:col-span-full lg:row-span-1",
       "full-sm":
         "col-span-full row-span-3 md:col-span-full md:row-span-4 lg:col-span-full lg:row-span-4",
       "full-md":

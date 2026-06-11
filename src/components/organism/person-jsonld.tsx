@@ -34,11 +34,5 @@ export const PersonJsonLd = () => {
     },
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD script for SEO
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+  return <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>;
 };

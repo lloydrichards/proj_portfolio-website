@@ -1,11 +1,12 @@
 "use client";
 
 import { HexagonIcon, PenToolIcon, TerminalIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import {
-  type Palette,
   PALETTES,
+  type Palette,
   usePalette,
 } from "@/providers/palette-provider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../atom/tooltip";
@@ -21,6 +22,9 @@ const PALETTE_META: Record<
 
 export const PaletteToggle = ({ className }: { className?: string }) => {
   const { palette, setPalette } = usePalette();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const cyclePalette = () => {
     const currentIndex = PALETTES.indexOf(palette);
@@ -28,7 +32,10 @@ export const PaletteToggle = ({ className }: { className?: string }) => {
     setPalette(PALETTES[nextIndex]);
   };
 
-  const nextPalette = PALETTES[(PALETTES.indexOf(palette) + 1) % PALETTES.length];
+  // Use "standard" during SSR/hydration to match server render
+  const activePalette = mounted ? palette : "standard";
+  const nextPalette =
+    PALETTES[(PALETTES.indexOf(activePalette) + 1) % PALETTES.length];
 
   return (
     <Tooltip>
@@ -46,7 +53,7 @@ export const PaletteToggle = ({ className }: { className?: string }) => {
       >
         {PALETTES.map((p) => {
           const { icon: Icon } = PALETTE_META[p];
-          const isActive = palette === p;
+          const isActive = activePalette === p;
           return (
             <Icon
               key={p}

@@ -1,15 +1,14 @@
 import { Effect, Option, Schema } from "effect";
-import { Briefcase, FlaskConical, Star } from "lucide-react";
+import { Briefcase, FlaskConical, GitBranch, Star } from "lucide-react";
 import { ExpandableTile } from "@/components/atom/expandable-tile";
 import { Tile } from "@/components/atom/tile";
 import { TileExpandButton } from "@/components/atom/tile-expand-button";
-import SvgGithub from "@/components/icons/github";
 import { GitHubCommitCard } from "@/components/molecule/github_commit_card";
-import { KPICard } from "@/components/molecule/kpi_card";
+import { KPIStrip } from "@/components/molecule/kpi_strip";
 import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { SkillCard } from "@/components/molecule/skill_card";
-import { ThemeToggle } from "@/components/molecule/theme-toggle";
+import { ThemeSwitcherTile } from "@/components/molecule/theme-switcher-tile";
 import { Logo } from "@/components/organism/logo";
 import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
@@ -75,65 +74,58 @@ const HomePage = async () => {
       <PersonJsonLd />
       <Mosaic>
         <Tile
-          size="square-md"
-          className="bg-background overflow-clip group grid items-center"
+          size="unset"
+          className="col-span-4 row-span-4 md:col-span-4 md:row-span-5 lg:col-span-6 lg:row-span-6 bg-background overflow-clip group flex justify-center items-center"
         >
           <Logo className="text-primary scale-110 transition-transform hover:scale-115" />
         </Tile>
+        {/* Compact stat strip */}
+        <Tile size="full-xs">
+          <KPIStrip
+            stats={[
+              {
+                label: "Projects",
+                value: allPortfolioProjects.length,
+                icon: <Briefcase className="size-full" />,
+              },
+              {
+                label: "Labs",
+                value: allLabs.length,
+                icon: <FlaskConical className="size-full" />,
+              },
+              {
+                label: "Repos",
+                value: githubStats.repos,
+                icon: <GitBranch className="size-full" />,
+              },
+              {
+                label: "Stars",
+                value: githubStats.stars,
+                icon: <Star className="size-full" />,
+              },
+            ]}
+          />
+        </Tile>
         <Tile
           size="unset"
-          className="col-span-full row-span-1 grid items-center px-8 md:col-span-12 md:row-span-2 lg:col-span-16 lg:row-span-2"
+          className="col-span-full row-span-1 grid items-end px-4 pb-1 md:col-span-12 md:row-span-2 md:px-8 lg:col-span-18 lg:row-span-2"
         >
           <h1 className={typefaceHeading1("mt-0")}>Hello, I&apos;m Lloyd</h1>
         </Tile>
         <Tile
           size="unset"
-          className="col-span-full row-span-4 grid items-center p-4 md:col-span-12 lg:col-span-18 lg:row-span-4"
+          className="col-span-full row-span-3 grid items-start p-4 md:col-span-12 md:row-span-3 lg:col-span-18 lg:row-span-4"
         >
           <p className={typefaceBody()}>
-            This website is a personal portfolio and lab space where I can
-            showcase my projects, experiment with new ideas, and share my
-            thoughts and experiences through blogging. Please feel free to
-            explore my recent projects, read my lab and blog posts, or connect
-            with me through social media.
+            Interaction engineer, building award-winning data platforms and
+            interactive visualizations. This site runs on three complete themes
+            to prove the system works.
           </p>
         </Tile>
 
-        {/* KPI Cards Section - Grouped together for better visual cohesion */}
-        <Tile size="box-sm">
-          <KPICard
-            label="Projects"
-            value={allPortfolioProjects.length}
-            subtitle="Total Articles"
-            icon={<Briefcase className="size-5" />}
-          />
-        </Tile>
-
-        <Tile size="box-sm">
-          <KPICard
-            label="Labs"
-            value={allLabs.length}
-            subtitle="Total Published"
-            icon={<FlaskConical className="size-5" />}
-          />
-        </Tile>
-
-        <Tile size="box-sm">
-          <KPICard
-            label="Github"
-            value={githubStats.repos}
-            subtitle="Total Repos"
-            icon={<SvgGithub className="size-5" />}
-          />
-        </Tile>
-
-        <Tile size="box-sm">
-          <KPICard
-            label="GitHub"
-            value={githubStats.stars}
-            subtitle="Total Stars"
-            icon={<Star className="size-5" />}
-          />
+        {/* Theme Switcher Tile */}
+        <Tile size="square-md">
+          <ThemeSwitcherTile />
         </Tile>
 
         {/* Projects Section */}

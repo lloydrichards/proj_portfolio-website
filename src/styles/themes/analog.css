@@ -1,0 +1,271 @@
+/* Analog Theme: The Field Notebook
+ *
+ * Warm sepia-tinted neutrals, burnt sienna primary, deep indigo secondary.
+ * Light mode is native (cream paper, ink, sunlit workspace).
+ * Dark mode becomes "writing at night" (warm amber undertones, lamplight).
+ * Borders soften or disappear; depth through warmth shifts.
+ * Grid breathes more (wider gap), corners round further (organic forms).
+ * Typography swaps: Gabarito for display (specimen-label energy),
+ * Karla for body (pencil-on-graph-paper warmth).
+ *
+ * Structural divergence from standard:
+ * - Larger radius (12px) — organic, hand-drawn feeling
+ * - Dual proportional families (Gabarito display + Karla body)
+ * - Wider grid gap (0.75rem) — breathing room, white space as material
+ * - Softer borders (hairline, warm-tinted, or absent)
+ * - Warmer shadows (subtle, warm-toned, like paper edge)
+ * - Lowercase headings with generous letter-spacing (field label style)
+ * - Custom selection in pencil-yellow
+ * - Visible dot-grid background texture on page surface
+ */
+
+:root[data-theme="analog"] {
+  /* === STRUCTURAL TOKENS === */
+
+  /* Organic corners: hand-drawn shapes aren't angular */
+  --radius: 12px;
+
+  /* Typography swap: warm proportional families.
+   * Gabarito for display/headings (specimen-label, felt-tip warmth).
+   * Karla for body (humanist sans, pencil-on-grid-paper). */
+  --font-serif: var(--font-gabarito);
+  --font-sans: var(--font-karla);
+
+  /* Breathing grid: field notebooks have generous margins */
+  --mosaic-gap: 0.75rem;
+
+  /* === COLOR PALETTE === */
+
+  /* Palette: Mono (warm sepia/cream neutrals) */
+  --color-mono-050: hsl(40 30% 97%);
+  --color-mono-100: hsl(38 28% 93%);
+  --color-mono-200: hsl(36 22% 85%);
+  --color-mono-300: hsl(34 18% 72%);
+  --color-mono-400: hsl(32 14% 55%);
+  --color-mono-500: hsl(30 12% 42%);
+  --color-mono-600: hsl(28 14% 32%);
+  --color-mono-700: hsl(26 18% 24%);
+  --color-mono-800: hsl(24 22% 16%);
+  --color-mono-900: hsl(22 26% 11%);
+  --color-mono-950: hsl(20 30% 7%);
+
+  /* Palette: Primary (burnt sienna / terracotta) */
+  --color-primary-050: hsl(18 60% 96%);
+  --color-primary-100: hsl(16 55% 90%);
+  --color-primary-200: hsl(14 50% 78%);
+  --color-primary-300: hsl(12 48% 64%);
+  --color-primary-400: hsl(10 52% 52%);
+  --color-primary-500: hsl(8 58% 44%);
+  --color-primary-600: hsl(6 60% 36%);
+  --color-primary-700: hsl(4 55% 30%);
+  --color-primary-800: hsl(2 48% 24%);
+  --color-primary-900: hsl(0 42% 18%);
+  --color-primary-950: hsl(358 38% 12%);
+
+  /* Palette: Secondary (deep indigo / ink) */
+  --color-secondary-050: hsl(230 35% 96%);
+  --color-secondary-100: hsl(228 32% 90%);
+  --color-secondary-200: hsl(226 28% 78%);
+  --color-secondary-300: hsl(224 26% 64%);
+  --color-secondary-400: hsl(222 30% 52%);
+  --color-secondary-500: hsl(220 38% 42%);
+  --color-secondary-600: hsl(218 42% 34%);
+  --color-secondary-700: hsl(216 40% 28%);
+  --color-secondary-800: hsl(214 38% 22%);
+  --color-secondary-900: hsl(212 35% 16%);
+  --color-secondary-950: hsl(210 32% 10%);
+
+  /* === SEMANTIC UI COLORS === */
+
+  --color-ui-error: light-dark(hsl(4 65% 48%), hsl(4 58% 58%));
+  --color-ui-warning: light-dark(hsl(36 80% 48%), hsl(38 72% 56%));
+  --color-ui-success: light-dark(hsl(148 45% 38%), hsl(150 40% 48%));
+  --color-ui-info: light-dark(hsl(220 38% 42%), hsl(222 42% 62%));
+  --color-ui-code: hsl(24 22% 16%);
+
+  /* === FUNCTIONAL COLORS === */
+
+  --background: light-dark(var(--color-mono-050), var(--color-mono-900));
+  --foreground: light-dark(var(--color-mono-900), var(--color-mono-100));
+
+  --primary: light-dark(var(--color-primary-600), var(--color-primary-400));
+  --primary-foreground: light-dark(
+    var(--color-mono-050),
+    var(--color-mono-950)
+  );
+
+  --secondary: light-dark(
+    var(--color-secondary-500),
+    var(--color-secondary-400)
+  );
+  --secondary-foreground: light-dark(
+    var(--color-mono-050),
+    var(--color-mono-100)
+  );
+
+  /* Cards float slightly above the warm surface */
+  --card: light-dark(var(--color-mono-100), var(--color-mono-800));
+  --card-foreground: var(--foreground);
+
+  --popover: light-dark(var(--color-mono-100), var(--color-mono-700));
+  --popover-foreground: var(--foreground);
+
+  --muted: light-dark(var(--color-mono-200), var(--color-mono-700));
+  --muted-foreground: light-dark(var(--color-mono-500), var(--color-mono-400));
+
+  /* Accent: warm primary tint for hovers and interactive states */
+  --accent: light-dark(var(--color-primary-050), var(--color-primary-950));
+  --accent-foreground: var(--foreground);
+
+  --destructive: var(--color-ui-error);
+  --destructive-foreground: light-dark(
+    var(--color-mono-050),
+    var(--color-mono-950)
+  );
+
+  --warning: var(--color-ui-warning);
+  --warning-foreground: light-dark(
+    var(--color-mono-950),
+    var(--color-mono-950)
+  );
+
+  --success: var(--color-ui-success);
+  --success-foreground: light-dark(
+    var(--color-mono-050),
+    var(--color-mono-950)
+  );
+
+  --info: var(--color-ui-info);
+  --info-foreground: light-dark(var(--color-mono-050), var(--color-mono-050));
+
+  /* Code: warm parchment tone, ink-on-paper */
+  --code: light-dark(var(--color-mono-200), var(--color-mono-800));
+  --code-foreground: light-dark(var(--color-mono-800), var(--color-mono-200));
+
+  /* Borders: warm, subtle, like pencil lines on paper */
+  --border: light-dark(var(--color-mono-200), var(--color-mono-700));
+  --input: light-dark(var(--color-mono-200), var(--color-mono-700));
+  --ring: light-dark(var(--color-primary-400), var(--color-primary-500));
+
+  /* === CHART COLORS (naturalist / earth-toned) === */
+
+  --chart-1: light-dark(hsl(8 58% 44%), hsl(10 52% 56%));
+  --chart-2: light-dark(hsl(148 45% 38%), hsl(150 40% 50%));
+  --chart-3: light-dark(hsl(220 38% 42%), hsl(222 42% 58%));
+  --chart-4: light-dark(hsl(36 65% 48%), hsl(38 60% 56%));
+  --chart-5: light-dark(hsl(280 30% 45%), hsl(282 28% 58%));
+  --chart-6: light-dark(hsl(170 40% 36%), hsl(172 38% 48%));
+  --chart-7: light-dark(hsl(50 55% 42%), hsl(52 50% 52%));
+  --chart-8: light-dark(hsl(340 40% 45%), hsl(342 38% 58%));
+  --chart-9: light-dark(hsl(100 35% 38%), hsl(102 32% 48%));
+  --chart-10: light-dark(hsl(25 60% 42%), hsl(27 55% 54%));
+}
+
+/* === STRUCTURAL OVERRIDES (require selectors beyond :root) === */
+
+/* Typography: field notebook style — lowercase headings, generous spacing */
+[data-theme="analog"] h1,
+[data-theme="analog"] h2,
+[data-theme="analog"] h3,
+[data-theme="analog"] h4,
+[data-theme="analog"] h5,
+[data-theme="analog"] h6 {
+  font-family: var(--font-gabarito), system-ui, sans-serif;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+/* Body text uses Karla for warmth */
+[data-theme="analog"] p,
+[data-theme="analog"] li,
+[data-theme="analog"] td,
+[data-theme="analog"] th,
+[data-theme="analog"] label,
+[data-theme="analog"] span,
+[data-theme="analog"] div {
+  font-family: var(--font-karla), system-ui, sans-serif;
+}
+
+/* Code stays monospace (Fira Mono) — the contrast is intentional */
+[data-theme="analog"] code,
+[data-theme="analog"] pre,
+[data-theme="analog"] [data-slot="code"] {
+  font-family: var(--font-fira-mono), monospace;
+}
+
+/* Card labels/metadata: warm proportional, slightly spaced */
+[data-theme="analog"] [data-slot="card-header"] {
+  font-family: var(--font-karla), system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* Badges/tags: proportional font, no small-caps (too cramped at 12px) */
+[data-theme="analog"] [data-slot="badge"] {
+  font-family: var(--font-karla), system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  font-variant: normal;
+  text-transform: lowercase;
+}
+
+/* Softer card treatment: warm shadow instead of none */
+[data-theme="analog"] [data-slot="card"],
+[data-theme="analog"] .bg-card {
+  box-shadow:
+    0 1px 3px hsl(30 20% 30% / 0.06),
+    0 1px 2px hsl(30 20% 30% / 0.04);
+  border: 1px solid light-dark(hsl(36 22% 85% / 0.8), hsl(26 18% 24% / 0.6));
+}
+
+/* Selection: pencil-yellow highlight */
+[data-theme="analog"] ::selection {
+  background: hsl(48 80% 60% / 0.35);
+  color: inherit;
+}
+
+/* Scrollbar: warm, muted */
+[data-theme="analog"] {
+  scrollbar-color: hsl(30 20% 50% / 0.3) transparent;
+  scrollbar-width: thin;
+}
+
+[data-theme="analog"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="analog"] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-theme="analog"] ::-webkit-scrollbar-thumb {
+  background: hsl(30 20% 50% / 0.3);
+  border-radius: 12px;
+}
+
+[data-theme="analog"] ::-webkit-scrollbar-thumb:hover {
+  background: hsl(30 20% 50% / 0.5);
+}
+
+/* Dot-grid background texture: graph paper feel on the page surface */
+[data-theme="analog"] body {
+  background-image: radial-gradient(
+    circle,
+    light-dark(hsl(30 15% 70% / 0.2), hsl(30 15% 40% / 0.08)) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+/* Nav tiles: slightly more rounded, warmer hover */
+[data-theme="analog"] nav button,
+[data-theme="analog"] nav a {
+  border-radius: 12px;
+}
+
+/* Inline code: warm paper pill */
+[data-theme="analog"] :not(pre) > code {
+  background: light-dark(hsl(36 22% 85% / 0.5), hsl(24 22% 20% / 0.5));
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+}

@@ -1,4 +1,10 @@
-import { Fira_Mono, Josefin_Sans, Roboto_Mono } from "next/font/google";
+import {
+  Fira_Mono,
+  Gabarito,
+  Josefin_Sans,
+  Karla,
+  Roboto_Mono,
+} from "next/font/google";
 
 export const josefin_sans = Josefin_Sans({
   subsets: ["latin"],
@@ -17,4 +23,16 @@ export const fira_mono = Fira_Mono({
   weight: ["400", "500", "700"],
   display: "swap",
   variable: "--font-fira-mono",
+});
+
+export const gabarito = Gabarito({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-gabarito",
+});
+
+export const karla = Karla({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-karla",
 });

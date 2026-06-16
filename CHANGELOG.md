@@ -1,3 +1,32 @@
+# [1.20.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.19.0...v1.20.0) (2026-06-16)
+
+
+### Content
+
+* add 2600 project ([ea1f15e](https://github.com/lloydrichards/proj_portfolio-website/commit/ea1f15e70e66bb80a5e23e5076737130007c65e9))
+
+
+### Features
+
+* add analog theme ([ac442d0](https://github.com/lloydrichards/proj_portfolio-website/commit/ac442d0ec63595758e15e1cd0e5609fe306fa0c2))
+* add ExpandableTile component ([21b9c34](https://github.com/lloydrichards/proj_portfolio-website/commit/21b9c34604c778fae05f2207d3f315db179e1e98))
+* add multi-theme toggle ([6df60ec](https://github.com/lloydrichards/proj_portfolio-website/commit/6df60ec17feca259d231d4d7e4354dba431bade8))
+* add nerdy terminal theme ([72f166c](https://github.com/lloydrichards/proj_portfolio-website/commit/72f166c4743ab9f3f63e473acacfecacb4ed972e))
+
+
+### Fixed
+
+* **a11y:** accessibility of data viz keyboard navigation ([275242c](https://github.com/lloydrichards/proj_portfolio-website/commit/275242c3271a28c6d6d7ee5d265ee2d2cc908dcb))
+
+
+### Improved
+
+* animate the grid ([2781d4b](https://github.com/lloydrichards/proj_portfolio-website/commit/2781d4bd9dda34bbfc72470cbf53c25b2f7c8c0a))
+* better position the tiles on the home page ([6de9b32](https://github.com/lloydrichards/proj_portfolio-website/commit/6de9b32ef6892e4b09fa57d512da12faec124192))
+* resizable charts ([73e0c71](https://github.com/lloydrichards/proj_portfolio-website/commit/73e0c7134dd191c5556fbe9348c752e3dae6f4ef))
+* use container query for LabCard ([088a0ce](https://github.com/lloydrichards/proj_portfolio-website/commit/088a0ce479eee2457faf757d447023a24eb27fc3))
+* use container query for ProjectCard ([3330047](https://github.com/lloydrichards/proj_portfolio-website/commit/3330047ddc5dc15175205d5791a0478e3441b368))
+
 # [1.19.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.18.0...v1.19.0) (2026-05-26)
 
 

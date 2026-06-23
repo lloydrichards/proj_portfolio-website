@@ -1,0 +1,74 @@
+---
+id: 2601
+title: SME Policy Index
+date: 2026-05-12
+description:
+  Multi-platform data visualization system extending the Competitiveness Outlook
+  design language. Built unified theming architecture using design tokens and
+  monorepo structure for backwards compatibility.
+isFeatured: true
+category:
+  - DEVELOP
+image: /images/projects/2601/thumb_sme-policy-index.webp
+href: https://smepi-westernbalkans-competitiveness.oecd.org/
+team:
+  [
+    ["Lloyd Richards", "Developer"],
+    ["Mevion Famos", "Project Manager"],
+    ["Tania Boa", "Designer"],
+  ]
+---
+
+Building on the success of the [OECD Competitiveness Outlook Data Hub](./2401-competitiveness-outlook-data-hub), the SME Policy Index platform extends the same proven design and data visualization language to a new dataset analyzing small and medium enterprise policies across the Western Balkans and Türkiye. Launched at a high-level regional event in Montenegro this year, the platform represents a significant evolution from single-platform development to a scalable, multi-themed ecosystem that serves multiple OECD regional programs simultaneously.
+
+![](/images/projects/2601/sme-policy-index-01.png)
+
+## Project Overview
+
+The SME Policy Index platform required more than just adapting existing components to new data. The OECD needed three distinct but interconnected applications: the new SME Policy Index, the existing Competitiveness Outlook Data Hub that policymakers actively rely on, and a unified landing page that connects both platforms plus any more in the future. Each platform needed its own visual identity while maintaining the quality users expect from OECD digital tools.
+
+The technical challenges were clear: how do we evolve the architecture to support multiple platforms without disrupting the existing Competitiveness Outlook platform? The solution required rethinking how we structure, share, and theme components across an ecosystem rather than maintaining separate codebases.
+
+## Challenges and Insights
+
+### Multi-Theme Architecture
+
+The most significant architectural decision was implementing a comprehensive design token system. Rather than hard-coding colors and styles into components, we created a three layered semantic token system that allows each platform to define its own visual identity while sharing the same underlying component library. This approach ensures that components remain consistent in structure and behavior, while their appearance can be completely customized for each platform.
+
+This approach used CSS variables as the foundation, allowing each platform to define its own theme while sharing the same component library. When a button needs a primary color, it references a functional token like `--color-surface-primary`, which each theme maps to its own palette. The SME Policy Index could have a completely different color scheme than the Competitiveness Outlook platform, but both use the exact same button component.
+
+![](/images/projects/2601/sme-policy-index-02.png)
+
+### Backwards Compatibility
+
+The existing Competitiveness Outlook Data Hub serves policymakers across the Western Balkans who depend on it for critical decisions around EU alignment. Breaking this platform while building the new one was not an option. Our monorepo architecture became essential for managing this constraint.
+
+By organizing all three applications in a shared repository with common component packages, we could improve and extend functionality across all platforms simultaneously while ensuring the existing platform remained stable. Bug fixes and performance improvements to shared components automatically benefited both platforms, while theme-specific customizations stayed isolated.
+
+This structure also enabled rapid development of the unified landing page, which needed to incorporate elements from both platforms while maintaining its own identity as an entry point to the OECD's regional policy analysis tools.
+
+### Unified Landing Experience
+
+Creating the landing page presented unique design challenges. It needed to bridge two distinct datahubs while helping users understand which platform serves their needs. The landing page uses shared components from both platforms, demonstrating the flexibility of the design token system by blending visual elements from each while maintaining its own cohesive identity.
+
+By using data-driven attributes along with the design token system, we were able to create islands of themed components that visually connect the two platforms while providing a clear and intuitive navigation experience. This approach ensures that users can easily transition between platforms without confusion, reinforcing the OECD's commitment to user-centered design.
+
+![](/images/projects/2601/sme-policy-index-03.png)
+
+## Key Learnings
+
+- **Design Systems at Scale**: Planning for multiple themes from the start, rather than trying to retrofit theming later, fundamentally changes how you architect components. Every color, spacing, and typography decision needs to be abstracted through tokens.
+
+- **Monorepo Strategy**: Shared component libraries accelerate development and ensure consistency, but they require careful thought about dependency management and deployment strategies. The benefit of fixing a bug once and having all platforms improve is significant.
+
+- **Stakeholder Communication**: Explaining technical architecture decisions to OECD stakeholders required translating concepts like design tokens and monorepo structure into benefits they care about: faster delivery, lower maintenance costs, and flexibility for future regional programs.
+
+- **Launch Coordination**: Delivering a platform for a high-profile international launch event meant coordinating technical milestones with event planning, stakeholder reviews, and content preparation. Technical excellence matters little if the platform isn't ready when policymakers gather.
+
+## Impact
+
+The SME Policy Index successfully launched at the regional high-level event in Montenegro, where we had the opportunity to present the platform directly to politicians and stakeholders from across the Western Balkans and Türkiye. The platform provides accessible insights into SME policies, helping policymakers identify opportunities for improvement and regional cooperation.
+
+More importantly, the architectural foundation we built extends beyond these two platforms. The design token system and monorepo structure create a template for future OECD regional analysis platforms. When the next regional program needs a data visualization platform, the development time will be significantly reduced because the hard architectural problems have already been solved.
+
+The success of this project demonstrates that thoughtful technical architecture directly enables policy impact. By investing in systems that scale, we created tools that serve not just current needs but future OECD initiatives across different regions and policy domains.

@@ -29,7 +29,7 @@ config:
     curve: monotoneX
 ---
 graph LR
-  U1((Upload))
+ U1((Upload))
   U2((Chat UI))
   
   P1(Prompt)
@@ -50,9 +50,9 @@ graph LR
   
   R([Response])
   
-  U2 --> P2 --> Chunk -.-> Embed --> V2 --> Retriever
+  U1 --> P2 --> Chunk -.-> Embed --> V2 --> Retriever
   
-  U1 --> P1 --> Embed --> V1 --> Retriever
+  U2 --> P1 --> Embed --> V1 --> Retriever
   P1 -.-> C
  
   Retriever --> C --> A --> R

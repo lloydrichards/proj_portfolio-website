@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 export const runtime = "nodejs";
 
-const LETTER_WIDTH_PX = 816;
+const LETTER_WIDTH_PX = 1350;
 const MIN_HEIGHT_PX = 1056;
 const MAX_HEIGHT_PX = 14_400;
 const PAGE_HEIGHT_BUFFER_PX = 160;

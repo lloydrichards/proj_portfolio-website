@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
       <Tile
         size="unset"
         outline={false}
-        className="col-span-4 grid items-center bg-transparent md:col-span-8 lg:col-span-12"
+        className="col-span-4 grid items-center bg-transparent md:col-span-12 lg:col-span-20"
       >
         lloydrichards.dev
       </Tile>

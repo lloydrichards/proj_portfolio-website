@@ -1,4 +1,5 @@
 import { Effect } from "effect";
+import { cvVariants } from "@/app/cv/data/variants";
 import { siteMetadata } from "@/lib/metadata";
 import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
@@ -18,6 +19,11 @@ export default async function sitemap() {
     lastModified: content.lastModified,
   }));
 
+  const cvRoutes = cvVariants.map((variant) => ({
+    url: `${siteMetadata.siteUrl}/cv/${variant.slug}`,
+    lastModified: new Date().toISOString(),
+  }));
+
   const routes = ["", "/about", "/projects", "/labs", "/timeline"].map(
     (route) => ({
       url: siteMetadata.siteUrl + route,
@@ -25,5 +31,5 @@ export default async function sitemap() {
     }),
   );
 
-  return [...routes, ...notes];
+  return [...routes, ...cvRoutes, ...notes];
 }

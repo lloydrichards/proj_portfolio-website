@@ -1,3 +1,7 @@
+import { existsSync, readdirSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
+import chromium from "@sparticuz/chromium-min";
 import { Option } from "effect";
 import { notFound } from "next/navigation";
 import { getCvVariantBySlug } from "../../data/variants";
@@ -13,6 +17,8 @@ const LETTER_WIDTH_PX = 816;
 const MIN_HEIGHT_PX = 1056;
 const MAX_HEIGHT_PX = 14_400;
 const PAGE_HEIGHT_BUFFER_PX = 160;
+const DEFAULT_CHROMIUM_PACK_URL =
+  "https://github.com/Sparticuz/chromium/releases/download/v149.0.0/chromium-v149.0.0-pack.x64.tar";
 
 const clampPdfHeight = (height: number) =>
   Math.min(
@@ -20,15 +26,46 @@ const clampPdfHeight = (height: number) =>
     MAX_HEIGHT_PX,
   );
 
+const localChromeExecutablePath = () => {
+  const chromeRoot = join(homedir(), ".cache/puppeteer/chrome");
+  if (!existsSync(chromeRoot)) {
+    return undefined;
+  }
+
+  return readdirSync(chromeRoot)
+    .filter((entry) => entry.startsWith("mac_"))
+    .sort()
+    .reverse()
+    .map((entry) =>
+      join(
+        chromeRoot,
+        entry,
+        "chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+      ),
+    )
+    .find(existsSync);
+};
+
+const chromiumExecutablePath = async () =>
+  process.env.PUPPETEER_EXECUTABLE_PATH ??
+  (process.platform === "darwin" ? localChromeExecutablePath() : undefined) ??
+  (await chromium.executablePath(
+    process.env.CHROMIUM_PACK_URL ?? DEFAULT_CHROMIUM_PACK_URL,
+  ));
+
 export async function GET(
   request: Request,
   { params }: CvVariantPdfRouteProps,
 ) {
   const { variant: slug } = await params;
   const variant = Option.getOrElse(getCvVariantBySlug(slug), () => notFound());
-  const puppeteer = await import("puppeteer");
+  const puppeteer = await import("puppeteer-core");
   const browser = await puppeteer.default.launch({
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: await puppeteer.default.defaultArgs({
+      args: chromium.args,
+      headless: "shell",
+    }),
+    executablePath: await chromiumExecutablePath(),
     headless: "shell",
   });
 

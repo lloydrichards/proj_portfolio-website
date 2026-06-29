@@ -1,5 +1,5 @@
 import { utcFormat } from "d3";
-import { Array as A, Option, pipe } from "effect";
+import { Option, pipe } from "effect";
 import Link from "next/link";
 import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import {
@@ -9,14 +9,16 @@ import {
   typefaceHeading2,
   typefaceMeta,
 } from "@/components/tokens/typeface";
-import type { Project } from "@/types/Project";
 import { EducationItem, VolunteerItem, WorkItem } from "../cv-items";
 import type { CvData } from "../data/get-cv-data";
+import { projectCvData } from "../data/project-cv-data";
 import type { CvVariant } from "../data/variants";
+import { CvMarkdownButton } from "./cv-markdown-button";
 import { CvPdfButton } from "./cv-pdf-button";
 
 type CvPublicPageProps = {
   data: CvData;
+  markdownHref?: string;
   pdfHref?: string;
   variant: CvVariant;
 };
@@ -28,54 +30,15 @@ const formatYear = (date?: Date) =>
     Option.getOrUndefined,
   );
 
-const orderedProjects = ({
-  projects,
-  projectIds,
-}: {
-  projects: readonly Project[];
-  projectIds: readonly number[];
-}) =>
-  pipe(
-    projectIds,
-    A.flatMap((projectId) =>
-      pipe(
-        projects,
-        A.findFirst((project) => project.id === projectId),
-        Option.match({
-          onNone: () => [],
-          onSome: (project) => [project],
-        }),
-      ),
-    ),
-  );
-
-export function CvPublicPage({ data, pdfHref, variant }: CvPublicPageProps) {
-  const featuredOccupations = pipe(
-    data.allOccupations,
-    A.filter((occupation) => occupation.isFeatures),
-  );
-  const occupations = variant.featuredOccupationIds
-    ? pipe(
-        variant.featuredOccupationIds,
-        A.flatMap((occupationId) =>
-          pipe(
-            data.allOccupations,
-            A.findFirst((occupation) => occupation.id === occupationId),
-            Option.match({
-              onNone: () => [],
-              onSome: (occupation) => [occupation],
-            }),
-          ),
-        ),
-      )
-    : featuredOccupations;
-  const grouped = A.groupBy(occupations, (occupation) => occupation.category);
-  const workExperience = grouped.WORK ?? [];
-  const education = grouped.EDUCATION ?? [];
-  const volunteering = grouped.VOLUNTEER ?? [];
-  const projects = orderedProjects({
-    projects: data.visibleProjects,
-    projectIds: variant.featuredProjectIds,
+export function CvPublicPage({
+  data,
+  markdownHref,
+  pdfHref,
+  variant,
+}: CvPublicPageProps) {
+  const { education, projects, volunteering, workExperience } = projectCvData({
+    data,
+    variant,
   });
 
   return (
@@ -92,7 +55,10 @@ export function CvPublicPage({ data, pdfHref, variant }: CvPublicPageProps) {
             <p className={typefaceMeta("uppercase tracking-widest")}>
               Curriculum Vitae / {variant.label}
             </p>
-            {pdfHref ? <CvPdfButton href={pdfHref} /> : null}
+            <div className="flex flex-wrap gap-2">
+              {pdfHref ? <CvPdfButton href={pdfHref} /> : null}
+              {markdownHref ? <CvMarkdownButton href={markdownHref} /> : null}
+            </div>
           </div>
           <section className="flex gap-4 flex-col">
             <h1 className={typefaceHeading1("grow")}>Lloyd Richards</h1>

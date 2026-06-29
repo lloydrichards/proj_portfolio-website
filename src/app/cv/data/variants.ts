@@ -20,6 +20,7 @@ export type CvVariant = {
   schemaJobTitle: string;
   schemaDescription: string;
   pdfFilename: string;
+  markdownFilename: string;
 };
 
 export const defaultCvVariant = {
@@ -64,6 +65,7 @@ export const defaultCvVariant = {
   schemaDescription:
     "Award-winning Fullstack Engineer specializing in TypeScript, React, Next.js, and D3.js with end-to-end ownership from data architecture through polished UI.",
   pdfFilename: "lloyd-richards-cv.pdf",
+  markdownFilename: "lloyd-richards-cv.md",
 } as const satisfies CvVariant;
 
 export const cvVariants = [
@@ -98,6 +100,7 @@ export const cvVariants = [
     schemaDescription:
       "Fullstack product engineer specializing in React, TypeScript, Next.js, design systems, frontend architecture, and polished data-rich user interfaces.",
     pdfFilename: "lloyd-richards-product-frontend-cv.pdf",
+    markdownFilename: "lloyd-richards-product-frontend-cv.md",
   },
   {
     id: "data_visualization",
@@ -131,6 +134,7 @@ export const cvVariants = [
     schemaDescription:
       "Data visualization engineer building D3, dashboard, mapping, analytics, and data platform interfaces from data pipeline to UI.",
     pdfFilename: "lloyd-richards-data-visualization-cv.pdf",
+    markdownFilename: "lloyd-richards-data-visualization-cv.md",
   },
   {
     id: "ai_dx_platform",
@@ -166,6 +170,7 @@ export const cvVariants = [
     schemaDescription:
       "Fullstack engineer with a design systems and developer tooling background, building typed, reusable, production-grade web platforms.",
     pdfFilename: "lloyd-richards-ai-dx-platform-cv.pdf",
+    markdownFilename: "lloyd-richards-ai-dx-platform-cv.md",
   },
 ] as const satisfies readonly CvVariant[];
 

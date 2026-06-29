@@ -37,6 +37,7 @@ export default async function CvVariantPage({ params }: CvVariantPageProps) {
   return (
     <CvPublicPage
       data={data}
+      markdownHref={`/cv/${variant.slug}/markdown`}
       pdfHref={`/cv/${variant.slug}/pdf`}
       variant={variant}
     />

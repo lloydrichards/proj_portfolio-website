@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 const nextConfig = {
   transpilePackages: ["effect-boxes"],
   pageExtensions: ["mdx", "ts", "tsx"],
+  serverExternalPackages: ["@sparticuz/chromium-min", "puppeteer-core"],
   outputFileTracingIncludes: {
     database: ["./database/**/*"],
   },

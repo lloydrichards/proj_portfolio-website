@@ -11,6 +11,7 @@ type CvVariantPdfRouteProps = {
 };
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 export const runtime = "nodejs";
 
 const LETTER_WIDTH_PX = 816;
@@ -78,8 +79,10 @@ export async function GET(
     });
     const origin = new URL(request.url).origin;
     await page.goto(`${origin}/cv/${variant.slug}`, {
-      waitUntil: "networkidle0",
+      timeout: 15_000,
+      waitUntil: "domcontentloaded",
     });
+    await page.evaluate(() => document.fonts.ready);
 
     const documentHeight = await page.evaluate(() =>
       Math.max(

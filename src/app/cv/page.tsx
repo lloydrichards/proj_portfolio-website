@@ -13,9 +13,12 @@ import { Dataset } from "@/services/Dataset/Dataset";
 import { OccupationService } from "@/services/Dataset/OccupationService";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
+import { CvPublicPage } from "./components/cv-public-page";
 import { EducationItem, VolunteerItem, WorkItem } from "./cv-items";
 import { CvSectionEditable } from "./cv-section-editable";
 import { CvViewToggle } from "./cv-view-toggle";
+import { getCvData } from "./data/get-cv-data";
+import { defaultCvVariant } from "./data/variants";
 import type { OccupationData } from "./types";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -31,6 +34,12 @@ const CVPage = async ({
     Match.when({ view: "prod" }, () => "prod" as const),
     Match.orElse(() => "edit" as const),
   );
+
+  if (mode === "prod") {
+    const data = await getCvData();
+    return <CvPublicPage data={data} variant={defaultCvVariant} />;
+  }
+
   const [allOccupations, projects] = await RuntimeServer.runPromise(
     Effect.all([
       Effect.gen(function* () {

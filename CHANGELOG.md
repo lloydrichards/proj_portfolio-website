@@ -1,3 +1,31 @@
+# [1.21.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.20.0...v1.21.0) (2026-06-30)
+
+
+### Content
+
+* add 062 lab ([a2fd50f](https://github.com/lloydrichards/proj_portfolio-website/commit/a2fd50ff028f6f4cf5601bf590a18ce5f6f90ccf))
+* add sme policy index project ([5b30860](https://github.com/lloydrichards/proj_portfolio-website/commit/5b30860eaf28e186228de893e12f52adca700e47))
+
+
+### Features
+
+* **cv:** add Markdown export ([a9e55f5](https://github.com/lloydrichards/proj_portfolio-website/commit/a9e55f5a6b595f66a3a0eb10e0e257dfb1e89ed3))
+* **cv:** add PDF export ([f0ac6c3](https://github.com/lloydrichards/proj_portfolio-website/commit/f0ac6c3cbd99060067d8d628047fdcade9ae7f34))
+* **cv:** add public variant pages ([6393731](https://github.com/lloydrichards/proj_portfolio-website/commit/6393731ac2c349bb7668c29db31ecdf611180c94))
+
+
+### Fixed
+
+* **layout:** adjust tile sizing ([3fbddd0](https://github.com/lloydrichards/proj_portfolio-website/commit/3fbddd0b77f255050121bd8d7c1a6c557f6cf00c))
+* bump timeout for pdf ([0c19e57](https://github.com/lloydrichards/proj_portfolio-website/commit/0c19e57c032bfe38f01956ad91beada06d03a210))
+* puppeteer on vercel ([971569e](https://github.com/lloydrichards/proj_portfolio-website/commit/971569eb42c8e9a3fea94d998293b1415d2d5b68))
+
+
+### Improved
+
+* increase pdf width ([929539e](https://github.com/lloydrichards/proj_portfolio-website/commit/929539e5b82973b3ec20cc77758f4f3a49360428))
+* move effect-boxes images ([c5c4844](https://github.com/lloydrichards/proj_portfolio-website/commit/c5c484435dbec89f24bd6a94a92bf57f4e9c86fb))
+
 # [1.20.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.19.0...v1.20.0) (2026-06-16)
 
 

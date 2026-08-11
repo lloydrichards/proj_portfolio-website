@@ -11,6 +11,24 @@ div.mermaid svg {
   background: transparent !important;
 }
 
+/* Mermaid constrains generated SVGs to their intrinsic width. In the expanded
+   viewer, let the SVG scale to the available dialog width instead. */
+.mermaid-dialog div.mermaid {
+  @apply bg-muted;
+  width: 100%;
+}
+
+.dark .mermaid-dialog div.mermaid {
+  @apply bg-muted;
+}
+
+.mermaid-dialog div.mermaid svg {
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: calc(100vh - 4rem) !important;
+  height: auto !important;
+}
+
 /* In dark mode, invert the diagram for legibility since mermaid "neutral" theme
    renders dark text on light nodes. The hue-rotate preserves color meaning. */
 .dark div.mermaid svg {

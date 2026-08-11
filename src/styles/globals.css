@@ -1,5 +1,62 @@
 @import "tailwindcss";
 
+[data-lab-id="063"] .footnotes {
+  margin-top: 3rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--muted) 45%, transparent);
+  padding: 1.25rem;
+}
+
+[data-lab-id="063"] .footnotes h2.sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0 0 0.75rem;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  border: 0;
+  font-size: 0;
+  line-height: 1.5rem;
+  letter-spacing: 0;
+}
+
+[data-lab-id="063"] .footnotes h2.sr-only::before {
+  content: "References and data";
+  color: var(--foreground);
+  font-size: 1rem;
+}
+
+[data-lab-id="063"] .footnotes h2.sr-only > a {
+  display: none;
+}
+
+[data-lab-id="063"] .footnotes ol {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+[data-lab-id="063"] .footnotes li,
+[data-lab-id="063"] .footnotes li p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+[data-lab-id="063"] .footnotes li strong {
+  color: var(--foreground);
+}
+
+[data-lab-id="063"] .footnotes .data-footnote-backref {
+  white-space: nowrap;
+}
+
 @media print {
   body {
     background: white;

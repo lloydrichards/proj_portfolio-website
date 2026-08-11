@@ -32,7 +32,10 @@ export const LabContent: FC<LabContentProps> = ({
   }
 
   return (
-    <article className={cn("col-span-full mt-8 mb-16", className)}>
+    <article
+      className={cn("col-span-full mt-8 mb-16", className)}
+      data-lab-id={lab.id}
+    >
       {children}
     </article>
   );

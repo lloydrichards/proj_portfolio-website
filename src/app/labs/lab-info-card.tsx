@@ -81,15 +81,17 @@ export const LabInfoCard: FC<LabInfoCardProps> = ({ labs, className }) => {
       )}
       <Tile size="unset" className="col-span-full">
         <Card className={className}>
-          <CardHeader className="flex-row justify-between pb-0">
-            <div className="flex items-center gap-1 opacity-60">
+          <CardHeader className="flex-row flex-wrap items-start justify-between gap-2 pb-0">
+            <div className="flex min-w-0 flex-wrap items-center gap-1 opacity-60">
               {lab.tags?.map((t) => (
                 <Badge key={t} variant="outline">
                   <h1>{t.toUpperCase()}</h1>
                 </Badge>
               ))}
             </div>
-            {formatDate(new Date(lab.date))}
+            <span className="shrink-0 text-sm">
+              {formatDate(new Date(lab.date))}
+            </span>
           </CardHeader>
           <CardContent>
             <CardTitle className="flex gap-2">{lab.title}</CardTitle>

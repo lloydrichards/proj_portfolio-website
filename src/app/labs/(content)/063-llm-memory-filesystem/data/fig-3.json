@@ -1,0 +1,58 @@
+[
+  {
+    "phase": "Contract",
+    "phase_order": 1,
+    "model": "gpt-5.6-sol",
+    "model_cost_chf": 64.930477899,
+    "phase_cost_chf": 78.900553661
+  },
+  {
+    "phase": "Contract",
+    "phase_order": 1,
+    "model": "gpt-5.6-terra",
+    "model_cost_chf": 13.970075762,
+    "phase_cost_chf": 78.900553661
+  },
+  {
+    "phase": "Implementation",
+    "phase_order": 2,
+    "model": "gpt-5.6-sol",
+    "model_cost_chf": 64.483467152,
+    "phase_cost_chf": 68.763515442
+  },
+  {
+    "phase": "Implementation",
+    "phase_order": 2,
+    "model": "gpt-5.6-terra",
+    "model_cost_chf": 4.28004829,
+    "phase_cost_chf": 68.763515442
+  },
+  {
+    "phase": "Explanation",
+    "phase_order": 3,
+    "model": "gpt-5.6-sol",
+    "model_cost_chf": 76.508744151,
+    "phase_cost_chf": 79.44021498
+  },
+  {
+    "phase": "Explanation",
+    "phase_order": 3,
+    "model": "gpt-5.6-terra",
+    "model_cost_chf": 2.931470829,
+    "phase_cost_chf": 79.44021498
+  },
+  {
+    "phase": "Audit",
+    "phase_order": 4,
+    "model": "gpt-5.6-terra",
+    "model_cost_chf": 15.111068897,
+    "phase_cost_chf": 15.111068897
+  },
+  {
+    "phase": "Hardening",
+    "phase_order": 5,
+    "model": "gpt-5.6-terra",
+    "model_cost_chf": 7.310112444,
+    "phase_cost_chf": 7.310112444
+  }
+]

@@ -1,0 +1,9 @@
+phase,phase_order,model,model_cost_chf,phase_cost_chf
+Contract,1,gpt-5.6-sol,64.930477899,78.900553661
+Contract,1,gpt-5.6-terra,13.970075762,78.900553661
+Implementation,2,gpt-5.6-sol,64.483467152,68.763515442
+Implementation,2,gpt-5.6-terra,4.28004829,68.763515442
+Explanation,3,gpt-5.6-sol,76.508744151,79.44021498
+Explanation,3,gpt-5.6-terra,2.931470829,79.44021498
+Audit,4,gpt-5.6-terra,15.111068897,15.111068897
+Hardening,5,gpt-5.6-terra,7.310112444,7.310112444

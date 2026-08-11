@@ -31,6 +31,7 @@
     "@libsql/client": "0.17.3",
     "@mdx-js/loader": "^3.1.1",
     "@next/mdx": "16.2.6",
+    "@observablehq/plot": "^0.6.17",
     "@sparticuz/chromium-min": "^149.0.0",
     "@uidotdev/usehooks": "^2.4.1",
     "@vercel/analytics": "^2.0.1",

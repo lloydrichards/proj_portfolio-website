@@ -7,7 +7,7 @@ export const metadata = createOGImageMetadata({
     "Full-stack implementation with Effect RPC streaming, monorepo architecture, and type-safe AI integration from domain to UI.",
   tags: ["effect", "rpc", "monorepo", "effect-ai"],
   date: "2025-12-09",
-  isFeatured: true,
+  isFeatured: false,
 });
 
 Building agentic applications requires more than just understanding LLM APIs. I
@@ -72,7 +72,7 @@ export const ChatMessage = Schema.Struct({
   role: Schema.Union(
     Schema.Literal("user"),
     Schema.Literal("assistant"),
-    Schema.Literal("system")
+    Schema.Literal("system"),
   ),
 });
 
@@ -96,7 +96,7 @@ export const ChatStreamPart = Schema.Union(
       inputTokens: Schema.Number,
       outputTokens: Schema.Number,
     }),
-  })
+  }),
 );
 
 export class EventRpc extends RpcGroup.make(
@@ -104,7 +104,7 @@ export class EventRpc extends RpcGroup.make(
     payload: Schema.Array(ChatMessage),
     success: ChatStreamPart,
     stream: true,
-  })
+  }),
 ) {}
 ```
 
@@ -182,7 +182,7 @@ merge `Toolkit` easily for each persona.
 const CraftsmanToolkit = Toolkit.merge(
   ASTToolkit,
   DateTimeToolkit,
-  DatasetToolkit
+  DatasetToolkit,
 );
 
 // Vega: Charting focus
@@ -192,7 +192,7 @@ const VegaToolkit = Toolkit.merge(ChartToolkit, DatasetToolkit);
 const LibrarianToolkit = Toolkit.merge(
   DatasetToolkit,
   DateTimeToolkit,
-  ResourceToolkit
+  ResourceToolkit,
 );
 
 // Oracle: Minimal tools, full context
@@ -242,7 +242,7 @@ export const EventRpcLive = EventRpc.toLayer(
         return mailbox;
       }),
     });
-  })
+  }),
 );
 ```
 
@@ -280,7 +280,7 @@ export const ChatResponse = Schema.Union(
   Schema.TaggedStruct("error", {
     segments: Schema.Array(MessageSegment),
     error: ErrorMetadata,
-  })
+  }),
 );
 ```
 
@@ -292,7 +292,7 @@ export const chatAtom = runtime.fn((messages: ChatMessage[]) =>
     Effect.gen(function* () {
       const rpc = yield* RpcClient;
       return rpc.client.chat(messages);
-    })
+    }),
   ).pipe(
     Stream.scan(
       {
@@ -313,16 +313,16 @@ export const chatAtom = runtime.fn((messages: ChatMessage[]) =>
           return { _tag: "complete", ...updated };
         }
         return state;
-      }
+      },
     ),
     Stream.drop(1), // Skip the initial seed emission
     Stream.catchAll((error: unknown) =>
       Stream.make({
         _tag: "error",
         error,
-      })
-    )
-  )
+      }),
+    ),
+  ),
 );
 ```
 

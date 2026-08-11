@@ -2,6 +2,10 @@ import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
 const nextConfig = {
+  turbopack: {
+    root: process.cwd(),
+  },
+  outputFileTracingRoot: process.cwd(),
   transpilePackages: ["effect-boxes"],
   pageExtensions: ["mdx", "ts", "tsx"],
   serverExternalPackages: ["@sparticuz/chromium-min", "puppeteer-core"],

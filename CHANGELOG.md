@@ -1,3 +1,15 @@
+# [1.22.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.21.0...v1.22.0) (2026-08-18)
+
+
+### Content
+
+* add 063 lab article ([674d545](https://github.com/lloydrichards/proj_portfolio-website/commit/674d54551e0a27c6fc7800123cb28565c359d5ed))
+
+
+### Features
+
+* add expandable image and mermaid components ([6e4492e](https://github.com/lloydrichards/proj_portfolio-website/commit/6e4492e3691c1888d42683f0bbce0b409d5179ff))
+
 # [1.21.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.20.0...v1.21.0) (2026-06-30)
 
 

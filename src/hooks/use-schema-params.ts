@@ -19,11 +19,9 @@ export function useSchemaParams<A extends Record<string, unknown>>(
 
   const buildQueryString = useCallback(
     (partialParams: Partial<A>) => {
-      const newParams = new URLSearchParams(params.toString());
-
       const merged = { ...currentValue, ...partialParams } as A;
-
       const encoded = Schema.encodeUnknownSync(schema)(merged);
+      const newParams = new URLSearchParams();
 
       if (encoded && typeof encoded === "object") {
         Object.entries(encoded as object).forEach(([key, value]) => {
@@ -35,7 +33,7 @@ export function useSchemaParams<A extends Record<string, unknown>>(
 
       return newParams.toString();
     },
-    [currentValue, schema, params],
+    [currentValue, schema],
   );
 
   return [currentValue, buildQueryString] as const;

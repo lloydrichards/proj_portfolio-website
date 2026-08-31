@@ -1,6 +1,5 @@
 "use client";
 import { Schema } from "effect";
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Button } from "@/components/atom/button";
 import { useSchemaParams } from "@/hooks/use-schema-params";
@@ -18,6 +17,11 @@ export const SchemaCounter = () => {
     factor: 1,
   });
 
+  const replaceParams = (partialParams: Partial<typeof ParamSchema.Type>) => {
+    const query = createQueryString(partialParams);
+    window.history.replaceState(null, "", query ? `${path}?${query}` : path);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 rounded-xl border p-4">
       <h1 className="text-2xl font-bold">Schema Counter Component</h1>
@@ -29,20 +33,17 @@ export const SchemaCounter = () => {
         <Button
           variant="ghost"
           aria-label="Reset"
-          render={<Link href={path} replace />}
+          onClick={() => window.history.replaceState(null, "", path)}
         >
           Reset
         </Button>
         <Button
           variant="outline"
           aria-label="Decrement"
-          render={
-            <Link
-              href={`?${createQueryString({
-                a: (data.a ?? 0) - 1 * (data.factor ?? 1),
-              })}`}
-              replace
-            />
+          onClick={() =>
+            replaceParams({
+              a: (data.a ?? 0) - 1 * (data.factor ?? 1),
+            })
           }
         >
           Decrement
@@ -56,13 +57,10 @@ export const SchemaCounter = () => {
         <Button
           variant="outline"
           aria-label="Increment"
-          render={
-            <Link
-              href={`?${createQueryString({
-                a: (data.a ?? 0) + 1 * (data.factor ?? 1),
-              })}`}
-              replace
-            />
+          onClick={() =>
+            replaceParams({
+              a: (data.a ?? 0) + 1 * (data.factor ?? 1),
+            })
           }
         >
           Increment
@@ -70,13 +68,10 @@ export const SchemaCounter = () => {
         <Button
           variant={(data.factor ?? 1) === 10 ? "default" : "secondary"}
           aria-label="factor-10"
-          render={
-            <Link
-              href={`?${createQueryString({
-                factor: (data.factor ?? 1) === 10 ? 1 : 10,
-              })}`}
-              replace
-            />
+          onClick={() =>
+            replaceParams({
+              factor: (data.factor ?? 1) === 10 ? 1 : 10,
+            })
           }
         >
           Factor 10

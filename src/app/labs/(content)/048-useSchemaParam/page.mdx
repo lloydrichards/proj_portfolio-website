@@ -82,8 +82,6 @@ export function useSchemaParams<A extends Record<string, unknown>, I>(
 
   const buildQueryString = useCallback(
     (partialParams: Partial<A>) => {
-      const newParams = new URLSearchParams(params.toString());
-
       const encoded = Schema.encodeUnknownSync(Schema.partial(schema))({
         ...paramResult.pipe(
           Either.match({
@@ -93,6 +91,8 @@ export function useSchemaParams<A extends Record<string, unknown>, I>(
         ),
         ...partialParams,
       });
+
+      const newParams = new URLSearchParams();
 
       if (encoded && typeof encoded === "object") {
         Object.entries(encoded).forEach(([key, value]) => {

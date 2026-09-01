@@ -1,3 +1,15 @@
+## [1.22.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.22.0...v1.22.1) (2026-09-01)
+
+
+### Content
+
+* **labs:** align schema param example with filtered queries ([7e7bd0d](https://github.com/lloydrichards/proj_portfolio-website/commit/7e7bd0db9615e7b0e7f8bb3e2d7646ad38955421))
+
+
+### Fixed
+
+* **labs:** avoid route requests for schema counter state ([d9a120f](https://github.com/lloydrichards/proj_portfolio-website/commit/d9a120ff11b8cc62d8a2b3f272f5df9f1a5737fe))
+
 # [1.22.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.21.0...v1.22.0) (2026-08-18)
 
 

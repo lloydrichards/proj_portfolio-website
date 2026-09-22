@@ -22,7 +22,7 @@ export const siteMetadata = {
     // threads: "https://www.threads.net",
     instagram: "https://www.instagram.com/lloyd_bydesign/",
     // medium: "https://medium.com",
-    // bluesky: "https://bsky.app/",
+    bluesky: "https://bsky.app/profile/lloydrichards.bsky.social",
   },
   analytics: {
     umamiAnalytics: {

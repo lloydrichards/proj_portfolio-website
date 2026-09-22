@@ -1,3 +1,5 @@
+import { siteMetadata } from "@/lib/metadata";
+
 type PersonJsonLdProps = {
   jobTitle?: string;
   description?: string;
@@ -35,7 +37,11 @@ export const PersonJsonLd = ({
       disambiguatingDescription,
       knowsAbout,
       award: ["Swiss Viz Awards 2025 - Silver", "German Design Award 2026"],
-      sameAs: ["https://github.com/lloydrichards", "https://lloydrichards.dev"],
+      sameAs: [
+        siteMetadata.social.github,
+        siteMetadata.social.bluesky,
+        siteMetadata.siteUrl,
+      ],
       worksFor: {
         "@type": "Organization",
         name: "Interactive Things",

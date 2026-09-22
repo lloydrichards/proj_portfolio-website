@@ -1,4 +1,5 @@
 import { Rss } from "lucide-react";
+import Bluesky from "@/components/icons/bluesky";
 import Github from "@/components/icons/github";
 import Instagram from "@/components/icons/instagram";
 import Linkedin from "@/components/icons/linkedin";
@@ -13,11 +14,16 @@ export const Footer: React.FC = () => {
       <Tile
         size="unset"
         outline={false}
-        className="col-span-4 grid items-center bg-transparent md:col-span-12 lg:col-span-20"
+        className="col-span-full grid items-center bg-transparent md:col-span-11 lg:col-span-19"
       >
         lloydrichards.dev
       </Tile>
       <TileIcon icon={<Rss />} label="RSS" href="/api/rss" />
+      <TileIcon
+        icon={<Bluesky />}
+        label="Bluesky"
+        href={siteMetadata.social.bluesky}
+      />
       <TileIcon
         icon={<Instagram />}
         label="Instagram"

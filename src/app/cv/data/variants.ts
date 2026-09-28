@@ -3,6 +3,7 @@ import { Array as A, type Option, pipe } from "effect";
 export type CvVariantId =
   | "general"
   | "product_frontend"
+  | "design_engineering"
   | "data_visualization"
   | "ai_dx_platform";
 
@@ -17,9 +18,12 @@ export type CvVariant = {
   skillOrder: readonly string[];
   featuredProjectIds: readonly number[];
   featuredOccupationIds?: readonly number[];
+  occupationDescriptions?: Readonly<Record<number, string>>;
+  projectDescriptions?: Readonly<Record<number, string>>;
   schemaJobTitle: string;
   schemaDescription: string;
   pdfFilename: string;
+  pdfPageFormat?: "A4";
   markdownFilename: string;
 };
 
@@ -44,44 +48,94 @@ export const defaultCvVariant = {
     "D3.js",
     "Storybook",
     "Tailwind",
-    "Web Components",
     "Node.js",
-    "GraphQL",
-    "REST APIs",
     "PostgreSQL",
-    "Snowflake",
-    "Docker",
-    "CI/CD",
-    "Terraform",
-    "Kubernetes",
-    "Vercel",
+    "Data Pipelines",
     "Data Visualization",
     "Design Systems",
-    "Flutter",
+    "Accessibility (WCAG)",
     "Figma",
   ],
   featuredProjectIds: [2601, 2600, 2403, 2402, 2401, 2400],
   schemaJobTitle: "Fullstack Engineer",
   schemaDescription:
-    "Award-winning Fullstack Engineer specializing in TypeScript, React, Next.js, and D3.js with end-to-end ownership from data architecture through polished UI.",
+    "Product-focused TypeScript and React engineer building responsive interfaces, data visualizations, shared component systems, and developer tools.",
   pdfFilename: "lloyd-richards-cv.pdf",
   markdownFilename: "lloyd-richards-cv.md",
 } as const satisfies CvVariant;
 
 export const cvVariants = [
   {
+    id: "design_engineering",
+    slug: "design-engineering",
+    label: "Design Engineer",
+    pageTitle: "Design Engineer CV",
+    headline:
+      "Design engineer turning complex data and product workflows into clear React interfaces.",
+    summary:
+      "Design engineer with 6+ years building data-rich web products. I turn supplied key screens into responsive, accessible flows by defining how components behave between breakpoints and advocating for mobile-first choices. I build React and TypeScript component systems that stay consistent across products.",
+    highlights: [
+      "Defined responsive behavior between key screens and checked interface decisions against WCAG requirements",
+      "Built the OECD Competitiveness Data Hub, then developed a shared, themeable component system for a second policy platform",
+      "Built charts with semantic HTML tables and D3 SVG, plus shared UI components, for Switzerland's Cancer Monitoring Dashboard",
+    ],
+    skillOrder: [
+      "Interaction Design",
+      "Responsive Design",
+      "Accessibility (WCAG)",
+      "Design Systems",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "D3.js",
+      "Storybook",
+      "Figma",
+      "Tailwind",
+      "Node.js",
+    ],
+    featuredProjectIds: [2401, 2601, 2402, 2400],
+    projectDescriptions: {
+      2401: "Built an interactive policy data hub with responsive D3 visualizations and an interface spanning 1100+ pages.",
+      2601: "Extended the OECD interface into a second platform through semantic design tokens and shared components while preserving the first application.",
+      2402: "Built semantic-table-backed D3 charts for public health data, balancing dense information with accessible navigation.",
+      2400: "Built a local-time conference schedule and a submission and approval flow for attendee-led sessions.",
+    },
+    occupationDescriptions: {
+      3: `Build interactive data products for public-sector and enterprise clients, working across frontend architecture, data, and UI with designers and researchers.
+
+- Sole developer on the 1100+ page OECD Competitiveness Outlook Data Hub, recognized by the Swiss Viz Awards and German Design Award
+- Defined responsive component behavior between supplied key screens, advocated for mobile-first layouts, and checked decisions against WCAG requirements
+- Built a shared, themeable component library used across three OECD applications; advocated for design tokens and lint rules to keep overrides intentional
+- Developed semantic-table-backed D3 charts for Switzerland's Cancer Monitoring Dashboard and mentored an intern through pairing and code review`,
+      6: `Owned design and development of digital products for an IoT beekeeping platform serving 500 users and 10,000 connected hives.
+
+- Built a cross-platform Flutter app to replace separate Swift and Kotlin apps, reducing feature delivery time from months to weeks
+- Designed dashboards for beekeepers and internal research teams using daily sensor data
+- Mentored a mobile developer while iterating on the app's UI and backend`,
+      7: `First design-focused hire. Audited the web, Swift, and Kotlin apps and created the company's first design system to bring their UI patterns together. Worked with developers to implement consistent components.`,
+      9: `Prototyped data interactions and developed visualizations for client-facing dashboards in collaboration with designers and engineers.`,
+      14: `Ran an independent ecological design practice. Managed 26 projects from client brief through design and construction, and created visual plans to explain multi-year work to clients.`,
+    },
+    schemaJobTitle: "Design Engineer",
+    schemaDescription:
+      "Design engineer combining interaction design, React, TypeScript, accessible interfaces, and reusable component systems for complex web products.",
+    pdfFilename: "lloyd-richards-design-engineering-cv.pdf",
+    pdfPageFormat: "A4",
+    markdownFilename: "lloyd-richards-design-engineering-cv.md",
+  },
+  {
     id: "product_frontend",
     slug: "product-frontend",
     label: "Product Frontend / Design Engineer",
     pageTitle: "Product Frontend CV",
     headline:
-      "Fullstack product engineer specializing in React, TypeScript, design systems, and polished data-rich interfaces.",
+      "Product frontend engineer building responsive React interfaces for complex data and user workflows.",
     summary:
-      "Fullstack product engineer with 6+ years of experience shipping React, TypeScript, and Next.js applications where interface quality, component architecture, and product clarity matter. I bring an interaction design background, production fullstack delivery, and hands-on ownership across award-winning public-sector and enterprise data products.",
+      "Product frontend engineer with 6+ years building React and TypeScript applications for data-heavy products. I turn supplied key screens into usable mobile layouts, decide how components behave between breakpoints, and build shared systems that keep interfaces accessible and consistent.",
     highlights: [
       "Sole developer on a 1100+ page OECD data platform recognized by Swiss Viz Awards and German Design Award",
-      "Built shared, themeable component libraries across OECD applications",
-      "Collaborated with designers, researchers, clients, and stakeholders while mentoring through pairing and code review",
+      "Adapted key screens for mobile so content fit narrow viewports, and advocated for shorter mobile content",
+      "Built a shared, themeable component system for OECD applications and checked UI decisions against WCAG requirements",
     ],
     skillOrder: [
       "TypeScript",

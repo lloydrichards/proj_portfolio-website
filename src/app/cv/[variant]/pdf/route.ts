@@ -96,7 +96,15 @@ export async function GET(
 
     const pageHeight = clampPdfHeight(documentHeight);
     await page.addStyleTag({
-      content: `@page { size: ${LETTER_WIDTH_PX}px ${pageHeight}px; margin: 0; }`,
+      content: `@page { size: ${LETTER_WIDTH_PX}px ${pageHeight}px; margin: 0; }
+        @media print {
+          header.mosaic-rows *, footer.mosaic-rows * {
+            background: transparent !important;
+          }
+          .cv-print-root .text-muted-foreground {
+            color: #444 !important;
+          }
+        }`,
     });
 
     const pdf = await page.pdf({

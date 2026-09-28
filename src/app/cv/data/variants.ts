@@ -33,13 +33,13 @@ export const defaultCvVariant = {
   label: "General CV",
   pageTitle: "Curriculum Vitae",
   headline:
-    "Multidisciplinary fullstack engineer building data-rich web applications.",
+    "Product-focused TypeScript engineer building clear interfaces for complex data and workflows.",
   summary:
-    "Multidisciplinary Fullstack Engineer with 6+ years of experience building award-winning, data-rich web applications for public sector and Fortune 500 clients. Background in interaction design and data visualization, working end-to-end across data pipelines, component libraries, and production infrastructure.",
+    "Product-focused engineer with 6+ years building React and TypeScript interfaces, data visualizations, and developer tools. I combine interaction design with frontend architecture, adapt complex products for mobile and accessibility, and build the data pipelines and shared components behind them.",
   highlights: [
-    "Award-winning work across interactive data platforms",
-    "End-to-end ownership from data architecture through D3 visualizations and CMS-driven sites",
-    "Experienced in cross-functional collaboration with designers, researchers, and stakeholders",
+    "Sole developer on an award-winning OECD data platform spanning 1100+ pages",
+    "Built a validated WordPress content pipeline for IPEN and semantic-table-backed D3 charts for Swiss public health data",
+    "Built open source developer tools including Effect Boxes and Stack Effect",
   ],
   skillOrder: [
     "TypeScript",
@@ -150,24 +150,32 @@ export const cvVariants = [
       "GraphQL",
     ],
     featuredProjectIds: [2401, 2402, 2601, 2400],
+    occupationDescriptions: {
+      3: `Built React and TypeScript data products with designers, researchers, and public-sector clients.
+
+- Sole developer on the 1100+ page OECD Competitiveness Outlook Data Hub, recognized by the Swiss Viz Awards and German Design Award
+- Adapted supplied key screens for mobile, keeping content readable within narrow screens and advocating for shorter mobile content
+- Defined component behavior between breakpoints and checked interface decisions against WCAG requirements
+- Built a themeable component library across three OECD applications, using design tokens and lint rules to keep overrides consistent`,
+    },
     schemaJobTitle: "Product Frontend Engineer",
     schemaDescription:
-      "Fullstack product engineer specializing in React, TypeScript, Next.js, design systems, frontend architecture, and polished data-rich user interfaces.",
+      "Product frontend engineer building responsive, accessible React and TypeScript interfaces and shared component systems for data-rich products.",
     pdfFilename: "lloyd-richards-product-frontend-cv.pdf",
     markdownFilename: "lloyd-richards-product-frontend-cv.md",
   },
   {
     id: "data_visualization",
     slug: "data-visualization",
-    label: "Data Visualization / Analytics Engineer",
+    label: "Data Visualization Engineer",
     pageTitle: "Data Visualization CV",
     headline:
-      "Data visualization engineer building award-winning D3, dashboard, and analytics platforms from data pipeline to UI.",
+      "Data visualization engineer building D3 charts, maps, and data products people can explore.",
     summary:
-      "Data visualization engineer with a fullstack foundation, building dashboards, maps, and analytics platforms that turn complex datasets into usable interfaces. My work spans D3 interactions, TypeScript data pipelines, PostgreSQL and Snowflake-backed products, and award-winning public-sector data platforms.",
+      "Data visualization engineer with 6+ years turning complex datasets into interactive charts, maps, and public-facing tools. I build D3 and React interfaces, shape source data for the frontend, and make dense information usable on mobile and with assistive technology.",
     highlights: [
       "Built award-winning OECD and public-sector data products with D3, React, and Next.js",
-      "Designed data pipelines that convert unstructured source material into structured datasets for visualization",
+      "Designed and built IPEN’s WordPress content pipeline, with a validated schema and actionable errors for editors",
       "Organizes Data Visualization Zurich Meetup, a 2300+ member community",
     ],
     skillOrder: [
@@ -184,6 +192,9 @@ export const cvVariants = [
       "Design Systems",
     ],
     featuredProjectIds: [2401, 2402, 2403, 2201],
+    projectDescriptions: {
+      2403: "Built IPEN’s interactive plastic pollution map and a validated WordPress-to-frontend content pipeline with actionable errors for editors.",
+    },
     schemaJobTitle: "Data Visualization Engineer",
     schemaDescription:
       "Data visualization engineer building D3, dashboard, mapping, analytics, and data platform interfaces from data pipeline to UI.",
@@ -193,16 +204,16 @@ export const cvVariants = [
   {
     id: "ai_dx_platform",
     slug: "ai-dx-platform",
-    label: "AI / DX / Platform Engineer",
-    pageTitle: "AI DX Platform CV",
+    label: "Developer Experience / Platform Engineer",
+    pageTitle: "Developer Experience / Platform CV",
     headline:
-      "Fullstack engineer with a design systems and developer tooling background, building structured, production-grade web platforms.",
+      "TypeScript engineer building developer tools, protocol adapters, and reusable application systems.",
     summary:
-      "Fullstack engineer focused on typed systems, reusable architecture, and developer-facing product quality. I bring a design systems background, strong TypeScript practice, production platform delivery, and practical experience turning messy content and workflows into structured, maintainable web systems.",
+      "Developer tooling and platform engineer with 6+ years building TypeScript products. I rebuilt Effect’s McpServer around versioned protocol adapters, including the stateless 2026-07-28 runtime. My open source work also includes Effect Boxes for terminal layouts and Stack Effect for application scaffolding.",
     highlights: [
-      "Built Effect Boxes, a functional terminal layout library for composable developer-facing interfaces",
-      "Designed reusable architecture and shared component systems across production applications",
-      "Ships fullstack platforms with TypeScript, React, Next.js, Node.js, CI/CD, Docker, and cloud deployment tooling",
+      "Rebuilt Effect’s McpServer with versioned protocol adapters, including the stateless 2026-07-28 runtime",
+      "Built Effect Boxes, a composable terminal layout library, and Stack Effect, an application scaffolding CLI",
+      "Designed the IPEN WordPress content schema and a validated pipeline that reports actionable errors to editors",
     ],
     skillOrder: [
       "TypeScript",
@@ -219,10 +230,14 @@ export const cvVariants = [
       "Kubernetes",
       "Vercel",
     ],
-    featuredProjectIds: [2600, 2401, 2400, 2601],
-    schemaJobTitle: "AI DX Platform Engineer",
+    featuredProjectIds: [2600, 2403, 2401, 2601],
+    projectDescriptions: {
+      2600: "Built an open source library for composable terminal layouts, used in the Stack Effect scaffolding CLI.",
+      2403: "Designed IPEN’s WordPress content schema and built a validated pipeline for the frontend with actionable errors for editors.",
+    },
+    schemaJobTitle: "Developer Experience Engineer",
     schemaDescription:
-      "Fullstack engineer with a design systems and developer tooling background, building typed, reusable, production-grade web platforms.",
+      "TypeScript engineer building developer tools, versioned MCP protocol adapters, terminal interfaces, and content pipelines.",
     pdfFilename: "lloyd-richards-ai-dx-platform-cv.pdf",
     markdownFilename: "lloyd-richards-ai-dx-platform-cv.md",
   },

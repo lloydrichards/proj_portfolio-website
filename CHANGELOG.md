@@ -1,3 +1,15 @@
+# [1.23.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.22.1...v1.23.0) (2026-09-29)
+
+
+### Features
+
+* add Bluesky social link ([b717d4f](https://github.com/lloydrichards/proj_portfolio-website/commit/b717d4f164a5636e064c14312e19fa71f7b2f2fc))
+
+
+### Fixed
+
+* use solid LinkedIn icon ([b94a3af](https://github.com/lloydrichards/proj_portfolio-website/commit/b94a3afe2ebd1fdbcbb66e60698b0772a9883941))
+
 ## [1.22.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.22.0...v1.22.1) (2026-09-01)
 
 

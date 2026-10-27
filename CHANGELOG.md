@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.23.0...v1.23.1) (2026-10-27)
+
+
+### Fixed
+
+* update dependencies and resolve security advisories ([4cae7ac](https://github.com/lloydrichards/proj_portfolio-website/commit/4cae7ac810b8deae7cf5cf6c5066fc272b225c73))
+
 # [1.23.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.22.1...v1.23.0) (2026-09-29)
 
 

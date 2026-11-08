@@ -1,11 +1,11 @@
 /* ─── Dual-theme switching (shiki multi-theme) ─────────────────────── */
 /* Shiki stores both themes as CSS variables on each span.
    We apply the correct one based on the active color scheme. */
-code[data-theme*=" "] span {
+code[data-theme~="github-light"] span {
   color: var(--shiki-light) !important;
 }
 
-.dark code[data-theme*=" "] span {
+.dark code[data-theme~="synthwave-84"] span {
   color: var(--shiki-dark) !important;
 }
 

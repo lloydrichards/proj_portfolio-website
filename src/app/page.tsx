@@ -59,7 +59,7 @@ const HomePage = async () => {
         Effect.gen(function* () {
           const svc = yield* GitHub;
           return yield* svc.getStats("lloydrichards");
-        }),
+        }).pipe(Effect.option),
         Effect.gen(function* () {
           const svc = yield* GitHub;
           return yield* svc.getCommitGraph({
@@ -107,16 +107,20 @@ const HomePage = async () => {
                 value: allLabs.length,
                 icon: <FlaskConical className="size-full" />,
               },
-              {
-                label: "Repos",
-                value: githubStats.repos,
-                icon: <GitBranch className="size-full" />,
-              },
-              {
-                label: "Stars",
-                value: githubStats.stars,
-                icon: <Star className="size-full" />,
-              },
+              ...(Option.isSome(githubStats)
+                ? [
+                    {
+                      label: "Repos",
+                      value: githubStats.value.repos,
+                      icon: <GitBranch className="size-full" />,
+                    },
+                    {
+                      label: "Stars",
+                      value: githubStats.value.stars,
+                      icon: <Star className="size-full" />,
+                    },
+                  ]
+                : []),
             ]}
           />
         </Tile>

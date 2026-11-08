@@ -1,5 +1,5 @@
 import { geoCentroid } from "d3";
-import { geographicPlaces } from "../data/geographic-places";
+import type { JourneyGeographicPlace } from "@/types/Journey";
 import { timestamp } from "../model/dates";
 import { locationHistory } from "../model/geography";
 import type { JourneyPhase, JourneyRecord } from "../model/types";
@@ -18,12 +18,19 @@ type GlobePlace = {
   recordIds: string[];
 };
 
-function locate(record: JourneyRecord) {
-  const city = geographicPlaces.find((place) =>
-    record.location
-      .split(/[,;]/)
-      .some((part) => part.trim().toLowerCase() === place.label.toLowerCase()),
-  );
+function locate(
+  record: JourneyRecord,
+  geographicPlaces: JourneyGeographicPlace[],
+) {
+  const city =
+    geographicPlaces.find((place) => place.id === record.geographicPlaceId) ??
+    geographicPlaces.find((place) =>
+      record.location
+        .split(/[,;]/)
+        .some(
+          (part) => part.trim().toLowerCase() === place.label.toLowerCase(),
+        ),
+    );
   if (city) return [{ ...city, precision: "city" as const }];
   return locationHistory([record], countryNames).map(({ code }) => ({
     id: code,
@@ -38,6 +45,7 @@ export function prepareGlobeData(
   records: JourneyRecord[],
   phase: JourneyPhase,
   selectedRecordId?: string | null,
+  geographicPlaces: JourneyGeographicPlace[] = [],
 ) {
   const activeIds = new Set(
     [...phase.started, ...phase.continuing].map((record) => record.id),
@@ -54,7 +62,7 @@ export function prepareGlobeData(
   )) {
     const active = activeIds.has(record.id);
     const home = record.placeKind === "lived";
-    for (const place of locate(record)) {
+    for (const place of locate(record, geographicPlaces)) {
       const previous = places.get(place.id);
       places.set(place.id, {
         ...place,

@@ -1,3 +1,4 @@
+export { journeyCity, journeyEvent, journeyPlace } from "./journey";
 export {
   attribute,
   category,
@@ -10,5 +11,4 @@ export {
   occupationToSkillRelations,
   skill,
 } from "./occupation";
-
 export { teamMember } from "./team_member";

@@ -1,16 +1,7 @@
-import type { JourneyAnnotation } from "../model/types";
-
-export type PersonalEvent = JourneyAnnotation & {
-  id: string;
-  date: string;
-  title: string;
-  text: string;
-  location?: string;
-  dateNote?: string;
-};
+import type { JourneyEvent } from "@/types/Journey";
 
 // Dates retain the precision of Lloyd's account; notes preserve unresolved evidence.
-export const personalEvents: PersonalEvent[] = [
+export const personalEvents: JourneyEvent[] = [
   {
     id: "leaving-masters",
     date: "2013-04",

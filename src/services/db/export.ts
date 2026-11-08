@@ -1,40 +1,10 @@
 import path from "node:path";
-import type { $IntentionalAny } from "@/types/helpers";
 import { db } from ".";
-import * as schema from "./schema";
-
-const exportDatabaseToJson = async () => {
-  try {
-    const exportData: Record<string, unknown> = {};
-
-    // Get all table names from schema
-    const tables = Object.entries(schema).filter(
-      ([_, value]) =>
-        typeof value === "object" && Symbol.for("drizzle:Name") in value,
-    );
-
-    // Fetch data from all tables
-    for (const [tableName, table] of tables) {
-      console.log("exporting table", tableName);
-      try {
-        const tableData = await db.select().from(table as $IntentionalAny);
-        exportData[tableName] = tableData;
-      } catch (error) {
-        console.error(`Failed to export table ${tableName}:`, error);
-        exportData[tableName] = [];
-      }
-    }
-
-    return exportData;
-  } catch (error) {
-    console.error("Database export failed:", error);
-    throw error;
-  }
-};
+import { exportDatabase } from "./backup";
 
 const main = async () => {
   try {
-    const data = await exportDatabaseToJson();
+    const data = await exportDatabase(db);
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
     const fileName = `database-export-${timestamp}.json`;
     const filePath = path.join(process.cwd(), "database/backup", fileName);

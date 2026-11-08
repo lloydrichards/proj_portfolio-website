@@ -1,0 +1,205 @@
+.root {
+  --land-unrecorded: color-mix(
+    in srgb,
+    var(--foreground) 10%,
+    var(--background)
+  );
+  --land-earlier: color-mix(in srgb, var(--foreground) 40%, var(--background));
+  position: relative;
+  margin: 12px 0 22px;
+  text-align: center;
+}
+.globe {
+  display: block;
+  width: 100%;
+  height: 270px;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.globe:active {
+  cursor: grabbing;
+}
+.ocean {
+  fill: var(--background);
+}
+.country {
+  fill: var(--land-unrecorded);
+  stroke: var(--background);
+  stroke-width: 0.6;
+}
+.country[data-known="true"] {
+  fill: var(--land-earlier);
+}
+.rim {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 0.7;
+}
+.country[data-active="activity"],
+.country[data-active="visited"] {
+  fill: color-mix(in srgb, var(--primary) 36%, var(--background));
+}
+.country[data-active="lived"],
+.country[data-selected="true"] {
+  fill: var(--primary);
+  fill-opacity: 0.75;
+}
+.caption {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 3px auto 6px;
+  max-width: 100%;
+  min-height: 3.2em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-wrap: balance;
+}
+.key {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted-foreground);
+  font-size: 10px;
+}
+.activeKey::before,
+.historyKey::before,
+.unrecordedKey::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  background: var(--primary);
+  opacity: 0.75;
+}
+.historyKey::before {
+  background: var(--land-earlier);
+  opacity: 1;
+}
+.reset {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--muted-foreground);
+  background: var(--background);
+  border-radius: 6px;
+}
+.reset:hover {
+  color: var(--foreground);
+  background: var(--muted);
+}
+.reset:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+@media (max-width: 960px) {
+  .root {
+    margin: 4px 0 10px;
+  }
+  .globe {
+    height: 160px;
+  }
+  .caption {
+    margin: 0 auto 3px;
+    font-size: 11px;
+    max-width: none;
+  }
+  .key {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 960px) {
+  .globe {
+    height: 125px;
+  }
+}
+
+@media (max-width: 960px) {
+  .root {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    align-self: center;
+  }
+  .globe {
+    height: 100px;
+  }
+  .caption,
+  .key {
+    display: none;
+  }
+  .reset {
+    top: -8px;
+    right: -8px;
+    background: transparent;
+  }
+}
+
+@media (min-width: 961px) {
+  .root {
+    flex-shrink: 0;
+    margin: 8px 0 14px;
+  }
+  .globe {
+    height: clamp(110px, 24dvh, 240px);
+  }
+  .caption {
+    min-height: 1.6em;
+    margin: 2px auto 4px;
+  }
+}
+
+@media (min-width: 961px) {
+  .globe {
+    height: clamp(90px, 20dvh, 220px);
+  }
+}
+@media (min-width: 961px) and (max-height: 650px) {
+  .globe {
+    height: 90px;
+  }
+}
+@media (max-width: 960px) and (max-height: 500px) {
+  .globe {
+    height: 56px;
+  }
+}
+
+.unrecordedKey::before {
+  background: var(--land-unrecorded);
+  opacity: 1;
+  border: 1px solid var(--border);
+}
+
+.activityKey::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  background: color-mix(in srgb, var(--primary) 36%, var(--background));
+}
+.mobileKey {
+  display: none;
+}
+@media (max-width: 960px) {
+  .mobileKey {
+    display: flex;
+    grid-column: 1 / -1;
+    gap: 8px;
+    margin: 2px 0 6px;
+    font-size: 9px;
+  }
+  .mobileKey span::before {
+    width: 6px;
+    height: 6px;
+    margin-right: 3px;
+  }
+}

@@ -9,6 +9,7 @@ import {
   typefaceHeading2,
   typefaceMeta,
 } from "@/components/tokens/typeface";
+import { createPageMetadata } from "@/lib/seo";
 import { Dataset } from "@/services/Dataset/Dataset";
 import { OccupationService } from "@/services/Dataset/OccupationService";
 import { Portfolio } from "@/services/Portfolio";
@@ -20,6 +21,11 @@ import { CvViewToggle } from "./cv-view-toggle";
 import { getCvData } from "./data/get-cv-data";
 import { defaultCvVariant } from "./data/variants";
 import type { OccupationData } from "./types";
+
+export const metadata = createPageMetadata({
+  title: defaultCvVariant.pageTitle,
+  description: defaultCvVariant.schemaDescription,
+});
 
 const isDev = process.env.NODE_ENV === "development";
 

@@ -1,36 +1,47 @@
 import type { Metadata } from "next";
 import { siteMetadata } from "@/lib/metadata";
+import {
+  labArtwork,
+  type SocialCardKind,
+  socialCardSize,
+} from "@/lib/social-card";
 import { makeOGImageURL } from "@/services/utils";
 
 type PageSEOProps = {
   title: string;
   description?: string;
   image?: string;
+  artwork?: string;
+  kind?: SocialCardKind;
 } & Metadata;
 
 export function createPageMetadata({
   title,
-  description,
+  description = siteMetadata.description,
   image,
+  artwork,
+  kind = "page",
   ...rest
 }: PageSEOProps): Metadata {
+  const url = image || makeOGImageURL({ title, description, artwork, kind });
+  const images = [{ url, ...socialCardSize, alt: `${title} | Lloyd Richards` }];
   return {
     title,
-    description: description || siteMetadata.description,
+    description,
     openGraph: {
       title: `${title} | ${siteMetadata.title}`,
-      description: description || siteMetadata.description,
+      description,
       url: "./",
       siteName: siteMetadata.title,
-      images: image ? [image] : [siteMetadata.social.socialBanner],
-      locale: siteMetadata.language,
+      images,
+      locale: siteMetadata.locale,
       type: "website",
     },
     twitter: {
       title: `${title} | ${siteMetadata.title}`,
-      description: description || siteMetadata.description,
-      card: "summary",
-      images: image ? [image] : [siteMetadata.siteLogo],
+      description,
+      card: "summary_large_image",
+      images,
     },
     ...rest,
   };
@@ -41,31 +52,34 @@ export const createOGImageMetadata = ({
   description,
   date,
   tags,
+  id,
+  socialImage,
   ...rest
 }: {
   title: string;
   description: string;
   tags: string[];
-  date: Date;
-} & Record<string, unknown>) => ({
-  title,
-  description,
-  tags,
-  date,
-  openGraph: {
-    title: `${title} | ${siteMetadata.title}`,
-    description: description || siteMetadata.description,
-    url: "./",
-    siteName: siteMetadata.title,
-    images: [makeOGImageURL({ title, description, tags, date })],
-    locale: siteMetadata.language,
-    type: "website",
-  },
-  twitter: {
-    title: `${title} | ${siteMetadata.title}`,
-    description: description || siteMetadata.description,
-    card: "summary_large_image",
-    images: [makeOGImageURL({ title, description, tags, date })],
-  },
-  ...rest,
-});
+  date: Date | string;
+  id?: string;
+  socialImage?: string;
+} & Record<string, unknown>) => {
+  const image = makeOGImageURL({
+    title,
+    description,
+    tags,
+    date,
+    kind: "lab",
+    label: id ? `Lab ${id}` : "Lab",
+    artwork: labArtwork(id, socialImage),
+  });
+  return {
+    ...createPageMetadata({ title, description, image }),
+    title,
+    description,
+    tags,
+    date,
+    id,
+    socialImage,
+    ...rest,
+  };
+};

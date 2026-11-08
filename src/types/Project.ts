@@ -21,6 +21,7 @@ export class ProjectMeta extends Schema.Class<ProjectMeta>("ProjectMeta")({
   description: Schema.String,
   isFeatured: Schema.optional(Schema.Boolean),
   status: Schema.optional(ContentStatus),
+  socialImage: Schema.optional(Schema.String),
   date: Schema.DateFromString,
   category: Schema.Array(PROJECT_CATEGORY),
   image: Schema.String,

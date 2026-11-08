@@ -46,6 +46,8 @@ export class Portfolio extends Context.Service<Portfolio>()("app/Portfolio", {
                 lastModified: new Date(),
                 pathname: `/projects/${slug}`,
                 ogImageURL: makeOGImageURL({
+                  kind: "project",
+                  artwork: frontmatter.socialImage ?? frontmatter.image,
                   title: frontmatter.title,
                   description: frontmatter.description,
                   tags: [...frontmatter.category],

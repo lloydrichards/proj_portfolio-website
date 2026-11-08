@@ -3,9 +3,9 @@
   "version": "1.6.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "bun run social:prepare && next build",
     "clean": "rm -rf .next node_modules dist && bun install",
-    "dev": "next dev",
+    "dev": "bun run social:prepare && next dev",
     "start": "next start",
     "lint": "biome lint .",
     "lint:write": "biome lint --write .",
@@ -22,7 +22,8 @@
     "db:import": "bun run ./src/services/db/import.ts",
     "release": "semantic-release",
     "type-check": "tsgo --noEmit",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "social:prepare": "bun scripts/prepare-social-cards.tsx"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
@@ -76,7 +77,8 @@
     "three": "^0.187.0",
     "vaul": "^1.1.2",
     "vitest": "^5.1.0",
-    "zod": "^4.6.7"
+    "zod": "^4.6.7",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.6",

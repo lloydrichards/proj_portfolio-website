@@ -1,8 +1,7 @@
+import type { JourneyPersonalData } from "@/types/Journey";
 import type { Occupation } from "@/types/Occupation";
 import { timestamp } from "../model/dates";
 import type { JourneyRecord, Lane } from "../model/types";
-import { personalEvents } from "./events";
-import { places } from "./places";
 
 const categoryLane: Record<string, Lane> = {
   WORK: "Work",
@@ -12,6 +11,7 @@ const categoryLane: Record<string, Lane> = {
 };
 export function normalizeJourneyRecords(
   occupations: typeof Occupation.Array.Encoded,
+  { places, events: personalEvents }: JourneyPersonalData,
 ): JourneyRecord[] {
   const cv = occupations.map(
     (record): JourneyRecord => ({
@@ -36,6 +36,7 @@ export function normalizeJourneyRecords(
       organization: "",
       location: place.place,
       country: place.country,
+      geographicPlaceId: place.geographicPlaceId,
       placeKind: place.kind,
       endExclusive: true,
       description:

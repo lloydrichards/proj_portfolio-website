@@ -29,9 +29,15 @@ export default function JourneyDashboard({
             data.records,
             activePhase,
             navigation.selectedRecordId,
+            data.geographicPlaces,
           )
         : null,
-    [data.records, activePhase, navigation.selectedRecordId],
+    [
+      data.records,
+      data.geographicPlaces,
+      activePhase,
+      navigation.selectedRecordId,
+    ],
   );
   const selectedRecord = data.records.find(
     (record) => record.id === navigation.selectedRecordId,

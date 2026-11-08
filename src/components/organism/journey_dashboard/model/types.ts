@@ -25,6 +25,7 @@ export type JourneyRecord = {
   source: "CV database" | "Personal account";
   commitment?: number;
   country?: string;
+  geographicPlaceId?: string;
   placeKind?: "lived" | "visited";
   endExclusive?: boolean;
   note?: string;

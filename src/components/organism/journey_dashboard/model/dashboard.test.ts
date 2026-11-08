@@ -43,3 +43,27 @@ describe("dashboard data", () => {
     ]);
   });
 });
+
+it("starts at the earliest supplied record when work and education are absent, regardless of input order", () => {
+  const record = (id: string, start: string): JourneyRecord => ({
+    id,
+    start,
+    end: null,
+    lane: "Places",
+    title: id,
+    organization: "",
+    location: "",
+    description: "",
+    kind: "period",
+    source: "Personal account",
+  });
+  const records = [
+    record("middle", "2010"),
+    record("earliest", "1988-04"),
+    record("latest", "2020"),
+  ];
+  expect(prepareDashboard(records, "2026-11-08").range.start).toBe("1988-04");
+  expect(prepareDashboard(records.toReversed(), "2026-11-08").range.start).toBe(
+    "1988-04",
+  );
+});

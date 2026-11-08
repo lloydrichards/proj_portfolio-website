@@ -1,52 +1,13 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
-import { sql } from "drizzle-orm";
-import type { $IntentionalAny } from "@/types/helpers";
 import { db } from ".";
-import * as schema from "./schema";
+import { importDatabase } from "./backup";
 
 const importJsonToDatabase = async (fileName: string) => {
-  try {
-    const filePath = path.join(process.cwd(), "database/backup", fileName);
-    const fileContent = await Bun.file(filePath).text();
-    const importData = JSON.parse(fileContent) as Record<string, unknown[]>;
-
-    // Get all table names from schema
-    const tables = Object.entries(schema).filter(
-      ([_, value]) =>
-        typeof value === "object" && Symbol.for("drizzle:Name") in value,
-    );
-
-    // Import data into each table
-    for (const [tableName, table] of tables) {
-      try {
-        const tableData = importData[tableName];
-        if (!Array.isArray(tableData)) continue;
-
-        // Clear existing data using safe Drizzle API
-        await db.delete(table as $IntentionalAny);
-
-        // Reset auto-increment sequence for SQLite
-        await db.run(
-          sql`DELETE FROM sqlite_sequence WHERE name = ${tableName}`,
-        );
-
-        // Skip if no data to import
-        if (tableData.length === 0) continue;
-
-        // Insert new data
-        await db.insert(table as $IntentionalAny).values(tableData);
-        console.log(`Imported ${tableData.length} records into ${tableName}`);
-      } catch (error) {
-        console.error(`Failed to import table ${tableName}:`, error);
-      }
-    }
-
-    return { success: true, message: "Database import completed" };
-  } catch (error) {
-    console.error("Database import failed:", error);
-    throw error;
-  }
+  const filePath = path.join(process.cwd(), "database/backup", fileName);
+  const data: unknown = JSON.parse(await Bun.file(filePath).text());
+  await importDatabase(db, data);
+  return { success: true, message: "Database import completed" };
 };
 
 const main = async () => {

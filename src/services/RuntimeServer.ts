@@ -1,5 +1,6 @@
 import { Layer, ManagedRuntime } from "effect";
 import { Dataset } from "./Dataset/Dataset";
+import { JourneyService } from "./Dataset/JourneyService";
 import { OccupationService } from "./Dataset/OccupationService";
 import { GitHub } from "./GitHub";
 import { Laboratory } from "./Laboratory";
@@ -10,6 +11,7 @@ const MainLayer = Layer.suspend(() =>
     Laboratory.layer,
     Portfolio.layer,
     Dataset.layer,
+    JourneyService.layer,
     GitHub.layer,
     OccupationService.layer,
   ),

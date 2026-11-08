@@ -5,6 +5,6 @@ export default {
   schema: "./src/services/db/schema",
   dialect: "sqlite",
   dbCredentials: {
-    url: process.env.DB_FILE_NAME ?? "",
+    url: process.env.DB_FILE_NAME ?? "database/db.sqlite",
   },
 } satisfies Config;

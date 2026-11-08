@@ -1,13 +1,5 @@
-// Country uses a three-letter code. Dates retain the month/year precision supplied by Lloyd.
-export type PlaceRecord = {
-  id: string;
-  date: string;
-  end?: string | null;
-  place: string;
-  country: string;
-  kind: "lived" | "visited";
-  title: string;
-};
+import type { JourneyPlace } from "@/types/Journey";
+import { geographicPlaces } from "./geographic-places";
 
 // All entries were confirmed as places lived. Each next arrival ends the previous stay.
 const residences = [
@@ -102,7 +94,7 @@ const residences = [
   },
 ];
 
-const homes: PlaceRecord[] = residences.map((residence, index) => ({
+const homes: JourneyPlace[] = residences.map((residence, index) => ({
   ...residence,
   end: residences[index + 1]?.date ?? null,
   kind: "lived",
@@ -143,11 +135,16 @@ const visits = [
   { id: "mexico-2012", date: "2012-02", place: "Mexico", country: "MEX" },
 ];
 
-export const places: PlaceRecord[] = [
+export const places: JourneyPlace[] = [
   ...homes,
   ...visits.map((visit) => ({
     ...visit,
     kind: "visited" as const,
     title: `Visiting ${visit.place}`,
   })),
-];
+].map((place) => ({
+  ...place,
+  geographicPlaceId: geographicPlaces.find(
+    (city) => place.place.split(",")[0] === city.label,
+  )?.id,
+}));

@@ -1,3 +1,5 @@
+import { Schema } from "effect";
+
 /** Authored dates keep their supplied year, month, or day precision. */
 export type JourneyDate = string;
 
@@ -37,3 +39,65 @@ export type JourneyPersonalData = {
   events: JourneyEvent[];
   geographicPlaces: JourneyGeographicPlace[];
 };
+
+const date = Schema.String.check(
+  Schema.isPattern(
+    /^\d{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?)?$/,
+  ),
+);
+const country = Schema.String.check(Schema.isPattern(/^[A-Z]{3}$/));
+export const JourneyPersonalDataSchema = Schema.Struct({
+  places: Schema.mutable(
+    Schema.Array(
+      Schema.Struct({
+        id: Schema.NonEmptyString,
+        date,
+        end: Schema.optionalKey(Schema.NullOr(date)),
+        place: Schema.NonEmptyString,
+        country,
+        kind: Schema.Literals(["lived", "visited"]),
+        title: Schema.NonEmptyString,
+        geographicPlaceId: Schema.optionalKey(Schema.NonEmptyString),
+      }),
+    ),
+  ),
+  events: Schema.mutable(
+    Schema.Array(
+      Schema.Struct({
+        id: Schema.NonEmptyString,
+        date,
+        title: Schema.NonEmptyString,
+        text: Schema.String,
+        kind: Schema.Literals(["pivot", "learning"]),
+        contextLane: Schema.Literals(["Work", "Volunteer", "Education"]),
+        location: Schema.optionalKey(Schema.String),
+        dateNote: Schema.optionalKey(Schema.String),
+        phaseLeadFor: Schema.optionalKey(
+          Schema.String.check(Schema.isPattern(/^cv-\d+$/)),
+        ),
+        afterRecordId: Schema.optionalKey(
+          Schema.String.check(Schema.isPattern(/^cv-\d+$/)),
+        ),
+      }),
+    ),
+  ),
+  geographicPlaces: Schema.mutable(
+    Schema.Array(
+      Schema.Struct({
+        id: Schema.NonEmptyString,
+        label: Schema.NonEmptyString,
+        country,
+        coordinates: Schema.mutable(
+          Schema.Tuple([
+            Schema.Finite.check(
+              Schema.isBetween({ minimum: -180, maximum: 180 }),
+            ),
+            Schema.Finite.check(
+              Schema.isBetween({ minimum: -90, maximum: 90 }),
+            ),
+          ]),
+        ),
+      }),
+    ),
+  ),
+});

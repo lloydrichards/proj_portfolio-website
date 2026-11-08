@@ -6,7 +6,6 @@ import { recordDates } from "../model/dates";
 import { locationHistory } from "../model/geography";
 import { recordPresentation } from "../model/record-presentation";
 import type { JourneyPhase } from "../model/types";
-import styles from "./phase-places.module.css";
 
 export default function PhasePlaces({ phase }: { phase: JourneyPhase }) {
   const [open, setOpen] = useState(false);
@@ -91,11 +90,11 @@ export default function PhasePlaces({ phase }: { phase: JourneyPhase }) {
   }, [open]);
   if (!homes.length && !visits.length && !activities.length) return null;
   return (
-    <div ref={root} className={styles.root}>
+    <div ref={root} className="relative mt-3 mb-4">
       {[...homes, ...visits].map((record) => (
         <span
           key={record.id}
-          className={styles.anchor}
+          className="block h-0 scroll-mt-[calc(var(--journey-sidebar-height,180px)+24px)]"
           aria-hidden="true"
           id={
             phase.continuing.includes(record)
@@ -107,28 +106,29 @@ export default function PhasePlaces({ phase }: { phase: JourneyPhase }) {
       <button
         ref={trigger}
         type="button"
-        className={styles.trigger}
+        className="inline-flex min-h-11 cursor-pointer items-center gap-1.75 text-[11px] text-muted-foreground hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary aria-expanded:text-primary"
         aria-expanded={open}
         aria-controls={id}
         aria-haspopup="dialog"
         onClick={() => setOpen(!open)}
       >
-        <MapPin size={13} aria-hidden="true" />
+        <MapPin size={13} aria-hidden="true" className="shrink-0" />
         <span>{summary}</span>
-        <ChevronDown size={13} aria-hidden="true" />
+        <ChevronDown size={13} aria-hidden="true" className="shrink-0" />
       </button>
       <div
         ref={panel}
         id={id}
         hidden={!open}
-        className={styles.panel}
+        className="absolute top-full left-0 z-5 max-h-[min(360px,calc(100dvh-var(--journey-sidebar-height,180px)-80px))] w-[min(380px,100%)] overflow-y-auto overscroll-contain rounded-lg border border-border bg-background px-4 pb-4 shadow-[0_8px_20px_rgb(0_0_0/15%)]"
         role="dialog"
         aria-label={`Places in ${phase.label}`}
       >
-        <div className={styles.heading}>
+        <div className="sticky top-0 flex items-center justify-between gap-2 bg-background py-1 text-[11px]">
           <span>Places · {phase.label}</span>
           <button
             ref={close}
+            className="grid size-11 shrink-0 cursor-pointer place-items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             type="button"
             aria-label="Close place details"
             onClick={() => {
@@ -140,37 +140,52 @@ export default function PhasePlaces({ phase }: { phase: JourneyPhase }) {
           </button>
         </div>
         {!!homes.length && (
-          <section>
-            <h3>Lived</h3>
-            <ul>
+          <section className="[&+section]:mt-5">
+            <h3 className="mb-2 text-xs font-medium text-primary">Lived</h3>
+            <ul className="grid gap-2.5">
               {homes.map((record) => (
-                <li key={record.id}>
+                <li
+                  key={record.id}
+                  className="grid gap-0.5 text-xs leading-[1.6]"
+                >
                   <span>{record.location}</span>
-                  <small>{recordDates(record)}</small>
+                  <small className="text-[10px] text-muted-foreground wrap-anywhere">
+                    {recordDates(record)}
+                  </small>
                 </li>
               ))}
             </ul>
           </section>
         )}
         {!!visits.length && (
-          <section>
-            <h3>Visited</h3>
-            <ul>
+          <section className="[&+section]:mt-5">
+            <h3 className="mb-2 text-xs font-medium text-primary">Visited</h3>
+            <ul className="grid gap-2.5">
               {visits.map((record) => (
-                <li key={record.id}>
+                <li
+                  key={record.id}
+                  className="grid gap-0.5 text-xs leading-[1.6]"
+                >
                   <span>{record.location}</span>
-                  <small>{recordDates(record)}</small>
+                  <small className="text-[10px] text-muted-foreground wrap-anywhere">
+                    {recordDates(record)}
+                  </small>
                 </li>
               ))}
             </ul>
           </section>
         )}
         {!!activities.length && (
-          <section>
-            <h3>Work &amp; conferences</h3>
-            <ul>
+          <section className="[&+section]:mt-5">
+            <h3 className="mb-2 text-xs font-medium text-primary">
+              Work &amp; conferences
+            </h3>
+            <ul className="grid gap-2.5">
               {activities.map((place) => (
-                <li key={place.code}>
+                <li
+                  key={place.code}
+                  className="grid gap-0.5 text-xs leading-[1.6]"
+                >
                   <span>{countryNames[place.code]}</span>
                   {place.recordIds.map((recordId) => {
                     const record = records.find(
@@ -178,7 +193,10 @@ export default function PhasePlaces({ phase }: { phase: JourneyPhase }) {
                     );
                     return (
                       record && (
-                        <small key={record.id}>
+                        <small
+                          key={record.id}
+                          className="text-[10px] text-muted-foreground wrap-anywhere"
+                        >
                           {recordPresentation(record).heading} ·{" "}
                           {recordDates(record)}
                         </small>

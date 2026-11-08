@@ -1,10 +1,34 @@
 "use client";
+import { cva } from "class-variance-authority";
 import { type CSSProperties, useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 import { recordDates } from "../model/dates";
 import { recordPresentation } from "../model/record-presentation";
 import type { JourneyPhase } from "../model/types";
-import styles from "./timeline.module.css";
 import { type TimelineData, timelineLane, timePosition } from "./timeline-data";
+
+const timelineMark = cva(
+  "pointer-events-none absolute left-[calc(var(--lane)+var(--offset))] top-[var(--time)] z-[3] bg-muted-foreground",
+  {
+    variants: {
+      shape: {
+        duration: "w-2 h-[max(2px,var(--duration))] -translate-x-1/2",
+        point: "size-1.5 rounded-full -translate-1/2",
+        event:
+          "size-[7px] -translate-1/2 rotate-45 outline-2 outline-background",
+      },
+      active: { true: "bg-primary" },
+      inspected: { true: "bg-foreground outline outline-primary" },
+    },
+    compoundVariants: [
+      {
+        shape: "event",
+        inspected: true,
+        class: "outline-2 outline-background",
+      },
+    ],
+  },
+);
 
 export default function JourneyTimeline({
   data,
@@ -48,16 +72,20 @@ export default function JourneyTimeline({
   );
   return (
     <>
-      <div className={styles.desktopPlot} id="journey-timeline" tabIndex={-1}>
-        <div className={styles.laneLabels}>
+      <div
+        className="hidden min-[961px]:flex min-[961px]:flex-col min-[961px]:flex-[1_0_160px] min-[961px]:min-h-40 min-[961px]:pl-8 scroll-mt-6 focus:outline-none"
+        id="journey-timeline"
+        tabIndex={-1}
+      >
+        <div className="grid grid-cols-3 mb-2 shrink-0 text-center text-[10px] leading-[1.2] tracking-tight text-muted-foreground">
           {lanes.map((lane) => (
             <span key={lane}>{lane === "Education" ? "Learning" : lane}</span>
           ))}
         </div>
-        <div className={styles.field}>
+        <div className="relative flex-1 min-h-30 mb-3.5">
           {ticks.map(({ year, position: tickPosition }) => (
             <span
-              className={styles.year}
+              className="absolute top-(--time) -left-8 -translate-y-1/2 text-[10px] leading-none text-muted-foreground tabular-nums"
               key={year}
               style={
                 {
@@ -71,7 +99,7 @@ export default function JourneyTimeline({
           {lanes.map((lane, index) => (
             <span
               key={lane}
-              className={styles.track}
+              className="absolute left-(--lane) inset-y-0 border-l border-border"
               style={
                 {
                   "--lane": `${(index + 0.5) * (100 / lanes.length)}%`,
@@ -83,7 +111,7 @@ export default function JourneyTimeline({
             <a
               key={chapter.id}
               href={`#${chapter.id}`}
-              className={styles.phaseBand}
+              className="absolute inset-x-0 z-2 border-t border-border hover:bg-[color-mix(in_srgb,var(--primary)_8%,transparent)] aria-[current=location]:border aria-[current=location]:border-primary aria-[current=location]:bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] aria-[current=location]:outline-none"
               data-compact={position(chapter.start) - position(chapter.end) < 5}
               aria-label={`${chapter.label}: ${chapter.title}`}
               aria-current={
@@ -102,7 +130,17 @@ export default function JourneyTimeline({
           {marks.map(({ record, channel, channels, point }) => (
             <span
               key={record.id}
-              className={point ? styles.mapDot : styles.duration}
+              className={cn(
+                timelineMark({
+                  shape: point
+                    ? record.lane === "Events"
+                      ? "event"
+                      : "point"
+                    : "duration",
+                  active: activeIds.has(record.id),
+                  inspected: selectedRecordId === record.id,
+                }),
+              )}
               data-event={point && record.lane === "Events"}
               data-active={activeIds.has(record.id)}
               data-inspected={selectedRecordId === record.id}
@@ -121,7 +159,7 @@ export default function JourneyTimeline({
             <button
               type="button"
               key={`hit-${record.id}`}
-              className={styles.recordHit}
+              className="absolute w-6 min-h-6 -translate-1/2 border-0 rounded-[3px] bg-transparent z-4 cursor-pointer hover:bg-[color-mix(in_srgb,var(--primary)_14%,transparent)] hover:outline hover:outline-primary aria-pressed:bg-[color-mix(in_srgb,var(--primary)_14%,transparent)] aria-pressed:outline aria-pressed:outline-primary"
               style={{
                 top: `${point ? position(record.start) : (position(record.start) + position(record.end ?? range.end)) / 2}%`,
                 left: `calc(${(lanes.indexOf(timelineLane(record.lane)) + 0.5) * (100 / lanes.length)}% + ${(channel - (channels - 1) / 2) * 18}px)`,
@@ -137,16 +175,23 @@ export default function JourneyTimeline({
           ))}
         </div>
       </div>
-      <nav className={styles.mobileOverview} aria-label="Journey phases">
-        <div className={styles.overviewDates}>
+      <nav
+        className="hidden [@media(max-width:960px)]:block col-span-full min-w-0"
+        aria-label="Journey phases"
+      >
+        <div className="hidden">
           <span>Present</span>
           <span>{range.start.slice(0, 4)}</span>
         </div>
-        <div ref={overview} className={styles.phaseStrip}>
+        <div
+          ref={overview}
+          className="relative flex overflow-x-auto gap-0.5 scrollbar-thin"
+        >
           {phases.map((phase) => (
             <button
               type="button"
               key={phase.id}
+              className="basis-11 shrink-0 min-w-11 min-h-11 border-b-[3px] border-border text-[9px] aria-[current=location]:border-primary aria-[current=location]:text-primary aria-[current=location]:bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] focus-visible:outline-2 focus-visible:outline-primary focus-visible:-outline-offset-2"
               data-phase={phase.id}
               aria-label={`${phase.label}: ${phase.title}`}
               aria-current={
@@ -160,9 +205,15 @@ export default function JourneyTimeline({
           ))}
         </div>
       </nav>
-      <div className={styles.picker}>
-        <label htmlFor="journey-chapter">Explore the timeline</label>
+      <div className="hidden min-[961px]:block shrink-0 pt-2.5 border-t border-border">
+        <label
+          className="block text-[11px] text-muted-foreground mb-1"
+          htmlFor="journey-chapter"
+        >
+          Explore the timeline
+        </label>
         <select
+          className="w-full max-w-full min-h-11 py-2 pl-2.5 pr-7.5 border border-border rounded bg-background text-foreground font-[inherit] text-[13px] cursor-pointer"
           id="journey-chapter"
           value={activePhase.id}
           onChange={(event) => {

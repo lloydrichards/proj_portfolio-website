@@ -10,7 +10,7 @@ const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
   serverExternalPackages: ["@sparticuz/chromium-min", "puppeteer-core"],
   outputFileTracingIncludes: {
-    database: ["./database/**/*"],
+    "/*": [process.env.DB_FILE_NAME ?? "./database/db.sqlite"],
   },
 } as NextConfig;
 

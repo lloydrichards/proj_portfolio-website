@@ -4,10 +4,13 @@ import { drizzle } from "drizzle-orm/libsql";
 import { Context, Layer } from "effect";
 import * as schema from "./schema";
 
-// Helper to create database client
 const createDBClient = () => {
   const dbFileName = process.env.DB_FILE_NAME ?? "database/db.sqlite";
-  const dbPath = path.join(process.cwd(), dbFileName);
+  // next.config.ts explicitly includes the database in server traces.
+  const dbPath = path.join(
+    /* turbopackIgnore: true */ process.cwd(),
+    dbFileName,
+  );
   return createClient({ url: `file:${dbPath}` });
 };
 

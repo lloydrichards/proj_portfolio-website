@@ -1,0 +1,72 @@
+.callout {
+  position: relative;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 12px;
+  margin: 20px 0 8px;
+  padding: 16px;
+  border-left: 1px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 5%, var(--background));
+  scroll-margin-top: 40px;
+}
+.icon {
+  margin-top: 12px;
+  color: var(--primary);
+}
+.callout h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.callout button {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  min-height: 44px;
+  cursor: pointer;
+}
+.date {
+  font-size: 10px;
+  color: var(--muted-foreground);
+  font-weight: 400;
+  white-space: nowrap;
+}
+.text {
+  font-size: 13px;
+  line-height: 1.75;
+  max-width: 65ch;
+}
+.callout[data-selected="true"] {
+  background: color-mix(in srgb, var(--primary) 8%, var(--background));
+}
+.callout[data-selected="true"] h4 {
+  color: var(--primary);
+}
+.callout button:focus-visible,
+.note summary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.callout:focus-visible {
+  outline: none;
+}
+.note {
+  font-size: 11px;
+  line-height: 1.7;
+  margin-top: 8px;
+}
+.note summary {
+  min-height: 44px;
+  align-content: center;
+  cursor: pointer;
+  color: var(--muted-foreground);
+}
+@media (max-width: 960px) {
+  .callout {
+    scroll-margin-top: calc(var(--journey-sidebar-height, 180px) + 56px);
+  }
+}

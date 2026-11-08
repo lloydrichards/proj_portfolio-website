@@ -203,21 +203,24 @@ describe("atomic backup restoration", () => {
     ["journeyPlace", "date", "2019-13"],
     ["journeyEvent", "kind", "promotion"],
     ["journeyCity", "latitude", 95],
-  ] as const)("rejects invalid %s.%s before replacing the original database", async (table, field, value) => {
-    const { client, database, directory } = await disposableDatabase();
-    try {
-      await seedJourney(database);
-      const before = await exportDatabase(database);
-      const invalid = structuredClone(before);
-      const row = invalid[table][0];
-      if (typeof row !== "object" || row === null)
-        throw new Error("Missing fixture row");
-      invalid[table][0] = { ...row, [field]: value };
-      await expect(importDatabase(database, invalid)).rejects.toThrow();
-      expect(await exportDatabase(database)).toEqual(before);
-    } finally {
-      client.close();
-      await rm(directory, { recursive: true, force: true });
-    }
-  });
+  ] as const)(
+    "rejects invalid %s.%s before replacing the original database",
+    async (table, field, value) => {
+      const { client, database, directory } = await disposableDatabase();
+      try {
+        await seedJourney(database);
+        const before = await exportDatabase(database);
+        const invalid = structuredClone(before);
+        const row = invalid[table][0];
+        if (typeof row !== "object" || row === null)
+          throw new Error("Missing fixture row");
+        invalid[table][0] = { ...row, [field]: value };
+        await expect(importDatabase(database, invalid)).rejects.toThrow();
+        expect(await exportDatabase(database)).toEqual(before);
+      } finally {
+        client.close();
+        await rm(directory, { recursive: true, force: true });
+      }
+    },
+  );
 });

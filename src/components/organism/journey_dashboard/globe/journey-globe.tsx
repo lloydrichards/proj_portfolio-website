@@ -56,8 +56,7 @@ const globeSurface = cva(
   {
     variants: {
       variant: {
-        dashboard:
-          "h-[clamp(90px,20dvh,220px)] touch-pan-y [@media(min-width:961px)_and_(max-height:650px)]:h-22.5 [@media(max-width:960px)]:h-[100px] [@media(max-width:960px)_and_(max-height:500px)]:h-14",
+        dashboard: "aspect-square h-auto touch-pan-y",
         standalone: "h-full touch-none",
       },
     },

@@ -23,7 +23,6 @@ export type CvVariant = {
   schemaJobTitle: string;
   schemaDescription: string;
   pdfFilename: string;
-  pdfPageFormat?: "A4";
   markdownFilename: string;
 };
 
@@ -120,7 +119,6 @@ export const cvVariants = [
     schemaDescription:
       "Design engineer combining interaction design, React, TypeScript, accessible interfaces, and reusable component systems for complex web products.",
     pdfFilename: "lloyd-richards-design-engineering-cv.pdf",
-    pdfPageFormat: "A4",
     markdownFilename: "lloyd-richards-design-engineering-cv.md",
   },
   {

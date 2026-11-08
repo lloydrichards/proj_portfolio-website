@@ -1,6 +1,8 @@
+import { sql } from "drizzle-orm";
 import type { SQLiteTable } from "drizzle-orm/sqlite-core";
 import type { $IntentionalAny } from "@/types/helpers";
 import type { db } from ".";
+import { readJourney } from "./journey-data";
 import {
   attribute,
   category,
@@ -55,11 +57,16 @@ export async function importDatabase(database: db, input: unknown) {
     if (!Array.isArray(data[name]))
       throw new Error(`Invalid backup table: ${name}`);
   await database.transaction(async (tx) => {
-    // A partial legacy backup may omit timeline tables. Foreign keys reject incompatible replacements.
+    // Legacy replacement temporarily removes occupations referenced by retained annotations.
+    await tx.run(sql`PRAGMA defer_foreign_keys = ON`);
     for (const [, table] of [...present].reverse()) await tx.delete(table);
     for (const [name, table] of present) {
       const rows = data[name] as unknown[];
       if (rows.length) await tx.insert(table).values(rows as $IntentionalAny);
     }
+    await readJourney(tx);
+    const violations = await tx.all(sql`PRAGMA foreign_key_check`);
+    if (violations.length)
+      throw new Error("Restored backup violates foreign key constraints");
   });
 }

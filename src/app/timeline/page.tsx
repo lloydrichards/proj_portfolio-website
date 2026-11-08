@@ -33,7 +33,7 @@ export default async function TimelinePage() {
   const asOf = new Date().toISOString();
   const data = prepareDashboard(records, asOf, personalData.geographicPlaces);
   return (
-    <main className="col-span-full min-w-0 px-4 pb-10 text-foreground selection:bg-primary selection:text-primary-foreground [@media(max-width:760px)]:px-2 [@media(max-width:760px)]:pb-6 [&_:focus-visible]:outline-2 [&_:focus-visible]:outline-offset-4 [&_:focus-visible]:outline-primary [&_article:focus-visible]:outline-none [&_article:focus-visible>h2]:outline-2 [&_article:focus-visible>h2]:outline-offset-[6px] [&_article:focus-visible>h2]:outline-primary [&_a]:underline-offset-[5px]">
+    <main className="col-span-full min-w-0 px-4 pb-10 text-foreground selection:bg-primary selection:text-primary-foreground [@media(max-width:760px)]:px-2 [@media(max-width:760px)]:pb-6 [&_:where(:focus-visible)]:outline-2 [&_:where(:focus-visible)]:outline-offset-4 [&_:where(:focus-visible)]:outline-primary [&_article:focus-visible]:outline-none [&_article:focus-visible>h2]:outline-2 [&_article:focus-visible>h2]:outline-offset-[6px] [&_article:focus-visible>h2]:outline-primary [&_a]:underline-offset-[5px]">
       <header className="mb-6 border-b border-border pt-6 pb-4 [@media(max-width:960px)]:mb-4 [@media(max-width:960px)]:pt-[18px] [@media(max-width:960px)]:pb-3">
         <h1 className="m-0 text-[clamp(28px,3vw,38px)] font-medium leading-[1.15] tracking-[-0.035em] text-balance [@media(max-width:960px)]:text-[28px]">
           Timeline

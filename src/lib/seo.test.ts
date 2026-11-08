@@ -5,6 +5,27 @@ import assets from "./social-assets.json";
 import { fitCardTitle, wrapCardText } from "./social-card";
 
 describe("social previews", () => {
+  it("carries a CV variant's role and skills into its matching preview", () => {
+    const metadata = createPageMetadata({
+      title: "Design Engineer CV",
+      description: "Accessible React interfaces",
+      kind: "cv",
+      social: {
+        label: "Design Engineer",
+        tags: ["Interaction Design", "React"],
+      },
+    });
+    const images = metadata.openGraph?.images as { url: string }[];
+    const url = new URL(images[0].url, "https://lloydrichards.dev");
+    expect(Object.fromEntries(url.searchParams)).toMatchObject({
+      v: "3",
+      kind: "cv",
+      label: "Design Engineer",
+      tags: "Interaction Design,React",
+    });
+    expect(metadata).not.toHaveProperty("social");
+    expect(metadata.twitter).toMatchObject({ images });
+  });
   it("gives ordinary pages the same large, named card on Open Graph and Twitter", () => {
     const metadata = createPageMetadata({
       title: "About",

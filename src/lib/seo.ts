@@ -13,6 +13,7 @@ type PageSEOProps = {
   image?: string;
   artwork?: string;
   kind?: SocialCardKind;
+  social?: { label?: string; tags?: string[]; description?: string };
 } & Metadata;
 
 export function createPageMetadata({
@@ -21,9 +22,11 @@ export function createPageMetadata({
   image,
   artwork,
   kind = "page",
+  social,
   ...rest
 }: PageSEOProps): Metadata {
-  const url = image || makeOGImageURL({ title, description, artwork, kind });
+  const url =
+    image || makeOGImageURL({ title, description, artwork, kind, ...social });
   const images = [{ url, ...socialCardSize, alt: `${title} | Lloyd Richards` }];
   return {
     title,

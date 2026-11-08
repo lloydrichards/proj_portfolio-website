@@ -23,6 +23,12 @@ import { defaultCvVariant } from "./data/variants";
 import type { OccupationData } from "./types";
 
 export const metadata = createPageMetadata({
+  kind: "cv",
+  social: {
+    label: defaultCvVariant.schemaJobTitle,
+    description: defaultCvVariant.headline,
+    tags: [...defaultCvVariant.skillOrder.slice(0, 4)],
+  },
   title: defaultCvVariant.pageTitle,
   description: defaultCvVariant.schemaDescription,
 });

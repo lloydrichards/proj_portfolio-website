@@ -4,7 +4,12 @@ import { ImageResponse } from "next/og";
 import { SocialCard } from "@/components/social/social-card";
 import { siteMetadata } from "@/lib/metadata";
 import assets from "@/lib/social-assets.json";
-import { type SocialCardKind, socialCardSize } from "@/lib/social-card";
+import {
+  collectionArtwork,
+  type SocialCardKind,
+  socialArtwork,
+  socialCardSize,
+} from "@/lib/social-card";
 
 export const runtime = "nodejs";
 const fontDirectory = path.join(process.cwd(), "public/fonts/roboto-mono");
@@ -22,7 +27,11 @@ export async function GET(request: Request) {
     const kind: SocialCardKind =
       requestedKind === "home" ||
       requestedKind === "project" ||
-      requestedKind === "lab"
+      requestedKind === "lab" ||
+      requestedKind === "timeline" ||
+      requestedKind === "projects" ||
+      requestedKind === "labs" ||
+      requestedKind === "cv"
         ? requestedKind
         : "page";
     const title = (params.get("title") || siteMetadata.title).slice(0, 240);
@@ -32,7 +41,7 @@ export async function GET(request: Request) {
     const tags = (params.get("tags") || "")
       .split(",")
       .filter(Boolean)
-      .slice(0, 3)
+      .slice(0, kind === "cv" ? 4 : 3)
       .map((tag) => tag.trim().slice(0, 60));
     const [regular, bold, globe] = await resources;
     const artwork = params.get("artwork");
@@ -44,7 +53,22 @@ export async function GET(request: Request) {
         // Artwork is optional; the title and metadata still form a complete card.
       }
     }
+    const collection =
+      kind === "projects" || kind === "labs"
+        ? await Promise.all(
+            collectionArtwork[kind].map(async (source) => {
+              const prepared = socialArtwork(source);
+              if (!prepared) return undefined;
+              try {
+                return `data:image/png;base64,${(await readFile(path.join(process.cwd(), "public", prepared))).toString("base64")}`;
+              } catch {
+                return undefined;
+              }
+            }),
+          )
+        : [];
     const props = {
+      collection,
       kind,
       title,
       description,
@@ -53,9 +77,16 @@ export async function GET(request: Request) {
       date: params.get("date")?.slice(0, 50),
       globe: `data:image/svg+xml;base64,${globe.toString("base64")}`,
     };
-    const render = async (artworkImage?: string) => {
+    const render = async (
+      artworkImage?: string,
+      collectionImages = collection,
+    ) => {
       const response = new ImageResponse(
-        <SocialCard {...props} image={artworkImage} />,
+        <SocialCard
+          {...props}
+          image={artworkImage}
+          collection={collectionImages}
+        />,
         {
           ...socialCardSize,
           fonts: [
@@ -75,8 +106,8 @@ export async function GET(request: Request) {
     try {
       body = await render(image);
     } catch (error) {
-      if (!image) throw error;
-      body = await render();
+      if (!image && !collection.some(Boolean)) throw error;
+      body = await render(undefined, []);
     }
     return new Response(body, {
       headers: {

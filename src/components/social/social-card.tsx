@@ -84,6 +84,7 @@ export type SocialCardProps = {
   date?: string;
   image?: string;
   globe: string;
+  collection?: (string | undefined)[];
 };
 export function SocialCard({
   kind,
@@ -94,17 +95,22 @@ export function SocialCard({
   date,
   image,
   globe,
+  collection = [],
 }: SocialCardProps) {
   const year = date?.match(/\b(?:19|20)\d{2}\b/)?.[0];
   const section =
     label ||
-    { home: "Portfolio", page: title, project: "Project", lab: "Lab" }[kind];
-  const heading = fitCardTitle(
-    title,
-    image ? 344 : 1024,
-    image ? 292 : 234,
-    image ? 54 : 64,
-  );
+    {
+      home: "Portfolio",
+      page: title,
+      project: "Project",
+      lab: "Lab",
+      timeline: "Timeline",
+      projects: "Projects",
+      labs: "Labs",
+      cv: "Curriculum Vitae",
+    }[kind];
+  const heading = fitCardTitle(title, image ? 344 : 1024, 234, image ? 54 : 64);
   const tagLine = tags.slice(0, 2).join(" / ");
   return (
     <div
@@ -194,6 +200,198 @@ export function SocialCard({
             </Tile>
           ))}
         </>
+      ) : kind === "timeline" ? (
+        <>
+          <Tile
+            x={32}
+            y={42}
+            width={496}
+            height={488}
+            style={{
+              background: "transparent",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={globe}
+              alt="Countries Lloyd has lived in and visited"
+              width={496}
+              height={496}
+            />
+          </Tile>
+          <Tile
+            x={552}
+            y={48}
+            width={600}
+            height={286}
+            style={{
+              padding: 36,
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <Lines lines={["Timeline"]} size={64} bold />
+            <Lines lines={wrapCardText(description, 36, 4)} size={23} />
+          </Tile>
+          {["Work", "Learning", "Community", "Places"].map((item, i) => (
+            <Tile
+              key={item}
+              x={552 + (i % 2) * 306}
+              y={346 + Math.floor(i / 2) * 98}
+              width={294}
+              height={86}
+              style={{
+                background: i === 3 ? color.green : color.greenMuted,
+                color: i === 3 ? color.background : color.foreground,
+                alignItems: "center",
+                padding: 28,
+                fontSize: 25,
+              }}
+            >
+              {item}
+            </Tile>
+          ))}
+        </>
+      ) : kind === "projects" || kind === "labs" ? (
+        <>
+          <Tile
+            x={48}
+            y={48}
+            width={432}
+            height={302}
+            style={{
+              padding: 32,
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <Lines lines={[title]} size={64} bold />
+            <Lines lines={wrapCardText(description, 25, 4)} size={23} />
+          </Tile>
+          <Tile
+            x={48}
+            y={362}
+            width={432}
+            height={168}
+            style={{
+              background: color.green,
+              color: color.background,
+              padding: 32,
+              alignItems: "center",
+              gap: 24,
+            }}
+          >
+            <span style={{ fontSize: 76, fontWeight: 700 }}>
+              {assets.counts[kind]}
+            </span>
+            <Lines
+              lines={
+                kind === "labs"
+                  ? ["experiments", "& prototypes"]
+                  : ["selected", "projects"]
+              }
+              size={23}
+            />
+          </Tile>
+          {[
+            { x: 492, y: 48, width: 660, height: 282 },
+            { x: 492, y: 342, width: 324, height: 188 },
+            { x: 828, y: 342, width: 324, height: 188 },
+          ].map((rect, i) => (
+            <Tile
+              key={`${rect.x}-${rect.y}`}
+              {...rect}
+              style={{ background: i === 0 ? color.card : color.greenMuted }}
+            >
+              {collection[i] ? (
+                <img
+                  src={collection[i]}
+                  alt={
+                    kind === "labs"
+                      ? "An experiment from the lab"
+                      : "Selected project artwork"
+                  }
+                  width={rect.width}
+                  height={rect.height}
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    padding: 28,
+                    fontSize: 30,
+                  }}
+                >
+                  {kind === "labs"
+                    ? "Experiments & prototypes"
+                    : "Design & development"}
+                </div>
+              )}
+            </Tile>
+          ))}
+        </>
+      ) : kind === "cv" ? (
+        <>
+          <Tile
+            x={48}
+            y={48}
+            width={636}
+            height={302}
+            style={{
+              padding: 36,
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <Lines lines={["Lloyd", "Richards"]} size={76} bold />
+            <Lines
+              lines={wrapCardText(label || "Fullstack Engineer", 30, 2)}
+              size={26}
+            />
+          </Tile>
+          <Tile
+            x={48}
+            y={362}
+            width={636}
+            height={168}
+            style={{
+              background: color.green,
+              color: color.background,
+              padding: 30,
+              alignItems: "center",
+            }}
+          >
+            <Lines lines={wrapCardText(description, 39, 4)} size={23} />
+          </Tile>
+          <Tile
+            x={696}
+            y={48}
+            width={456}
+            height={482}
+            style={{
+              padding: 32,
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <Lines lines={wrapCardText(title, 17, 3)} size={36} bold />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 16,
+                color: color.green,
+              }}
+            >
+              {tags.slice(0, 4).map((tag) => (
+                <Lines key={tag} lines={wrapCardText(tag, 26, 2)} size={24} />
+              ))}
+            </div>
+          </Tile>
+        </>
       ) : image ? (
         <>
           <Tile
@@ -207,7 +405,13 @@ export function SocialCard({
               justifyContent: "space-between",
             }}
           >
-            <Lines lines={heading.lines} size={heading.size} bold />
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <span style={{ color: color.green, fontSize: 21 }}>
+                {section}
+                {year ? ` · ${year}` : ""}
+              </span>
+              <Lines lines={heading.lines} size={heading.size} bold />
+            </div>
             <Lines lines={wrapCardText(description, 27, 3)} size={20} />
           </Tile>
           <Tile
@@ -285,10 +489,7 @@ export function SocialCard({
               lines={
                 tags.length
                   ? tags.slice(0, 3).map((tag) => wrapCardText(tag, 22, 1)[0])
-                  : [
-                      `${assets.counts.projects} projects`,
-                      `${assets.counts.labs} labs`,
-                    ]
+                  : [section, ...(year ? [year] : [])]
               }
               size={23}
             />

@@ -11,6 +11,7 @@ import {
   pipe,
   Schema,
 } from "effect";
+import { labArtwork } from "@/lib/social-card";
 import { ImportError, ValidationError } from "@/types/Errors";
 import { Lab, LabMeta } from "@/types/Lab";
 import { LAB_PATH } from "./consts";
@@ -61,6 +62,9 @@ export class Laboratory extends Context.Service<Laboratory>()(
                 slug,
                 lastModified: new Date(),
                 ogImageURL: makeOGImageURL({
+                  kind: "lab",
+                  label: `Lab ${metadata.id}`,
+                  artwork: labArtwork(metadata.id, metadata.socialImage),
                   title: metadata.title,
                   description: metadata.description,
                   tags: [...metadata.tags],

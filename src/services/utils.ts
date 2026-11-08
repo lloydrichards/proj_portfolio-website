@@ -1,5 +1,5 @@
 import { formatDate } from "@/lib/format";
-import { getBaseUrl } from "@/lib/utils";
+import { type SocialCardKind, socialArtwork } from "@/lib/social-card";
 
 export const notEmpty = <T>(value: T | null | undefined): value is T => {
   return value !== null && value !== undefined;
@@ -17,13 +17,24 @@ export const makeOGImageURL = ({
   description,
   date,
   tags,
+  kind = "page",
+  artwork,
+  label,
 }: {
   title: string;
   description: string;
   tags?: Array<string>;
-  date?: Date;
+  date?: Date | string;
+  kind?: SocialCardKind;
+  artwork?: string;
+  label?: string;
 }) => {
-  const baseUrl = new URL(`${getBaseUrl()}/api/og`);
+  const baseUrl = new URL("/api/og", "https://lloydrichards.dev");
+  baseUrl.searchParams.set("v", "2");
+  baseUrl.searchParams.set("kind", kind);
+  const image = socialArtwork(artwork);
+  if (image) baseUrl.searchParams.set("artwork", image);
+  if (label) baseUrl.searchParams.set("label", label);
   baseUrl.searchParams.set("title", title);
   baseUrl.searchParams.set("description", description);
   if (tags) {

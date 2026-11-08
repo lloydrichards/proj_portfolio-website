@@ -7,6 +7,7 @@ export class LabMeta extends Schema.Class<LabMeta>("LabMeta")({
   date: Schema.DateFromString,
   isFeatured: Schema.optional(Schema.Boolean),
   status: Schema.optional(ContentStatus),
+  socialImage: Schema.optional(Schema.String),
   description: Schema.String,
   tags: Schema.Array(Schema.String),
   repo: Schema.optional(Schema.String),

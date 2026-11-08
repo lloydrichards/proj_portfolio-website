@@ -1,0 +1,37 @@
+{
+  "counts": {
+    "labs": 48,
+    "projects": 19
+  },
+  "artwork": {
+    "/images/projects/1500/thumb_spanish-food-forest.webp": "/images/social/artwork/82e30aff9ad0ad89.png",
+    "/images/projects/1901/thumb_mimirHome_visualization.webp": "/images/social/artwork/97c324d19189c946.png",
+    "/images/projects/2000/thumb_lifeofplastic.webp": "/images/social/artwork/e0d42cc9e73cddd1.png",
+    "/images/projects/2001/thumb_coming-soon.webp": "/images/social/artwork/521267342e70e6ae.png",
+    "/images/projects/2002/thumb_mimirOpen.webp": "/images/social/artwork/1ce39f876dddb021.png",
+    "/images/projects/2003/thumb_mimirHome.webp": "/images/social/artwork/49aabeeb27f357de.png",
+    "/images/projects/2005/preview_thumb.webp": "/images/social/artwork/8b18ef3ad63e75cf.png",
+    "/images/projects/2006/thumb_outlier-conf-websites.webp": "/images/social/artwork/35fac6a73f516477.png",
+    "/images/projects/thumb_outlier_conf.webp": "/images/social/artwork/131edec0ad61ad4e.png",
+    "/images/projects/thumb_hive_connector.webp": "/images/social/artwork/983b2796c064d7d9.png",
+    "/images/projects/thumb_hive_manager.webp": "/images/social/artwork/856c2308b2c00779.png",
+    "/images/projects/2300/thumb_sustainability-discourse-map.webp": "/images/social/artwork/7d86ea5b1ae2cab9.png",
+    "/images/projects/2301/thumb_migration-inititives-map.webp": "/images/social/artwork/4748e77e32ad6605.png",
+    "/images/projects/2400/thumb_outlier-micro-frontend.webp": "/images/social/artwork/460c5840fd03680b.png",
+    "/images/projects/2401/thumb_competitiveness-outlook-data-hub.webp": "/images/social/artwork/3e11ca6b20a2c38c.png",
+    "/images/projects/2402/thumb_cancer-monitoring-dashboard.webp": "/images/social/artwork/7af5853849081b47.png",
+    "/images/projects/2403/thumb_ipen-plastic-map.webp": "/images/social/artwork/6adfe31a2d0fa12e.png",
+    "/images/projects/2600/thumb_effect-boxes.webp": "/images/social/artwork/be3eaa03f20c6fc1.png",
+    "/images/projects/2601/sme-policy-index-01.png": "/images/social/artwork/93e1954a57dd8293.png",
+    "/labs/038-mosaic-design/mosaic-design-01.png": "/images/social/artwork/eeb91637f7b86045.png",
+    "/labs/058-rag-chunker/rag-playground.png": "/images/social/artwork/c84eba900f3ded3c.png",
+    "/labs/059-generative-data-viz/claude-screenshot.png": "/images/social/artwork/8df857bf7842bdff.png",
+    "/labs/063-llm-memory-filesystem/stack-effect-recipe-builder.png": "/images/social/artwork/3a4dea46c77d7fc0.png"
+  },
+  "labs": {
+    "038": "/labs/038-mosaic-design/mosaic-design-01.png",
+    "058": "/labs/058-rag-chunker/rag-playground.png",
+    "059": "/labs/059-generative-data-viz/claude-screenshot.png",
+    "063": "/labs/063-llm-memory-filesystem/stack-effect-recipe-builder.png"
+  }
+}

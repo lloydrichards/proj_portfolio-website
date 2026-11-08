@@ -12,7 +12,7 @@ export const siteMetadata = {
   icon: `/favicon.svg`,
   social: {
     email: "lloyd.d.richards@gmail.com",
-    socialBanner: `${process.env.BASE_PATH || ""}/images/og-image.png`,
+    socialBanner: "/api/og?v=2&kind=home",
     // mastodon: "https://mastodon.social/@mastodonuser",
     github: "https://github.com/lloydrichards",
     // x: "https://twitter.com/x",

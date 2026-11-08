@@ -27,8 +27,15 @@ export const metadata: Metadata = {
     description: siteMetadata.description,
     url: "./",
     siteName: siteMetadata.title,
-    images: [siteMetadata.social.socialBanner],
-    locale: siteMetadata.language,
+    images: [
+      {
+        url: siteMetadata.social.socialBanner,
+        width: 1200,
+        height: 630,
+        alt: "Lloyd Richards, interaction engineer. Data platforms and visualizations.",
+      },
+    ],
+    locale: siteMetadata.locale,
     type: "website",
   },
   alternates: {
@@ -49,7 +56,14 @@ export const metadata: Metadata = {
   twitter: {
     title: siteMetadata.title,
     card: "summary_large_image",
-    images: [siteMetadata.social.socialBanner],
+    images: [
+      {
+        url: siteMetadata.social.socialBanner,
+        width: 1200,
+        height: 630,
+        alt: "Lloyd Richards, interaction engineer. Data platforms and visualizations.",
+      },
+    ],
   },
 };
 

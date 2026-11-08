@@ -2,7 +2,6 @@ import { Effect, Exit } from "effect";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectInfoCard } from "@/app/projects/[slug]/project-info-card";
-import { siteMetadata } from "@/lib/metadata";
 import { createPageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { Portfolio } from "@/services/Portfolio";
@@ -25,12 +24,6 @@ export async function generateMetadata({
     title: project.title,
     description: project.description,
     image: project.ogImageURL,
-    twitter: {
-      title: `${project.title} | ${siteMetadata.title}`,
-      description: project.description || siteMetadata.description,
-      card: "summary_large_image",
-      images: [project.ogImageURL],
-    },
   });
 }
 

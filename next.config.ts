@@ -32,6 +32,10 @@ const nextConfig: NextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
   serverExternalPackages: ["@sparticuz/chromium-min", "puppeteer-core"],
   outputFileTracingIncludes: {
+    "/api/og": [
+      "./public/fonts/roboto-mono/**/*",
+      "./public/images/social/**/*",
+    ],
     "/*": [process.env.DB_FILE_NAME ?? "./database/db.sqlite"],
   },
 };

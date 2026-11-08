@@ -66,7 +66,12 @@ export const projectCvData = ({
   variant: CvVariant;
 }): ProjectedCvData => {
   const grouped = A.groupBy(
-    selectedOccupations({ data, variant }),
+    selectedOccupations({ data, variant }).map((occupation) => ({
+      ...occupation,
+      longDescription:
+        variant.occupationDescriptions?.[occupation.id] ??
+        occupation.longDescription,
+    })),
     (occupation) => occupation.category,
   );
 
@@ -77,6 +82,10 @@ export const projectCvData = ({
     projects: orderedProjects({
       projects: data.visibleProjects,
       projectIds: variant.featuredProjectIds,
-    }),
+    }).map((project) => ({
+      ...project,
+      description:
+        variant.projectDescriptions?.[project.id] ?? project.description,
+    })),
   };
 };

@@ -1,6 +1,8 @@
 import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
+const databaseFile = process.env.DB_FILE_NAME ?? "./database/db.sqlite";
+
 const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
@@ -36,7 +38,7 @@ const nextConfig: NextConfig = {
       "./public/fonts/roboto-mono/**/*",
       "./public/images/social/**/*",
     ],
-    "/*": [process.env.DB_FILE_NAME ?? "./database/db.sqlite"],
+    "/*": [databaseFile, `${databaseFile}-wal`, `${databaseFile}-shm`],
   },
 };
 

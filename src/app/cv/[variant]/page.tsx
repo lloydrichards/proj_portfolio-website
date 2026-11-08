@@ -24,6 +24,12 @@ export async function generateMetadata({
   const variant = Option.getOrElse(getCvVariantBySlug(slug), () => notFound());
 
   return createPageMetadata({
+    kind: "cv",
+    social: {
+      label: variant.schemaJobTitle,
+      description: variant.headline,
+      tags: [...variant.skillOrder.slice(0, 4)],
+    },
     title: variant.pageTitle,
     description: variant.schemaDescription,
   });

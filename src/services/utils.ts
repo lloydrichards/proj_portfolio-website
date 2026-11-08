@@ -30,7 +30,7 @@ export const makeOGImageURL = ({
   label?: string;
 }) => {
   const baseUrl = new URL("/api/og", "https://lloydrichards.dev");
-  baseUrl.searchParams.set("v", "2");
+  baseUrl.searchParams.set("v", "3");
   baseUrl.searchParams.set("kind", kind);
   const image = socialArtwork(artwork);
   if (image) baseUrl.searchParams.set("artwork", image);

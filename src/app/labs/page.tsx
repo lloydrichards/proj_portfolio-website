@@ -10,6 +10,7 @@ import { RuntimeServer } from "@/services/RuntimeServer";
 import { Lab } from "@/types/Lab";
 
 export const metadata = createPageMetadata({
+  kind: "labs",
   title: "Labs",
   description: "Rag tag collection of experiments and prototypes.",
 });

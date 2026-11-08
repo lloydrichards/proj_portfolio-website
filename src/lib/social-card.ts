@@ -1,6 +1,26 @@
 import assets from "./social-assets.json";
 
-export type SocialCardKind = "home" | "page" | "project" | "lab";
+export type SocialCardKind =
+  | "home"
+  | "page"
+  | "project"
+  | "lab"
+  | "timeline"
+  | "projects"
+  | "labs"
+  | "cv";
+export const collectionArtwork = {
+  projects: [
+    "/images/projects/2601/sme-policy-index-01.png",
+    "/images/projects/2402/thumb_cancer-monitoring-dashboard.webp",
+    "/images/projects/2403/thumb_ipen-plastic-map.webp",
+  ],
+  labs: [
+    "/labs/038-mosaic-design/mosaic-design-01.png",
+    "/labs/058-rag-chunker/rag-playground.png",
+    "/labs/063-llm-memory-filesystem/stack-effect-recipe-builder.png",
+  ],
+} as const;
 export const socialCardSize = { width: 1200, height: 630 };
 
 export function socialArtwork(source?: string) {

@@ -9,6 +9,7 @@ import { RuntimeServer } from "@/services/RuntimeServer";
 import { Project } from "@/types/Project";
 
 export const metadata = createPageMetadata({
+  kind: "projects",
   title: "Projects",
   description: "A collection of projects I've worked on.",
 });

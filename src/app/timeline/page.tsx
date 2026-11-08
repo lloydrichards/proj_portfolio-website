@@ -11,6 +11,7 @@ import { Occupation } from "@/types/Occupation";
 export const dynamic = "force-dynamic";
 
 export const metadata = createPageMetadata({
+  kind: "timeline",
   title: "Timeline",
   description:
     "Work, learning, community, and places through the phases of my journey.",

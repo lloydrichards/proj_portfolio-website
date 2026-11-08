@@ -2,6 +2,19 @@
 
 Social preview cards render at 1200 × 630 pixels through `/api/og`. They use the site's dark slate, emerald, and Roboto Mono identity. A visitor's selected theme does not affect the cards.
 
+## Page-specific layouts
+
+The `kind` parameter selects the card layout:
+
+- `timeline` puts the prepared journey globe on the left, alongside the page description and Work, Learning, Community, and Places tiles.
+- `projects` and `labs` show a curated artwork collage and their own published content count from `src/lib/social-assets.json`.
+- `cv` shows Lloyd Richards, the CV variant's role, its first four skills, and its existing `headline`. The headline supplies image copy only. The page's description and Open Graph description keep their original text.
+- `project` and `lab` show the section and year above the heading when artwork is available. Cards without artwork keep the title and available metadata rather than adding unrelated site counts.
+
+The overview collages each use three sources from `collectionArtwork` in `src/lib/social-card.ts`. Projects currently select SME Policy Index, Cancer Monitoring Dashboard, and IPEN Plastic Map artwork. Labs select Mosaic Design, RAG Chunker, and LLM Memory Filesystem artwork. To change a collage, update that collection's source list and run asset preparation. A source must have a prepared entry in the manifest. Missing artwork leaves a text tile in its place.
+
+Generated image URLs include the version parameter `v=3` so existing previews request the updated layouts.
+
 ## Choose project artwork
 
 Projects use their frontmatter `image` by default. To choose different artwork for the social card, add `socialImage` to the project's file in `src/app/projects/content/`:

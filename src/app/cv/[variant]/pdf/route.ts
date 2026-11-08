@@ -19,7 +19,7 @@ const MIN_HEIGHT_PX = 1056;
 const MAX_HEIGHT_PX = 14_400;
 const PAGE_HEIGHT_BUFFER_PX = 160;
 const DEFAULT_CHROMIUM_PACK_URL =
-  "https://github.com/Sparticuz/chromium/releases/download/v149.0.0/chromium-v149.0.0-pack.x64.tar";
+  "https://github.com/Sparticuz/chromium/releases/download/v153.0.0/chromium-v153.0.0-pack.x64.tar";
 
 const clampPdfHeight = (height: number) =>
   Math.min(

@@ -1,6 +1,5 @@
 import { Effect } from "effect";
 import { siteMetadata } from "@/lib/metadata";
-import { getBaseUrl } from "@/lib/utils";
 import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
 import { RuntimeServer } from "@/services/RuntimeServer";
@@ -30,7 +29,7 @@ export async function GET() {
     <rss version="2.0">
         <channel>
             <title>${escapeXml(siteMetadata.title)}</title>
-            <link>${getBaseUrl()}</link>
+            <link>${escapeXml(siteMetadata.siteUrl)}</link>
             <description>${escapeXml(siteMetadata.description)}</description>
             <language>en-us</language>
             ${[...allLabs, ...allProjects]
@@ -39,10 +38,10 @@ export async function GET() {
                 (content) => `
             <item>
                 <title>${escapeXml(content.title)}</title>
-                <link>${getBaseUrl()}${content.slug}</link>
+                <link>${escapeXml(new URL(content.pathname, siteMetadata.siteUrl).href)}</link>
                 <description>${escapeXml(content.description)}</description>
                 <pubDate>${new Date(content.date).toUTCString()}</pubDate>
-                <guid isPermaLink="true">${getBaseUrl()}${content.slug}</guid>
+                <guid isPermaLink="true">${escapeXml(new URL(content.pathname, siteMetadata.siteUrl).href)}</guid>
             </item>
             `,
               )

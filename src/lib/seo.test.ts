@@ -4,6 +4,14 @@ import { siteMetadata } from "./metadata";
 import { createOGImageMetadata, createPageMetadata } from "./seo";
 import assets from "./social-assets.json";
 import { fitCardTitle, wrapCardText } from "./social-card";
+import { socialImageParams } from "./social-image-url";
+
+function imageParams(value: string) {
+  const url = new URL(value);
+  const params = socialImageParams(url.pathname.split("/").at(-1) ?? "");
+  if (!params) throw new Error(`Invalid social image URL: ${value}`);
+  return params;
+}
 
 describe("social previews", () => {
   it("uses the final image host without relying on a redirect or metadataBase", () => {
@@ -29,7 +37,9 @@ describe("social previews", () => {
     for (const value of urls) {
       const url = new URL(value);
       expect(url.origin).toBe("https://www.lloydrichards.dev");
-      expect(url.pathname).toBe("/api/og");
+      expect(url.pathname).toMatch(/^\/api\/og\/v4\/[A-Za-z0-9_-]+\.png$/);
+      expect(url.search).toBe("");
+      expect(url.hash).toBe("");
     }
   });
   it("carries a CV variant's role and skills into its matching preview", () => {
@@ -43,9 +53,8 @@ describe("social previews", () => {
       },
     });
     const images = metadata.openGraph?.images as { url: string }[];
-    const url = new URL(images[0].url, "https://lloydrichards.dev");
-    expect(Object.fromEntries(url.searchParams)).toMatchObject({
-      v: "3",
+    const params = imageParams(images[0].url);
+    expect(Object.fromEntries(params)).toMatchObject({
       kind: "cv",
       label: "Design Engineer",
       tags: "Interaction Design,React",
@@ -67,7 +76,7 @@ describe("social previews", () => {
         width: 1200,
         height: 630,
         alt: "About | Lloyd Richards",
-        url: expect.stringContaining("title=About"),
+        url: expect.stringContaining("/api/og/v4/"),
       }),
     ]);
   });
@@ -85,10 +94,13 @@ describe("social previews", () => {
       date: "2026-04-02",
       tags: ["effect"],
     });
-    const image = metadata.openGraph?.images;
+    const image = metadata.openGraph?.images as { url: string }[];
+    expect(imageParams(image[0].url).get("artwork")).toBe(
+      assets.artwork["/labs/058-rag-chunker/rag-playground.png"],
+    );
     expect(image).toEqual([
       expect.objectContaining({
-        url: expect.stringContaining("artwork="),
+        url: expect.stringContaining("/api/og/v4/"),
         alt: "RAG Builder | Lloyd Richards",
       }),
     ]);
@@ -110,17 +122,16 @@ describe("social previews", () => {
       "https://example.com/untrusted.png",
       "/images/missing.png",
     ]) {
-      const url = new URL(
+      const params = imageParams(
         makeOGImageURL({
           title: "An experiment",
           description: "No image",
           kind: "lab",
           artwork,
         }),
-        "https://example.com",
       );
-      expect(url.searchParams.get("kind")).toBe("lab");
-      expect(url.searchParams.has("artwork")).toBe(false);
+      expect(params.get("kind")).toBe("lab");
+      expect(params.has("artwork")).toBe(false);
     }
   });
 
@@ -134,13 +145,10 @@ describe("social previews", () => {
       date: "2026-04-02",
       socialImage: source,
     });
-    expect(metadata.openGraph?.images).toEqual([
-      expect.objectContaining({
-        url: expect.stringContaining(
-          encodeURIComponent(assets.artwork[source]),
-        ),
-      }),
-    ]);
+    const images = metadata.openGraph?.images as { url: string }[];
+    expect(imageParams(images[0].url).get("artwork")).toBe(
+      assets.artwork[source],
+    );
   });
 
   it("keeps unusually long words and descriptions inside the image's line budget", () => {

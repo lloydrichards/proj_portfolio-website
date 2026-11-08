@@ -1,5 +1,6 @@
 import { formatDate } from "@/lib/format";
 import { type SocialCardKind, socialArtwork } from "@/lib/social-card";
+import { socialImageURL } from "@/lib/social-image-url";
 
 export const notEmpty = <T>(value: T | null | undefined): value is T => {
   return value !== null && value !== undefined;
@@ -29,19 +30,24 @@ export const makeOGImageURL = ({
   artwork?: string;
   label?: string;
 }) => {
-  const baseUrl = new URL("/api/og", "https://www.lloydrichards.dev");
-  baseUrl.searchParams.set("v", "3");
-  baseUrl.searchParams.set("kind", kind);
+  const params = new URLSearchParams();
+  params.set("kind", kind);
   const image = socialArtwork(artwork);
-  if (image) baseUrl.searchParams.set("artwork", image);
-  if (label) baseUrl.searchParams.set("label", label);
-  baseUrl.searchParams.set("title", title);
-  baseUrl.searchParams.set("description", description);
+  if (image) params.set("artwork", image);
+  if (label) params.set("label", label.slice(0, 80));
+  params.set("title", title.slice(0, 240));
+  params.set("description", description.slice(0, 400));
   if (tags) {
-    baseUrl.searchParams.set("tags", tags.join(","));
+    params.set(
+      "tags",
+      tags
+        .slice(0, kind === "cv" ? 4 : 3)
+        .map((tag) => tag.slice(0, 60))
+        .join(","),
+    );
   }
   if (date) {
-    baseUrl.searchParams.set("date", formatDate(new Date(date)));
+    params.set("date", formatDate(new Date(date)));
   }
-  return baseUrl.href;
+  return socialImageURL(params);
 };

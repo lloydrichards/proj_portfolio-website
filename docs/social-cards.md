@@ -15,7 +15,11 @@ The `kind` parameter selects the card layout:
 
 The overview collages each use three sources from `collectionArtwork` in `src/lib/social-card.ts`. Projects currently select SME Policy Index, Cancer Monitoring Dashboard, and IPEN Plastic Map artwork. Labs select Mosaic Design, RAG Chunker, and LLM Memory Filesystem artwork. To change a collage, update that collection's source list and run asset preparation. A source must have a prepared entry in the manifest. Missing artwork leaves a text tile in its place.
 
-Generated image URLs include the version parameter `v=3` so existing previews request the updated layouts.
+Generated metadata uses query-free `/api/og/v4/<encoded-inputs>.png` URLs. The homepage uses `/api/og/v4/home.png`. The encoded path contains the card's render inputs, including artwork and variant details, so it does not need a database lookup or manifest entry for each URL. The versioned path changes when card inputs change.
+
+Vercel's inspector did not encode nested image query strings, dropping layout and content settings. Keeping those inputs in the path preserves the full design through its image proxy. The original `/api/og?...` endpoint remains available for old links and manual previews.
+
+The public image firewall exception must allow GET and HEAD for both the exact `/api/og` path and `/api/og/v4/<encoded-inputs>.png` paths. Keep the existing Alibaba rule first. Both image routes must bundle `public/fonts/roboto-mono/` and `public/images/social/`.
 
 ## Choose project artwork
 

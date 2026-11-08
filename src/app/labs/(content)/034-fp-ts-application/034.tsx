@@ -314,7 +314,7 @@ const ProductCard: FC<{
   onAdd: (product: Product) => void;
   onRemove: (product: Product) => void;
 }> = ({ product, onAdd, onRemove }) => {
-  const Icon = () => {
+  const renderIcon = () => {
     switch (product.type) {
       case "BOOK":
         return <Book size={40} className="text-foreground/80" />;
@@ -329,7 +329,7 @@ const ProductCard: FC<{
     <div className="flex h-32 w-40 gap-2 rounded-md border px-2 py-4 shadow-md">
       <div className="flex w-full flex-col justify-center">
         <p className="w-full text-ellipsis">{product.name}</p>
-        <Icon />
+        {renderIcon()}
       </div>
       <div className="flex flex-col justify-between">
         <Button variant="ghost" size="sm" onClick={() => onAdd(product)}>

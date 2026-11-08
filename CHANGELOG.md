@@ -1,514 +1,440 @@
 ## [1.23.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.23.0...v1.23.1) (2026-10-27)
 
-
 ### Fixed
 
-* update dependencies and resolve security advisories ([4cae7ac](https://github.com/lloydrichards/proj_portfolio-website/commit/4cae7ac810b8deae7cf5cf6c5066fc272b225c73))
+- update dependencies and resolve security advisories ([4cae7ac](https://github.com/lloydrichards/proj_portfolio-website/commit/4cae7ac810b8deae7cf5cf6c5066fc272b225c73))
 
 # [1.23.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.22.1...v1.23.0) (2026-09-29)
 
-
 ### Features
 
-* add Bluesky social link ([b717d4f](https://github.com/lloydrichards/proj_portfolio-website/commit/b717d4f164a5636e064c14312e19fa71f7b2f2fc))
-
+- add Bluesky social link ([b717d4f](https://github.com/lloydrichards/proj_portfolio-website/commit/b717d4f164a5636e064c14312e19fa71f7b2f2fc))
 
 ### Fixed
 
-* use solid LinkedIn icon ([b94a3af](https://github.com/lloydrichards/proj_portfolio-website/commit/b94a3afe2ebd1fdbcbb66e60698b0772a9883941))
+- use solid LinkedIn icon ([b94a3af](https://github.com/lloydrichards/proj_portfolio-website/commit/b94a3afe2ebd1fdbcbb66e60698b0772a9883941))
 
 ## [1.22.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.22.0...v1.22.1) (2026-09-01)
 
-
 ### Content
 
-* **labs:** align schema param example with filtered queries ([7e7bd0d](https://github.com/lloydrichards/proj_portfolio-website/commit/7e7bd0db9615e7b0e7f8bb3e2d7646ad38955421))
-
+- **labs:** align schema param example with filtered queries ([7e7bd0d](https://github.com/lloydrichards/proj_portfolio-website/commit/7e7bd0db9615e7b0e7f8bb3e2d7646ad38955421))
 
 ### Fixed
 
-* **labs:** avoid route requests for schema counter state ([d9a120f](https://github.com/lloydrichards/proj_portfolio-website/commit/d9a120ff11b8cc62d8a2b3f272f5df9f1a5737fe))
+- **labs:** avoid route requests for schema counter state ([d9a120f](https://github.com/lloydrichards/proj_portfolio-website/commit/d9a120ff11b8cc62d8a2b3f272f5df9f1a5737fe))
 
 # [1.22.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.21.0...v1.22.0) (2026-08-18)
 
-
 ### Content
 
-* add 063 lab article ([674d545](https://github.com/lloydrichards/proj_portfolio-website/commit/674d54551e0a27c6fc7800123cb28565c359d5ed))
-
+- add 063 lab article ([674d545](https://github.com/lloydrichards/proj_portfolio-website/commit/674d54551e0a27c6fc7800123cb28565c359d5ed))
 
 ### Features
 
-* add expandable image and mermaid components ([6e4492e](https://github.com/lloydrichards/proj_portfolio-website/commit/6e4492e3691c1888d42683f0bbce0b409d5179ff))
+- add expandable image and mermaid components ([6e4492e](https://github.com/lloydrichards/proj_portfolio-website/commit/6e4492e3691c1888d42683f0bbce0b409d5179ff))
 
 # [1.21.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.20.0...v1.21.0) (2026-06-30)
 
-
 ### Content
 
-* add 062 lab ([a2fd50f](https://github.com/lloydrichards/proj_portfolio-website/commit/a2fd50ff028f6f4cf5601bf590a18ce5f6f90ccf))
-* add sme policy index project ([5b30860](https://github.com/lloydrichards/proj_portfolio-website/commit/5b30860eaf28e186228de893e12f52adca700e47))
-
+- add 062 lab ([a2fd50f](https://github.com/lloydrichards/proj_portfolio-website/commit/a2fd50ff028f6f4cf5601bf590a18ce5f6f90ccf))
+- add sme policy index project ([5b30860](https://github.com/lloydrichards/proj_portfolio-website/commit/5b30860eaf28e186228de893e12f52adca700e47))
 
 ### Features
 
-* **cv:** add Markdown export ([a9e55f5](https://github.com/lloydrichards/proj_portfolio-website/commit/a9e55f5a6b595f66a3a0eb10e0e257dfb1e89ed3))
-* **cv:** add PDF export ([f0ac6c3](https://github.com/lloydrichards/proj_portfolio-website/commit/f0ac6c3cbd99060067d8d628047fdcade9ae7f34))
-* **cv:** add public variant pages ([6393731](https://github.com/lloydrichards/proj_portfolio-website/commit/6393731ac2c349bb7668c29db31ecdf611180c94))
-
+- **cv:** add Markdown export ([a9e55f5](https://github.com/lloydrichards/proj_portfolio-website/commit/a9e55f5a6b595f66a3a0eb10e0e257dfb1e89ed3))
+- **cv:** add PDF export ([f0ac6c3](https://github.com/lloydrichards/proj_portfolio-website/commit/f0ac6c3cbd99060067d8d628047fdcade9ae7f34))
+- **cv:** add public variant pages ([6393731](https://github.com/lloydrichards/proj_portfolio-website/commit/6393731ac2c349bb7668c29db31ecdf611180c94))
 
 ### Fixed
 
-* **layout:** adjust tile sizing ([3fbddd0](https://github.com/lloydrichards/proj_portfolio-website/commit/3fbddd0b77f255050121bd8d7c1a6c557f6cf00c))
-* bump timeout for pdf ([0c19e57](https://github.com/lloydrichards/proj_portfolio-website/commit/0c19e57c032bfe38f01956ad91beada06d03a210))
-* puppeteer on vercel ([971569e](https://github.com/lloydrichards/proj_portfolio-website/commit/971569eb42c8e9a3fea94d998293b1415d2d5b68))
-
+- **layout:** adjust tile sizing ([3fbddd0](https://github.com/lloydrichards/proj_portfolio-website/commit/3fbddd0b77f255050121bd8d7c1a6c557f6cf00c))
+- bump timeout for pdf ([0c19e57](https://github.com/lloydrichards/proj_portfolio-website/commit/0c19e57c032bfe38f01956ad91beada06d03a210))
+- puppeteer on vercel ([971569e](https://github.com/lloydrichards/proj_portfolio-website/commit/971569eb42c8e9a3fea94d998293b1415d2d5b68))
 
 ### Improved
 
-* increase pdf width ([929539e](https://github.com/lloydrichards/proj_portfolio-website/commit/929539e5b82973b3ec20cc77758f4f3a49360428))
-* move effect-boxes images ([c5c4844](https://github.com/lloydrichards/proj_portfolio-website/commit/c5c484435dbec89f24bd6a94a92bf57f4e9c86fb))
+- increase pdf width ([929539e](https://github.com/lloydrichards/proj_portfolio-website/commit/929539e5b82973b3ec20cc77758f4f3a49360428))
+- move effect-boxes images ([c5c4844](https://github.com/lloydrichards/proj_portfolio-website/commit/c5c484435dbec89f24bd6a94a92bf57f4e9c86fb))
 
 # [1.20.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.19.0...v1.20.0) (2026-06-16)
 
-
 ### Content
 
-* add 2600 project ([ea1f15e](https://github.com/lloydrichards/proj_portfolio-website/commit/ea1f15e70e66bb80a5e23e5076737130007c65e9))
-
+- add 2600 project ([ea1f15e](https://github.com/lloydrichards/proj_portfolio-website/commit/ea1f15e70e66bb80a5e23e5076737130007c65e9))
 
 ### Features
 
-* add analog theme ([ac442d0](https://github.com/lloydrichards/proj_portfolio-website/commit/ac442d0ec63595758e15e1cd0e5609fe306fa0c2))
-* add ExpandableTile component ([21b9c34](https://github.com/lloydrichards/proj_portfolio-website/commit/21b9c34604c778fae05f2207d3f315db179e1e98))
-* add multi-theme toggle ([6df60ec](https://github.com/lloydrichards/proj_portfolio-website/commit/6df60ec17feca259d231d4d7e4354dba431bade8))
-* add nerdy terminal theme ([72f166c](https://github.com/lloydrichards/proj_portfolio-website/commit/72f166c4743ab9f3f63e473acacfecacb4ed972e))
-
+- add analog theme ([ac442d0](https://github.com/lloydrichards/proj_portfolio-website/commit/ac442d0ec63595758e15e1cd0e5609fe306fa0c2))
+- add ExpandableTile component ([21b9c34](https://github.com/lloydrichards/proj_portfolio-website/commit/21b9c34604c778fae05f2207d3f315db179e1e98))
+- add multi-theme toggle ([6df60ec](https://github.com/lloydrichards/proj_portfolio-website/commit/6df60ec17feca259d231d4d7e4354dba431bade8))
+- add nerdy terminal theme ([72f166c](https://github.com/lloydrichards/proj_portfolio-website/commit/72f166c4743ab9f3f63e473acacfecacb4ed972e))
 
 ### Fixed
 
-* **a11y:** accessibility of data viz keyboard navigation ([275242c](https://github.com/lloydrichards/proj_portfolio-website/commit/275242c3271a28c6d6d7ee5d265ee2d2cc908dcb))
-
+- **a11y:** accessibility of data viz keyboard navigation ([275242c](https://github.com/lloydrichards/proj_portfolio-website/commit/275242c3271a28c6d6d7ee5d265ee2d2cc908dcb))
 
 ### Improved
 
-* animate the grid ([2781d4b](https://github.com/lloydrichards/proj_portfolio-website/commit/2781d4bd9dda34bbfc72470cbf53c25b2f7c8c0a))
-* better position the tiles on the home page ([6de9b32](https://github.com/lloydrichards/proj_portfolio-website/commit/6de9b32ef6892e4b09fa57d512da12faec124192))
-* resizable charts ([73e0c71](https://github.com/lloydrichards/proj_portfolio-website/commit/73e0c7134dd191c5556fbe9348c752e3dae6f4ef))
-* use container query for LabCard ([088a0ce](https://github.com/lloydrichards/proj_portfolio-website/commit/088a0ce479eee2457faf757d447023a24eb27fc3))
-* use container query for ProjectCard ([3330047](https://github.com/lloydrichards/proj_portfolio-website/commit/3330047ddc5dc15175205d5791a0478e3441b368))
+- animate the grid ([2781d4b](https://github.com/lloydrichards/proj_portfolio-website/commit/2781d4bd9dda34bbfc72470cbf53c25b2f7c8c0a))
+- better position the tiles on the home page ([6de9b32](https://github.com/lloydrichards/proj_portfolio-website/commit/6de9b32ef6892e4b09fa57d512da12faec124192))
+- resizable charts ([73e0c71](https://github.com/lloydrichards/proj_portfolio-website/commit/73e0c7134dd191c5556fbe9348c752e3dae6f4ef))
+- use container query for LabCard ([088a0ce](https://github.com/lloydrichards/proj_portfolio-website/commit/088a0ce479eee2457faf757d447023a24eb27fc3))
+- use container query for ProjectCard ([3330047](https://github.com/lloydrichards/proj_portfolio-website/commit/3330047ddc5dc15175205d5791a0478e3441b368))
 
 # [1.19.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.18.0...v1.19.0) (2026-05-26)
 
-
 ### Content
 
-* add Lab 061 ([3eab4cc](https://github.com/lloydrichards/proj_portfolio-website/commit/3eab4ccba8bca51d952a26dcb9999bc263b5056d))
-
+- add Lab 061 ([3eab4cc](https://github.com/lloydrichards/proj_portfolio-website/commit/3eab4ccba8bca51d952a26dcb9999bc263b5056d))
 
 ### Features
 
-* add AnsiTerminal for rendering ansi ([734ff2a](https://github.com/lloydrichards/proj_portfolio-website/commit/734ff2a181358340bc37cda53d74c028fc1f6228))
-* add inline editing capabilities for CV sections ([e510510](https://github.com/lloydrichards/proj_portfolio-website/commit/e510510095fbf55f8f1a6c278683124b68ec93d7))
-* add Person JSON-LD for SEO profile markup ([5823287](https://github.com/lloydrichards/proj_portfolio-website/commit/58232874084aae4d6c202a17af94fdfa511263db))
-* add rich markdown editor ([c047a3e](https://github.com/lloydrichards/proj_portfolio-website/commit/c047a3ec65b76da4322000ba5141a176ababa450))
-
+- add AnsiTerminal for rendering ansi ([734ff2a](https://github.com/lloydrichards/proj_portfolio-website/commit/734ff2a181358340bc37cda53d74c028fc1f6228))
+- add inline editing capabilities for CV sections ([e510510](https://github.com/lloydrichards/proj_portfolio-website/commit/e510510095fbf55f8f1a6c278683124b68ec93d7))
+- add Person JSON-LD for SEO profile markup ([5823287](https://github.com/lloydrichards/proj_portfolio-website/commit/58232874084aae4d6c202a17af94fdfa511263db))
+- add rich markdown editor ([c047a3e](https://github.com/lloydrichards/proj_portfolio-website/commit/c047a3ec65b76da4322000ba5141a176ababa450))
 
 ### Improved
 
-* migrate atom components to base-ui and update variants ([560a0d1](https://github.com/lloydrichards/proj_portfolio-website/commit/560a0d12c3152df2140113bb66b431f9896c452f))
-* migrate Schema types to Effect v4 API ([46ce0c9](https://github.com/lloydrichards/proj_portfolio-website/commit/46ce0c9c5cceadcacb5e7154a2f692e616a3a3e2))
-* migrate services to Effect v4 Context.Service pattern ([a68e7bf](https://github.com/lloydrichards/proj_portfolio-website/commit/a68e7bfa75a7a2875a7e3d0a58c817baf09a4b3e))
-* remove tasks from occupation ([c7dd775](https://github.com/lloydrichards/proj_portfolio-website/commit/c7dd775b6426171efb55670fa70798f384972770))
-* simplify tick mapping keys ([3816037](https://github.com/lloydrichards/proj_portfolio-website/commit/3816037a8a385ddc400891f0529695793209cdfa))
-* toggle formatting markers in editor ([24344df](https://github.com/lloydrichards/proj_portfolio-website/commit/24344dfc3e8fa0618b5046818f4abf00c5f854ae))
-* update app layer for Effect v4 API changes ([86063b3](https://github.com/lloydrichards/proj_portfolio-website/commit/86063b32b520cd4d42865a9572e311357098aec7))
-* update occupation data ([281c1ef](https://github.com/lloydrichards/proj_portfolio-website/commit/281c1efb68e3839ffff95afe18700fdd6f20596c))
+- migrate atom components to base-ui and update variants ([560a0d1](https://github.com/lloydrichards/proj_portfolio-website/commit/560a0d12c3152df2140113bb66b431f9896c452f))
+- migrate Schema types to Effect v4 API ([46ce0c9](https://github.com/lloydrichards/proj_portfolio-website/commit/46ce0c9c5cceadcacb5e7154a2f692e616a3a3e2))
+- migrate services to Effect v4 Context.Service pattern ([a68e7bf](https://github.com/lloydrichards/proj_portfolio-website/commit/a68e7bfa75a7a2875a7e3d0a58c817baf09a4b3e))
+- remove tasks from occupation ([c7dd775](https://github.com/lloydrichards/proj_portfolio-website/commit/c7dd775b6426171efb55670fa70798f384972770))
+- simplify tick mapping keys ([3816037](https://github.com/lloydrichards/proj_portfolio-website/commit/3816037a8a385ddc400891f0529695793209cdfa))
+- toggle formatting markers in editor ([24344df](https://github.com/lloydrichards/proj_portfolio-website/commit/24344dfc3e8fa0618b5046818f4abf00c5f854ae))
+- update app layer for Effect v4 API changes ([86063b3](https://github.com/lloydrichards/proj_portfolio-website/commit/86063b32b520cd4d42865a9572e311357098aec7))
+- update occupation data ([281c1ef](https://github.com/lloydrichards/proj_portfolio-website/commit/281c1efb68e3839ffff95afe18700fdd6f20596c))
 
 # [1.18.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.17.1...v1.18.0) (2026-05-12)
 
-
 ### Content
 
-* add 060 lab ([1ec688e](https://github.com/lloydrichards/proj_portfolio-website/commit/1ec688e97f04e140e6882649fd3daa8f862d17d2))
-* update labs with git commit card ([9220f56](https://github.com/lloydrichards/proj_portfolio-website/commit/9220f56b51ef50c042e772fbf86d11775c5a2080))
-
+- add 060 lab ([1ec688e](https://github.com/lloydrichards/proj_portfolio-website/commit/1ec688e97f04e140e6882649fd3daa8f862d17d2))
+- update labs with git commit card ([9220f56](https://github.com/lloydrichards/proj_portfolio-website/commit/9220f56b51ef50c042e772fbf86d11775c5a2080))
 
 ### Features
 
-* add commit card as mdx component for labs ([e18807e](https://github.com/lloydrichards/proj_portfolio-website/commit/e18807e10b26f1ecb53a10a9e614ec19f875b48a))
-
+- add commit card as mdx component for labs ([e18807e](https://github.com/lloydrichards/proj_portfolio-website/commit/e18807e10b26f1ecb53a10a9e614ec19f875b48a))
 
 ### Fixed
 
-* suspend layer creation ([49a120c](https://github.com/lloydrichards/proj_portfolio-website/commit/49a120c8bd29362eb735e55bed56b8b515a0490e))
-
+- suspend layer creation ([49a120c](https://github.com/lloydrichards/proj_portfolio-website/commit/49a120c8bd29362eb735e55bed56b8b515a0490e))
 
 ### Improved
 
-* use d3 ticks and force containsts ([de43892](https://github.com/lloydrichards/proj_portfolio-website/commit/de438927e2e6d71e6b8630f616cd0581a5543792))
+- use d3 ticks and force containsts ([de43892](https://github.com/lloydrichards/proj_portfolio-website/commit/de438927e2e6d71e6b8630f616cd0581a5543792))
 
 ## [1.17.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.17.0...v1.17.1) (2026-04-07)
 
-
 ### Content
 
-* add 058 lab ([6d8f833](https://github.com/lloydrichards/proj_portfolio-website/commit/6d8f833de5f659af2e947ad814b5cb686840109c))
-* add lab 059 ([74d8ae6](https://github.com/lloydrichards/proj_portfolio-website/commit/74d8ae6e406fa9c837ba65e3e3e0e370d2eca3ef))
-* fix minor typos ([82f0199](https://github.com/lloydrichards/proj_portfolio-website/commit/82f0199ed51b93248d7d8167131f793f18144a30))
+- add 058 lab ([6d8f833](https://github.com/lloydrichards/proj_portfolio-website/commit/6d8f833de5f659af2e947ad814b5cb686840109c))
+- add lab 059 ([74d8ae6](https://github.com/lloydrichards/proj_portfolio-website/commit/74d8ae6e406fa9c837ba65e3e3e0e370d2eca3ef))
+- fix minor typos ([82f0199](https://github.com/lloydrichards/proj_portfolio-website/commit/82f0199ed51b93248d7d8167131f793f18144a30))
 
 # [1.17.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.16.1...v1.17.0) (2026-03-24)
 
-
 ### Content
 
-* add 057 lab on dynamic tools ([7e45353](https://github.com/lloydrichards/proj_portfolio-website/commit/7e453536cce21857aeb8206212a4ebc6e7c75fca))
-
+- add 057 lab on dynamic tools ([7e45353](https://github.com/lloydrichards/proj_portfolio-website/commit/7e453536cce21857aeb8206212a4ebc6e7c75fca))
 
 ### Features
 
-* add BeeSwarmChart ([a6e8d89](https://github.com/lloydrichards/proj_portfolio-website/commit/a6e8d894cb5437b4112ae8c9f104dd71d8b68a7f))
-* add GitCommitGraph ([dcb077e](https://github.com/lloydrichards/proj_portfolio-website/commit/dcb077eaac388f55896cf98da0377fa92d59bff4))
-
+- add BeeSwarmChart ([a6e8d89](https://github.com/lloydrichards/proj_portfolio-website/commit/a6e8d894cb5437b4112ae8c9f104dd71d8b68a7f))
+- add GitCommitGraph ([dcb077e](https://github.com/lloydrichards/proj_portfolio-website/commit/dcb077eaac388f55896cf98da0377fa92d59bff4))
 
 ### Fixed
 
-* layout shift from tooltip ([b2e232a](https://github.com/lloydrichards/proj_portfolio-website/commit/b2e232a1a686d7ca94037cee07a1bc3473d5cf0f))
-
+- layout shift from tooltip ([b2e232a](https://github.com/lloydrichards/proj_portfolio-website/commit/b2e232a1a686d7ca94037cee07a1bc3473d5cf0f))
 
 ### Improved
 
-* clean up tile spacing ([10020ad](https://github.com/lloydrichards/proj_portfolio-website/commit/10020ad43ea586224f290c43f6385dd55be3d82a))
+- clean up tile spacing ([10020ad](https://github.com/lloydrichards/proj_portfolio-website/commit/10020ad43ea586224f290c43f6385dd55be3d82a))
 
 ## [1.16.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.16.0...v1.16.1) (2026-02-24)
 
-
 ### Content
 
-* add 056 lab dev containers ([0fe0265](https://github.com/lloydrichards/proj_portfolio-website/commit/0fe0265e03aa003ec0af2a7ea521b3d83bd50440))
-
+- add 056 lab dev containers ([0fe0265](https://github.com/lloydrichards/proj_portfolio-website/commit/0fe0265e03aa003ec0af2a7ea521b3d83bd50440))
 
 ### Improved
 
-* base-ui accordion ([2add655](https://github.com/lloydrichards/proj_portfolio-website/commit/2add655bbdbbbe5c22f4740b635b4ac0a033a16b))
-* base-ui button table card and select ([1a08606](https://github.com/lloydrichards/proj_portfolio-website/commit/1a086068b05c0263efd2979970b2cce7c5fcca87))
-* base-ui navigation menu ([bdb0a3b](https://github.com/lloydrichards/proj_portfolio-website/commit/bdb0a3be4e99b2692a04b174f515ab6cb3592ab8))
-* base-ui slider and range-slider ([4e212e8](https://github.com/lloydrichards/proj_portfolio-website/commit/4e212e865ec56aab39449c9896abf4da565a08a6))
-* base-ui tooltip avatar and badge ([a94cfba](https://github.com/lloydrichards/proj_portfolio-website/commit/a94cfbab058e3f4d4933636c0affc47af7f57ba2))
-* sonner toast ([09c3dee](https://github.com/lloydrichards/proj_portfolio-website/commit/09c3dee1d6707d938c268f7b3ba218ff74dffcf8))
+- base-ui accordion ([2add655](https://github.com/lloydrichards/proj_portfolio-website/commit/2add655bbdbbbe5c22f4740b635b4ac0a033a16b))
+- base-ui button table card and select ([1a08606](https://github.com/lloydrichards/proj_portfolio-website/commit/1a086068b05c0263efd2979970b2cce7c5fcca87))
+- base-ui navigation menu ([bdb0a3b](https://github.com/lloydrichards/proj_portfolio-website/commit/bdb0a3be4e99b2692a04b174f515ab6cb3592ab8))
+- base-ui slider and range-slider ([4e212e8](https://github.com/lloydrichards/proj_portfolio-website/commit/4e212e865ec56aab39449c9896abf4da565a08a6))
+- base-ui tooltip avatar and badge ([a94cfba](https://github.com/lloydrichards/proj_portfolio-website/commit/a94cfbab058e3f4d4933636c0affc47af7f57ba2))
+- sonner toast ([09c3dee](https://github.com/lloydrichards/proj_portfolio-website/commit/09c3dee1d6707d938c268f7b3ba218ff74dffcf8))
 
 # [1.16.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.1...v1.16.0) (2026-01-27)
 
-
 ### Content
 
-* release lab 055 ([d43fb0b](https://github.com/lloydrichards/proj_portfolio-website/commit/d43fb0bf2c961ad8da8468183ad001289c134c1c))
-
+- release lab 055 ([d43fb0b](https://github.com/lloydrichards/proj_portfolio-website/commit/d43fb0bf2c961ad8da8468183ad001289c134c1c))
 
 ### Features
 
-* display detailed awards in projects ([726ec00](https://github.com/lloydrichards/proj_portfolio-website/commit/726ec00ca62b18b657205b8450652935d0de628f))
+- display detailed awards in projects ([726ec00](https://github.com/lloydrichards/proj_portfolio-website/commit/726ec00ca62b18b657205b8450652935d0de628f))
 
 ## [1.15.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.1...v1.15.2) (2026-01-20)
 
-
 ### Content
 
-* release lab 055 ([d43fb0b](https://github.com/lloydrichards/proj_portfolio-website/commit/d43fb0bf2c961ad8da8468183ad001289c134c1c))
+- release lab 055 ([d43fb0b](https://github.com/lloydrichards/proj_portfolio-website/commit/d43fb0bf2c961ad8da8468183ad001289c134c1c))
 
 ## [1.15.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.1...v1.15.2) (2025-12-23)
 
-
 ### Content
 
-* release lab 055 ([0687080](https://github.com/lloydrichards/proj_portfolio-website/commit/06870805667afacc95a17698d65faf83fbedf06d))
+- release lab 055 ([0687080](https://github.com/lloydrichards/proj_portfolio-website/commit/06870805667afacc95a17698d65faf83fbedf06d))
 
 ## [1.15.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.15.0...v1.15.1) (2025-12-16)
 
-
 ### Content
 
-* release 053 ([3109f47](https://github.com/lloydrichards/proj_portfolio-website/commit/3109f473cc03db4fc0633f3d88370c0614dcb016))
-* release lab 054 ([99a6931](https://github.com/lloydrichards/proj_portfolio-website/commit/99a6931a208fe497517aa3a0bed2045f3b680709))
-
+- release 053 ([3109f47](https://github.com/lloydrichards/proj_portfolio-website/commit/3109f473cc03db4fc0633f3d88370c0614dcb016))
+- release lab 054 ([99a6931](https://github.com/lloydrichards/proj_portfolio-website/commit/99a6931a208fe497517aa3a0bed2045f3b680709))
 
 ### Improved
 
-* use Effect.gen for all services ([0a4dbb3](https://github.com/lloydrichards/proj_portfolio-website/commit/0a4dbb3f938aa08df87bfbf397a08897cd5adc89))
+- use Effect.gen for all services ([0a4dbb3](https://github.com/lloydrichards/proj_portfolio-website/commit/0a4dbb3f938aa08df87bfbf397a08897cd5adc89))
 
 # [1.15.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.6...v1.15.0) (2025-12-02)
 
-
 ### Features
 
-* add KPICard with repo and articles ([aa01ce5](https://github.com/lloydrichards/proj_portfolio-website/commit/aa01ce54f607f55fb57808f56148b16d301058e9))
-* add status to project and labs ([b7747e7](https://github.com/lloydrichards/proj_portfolio-website/commit/b7747e70772c9a2ab5b744bba91cc66f2ee02e28))
-
+- add KPICard with repo and articles ([aa01ce5](https://github.com/lloydrichards/proj_portfolio-website/commit/aa01ce54f607f55fb57808f56148b16d301058e9))
+- add status to project and labs ([b7747e7](https://github.com/lloydrichards/proj_portfolio-website/commit/b7747e70772c9a2ab5b744bba91cc66f2ee02e28))
 
 ### Improved
 
-* correct effect-drizzle implementation ([356a57a](https://github.com/lloydrichards/proj_portfolio-website/commit/356a57a97b2d80107400b60a35588e44bf0585de))
-* select for navigation on mobile ([483828a](https://github.com/lloydrichards/proj_portfolio-website/commit/483828ac2552d6c1936b97414c94d1bb26642049))
+- correct effect-drizzle implementation ([356a57a](https://github.com/lloydrichards/proj_portfolio-website/commit/356a57a97b2d80107400b60a35588e44bf0585de))
+- select for navigation on mobile ([483828a](https://github.com/lloydrichards/proj_portfolio-website/commit/483828ac2552d6c1936b97414c94d1bb26642049))
 
 ## [1.14.6](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.5...v1.14.6) (2025-11-30)
 
-
 ### Bug Fixes
 
-* filter unpublished labs ([19ecd1c](https://github.com/lloydrichards/proj_portfolio-website/commit/19ecd1c7f0b6d7769101e712cf762585fe735bbd))
+- filter unpublished labs ([19ecd1c](https://github.com/lloydrichards/proj_portfolio-website/commit/19ecd1c7f0b6d7769101e712cf762585fe735bbd))
 
 ## [1.14.5](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.4...v1.14.5) (2025-11-29)
 
-
 ### Bug Fixes
 
-* hydration on skill chart ([5a70723](https://github.com/lloydrichards/proj_portfolio-website/commit/5a70723ea065007604a10119f76f772ab995e0a0))
-* simplify navBar ([5d09adb](https://github.com/lloydrichards/proj_portfolio-website/commit/5d09adbe06b09d65378d5ccd8df4bf87f814e363))
+- hydration on skill chart ([5a70723](https://github.com/lloydrichards/proj_portfolio-website/commit/5a70723ea065007604a10119f76f772ab995e0a0))
+- simplify navBar ([5d09adb](https://github.com/lloydrichards/proj_portfolio-website/commit/5d09adbe06b09d65378d5ccd8df4bf87f814e363))
 
 ## [1.14.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.3...v1.14.4) (2025-10-10)
 
-
 ### Bug Fixes
 
-* escapeXml in rss feed ([eeb548d](https://github.com/lloydrichards/proj_portfolio-website/commit/eeb548dbeea1b7636196ea01367a25738e032320))
+- escapeXml in rss feed ([eeb548d](https://github.com/lloydrichards/proj_portfolio-website/commit/eeb548dbeea1b7636196ea01367a25738e032320))
 
 ## [1.14.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.2...v1.14.3) (2025-10-03)
 
-
 ### Bug Fixes
 
-* lab nav bar loading ([4042998](https://github.com/lloydrichards/proj_portfolio-website/commit/404299894ce729cbc548e6138b3796661c9e7cd4))
+- lab nav bar loading ([4042998](https://github.com/lloydrichards/proj_portfolio-website/commit/404299894ce729cbc548e6138b3796661c9e7cd4))
 
 ## [1.14.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.1...v1.14.2) (2025-08-20)
 
-
 ### Bug Fixes
 
-* rebuild using Drizzle ([7e93e1e](https://github.com/lloydrichards/proj_portfolio-website/commit/7e93e1e6dc948ad416cb6a0d38d71a77648be3ec))
+- rebuild using Drizzle ([7e93e1e](https://github.com/lloydrichards/proj_portfolio-website/commit/7e93e1e6dc948ad416cb6a0d38d71a77648be3ec))
 
 ## [1.14.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.14.0...v1.14.1) (2025-04-27)
 
-
 ### Bug Fixes
 
-* database on the edge ([#92](https://github.com/lloydrichards/proj_portfolio-website/issues/92)) ([913fffc](https://github.com/lloydrichards/proj_portfolio-website/commit/913fffc91f57449fea2c098217038efeb03aadd5))
+- database on the edge ([#92](https://github.com/lloydrichards/proj_portfolio-website/issues/92)) ([913fffc](https://github.com/lloydrichards/proj_portfolio-website/commit/913fffc91f57449fea2c098217038efeb03aadd5))
 
 # [1.14.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.12...v1.14.0) (2025-04-13)
 
-
 ### Features
 
-* add curriculum vitae built from database ([da2b961](https://github.com/lloydrichards/proj_portfolio-website/commit/da2b96174a09faf9f39d945b7b5f4e8929ce43ca))
+- add curriculum vitae built from database ([da2b961](https://github.com/lloydrichards/proj_portfolio-website/commit/da2b96174a09faf9f39d945b7b5f4e8929ce43ca))
 
 ## [1.13.12](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.11...v1.13.12) (2025-04-09)
 
-
 ### Bug Fixes
 
-* :bug: fix the skills and attributes when empty ([9af4b74](https://github.com/lloydrichards/proj_portfolio-website/commit/9af4b748dca0824fb00fccf44da75b881ecfabac))
-* :wheelchair: add header for accessibility ([954cebd](https://github.com/lloydrichards/proj_portfolio-website/commit/954cebdd77b45d029b3a25071a73416d17603ca2))
+- :bug: fix the skills and attributes when empty ([9af4b74](https://github.com/lloydrichards/proj_portfolio-website/commit/9af4b748dca0824fb00fccf44da75b881ecfabac))
+- :wheelchair: add header for accessibility ([954cebd](https://github.com/lloydrichards/proj_portfolio-website/commit/954cebdd77b45d029b3a25071a73416d17603ca2))
 
 ## [1.13.11](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.10...v1.13.11) (2025-03-02)
 
-
 ### Bug Fixes
 
-* **portfolio:** :bug: add missing img [content] ([408cfe0](https://github.com/lloydrichards/proj_portfolio-website/commit/408cfe0c5c18b41773eea55485404fdd2d91ac00))
+- **portfolio:** :bug: add missing img [content] ([408cfe0](https://github.com/lloydrichards/proj_portfolio-website/commit/408cfe0c5c18b41773eea55485404fdd2d91ac00))
 
 ## [1.13.10](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.9...v1.13.10) (2025-02-21)
 
-
 ### Performance Improvements
 
-* :zap: use webp for thumb images ([96e7b82](https://github.com/lloydrichards/proj_portfolio-website/commit/96e7b828251ec14e4b102ccd0e70853bc20b39a6))
+- :zap: use webp for thumb images ([96e7b82](https://github.com/lloydrichards/proj_portfolio-website/commit/96e7b828251ec14e4b102ccd0e70853bc20b39a6))
 
 ## [1.13.9](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.8...v1.13.9) (2025-02-09)
 
-
 ### Bug Fixes
 
-* 🐛 filter correct skill data ([4769116](https://github.com/lloydrichards/proj_portfolio-website/commit/4769116c2eae9fb0a2fe625e4856fb21aa06f9ef))
+- 🐛 filter correct skill data ([4769116](https://github.com/lloydrichards/proj_portfolio-website/commit/4769116c2eae9fb0a2fe625e4856fb21aa06f9ef))
 
 ## [1.13.8](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.7...v1.13.8) (2025-02-09)
 
-
 ### Performance Improvements
 
-* **lab:** :zap: use Effect for all lab actions ([a88c838](https://github.com/lloydrichards/proj_portfolio-website/commit/a88c838a7d2b89b9bef984fdef6c303cd8f45ac3))
-* **portfolio:** :zap: use Effect for all project actions ([10663c9](https://github.com/lloydrichards/proj_portfolio-website/commit/10663c9b211e9f91a3cda347f06269448eb36cfa))
+- **lab:** :zap: use Effect for all lab actions ([a88c838](https://github.com/lloydrichards/proj_portfolio-website/commit/a88c838a7d2b89b9bef984fdef6c303cd8f45ac3))
+- **portfolio:** :zap: use Effect for all project actions ([10663c9](https://github.com/lloydrichards/proj_portfolio-website/commit/10663c9b211e9f91a3cda347f06269448eb36cfa))
 
 ## [1.13.7](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.6...v1.13.7) (2025-02-07)
 
-
 ### Bug Fixes
 
-* :bug: fix date in og image ([c7a6ad1](https://github.com/lloydrichards/proj_portfolio-website/commit/c7a6ad18aeefd8e1d93f697a2a3d0dbf728a40b4))
+- :bug: fix date in og image ([c7a6ad1](https://github.com/lloydrichards/proj_portfolio-website/commit/c7a6ad18aeefd8e1d93f697a2a3d0dbf728a40b4))
 
 ## [1.13.6](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.5...v1.13.6) (2025-02-07)
 
-
 ### Performance Improvements
 
-* 🔍 improve open graph data ([#90](https://github.com/lloydrichards/proj_portfolio-website/issues/90)) ([177faaf](https://github.com/lloydrichards/proj_portfolio-website/commit/177faaf4a47e401891330780ae18065cfa986260))
+- 🔍 improve open graph data ([#90](https://github.com/lloydrichards/proj_portfolio-website/issues/90)) ([177faaf](https://github.com/lloydrichards/proj_portfolio-website/commit/177faaf4a47e401891330780ae18065cfa986260))
 
 ## [1.13.5](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.4...v1.13.5) (2025-01-27)
 
-
 ### Bug Fixes
 
-* :bug: fix SkillBarChart crashing on overlapping slider ([dd54787](https://github.com/lloydrichards/proj_portfolio-website/commit/dd54787e88547b08acff66eeffbdda2d128e052d))
+- :bug: fix SkillBarChart crashing on overlapping slider ([dd54787](https://github.com/lloydrichards/proj_portfolio-website/commit/dd54787e88547b08acff66eeffbdda2d128e052d))
 
 ## [1.13.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.3...v1.13.4) (2025-01-25)
 
-
 ### Bug Fixes
 
-* :bug: skip client initialization on edge ([82a28af](https://github.com/lloydrichards/proj_portfolio-website/commit/82a28af4069a15079b0c27f27fabacb83ac0b0d3))
+- :bug: skip client initialization on edge ([82a28af](https://github.com/lloydrichards/proj_portfolio-website/commit/82a28af4069a15079b0c27f27fabacb83ac0b0d3))
 
 ## [1.13.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.2...v1.13.3) (2025-01-25)
 
-
 ### Bug Fixes
 
-* :mag: fix favicon ([cd4a585](https://github.com/lloydrichards/proj_portfolio-website/commit/cd4a585ad9941cb6a2084e06f6e88a813a897a67))
+- :mag: fix favicon ([cd4a585](https://github.com/lloydrichards/proj_portfolio-website/commit/cd4a585ad9941cb6a2084e06f6e88a813a897a67))
 
 ## [1.13.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.1...v1.13.2) (2025-01-25)
 
-
 ### Bug Fixes
 
-* :bug: fix tooltips so they work in tiles ([74ada02](https://github.com/lloydrichards/proj_portfolio-website/commit/74ada0267e221663333ee951af306bd89d40003a))
+- :bug: fix tooltips so they work in tiles ([74ada02](https://github.com/lloydrichards/proj_portfolio-website/commit/74ada0267e221663333ee951af306bd89d40003a))
 
 ## [1.13.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.13.0...v1.13.1) (2025-01-25)
 
-
 ### Bug Fixes
 
-* :iphone: fix chart for mobile ([7c650aa](https://github.com/lloydrichards/proj_portfolio-website/commit/7c650aa668fa2ee09f0c0c7290708f79fa4b7903))
+- :iphone: fix chart for mobile ([7c650aa](https://github.com/lloydrichards/proj_portfolio-website/commit/7c650aa668fa2ee09f0c0c7290708f79fa4b7903))
 
 # [1.13.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.4...v1.13.0) (2025-01-25)
 
-
 ### Bug Fixes
 
-* :bug: fix the order of the timeline ([19428af](https://github.com/lloydrichards/proj_portfolio-website/commit/19428af89fd22bbcf254b8ea971a10124e5054a3))
-
+- :bug: fix the order of the timeline ([19428af](https://github.com/lloydrichards/proj_portfolio-website/commit/19428af89fd22bbcf254b8ea971a10124e5054a3))
 
 ### Features
 
-* :sparkles: add skill bar chart ([5cecd43](https://github.com/lloydrichards/proj_portfolio-website/commit/5cecd43ee84627dfec4d63d4e07f43572b0b8902))
-* :sparkles: get skill data ([0675695](https://github.com/lloydrichards/proj_portfolio-website/commit/0675695dcd54de3ab50719e6a827abe6f0f51346))
+- :sparkles: add skill bar chart ([5cecd43](https://github.com/lloydrichards/proj_portfolio-website/commit/5cecd43ee84627dfec4d63d4e07f43572b0b8902))
+- :sparkles: get skill data ([0675695](https://github.com/lloydrichards/proj_portfolio-website/commit/0675695dcd54de3ab50719e6a827abe6f0f51346))
 
 ## [1.12.4](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.3...v1.12.4) (2025-01-25)
 
-
 ### Performance Improvements
 
-* **portfolio:** :zap: remove project categories select from project list ([ea207d8](https://github.com/lloydrichards/proj_portfolio-website/commit/ea207d8c7266793cb967cb9d5d23c29b3292363c))
+- **portfolio:** :zap: remove project categories select from project list ([ea207d8](https://github.com/lloydrichards/proj_portfolio-website/commit/ea207d8c7266793cb967cb9d5d23c29b3292363c))
 
 ## [1.12.3](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.2...v1.12.3) (2025-01-25)
 
-
 ### Bug Fixes
 
-* :bug: fix block height for timeline ([f099476](https://github.com/lloydrichards/proj_portfolio-website/commit/f099476feb56962e319b093047c1de95c1476802))
-* :bug: only call SQLite on build tasks ([6fb8649](https://github.com/lloydrichards/proj_portfolio-website/commit/6fb8649d161fe3c82283296ef690d3af3a4c915c))
+- :bug: fix block height for timeline ([f099476](https://github.com/lloydrichards/proj_portfolio-website/commit/f099476feb56962e319b093047c1de95c1476802))
+- :bug: only call SQLite on build tasks ([6fb8649](https://github.com/lloydrichards/proj_portfolio-website/commit/6fb8649d161fe3c82283296ef690d3af3a4c915c))
 
 ## [1.12.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.1...v1.12.2) (2025-01-25)
 
-
 ### Bug Fixes
 
-* :goal_net: add 500 error page ([b473318](https://github.com/lloydrichards/proj_portfolio-website/commit/b473318222e00f1515921bb5edd6c5aabd509d00))
+- :goal_net: add 500 error page ([b473318](https://github.com/lloydrichards/proj_portfolio-website/commit/b473318222e00f1515921bb5edd6c5aabd509d00))
 
 ## [1.12.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.12.0...v1.12.1) (2025-01-24)
 
-
 ### Bug Fixes
 
-* :bug: expose SQLite to edge functions ([b4aeb9a](https://github.com/lloydrichards/proj_portfolio-website/commit/b4aeb9ad90005bff1b90a37e3dac39d9d9093ce2))
+- :bug: expose SQLite to edge functions ([b4aeb9a](https://github.com/lloydrichards/proj_portfolio-website/commit/b4aeb9ad90005bff1b90a37e3dac39d9d9093ce2))
 
 # [1.12.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.11.1...v1.12.0) (2025-01-21)
 
-
 ### Features
 
-* **db:** :sparkles: add team members to db ([afa3e8d](https://github.com/lloydrichards/proj_portfolio-website/commit/afa3e8d029f9123880d7dcef4885e255fcf402a6))
+- **db:** :sparkles: add team members to db ([afa3e8d](https://github.com/lloydrichards/proj_portfolio-website/commit/afa3e8d029f9123880d7dcef4885e255fcf402a6))
 
 ## [1.11.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.11.0...v1.11.1) (2025-01-19)
 
-
 ### Bug Fixes
 
-* :bug: fix focus ring on nav items ([bc04f6b](https://github.com/lloydrichards/proj_portfolio-website/commit/bc04f6b18af7edb31684b714f5566880fe448493))
-* :wheelchair: improve a11y with minor changes ([8188bad](https://github.com/lloydrichards/proj_portfolio-website/commit/8188bad82d2c766bd7371f8fd43e77b3a37bac7c))
+- :bug: fix focus ring on nav items ([bc04f6b](https://github.com/lloydrichards/proj_portfolio-website/commit/bc04f6b18af7edb31684b714f5566880fe448493))
+- :wheelchair: improve a11y with minor changes ([8188bad](https://github.com/lloydrichards/proj_portfolio-website/commit/8188bad82d2c766bd7371f8fd43e77b3a37bac7c))
 
 # [1.11.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.2...v1.11.0) (2025-01-19)
 
-
 ### Bug Fixes
 
-* :card_file_box: change path on server ([6caddd1](https://github.com/lloydrichards/proj_portfolio-website/commit/6caddd16bf3dcc81243b9db4c8db6730b55bf15a))
-
+- :card_file_box: change path on server ([6caddd1](https://github.com/lloydrichards/proj_portfolio-website/commit/6caddd16bf3dcc81243b9db4c8db6730b55bf15a))
 
 ### Features
 
-* **db:** :sparkles: add occupation schema ([d5b1615](https://github.com/lloydrichards/proj_portfolio-website/commit/d5b1615be3d03052f88c24b956b86c0608ddefd8))
-* **db:** :sparkles: create database with drizzle ([9dc54aa](https://github.com/lloydrichards/proj_portfolio-website/commit/9dc54aaaef917be68ed4916fab45cdf89f16a107))
+- **db:** :sparkles: add occupation schema ([d5b1615](https://github.com/lloydrichards/proj_portfolio-website/commit/d5b1615be3d03052f88c24b956b86c0608ddefd8))
+- **db:** :sparkles: create database with drizzle ([9dc54aa](https://github.com/lloydrichards/proj_portfolio-website/commit/9dc54aaaef917be68ed4916fab45cdf89f16a107))
 
 ## [1.10.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.1...v1.10.2) (2025-01-13)
 
-
 ### Bug Fixes
 
-* :bug: fix mermaid charts needing semi-colons ([4816928](https://github.com/lloydrichards/proj_portfolio-website/commit/48169281e5bf3c8548b847c53296042352b986fd))
+- :bug: fix mermaid charts needing semi-colons ([4816928](https://github.com/lloydrichards/proj_portfolio-website/commit/48169281e5bf3c8548b847c53296042352b986fd))
 
 ## [1.10.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.10.0...v1.10.1) (2025-01-10)
 
-
 ### Bug Fixes
 
-* :goal_net: add graceful error handling for 404 ([2077d47](https://github.com/lloydrichards/proj_portfolio-website/commit/2077d47c6830039abbfa42dab536b40272cd539c))
+- :goal_net: add graceful error handling for 404 ([2077d47](https://github.com/lloydrichards/proj_portfolio-website/commit/2077d47c6830039abbfa42dab536b40272cd539c))
 
 # [1.10.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.2...v1.10.0) (2025-01-07)
 
-
 ### Features
 
-* :sparkles: filter projects by category in nav ([57ba502](https://github.com/lloydrichards/proj_portfolio-website/commit/57ba50241fd6c5faf71cd5ea4cfbea5e78de8bc5))
+- :sparkles: filter projects by category in nav ([57ba502](https://github.com/lloydrichards/proj_portfolio-website/commit/57ba50241fd6c5faf71cd5ea4cfbea5e78de8bc5))
 
 ## [1.9.2](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.1...v1.9.2) (2025-01-07)
 
-
 ### Bug Fixes
 
-* :bug: fix paths ([d70e20a](https://github.com/lloydrichards/proj_portfolio-website/commit/d70e20a00f96147a5dc2ac6b14b65e79f567d615))
+- :bug: fix paths ([d70e20a](https://github.com/lloydrichards/proj_portfolio-website/commit/d70e20a00f96147a5dc2ac6b14b65e79f567d615))
 
 ## [1.9.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.9.0...v1.9.1) (2025-01-07)
 
-
 ### Performance Improvements
 
-* :zap: use react compiler ([59035bf](https://github.com/lloydrichards/proj_portfolio-website/commit/59035bf4419a1af82a80d07daa74d304ccdf2966))
+- :zap: use react compiler ([59035bf](https://github.com/lloydrichards/proj_portfolio-website/commit/59035bf4419a1af82a80d07daa74d304ccdf2966))
 
 # [1.9.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.8.1...v1.9.0) (2025-01-05)
 
-
 ### Bug Fixes
 
-* :bug: header links on hover ([c94b3b0](https://github.com/lloydrichards/proj_portfolio-website/commit/c94b3b04ccfab1c3677b5e1cfac1cb6c6066046e))
-
+- :bug: header links on hover ([c94b3b0](https://github.com/lloydrichards/proj_portfolio-website/commit/c94b3b04ccfab1c3677b5e1cfac1cb6c6066046e))
 
 ### Features
 
-* **portfolio:** :sparkles: add team with avatars ([b9fd38a](https://github.com/lloydrichards/proj_portfolio-website/commit/b9fd38a673deb61677b649b54a3c2c7c0200639a))
-
+- **portfolio:** :sparkles: add team with avatars ([b9fd38a](https://github.com/lloydrichards/proj_portfolio-website/commit/b9fd38a673deb61677b649b54a3c2c7c0200639a))
 
 ### Performance Improvements
 
-* :mag: improve metadata and seo ([e3d903d](https://github.com/lloydrichards/proj_portfolio-website/commit/e3d903d5d42f0c088a9c48b7bfd17b0dba77c44c))
-* :sparkles: better rss feed ([f99a47c](https://github.com/lloydrichards/proj_portfolio-website/commit/f99a47c2394c03cda26fa28b8206e725324b20e0))
-* :zap: better sitemap ([0f131c5](https://github.com/lloydrichards/proj_portfolio-website/commit/0f131c5fa33b5fae37083be42352578f11d47e5f))
+- :mag: improve metadata and seo ([e3d903d](https://github.com/lloydrichards/proj_portfolio-website/commit/e3d903d5d42f0c088a9c48b7bfd17b0dba77c44c))
+- :sparkles: better rss feed ([f99a47c](https://github.com/lloydrichards/proj_portfolio-website/commit/f99a47c2394c03cda26fa28b8206e725324b20e0))
+- :zap: better sitemap ([0f131c5](https://github.com/lloydrichards/proj_portfolio-website/commit/0f131c5fa33b5fae37083be42352578f11d47e5f))
 
 ## [1.8.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.8.0...v1.8.1) (2025-01-05)
 

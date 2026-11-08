@@ -9,12 +9,15 @@ import { LabCard } from "@/components/molecule/lab_card";
 import { ProjectCard } from "@/components/molecule/project_card";
 import { SkillCard } from "@/components/molecule/skill_card";
 import { ThemeSwitcherTile } from "@/components/molecule/theme-switcher-tile";
-import { Logo } from "@/components/organism/logo";
+import { normalizeJourneyRecords } from "@/components/organism/journey_dashboard/data/records";
+import { prepareLifetimeGlobeData } from "@/components/organism/journey_dashboard/globe/globe-data";
+import JourneyGlobe from "@/components/organism/journey_dashboard/globe/journey-globe";
 import { PersonJsonLd } from "@/components/organism/person-jsonld";
 import { SkillBarChart } from "@/components/organism/skill_bar_chart/skill_bar_chart.server";
 import { Mosaic } from "@/components/template/mosaic";
 import { typefaceBody, typefaceHeading1 } from "@/components/tokens/typeface";
 import { siteMetadata } from "@/lib/metadata";
+import { JourneyService } from "@/services/Dataset/JourneyService";
 import { GitHub } from "@/services/GitHub";
 import { Laboratory } from "@/services/Laboratory";
 import { Portfolio } from "@/services/Portfolio";
@@ -33,6 +36,7 @@ const HomePage = async () => {
     allPortfolioProjects,
     githubStats,
     githubCommitGraph,
+    personalData,
   ] = await RuntimeServer.runPromise(
     Effect.all(
       [
@@ -64,20 +68,30 @@ const HomePage = async () => {
             commitLimit: 300,
           });
         }).pipe(Effect.option),
+        Effect.gen(function* () {
+          const journey = yield* JourneyService;
+          return yield* journey.personalData();
+        }),
       ],
       { concurrency: "unbounded" },
     ),
   );
 
+  const globe = prepareLifetimeGlobeData(
+    normalizeJourneyRecords([], personalData),
+    personalData.geographicPlaces,
+    new Date().toISOString(),
+  );
   return (
     <>
       <PersonJsonLd />
       <Mosaic>
         <Tile
           size="unset"
-          className="col-span-4 row-span-4 md:col-span-4 md:row-span-5 lg:col-span-6 lg:row-span-6 bg-background overflow-clip group flex justify-center items-center"
+          outline={false}
+          className="col-span-4 row-span-4 md:col-span-4 md:row-span-5 lg:col-span-6 lg:row-span-6 bg-transparent flex justify-center items-center"
         >
-          <Logo className="text-primary scale-110 transition-transform hover:scale-115" />
+          <JourneyGlobe data={globe} variant="standalone" />
         </Tile>
         {/* Compact stat strip */}
         <Tile size="full-xs">

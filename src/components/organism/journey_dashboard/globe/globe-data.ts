@@ -118,3 +118,34 @@ export function prepareGlobeData(
   };
 }
 export type GlobeData = ReturnType<typeof prepareGlobeData>;
+
+/** The homepage shows authored homes and visits across the whole journey. */
+export function prepareLifetimeGlobeData(
+  records: JourneyRecord[],
+  geographicPlaces: JourneyGeographicPlace[],
+  asOf: string,
+): GlobeData {
+  const reached = records.filter(
+    (record) =>
+      record.lane === "Places" && timestamp(record.start) <= timestamp(asOf),
+  );
+  const currentHome = reached
+    .filter(
+      (record) =>
+        record.placeKind === "lived" &&
+        (record.end === null || timestamp(record.end) > timestamp(asOf)),
+    )
+    .toSorted((a, b) => timestamp(b.start) - timestamp(a.start))[0];
+  const home = geographicPlaces.find(
+    (place) => place.id === currentHome?.geographicPlaceId,
+  );
+  const history = locationHistory(reached, countryNames);
+  return {
+    markers: [],
+    center: home?.coordinates ?? [0, 25],
+    focusKey: `current-home:${currentHome?.id ?? "unknown"}`,
+    caption: "Places lived in and visited",
+    history,
+    active: history,
+  };
+}

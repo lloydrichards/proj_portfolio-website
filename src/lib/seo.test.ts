@@ -1,10 +1,37 @@
 import { describe, expect, it } from "vitest";
 import { makeOGImageURL } from "../services/utils";
+import { siteMetadata } from "./metadata";
 import { createOGImageMetadata, createPageMetadata } from "./seo";
 import assets from "./social-assets.json";
 import { fitCardTitle, wrapCardText } from "./social-card";
 
 describe("social previews", () => {
+  it("uses the final image host without relying on a redirect or metadataBase", () => {
+    const urls = [siteMetadata.social.socialBanner];
+    for (const kind of [
+      "page",
+      "project",
+      "lab",
+      "timeline",
+      "projects",
+      "labs",
+      "cv",
+    ] as const) {
+      const metadata = createPageMetadata({
+        title: "Example",
+        description: "Example description",
+        kind,
+      });
+      const images = metadata.openGraph?.images as { url: string }[];
+      urls.push(images[0].url);
+      expect(metadata.twitter).toMatchObject({ images });
+    }
+    for (const value of urls) {
+      const url = new URL(value);
+      expect(url.origin).toBe("https://www.lloydrichards.dev");
+      expect(url.pathname).toBe("/api/og");
+    }
+  });
   it("carries a CV variant's role and skills into its matching preview", () => {
     const metadata = createPageMetadata({
       title: "Design Engineer CV",

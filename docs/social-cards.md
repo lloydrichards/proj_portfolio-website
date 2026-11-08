@@ -2,6 +2,8 @@
 
 Social preview cards render at 1200 × 630 pixels through `/api/og`. They use the site's dark slate, emerald, and Roboto Mono identity. A visitor's selected theme does not affect the cards.
 
+Image metadata uses absolute URLs on `https://www.lloydrichards.dev`, the final serving host. Keep images on this host: Vercel’s Open Graph inspector returned 503 when its image proxy fetched the redirect from the non-www domain.
+
 ## Page-specific layouts
 
 The `kind` parameter selects the card layout:

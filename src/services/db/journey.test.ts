@@ -172,3 +172,52 @@ describe("SQL timeline", () => {
     }
   });
 });
+
+describe("atomic backup restoration", () => {
+  it("restores compatible legacy backups while retaining journey data, and rejects missing occupation targets atomically", async () => {
+    const { client, database, directory } = await disposableDatabase();
+    try {
+      await seedJourney(database);
+      const before = await exportDatabase(database);
+      const legacy = Object.fromEntries(
+        Object.entries(before).filter(([name]) => !name.startsWith("journey")),
+      );
+      await importDatabase(database, legacy);
+      expect(await exportDatabase(database)).toEqual(before);
+      legacy.occupation = legacy.occupation.filter(
+        (row) =>
+          typeof row === "object" &&
+          row !== null &&
+          "id" in row &&
+          row.id !== 10,
+      );
+      await expect(importDatabase(database, legacy)).rejects.toThrow();
+      expect(await exportDatabase(database)).toEqual(before);
+    } finally {
+      client.close();
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+
+  it.each([
+    ["journeyPlace", "date", "2019-13"],
+    ["journeyEvent", "kind", "promotion"],
+    ["journeyCity", "latitude", 95],
+  ] as const)("rejects invalid %s.%s before replacing the original database", async (table, field, value) => {
+    const { client, database, directory } = await disposableDatabase();
+    try {
+      await seedJourney(database);
+      const before = await exportDatabase(database);
+      const invalid = structuredClone(before);
+      const row = invalid[table][0];
+      if (typeof row !== "object" || row === null)
+        throw new Error("Missing fixture row");
+      invalid[table][0] = { ...row, [field]: value };
+      await expect(importDatabase(database, invalid)).rejects.toThrow();
+      expect(await exportDatabase(database)).toEqual(before);
+    } finally {
+      client.close();
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+});

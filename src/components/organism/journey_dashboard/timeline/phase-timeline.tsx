@@ -1,11 +1,32 @@
 "use client";
+import { cva } from "class-variance-authority";
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import { formatDate, recordDates, timestamp } from "../model/dates";
 import { recordPresentation } from "../model/record-presentation";
 import type { JourneyPhase } from "../model/types";
 import { nearestMark, staggerNearbyPoints } from "./nearest-mark";
-import styles from "./phase-timeline.module.css";
 import { type TimelineData, timelineLane, timePosition } from "./timeline-data";
+
+const phaseMark = cva(
+  "absolute pointer-events-none -translate-y-1/2 bg-primary h-1.5",
+  {
+    variants: {
+      shape: {
+        bar: "",
+        point: "w-1.5 rounded-full -translate-x-1/2",
+        event:
+          "size-1.75 rounded-none -translate-x-1/2 rotate-45 outline-2 outline-background",
+      },
+      eventLaneBar: { true: "h-1 bg-muted-foreground" },
+      selected: { true: "bg-foreground outline outline-primary" },
+      hovered: { true: "bg-foreground" },
+    },
+    compoundVariants: [
+      { shape: "event", selected: true, class: "outline-2 outline-background" },
+    ],
+  },
+);
 
 export default function PhaseTimeline({
   phase,
@@ -42,16 +63,16 @@ export default function PhaseTimeline({
     );
   return (
     <section
-      className={styles.root}
+      className="hidden [@media(max-width:960px)]:block my-0 [@media(max-width:960px)]:mt-4 [@media(max-width:960px)]:mb-6 scroll-mt-[calc(var(--journey-sidebar-height,180px)+20px)] focus:outline-none"
       id={`${phase.id}-timeline`}
       tabIndex={-1}
       aria-label={`Explore entries in ${phase.label}`}
     >
-      <div className={styles.dates}>
+      <div className="flex justify-between ml-16 text-[10px] text-muted-foreground">
         <span>{formatDate(phase.end)}</span>
         <span>{formatDate(phase.start)}</span>
       </div>
-      <div ref={plot} className={styles.plot}>
+      <div ref={plot} className="ml-16">
         {data.lanes.map((lane) => {
           const ends: number[] = [];
           const laneMarks = data.marks
@@ -98,21 +119,35 @@ export default function PhaseTimeline({
           return (
             <div
               key={lane}
-              className={styles.lane}
+              className="relative"
               style={{ height }}
               data-events={lane === "Events"}
             >
-              <span className={styles.label}>
+              <span className="absolute -left-16 top-3.5 text-[10px] text-foreground">
                 {lane === "Education" ? "Learning" : lane}
               </span>
-              <div className={styles.track} style={{ height }}>
+              <div
+                className="relative before:content-[''] before:absolute before:top-1/2 before:w-full before:border-t before:border-border"
+                style={{ height }}
+              >
                 {laneMarks.map(({ record, point }, index) => {
                   const segment = segments[index];
                   const label = `${recordPresentation(record).heading}, ${recordDates(record)}`;
                   return (
                     <span key={record.id}>
                       <span
-                        className={point ? styles.dot : styles.bar}
+                        className={cn(
+                          phaseMark({
+                            shape: point
+                              ? record.lane === "Events"
+                                ? "event"
+                                : "point"
+                              : "bar",
+                            eventLaneBar: !point && lane === "Events",
+                            selected: record.id === selectedRecordId,
+                            hovered: record.id === hovered,
+                          }),
+                        )}
                         data-record-id={record.id}
                         data-event={point && record.lane === "Events"}
                         data-selected={record.id === selectedRecordId}
@@ -127,7 +162,7 @@ export default function PhaseTimeline({
                       />
                       <button
                         type="button"
-                        className={styles.keyboardTarget}
+                        className="group absolute size-6 -translate-1/2 pointer-events-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 focus-visible:z-2"
                         style={{
                           left: (segment.x1 + segment.x2) / 2,
                           top: segment.y1,
@@ -136,7 +171,9 @@ export default function PhaseTimeline({
                         aria-pressed={record.id === selectedRecordId}
                         onClick={() => choose(record.id)}
                       >
-                        <span>{label}</span>
+                        <span className="absolute size-px overflow-hidden [clip-path:inset(50%)] group-focus-visible:w-max group-focus-visible:max-w-50 group-focus-visible:h-auto group-focus-visible:[clip-path:none] group-focus-visible:overflow-visible group-focus-visible:left-0 group-focus-visible:bottom-7 group-focus-visible:p-1.5 group-focus-visible:text-[10px] group-focus-visible:bg-background group-focus-visible:text-foreground">
+                          {label}
+                        </span>
                       </button>
                     </span>
                   );
@@ -146,8 +183,10 @@ export default function PhaseTimeline({
                     type="button"
                     tabIndex={-1}
                     aria-hidden="true"
-                    className={styles.nearestTarget}
-                    style={{ cursor: hovered ? "pointer" : "default" }}
+                    className={cn(
+                      "absolute inset-y-0 -inset-x-3 w-[calc(100%+24px)] h-full",
+                      hovered ? "cursor-pointer" : "cursor-default",
+                    )}
                     onPointerMove={(event) => {
                       const b =
                         event.currentTarget.parentElement?.getBoundingClientRect();

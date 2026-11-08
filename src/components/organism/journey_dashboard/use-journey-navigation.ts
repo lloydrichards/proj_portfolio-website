@@ -123,7 +123,7 @@ export function useJourneyNavigation(phases: JourneyPhase[]) {
     if (targetPhase) setActivePhaseId(targetPhase);
     setSelectedRecordId(id);
     if (!scrollToEntry) return;
-    // Let an inline chooser close before measuring the card's scroll position.
+    // Measure after React renders the selected entry's expanded content.
     requestAnimationFrame(() =>
       navigate(phaseId ? `${phaseId}-entry-${id}` : `entry-${id}`, true),
     );

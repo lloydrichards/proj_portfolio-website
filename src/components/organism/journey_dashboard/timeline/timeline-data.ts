@@ -41,10 +41,14 @@ export function isTimelinePoint(record: JourneyRecord) {
 }
 
 export function prepareTimelineData(data: JourneyDashboardData) {
+  const available = (record: JourneyRecord) =>
+    timestamp(record.start) <= timestamp(data.range.end);
   const marks = timelineLanes.flatMap((lane) => {
     const ends: number[] = [];
     return data.records
-      .filter((record) => timelineLane(record.lane) === lane)
+      .filter(
+        (record) => available(record) && timelineLane(record.lane) === lane,
+      )
       .toSorted((a, b) => timestamp(a.start) - timestamp(b.start))
       .map((record) => {
         let channel = ends.findIndex((end) => end < timestamp(record.start));
@@ -60,7 +64,7 @@ export function prepareTimelineData(data: JourneyDashboardData) {
     marks,
     lanes: timelineLanes,
     phases: data.phases,
-    navigationRecords: data.timelineRecords,
+    navigationRecords: data.timelineRecords.filter(available),
     range: data.range,
     ticks: Array.from({ length: 5 }, (_, index) => {
       const year = new Date(

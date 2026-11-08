@@ -1,6 +1,21 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { resolveJourneyTarget } from "./model/navigation-target";
 import type { JourneyPhase } from "./model/types";
+
+function navigate(id: string, instant = false) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  history.replaceState(null, "", `#${id}`);
+  target.scrollIntoView({
+    block: "start",
+    behavior:
+      instant || window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+  });
+  target.focus({ preventScroll: true });
+}
 
 // Phase elements and public entry anchors are the only DOM this coordinator reads.
 export function useJourneyNavigation(phases: JourneyPhase[]) {
@@ -60,6 +75,23 @@ export function useJourneyNavigation(phases: JourneyPhase[]) {
       navigating.current = false;
       onScroll();
     };
+    let restoreFrame = 0;
+    const restoreFromHash = () => {
+      const target = resolveJourneyTarget(phases, window.location.hash);
+      if (!target) return;
+      navigating.current = true;
+      selectedPhase.current = target.recordId ? target.phaseId : null;
+      setActivePhaseId(target.phaseId);
+      setSelectedRecordId(target.recordId);
+      cancelAnimationFrame(restoreFrame);
+      restoreFrame = requestAnimationFrame(() => {
+        navigate(target.anchor, true);
+        navigating.current = false;
+        onScroll();
+      });
+    };
+    restoreFromHash();
+    window.addEventListener("hashchange", restoreFromHash);
     const resize = new ResizeObserver(measure);
     if (sidebarRef.current) resize.observe(sidebarRef.current);
     measure();
@@ -68,25 +100,14 @@ export function useJourneyNavigation(phases: JourneyPhase[]) {
     window.addEventListener("resize", measure);
     return () => {
       resize.disconnect();
+      window.removeEventListener("hashchange", restoreFromHash);
+      cancelAnimationFrame(restoreFrame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("scrollend", onScrollEnd);
       window.removeEventListener("resize", measure);
       if (frame) cancelAnimationFrame(frame);
     };
   }, [phases]);
-  function navigate(id: string, instant = false) {
-    const target = document.getElementById(id);
-    if (!target) return;
-    history.replaceState(null, "", `#${id}`);
-    target.scrollIntoView({
-      block: "start",
-      behavior:
-        instant || window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "instant"
-          : "smooth",
-    });
-    target.focus({ preventScroll: true });
-  }
   function selectRecord(id: string, phaseId?: string, scrollToEntry = true) {
     const targetPhase =
       phaseId ??

@@ -58,7 +58,7 @@ export default function JourneyDashboard({
             </span>
             <div
               className={cn(
-                "flex h-6 min-h-6 min-w-0 w-full items-center text-[11px] leading-normal text-muted-foreground min-[961px]:block min-[961px]:h-auto",
+                "flex h-11 min-h-11 min-w-0 w-full items-center text-[11px] leading-normal text-muted-foreground min-[961px]:block min-[961px]:h-auto",
                 !selectedRecord && "min-[961px]:invisible",
               )}
               data-selected={!!selectedRecord}
@@ -66,7 +66,7 @@ export default function JourneyDashboard({
               {selectedRecord ? (
                 <button
                   type="button"
-                  className="flex min-h-6 w-full cursor-pointer items-center justify-between gap-2 text-left text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 text-left text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   onClick={navigation.clearSelection}
                   aria-label={`Clear ${recordPresentation(selectedRecord).heading} and follow phase`}
                   title="Follow phase"

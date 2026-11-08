@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
   serverExternalPackages: ["@sparticuz/chromium-min", "puppeteer-core"],
   outputFileTracingIncludes: {
-    "/api/og": [
+    "/api/og{,/**}": [
       "./public/fonts/roboto-mono/**/*",
       "./public/images/social/**/*",
     ],

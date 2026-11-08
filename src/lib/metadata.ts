@@ -1,3 +1,5 @@
+import { socialImageURL } from "./social-image-url";
+
 export const siteMetadata = {
   title: "lloydrichards.dev",
   author: "Lloyd Richards",
@@ -12,7 +14,7 @@ export const siteMetadata = {
   icon: `/favicon.svg`,
   social: {
     email: "lloyd.d.richards@gmail.com",
-    socialBanner: "https://www.lloydrichards.dev/api/og?v=2&kind=home",
+    socialBanner: socialImageURL(new URLSearchParams({ kind: "home" })),
     // mastodon: "https://mastodon.social/@mastodonuser",
     github: "https://github.com/lloydrichards",
     // x: "https://twitter.com/x",

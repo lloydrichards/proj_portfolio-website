@@ -1,3 +1,4 @@
+import path from "node:path";
 import { BunFileSystem } from "@effect/platform-bun";
 import {
   Array,
@@ -74,11 +75,13 @@ export class Laboratory extends Context.Service<Laboratory>()(
 
       const all = Effect.gen(function* () {
         const fileNames = yield* fs.readDirectory(LAB_PATH);
+        const slugs = yield* Effect.filter(fileNames, (slug) =>
+          fs.exists(path.join(LAB_PATH, slug, "page.mdx")),
+        );
 
         return yield* Effect.all(
           pipe(
-            fileNames,
-            Array.filter((f) => !f.endsWith(".tsx")),
+            slugs,
             Array.map((f) => getLab(f)),
           ),
           { concurrency: "unbounded" },

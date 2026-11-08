@@ -42,9 +42,37 @@ const keySwatch = cva(
   },
 );
 
+const globeFigure = cva("relative text-center shrink-0", {
+  variants: {
+    variant: {
+      dashboard:
+        "my-0 min-[961px]:mt-2 min-[961px]:mb-3.5 [@media(max-width:960px)]:col-start-1 [@media(max-width:960px)]:row-start-1 [@media(max-width:960px)]:self-center",
+      standalone: "m-0 flex size-full items-center justify-center",
+    },
+  },
+});
+const globeSurface = cva(
+  "block w-full cursor-grab active:cursor-grabbing focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-[-4px] rounded-full",
+  {
+    variants: {
+      variant: {
+        dashboard:
+          "h-[clamp(90px,20dvh,220px)] touch-pan-y [@media(min-width:961px)_and_(max-height:650px)]:h-22.5 [@media(max-width:960px)]:h-[100px] [@media(max-width:960px)_and_(max-height:500px)]:h-14",
+        standalone: "h-full touch-none",
+      },
+    },
+  },
+);
+
 const sphere = { type: "Sphere" as const };
 
-export default function JourneyGlobe({ data }: { data: GlobeData }) {
+export default function JourneyGlobe({
+  data,
+  variant = "dashboard",
+}: {
+  data: GlobeData;
+  variant?: "dashboard" | "standalone";
+}) {
   const [camera, setCamera] = useState(data.center);
   const cameraRef = useRef(camera);
   const [manualKey, setManualKey] = useState<string | null>(null);
@@ -100,15 +128,35 @@ export default function JourneyGlobe({ data }: { data: GlobeData }) {
       .map((place) => place.country),
   );
   return (
-    <figure
-      className="relative text-center shrink-0 my-0 min-[961px]:mt-2 min-[961px]:mb-3.5 [@media(max-width:960px)]:col-start-1 [@media(max-width:960px)]:row-start-1 [@media(max-width:960px)]:self-center"
-      aria-label="Places globe"
-    >
+    <figure className={globeFigure({ variant })} aria-label="Places globe">
       <svg
         viewBox="0 0 320 320"
-        className="block w-full h-[clamp(90px,20dvh,220px)] touch-pan-y cursor-grab active:cursor-grabbing [@media(min-width:961px)_and_(max-height:650px)]:h-22.5 [@media(max-width:960px)]:h-[100px] [@media(max-width:960px)_and_(max-height:500px)]:h-14"
+        className={globeSurface({ variant })}
         role="img"
-        aria-label={`Places in this phase: ${data.caption}. Highlighted countries belong to this phase; earlier countries are muted.`}
+        aria-label={
+          variant === "standalone"
+            ? "Countries I've lived in and visited. Homes are highlighted strongly; visits more softly. Drag or use arrow keys to rotate."
+            : `Places in this phase: ${data.caption}. Highlighted countries belong to this phase; earlier countries are muted.`
+        }
+        tabIndex={variant === "standalone" ? 0 : undefined}
+        onKeyDown={(event) => {
+          const directions: Record<string, [number, number]> = {
+            ArrowLeft: [-12, 0],
+            ArrowRight: [12, 0],
+            ArrowUp: [0, 12],
+            ArrowDown: [0, -12],
+          };
+          const delta = directions[event.key];
+          if (!delta || variant !== "standalone") return;
+          event.preventDefault();
+          const next: [number, number] = [
+            camera[0] + delta[0],
+            Math.max(-80, Math.min(80, camera[1] + delta[1])),
+          ];
+          setManualKey(data.focusKey);
+          cameraRef.current = next;
+          setCamera(next);
+        }}
         onPointerDown={(event) => {
           if (event.button !== 0) return;
           drag.current = { x: event.clientX, y: event.clientY, center: camera };
@@ -165,14 +213,18 @@ export default function JourneyGlobe({ data }: { data: GlobeData }) {
           className="fill-none stroke-border stroke-[0.7]"
         />
       </svg>
-      <figcaption
-        className="text-xs leading-[1.6] mt-0.5 mx-auto mb-1 max-w-full min-h-[1.6em] line-clamp-2 text-balance [@media(max-width:960px)]:hidden"
-        title={data.caption}
-      >
-        {data.caption}
-      </figcaption>
-      <GlobeKey />
-      {manual && (
+      {variant === "dashboard" && (
+        <>
+          <figcaption
+            className="text-xs leading-[1.6] mt-0.5 mx-auto mb-1 max-w-full min-h-[1.6em] line-clamp-2 text-balance [@media(max-width:960px)]:hidden"
+            title={data.caption}
+          >
+            {data.caption}
+          </figcaption>
+          <GlobeKey />
+        </>
+      )}
+      {manual && variant === "dashboard" && (
         <button
           className="absolute top-0 right-0 grid place-items-center size-11 text-muted-foreground bg-background rounded-md hover:text-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 [@media(max-width:960px)]:-top-2 [@media(max-width:960px)]:-right-2 [@media(max-width:960px)]:bg-transparent"
           type="button"

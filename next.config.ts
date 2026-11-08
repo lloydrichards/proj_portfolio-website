@@ -1,9 +1,31 @@
 import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
+  },
+  webpack(config, { defaultLoaders, isServer }) {
+    if (isServer) {
+      // @next/mdx's generic SWC loader treats metadata exports as client code.
+      for (const rule of config.module.rules) {
+        if (
+          rule.test instanceof RegExp &&
+          rule.test.test("page.mdx") &&
+          Array.isArray(rule.use)
+        ) {
+          for (const [index, loader] of rule.use.entries()) {
+            if (loader === defaultLoaders.babel) {
+              rule.use[index] = {
+                ...loader,
+                options: { ...loader.options, bundleLayer: "rsc" },
+              };
+            }
+          }
+        }
+      }
+    }
+    return config;
   },
   outputFileTracingRoot: process.cwd(),
   transpilePackages: ["effect-boxes"],
@@ -12,7 +34,7 @@ const nextConfig = {
   outputFileTracingIncludes: {
     "/*": [process.env.DB_FILE_NAME ?? "./database/db.sqlite"],
   },
-} as NextConfig;
+};
 
 const withMDX = createMDX({
   options: {

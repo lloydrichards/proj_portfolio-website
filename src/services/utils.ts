@@ -29,7 +29,7 @@ export const makeOGImageURL = ({
   artwork?: string;
   label?: string;
 }) => {
-  const baseUrl = new URL("/api/og", "https://lloydrichards.dev");
+  const baseUrl = new URL("/api/og", "https://www.lloydrichards.dev");
   baseUrl.searchParams.set("v", "3");
   baseUrl.searchParams.set("kind", kind);
   const image = socialArtwork(artwork);
@@ -43,5 +43,5 @@ export const makeOGImageURL = ({
   if (date) {
     baseUrl.searchParams.set("date", formatDate(new Date(date)));
   }
-  return baseUrl.pathname + baseUrl.search;
+  return baseUrl.href;
 };

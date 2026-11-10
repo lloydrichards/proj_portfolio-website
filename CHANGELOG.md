@@ -1,3 +1,40 @@
+# [1.24.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.23.1...v1.24.0) (2026-11-10)
+
+
+### Content
+
+* add design engineering CV and refine role variants ([#133](https://github.com/lloydrichards/proj_portfolio-website/issues/133)) ([89fb382](https://github.com/lloydrichards/proj_portfolio-website/commit/89fb382d546f6cb7cf61cef6ea84179ab90a248d))
+
+
+### Features
+
+* add consistent sitewide social preview cards ([#136](https://github.com/lloydrichards/proj_portfolio-website/issues/136)) ([01dca31](https://github.com/lloydrichards/proj_portfolio-website/commit/01dca310648929d971123915a356f6abff24bfbb))
+* add Effect Days and ZurichJS conference attendance ([8cc654a](https://github.com/lloydrichards/proj_portfolio-website/commit/8cc654a310825e4897e5624d9577e1dd509bcef5))
+* add page-specific social preview designs ([d99f324](https://github.com/lloydrichards/proj_portfolio-website/commit/d99f324d335a2201658572a9eafebaae745bbd4a))
+* add planned Effect Days 2026 attendance ([df83b3d](https://github.com/lloydrichards/proj_portfolio-website/commit/df83b3dd1bd0484bf5b6e67b60b39c0206640e6e))
+* establish journey timeline dashboard ([f2a844e](https://github.com/lloydrichards/proj_portfolio-website/commit/f2a844e4d25fa5531540cd35de3cc6aefedc7c8c))
+* show lived and visited places on the homepage globe ([d6a42f9](https://github.com/lloydrichards/proj_portfolio-website/commit/d6a42f92cf59e48d7171674ca2c844d9d9bb486c))
+
+
+### Fixed
+
+* bundle SQLite WAL files for server queries ([9192eb2](https://github.com/lloydrichards/proj_portfolio-website/commit/9192eb28dae9ff4ca4ed839381e09e7dac22b318))
+* preserve journey keyboard focus and touch targets ([41c9d38](https://github.com/lloydrichards/proj_portfolio-website/commit/41c9d38519954e098d01247e1f76dea9b3169286))
+* preserve social card designs through image proxies ([#140](https://github.com/lloydrichards/proj_portfolio-website/issues/140)) ([f76b47f](https://github.com/lloydrichards/proj_portfolio-website/commit/f76b47fc9fe2e8dfa0e29a94de3fd162b87190ff))
+* restore timeline entry links and hide future marks ([90a7128](https://github.com/lloydrichards/proj_portfolio-website/commit/90a7128222b19ea59f6e6ba71c311f7ea6db47ac))
+* scope database tracing and restore MDX builds ([#134](https://github.com/lloydrichards/proj_portfolio-website/issues/134)) ([2722e17](https://github.com/lloydrichards/proj_portfolio-website/commit/2722e1716ec35165352f43aaa7df16e9ddaefe4a))
+* size timeline globe to its lane ([#135](https://github.com/lloydrichards/proj_portfolio-website/issues/135)) ([98dacfa](https://github.com/lloydrichards/proj_portfolio-website/commit/98dacfaa2abf6d78cbb2c9dc05cce94ff5a8fdcf))
+* tolerate unavailable GitHub statistics during builds ([29d0f7d](https://github.com/lloydrichards/proj_portfolio-website/commit/29d0f7d4a55e3d006ab72d7612d720becb897f44))
+* update dependencies and restore discovery endpoints ([#132](https://github.com/lloydrichards/proj_portfolio-website/issues/132)) ([cc6882a](https://github.com/lloydrichards/proj_portfolio-website/commit/cc6882acffe94af5b406f6974322153fa413fe0e))
+* use direct social image URLs for Vercel previews ([#139](https://github.com/lloydrichards/proj_portfolio-website/issues/139)) ([8c1134c](https://github.com/lloydrichards/proj_portfolio-website/commit/8c1134ccdc756a8dc07a8c857f9541807cd8b4fe))
+* validate journey restores atomically and support legacy backups ([b79544a](https://github.com/lloydrichards/proj_portfolio-website/commit/b79544a11422d095f313dddef8080aab9663fcfc))
+
+
+### Improved
+
+* align journey components with Tailwind conventions ([10fc7ed](https://github.com/lloydrichards/proj_portfolio-website/commit/10fc7ed8aee9c310c37c32bd95c991858a68bee0))
+* load journey history through SQL services ([73e9c89](https://github.com/lloydrichards/proj_portfolio-website/commit/73e9c89d28528239ce01c08a6761d3467faf7c5f))
+
 ## [1.23.1](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.23.0...v1.23.1) (2026-10-27)
 
 ### Fixed

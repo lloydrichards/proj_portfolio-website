@@ -59,6 +59,12 @@
   },
   "overrides": [
     {
+      "includes": ["CHANGELOG.md"],
+      "formatter": {
+        "enabled": false
+      }
+    },
+    {
       "includes": ["src/types/helpers.ts"],
       "linter": {
         "rules": {

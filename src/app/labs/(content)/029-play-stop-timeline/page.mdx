@@ -9,10 +9,9 @@ export const metadata = createOGImageMetadata({
   tags: ["visx", "d3", "simulation"],
 });
 
-Following in the success of the **028** lab, I'm not going to use the
-`@visx/brush` component to create a timeline that is automatically moves across
-time. The idea is to have a timeline that is moving across time, and have some
-controls that can be used to start and stop the timeline.
+Building on the [brushable timeline](/labs/028-brushable-timeline), I used the
+`@visx/brush` component to make the timeline move automatically, with controls
+to start and stop playback.
 
 With a bit of work, I was able to get the timeline to move across time, and have
 a button that can be used to start and stop the timeline. I also added forward
@@ -23,9 +22,8 @@ jumps each tick.
 
 ## How it works
 
-I started with the base `<Timeline />` component from **028** and added some
-buttons to the bottom. These I styles and could hook into the `onClick()` to
-start and stop the animation.
+I started with the base `<Timeline />` component from the brushable timeline and added buttons
+to start and stop the animation.
 
 ```tsx
 const [selected, setSelected] = useState<[Date, Date]>([

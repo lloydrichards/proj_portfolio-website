@@ -1,8 +1,7 @@
-"use client";
 import * as THREE from "three";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
-export function startBackground(background: HTMLCanvasElement) {
+function startBackground(background: HTMLCanvasElement) {
   const canvasWidth = Math.max(1, background.clientWidth);
   const canvasHeight = Math.max(1, background.clientHeight);
   const context = background.getContext("webgl2");
@@ -171,13 +170,11 @@ export function startBackground(background: HTMLCanvasElement) {
   }
 
   const stars = Array(1200).fill(null).map(generateStar);
-  stars.forEach((star) => scene.add(star));
-
-  let frame = 0;
+  scene.add(...stars);
 
   function render() {
     if (outlier) {
-      const offset = -window.scrollY;
+      const offset = -pageScroll;
       outlier.rotation.x += 0.01;
       outlier.rotation.y += 0.01;
       outlier.position.y = offset * 0.005;
@@ -186,7 +183,7 @@ export function startBackground(background: HTMLCanvasElement) {
       camera.position.y = offset * 0.01;
     }
     renderer.render(scene, camera);
-    frame = requestAnimationFrame(render);
+    requestAnimationFrame(render);
   }
 
   const observer = new ResizeObserver(() => {
@@ -199,15 +196,30 @@ export function startBackground(background: HTMLCanvasElement) {
   observer.observe(background);
   render();
 
-  return () => {
-    observer.disconnect();
-    cancelAnimationFrame(frame);
-    scene.traverse((object) => {
-      if (object instanceof THREE.Mesh) {
-        object.geometry.dispose();
-        (object.material as THREE.Material).dispose();
-      }
-    });
-    renderer.dispose();
-  };
+  return true;
+}
+
+let pageScroll = 0;
+window.addEventListener("message", (event) => {
+  if (
+    event.source === window.parent &&
+    event.data?.type === "lab-scroll" &&
+    Number.isFinite(event.data.y)
+  ) {
+    pageScroll = event.data.y;
+  }
+});
+
+const canvas = document.querySelector("canvas");
+const status = document.querySelector("[role=status]");
+if (canvas && status) {
+  try {
+    if (startBackground(canvas)) {
+      status.remove();
+    } else {
+      status.textContent = "This browser could not start WebGL 2.";
+    }
+  } catch {
+    status.textContent = "The 3D scene could not start.";
+  }
 }

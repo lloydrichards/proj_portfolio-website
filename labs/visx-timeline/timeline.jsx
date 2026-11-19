@@ -45,7 +45,7 @@ const selectedBoxStyle = {
   stroke: "#b45309",
 };
 const playback =
-  new URLSearchParams(window.location.search).get("mode") === "playback";
+  new URL(document.baseURI).searchParams.get("mode") === "playback";
 
 function Timeline() {
   const chart = useRef(null);

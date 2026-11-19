@@ -10,7 +10,7 @@ export const metadata = createOGImageMetadata({
   href: "https://www.outlierconf.com/",
 });
 
-import { BackgroundDemo } from "./background-demo";
+import { RunDemo } from "@/app/labs/run-demo";
 
 <GitHubCommitCard owner="lloydrichards" repo="proj_outlier-background" title="Repository activity" className="h-64" />
 
@@ -20,7 +20,7 @@ interesting and inline with the conference's branding of thinking outside the
 box. I decided to use Three.js to create a simple 3D background that would be
 rendered in the browser.
 
-<BackgroundDemo />
+<RunDemo title="Animated Outlier conference background" src="/labs/outlier-background/index.html" height={448} syncScroll />
 
 The challenge I had was that the website was build using SquareSpace, which
 isn't the most developer-friendly platform. I had to find a way to inject the

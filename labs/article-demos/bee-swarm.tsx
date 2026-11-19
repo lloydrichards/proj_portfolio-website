@@ -1,4 +1,3 @@
-"use client";
 import {
   extent,
   forceCollide,
@@ -11,7 +10,8 @@ import {
 import { folder, Leva, useControls } from "leva";
 import { type FC, useEffect, useState } from "react";
 
-type Topic = "SPORT" | "NEWS" | "MEDIA";
+const topics = ["SPORT", "NEWS", "MEDIA"] as const;
+type Topic = (typeof topics)[number];
 type Node = {
   id: string;
   timestamp: Date;
@@ -77,9 +77,7 @@ const addDays = (date: Date, days: number) => {
 
 const random = randomLcg(0.31);
 const randomTopic = () => {
-  const types: Topic[] = ["SPORT", "NEWS", "MEDIA"];
-  const randomIdx = Math.floor(random() * types.length);
-  return types[randomIdx];
+  return topics[Math.floor(random() * topics.length)];
 };
 export const MockBubbles: Node[] = Array.from({ length: 200 }).map((_, i) => ({
   id: `node-${i}`,
@@ -175,11 +173,15 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
   ]);
 
   return (
-    <div className="w-full overflow-scroll">
-      <Leva collapsed={true} />
-      <svg width={width * 2} height={height} className="bg-accent">
+    <div className="simulation">
+      <svg
+        role="img"
+        aria-label="Bee swarm simulation"
+        viewBox={`0 0 ${Math.max(1, width * 2)} ${Math.max(1, height)}`}
+      >
         <g transform={`translate(${marginLeft},0)`}>
           {nodes.map((d) => (
+            // biome-ignore lint/a11y/noStaticElementInteractions: Topic buttons provide the same interaction by keyboard.
             <circle
               key={d.id}
               cx={d.x}
@@ -196,6 +198,22 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
           ))}
         </g>
       </svg>
+      <fieldset className="topics" aria-label="Filter by topic">
+        {topics.map((topic) => (
+          <button
+            key={topic}
+            type="button"
+            aria-pressed={selected === topic}
+            onClick={() => setSelected(selected === topic ? null : topic)}
+          >
+            {topic.toLowerCase()}
+          </button>
+        ))}
+      </fieldset>
+      <details className="simulation-controls">
+        <summary>Simulation controls</summary>
+        <Leva fill flat titleBar={false} />
+      </details>
     </div>
   );
 };

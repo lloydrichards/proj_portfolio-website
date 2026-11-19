@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-article-demos",
+  "private": true,
+  "scripts": {
+    "build": "bun build.mjs"
+  },
+  "dependencies": {
+    "d3": "7.9.2",
+    "fp-ts": "2.16.11",
+    "io-ts": "2.2.22",
+    "leva": "0.10.1",
+    "lucide-react": "1.70.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "sonner": "2.0.8"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

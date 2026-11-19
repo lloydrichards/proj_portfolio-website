@@ -9,8 +9,8 @@ export const metadata = createOGImageMetadata({
   tags: ["rxjs", "firestore", "d3"],
 });
 
-In this experiment I wanted to create a D3 chart using data from a Firebase
-project. With my previous GraphQL query, adding a measurement could mean
+In this experiment I wanted to create a D3 chart using Firebase sensor data
+from the [mimir project](/projects/2003-mimir-home). With my previous GraphQL query, adding a measurement could mean
 rereading all the documents in the query. I wanted to fetch the initial
 readings, then listen for new values and update the chart.
 

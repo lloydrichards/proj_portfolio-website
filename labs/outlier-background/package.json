@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-outlier-background-demo",
+  "private": true,
+  "scripts": {
+    "build": "bun build background.mts --target browser --format iife --minify --outfile ../../public/labs/outlier-background/background.js && cp node_modules/three/LICENSE ../../public/labs/outlier-background/THREE-LICENSE.txt"
+  },
+  "dependencies": {
+    "three": "0.187.0"
+  }
+}

@@ -1,4 +1,3 @@
-"use client";
 import {
   forceCollide,
   forceSimulation,
@@ -242,12 +241,15 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({ data }) => {
   }, [data, dataNodes.find, topics.map]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="w-full overflow-scroll">
-      <Leva collapsed={true} />
-      <svg width={width} height={height} className="bg-accent">
-        {layout.map((d, i) => (
+    <div className="simulation">
+      <svg
+        role="img"
+        aria-label="Nested bubble simulation"
+        viewBox={`0 0 ${Math.max(1, width)} ${Math.max(1, height)}`}
+      >
+        {layout.map((d) => (
           <circle
-            key={i}
+            key={d.id}
             cx={d.x}
             cy={d.y}
             r={(d?.count || 0) / Math.PI + nodeRad * Math.PI * 2}
@@ -256,9 +258,9 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({ data }) => {
             strokeWidth={2}
           />
         ))}
-        {nodes.map((d, i) => (
+        {nodes.map((d) => (
           <circle
-            key={i}
+            key={d.id}
             cx={d.x}
             cy={d.y}
             r={(d?.count || 0) + 5}
@@ -268,6 +270,10 @@ export const OptimizedNestedBubblePacking: FC<Props> = ({ data }) => {
           />
         ))}
       </svg>
+      <details className="simulation-controls">
+        <summary>Simulation controls</summary>
+        <Leva fill flat titleBar={false} />
+      </details>
     </div>
   );
 };

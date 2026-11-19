@@ -12,6 +12,8 @@
       "!next-env.d.ts",
       "!!public/labs/vendor",
       "!!public/labs/visx-timeline/timeline.js",
+      "!!public/labs/outlier-background/background.js",
+      "!!public/labs/article-demos/*.js",
       "!src/styles/globals.css",
       "!.releaserc.cjs"
     ]

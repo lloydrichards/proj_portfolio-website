@@ -1,4 +1,4 @@
-import { VisxTimelineDemo } from "@/app/labs/visx-timeline-demo";
+import { RunDemo } from "@/app/labs/run-demo";
 import { createOGImageMetadata } from "@/lib/seo";
 export const metadata = createOGImageMetadata({
   id: "028",
@@ -20,7 +20,7 @@ domain of the scale so I can use it to select or filter data. In this first
 example I made a quick timetable which can be brushed to highlight any
 intersecting boxes.
 
-<VisxTimelineDemo mode="brush" />
+<RunDemo title="Brushable timeline" src="/labs/visx-timeline/index.html?mode=brush" height={268} />
 
 ```tsx
 <Brush

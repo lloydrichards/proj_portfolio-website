@@ -1,4 +1,3 @@
-"use client";
 import * as A from "fp-ts/lib/Array";
 import * as E from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/lib/function";
@@ -18,8 +17,7 @@ import {
   Trash,
 } from "lucide-react";
 import { type FC, useCallback, useEffect, useState } from "react";
-import { Button } from "@/components/atom/button";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "../../src/hooks/use-toast";
 
 /*
  * Infrastructure Layer
@@ -285,21 +283,19 @@ const ErrorCard: FC<{
 }> = ({ type, isLoading, onRetry }) => {
   return (
     <div
-      className={`border-destructive grid items-center justify-center rounded border-2 p-4 shadow-md ${
-        isLoading ? "opacity-50" : "opacity-100"
-      }`}
+      className={`shop-status shop-error ${isLoading ? "shop-loading" : ""}`}
     >
       <p>Oh no! Something went wrong 😭 ({type})</p>
-      <Button variant="ghost" onClick={onRetry}>
+      <button type="button" onClick={onRetry}>
         Retry
-      </Button>
+      </button>
     </div>
   );
 };
 
 const LoadingCard: FC = () => {
   return (
-    <div className="bg-background grid items-center justify-center rounded border p-4 shadow-md">
+    <div className="shop-status">
       <p>Loading...</p>
     </div>
   );
@@ -315,28 +311,26 @@ const ShopCard: FC<{
   useEffect(() => {
     pipe(
       error,
-      O.map((error) => {
-        toast({
-          variant: "destructive",
-          title: error.type,
-          description: error.message,
-        });
-      }),
+      O.match(
+        () => {},
+        (error) =>
+          toast({
+            variant: "destructive",
+            title: error.type,
+            description: error.message,
+          }),
+      ),
     );
   }, [error, toast]);
 
   return (
-    <div
-      className={`not-prose bg-background dark:prose-invert grid grid-cols-5 rounded border p-4 shadow-md ${
-        isLoading ? "opacity-50" : "opacity-100"
-      } `}
-    >
-      <section className="col-span-3 w-full border-r">
-        <h1 className="flex gap-2">
+    <div className={`shop ${isLoading ? "shop-loading" : ""} `}>
+      <section>
+        <h1 className="shop-heading">
           <Gift />
           Products
         </h1>
-        <div className="flex w-full flex-wrap gap-2">
+        <div className="products">
           {products.map((product) => (
             <ProductCard
               key={product.id}
@@ -347,8 +341,8 @@ const ShopCard: FC<{
           ))}
         </div>
       </section>
-      <aside className="col-span-2 w-full flex-col border p-2">
-        <h2 className="flex gap-2">
+      <aside className="cart">
+        <h2 className="shop-heading">
           <ShoppingBasket />
           Cart
         </h2>
@@ -370,27 +364,35 @@ const ProductCard: FC<{
   const renderIcon = () => {
     switch (product.type) {
       case "BOOK":
-        return <Book size={40} className="text-foreground/80" />;
+        return <Book size={24} />;
       case "FURNITURE":
-        return <Sofa size={40} className="text-foreground/80" />;
+        return <Sofa size={24} />;
       case "CLOTH":
-        return <Shirt size={40} className="text-foreground/80" />;
+        return <Shirt size={24} />;
     }
   };
 
   return (
-    <div className="flex h-32 w-40 gap-2 rounded-md border px-2 py-4 shadow-md">
-      <div className="flex w-full flex-col justify-center">
-        <p className="w-full text-ellipsis">{product.name}</p>
+    <div className="product">
+      <div className="product-name">
+        <p>{product.name}</p>
         {renderIcon()}
       </div>
-      <div className="flex flex-col justify-between">
-        <Button variant="ghost" size="sm" onClick={() => onAdd(product)}>
+      <div className="product-actions">
+        <button
+          type="button"
+          aria-label={`Add ${product.name}`}
+          onClick={() => onAdd(product)}
+        >
           <Plus />
-        </Button>
-        <Button variant="ghost" size="sm" onClick={() => onRemove(product)}>
+        </button>
+        <button
+          type="button"
+          aria-label={`Remove one ${product.name}`}
+          onClick={() => onRemove(product)}
+        >
           <Minus />
-        </Button>
+        </button>
       </div>
     </div>
   );
@@ -401,16 +403,17 @@ const CartItem: FC<{
   onDelete: (product: Product, amount: number) => void;
 }> = ({ item, onDelete }) => {
   return (
-    <li key={item.product.id} className="bg-background flex items-center gap-1">
-      <p className="w-full">
+    <li key={item.product.id} className="cart-item">
+      <p>
         {item.product.name} x {item.quantity}
       </p>
-      <Button
-        variant="ghost"
+      <button
+        type="button"
+        aria-label={`Remove all ${item.product.name}`}
         onClick={() => onDelete(item.product, item.quantity)}
       >
         <Trash />
-      </Button>
+      </button>
     </li>
   );
 };

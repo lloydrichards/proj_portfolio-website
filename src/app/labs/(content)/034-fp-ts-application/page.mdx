@@ -7,7 +7,7 @@ export const metadata = createOGImageMetadata({
   tags: ["fp-ts", "io-ts", "functional-programming"],
 });
 
-import { ShoppingApp } from "./034";
+import { RunDemo } from "@/app/labs/run-demo";
 
 ## The Application
 
@@ -15,7 +15,7 @@ In the previous two articles we have explored the basics of `fp-ts` and `io-ts`.
 In this article we will build a practical example of an application using these
 libraries. We will build a simple application for updating product:
 
-<ShoppingApp />
+<RunDemo title="Shopping cart" src="/labs/article-demos/shopping-cart.html" height={460} />
 
 The application is very simple. It fetches a list of products from a external
 source and displays them to the user. The user can then add or remove products

@@ -8,7 +8,7 @@ export const metadata = createOGImageMetadata({
   tags: ["gui", "d3", "physics"],
 });
 
-import { OptimizedNestedBubblePacking, MockBubbles } from "./027";
+import { RunDemo } from "@/app/labs/run-demo";
 
 Part of the frustration when building out an interactive or reactive chart is
 having to tweak parameters and re-run the code to see the results. This is
@@ -18,7 +18,7 @@ often unpredictable and non-deterministic. I've been experimenting with using
 seeing the results in real-time. This is a proof-of-concept for using Leva to
 tweak the parameters of a physics simulation.
 
-<OptimizedNestedBubblePacking data={MockBubbles} />
+<RunDemo title="Nested bubble simulation" src="/labs/article-demos/nested-bubbles.html" height={440} />
 
 ## How it works
 

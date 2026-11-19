@@ -8,7 +8,7 @@ export const metadata = createOGImageMetadata({
   tags: ["gui", "d3", "physics"],
 });
 
-import { BeeSwarmChart, MockBubbles } from "./030.tsx";
+import { RunDemo } from "@/app/labs/run-demo";
 
 A bee swarm chart is a type of scatter plot that uses a force simulation to
 prevent overlapping points. This is a great way to visualize a large number of
@@ -16,7 +16,7 @@ points in a small space. It also allows for single dimension data to be
 visualized in a 2D space. By using a force simulation, the points will
 automatically move to avoid overlapping each other.
 
-<BeeSwarmChart width={600} height={400} data={MockBubbles} />
+<RunDemo title="Bee swarm simulation" src="/labs/article-demos/bee-swarm.html" height="clamp(260px, 45vw, 410px)" />
 
 The **BeeSwarmChart** above works with the `forceSimulation` from d3. Taking the
 data and applying a forces to it, the points will move to avoid overlapping

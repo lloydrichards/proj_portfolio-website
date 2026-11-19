@@ -1,7 +1,7 @@
 {
   "counts": {
     "labs": 48,
-    "projects": 19
+    "projects": 23
   },
   "artwork": {
     "/images/projects/1500/thumb_spanish-food-forest.webp": "/images/social/artwork/82e30aff9ad0ad89.png",
@@ -23,6 +23,10 @@
     "/images/projects/2403/thumb_ipen-plastic-map.webp": "/images/social/artwork/6adfe31a2d0fa12e.png",
     "/images/projects/2600/thumb_effect-boxes.webp": "/images/social/artwork/be3eaa03f20c6fc1.png",
     "/images/projects/2601/sme-policy-index-01.png": "/images/social/artwork/93e1954a57dd8293.png",
+    "/images/projects/2602/thumb_stack-effect.webp": "/images/social/artwork/c009805918b0a02f.png",
+    "/images/projects/2603/image-tile-workshop.webp": "/images/social/artwork/d8a392d0ecafdb50.png",
+    "/images/projects/2604/thumb_shadcn-storybook-registry.webp": "/images/social/artwork/37c4d5c254e43bcb.png",
+    "/images/projects/2605/thumb_okf-graph.webp": "/images/social/artwork/16dfa34154b3c2af.png",
     "/labs/038-mosaic-design/mosaic-design-01.png": "/images/social/artwork/eeb91637f7b86045.png",
     "/labs/058-rag-chunker/rag-playground.png": "/images/social/artwork/c84eba900f3ded3c.png",
     "/labs/059-generative-data-viz/claude-screenshot.png": "/images/social/artwork/8df857bf7842bdff.png",

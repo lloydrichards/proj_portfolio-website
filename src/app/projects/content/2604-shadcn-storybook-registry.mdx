@@ -1,0 +1,33 @@
+---
+id: 2604
+title: shadcn Storybook Registry
+date: 2025-01-24
+description: Installable Storybook stories for shadcn/ui components, with examples for Radix UI, Base UI, and React Aria.
+status: published
+category:
+  - DEVELOP
+image: /images/projects/2604/thumb_shadcn-storybook-registry.webp
+href: https://registry.lloydrichards.dev/
+repo: https://github.com/lloydrichards/shadcn-storybook-registry
+team: [["Lloyd Richards", "Developer"]]
+---
+
+When I add a shadcn/ui component to a project, I get the source code and can change it to fit the design. I still have to write the stories that show which variants exist and how the component behaves. I built a registry for those stories so I could install them with the same CLI I was already using for the components.
+
+![The Button documentation in the Radix UI Storybook shows component variants and examples](/images/projects/2604/shadcn-storybook-registry.webp)
+
+[Open the Radix Button stories](https://registry.lloydrichards.dev/storybook/radix/?path=/docs/ui-radix-button--docs), then run this in a project with [shadcn/ui and Storybook configured](https://github.com/lloydrichards/shadcn-storybook-registry#how-to-use) to install the story.
+
+```bash
+npx shadcn@latest add https://registry.lloydrichards.dev/v3/radix/button-story.json
+```
+
+## Project Overview
+
+The [registry](https://registry.lloydrichards.dev/) lets you browse stories, try them in Storybook, and copy the install command for the component you want. The story lands in your project as source code, where you can adapt it to the component and theme you actually ship. The published collections include component examples, interaction tests, and reference stories for tokens such as colour and typography.
+
+## Challenges and Insights
+
+### Matching the Component You Installed
+
+A story has to match the component it imports. A Radix UI example can look much like its Base UI counterpart in Storybook, even when the props or composition differ. The registry publishes separate entries for Radix UI, Base UI, and React Aria so you can pick the one that matches your project. The [setup guide](https://github.com/lloydrichards/shadcn-storybook-registry#how-to-use) covers the other half of the install, including where Storybook finds the stories and how it loads your project's styles.

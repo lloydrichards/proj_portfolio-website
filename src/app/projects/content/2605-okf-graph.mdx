@@ -1,0 +1,56 @@
+---
+id: 2605
+title: OKF Graph
+date: 2026-08-31
+description: A terminal tool for exploring the relationships in Open Knowledge Format bundles and finding broken links.
+status: published
+category:
+  - DEVELOP
+image: /images/projects/2605/thumb_okf-graph.webp
+href: https://www.npmjs.com/package/okf-graph
+repo: https://github.com/lloydrichards/proj_okf-graph
+team: [["Lloyd Richards", "Developer"]]
+---
+
+An [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md) bundle is a directory of Markdown files that link to each other. It's easy to read a single concept, but as the directory grows it takes more work to see what links back to it or what broke when a file moved. I built `okf-graph` to answer those questions from the terminal.
+
+<video
+  className="my-6 w-full rounded-md"
+  src="/images/projects/2605/okf-graph-demo.mp4"
+  poster="/images/projects/2605/thumb_okf-graph.webp"
+  controls
+  playsInline
+  preload="none"
+  aria-label="OKF Graph validation and neighbours demo"
+/>
+
+The demo validates the houseplant bundle and lists the concepts connected to Leaf Cuttings.
+
+## Project Overview
+
+The CLI reads a local bundle or one hosted on GitHub and builds a directed graph of its internal links. You can check the bundle for broken links, inspect a concept, or explore its neighbours. I included a [houseplant bundle](https://github.com/lloydrichards/proj_okf-graph/tree/main/examples/house-plants-okf) as a small example. Open the concept for leaf cuttings and you can follow its links to the other propagation and care notes.
+
+### Exploring the Graph in the Terminal
+
+Run `concept` with `--interactive` to read a note and browse its neighbours in the same terminal. The left pane shows the current concept. The right pane shows incoming and outgoing links, with a preview of the selected neighbour.
+
+With [Bun](https://bun.sh/) and npm installed, run this to open the Leaf Cuttings view.
+
+```bash
+npx okf-graph@latest concept \
+  https://github.com/lloydrichards/proj_okf-graph/tree/main/examples/house-plants-okf \
+  propagation/leaf-cuttings --interactive
+```
+
+![OKF Graph's interactive terminal showing the Leaf Cuttings concept beside its links to other houseplant notes](/images/projects/2605/neighborhood-explorer.webp)
+
+## Challenges and Insights
+
+### Making Links Useful in Both Directions
+
+An outgoing link is easy to see in a Markdown file. Answering the reverse question means looking through the rest of the bundle for files that link to it. Once the CLI has resolved those links into a graph, it can show both directions from the same concept. Validation uses that same link resolution to point back to the concept that contains a broken reference.
+
+## Related Links
+
+- [CLI examples and documentation](https://github.com/lloydrichards/proj_okf-graph#quick-start)
+- [OKF Graph on npm](https://www.npmjs.com/package/okf-graph)

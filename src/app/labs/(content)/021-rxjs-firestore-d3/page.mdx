@@ -1,0 +1,49 @@
+import { createOGImageMetadata } from "@/lib/seo";
+import { ObservableDemo } from "./observable-demo";
+
+export const metadata = createOGImageMetadata({
+  id: "021",
+  title: "RxJS, Firestore and D3",
+  date: "2020-09-06",
+  description: "Debouncing a search and charting streaming air-quality readings with observables.",
+  tags: ["rxjs", "firestore", "d3"],
+});
+
+In this experiment I wanted to create a D3 chart using data from a Firebase
+project. With my previous GraphQL query, adding a measurement could mean
+rereading all the documents in the query. I wanted to fetch the initial
+readings, then listen for new values and update the chart.
+
+## RxJS in React with hooks
+
+I started with a simple search. An RxJS `BehaviorSubject` receives the input
+and `debounceTime(750)` waits for the reader to stop typing before showing
+matches. The archive keeps the three-character minimum and searches a local
+Pokémon fixture.
+
+## Firestore observables with RxFire
+
+The original chart used RxFire's `collectionData` to subscribe to a Firestore
+query for the last 48 readings from one device. The hook subscribed to the
+observable and put its results into React state:
+
+```javascript
+const dataObservable = collectionData(
+  db.collection("mimirReading")
+    .where("deviceId", "==", deviceId)
+    .orderBy("timestamp", "desc")
+    .limit(48)
+);
+
+useObservable(dataObservable, setReadings);
+```
+
+This replay starts with 48 synthetic air-quality readings. Press **Play
+readings** to add one reading at a time while the D3 chart keeps the latest 48.
+
+<ObservableDemo />
+
+After hooking the D3 chart up to the observable, it was smooth to watch it
+update and add a new point. The example still showed only the latest 48
+readings, but it was a good start for a dashboard that could respond to new
+measurements.

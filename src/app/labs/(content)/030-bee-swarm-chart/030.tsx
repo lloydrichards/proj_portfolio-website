@@ -5,9 +5,8 @@ import {
   forceSimulation,
   forceX,
   forceY,
-  type Simulation,
-  type SimulationNodeDatum,
-  scaleTime,
+  randomLcg,
+  scaleUtc,
 } from "d3";
 import { folder, Leva, useControls } from "leva";
 import { type FC, useEffect, useState } from "react";
@@ -72,21 +71,22 @@ const simulationConfig = {
 
 const addDays = (date: Date, days: number) => {
   const copy = new Date(Number(date));
-  copy.setDate(date.getDate() + days);
+  copy.setUTCDate(date.getUTCDate() + days);
   return copy;
 };
 
+const random = randomLcg(0.31);
 const randomTopic = () => {
   const types: Topic[] = ["SPORT", "NEWS", "MEDIA"];
-  const randomIdx = Math.floor(Math.random() * types.length);
+  const randomIdx = Math.floor(random() * types.length);
   return types[randomIdx];
 };
 export const MockBubbles: Node[] = Array.from({ length: 200 }).map((_, i) => ({
   id: `node-${i}`,
-  x: Math.floor(Math.random() * 500) + 1,
+  x: Math.floor(random() * 500) + 1,
   y: 150,
-  timestamp: addDays(new Date(), i + Math.ceil(Math.random() * 32) - 16),
-  count: Math.floor(Math.random() * 10) + 10,
+  timestamp: addDays(new Date("2023-07-01"), i + Math.ceil(random() * 32) - 16),
+  count: Math.floor(random() * 10) + 10,
   type: randomTopic(),
 }));
 
@@ -120,72 +120,50 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
     selectRad,
   } = useControls("Simulation", simulationConfig);
 
-  // States
   const [selected, setSelected] = useState<Topic | null>(null);
-  const [nodes, setNodes] = useState<
-    Array<SimulationNodeDatum & Partial<Node>>
-  >(data.map((d) => ({ ...d, color: topicColor(d.type || "SPORT") })));
-  const [simulator, setSimulator] =
-    useState<Simulation<SimulationNodeDatum, undefined>>();
+  const [nodes, setNodes] = useState(() => data);
+  const marginLeft = 16;
+  const innerWidth = width - 2 * marginLeft;
 
-  // Dimensions
-  const margin = { top: 0, right: 16, bottom: 0, left: 16 };
-  const innerWidth = width - margin.left - margin.right;
-
-  // Scales
-  const xScale = scaleTime()
-    .domain(extent(data, (d) => d.timestamp) as [Date, Date])
-    .range([0, innerWidth * 2]);
-
-  // Layout Simulator
   useEffect(() => {
-    const forceSim = forceSimulation();
-    forceSim.nodes(nodes);
-    forceSim.alpha(alpha).restart();
-    setSimulator(forceSim);
-    return () => {
-      forceSim.stop();
-    };
-  }, [alpha, nodes]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Update Layout Simulator
-  useEffect(() => {
-    if (simulator) {
-      simulator
-        .force(
-          "forceX",
-          forceX<Node>((d) => xScale(d.timestamp)).strength(xStr),
-        )
-        .force(
-          "forceY",
-          forceY<Node>(height / 2).strength(
-            (d) => yStr + (d.type === selected ? selectStr : 0),
-          ),
-        )
-        .force(
-          "collide",
-          forceCollide<Node>()
-            .strength(collisionStr)
-            .radius(
-              (d) =>
-                ((d.count || 0) / Math.PI) * 2 +
+    const xScale = scaleUtc()
+      .domain(extent(data, (node) => node.timestamp) as [Date, Date])
+      .range([0, innerWidth * 2]);
+    const simulator = forceSimulation(data.map((node) => ({ ...node })))
+      .alpha(alpha)
+      .force(
+        "forceX",
+        forceX<Node>((node) => xScale(node.timestamp)).strength(xStr),
+      )
+      .force(
+        "forceY",
+        forceY<Node>(height / 2).strength(
+          (node) => yStr + (node.type === selected ? selectStr : 0),
+        ),
+      )
+      .force(
+        "collide",
+        forceCollide<Node>()
+          .strength(collisionStr)
+          .radius((node) =>
+            Math.max(
+              0,
+              (node.count / Math.PI) * 2 +
                 padding -
-                (d.type === selected ? selectRad : 0),
+                (node.type === selected ? selectRad : 0),
             ),
-        );
-
-      simulator.nodes(nodes);
-      simulator.on("tick", () => {
-        simulator.tick(1);
-        setNodes([...simulator.nodes()]);
-      });
-      simulator.alpha(alpha).restart();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+          ),
+      )
+      .on("tick", () =>
+        setNodes(simulator.nodes().map((node) => ({ ...node }))),
+      );
+    return () => {
+      simulator.stop();
+    };
   }, [
-    simulator,
+    data,
     alpha,
-    nodes,
+    innerWidth,
     height,
     collisionStr,
     padding,
@@ -194,34 +172,21 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
     yStr,
     selected,
     selectRad,
-    xScale,
   ]);
-
-  // Data Update
-  useEffect(() => {
-    const updatedNodes = data.map((d) => {
-      const existing = nodes.find((n) => n.id === d.id);
-      if (existing) {
-        return { ...existing, count: d.count };
-      }
-      return d;
-    });
-    setNodes(updatedNodes);
-  }, [data, nodes.find]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="w-full overflow-scroll">
       <Leva collapsed={true} />
       <svg width={width * 2} height={height} className="bg-accent">
-        <g transform={`translate(${margin.left},${margin.top})`}>
-          {nodes.map((d, i) => (
+        <g transform={`translate(${marginLeft},0)`}>
+          {nodes.map((d) => (
             <circle
-              key={i}
+              key={d.id}
               cx={d.x}
               cy={d.y}
               r={((d?.count || 0) / Math.PI) * 2}
               opacity={selected ? (d.type === selected ? 1 : 0.2) : 0.8}
-              fill={d?.color}
+              fill={topicColor(d.type || "SPORT")}
               stroke="black"
               strokeWidth={1}
               onClick={() =>
@@ -229,7 +194,6 @@ export const BeeSwarmChart: FC<Props> = ({ data, width, height }) => {
               }
             />
           ))}
-          {/* <AxisBottom scale={xScale} top={height / 2 + offset} left={0} /> */}
         </g>
       </svg>
     </div>

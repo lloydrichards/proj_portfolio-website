@@ -1,4 +1,5 @@
 import { createOGImageMetadata } from "@/lib/seo";
+import { AnimeDemo } from "./anime-demo";
 export const metadata = createOGImageMetadata({
   id: "005",
   title: "Setting up Anime.js",
@@ -31,6 +32,8 @@ import anime from "animejs";
 ```
 
 Lets try move some squares around the place
+
+<AnimeDemo />
 
 For this, i had to create a class based component for the box that took in the
 props for the translateX. This was then rendered during componentDidMount and
@@ -80,7 +83,7 @@ const Box2 = ({ translateX, translateY, initX, initY }: BoxProps) => {
 };
 ```
 
-Here is a box made from a 'pure' functional component
+The looping box in the demo is made from a 'pure' functional component.
 
 Peter also suggested ways to clean up the state management system. Suggesting
 that there should be a BoxManagement component that uses hooks to manage an
@@ -118,6 +121,9 @@ const BoxManager = () => {
   ));
 };
 ```
+
+<details className="my-6 rounded-lg border p-4">
+  <summary className="cursor-pointer font-medium">Original demo source</summary>
 
 ```typescript
 /* eslint-disable tailwindcss/no-custom-classname */
@@ -256,3 +262,5 @@ export const Box = ({ translateX, translateY, initX, initY }: BoxProps) => {
   );
 };
 ```
+
+</details>

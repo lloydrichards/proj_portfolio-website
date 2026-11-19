@@ -23,7 +23,12 @@ export const BasicTimeline = () => {
               .attr("cy", 50)
               .attr("stroke", "tomato"),
           (update) => update.attr("class", "updated"),
-          (exit) => exit.transition().duration(1000).attr("r", 0).remove(),
+          (exit) =>
+            exit
+              .transition(d3.transition())
+              .duration(1000)
+              .attr("r", 0)
+              .remove(),
         )
         .transition()
         .duration(1000)

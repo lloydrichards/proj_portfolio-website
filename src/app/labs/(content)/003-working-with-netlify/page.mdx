@@ -1,0 +1,25 @@
+import { createOGImageMetadata } from "@/lib/seo";
+
+export const metadata = createOGImageMetadata({
+  id: "003",
+  title: "Working with Netlify",
+  date: "2020-05-20",
+  description: "Connecting the original portfolio to Netlify for automatic deployment.",
+  tags: ["nextjs", "netlify"],
+});
+
+After setting up a basic website, I wanted it to deploy to my domain
+automatically from the master branch. This would allow me to update and test
+features while keeping experiments and tests on side branches. Netlify made it
+easy to connect my GitHub repository.
+
+This was the `netlify.toml` file in the root of the original site:
+
+```toml
+[build]
+  command = "npm run build && npm run export"
+  publish = "out"
+```
+
+With this setup, pushing a commit to the master branch automatically updated
+the site on Netlify.

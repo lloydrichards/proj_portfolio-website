@@ -1,0 +1,19 @@
+import { createOGImageMetadata } from "@/lib/seo";
+import weather from "./weather.json";
+
+export const metadata = createOGImageMetadata({
+  id: "002",
+  title: "Working with APIs",
+  date: "2020-05-20",
+  description: "Displaying a temperature from an OpenWeather-style response.",
+  tags: ["nextjs", "api"],
+});
+
+The original experiment fetched weather for Zürich and rendered the temperature
+from the response's `current.temp` field. This archived version uses a local
+sample response.
+
+<figure className="not-prose my-6 rounded-lg border p-4">
+  <p className="text-lg">The current temperature is <strong>{weather.current.temp} °C</strong>.</p>
+  <figcaption className="mt-2 text-sm text-muted-foreground">Zürich · Sample data</figcaption>
+</figure>

@@ -2,39 +2,30 @@
 import * as THREE from "three";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
-let scene: THREE.Scene,
-  camera: THREE.PerspectiveCamera,
-  renderer: THREE.WebGLRenderer,
-  outlier: THREE.Object3D<THREE.Object3DEventMap> | undefined,
-  outlierLight: THREE.PointLight,
-  stars: Array<
-    THREE.Mesh<
-      THREE.BoxGeometry,
-      THREE.MeshStandardMaterial,
-      THREE.Object3DEventMap
-    >
-  >;
-
-const background = document.getElementById("bg");
-
-function init() {
-  if (!background) return;
-
-  const canvasWidth = background.clientWidth;
-  const canvasHeight = background.clientHeight;
+export function startBackground(background: HTMLCanvasElement) {
+  const canvasWidth = Math.max(1, background.clientWidth);
+  const canvasHeight = Math.max(1, background.clientHeight);
+  const context = background.getContext("webgl2");
+  if (!context) return;
 
   // Create an empty scene
-  scene = new THREE.Scene();
+  const scene = new THREE.Scene();
 
   // Create a basic perspective camera
-  camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 1, 1000);
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    canvasWidth / canvasHeight,
+    1,
+    1000,
+  );
   camera.position.z = 10;
   camera.position.y = -200;
 
   // Create a renderer with Antialiasing
-  renderer = new THREE.WebGLRenderer({
+  const renderer = new THREE.WebGLRenderer({
     antialias: true,
     canvas: background,
+    context,
   });
 
   // Configure renderer clear color
@@ -42,7 +33,7 @@ function init() {
 
   // Configure renderer size
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(canvasWidth, canvasHeight);
+  renderer.setSize(canvasWidth, canvasHeight, false);
 
   // ------------------------------------------------
   // FUN STARTS HERE
@@ -114,6 +105,8 @@ function init() {
     plane.applyMatrix4(planeMesh.matrix);
 
     const geometry = BufferGeometryUtils.mergeGeometries([cylinder, plane]);
+    cylinder.dispose();
+    plane.dispose();
 
     return new THREE.Mesh(geometry, material);
   }
@@ -134,7 +127,7 @@ function init() {
     }
   }
 
-  outlier = randomShape();
+  const outlier = randomShape();
 
   outlier?.position.set(2, 2, -5);
 
@@ -152,7 +145,7 @@ function init() {
   topLight.position.set(0, 2, 5);
   topLight.intensity = 80;
 
-  outlierLight = new THREE.PointLight(0x2db1a4, 1, 100);
+  const outlierLight = new THREE.PointLight(0x2db1a4, 1, 100);
   outlierLight.position.set(2, 2, -5);
   outlierLight.intensity = 100;
 
@@ -177,44 +170,44 @@ function init() {
     return star;
   }
 
-  stars = Array(1200).fill(null).map(generateStar);
+  const stars = Array(1200).fill(null).map(generateStar);
   stars.forEach((star) => scene.add(star));
-}
 
-// Render Loop
-const render = () => {
-  requestAnimationFrame(render);
-  if (!outlier) return;
-  const t = document.body.getBoundingClientRect().top;
-  outlier.rotation.x += 0.01;
-  outlier.rotation.y += 0.01;
-  outlier.position.y = t * 0.005;
+  let frame = 0;
 
-  outlierLight.position.y = t * 0.005;
+  function render() {
+    if (outlier) {
+      const offset = -window.scrollY;
+      outlier.rotation.x += 0.01;
+      outlier.rotation.y += 0.01;
+      outlier.position.y = offset * 0.005;
+      outlierLight.position.y = offset * 0.005;
+      for (const star of stars) star.rotation.x += 0.005;
+      camera.position.y = offset * 0.01;
+    }
+    renderer.render(scene, camera);
+    frame = requestAnimationFrame(render);
+  }
 
-  // rotates stars
-  stars.forEach((star: { rotation: { x: number; y: number } }) => {
-    star.rotation.x += 0.005;
-    star.rotation.y += 0.005;
+  const observer = new ResizeObserver(() => {
+    const width = Math.max(1, background.clientWidth);
+    const height = Math.max(1, background.clientHeight);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height, false);
   });
+  observer.observe(background);
+  render();
 
-  camera.position.y = t * +0.01;
-
-  // Render the scene
-  renderer.render(scene, camera);
-};
-
-function onWindowResize() {
-  const background = document.getElementById("bg");
-  if (!background) return;
-
-  const canvasWidth = background.clientWidth;
-  const canvasHeight = background.clientHeight;
-
-  camera.aspect = canvasWidth / canvasHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(canvasWidth, canvasHeight);
+  return () => {
+    observer.disconnect();
+    cancelAnimationFrame(frame);
+    scene.traverse((object) => {
+      if (object instanceof THREE.Mesh) {
+        object.geometry.dispose();
+        (object.material as THREE.Material).dispose();
+      }
+    });
+    renderer.dispose();
+  };
 }
-init();
-window.addEventListener("resize", onWindowResize, false);
-render();

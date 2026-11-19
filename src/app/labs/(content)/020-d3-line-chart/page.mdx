@@ -1,0 +1,16 @@
+import { createOGImageMetadata } from "@/lib/seo";
+import { LineChart } from "./line-chart";
+
+export const metadata = createOGImageMetadata({
+  id: "020",
+  title: "D3.js and Line Chart",
+  date: "2020-07-22",
+  description: "Drawing a line through seven values using D3 linear scales and cardinal interpolation.",
+  tags: ["d3", "data-visualization"],
+});
+
+This experiment draws a line through the original seven sample values. The
+horizontal axis shows each value's index. D3's cardinal curve smooths the line
+between the points.
+
+<LineChart />

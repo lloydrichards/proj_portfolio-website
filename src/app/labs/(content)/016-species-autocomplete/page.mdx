@@ -1,0 +1,30 @@
+import { createOGImageMetadata } from "@/lib/seo";
+import { SpeciesForm } from "./species-form";
+
+export const metadata = createOGImageMetadata({
+  id: "016",
+  title: "Autocomplete Species with Algolia",
+  date: "2020-06-29",
+  description: "Connecting a species autocomplete to a plant registration form.",
+  tags: ["frontend", "search", "forms"],
+});
+
+One of my side projects involved building a registration system that linked
+plants people owned with their species. The records were stored in separate
+databases and linked using IDs and GraphQL. My challenge was to make a plant
+registration form with autocomplete for the species. I could use Algolia and
+React InstantSearch to query the species index and display results, but I was
+stuck trying to link the selection to my Formik form.
+
+After experimenting some more, I tried React Select. The trick was to use its
+async select and populate the options with a callback to the Algolia index.
+The callback shaped each search hit into a label and value. I could also pass
+an image through to a custom option. Selecting an option set Formik's
+`speciesId` field to the hit's ID.
+
+## Try the form
+
+This restored example searches a local set of common houseplants by common or
+scientific name. The form shows the submitted name and species ID on the page.
+
+<SpeciesForm />

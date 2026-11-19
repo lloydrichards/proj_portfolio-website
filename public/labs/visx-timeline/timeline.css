@@ -1,0 +1,49 @@
+:root {
+  color-scheme: light dark;
+  font:
+    14px system-ui,
+    sans-serif;
+  background: Canvas;
+  color: CanvasText;
+}
+
+body {
+  margin: 0;
+}
+
+main,
+#timeline > p {
+  padding: 8px 10px;
+}
+
+.chart {
+  min-height: 156px;
+}
+
+svg {
+  display: block;
+  touch-action: none;
+  user-select: none;
+}
+
+.controls,
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+}
+
+button {
+  border: 1px solid GrayText;
+  border-radius: 5px;
+  background: ButtonFace;
+  color: ButtonText;
+  cursor: pointer;
+  padding: 5px 8px;
+  font: inherit;
+}
+
+output {
+  min-width: 100%;
+}

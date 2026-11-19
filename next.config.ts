@@ -2,8 +2,10 @@ import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
 const databaseFile = process.env.DB_FILE_NAME ?? "./database/db.sqlite";
+const previewHost = process.env.LAB_PREVIEW_HOST;
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: previewHost ? [previewHost] : undefined,
   turbopack: {
     root: process.cwd(),
   },

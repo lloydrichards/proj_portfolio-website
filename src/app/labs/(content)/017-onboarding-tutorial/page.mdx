@@ -1,0 +1,23 @@
+import { LifeOfPlasticDemo } from "@/app/labs/life-of-plastic/life-of-plastic-demo";
+import { createOGImageMetadata } from "@/lib/seo";
+
+export const metadata = createOGImageMetadata({
+  id: "017",
+  title: "Onboarding Tutorial",
+  date: "2020-06-30",
+  description: "Guiding readers through the recycling diagram one stage at a time.",
+  tags: ["svg", "animation", "data-visualization"],
+});
+
+As part of the usability redesign for the Life of Plastic, one of the key
+areas to tackle was the Onboarding where users were introduced to the diagram
+and how to explore it. This should be a click based adventure where the user
+clicks a 'next' button and watches a few bottles flow through to the next
+stage. Here there should be some text and explination on what is happening and
+what to expect, along with another 'next' button.
+
+Some things I will need to experiment and design will be a splash screen and a
+way to focus the users attention onto the process at hand and give a little
+bit of information on what is happening.
+
+<LifeOfPlasticDemo lab="017" />

@@ -1,0 +1,24 @@
+import { LifeOfPlasticDemo } from "@/app/labs/life-of-plastic/life-of-plastic-demo";
+import { createOGImageMetadata } from "@/lib/seo";
+
+export const metadata = createOGImageMetadata({
+  id: "011",
+  title: "Adding and Taking Away Routes",
+  date: "2020-06-19",
+  description: "Changing particle shapes and colors and enabling or disabling recycling routes.",
+  tags: ["svg", "animation", "data-visualization"],
+});
+
+Now that all the routes are in place, the next two challenges are to change
+the shape and colour of the particle depengin on the properties of the route.
+The second is being able to conditionally remove or add routes based on the
+state. Initially this was going to be a boolean, but I think now I want to add
+this is a number which can be incremented up when a particle finishes a route
+and then used to create the next particle when a certain amount arrive.
+
+First part is done, there are now different colours and forms for each type
+and plastic as they go through the system. There are still things to do now,
+but for now it feels quite full. I think I still need to clean up the pipes
+and change the lines.
+
+<LifeOfPlasticDemo lab="011" />

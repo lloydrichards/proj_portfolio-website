@@ -1,0 +1,35 @@
+import Image from "next/image";
+import { createOGImageMetadata } from "@/lib/seo";
+
+export const metadata = createOGImageMetadata({
+  id: "009",
+  title: "Importing the Plastic Illustration",
+  date: "2020-06-16",
+  description: "Building the layered SVG illustration for Life of Plastic.",
+  tags: ["svg", "data-visualization"],
+});
+
+After a week of sketching and many many iterations, I'm finally ready to
+implement the SVG base for the Life of Plastic data visualization. I've split up
+all the SVGs into several TypeScript components to help with organizing and later
+customizing them.
+
+First challenge is figuring out how to get the SVG to load on this page.
+Something with TypeScript is creating problems importing the JSX. And of course
+it turns out that I forgot to capitalize the component.
+
+<figure>
+  <Image
+    src="/labs/009-plastic-illustration/life-of-plastic.svg"
+    alt="Isometric diagram of the Life of Plastic recycling system, with factories, bins, and processing routes arranged across nine SVG layers."
+    width={1050}
+    height={4028}
+    className="h-auto w-full rounded-md bg-white"
+    unoptimized
+  />
+  <figcaption>
+    <a href="/labs/009-plastic-illustration/life-of-plastic.svg">
+      Open the original illustration at full size
+    </a>
+  </figcaption>
+</figure>

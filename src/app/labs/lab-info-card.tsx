@@ -181,7 +181,7 @@ const InfoFooter: FC<{
         render={
           <a
             target="_blank"
-            href={`https://github.com/lloydrichards/lloyd-portfolio/tree/master/src/app/labs/(content)/${currentLab.slug}`}
+            href={`https://github.com/lloydrichards/proj_portfolio-website/tree/main/src/app/labs/(content)/${currentLab.slug}`}
             rel="noopener"
           />
         }

@@ -1,0 +1,39 @@
+import { createOGImageMetadata } from "@/lib/seo";
+import { Scatterplot } from "./scatterplot";
+
+export const metadata = createOGImageMetadata({
+  id: "004",
+  title: "Getting D3.js Running",
+  date: "2020-05-20",
+  description: "Using D3 scales to draw a scatterplot in React.",
+  tags: ["d3", "data-visualization"],
+});
+
+Using D3 and React. D3 is used mostly for doing calculations on the data and React
+deals with the DOM. In the few instances where D3 needs to access the DOM, such
+as transitions, axes, and brushing, we can switch.
+
+D3 is more than enough for simple interactions like click or hover. React comes
+in when you want to change state or link multiple parts of a visualization
+together.
+
+## Installing
+
+To set up D3 in my React environment, I first installed it:
+
+```sh
+npm install d3
+```
+
+D3 can then be imported in a React component:
+
+```typescript
+import * as d3 from "d3";
+```
+
+## Example 1
+
+D3's linear scales turn the x and y values into SVG coordinates. React draws the
+100 points. The restored chart uses a seed so the same points appear on each visit.
+
+<Scatterplot />

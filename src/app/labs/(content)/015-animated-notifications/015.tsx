@@ -1,84 +1,59 @@
-import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+"use client";
 
-interface TaskProps {
-  task: string;
-  id: string;
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { type FormEvent, useRef, useState } from "react";
+import { Button } from "@/components/atom/button";
+import { Input } from "@/components/atom/input";
+
+interface Task {
+  text: string;
+  id: number;
 }
 
-export const NotificationForm = () => {
-  const [formData, updateFormData] = React.useState<string>("");
-  const [tasks, updateTasks] = React.useState<Array<TaskProps>>([]);
+export function NotificationForm() {
+  const [formData, setFormData] = useState("");
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const nextId = useRef(0);
+  const reduceMotion = useReducedMotion();
 
-  React.useEffect(() => {
-    if (tasks.length > 4) {
-      // console.log("OVER");
-      updateTasks([...tasks.slice(1)]);
-    }
-  }, [tasks]);
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const text = formData.trim();
+    if (!text) return;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (formData) {
-      const newArr = { task: formData, id: Math.random().toString() };
-      updateTasks([...tasks, newArr]);
-      // console.log(tasks);
-      updateFormData("");
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateFormData(e.target.value);
-  };
+    const task = { text, id: nextId.current++ };
+    setTasks((previous) => [...previous.slice(-3), task]);
+    setFormData("");
+  }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Submit Task
-          <input
-            type="input"
-            name="name"
+    <div className="not-prose my-6 rounded-lg border p-4">
+      <form className="flex flex-wrap items-end gap-2" onSubmit={handleSubmit}>
+        <label className="grid max-w-full flex-1 gap-1 text-sm">
+          Submit task
+          <Input
+            name="task"
             value={formData}
-            onChange={handleChange}
+            onChange={(event) => setFormData(event.target.value)}
           />
         </label>
-
-        <button>Add</button>
+        <Button type="submit">Add</Button>
       </form>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          listStyle: "none",
-          justifyContent: "flex-end",
-        }}
-      >
-        <ul>
-          <AnimatePresence initial={false}>
-            {tasks?.map((task) => (
-              <motion.li
-                style={{
-                  width: "300px",
-                  height: "50px",
-                  background: "tomato",
-                  margin: "10px",
-                  flex: "0 0 100px",
-                  position: "relative",
-                  borderRadius: "10px",
-                }}
-                key={task.id}
-                initial={{ opacity: 0, y: 50, scale: 0.3 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-              >
-                <h2>{task.task}</h2>
-              </motion.li>
-            ))}
-          </AnimatePresence>
-        </ul>
-      </div>
+      <ul aria-live="polite" className="grid max-h-64 gap-2 overflow-auto">
+        <AnimatePresence initial={false}>
+          {tasks.map((task) => (
+            <motion.li
+              className="wrap-anywhere rounded-md bg-orange-200 p-3 text-orange-950 first:mt-3"
+              key={task.id}
+              initial={reduceMotion ? false : { opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={reduceMotion ? undefined : { opacity: 0, scale: 0.9 }}
+            >
+              {task.text}
+            </motion.li>
+          ))}
+        </AnimatePresence>
+      </ul>
     </div>
   );
-};
+}

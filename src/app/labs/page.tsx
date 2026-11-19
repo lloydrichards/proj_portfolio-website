@@ -24,7 +24,7 @@ const LabOverviewPage: FC = async () => {
   );
 
   return (
-    <Mosaic render={<article />}>
+    <Mosaic as="article">
       <h1
         className={typefaceHeading1(
           "col-span-full row-span-2 flex items-center",

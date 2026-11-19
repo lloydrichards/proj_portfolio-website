@@ -1,0 +1,38 @@
+[
+  {
+    "id": "monstera-deliciosa",
+    "common": "Swiss cheese plant",
+    "scientific": "Monstera deliciosa"
+  },
+  {
+    "id": "epipremnum-aureum",
+    "common": "Golden pothos",
+    "scientific": "Epipremnum aureum"
+  },
+  {
+    "id": "chlorophytum-comosum",
+    "common": "Spider plant",
+    "scientific": "Chlorophytum comosum"
+  },
+  {
+    "id": "ficus-elastica",
+    "common": "Rubber plant",
+    "scientific": "Ficus elastica"
+  },
+  {
+    "id": "ficus-lyrata",
+    "common": "Fiddle-leaf fig",
+    "scientific": "Ficus lyrata"
+  },
+  {
+    "id": "spathiphyllum-wallisii",
+    "common": "Peace lily",
+    "scientific": "Spathiphyllum wallisii"
+  },
+  { "id": "aloe-vera", "common": "Aloe vera", "scientific": "Aloe vera" },
+  {
+    "id": "pilea-peperomioides",
+    "common": "Chinese money plant",
+    "scientific": "Pilea peperomioides"
+  }
+]

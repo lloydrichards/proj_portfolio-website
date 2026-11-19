@@ -7,7 +7,7 @@ export const metadata = createOGImageMetadata({
   tags: ["d3"],
 });
 
-import { SimpleTimelineChart, mockOccupations } from "./031.tsx";
+import { TimelineDemo } from "./031";
 
 The first step in refactoring the Timeline from my old CV was to create a simple
 version of the chart. To move over the logic for how the offsetting works and
@@ -15,7 +15,7 @@ how to draw the lines, its easier to start with a simple version of the chart.
 
 ### Simple Timeline
 
-    <SimpleTimelineChart width={500} data={mockOccupations} />
+<TimelineDemo />
 
 It was quite easy to get the helper functions for `lookupInRange()` and using it
 to map over the data to add the channel property. This can be used with a

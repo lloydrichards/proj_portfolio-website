@@ -1,4 +1,5 @@
 import { createOGImageMetadata } from "@/lib/seo";
+import { PlasticTutorialDemo } from "./plastic-tutorial-demo";
 export const metadata = createOGImageMetadata({
   id: "014",
   title: "Life of Plastic Tutorial",
@@ -30,6 +31,11 @@ Unfortunately, our current recycling system is just not that efficient and we
 are left with some material being recycled back, while some is still diverted to
 landfills. While every recycling system is different, in general PET plastic
 bottles could be reused up to 7 times. This is roughly 85% efficient.
+
+<PlasticTutorialDemo />
+
+<details className="my-6 rounded-lg border p-4">
+  <summary className="cursor-pointer font-medium">Original demo source</summary>
 
 ```jsx
 import React from "react";
@@ -284,3 +290,5 @@ export const Example3 = () => {
   );
 };
 ```
+
+</details>

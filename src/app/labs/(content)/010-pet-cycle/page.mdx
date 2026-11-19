@@ -1,0 +1,21 @@
+import { LifeOfPlasticDemo } from "@/app/labs/life-of-plastic/life-of-plastic-demo";
+import { createOGImageMetadata } from "@/lib/seo";
+
+export const metadata = createOGImageMetadata({
+  id: "010",
+  title: "Starting with the PET Cycle",
+  date: "2020-06-16",
+  description: "Moving plastic through the illustrated Life of Plastic recycling routes.",
+  tags: ["svg", "animation", "data-visualization"],
+});
+
+And so starts the process of implimenting all the paths and the movement of
+platic through the system. Will first impliment a simple button and add one
+PET bottle at a time and then slowly build up the other systems.
+
+After a few days of adding and checking and adding and checking, I beleive all
+the possible routes are in. I ended up writting some nice little functional
+comands to start a route anywhere in the diagram by inputting a string and
+then using a routeLoop() to find the route.
+
+<LifeOfPlasticDemo lab="010" />

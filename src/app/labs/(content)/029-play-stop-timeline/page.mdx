@@ -1,3 +1,4 @@
+import { VisxTimelineDemo } from "@/app/labs/visx-timeline-demo";
 import { createOGImageMetadata } from "@/lib/seo";
 export const metadata = createOGImageMetadata({
   id: "029",
@@ -17,6 +18,8 @@ With a bit of work, I was able to get the timeline to move across time, and have
 a button that can be used to start and stop the timeline. I also added forward
 and rewind buttons and have a speed property which changes the number days it
 jumps each tick.
+
+<VisxTimelineDemo mode="playback" />
 
 ## How it works
 
@@ -113,6 +116,9 @@ animate the timeline.
 - Add a slider to control the speed
 - Add **framer motion** to smooth out the animation
 - Move the animation logic into a custom hook
+
+<details className="my-6 rounded-lg border p-4">
+  <summary className="cursor-pointer font-medium">Original demo source</summary>
 
 ```tsx
 import { Brush } from "@visx/brush";
@@ -357,3 +363,5 @@ const clampZero = (n: number) => max([n, 0]) || 0;
 const intersect = (a: [Date, Date], b: [Date, Date]) =>
   a[0] <= b[1] && b[0] <= a[1];
 ```
+
+</details>

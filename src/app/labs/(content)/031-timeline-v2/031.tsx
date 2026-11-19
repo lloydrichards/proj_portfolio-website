@@ -1,6 +1,10 @@
 "use client";
-import { curveStep, line, min, scaleOrdinal, scaleTime } from "d3";
-import type { FC } from "react";
+
+import { curveStep, extent, line, scaleOrdinal, scaleUtc } from "d3";
+import {
+  ResponsiveWrapper,
+  useResponsive,
+} from "@/components/template/responsive_wrapper";
 
 interface Occupation {
   start_date: string;
@@ -10,163 +14,115 @@ interface Occupation {
   category: string;
 }
 
-interface TimelineProps {
-  data: Occupation[];
-  maxHeight?: number;
-  width: number;
-  margin?: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-  };
-}
-export const SimpleTimelineChart: FC<TimelineProps> = ({
-  data,
-  maxHeight,
-  width,
-  margin = {
-    top: 16,
-    right: 0,
-    bottom: 16,
-    left: 48,
-  },
-}) => {
-  const textBlockHeight = 96;
-  const textMargin = 180;
-  const height = data.length * textBlockHeight || maxHeight || 400;
-  const innerHeight = height - margin.top - margin.bottom;
-  const innerWidth = width - margin.left - margin.right;
+function SimpleTimelineChart({ data }: { data: Occupation[] }) {
+  const { width } = useResponsive();
+  if (!width || !data.length) return null;
 
-  // Scales
-  const yScale = scaleTime()
-    .domain([
-      min(data, (d) => new Date(d.start_date)) || new Date("1988-04-18"),
-      new Date(),
-    ])
-    .range([innerHeight, margin.bottom]);
+  const compact = width < 480;
+  const rowHeight = compact ? 112 : 96;
+  const barWidth = compact ? 28 : 48;
+  const labelX = compact ? 88 : 180;
+  const labelWidth = Math.max(1, width - labelX - 12);
+  const height = data.length * rowHeight;
+  const today = new Date();
+  const dates = data
+    .map((occupation) => ({
+      ...occupation,
+      start: new Date(occupation.start_date),
+      end: occupation.end_date ? new Date(occupation.end_date) : today,
+    }))
+    .sort((a, b) => +a.start - +b.start);
+  const [start, end] = extent(
+    dates.flatMap((occupation) => [occupation.start, occupation.end]),
+  );
+  const yScale = scaleUtc([start ?? today, end ?? today], [height - 16, 16]);
   const xScale = scaleOrdinal<number, number>()
     .domain([0, 1, 2])
-    .range([margin.left, margin.left + 16, margin.left + 32]);
-  const cScale = scaleOrdinal<string>()
-    .domain(Array.from(new Set(data.map((d) => d.category))))
+    .range(compact ? [12, 26, 40] : [48, 64, 80]);
+  const color = scaleOrdinal<string, string>()
+    .domain(Array.from(new Set(data.map((occupation) => occupation.category))))
     .range(["#FBBF24", "#F87171", "#60A5FA"]);
-
-  // Helpers
-  const lookupInRange = (
-    corner: Date,
-    allValues: Array<Occupation>,
-  ): boolean => {
-    let result: boolean = false;
-    allValues.forEach((i) => {
-      if (
-        corner > new Date(i.start_date) &&
-        corner < new Date(i.end_date || new Date())
-      ) {
-        result = true;
-        return true;
-      }
-    });
-    return result;
-  };
-
-  const dataWithChannels = data
-    .sort(
-      (a, b) =>
-        new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
-    )
-    .map((d) => {
-      if (
-        lookupInRange(new Date(d.end_date || new Date()), data) &&
-        lookupInRange(new Date(d.start_date), data)
-      ) {
-        return { ...d, channel: 2 };
-      } else if (lookupInRange(new Date(d.start_date), data)) {
-        return { ...d, channel: 1 };
-      } else {
-        return { ...d, channel: 0 };
-      }
-    });
-
-  const lineConnector = line()
-    .curve(curveStep)
-    .x((d) => d[0])
-    .y((d) => d[1]);
+  const connector = line().curve(curveStep);
+  const overlaps = (date: Date) =>
+    dates.some(
+      (occupation) => date > occupation.start && date < occupation.end,
+    );
 
   return (
-    <div
-      style={{
-        height,
-        width,
-        maxHeight: maxHeight || undefined,
-        overflow: "scroll",
-      }}
+    <svg
+      width={width}
+      height={height}
+      className="block max-w-full"
+      role="img"
+      aria-label="CV timeline with six sample occupations"
     >
-      <svg width={width} height={height}>
-        {/* <AxisLeft scale={yScale} top={margin.top} left={margin.left} /> */}
-        {dataWithChannels.map((d, idx) => {
-          {
-            const startDate = new Date(d.start_date);
-            const endDate = new Date(d.end_date || new Date());
-            const y1 = yScale(startDate);
-            const y2 = yScale(endDate);
-            const height = y1 - y2;
-            return (
-              <g key={idx}>
-                <rect
-                  x={xScale(d.channel)}
-                  y={y2}
-                  width={48}
-                  height={height}
-                  fill={cScale(d.category) || "black"}
-                  stroke="black"
-                />
-                <text
-                  x={textMargin}
-                  y={idx * textBlockHeight + 20}
-                  fill="black"
-                  fontSize={12}
-                  fontWeight="bold"
-                >
-                  {d.title}
-                </text>
-                <foreignObject
-                  x={textMargin}
-                  y={idx * textBlockHeight + 40}
-                  width={innerWidth - textMargin}
-                  height={textBlockHeight - 16}
-                >
-                  <p className="m-0 text-sm">{d.description}</p>
-                </foreignObject>
-                <rect
-                  x={textMargin}
-                  y={idx * textBlockHeight + 8}
-                  width={innerWidth - textMargin}
-                  height={textBlockHeight - 16}
-                  fill={cScale(d.category) || "black"}
-                  opacity={0.2}
-                />
-                <path
-                  d={
-                    lineConnector([
-                      [xScale(d.channel) + 48, y1 - height / 2],
-                      [textMargin, idx * textBlockHeight + textBlockHeight / 2],
-                    ]) || ""
-                  }
-                  stroke={cScale(d.category) || "black"}
-                  fill="none"
-                  strokeWidth={2}
-                />
-              </g>
-            );
-          }
-        })}
-      </svg>
-    </div>
+      {dates.map((occupation, index) => {
+        const channel = overlaps(occupation.start)
+          ? overlaps(occupation.end)
+            ? 2
+            : 1
+          : 0;
+        const x = xScale(channel);
+        const top = yScale(occupation.end);
+        const bottom = yScale(occupation.start);
+        const rowY = index * rowHeight + 8;
+        const fill = color(occupation.category);
+        return (
+          <g key={occupation.title}>
+            <rect
+              x={x}
+              y={top}
+              width={barWidth}
+              height={bottom - top}
+              fill={fill}
+              stroke="currentColor"
+            />
+            <path
+              d={
+                connector([
+                  [x + barWidth, (top + bottom) / 2],
+                  [labelX, rowY + (rowHeight - 16) / 2],
+                ]) ?? undefined
+              }
+              stroke={fill}
+              fill="none"
+              strokeWidth={2}
+            />
+            <rect
+              x={labelX}
+              y={rowY}
+              width={labelWidth}
+              height={rowHeight - 16}
+              fill={fill}
+              opacity={0.2}
+            />
+            <foreignObject
+              x={labelX}
+              y={rowY}
+              width={labelWidth}
+              height={rowHeight - 16}
+            >
+              <div className="not-prose grid gap-1 p-2 text-xs leading-tight">
+                <p className="font-semibold">{occupation.title}</p>
+                <p>{occupation.description}</p>
+              </div>
+            </foreignObject>
+          </g>
+        );
+      })}
+    </svg>
   );
-};
+}
 
-export const mockOccupations: Occupation[] = [
+export function TimelineDemo() {
+  return (
+    <ResponsiveWrapper className="not-prose my-6 min-w-0 rounded-lg bg-muted/30 ring-1 ring-border ring-inset">
+      <SimpleTimelineChart data={mockOccupations} />
+    </ResponsiveWrapper>
+  );
+}
+
+const mockOccupations: Occupation[] = [
   {
     start_date: "2020-01-01",
     end_date: "2020-12-31",

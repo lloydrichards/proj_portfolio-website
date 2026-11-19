@@ -1,4 +1,5 @@
 import { createOGImageMetadata } from "@/lib/seo";
+import { SvgAnimeDemo } from "./svg-anime-demo";
 export const metadata = createOGImageMetadata({
   id: "006",
   title: "SVG's & Anime.js",
@@ -11,6 +12,8 @@ Going to playing around with SVGs and anime.js. Using this nifty SVG line
 creator [SVG Path Builder](https://codepen.io/anthonydugois/pen/mewdyZ) I made a
 path and drew it below
 
+<SvgAnimeDemo example="timeline" />
+
 Now I've added a second blue svg path and using the timeline function to link
 the two paths together. These animations can be chained together using the
 `.add({})` There is still a bit of a problem with the animation instantly
@@ -19,9 +22,13 @@ or another animations added between them.
 
 Now lets see if we can add a button and add a new svg each time I press it.
 
+<SvgAnimeDemo example="add" />
+
 This doesn't work because the `useEffect()` rerenders each time a new id is
 created. Instead I think I need to break this up into separate components that
 each deal with their own rendering and have the path and id passed into them.
+
+<SvgAnimeDemo example="independent" />
 
 Ta Da! That wasn't too hard. For this, I made a new component that took in the
 id and a string reference to the path. Inside the component I was able to then
@@ -76,6 +83,8 @@ this could be implemented now:
 
 For now, lets try use the callback function to trigger a second animation
 
+<SvgAnimeDemo example="sequence" />
+
 Using the `complete: () =>{}` properties I could pass in a callback function
 that could be used to add the circle once the square was completed. At this time
 I could also remove the square or call on a different animation like fading it
@@ -83,6 +92,9 @@ out. I'd also like to experiment with adding several circles when a single
 square arrives and then staggering their deployment. this could be interesting
 for creating almost a particle effect with several bits breaking down from the
 single path.
+
+<details className="my-6 rounded-lg border p-4">
+  <summary className="cursor-pointer font-medium">Original demo source</summary>
 
 ```typescript
 import anime from "animejs";
@@ -405,3 +417,5 @@ export const AddSVGExample3 = () => {
   );
 };
 ```
+
+</details>

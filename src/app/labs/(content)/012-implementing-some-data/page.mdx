@@ -1,0 +1,59 @@
+import { LifeOfPlasticDemo } from "@/app/labs/life-of-plastic/life-of-plastic-demo";
+import { createOGImageMetadata } from "@/lib/seo";
+
+export const metadata = createOGImageMetadata({
+  id: "012",
+  title: "Implementing Some Data",
+  date: "2020-06-21",
+  description: "Using weighted routes and factory settings to model how plastic moves.",
+  tags: ["svg", "animation", "data-visualization"],
+});
+
+The plan now is to start implimenting some data and figuring out how to remove
+specific paths. I came up with a functions while on a hike yesterday that
+should help to control the movement of plastic between the various routes.
+Currently all the routes are given equal weight so there is no priority for
+certain routes.
+
+```typescript
+{
+    parent: "Bale-PP-Hand",
+    require: "PPHandSorting",
+    possible: ["Mixed-HDPERecovery_2", "Regrind-PP"],
+    probability: [1,19],
+    waste: "PPHandSorting-Garbage",
+  },
+```
+
+```typescript
+export const func = (arrayRoutes, arrayProb) => {
+  if (arrayRoutes.length === arrayProb.length){
+    let arrayReturn = [];
+    for(const x=0; x < arrayRoutes.length; x++){
+      for (const y=0; y< arrayProb[x]; y++){
+        arrayReturn.concat(arrayRoutes[x]);
+      }
+    }
+    return arrayReturn;
+  } else {console.log("The Routes and Probabilities don't match!")}
+}
+```
+
+What this should do when its given the `object.possible` and
+`object.probability` is build an array of routes equal to the numbers in the
+probability. So for the example above it would be a 5% chance of going to
+Mixed-HDPERecovery-2 and 95% chance to go to Regrind-PP. This will also allow
+me to remoce the garbage routes and instead impliment something that is more
+evident of when a system is missing such as the material just dropping out the
+pipe and keeping its type and plastic.
+
+The second problem is that currently everything moves 1:1 across the diagram
+and this makes everything quite liniar. What i would like to do is impliment
+something that adds up over time and fires only when a certain amount has been
+formed. For PET this could be 10 Bottles `>` 1 Bale `>` 25 Regrind `>` 1
+Pellet `>` 10 Bottles. In this way the material is conserved across the
+diagram, but because there are waste streams and inefficiencies in the system,
+it doesnt always mean that putting 10 bottles in will make 10 bottles out, and
+probablt not when you only put 10 in.
+
+<LifeOfPlasticDemo lab="012" />

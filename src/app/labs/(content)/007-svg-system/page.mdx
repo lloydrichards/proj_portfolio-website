@@ -1,4 +1,6 @@
 import { createOGImageMetadata } from "@/lib/seo";
+import { SVGSystem } from "./svg-system";
+
 export const metadata = createOGImageMetadata({
   id: "007",
   title: "Little SVG System",
@@ -19,6 +21,8 @@ cycling feature, and a garbage. The plan is:
   fall to the garbage
 
 Lets jump into this!
+
+<SVGSystem />
 
 Used Figma and SVGOMG to create paths that were copy and pasted into the page
 component. Each one was given a unique id and colour to help identify them.
@@ -55,6 +59,9 @@ the conversion so when 'garbage' converts to 'grind' it results in say 5 smaller
 circles which could go either way. Additionally, some conversions could only
 take place when a certain amount have accumulated, say when 5 pellets are turned
 into a product.
+
+<details className="my-6 rounded-lg border p-4">
+  <summary className="cursor-pointer font-medium">Original demo source</summary>
 
 ```typescript
 import anime from "animejs";
@@ -629,3 +636,5 @@ export const Waste = ({ pathRef, onComplete, delay }: BoxProps) => {
   );
 };
 ```
+
+</details>

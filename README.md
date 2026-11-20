@@ -1,7 +1,7 @@
 Welcome to the Portfolio website for myself, Lloyd Richards. This website is a
 personal project to showcase my work and experiments. It is built with Next.js
 and TypeScript, and uses Tailwind CSS for styling. As a digital curriculum
-vitae, it include what works, education, and volunteer projects I have been
+vitae, it includes my work, education, and volunteer projects I have been
 involved in.
 
 The website is also a place for me to experiment with new technologies and

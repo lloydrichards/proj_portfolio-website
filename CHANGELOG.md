@@ -1,3 +1,12 @@
+# [1.25.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.24.0...v1.25.0) (2026-11-24)
+
+
+### Features
+
+* **portfolio:** publish four open-source projects ([092259b](https://github.com/lloydrichards/proj_portfolio-website/commit/092259bed028b292e6e489c320cc1abfe77abb94))
+* **labs:** restore archived articles and interactive demos ([7321ba4](https://github.com/lloydrichards/proj_portfolio-website/commit/7321ba4932ec65059c5450c164e71ffdbce0980b))
+* **labs:** run interactive demos on demand ([#144](https://github.com/lloydrichards/proj_portfolio-website/issues/144)) ([2822d12](https://github.com/lloydrichards/proj_portfolio-website/commit/2822d121c4c9e107d4d2772f3eb38c95493aa7ec))
+
 # [1.24.0](https://github.com/lloydrichards/proj_portfolio-website/compare/v1.23.1...v1.24.0) (2026-11-10)
 
 

@@ -85,14 +85,19 @@ For the lab, I used my bEvr monorepo template[^2] to build a simple MCP server a
 
 Repo overview:
 
-```txt
-.
-├── apps/
-│   └── server-mcp/         # MCP Apps server (Effect + @effect/ai)
-└── packages/
-    ├── widget-bar-chart/
-    ├── widget-line-chart/
-    └── widget-scatterplot/
+```mermaid
+---
+config:
+  treeView:
+    showIcons: true
+---
+treeView-beta
+  apps/
+    server-mcp/ ## MCP Apps server (Effect + @effect/ai)
+  packages/
+    widget-bar-chart/
+    widget-line-chart/
+    widget-scatterplot/
 ```
 
 ### MCP Server Wiring

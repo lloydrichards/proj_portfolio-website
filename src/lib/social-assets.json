@@ -1,6 +1,6 @@
 {
   "counts": {
-    "labs": 48,
+    "labs": 63,
     "projects": 23
   },
   "artwork": {
@@ -30,12 +30,16 @@
     "/labs/038-mosaic-design/mosaic-design-01.png": "/images/social/artwork/eeb91637f7b86045.png",
     "/labs/058-rag-chunker/rag-playground.png": "/images/social/artwork/c84eba900f3ded3c.png",
     "/labs/059-generative-data-viz/claude-screenshot.png": "/images/social/artwork/8df857bf7842bdff.png",
-    "/labs/063-llm-memory-filesystem/stack-effect-recipe-builder.png": "/images/social/artwork/3a4dea46c77d7fc0.png"
+    "/labs/063-llm-memory-filesystem/stack-effect-recipe-builder.png": "/images/social/artwork/3a4dea46c77d7fc0.png",
+    "/labs/064-sszvis-chart-builder/cooperative-housing-editor.png": "/images/social/artwork/d7fa199f8838c8ac.png",
+    "/labs/065-sszvis-mcp-app/chatgpt-inline-map.png": "/images/social/artwork/a59cbaea0600cea7.png"
   },
   "labs": {
     "038": "/labs/038-mosaic-design/mosaic-design-01.png",
     "058": "/labs/058-rag-chunker/rag-playground.png",
     "059": "/labs/059-generative-data-viz/claude-screenshot.png",
-    "063": "/labs/063-llm-memory-filesystem/stack-effect-recipe-builder.png"
+    "063": "/labs/063-llm-memory-filesystem/stack-effect-recipe-builder.png",
+    "064": "/labs/064-sszvis-chart-builder/cooperative-housing-editor.png",
+    "065": "/labs/065-sszvis-mcp-app/chatgpt-inline-map.png"
   }
 }

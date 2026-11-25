@@ -1,4 +1,7 @@
+import { ExpandableImage } from "@/components/molecule/expandable-image";
 import { createOGImageMetadata } from "@/lib/seo";
+import inlineMap from "./chatgpt-inline-map.png";
+import mapEditor from "./chatgpt-map-editor.png";
 
 export const metadata = createOGImageMetadata({
   id: "065",
@@ -7,72 +10,116 @@ export const metadata = createOGImageMetadata({
     "How an Effect MCP server delivers an editable SSZVIS map to a chat host and gets its chart code and geography into the sandbox.",
   tags: ["effect", "mcp", "sszvis", "data visualization"],
   date: "2026-11-25",
-  status: "draft",
+  status: "published",
+  socialImage: "/labs/065-sszvis-mcp-app/chatgpt-inline-map.png",
   repo: "https://github.com/StatistikStadtZuerich/sszvis/tree/master/apps/mcp-server",
 });
 
-My original idea for an SSZVIS MCP server was to give the agent the chart controls. Someone could ask a question about Zürich and get a visualization that followed the same conventions as charts published by Statistik Stadt Zürich. The chart builder in the docs came at the problem from the data scientist's side. They already have a table and need to decide what to do with it and how best to show it. [Building SSZVIS charts you can copy and run](/labs/064-sszvis-chart-builder)
+When I first started thinking about an MCP server for SSZVIS, I figured the agent would write most of the chart. Someone could ask a question about Zürich and get a chart made with the same library Statistik Stadt Zürich uses for its articles. Getting the agent to write consistent HTML and JavaScript was the part I kept running into. This time I gave it chart recipes to choose from. The agent picks a recipe and maps the data to it, and the chart builder generates the code from that spec.
 
-<figure>
-  <div style={{ aspectRatio: "1660 / 1840", overflow: "hidden", borderRadius: "0.5rem" }}>
-    <div style={{ width: "212.77%", transform: "translate(-26.4%, -8.1%)" }}>
+I wrote about how the recipes turn into code in [the SSZVIS chart builder lab](/labs/064-sszvis-chart-builder).
 
-![The housing map appears below the prompt in ChatGPT. Hovering over Unterstrass shows its cooperative housing share.](./chatgpt-inline-map.png)
+<ExpandableImage
+  src={inlineMap}
+  alt="The housing map appears below the prompt in ChatGPT. Hovering over Unterstrass shows its cooperative housing share."
+  previewCrop={{ aspectRatio: "1660 / 1840", width: "212.77%", transform: "translate(-26.4%, -8.1%)" }}
+>
+  ChatGPT opens the share map inline. The tooltip shows 24.92% for Unterstrass.
+</ExpandableImage>
 
-    </div>
-  </div>
-  <figcaption>ChatGPT opens the share map inline. The tooltip shows 24.92% for Unterstrass.</figcaption>
-</figure>
+I put the builder controls in the app to help me debug. It was quicker to try another field or turn off a feature myself than to ask the model each time. Once I could do that in chat, I started to think about what the model could do with those edits. I'd ask for a first chart, play around with it for a bit, then go back to the conversation when I had another question.
 
-I added the editor to the MCP App as a proof of concept and because I wanted to debug a chart without prompting the model through every change. Once I could edit the chart in place, I started to think about a different workflow for the public app. Ask a question, get a first chart, and explore it directly. If the edit raises another question, take it back to the conversation.
+I used the same cooperative housing data as in the builder lab. The prompt asks for the share of homes owned by co-ops. Here's how to try it.[^server]
 
-The cooperative housing map from the builder lab makes a good test. Start with the share of homes owned by cooperatives in each Zürich quarter. In the editor, switch to the number of cooperative homes and turn on Bubbles. That gives you a different view of the same data, and the map forces the app to solve a problem the simpler charts in my first MCP Apps experiment skipped. The iframe needs to get hold of the city boundaries as well as the chart code. [MCP Apps: Generative Data Visualization](/labs/059-generative-data-viz)
+1. Open a chat client that [supports MCP Apps](https://modelcontextprotocol.io/extensions/client-matrix#support-matrix). You can also try the server in [MCPJam](https://www.mcpjam.com/).
+1. Add `sszvis-mcp` as a Streamable HTTP server. It doesn't require authentication.
 
-The [SSZVIS MCP endpoint](https://sszvis-mcp.lloydrichards.dev/mcp) connects to an MCP Apps host such as MCPJam over Streamable HTTP. Use the [cooperative housing CSV](/labs/064-sszvis-chart-builder/cooperative-housing-zurich-2025.csv) to follow the same example.[^server]
+   ```text wrap
+   https://sszvis-mcp.lloydrichards.dev/mcp
+   ```
 
-In MCPJam, add the endpoint as a Streamable HTTP server. In an MCP Apps chat with that server enabled, attach the CSV and use this prompt.
+1. Start a chat, attach the [cooperative housing CSV](/labs/064-sszvis-chart-builder/cooperative-housing-zurich-2025.csv), and send this prompt.
 
-```text title="Demo prompt"
-Using the attached CSV, make an interactive
-SSZVIS map of the share of homes owned by
-housing cooperatives in each Zürich quarter.
-Use QuarterCode for boundaries, QuarterName
-for tooltips, and CooperativeSharePct for
-shading.
-Show the legend and leave Bubbles off.
-```
+   ```text title="prompt" wrap
+   Using the attached CSV, make an interactive SSZVIS map of the share of homes owned by housing cooperatives in each Zürich quarter. Use QuarterCode for boundaries, QuarterName for tooltips, and CooperativeSharePct for shading. Show the legend and leave Bubbles off.
+   ```
+
+1. Hover over Unterstrass on the inline map to see its share of 24.92%. In ChatGPT, click **Edit**, set **Value** to `CooperativeHomes`, and turn on **Bubbles**. Other hosts may put the controls somewhere else. [See the ChatGPT editor screenshot](#going-from-an-edit-back-to-a-question).
 
 ## How the host gets the editor
 
-The **host** is the chat product. Its MCP client calls the SSZVIS **server**, and the host mounts the **app** in an iframe. The model can call `list_recipes` to learn the names of the available recipes, their column roles, and their options and features. For the housing map it calls `render_chart` with `map-choropleth`, the prepared CSV, and the mappings for area code, name, and share. The handler fills defaults, checks the request against the recipe and columns, and checks that it can generate the chart. Compiling in `render_chart` lets the model act on a generation error. The app receives the completed spec in the structured result and calls `update_chart` to get the generated files. The handler supplies a compact model-facing summary and leaves the generated source out of the result.[^tools]
+I think of this in terms of who makes each request. The chat **host** runs the model's tool calls against the SSZVIS **server**. It also opens the chart **app**, which runs in an iframe and makes its own calls through the host.
 
-```ts title="chartTools.ts · render_chart handler"
-render_chart: Effect.fnUntraced(function* (params) {
-  const spec = yield* specFrom(params);
-  yield* compile(spec);
-  return { spec };
-}),
+I put the tools and the app on the same `/mcp` endpoint. `ChartTools` registers the toolkit and its handlers, `ChartApp` registers the editor HTML, and `TopologyResources` registers the map boundary files. `Layer.mergeAll` brings those registrations together, and `extensions` advertises MCP Apps support to the host.[^registration]
+
+```ts title="capabilities.ts" showLineNumbers
+const Capabilities = Layer.mergeAll(ChartTools, ChartApp, TopologyResources);
+```
+```ts title="index.ts" showLineNumbers
+McpServer.layerHttp({
+  // ...server identity, protocol versions, and HTTP options omitted
+  path: "/mcp",
+  extensions: { [EXTENSION]: {} }, // EXTENSION = "io.modelcontextprotocol/ui"
+  registrations: Capabilities,
+});
 ```
 
-The link to the UI lives in the tool's metadata. Its `ui.resourceUri` points to `ui://sszvis/chart`, a resource with the MIME type `text/html;profile=mcp-app`. Vite builds the React app into one HTML file, which the server returns when the host reads that resource. The host mounts the HTML in a sandboxed iframe and delivers the tool result through the MCP Apps bridge. The same HTML can open any recipe. The spec in the result tells it which one to draw.[^app]
+`Toolkit.make` collects the tool declarations and their schemas. `ChartToolkit.toLayer(handlers)` supplies the functions Effect runs when the host calls one of those tools. The model can call `list_recipes` to see what it can build and which columns it needs. For the housing map, it calls `render_chart` with the CSV and the quarter code, name, and share mappings. The handler builds the spec and tries to compile it while the model can still do something about an error. On success, the app gets the spec in the tool result's `structuredContent`.[^tools]
 
-```ts title="mcpApp.ts · UI metadata helpers"
-export const renderedBy = (resourceUri: string) =>
+```ts title="chartTools.ts" showLineNumbers
+const ChartToolkit = Toolkit.make(
+  ListRecipes, RenderChart, UpdateChart, DescribeRecipes, ReadTopology,
+);
+
+const handlers = Effect.gen(function* () {
+  // Set up compile using the chart builder's generator.
+  return ChartToolkit.of({
+    // ...other handlers omitted
+    render_chart: Effect.fnUntraced(function* (params) {
+      const spec = yield* specFrom(params);
+      yield* compile(spec);
+      return { spec };
+    }),
+  });
+});
+
+export const ChartTools = McpServer.toolkit(ChartToolkit).pipe(
+  Layer.provide(ChartToolkit.toLayer(handlers)),
+);
+```
+
+I connect the tool to the editor with a shared URI. The `render_chart` declaration puts `CHART_APP_URI` in `ui.resourceUri`, and `ChartApp` registers that same URI. When the host reads it, Effect's `McpServer.resource` returns the HTML built by Vite with the MIME type `text/html;profile=mcp-app`. The host mounts it in a sandboxed iframe and passes in the tool result. The same HTML opens every recipe because the spec tells the editor which one to draw.[^app]
+
+```ts title="mcpApp.ts, chartTools.ts, and chartApp.ts" showLineNumbers
+const renderedBy = (resourceUri: string) =>
   Tool.Meta.of({ ui: { resourceUri } });
-export const appOnly = Tool.Meta.of({ ui: { visibility: ["app"] } });
+
+const CHART_APP_URI = "ui://sszvis/chart";
+
+const RenderChart = Tool.make("render_chart", {
+  // Tool description and schemas omitted
+}).annotate(Tool.Meta, renderedBy(CHART_APP_URI));
+
+export const ChartApp = appResource({
+  uri: CHART_APP_URI,
+  html, // Imported from the Vite build
+  // ...resource name, description, and CSP omitted
+});
 ```
 
-An app-only tool is available to the iframe through the host bridge. The model’s tool menu omits it.
+Once the editor has the spec, it calls `update_chart` through the host bridge to get the JavaScript it will run. That tool is registered in the same toolkit with `ui.visibility` set to `["app"]`, so the editor can call it on first render and again when I change a control. The host keeps it out of the model's tool menu.[^tools]
 
 ```mermaid
 sequenceDiagram
   accTitle: How a tool call opens a chart in chat
   accDescr: The host calls render_chart, mounts the app, and relays update_chart to fetch the code.
+  actor U as Reader
   participant H as Chat host
-  participant S as SSZVIS MCP server
+  participant S as MCP server
   participant A as Chart app
+  U->>H: Ask for a chart
   H->>S: Run model’s render_chart call
-  S-->>H: Validated chart spec
+  S-->>H: Tool result with validated spec
   H->>S: Read ui://sszvis/chart
   S-->>H: App HTML
   H->>A: Mount app with spec
@@ -84,7 +131,9 @@ sequenceDiagram
 
 ## Getting quarter boundaries into the sandbox
 
-The app declares the CDN origin in the resource's content security policy metadata. The host still controls what the iframe can fetch.[^app]
+In a published article, the map script loads the CSV and the boundary file alongside it. I wanted to run that same script in chat. The MCP App can load its libraries from an approved origin, but the map's data needs a way into the iframe that the host allows.[^consumer]
+
+I could declare the CDN as an allowed origin for the scripts in the app resource's content security policy. That handled the libraries. The host still had its own rules for what the iframe could fetch.[^app]
 
 | What the app needs | How it gets there |
 | --- | --- |
@@ -92,9 +141,9 @@ The app declares the CDN origin in the resource's content security policy metada
 | D3, SSZVIS, TopoJSON client | The iframe loads scripts from the declared CDN origin |
 | Quarter boundaries | The iframe calls `read_topology` through the host |
 
-The server exposes the TopoJSON bundles as MCP resources. I hit a host that could load the app but refused a resource read for the topology from inside the iframe. The app now asks the server for the map through `read_topology`, a tool visible to the app. The app fetches `stadt-zurich.json` and caches it under that filename. When it runs the generated chart, it exposes the cached data under `topo.json`, the path the chart passes to `d3.json`. Editing the measure or turning on Bubbles keeps the same boundaries.[^topology]
+The part that tripped me up was that the host could read the app HTML and still refuse a resource read from inside the app. I already had the TopoJSON registered as an MCP resource. To get it into the iframe, I added `read_topology` as an app-only tool. The server sends back `stadt-zurich.json` and the app caches it by filename. It gives that data to the chart under `topo.json`, the name the generated script asks for. When I change the measure or enable Bubbles, the app can use the boundaries it already has.[^topology]
 
-```ts title="App-only topology request"
+```ts
 await app.callServerTool({
   name: "read_topology",
   arguments: { file: "stadt-zurich.json" },
@@ -103,7 +152,7 @@ await app.callServerTool({
 
 The generated script still calls `d3.csv` and `d3.json` as it would in an article. Inside the sandbox, the app supplies implementations that read the CSV and topology it already has in memory. The CSV adapter uses `csvParseRows` and builds the row objects itself because D3's object parser uses `new Function` and the sandbox disallows it. This lets the two hosts keep using the same generated chart code even though the routes to the data are different.[^runtime]
 
-```ts title="runtime.ts · in-memory TopoJSON loader"
+```ts title="runtime.ts" showLineNumbers
 d3.json = (url, ...rest) =>
   Object.hasOwn(files, url)
     ? Promise.resolve(files[url])
@@ -112,24 +161,21 @@ d3.json = (url, ...rest) =>
 
 ## One MCP endpoint across protocol versions
 
-In the earlier experiment I could build the app tools by hand once Effect let me advertise extensions. Compatibility got more predictable after the work on protocol adapters and support for the `2025-11-25` and `2026-07-28` MCP revisions. The SSZVIS server registers its tools and resources once. Effect's shared `McpSchema` abstractions give those registrations a common representation while the selected adapter handles the request and response shapes for its revision. The endpoint also declares `2025-06-18` among its adapters. Mounting the app still depends on the host supporting MCP Apps.[^entry]
+In my first MCP Apps lab, the work I'd done on advertising extensions in Effect was enough to wire up the tools by hand. Getting different hosts to work reliably was where the protocol adapters helped most. I register the tools and resources once in Effect. The server and host agree on a protocol version, then Effect uses the adapter for that version to read and write the messages. This endpoint supports `2025-06-18`, `2025-11-25`, and `2026-07-28`. The host still needs MCP Apps support to open the editor.[^entry]
 
-I spent months reading the specification and checking how different revisions behaved. By the time I came back to MCP Apps, I had a better idea of where to look when something failed. The MCP client inside the host can ask the server for a resource. The app in the iframe has to ask the host to do that on its behalf. Those look like the same operation from the server's point of view, but the host can decide to allow one and refuse the other. That distinction mattered as soon as I tried a map.
+I spent months reading the spec and checking those versions against clients. Coming back to the app after that was a lot easier. When the map failed to load, I knew to look at what the host was forwarding from the iframe and what the MCP server was actually returning.
 
 ## Going from an edit back to a question
 
-The inline app shows **Preview** and **Code**. On a host that supports fullscreen, **Edit** opens the controls for chart type, fields, options, and features. When I change the Value field to count and enable Bubbles, the app sends the revised spec through the host to `update_chart`. That tool is app-only, so a change in the editor can redraw the chart without starting another model turn. The app uses the same tool call to generate code on the first render. It gets the richer recipe descriptions for the editor through another app-only tool, `describe_recipes`.[^react-app]
+The inline app shows **Preview** and **Code**. On a host that supports fullscreen, **Edit** opens the controls for chart type, fields, options, and features. When I switch **Value** to `CooperativeHomes` and enable **Bubbles**, the map redraws with circles sized by count. I can try both views in the editor without starting another model turn. It gets the richer recipe descriptions for the editor through another app-only tool, `describe_recipes`.[^react-app]
 
-<figure>
-  <div style={{ aspectRatio: "2072 / 1745", overflow: "hidden", borderRadius: "0.5rem" }}>
-    <div style={{ width: "170.46%", transform: "translate(-41.34%, -0%)" }}>
-
-![The ChatGPT editor with Value set to CooperativeHomes and Bubbles selected. The map tooltip shows 3,901 cooperative homes in Altstetten.](./chatgpt-map-editor.png)
-
-    </div>
-  </div>
-  <figcaption>With Value set to CooperativeHomes and Bubbles on, the Altstetten tooltip shows 3,901 homes.</figcaption>
-</figure>
+<ExpandableImage
+  src={mapEditor}
+  alt="The ChatGPT editor with Value set to CooperativeHomes and Bubbles selected. The map tooltip shows 3,901 cooperative homes in Altstetten."
+  previewCrop={{ aspectRatio: "2072 / 1745", width: "170.46%", transform: "translate(-41.34%, -0%)" }}
+>
+  With Value set to CooperativeHomes and Bubbles on, the Altstetten tooltip shows 3,901 cooperative homes.
+</ExpandableImage>
 
 ```ts title="App-only chart update"
 await app.callServerTool({
@@ -138,23 +184,29 @@ await app.callServerTool({
 });
 ```
 
-The current chart's field mapping and feature settings give the next question context. Sending the spec, or a compact description of the relevant fields, makes it possible for the model to refer to the same view and suggest a change. The chart's generated JavaScript would be a much larger way to convey the same decision.
+What I'd like to try next is going back to chat after an edit. If I've switched from share to count, the model needs to know which column I picked and that I've turned on Bubbles. Those are a couple of fields in the spec. I'd use `ui/update-model-context` to pass them to the host for the next turn, where the host supports it. The editor can already redraw the map. Feeding that edit back into the conversation is the part I still want to try.[^model-context]
 
-MCP Apps provides `ui/update-model-context` for that next handoff when the host supports it. The current SSZVIS editor uses the bridge to redraw the map. Sending the edited spec back as context for the next user turn is a step I'd like to take with the prototype.[^model-context]
+That's where this gets interesting for me. I'd have both maps in mind and could ask something I probably wouldn't have thought to ask at the start.
 
 > Which quarters have a high share of cooperative housing but relatively few cooperative homes?
+
+---
 
 [^server]: [SSZVIS MCP server README](https://github.com/StatistikStadtZuerich/sszvis/tree/master/apps/mcp-server)
 
 [^tools]: [Chart tools](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/src/chartTools.ts)
 
-[^app]: [App resource registration](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/src/mcpApp.ts) · [MCP Apps lifecycle](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html) · [Chart host generator](https://github.com/StatistikStadtZuerich/sszvis/blob/master/packages/chart-builder/src/host.ts)
+[^registration]: [HTTP server](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/src/index.ts) · [Registration layers](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/src/capabilities.ts)
 
-[^entry]: [SSZVIS server entry point](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/src/index.ts) · [Effect protocol adapter work](https://github.com/Effect-TS/effect/pull/7265) · [Effect multi-protocol design](https://github.com/Effect-TS/effect/issues/6617)
+[^app]: [Chart app](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/src/chartApp.ts) · [App resource registration](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/src/mcpApp.ts) · [MCP Apps lifecycle](https://apps.extensions.modelcontextprotocol.io/api/documents/overview.html) · [Chart host generator](https://github.com/StatistikStadtZuerich/sszvis/blob/master/packages/chart-builder/src/host.ts)
+
+[^consumer]: [How SSZVIS charts load their data and dependencies](https://github.com/StatistikStadtZuerich/sszvis/pull/498/files)
 
 [^topology]: [Topology fix](https://github.com/StatistikStadtZuerich/sszvis/pull/495)
 
 [^runtime]: [Chart runtime](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/ui/src/runtime.ts)
+
+[^entry]: [SSZVIS server entry point](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/src/index.ts) · [Effect protocol adapter work](https://github.com/Effect-TS/effect/pull/7265) · [Effect multi-protocol design](https://github.com/Effect-TS/effect/issues/6617)
 
 [^react-app]: [React app](https://github.com/StatistikStadtZuerich/sszvis/blob/master/apps/mcp-server/ui/src/app.tsx)
 

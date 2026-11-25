@@ -22,7 +22,11 @@ That publishing setup gave me a starting point for the builder. The consumer alr
 
 Let's look at some SSZ data. Cooperatives owned about 65% of the homes in Saatlen in 2025. Altstetten had the most cooperative homes of any quarter, with 3,901, but they made up only about 20% of its housing stock. The share and the count put different places at the top of the map.[^data]
 
-To give this a try, you can open the [SSZVIS docs builder](https://statistikstadtzuerich.github.io/sszvis/builder/) and paste the contents of the [demo CSV](/labs/064-sszvis-chart-builder/cooperative-housing-zurich-2025.csv). It has one row per statistical quarter. `QuarterCode` joins to the map. `QuarterName` labels the tooltip. Map **Value** to `CooperativeSharePct` to shade the quarters by share. Switch to `CooperativeHomes` and enable **Bubbles** to map the counts.[^map]
+To give this a try, open the [SSZVIS docs builder](https://statistikstadtzuerich.github.io/sszvis/builder/) and download the [demo CSV](/labs/064-sszvis-chart-builder/cooperative-housing-zurich-2025.csv). It has one row per statistical quarter.[^map]
+
+1. Use **Paste CSV** to replace the sample data, then choose **Map** as the chart type.
+1. Set **Area code** to `QuarterCode` to match the boundaries and **Area name** to `QuarterName` to label the tooltip.
+1. Set **Value** to `CooperativeSharePct` to shade the quarters by share. To map counts, switch **Value** to `CooperativeHomes` and turn on **Bubbles**.
 
 <div className="my-8 grid grid-cols-1 gap-4 sm:grid-cols-2 [&>figure]:my-0">
   <ExpandableImage

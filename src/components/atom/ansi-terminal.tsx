@@ -1,11 +1,10 @@
 "use client";
 
-import { AnsiHtml } from "fancy-ansi/react";
-
+import { renderTerminalPreview } from "@/lib/terminal-preview";
 import { cn } from "@/lib/utils";
 
 const vscodePalette = {
-  "--ansi-black": "#000000",
+  "--ansi-black": "#1a1a2e",
   "--ansi-red": "#cd3131",
   "--ansi-green": "#0dbc79",
   "--ansi-yellow": "#e5e510",
@@ -36,33 +35,29 @@ export const AnsiTerminal = ({
 }: AnsiTerminalProps) => (
   <div
     className={cn(
-      "my-6 overflow-hidden rounded-md border border-border",
+      "my-6 overflow-hidden border border-terminal-outline bg-terminal-surface dark:border-terminal-outline-dark dark:bg-terminal-surface-dark",
       className,
     )}
   >
     {/* Title bar */}
-    <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 border-b border-border/50">
+    <div className="flex items-center gap-2 border-b border-inherit px-3 py-2">
       <div className="flex gap-1.5">
-        <span className="size-2.5 rounded-full bg-[#FF5F56]" />
-        <span className="size-2.5 rounded-full bg-[#FFBD2E]" />
-        <span className="size-2.5 rounded-full bg-[#27C93F]" />
+        <span className="size-2.5 rounded-full bg-destructive/70" />
+        <span className="size-2.5 rounded-full bg-warning/70" />
+        <span className="size-2.5 rounded-full bg-success/70" />
       </div>
       {title && (
-        <span className="ml-2 text-xs font-medium text-muted-foreground">
+        <span className="ml-2 font-mono text-xs text-muted-foreground">
           {title}
         </span>
       )}
     </div>
-    {/* Terminal body — dark background required for ANSI color legibility */}
-    <pre
-      className="overflow-x-auto bg-[hsl(220_20%_12%)] p-4 text-sm leading-[1.3] text-slate-200"
-      style={{
-        ...vscodePalette,
-        fontFamily:
-          "Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace",
-      }}
-    >
-      <AnsiHtml text={input} />
+    <pre className="overflow-x-auto p-4 font-terminal text-sm leading-none text-terminal-ink [font-variant-ligatures:none] dark:text-terminal-ink-dark">
+      <span
+        style={vscodePalette}
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: FancyAnsi escapes input, and the cell renderer re-escapes text it transforms.
+        dangerouslySetInnerHTML={{ __html: renderTerminalPreview(input) }}
+      />
     </pre>
   </div>
 );

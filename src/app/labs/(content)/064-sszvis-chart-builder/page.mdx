@@ -1,4 +1,7 @@
+import { ExpandableImage } from "@/components/molecule/expandable-image";
 import { createOGImageMetadata } from "@/lib/seo";
+import cooperativeCount from "./cooperative-count.png";
+import cooperativeShare from "./cooperative-share.png";
 
 export const metadata = createOGImageMetadata({
   id: "064",
@@ -7,7 +10,7 @@ export const metadata = createOGImageMetadata({
     "How I built a chart editor that generates readable SSZVIS source and runs it in an iframe before it goes into an article.",
   tags: ["sszvis", "d3", "data visualization"],
   date: "2026-11-25",
-  status: "draft",
+  status: "published",
   repo: "https://github.com/StatistikStadtZuerich/sszvis/tree/master/packages/chart-builder",
 });
 
@@ -21,19 +24,19 @@ Let's look at some SSZ data. Cooperatives owned about 65% of the homes in Saatle
 
 To give this a try, you can open the [SSZVIS docs builder](https://statistikstadtzuerich.github.io/sszvis/builder/) and paste the contents of the [demo CSV](/labs/064-sszvis-chart-builder/cooperative-housing-zurich-2025.csv). It has one row per statistical quarter. `QuarterCode` joins to the map. `QuarterName` labels the tooltip. Map **Value** to `CooperativeSharePct` to shade the quarters by share. Switch to `CooperativeHomes` and enable **Bubbles** to map the counts.[^map]
 
-<div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-  <figure>
-
-  ![Zürich quarters shaded by cooperative housing share. Saatlen is the darkest quarter.](./cooperative-share.png)
-
-  <figcaption>Share of local housing stock. Saatlen has the highest share at 64.78%.</figcaption>
-  </figure>
-  <figure>
-
-  ![Zürich quarters with circles sized by cooperative housing count. The largest circle is over Altstetten.](./cooperative-count.png)
-
-  <figcaption>Number of cooperative homes. Altstetten has the most, with 3,901.</figcaption>
-  </figure>
+<div className="my-8 grid grid-cols-1 gap-4 sm:grid-cols-2 [&>figure]:my-0">
+  <ExpandableImage
+    src={cooperativeShare}
+    alt="Zürich quarters shaded by cooperative housing share. Saatlen is the darkest quarter."
+  >
+    Share of local housing stock. Saatlen has the highest share at 64.78%.
+  </ExpandableImage>
+  <ExpandableImage
+    src={cooperativeCount}
+    alt="Zürich quarters with circles sized by cooperative housing count. The largest circle is over Altstetten."
+  >
+    Number of cooperative homes. Altstetten has the most, with 3,901.
+  </ExpandableImage>
 </div>
 
 Under the hood, a **recipe** defines what a chart type accepts and which template generates it. A **spec** records the table, column mappings, and settings for one chart. Here are the fields that change between the two maps.

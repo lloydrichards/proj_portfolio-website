@@ -9,7 +9,7 @@ const previewHost = process.env.LAB_PREVIEW_HOST;
 const darkCodeTheme = {
   ...synthwave,
   tokenColors: [
-    ...synthwave.tokenColors,
+    ...(synthwave.tokenColors ?? []),
     { scope: "markup.deleted.diff", settings: { foreground: "#FDAEB7" } },
     { scope: "markup.inserted.diff", settings: { foreground: "#85E89D" } },
   ],

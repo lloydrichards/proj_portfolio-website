@@ -56,7 +56,7 @@ export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
         onClick={(event) => {
           if (
             event.target instanceof Element &&
-            event.target.closest(".mermaid")
+            event.target.closest("[data-mermaid-scroll]")
           ) {
             return;
           }
@@ -65,7 +65,13 @@ export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
       >
         <DialogTitle className="sr-only">Expanded diagram</DialogTitle>
         <div className="flex min-h-full w-full items-center justify-center [&_.mermaid]:my-0">
-          <div className="w-full max-md:[&_.mermaid]:justify-start! max-md:[&_.mermaid_svg:not(:has(>g.tree-view))]:min-w-[56rem] max-md:[&_.mermaid_svg:not(:has(>g.tree-view))]:max-h-none! max-md:[&_.mermaid_svg:not(:has(>g.tree-view))]:flex-none">
+          <section
+            data-mermaid-scroll=""
+            aria-label="Scrollable diagram"
+            // biome-ignore lint/a11y/noNoninteractiveTabindex: Keyboard users need focus to scroll the diagram.
+            tabIndex={0}
+            className="w-full overflow-x-auto focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring [&_.mermaid]:overflow-visible! [&_.mermaid:has(g.tree-view)]:w-max! [&_.mermaid:has(g.tree-view)]:min-w-full max-md:[&_.mermaid:has(svg):not(:has(g.tree-view))]:min-w-[56rem] max-md:[&_.mermaid_svg]:max-h-none!"
+          >
             <MdxMermaid
               config={{
                 theme: {
@@ -75,7 +81,7 @@ export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
               }}
               {...props}
             />
-          </div>
+          </section>
         </div>
       </DialogContent>
     </Dialog>

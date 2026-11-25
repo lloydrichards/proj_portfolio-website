@@ -2,7 +2,8 @@
 
 import { Maximize2 } from "lucide-react";
 import Image, { type ImageProps } from "next/image";
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
+import { buttonVariants } from "@/components/atom/button";
 
 import {
   Dialog,
@@ -17,8 +18,15 @@ export function ExpandableImage({
   className,
   src,
   style,
+  previewCrop,
   ...props
-}: ImageProps) {
+}: ImageProps & {
+  previewCrop?: {
+    aspectRatio: string;
+    width: string;
+    transform: CSSProperties["transform"];
+  };
+}) {
   const [open, setOpen] = useState(false);
   const accessibleName = alt || "Image";
   const originalSrc =
@@ -34,22 +42,48 @@ export function ExpandableImage({
         render={
           <button
             type="button"
-            className="group relative block w-full cursor-zoom-in rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="group/floating-action relative block w-full cursor-zoom-in rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
             aria-label={alt ? `Expand ${alt}` : "Expand image"}
           />
         }
       >
-        <Image
-          src={src}
-          sizes="100vw"
-          width={0}
-          height={0}
-          style={{ width: "100%", height: "auto", ...style }}
-          {...props}
-          className={className}
-          alt={alt}
-        />
-        <span className="absolute top-2 right-2 flex size-8 items-center justify-center rounded-md bg-background/80 text-foreground shadow-sm backdrop-blur-sm transition-opacity pointer-fine:opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
+        <span
+          className="block"
+          style={
+            previewCrop
+              ? {
+                  aspectRatio: previewCrop.aspectRatio,
+                  overflow: "hidden",
+                  borderRadius: "inherit",
+                }
+              : undefined
+          }
+        >
+          <Image
+            src={src}
+            sizes="100vw"
+            width={0}
+            height={0}
+            style={{
+              width: previewCrop?.width ?? "100%",
+              height: "auto",
+              ...style,
+              ...(previewCrop && {
+                maxWidth: "none",
+                transform: previewCrop.transform,
+              }),
+            }}
+            {...props}
+            className={className}
+            alt={alt}
+          />
+        </span>
+        <span
+          className={cn(
+            buttonVariants({ variant: "floating", size: "icon-sm" }),
+          )}
+          aria-hidden="true"
+        >
           <Maximize2 aria-hidden="true" />
         </span>
       </DialogTrigger>

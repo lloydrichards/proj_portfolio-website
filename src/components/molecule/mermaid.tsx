@@ -1,9 +1,11 @@
 "use client";
+import "d3-transition";
 import { Maximize2 } from "lucide-react";
 import type { MermaidProps } from "mdx-mermaid/lib/Mermaid";
 import dynamic from "next/dynamic.js";
 import { useState } from "react";
 import { Button } from "@/components/atom/button";
+import { CopyButton } from "@/components/atom/copy-button";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +23,7 @@ export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <div className="group relative">
+      <div className="group/floating-action relative">
         <MdxMermaid
           config={{
             theme: {
@@ -31,17 +33,22 @@ export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
           }}
           {...props}
         />
+        <CopyButton
+          label="Copy Mermaid source"
+          getText={() => props.chart}
+          className="right-12 pointer-coarse:right-14"
+        />
         <DialogTrigger
           render={
             <Button
-              variant="outline"
+              type="button"
+              variant="floating"
               size="icon-sm"
-              className="absolute top-2 right-2 opacity-80 shadow-sm transition-opacity group-hover:opacity-100"
               aria-label="Expand diagram"
             />
           }
         >
-          <Maximize2 />
+          <Maximize2 aria-hidden="true" />
         </DialogTrigger>
       </div>
       <DialogContent

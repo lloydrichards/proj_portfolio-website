@@ -52,7 +52,7 @@ export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
         </DialogTrigger>
       </div>
       <DialogContent
-        className="mermaid-dialog h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] overflow-auto bg-transparent p-0 ring-0 sm:max-w-[calc(100vw-2rem)] [&_[data-slot=dialog-close]]:bg-background/80 [&_[data-slot=dialog-close]]:shadow-sm [&_[data-slot=dialog-close]]:backdrop-blur-sm"
+        className="mermaid-dialog max-md:grid-cols-1 h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] overflow-auto bg-transparent p-0 ring-0 sm:max-w-[calc(100vw-2rem)] [&_[data-slot=dialog-close]]:bg-background/80 [&_[data-slot=dialog-close]]:shadow-sm [&_[data-slot=dialog-close]]:backdrop-blur-sm"
         onClick={(event) => {
           if (
             event.target instanceof Element &&
@@ -65,7 +65,7 @@ export const Mermaid: React.FC<MermaidProps> = ({ ...props }) => {
       >
         <DialogTitle className="sr-only">Expanded diagram</DialogTitle>
         <div className="flex min-h-full w-full items-center justify-center [&_.mermaid]:my-0">
-          <div className="w-full">
+          <div className="w-full max-md:[&_.mermaid]:justify-start! max-md:[&_.mermaid_svg:not(:has(>g.tree-view))]:min-w-[56rem] max-md:[&_.mermaid_svg:not(:has(>g.tree-view))]:max-h-none! max-md:[&_.mermaid_svg:not(:has(>g.tree-view))]:flex-none">
             <MdxMermaid
               config={{
                 theme: {

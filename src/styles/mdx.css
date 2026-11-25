@@ -97,6 +97,11 @@ figure[data-rehype-pretty-code-figure] pre {
   @apply !mb-0 !rounded-none !border-0 pt-3;
 }
 
+:is(pre[data-code-wrap], [data-code-wrap] pre) {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 /* ─── Anchor links ─────────────────────────────────────────────────── */
 .subheading-anchor {
   opacity: 0;

@@ -1,8 +1,19 @@
+import { resolve } from "node:path";
 import createMDX from "@next/mdx";
+import synthwave from "@shikijs/themes/synthwave-84";
 import type { NextConfig } from "next";
 
 const databaseFile = process.env.DB_FILE_NAME ?? "./database/db.sqlite";
 const previewHost = process.env.LAB_PREVIEW_HOST;
+
+const darkCodeTheme = {
+  ...synthwave,
+  tokenColors: [
+    ...synthwave.tokenColors,
+    { scope: "markup.deleted.diff", settings: { foreground: "#FDAEB7" } },
+    { scope: "markup.inserted.diff", settings: { foreground: "#85E89D" } },
+  ],
+};
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: previewHost ? [previewHost] : undefined,
@@ -50,13 +61,14 @@ const withMDX = createMDX({
     rehypePlugins: [
       "rehype-mdx-import-media",
       "rehype-slug",
+      resolve("scripts/rehype-code-wrap.mjs"),
       [
         "rehype-pretty-code",
         {
           keepBackground: false,
           theme: {
             light: "github-light",
-            dark: "synthwave-84",
+            dark: darkCodeTheme,
           },
         },
       ],

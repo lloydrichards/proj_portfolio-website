@@ -3,7 +3,7 @@ import { AnsiTerminal } from "@/components/atom/ansi-terminal";
 import { CopyableCodeBlock } from "./components/molecule/copyable-code-block";
 import { ExpandableImage } from "./components/molecule/expandable-image";
 import { GitHubCommitCardServer } from "./components/molecule/github_commit_card.server";
-import { Mermaid } from "./components/molecule/mermaid";
+import { MdxMermaid } from "./components/molecule/mdx-mermaid";
 import { proseComponents } from "./components/tokens/prose_components";
 
 export const components = {
@@ -19,8 +19,8 @@ export const components = {
     );
   },
   img: ExpandableImage,
-  Mermaid,
-  mermaid: Mermaid,
+  Mermaid: MdxMermaid,
+  mermaid: MdxMermaid,
   AnsiTerminal,
   GitHubCommitCard: GitHubCommitCardServer,
 };

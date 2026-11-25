@@ -93,6 +93,16 @@
   --font-serif: var(--font-josefin-sans);
   --font-sans: var(--font-roboto-mono);
   --font-mono: var(--font-fira-mono);
+  --font-terminal:
+    var(--font-fira-mono), "Noto Sans Mono CJK SC", "Apple Color Emoji",
+    "Segoe UI Emoji", "Noto Color Emoji", monospace;
+
+  --color-terminal-surface: oklch(0.97 0.004 250);
+  --color-terminal-ink: oklch(0.25 0.012 250);
+  --color-terminal-outline: oklch(0.9 0.008 250);
+  --color-terminal-surface-dark: oklch(0.13 0.015 250);
+  --color-terminal-ink-dark: oklch(0.9 0.006 250);
+  --color-terminal-outline-dark: oklch(0.3 0.012 250);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

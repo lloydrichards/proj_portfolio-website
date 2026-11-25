@@ -52,7 +52,7 @@ export const AnsiTerminal = ({
         </span>
       )}
     </div>
-    <pre className="overflow-x-auto p-4 font-terminal text-sm leading-none text-terminal-ink [font-variant-ligatures:none] dark:text-terminal-ink-dark">
+    <pre className="overflow-x-auto bg-terminal-surface-dark p-4 font-terminal text-sm leading-none text-terminal-ink-dark [font-variant-ligatures:none]">
       <span
         style={vscodePalette}
         // biome-ignore lint/security/noDangerouslySetInnerHtml: FancyAnsi escapes input, and the cell renderer re-escapes text it transforms.

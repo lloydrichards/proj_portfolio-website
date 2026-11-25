@@ -7,7 +7,10 @@ export function CopyableCodeBlock({ children }: { children: ReactNode }) {
   const block = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={block} className="group/floating-action relative min-w-0">
+    <div
+      ref={block}
+      className="group/floating-action relative min-w-0 pointer-coarse:pt-15"
+    >
       <CopyButton
         label="Copy code"
         getText={() => block.current?.querySelector("pre code")?.textContent}

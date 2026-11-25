@@ -211,18 +211,23 @@ Agentic loop timeline:
 - Tool result is streamed back to the client.
 
 
-```txt
-.
-├── apps/
-│   ├── client/             # React frontend (Vite + React)
-│   ├── server/             # Bun + Effect backend API
-│   └── server-mcp/         # Model Context Protocol server
-├── packages/
-│   ├── config-typescript/  # TypeScript configurations
-│   └── domain/             # Shared Schema definitions
-├── docker-compose.yaml     # Optional local deployment
-├── package.json            # Root package.json with workspaces
-└── turbo.json              # Turborepo configuration
+```mermaid
+---
+config:
+  treeView:
+    showIcons: true
+---
+treeView-beta
+  apps/
+    client/ ## React frontend (Vite + React)
+    server/ ## Bun + Effect backend API
+    server-mcp/ ## Model Context Protocol server
+  packages/
+    config-typescript/ ## TypeScript configurations
+    domain/ ## Shared Schema definitions
+  docker-compose.yaml ## Optional local deployment
+  package.json ## Root package.json with workspaces
+  turbo.json ## Turborepo configuration
 ```
 
 ### Key files

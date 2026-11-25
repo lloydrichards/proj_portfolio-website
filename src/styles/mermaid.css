@@ -2,6 +2,10 @@ div.mermaid {
   @apply my-6 flex justify-center overflow-x-auto rounded-md border border-border bg-muted/50 p-4 text-foreground;
 }
 
+div.mermaid:has(svg > g.tree-view) {
+  @apply justify-start;
+}
+
 .dark div.mermaid {
   @apply bg-muted/30;
 }

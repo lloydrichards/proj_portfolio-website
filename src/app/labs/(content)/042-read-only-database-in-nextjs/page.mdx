@@ -28,18 +28,24 @@ with a SQLite database.
 I've build a few other application this way and enjoy a setting up a database
 layer like this.
 
-```text
-📂 src
-├── 📂 service
-│   ├── 📁 api
-│   └── 📁 db
-│       ├── 📁 migrations  // <- output from drizzle.config.ts
-│       ├── 📁 schema
-│       │   ├── ...
-│       │   └── index.ts  // <- schema definition
-│       ├── seed.ts       // <- seed data
-│       └── index.ts      // <- db setup
-└── ...
+```mermaid
+---
+config:
+  treeView:
+    showIcons: true
+---
+treeView-beta
+  src/
+    service/
+      api/
+      db/
+        migrations/ ## output from drizzle.config.ts
+        schema/
+          ...
+          index.ts ## schema definition
+        seed.ts ## seed data
+        index.ts ## db setup
+    ...
 ```
 
 Probably the most important part of the setup is the `/db/index.ts` file. This

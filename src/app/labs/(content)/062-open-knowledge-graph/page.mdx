@@ -121,18 +121,24 @@ Houseplants are a good domain for this because useful answers are rarely isolate
 
 The bundle is organized as a directory tree of OKF concepts:
 
-```text
-house-plants-okf/
-├── index.md
-├── care/
-├── foundations/
-├── pests/
-├── plants/
-├── problems/
-├── propagation/
-├── safety/
-├── workflows/
-└── sources.md
+```mermaid
+---
+config:
+  treeView:
+    showIcons: true
+---
+treeView-beta
+  house-plants-okf/
+    index.md
+    care/
+    foundations/
+    pests/
+    plants/
+    problems/
+    propagation/
+    safety/
+    workflows/
+    sources.md
 ```
 
 The current graph has 67 concepts, 219 edges, and zero unresolved links. That is large enough to expose modeling problems, but small enough that I can still inspect the shape of the graph directly.

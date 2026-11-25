@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 
 export function ExpandableImage({
   alt = "",
+  children,
   className,
   src,
   style,
@@ -36,7 +37,7 @@ export function ExpandableImage({
         ? src.default.src
         : src.src;
 
-  return (
+  const image = (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
@@ -125,5 +126,16 @@ export function ExpandableImage({
         </div>
       </DialogContent>
     </Dialog>
+  );
+
+  if (children == null) return image;
+
+  return (
+    <figure className="my-8">
+      {image}
+      <figcaption className="mt-3 px-2 text-right text-sm/relaxed text-foreground/70 italic">
+        {children}
+      </figcaption>
+    </figure>
   );
 }
